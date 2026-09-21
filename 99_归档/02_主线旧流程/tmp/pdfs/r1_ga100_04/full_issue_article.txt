@@ -1,0 +1,318 @@
+THEME ARTICLE: HOT CHIPS
+
+
+NVIDIA A100 Tensor Core GPU: Performance
+and Innovation
+Jack Choquette , Wishwesh Gandhi, Olivier Giroux, Nick Stam, and Ronny Krashinsky, NVIDIA,
+Singapore, 609927
+
+
+
+
+    NVIDIA A100 Tensor Core GPU is NVIDIA’s latest ﬂagship GPU. It has been designed
+    with many new innovative features to provide performance and capabilities for
+    HPC, AI, and data analytics workloads. Feature enhancements include a Third-
+    Generation Tensor Core, new asynchronous data movement and programming
+    model, enhanced L2 cache, HBM2 DRAM, and third-generation NVIDIA NVLink I/O.
+
+
+ NVIDIA A100 TENSOR CORE GPU                                     faster than V100 on important HPC applications within
+ OVERVIEW                                                        molecular dynamics, physics, engineering ,and geo sci-
+
+
+
+T
+        he diversity of compute-intensive applications           ence areas (see Figure 1). For DL workloads, DGX
+        in modern cloud data centers has driven the              super-pods with A100 have set records for the MLPerf
+        explosion of GPU-accelerated cloud computing.            benchmark,2 handily surpassing all other commercially
+Such applications include AI deep learning (DL) train-           available systems, including Google’s TPUv3 and Hua-
+ing and inference, data analytics, scientiﬁc computing,          wei’s Ascend systems (see Figure 2). The benchmark
+genomics, edge video analytics and 5G services,                  also demonstrates A100’s breadth of support for AI
+graphics rendering, and cloud gaming. The NVIDIA                 networks, the only system able to run all benchmarks,
+Ampere architecture-based A100 GPU brings record-                and run them with high performance.
+setting scale and novel capabilities to these work-                  Many new and innovative features in A100 contrib-
+loads. The A100 GPU is 54 billion transistors built on           ute to its high performance and capabilities. This arti-
+TSMC’s 7-nm process. It has 108 streaming microproc-             cle will cover a few of those improvements: top to
+essors (SMs) with 6912 CUDA cores, 40 MB of L2                   bottom features to support strong scaling, elastic
+cache, 600 GB/s of NVIDIA NVLink interconnect band-              GPU capabilities to support scale up and scale out,
+width, and 1.6 TB/s of HBM2 memory bandwidth. It                 and asynchronous programming features to enable
+also has new elastic GPU capabilities including scale-           efﬁciency and programmer productivity.
+out support with multi-instance GPU (MIG) virtuali-
+zation, and scale-up support with a third-generation
+50-Gb/s NVLink I/O interface connecting multiple                   STRONG SCALING: TOP TO
+A100s directly or through NVIDIA’s NVSwitch. Inside                BOTTOM
+the A100 SM are new third-generation tensor cores                A typical deep neural network consists of long chains
+with support for ﬁne-grain sparsity and new BFloat16             of interconnected layers (see Figure 3). While there is
+(BF16), TensorFloat-32 (TF32), and FP64 datatypes.               a massive amount of compute in a network, the paral-
+The SM also adds new asynchronous data movement                  lelism is broken up into layers of smaller, sequentially
+instructions and barriers which work together to efﬁ-            dependent chunks of work. Each layer takes an input
+ciently stream data in a programmer-friendly way.                activation tensor and weight tensor, performs an oper-
+    A comparison shows that A100 provides dramati-               ation similar to a matrix multiplication, and outputs an
+cally higher performance than currently available com-           activation tensor. To leverage the large amount of
+mercial designs and NVIDIA’s previous generation                 compute available in a GPU, the output tensor is bro-
+V100 GPU.1 A100 runs approximately 1.5 to over 2               ken down into smaller tiles which are distributed
+                                                                 across the different SMs.
+                                                                      A100’s Tensor Core throughput is 2.5 times higher
+                                                                 on dense FP16 data than the previous generation V100
+0272-1732 ß 2021 IEEE
+Digital Object Identiﬁer 10.1109/MM.2021.3061394                 GPU. In weak scaling, both the network size and paral-
+Date of publication 23 February 2021; date of current version    lelism must grow to match the increased throughput.
+26 March 2021.                                                   In strong scaling, both the network size and available
+
+
+March/April 2021                        Published by the IEEE Computer Society                    IEEE Micro                29
+HOT CHIPS
+
+
+
+
+      FIGURE 1. NVIDIA A100 HPC performance HPC relative to NVIDIA V100, normalized to per chip.
+
+
+
+
+      FIGURE 2. MLPerf v0.7 performance for NVIDIA A100 and other commercially available DL systems, relative to NVIDIA V100 &
+      normalized to per chip.
+
+
+
+
+      FIGURE 3. DL network mapping to GPU.
+
+
+ 30                 IEEE Micro                                                                                March/April 2021
+                                                                                                                HOT CHIPS
+
+
+
+
+FIGURE 4. NVIDIA A100 & V100 tensor core formats and performance.
+
+
+
+parallelism remain ﬁxed, and A100 runs the network            reduces the number of times data needs to be loaded
+faster.                                                       and reduces SMEM bandwidth by half.
+    To achieve strong scaling, A100 needed to scale               Data transfer efﬁciency from the memory system
+performance at all levels: from the tensor cores,             was also improved. In V100, data must ﬁrst be loaded
+through the cache hierarchy, through DRAM, and chip           into the register ﬁle and then stored into SMEM. In
+interconnect.                                                 A100, a new asynchronous combined load-global-
+                                                              store-shared instruction was added which transfers
+                                                              data directly into SMEM, bypassing the register ﬁle
+SM Core                                                       and increasing efﬁciency.
+A100’s new tensor cores have increased the process-               Combined with the Tensor Core organization
+ing of dense FP16 data by 2x per SM and 2.5 per GPU          changes, A100 reduces 6 L1þSMEM accesses (L1 read,
+over V100 (see Figure 4). The tensor cores added sup-         SMEM write, 4 SMEM reads) down to only two SMEM
+port for additional formats, including the TensorFloat-       reads. The asynchronous capability of the transfer of
+32 operation that improves the processing of FP32             memory also helps the SM to continuously stream data,
+data by 10 per GPU. A100’s tensor cores also support         improving utilization throughout the memory system.
+ﬁne-grain sparsity, which doubles the throughput
+when processing sparse data.
+    The 2 increase in FP16 math throughput per SM            A100 L2 Cache
+for dense data requires 2 more data bandwidth, and           The A100 L2 cache is a shared resource for the SMs.
+the effective 4 increase for sparse data requires 3         Additional bandwidth from the L2 cache is necessary
+more data bandwidth.                                          to achieve strong scaling, as the number of SMs is
+    In the SM core, multiple improvements in data             increased in A100 and each SM processes data at a
+delivery provide this increase in data bandwidth (see         faster rate. A100 delivers a 2.3x L2 bandwidth increase
+Figure 5). Inside the V100 and A100 SM, the network           over V100, supported by a new structure to efﬁciently
+layer tile is further broken down into four smaller tiles     move this data.
+which are each processed by a 32-thread warp. V100’s              The L2 cache is divided into two partitions to enable
+tensor cores were designed to work at 8-thread granu-         higher bandwidth and lower latency memory access
+larity, and required the tiles to be further broken down      (Figure 6). Each L2 partition localizes and caches data
+to four smaller tiles per warp. Each of these tiles loads     for memory accesses from SMs directly connected to
+the tensor data from shared memory (SMEM), which              the partition. Hardware cache-coherence maintains
+in aggregate requires all data to be loaded four times.       the CUDA programming model across the full GPU,
+In A100, the tensor cores were reorganized and                and applications will automatically leverage the band-
+enhanced to work at 32-thread granularity. This               width and latency beneﬁts of A100’s new L2 cache.
+
+
+March/April 2021                                                                               IEEE Micro                 31
+HOT CHIPS
+
+
+
+
+      FIGURE 5. Data delivery for V100 and A100.
+
+
+      L2 Cache Residency Controls                              global memory can only utilize this portion of L2 when
+      A100 gives applications the capability to inﬂuence the   it is unused by persistent accesses.
+      persistence of data in the L2 cache, allowing higher          There are two primary mechanisms that allow per-
+      bandwidth and lower latency accesses to the global       sistent data to be resident in the L2. In the ﬁrst, an
+      memory. The so-called persistent accesses control        address-based window is speciﬁed where all the read/
+      the replacement policy to effectively set-aside a por-   write accesses are persistently cached in the L2. Indi-
+      tion of L2 cache. Normal or streaming accesses to        vidual accesses are not tagged in this scheme. Alter-
+                                                               natively, controls can be speciﬁed at a ﬁner-grained,
+                                                               per-memory-operation basis.
+
+
+                                                               A100 DRAM Bandwidth
+                                                               The A100 GPU includes 40 GB of fast HBM2 DRAM
+                                                               memory on its SXM4-style circuit board. The memory
+                                                               is organized as ﬁve active HBM2 stacks with eight
+                                                               memory dies per stack. With a 1215 MHz (DDR) data
+                                                               rate the A100 HBM2 delivers 1555-GB/s memory band-
+                                                               width, which is more than 1.7x higher than Tesla V100
+                                                               memory bandwidth.
+
+
+                                                               A100 Compute Data Compression
+                                                               To boost DRAM bandwidth and L2 capacity, A100
+                                                               implements a data-compression feature for sparsity
+                                                               and other compressible data patterns. Compression
+                                                               in L2 provides up to 4 improvement to DRAM read/
+                                                               write bandwidth, up to 4 improvement in L2 read
+                                                               bandwidth, and up to 2 improvement in L2 capacity.
+                                                                   Compression is initiated by marking buffers avail-
+                                                               able for compressibility using new APIs in CUDA 11.
+                                                               Data written to these buffers is examined inside the
+                                                               L2 by the hardware. For speciﬁc data patterns that
+      FIGURE 6. NVIDIA A100 die.                               match the hardware algorithms, the data are com-
+                                                               pressed and written back to the L2. Any subsequent
+
+
+ 32                 IEEE Micro                                                                         March/April 2021
+                                                                                                             HOT CHIPS
+
+
+
+
+FIGURE 7. NVIDIA DGX-A100 system block diagram.
+
+
+
+access will take advantage of the compressed data            efﬁciency of small payload writes and data-less
+bandwidth. Compression helps both the write and              responses were also added.
+read accesses to DRAM and increases the effective
+DRAM bandwidth available.
+                                                              ELASTIC GPU: MULTI-GPU
+                                                              SCALE UP
+A100 Gen 3 NVLink                                            The twelve NVLink links in each A100 allow a variety of
+The third generation of NVIDIA’s high-speed NVLink           conﬁgurations with high-speed connections to other
+interconnect is implemented in A100 and the new              GPUs and switches. To meet the growing computa-
+NVSwitch. NVLink is a reliable, high bandwidth, low-         tional demands of larger and more complex DNNs and
+latency memory interconnect, and includes resiliency         HPC simulations, the new NVIDIA DGX A100 system
+features such as link-level error detection and packet       (Figure 7) includes eight A100 GPUs connected by the
+replay mechanisms to guarantee successful transmis-          new NVLink-enabled NVSwitch.
+sion of data. The new NVLink has a data rate of 50 Gb/s          Multiple DGX A100 systems can be connected via
+per signal pair, nearly doubling the 25.78-Gb/s rate in      a networking fabric like NVIDIA Mellanox InﬁniBand
+Tesla V100.3 Each link uses four differential signal pairs   and Mellanox Ethernet to scale out data centers, cre-
+(four lanes) in each direction compared to eight signal      ating powerful supercomputer-class systems. More
+pairs (eight lanes) in V100. A single link provides 25-GB/   powerful NVIDIA DGX POD and NVIDIA DGX Super-
+s bandwidth in each direction similar to V100 GPUs, but      POD systems will include multiple DGX A100 systems
+uses only half the signals compared to V100. The total       to provide much greater compute power with strong
+number of NVLink links is increased to 12 in A100, ver-      scaling.
+sus six in V100, yielding 600-GB/s total bandwidth for an
+entire A100 versus 300 GB/s for Tesla V100. The twelve
+NVLink links in each A100 allow a variety of conﬁgura-        ELASTIC GPU: MULTI-INSTANCE
+tions with high-speed connections to other GPUs and           GPU (MIG)
+switches.                                                    While many data center workloads continue to scale,
+    All writes in the third-generation NVLink now            both in size and complexity, some acceleration tasks
+require an acknowledgement from the destination.             are not as demanding, such as early-stage develop-
+This allows synchronization to be performed at the           ment or inference on simple models at low batch
+requester, and error attribution to be returned to a         sizes. Data center managers aim to keep resource uti-
+speciﬁc execution context. Writes are allowed to be          lization high, so an ideal data center accelerator not
+pipeline to the destination while the requestor is wait-     only needs to efﬁciently handle a large workload—it
+ing on a response. New features to improve the               also efﬁciently accelerates many smaller workloads.
+
+
+March/April 2021                                                                             IEEE Micro                33
+HOT CHIPS
+
+
+
+
+      FIGURE 8. Traditional CUDA Cþþ program with exposed latency.
+
+
+
+          The new MIG feature can partition each A100 into               Updates to CUDA for A100 expand the expressive-
+      as many as seven GPU Instances for optimal utiliza-            ness of Cþþ for data and computation pipelining,
+      tion, effectively expanding access to every user and           which we identiﬁed as a growing source of difﬁculty
+      application. The A100 GPU’s new MIG capability can             for CUDA programmers. The goal of pipelining in soft-
+      divide a single GPU into multiple GPU partitions called        ware is the same as in hardware: to keep execution
+      GPU Instances. Each instance’s SMs have separate               resources busy by overlapping the latency of different
+      and isolated paths through the entire memory sys-              phases of computation. This is difﬁcult to express in
+      tem—the on-chip crossbar ports, L2 cache banks,                Cþþ due to its conservative requirements around
+      memory controllers, and DRAM address busses are all            memory consistency.
+      assigned uniquely to an individual instance. This                  The example program in Figure 8 shows that oper-
+      ensures that an individual user’s workload can run             ation-level parallelism is prevented by synchronization
+      with predictable throughput and latency, with the              semantics. Software pipelining depends on having the
+      same L2 cache allocation and DRAM bandwidth even               opportunity to execute independent work while syn-
+      if other tasks are thrashing their own caches or satu-         chronization is resolving at the boundaries of stages.
+      rating their DRAM interface. Using this capability, MIG            The ﬁrst programming model innovation borrows
+      can partition available GPU compute resources to pro-          from asynchronous programming: separate the arrival
+      vide a deﬁned quality of service (QoS) with fault isola-       and waiting steps, as in phasers.4 Early in develop-
+      tion for different clients (such as VMs, containers,           ment, NVIDIA recognized this innovation would bene-
+      processes, and so on). It enables multiple GPU Instan-         ﬁt programmers beyond CUDA, so NVIDIA offered
+      ces to run in parallel on a single, physical A100 GPU.         both speciﬁcations and implementations to the com-
+      MIG also keeps the CUDA programming model                      munity; it is now part of ISO Cþþ 205 and is available
+      unchanged to minimize programming effort.                      in LLVM (libcxx) today.
+          MIG enables users to see and schedule jobs on vir-             The second innovation extends this foundation
+      tual GPU Instances as if they were physical GPUs.              with asynchronous data movement capabilities. This
+      MIG works with Linux operating systems and their               example program in Figure 9 combines both asynchro-
+      hypervisors.                                                   nous barrier and data movement operations, resulting
+                                                                     in a remarkably precise expression of programming
+                                                                     intent. By leveraging the relaxed semantics of asyn-
+       PRODUCTIVITY: ASYNCHRONOUS                                    chronous operations, there is a net reduction in the
+       PROGRAMMING                                                   difﬁculty of compiling the program and performance is
+      The goal of CUDA is to compile intuitive Cþþ sources           both higher and more predictable.
+      into high-performance executable programs for the
+      GPU. In this pursuit, a compiler’s goals are in tension:
+      to maximize operation-level parallelism, but never to           CONCLUSION
+      alter the program’s semantics. NVIDIA’s work on joint          NVIDIA’s A100 GPU is the largest and most advanced
+      hardware & programming system codesign directly                GPU developed by NVIDIA, and builds on the ground-
+      addresses this tension.                                        work laid by previous generations of NVIDIA GPUs. It
+
+
+ 34                IEEE Micro                                                                                March/April 2021
+                                                                                                                      HOT CHIPS
+
+
+
+
+FIGURE 9. Asynchronous data movement and computation.
+
+
+is the result of the work of thousands of engineers              WISHWESH GANDHI is a Senior Director of architecture at
+that worked together from transistors to standards               NVIDIA, Singapore. He has led the architecture development
+and everything in between such as system integration             of the GPU memory system for multiple generations. He
+and programming model design. A100 provides
+                                                                 has been working with Integrated and Discrete GPU mem-
+unprecedented acceleration at every scale, and adds
+                                                                 ory architecture for more than 20 years. Contact him at
+powerful new features which deliver dramatically
+faster performance for HPC, AI, and data analytics               wgandhi@nvidia.com.
+workloads.
+                                                                 OLIVIER GIROUX is a Distinguished Architect at NVIDIA, and
+                                                                 the ISO Cþþ Concurrency and Parallelism Chair. He has
+                                                                 worked on ten GPU and six SM architecture generations,
+ REFERENCES
+  1. J. Choquette, O. Giroux, and D. Foley, “Volta:              with a focus on clarifying the programming model of GPU
+     Performance and programmability,” IEEE Micro, vol. 38,      threads. Giroux received an M.S. in computer science from
+     no. 2, pp. 42–52, Mar./Apr. 2018.                           McGill University, Montreal, QC, Canada. Contact him at
+  2. P. Mattson et al., “MLPerf training benchmark,” 2019,       ogiroux@nvidia.com.
+     arXiv:1910.01500.
+  3. A. Ishii et al., “NVSwitch and DGX-2: NVLink-Switching      NICK STAM is a Senior Technical Marketing Director with
+     chip and scale-up compute server,” Hot Chips, 2018.
+                                                                 NVIDIA. His team provides tech support to press, and also
+  4. J. Shirako, D. M. Peixotto, V. Sarkar, and W. N. Scherer,
+                                                                 produces our GPU white papers. Before NVIDIA, he worked
+     “Phasers: A uniﬁed deadlock-free construct for
+                                                                 at PC Magazine USA, and cofounded the ExtremeTech web-
+     collective and point-to-point synchronization,” in Proc.
+     22nd Annu. Int. Conf. Supercomput., 2008, pp. 277–288.      site. Stam received an M.S. in computer science from SUNY
+  5. International Standard ISO/IEC 14882:2020 – Program         Binghamton, NY, USA. Contact him at nstam@nvidia.com.
+     ming Language Cþþ.
+                                                                 RONNY KRASHINSKY is a Distinguished Engineer with NVI-
+JACK CHOQUETTE is a Senior Distinguished Engineer with           DIA where he has architected GPUs for 11 years. He began
+NVIDIA, where he has led the architecture development of         his NVIDIA career in Research, and later joined the Streaming
+NVIDIA’s GPGPU Streaming Microprocessors for multiple            Multiprocessor team. He now focuses on deep-learning com-
+generations. He has been leading CPU and system designs          pute architecture. Krashinsky received a Ph.D. in electrical
+for over 25 years. Choquette received an M.S. in computer        engineering and computer science from Massachusetts Insti-
+engineering from the University of Illinois Urbana-Champaign,    tute of Technology (MIT), Cambridge, MA, USA. Contact him
+Champaign, IL, USA. Contact him at jchoquette@nvidia.com.        at rkrashinsky@nvidia.com.
+
+
+
+March/April 2021                                                                                     IEEE Micro                  35
+

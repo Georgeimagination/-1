@@ -1,0 +1,18 @@
+﻿{
+    "stage":  "signoff_generated",
+    "current_formal_aggregate":  "97ebb17a2518e3a43b18a382dcfc879c1f5e2b08118a6149c8fa984e65017453",
+    "reconstructed_old_aggregate":  "0b4c6106bde7e2a62b1ffd6a0df7246ded62177d941c7fb9303a2cbac62f92bf",
+    "original_signoff_sha256":  "58f2368764e4fb132fe63a5acc427f22cdace7c38538270a7457e566d19bbd05",
+    "rebase_signoff_sha256":  "9429d80f0ba649724ed1276523df8ecfcf269e6e748b15a6cbe4dd11013b42c0",
+    "signoff_rows":  486,
+    "aws_write_rows":  478,
+    "aws_guard_rows":  8,
+    "google_pk_delta":  8,
+    "google_fixed_files":  5,
+    "aws_google_pk_conflicts":  0,
+    "aws_google_fixed_file_conflicts":  0,
+    "target_hash_cell_diffs":  29,
+    "aggregate_cell_diffs":  486,
+    "note_cell_diffs":  486,
+    "forbidden_cell_diffs":  0
+}

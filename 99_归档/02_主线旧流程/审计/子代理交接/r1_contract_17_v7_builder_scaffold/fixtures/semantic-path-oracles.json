@@ -1,0 +1,31 @@
+{
+  "fixture_contract_version": "CONTRACT-V7-SEMANTIC-PATH-ORACLES-V1",
+  "source": "current formal 数据/fields.csv first data row",
+  "primary_key": ["field_id"],
+  "oracles": [
+    {
+      "semantic_path": "数据/fields.csv",
+      "envelope_payload_bytes": 859,
+      "singleton_payload_bytes": 861,
+      "row_v1_sha256": "c9332d894c520577a49b7479652139dc9f6de35df8591481bd25e7e1b9a4c10f",
+      "rowset_v1_sha256": "33b9c8872bb811fb91c3147df2c6c85f852ae63cf6be380e9f84b3a35de5eff2",
+      "legal_for_snapshot": true
+    },
+    {
+      "semantic_path": "审计/事务/TX-TEST/inputs/base/数据/fields.csv",
+      "envelope_payload_bytes": 893,
+      "singleton_payload_bytes": 895,
+      "row_v1_sha256": "8db42271feef643745b699bb303622c09a2c22038c7415f370dd059fbea7aa2a",
+      "rowset_v1_sha256": "b43d5fe8867c74f0487df09b3f6fca35ac5763f27742126c6d7c0ac3df1860c6",
+      "legal_for_snapshot": false
+    },
+    {
+      "semantic_path": "审计/事务/TX-TEST/inputs/post/数据/fields.csv",
+      "envelope_payload_bytes": 893,
+      "singleton_payload_bytes": 895,
+      "row_v1_sha256": "d605741c1806deb881fa6631bc72d401cc1b8a444503db4cbb9557ffaf8bd91d",
+      "rowset_v1_sha256": "d43f156813cf3b382a603af19fb6ef460883435b9276ef6f055d15a97212b81a",
+      "legal_for_snapshot": false
+    }
+  ]
+}

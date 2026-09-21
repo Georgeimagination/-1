@@ -1,0 +1,7 @@
+"gate_id","status","exit_code","expected_pattern","pattern_match","formal_aggregate_after","formal_targets_absent","notes"
+"default-deny","passed","1","denied by default","True","f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10","True","Current formal root is denied by default. Supply -AllowFormalRoot only after the formal backup and authorization are re"
+"wrong-token","passed","1","authorization token differs","True","f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10","True","Formal authorization token differs."
+"pending-independent-signoff","passed","1","reviewer identity differs","True","f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10","True","Transaction-review reviewer identity differs."
+"wrong-mirror-marker","passed","1","marker content differs","True","f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10","True","Non-formal TargetRoot marker content differs."
+"preexisting-target","passed","1","New-file target already exists","True","f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10","True","New-file target already exists: 资料卡/华为昇腾/封装/华为_Ascend950_共享裸片资料卡.md"
+"wrong-premerge-hash","passed","1","TargetRoot formal aggregate differs","True","f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10","True","TargetRoot formal aggregate differs."

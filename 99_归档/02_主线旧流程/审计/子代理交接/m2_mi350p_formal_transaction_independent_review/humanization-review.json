@@ -1,0 +1,27 @@
+{
+    "status":  "passed",
+    "document":  "report.md",
+    "document_type":  "engineering_doc",
+    "report_humanizer_scan":  "No machine-detectable AI tells found",
+    "shuorenhua_scene":  "docs",
+    "shuorenhua_tier":  "Tier 1 local findings absent",
+    "shuorenhua_level":  "minimal",
+    "shuorenhua_scope":  "in-place",
+    "protected_spans_checked":  [
+                                    "hashes",
+                                    "counts",
+                                    "paths",
+                                    "statuses",
+                                    "responsibility",
+                                    "failure classifications"
+                                ],
+    "manual_checks":  {
+                          "headings":  "concrete",
+                          "first_paragraphs":  "direct",
+                          "transitions":  "operational",
+                          "ending":  "scope and remaining authorization boundary",
+                          "residual_ai_tells":  "none obvious",
+                          "fact_drift":  "none"
+                      },
+    "remaining_risk":  "No human writing sample was provided; the report keeps engineering-document formality."
+}

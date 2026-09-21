@@ -1,0 +1,223 @@
+Survey of deployment locations and underlying hardware architectures for contemporary deep neural networks - Miloš Kotlar, Dragan Bojić, Marija Punt, Veljko Milutinović, 2019 (https://journals.sagepub.com/doi/10.1177/1550147719868669)
+citeturn79view0 [wordlim: 200] Crawled: last week; Content type: text/html; Source: open({"ref_id":"https://journals.sagepub.com/doi/10.1177/1550147719868669","lineno":1}); Total lines: 1005
+L0: cite0†iframe†www.googletagmanager.com L1: 
+L2: cite1†Skip to main content L3: 
+L4: cite2†Open Drawer MenuMenu L5: 
+L6: #### Add email alerts
+L7: 
+L8: You are adding the following journal to your email alerts
+L9: 
+L10: [Input][Input]
+L11:  | New content
+L12: --- | ---
+L13: International Journal of Distributed Sensor Networks  | [Input]
+L14: [Button: Create email alert]
+L15: 
+L16: Open access
+L17: 
+L18: Review article
+L19: 
+L20: First published online August 15, 2019
+L21: # Survey of deployment locations and underlying hardware architectures for contemporary deep neural networks
+L22: 
+L23: cite3†Miloš Kotlar cite4†https://orcid.org/0000-0001-6459-0087†orcid.org cite5†[email protected] , cite6†Dragan Bojić , […], cite7†Marija Punt , and cite8†Veljko Milutinović +1-1cite9†View all authors and affiliations L24: 
+L25: cite10†All Articles L26: 
+L27: cite11†https://doi.org/10.1177/1550147719868669†doi.org L28: 
+L29: Contents
+L30:   * cite12†Abstract L31:   * cite13†Introduction L32:   * cite14†Compute intensive training and strict latency inference of DNNs L33:   * cite15†Analysis of existing solutions L34:   * cite16†Classification criteria L35:   * cite17†Conclusion L36:   * cite18†Acknowledgments L37:   * cite19†Declaration of conflicting interests L38:   * cite20†Funding L39:   * cite21†ORCID iD L40:   * cite22†Footnote L41:   * cite23†References L42: 
+L43: cite24†PDF/EPUB L44: 
+L45: cite25†More L46:   * cite26†Cite L47:   * cite27†Share options L48:   * cite28†Information, rights and permissions L49:   * cite29†Metrics and citations L50:   * cite30†Figures and tables L51: ## Abstract
+L52: This article overviews the emerging use of deep neural networks in data analytics and explores which type of underlying hardware and architectural approach is best used in various deployment locations when implementing deep neural networks. The locations which are discussed are in the cloud, fog, and dew computing (dew computing is performed by end devices).
+L53: Covered architectural approaches include multicore processors (central processing unit), manycore processors (graphics processing unit), field programmable gate arrays, and application-specific integrated circuits. The proposed classification in this article divides the existing solutions into 12 different categories, organized in two dimensions.
+L54: The proposed classification allows a comparison of existing architectures, which are predominantly cloud-based, and anticipated future architectures, which are expected to be hybrid cloud-fog-dew architectures for applications in Internet of Things and Wireless Sensor Networks. Researchers interested in studying trade-offs among data processing bandwidth, data processing latency, and processing power consumption would benefit from the classification made in this article.
+L55: ## Introduction
+L56: 
+L57: Over the last several years, with proliferation of data and devices, machine learning algorithms have become unavoidable in almost every aspect of human life,^{cite31†1 } especially when deep learning (DL) techniques are used. DL techniques, such as deep neural networks (DNNs), are among the best solutions for many problems in image understanding. DNNs are used in applications like face recognition, document analysis, image classification, labeling, and many others.^{cite32†2 –cite33†4 }
+L58: Training and inference of DNNs could be done in the cloud, with enormous computational power, as well as hundreds of kilometers away from data sources, with a less strong computational power in the fog, but much closer to data sources, and also in the dew, at the source of data, where processing is closely coupled with Internet of Things (IoT) and Wireless Sensor Networks (WSNs) connected to end devices.
+L59: Cloud computing provides enormous computational power and storage resources available on demand, where users can scale services to fit their needs. Fog computing provides less computational power and storage resources with bigger geographical distribution compared to cloud computing, which could be tuned more effectively to adequate preprocessing.
+L60: Fog computing is performed by edge devices (routers, routing switches, multiplexers, and integrated access devices), which provide an entry point into enterprise. Dew computing provides minimal computational power and storage resources in close coupling with IoT and WSN on the very edge of the system. Dew computing is performed by end devices like personal computers, mobile phones, and sensors.
+L61: DNNs could include hundreds of millions of connections between nodes, which are computationally and memory intensive, making DNNs difficult to deploy on end devices with limited resources.
+L62: While embedded processors enable arithmetic logic unit (ALU)based computations with reasonable power consumptions, fetching weights from dynamic random-access memory (DRAM), static random-access memory (SRAM), or block random-access memory (BRAM) is several orders of magnitude which is more power greedy than ALU operations.
+L63: Besides deployment locations, it is hard to determine which underlying hardware is the optimal solution for a wide spectrum of DNNs. Depending on the application type and the amount of data, the following architectural approaches could be used: general purpose processors (multicore or central processing unit (CPU)), graphics processing units (manycore or GPUs), field programmable gate arrays (FPGAs), and application-specific integrated circuits (ASICs).
+L64: This article discusses advantages and disadvantages of different deployment locations and different architectural approaches used for training and inference of DNNs, comparing them in terms of aspects such as speed, power consumption, and complexity. It then proposes a novel classification of deployment locations, from the viewpoint of underlying hardware. The goal of this article is to provide insights into design choices related to hardware used for DNNs at different deployment locations.
+L65: In our search, which we conducted using Google Scholar database, we focused on keywords related to DNNs and hardware acceleration.
+L66: Specifically, we searched for the following terms: “an Analysis of DNNs,”“Hardware Acceleration of DNNs,”“Deep Learning in Neural Networks,”“Tensorflow,”“Neuron Programmable Chip,”“Convolution Neural Networks,”“Binarized Neural Networks,”“Training Deep FeedForward Neural Networks,”“Image Segmentation with Deep Neural Networks,”“Memristors for Neural Networks,”“Image Classification using Deep Neural Networks,”“Cloud Computing,”“Fog Computing,”“Edge Computing.”
+L67: The “Compute intensive training and strict latency inference of DNNs” section discusses problems with training and inference of DNNs at different deployment locations, defines the big data problem, and presents why the problem will grow over time. The “Analysis of existing solutions” section gives an overview of existing articles available in the open literature, presents advantages of the state-of-the-art solutions for training and inference of DNNs, and discusses major comparative differences.
+L68: The “Classification criteria” section classifies existing solutions into 12 categories with examples, based on the underlying hardware and architectural approach in connection with various deployment locations. The “Conclusion” section concludes this article, discusses the main advantages of the proposed classification, defines what would be the optimal solution for future, and presents newly opened research problems.
+L69: ## Compute intensive training and strict latency inference of DNNs
+L70: Training of DNNs is a much more compute-intensive process than inference,^{cite34†5 } which requires enormous computational power, especially for big data applications. Inference of DNNs often has strict latency demands, especially in real-time scenarios such as driverless cars and search engines, which is, in both cases, less than a second for each sample.
+L71: While academia is focused on faster training, industry is often more focused on faster inference, by creating custom solutions, both in software and hardware.
+L72: For big data applications, in environments with limited resources such as embedded systems, it is hard to train a DNN, due the lack of computational power and power resources. In real-time applications, which have strict latency demands, it is a non-trivial problem for inference in the cloud environment, since processing could be done hundreds of kilometers away.
+L73: Currently, big data applications are using powerful GPUs for DNNs in the cloud environment, while FPGA, ASIC, and embedded processors of any type are on the rise in fog and dew environments suited for DL.^{cite35†6 ,cite36†7 }
+L74: ## Analysis of existing solutions
+L75: Companies like Amazon, Google, Microsoft, Baidu, and many others recently created web services for image understanding. Nowadays, they are aiming to create artificial intelligence cloud-based platforms for image understanding which could be used for almost any type of data,^{cite37†8 } referred to as Machine-Learning-as-a-Service (MLaaS).
+L76: MLaaS presents a set of machine learning tools which are a part of cloud computing, including frameworks, data visualization, application programming interfaces (APIs), and predictive analysis.
+L77: Cloud computing currently offers the best solution for training and inference of DNNs, if execution time is of primary concern. Even though cloud computing offers immense opportunities, the development of cloud computing technology is currently struggling with many issues which still have to be addressed, such as latency and security concerns,^{cite38†9 ,cite39†10 } also in real-time scenarios.
+L78: The amount of power required to send data to the cloud is enormous, which is why even the most powerful cloud solutions need to make a great effort to overcome latency concerns.^{cite40†11 }
+L79: There is another trend which shifts data and processing significantly away from the cloud to end devices. Huang et al.^{cite41†12 } propose a dew machine learning framework, which demonstrates superiority by reducing network traffic and running time under certain conditions of interest. This could be of crucial importance in environments, such as drones, ships, and research stations, where execution time is not of primary concern and where ultra-low-power solutions benefit.
+L80: Even data mining could be ported to end devices.^{cite42†13 }
+L81: Schmidhuber^{cite43†14 } presents the essence of DNNs, how they have evolved over time, and which cutting-edge DNNs exist today. In the open literature, there are many papers which discuss implementations of DNNs using various architectural approaches. The history of DNNs for image understanding – convolutional neural networks (CNNs) began from AlexNet,^{cite44†15 } with a DNN which won an ImageNet competition, where the goal was to classify 1.2 million high-resolution images into 1000 different classes.
+L82: They used an efficient GPU implementation of the convolution operation which relied on two GTX 580 GPUs with 3 GB of memory. State-of-the-art CNNs, such as VGG, Inception, GoogleNet, RestNet, and other families,^{cite45†16 } are suitable for training on high parallelizable GPUs. These DNNs are very powerful. However, they require an enormous amount of energy because weights have to be stored into external DRAM memory and have to be fetched every time for each image.
+L83: It is possible to fit a relatively small neural network (NN) into an on-chip SRAM such as LeNet-5.^{cite46†17 }
+L84: While training is mostly dominated by GPUs, FPGAs provide superior efficiency over GPUs, especially for binarized NNs—NNs with binary weights—often used in environments with limited resources, especially in embedded systems. A group of researchers^{cite47†18 } present power-efficient training of a binarized NN, where most arithmetic operations are replaced with bitwise operations. That paper further evaluates the opportunity to improve the execution efficiency of a binarized NN through hardware acceleration.
+L85: In the open literature, there are a number of ASICs developed for DNNs such as neuromorphic chips.^{cite48†19 } IBM TrueNorth^{cite49†20 } and Intel Loihi^{cite50†21 } are neuromorphic chips which enable parallel computations used for learning and inference of DNNs needing high efficiency. Another trend implies analog computational units for running DNNs^{cite51†22 } such as memristors.
+L86: Quantum computing, the emerging interdisciplinary research area of quantum physics and machine learning, could also be used for training of DNNs.^{cite52†23 }
+L87: ## Classification criteria
+L88: 
+L89: The classification proposed in this article is illustrated in cite53†Table 1 . Each category contains examples from the open literature, if such examples exist, which describes the essence of the paradigm and its advantages and disadvantages in comparison to other categories. An empty category in the classification could be an opportunity for further research and development. Creativity in this article follows the path referred to as generalization.^{cite54†24 }
+L90: Table 1. Proposed classification with 12 different categories and examples of different underlying hardware used at deployment locations.
+L91: 
+L92: Underlying hardware  | Deployment locations
+L93: --- | ---
+L94: Cloud  | Fog  | Dew
+L95: --- | --- | ---
+L96: CPU  | Intel—AI DevCloud, Skylake  | Intel FRD  | Intel—Atom, Pentium M, Core Solo
+L97: GPU  | Amazon EC2  | N/A  | Nvidia–JetsonTX, Tegra X, Drive
+L98: FPGA  | Baidu XPU  | hpFog  | Altera Stratix, Xilinx Virtex
+L99: ASIC  | Google TPU  | N/A  | IBM TrueNorth, Intel Loihi
+L100: CPU: central processing unit; FRD: Fog Reference Design; GPU: graphics processing unit; FPGA: field programmable gate array; ASIC: application-specific integrated circuit; TPU: tensor processing unit.
+L101: We immediately found that different architectural approaches do not allow for a full direct comparison of performance, power consumption, latency, and data processing bandwidth of DNNs described in the open literature, due to different testing conditions and different DNN designs. Therefore, this section partially compares different architectural approaches through aspects such as speed, power, and speed per watt, using the data available in the open literature.
+L102: ### DNNs in cloud computing
+L103: Cloud computing is the most powerful massive workload computing model today. The main advantage of cloud computing is its flexibility where users can scale resources and services to fit their needs and access them from anywhere. It provides the enormous computational power needed for training and inference of DNNs. The most important aspect of performance evaluation for training of DNNs is the computational power needed for such massive workload, while inference heavily depends on power consumption.
+L104: Cloud-based solutions are often implemented on powerful manycore processors, which makes the massive parallel calculations for training of DNNs possible, while multicore processors orchestrate data movements into and from the memory of GPUs.
+L105: Nvidia recently introduced a mixed-precision arithmetic, where calculations are performed using FP16 (half precision) instead of FP32 (single precision) or FP64 (double precision), which is not critical for DNNs but reduces the time required for calculations and moving data into and from the shared memory.^{cite55†25 ,cite56†26 } Such approach reduces memory usage and allows for training of larger DNNs.
+L106: Tensor cores are introduced in the Nvidia’s Volta architecture and represent another optimization construct which accelerates the training of DNNs.^{cite57†27 }
+L107: Besides the powerful GPUs, cloud services for DNNs could be based on multicore processors, usually from 2 to 8 cores, and also with up to 18 cores, for Intel i9. There are attempts to create multicore processors with up to 72 cores like Intel Xeon Phi.^{cite58†28 } A group of researchers^{cite59†29 } trained a DNN on a cluster of 1024 CPUs. Intel also introduced a new instruction set (AVX-512) available on the latest Xeon Phi and Skylake-X CPUs, which could accelerate performance for massive workloads of DNNs.
+L108: The new instruction set enables lower precision operations using Fused Multiply Add (FMA) core instructions.^{cite60†30 }
+L109: cite61†Table 2 presents the performance comparison between Titan X GPU and Xeon E5-2698 CPU processors for AlexNet. It is shown that for inference, the GPU solution achieves a better performance per watt.
+L110: 
+L111: Table 2. Inference performance for AlexNet^{cite44†15 } on Titan X GPU and Xeon E5-2698 CPU.
+L112: 
+L113: Processor  | Inference  | Power  | Performance/watt
+L114: --- | --- | --- | ---
+L115: Titan X  | 405 img/s  | 160.0 W  | 2.5 img/s/W
+L116: Xeon E5-2698 v3  | 76 img/s  | 111.7 W  | 0.7 img/s/W
+L117: Source: Performance evaluation adopted from Nvidia Corporation.^{cite62†31 }
+L118: 
+L119: GPU: graphics processing unit; CPU: central processing unit.
+L120: Calculations are today usually bandwidth-limited, which means that storing and reading data could take more energy than computation itself. In order to solve this problem, many new developments are switching from the control-flow paradigm to the dataflow paradigm.^{cite63†32 ,cite64†33 } Cloud services which rely on FPGA, such as Baidu XPU, still cannot offer performance of today’s GPUs or TPUs (tensor processing units), but offer better energy efficiency for training and inference of DNNs.
+L121: Companies like Baidu, Intel, and Microsoft have cloud services which rely on FPGAs, which under certain conditions of interest could achieve better performance per watt. Nurvitadhi et al.^{cite47†18 } compare the performance per watt of DNNs, such as AlexNet and VGG, which rely on floating-point matrix multiplication. cite65†Table 3 shows that Stratix 10 with far greater number of DSPs used for multiplication offers improved FP32 performance compared to Arria 10 but is still behind the powerful Titan X GPU.
+L122: Stratix 10 can be up to 40% more power greedy than Titan X for the theoretical peak.
+L123: Table 3. Dense matrix multiplication (theoretical peak) with FP32 data type, on Arria 10 FPGA, Stratix 10 FPGA, and Titan X GPU.
+L124: 
+L125: Processor  | Performance (FP32)  | Performance/watt (FP32)
+L126: --- | --- | ---
+L127: Arria 10  | 1.8 TOP/s  | 28 GOP/s/W
+L128: Stratix 10  | 9.1 TOP/s  | 60 GOP/s/W
+L129: Titan X  | 10.88 TOP/s  | 45 GOP/s/W
+L130: 
+L131: Source: Performance evaluation adopted from Nurvitadhi et al.^{cite47†18 }
+L132: 
+L133: FPGA: field programmable gate array; GPU: graphics processing unit.
+L134: It is shown that in the case of binarized NNs with 1 bit data types, Stratix 10 FPGA can deliver 10 times better performance per watt compared to Titan X GPU, which is shown in cite66†Table 4 .
+L135: 
+L136: Table 4. Dense matrix multiplication for binarized DNNs with 1 bit data types, on Arria 10 FPGA, Stratix 10 FPGA, and Titan X GPU (multiply and add operations are replaced with XOR and BitCount).
+L137: Processor  | Performance (fixed-point 1 bit)  | Performance/watt (fixed-point 1 bit)
+L138: --- | --- | ---
+L139: Arria 10  | 50 TOP/s  | 1500 GOP/s/W
+L140: Stratix 10 (300 MHz)  | 170 TOP/s  | 1000 GOP/s/W
+L141: Stratix 10 (500 MHz)  | 250 TOP/s  | 1600 GOP/s/W
+L142: Stratix 10 (700 MHz)  | 600 TOP/s  | 3100 GOP/s/W
+L143: Titan X  | 87.7 TOP/s  | 400 GOP/s/W
+L144: 
+L145: Source: Performance evaluation adopted from Nurvitadhi et al.^{cite47†18 }
+L146: 
+L147: DNNs: deep neural networks; FPGA: field programmable gate array; GPU: graphics processing unit.
+L148: In terms of performance on ResNet-50 (CNN), two cloud-based services, Google TPU and Amazon EC2, which rely on TPUv2 ASIC and Nvidia V100 GPU, are almost equally fast on the ImageNet dataset, as shown in cite67†Table 5 .^{cite68†34 } Due to their ability to be fully tuned to DNN design, these two architectural approaches are in many cases used for training DNNs.
+L149: 
+L150: Table 5. ResNet-50 results for training the ImageNet dataset, on Google TPUv2 ASIC and Nvidia V100 GPU for various batch sizes.
+L151: Processor  | 128 (batch size)  | 256 (batch size)  | 512 (batch size)  | 1024 (batch size)
+L152: --- | --- | --- | --- | ---
+L153: 4× Google TPUv2  | 1127 img/s  | 2183 img/s  | 2664 img/s  | 3186 img/s
+L154: 4× Nvidia V100  | 1746 img/s  | 2287 img/s  | 2783 img/s  | 3128 img/s
+L155: 
+L156: Source: Performance evaluation adopted from RiseML.^{cite68†34 }
+L157: 
+L158: TPU: tensor processing unit; ASIC: application-specific integrated circuit; GPU: graphics processing unit.
+L159: Due to their complexity, GPUs are quite often used in cloud services to enable parallelism. However, companies like Intel and Amazon have CPU cloud-based services. By scaling the performance evaluation to the cloud level, with a number of processors running simultaneously, GPU and ASIC solutions would definitely be faster compared to CPU and FPGA solutions.
+L160: cite69†Table 6 presents a comparison of different architectural approaches commonly used in cloud-based services, focusing on attributes such as the year of production, platform type, technology, clock rate, memory type, and transistor count.
+L161: 
+L162: Table 6. Comparison of different architectural approaches commonly used in cloud-based services.
+L163: Platform  | Intel Xeon  | Tesla V100  | Xilinx Virtex Ultrascale  | Google TPU
+L164: --- | --- | --- | --- | ---
+L165: Year  | 2016  | 2017  | 2014  | 2017
+L166: Platform type  | CPU  | GPU  | FPGA  | ASIC
+L167: Technology  | 22 nm  | 12 nm  | 22 nm  | 28 nm
+L168: Clock (MHz)  | 4300  | 1530  | 200  | 700
+L169: Memory type  | DRAM  | DRAM  | BRAM  | SRAM
+L170: Transistors count  | 7.2 billion  | 21.1 billion  | 20 billion  | 2.5 billion
+L171: TPU: tensor processing unit; CPU: central processing unit; GPU: graphics processing unit; FPGA: field programmable gate array; ASIC: application-specific integrated circuit; DRAM: dynamic random-access memory; BRAM: block random-access memory; SRAM: static random-access memory
+L172: #### Cloud/multicore
+L173: 
+L174: Intel AI DevCloud^{cite70†35 } is a full-stack platform for DL based on Xeon Scalable processors, which enable fast training and inference of DNNs, by splitting calculations to more dedicated nodes. A group of researchers^{cite59†29 } trained RestNet-50 and AlexNet in record time (presented in their publication), by scaling computations to more dedicated CPU nodes.
+L175: #### Cloud/manycore
+L176: Amazon EC2 provides GPU cloud-based acceleration with up to 8 GB of GPU memory, which could be used for almost any massive workload. In the open literature, there are a number of DNN implementations which exploit the above-mentioned cloud-based platform. Strom^{cite71†36 } solves the well-known communication bottleneck problem, which arises for data-parallel stochastic gradient descent.
+L177: This reduction in communication bandwidth enables efficient scaling to more parallel GPU nodes than any other method, thus achieving better accuracy in the resulting DNN.
+L178: #### Cloud/FPGA
+L179: Baidu XPU is an FPGA cloud-based accelerator with 256 cores, running on 600 MHz. It has a shared memory for data synchronization. In the open literature, there are many papers which propose DNN FPGA-based designs.
+L180: A group of researchers from Intel evaluated performance of algorithms for training DNNs on Intel FPGAs (Arria 10, Stratix 10) against the high performance Titan X Pascal GPU.^{cite47†18 } Their results show that in environments where execution time is not a prime concern, FPGAs could become the optimal platform for accelerating the next generation of DNNs.
+L181: #### Cloud/ASIC
+L182: Google TPU^{cite35†6 } is an ASIC accelerator developed by Google, especially suited for DNNs. It runs at 700 MHz and consumes 40 W, which is extremely low for cloud services. The TPU is connected to its host via a peripheral component interconnect (PCI) express bus which provides a high bandwidth (up to 12 GB/s). Tensorflow framework, a well-known framework for machine learning, relies on the TPU.
+L183: Nodes of a dataflow execution graph are mapped across many machines in a cluster, including CPUs, GPUs, and ASICs.
+L184: ### DNNs in fog computing
+L185: 
+L186: Fog computing is an infrastructure which provides compute and storage distributed in the most logical and efficient place, between end devices and cloud servers. Fog computing is performed by edge devices, at local area network level, at the edge of the network. It enables localization, therefore enabling low and admissible latency for real-time applications, which is necessary in smart grids and vehicular ad hoc networks (VANETs).
+L187: One of the first attempts to define a fog computing was made by Cisco,^{cite72†37 } when fog computing was defined as a mini-cloud, located at the edge of the network. It consists of a variety of interconnected edge devices. Edge devices which contain processing units and storage are used not only to process their own data but also to process external requests.
+L188: In the open literature, there are several definitions of fog computing, from Cloudlets and Mobile Edge Computing, to Intelligent Transport Systems Clouds.^{cite72†37 }
+L189: Fog to cloud computing is an extension of cloud computing in the way which brings processing closer to end devices, thus fulfilling essential latency and security requirements, while minimizing traffic load in the network.^{cite73†38 } This new emerging field addresses applications and services which do not fit well in the existing paradigms.
+L190: Fog-based solutions often rely on low-power processors, enabling computations in environments with limited resources. In the open literature, there are attempts to create fog solutions for DL, which implement intercommunication between deployed edge devices, often based on low-power CPUs and FPGAs. Yi et al.^{cite74†39 } introduce and define fog computing, and also present its benefits against cloud computing, comparing latency, bandwidth, and migration performance.
+L191: An example shows that response time for face recognition could be drastically reduced using fog computing instead of cloud computing, consuming similar time for the computation task.
+L192: #### Fog/multicore
+L193: Intel built the Fog Reference Design (FRD), reference design for testing and demonstration of fog for many use cases, in order to accelerate market adoption of fog technologies.^{cite75†40 } It is still used at universities for platform testing and research. Since end devices do not have enough computing and storage resources to perform analytics, and since cloud servers, on the contrary, are too far away to process data and respond in time, data processing could be done using edge devices.
+L194: #### Fog/manycore
+L195: 
+L196: In the open literature, there is no paper which introduces fog computing using the manycore approach. Most papers are focused on dew computing, which is discussed in the next section.
+L197: 
+L198: #### Fog/FPGA
+L199: 
+L200: An FPGA fog-based platform^{cite76†41 } allocates less than 15% of resources in FPGA, while the rest of the resources are available for user-defined applications. It allows high throughput computations and enables post-deployment updates.
+L201: #### Fog/ASIC
+L202: 
+L203: In the open literature, there is no paper which introduces fog computing using ASICs. Most papers are focused on dew computing, which is discussed in the next section.
+L204: ### DNNs in dew computing
+L205: 
+L206: Dew computing brings processing close to the data source, where data are processed by end devices, without sending data to a remote cloud. Using such an approach, applications which have strict latency demands could have significantly better performance by eliminating latency. In dew computing, data are processed on end devices (IoT and WSN), addressing the concerns of the strict latency demands, data safety, and privacy.^{cite77†42 }
+L207: cite78†Table 7 presents the performance comparison between Tegra X1 (FP16) GPU and Core i7 6700K CPU low-voltage processors for AlexNet.^{cite44†15 } It is shown that the GPU solution achieves better performance per watt for inference.
+L208: 
+L209: Table 7. Inference performance for AlexNet^{cite44†15 } on Tegra X1 (FP16) GPU and Core i7 6700K CPU.
+L210: 
+L211: Processor  | Inference  | Power  | Performance/watt
+L212: --- | --- | --- | ---
+L213: Core i7 6700K  | 62 img/s  | 49.7 W  | 1.3 img/s/W
+L214: Tegra X1 (FP16)  | 47 img/s  | 5.5 W  | 8.6 img/s/W
+L215: Source: Performance evaluation adopted from Nvidia Corporation.^{cite62†31 }
+L216: 
+L217: GPU: graphics processing unit; CPU: central processing unit.
+L218: In contrast to cloud services, end devices have limited power resources, which means that massive workloads cannot be done, thus making the training of DNNs at end devices almost impossible. Despite the limited resources, an NN could efficiently inference in the dew. End devices have to be ultra power efficient in order to perform the inference of DNNs.
+L219: In the open literature, there are many ASIC- and FPGA-based end devices, specialized for machine learning.^{cite79†43 ,cite80†44 } FPGAs provide low-precision data types and sparsity, which drive the adoption of FPGAs over GPUs for inference of DNNs. TrueNorth^{cite81†45 } can be the optimal solution for inference in the dew, due to its energy-efficient architecture, consuming 70 mW. ASICs, such as TPU, often deliver up to 30× faster inference than CPUs or GPUs, and even more performance per watt.
+L220: Han et al.^{cite82†46 } give a comprehensive comparison of different architectural approaches for DNNs and propose an ASIC-based efficient inference engine on compressed DNNs. The article further compares the proposed inference engine against CPU and mobile GPU on nine benchmarks selected from AlexNet, VGG16, and Neural Talk. The proposed engine outperforms CPUs and mobile GPUs on average 189 and 307 times, respectively.
+L221: Besides ASICs and FPGAs, in the open literature, there are several ultra-low-voltage chips aimed for DL, which are based on multicore and manycore architectures. Intel Atom and Nvidia Tegra X microprocessors are ultra-low-voltage chips, consuming less than 20 W. The ability to process data locally with limited power is extremely useful when connectivity bandwidth is limited, when latency is critical in real-time scenarios, or where privacy and security are a concern.
+L222: Nvidia recently launched an energy-efficient T4 inference accelerator with low-precision calculations, supporting INT4 precision, which is about two times faster than other Nvidia architectures with higher precision calculations. Intel also provides inference on Xeon with its custom instruction set which enables acceleration available both for multicore processors and FPGA cards.
+L223: Hubara et al.^{cite83†47 } discuss quantized neural networks (QNNs)—NNs with extremely low precision. QNNs are extremely useful in environments where resources are limited such as end devices. In QNN, arithmetic operations are replaced with bitwise operations, and thus it allocates small amount of resources.
+L224: cite84†Table 8 presents a comparison of different architectural approaches commonly used in dew solutions, for attributes such as the year of production, platform type, technology, clock rate, memory type, and transistors count.
+L225: 
+L226: Table 8. Comparison of different architectural approaches commonly used in dew-based solutions.
+L227: Platform  | Intel Atom  | Nvidia Tegra X1  | Xilinx Virtex 7  | IBM TrueNorth
+L228: --- | --- | --- | --- | ---
+L229: Year  | 2012  | 2015  | 2011  | 2014
+L230: Platform type  | CPU  | GPU  | FPGA  | ASIC
+L231: Technology  | 41 nm  | 40 nm  | 28 nm  | 28 nm
+L232: Clock (MHz)  | 2600  | 1000  | 200  | 500
+L233: Memory type  | DRAM  | DRAM  | BRAM  | SRAM
+L234: Transistors count  | 47 million  | 9 billion  | 17 billion  | 5.4 billion
+L235: CPU: central processing unit; GPU: graphics processing unit; FPGA: field programmable gate array; ASIC: application-specific integrated circuit; DRAM: dynamic random-access memory; BRAM: block random-access memory; SRAM: static random-access memory.
+L236: #### Dew/multicore
+L237: 
+L238: Intel has created a library for DNNs,^{cite85†48 } which contains vectorized and threaded building blocks that can be used for implementing DNNs. The library is optimized for ultra-low-voltage processors such as Intel Atom and Intel Core Solo. These ultra-low-voltage processors are often embedded into IoT and WSN systems ranging from health care to VANETs.
+L239: #### Dew/manycore
+L240: 
+L241: Nvidia Tegra X is a power-efficient processor intended for end devices (IoT and WSN), suitable for a DNN inference, due to its low-power consumption, which is of crucial importance in edge computing. Han et al.^{cite86†49 } measure the total power consumption of a compressed DNN implemented on the Jetson development board based on Tegra X processor. The results show that Tegra X processor achieves three to seven times higher energy efficiency on the compressed NN.
+L242: #### Dew/FPGA
+L243: 
+L244: FPGAs are mainstream architectural approaches used in embedded systems, due to their low-power consumption and ability to be configured for a specific NN. With specifically designed hardware, FPGAs beat powerful GPUs in speed and energy efficiency. Guo et al.^{cite87†50 } propose various FPGA-based accelerator designs with software and hardware optimization techniques to achieve high speed and energy efficiency, compared to existing GPU solutions.
+L245: #### Dew/ASIC

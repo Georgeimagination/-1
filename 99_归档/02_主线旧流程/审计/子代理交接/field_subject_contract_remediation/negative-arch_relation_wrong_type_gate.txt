@@ -1,0 +1,2 @@
+﻿FAIL: 1 validation error(s); 97920 checks executed; subject_contract_mode=gate.
+ - FIELD-ID-ARCH projection requires a unique implements_architecture relation: 数据/field-requirements.csv:REQ-CAMBRICON-MLU590-ARCH-RELATION target=OREL-AWS-TRN2-INSTANCE-CONTAINS-TRAINIUM2

@@ -1,0 +1,50 @@
+{
+    "status":  "passed",
+    "generated_at":  "2026-08-13",
+    "positive":  {
+                     "journal_rows":  58,
+                     "csv_commits":  20,
+                     "payload_commits":  8,
+                     "rollbacks":  0,
+                     "candidate_validator_checks":  115509,
+                     "post_commit_validator_checks":  115509,
+                     "candidate_aggregate":  "bcb16e932019c1625e9b5a5309a37f569c0bb230b7c921a589dd3f7175632b8c"
+                 },
+    "rollback_after_3_tables":  {
+                                    "journal_rows":  14,
+                                    "injection":  "INJECTED_TEST_FAILURE_AFTER_3_REPLACEMENTS",
+                                    "csv_commits":  3,
+                                    "csv_rollbacks":  3,
+                                    "strict_reverse_order":  true,
+                                    "aggregate_after":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10"
+                                },
+    "rollback_after_2_payloads":  {
+                                      "journal_rows":  90,
+                                      "injection":  "INJECTED_TEST_FAILURE_AFTER_2_PAYLOADS",
+                                      "csv_commits":  20,
+                                      "csv_rollbacks":  20,
+                                      "payload_commits":  2,
+                                      "payload_rollbacks":  2,
+                                      "strict_reverse_csv_order":  true,
+                                      "strict_reverse_payload_order":  true,
+                                      "aggregate_after":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10"
+                                  },
+    "negative_gates":  {
+                           "count":  6,
+                           "passed":  6,
+                           "default_deny_present":  true,
+                           "formal_targets_absent":  true
+                       },
+    "lifecycle_delta":  {
+                            "draft_validator_checks":  115461,
+                            "reviewed_validator_checks":  115509,
+                            "difference":  48,
+                            "reviewed_fact_gates":  41,
+                            "reviewed_selection_run_gates":  1,
+                            "reviewed_selection_member_gates":  6
+                        },
+    "formal_aggregate_after":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "formal_writes_performed":  0,
+    "temp_files":  0,
+    "lock_files":  0
+}

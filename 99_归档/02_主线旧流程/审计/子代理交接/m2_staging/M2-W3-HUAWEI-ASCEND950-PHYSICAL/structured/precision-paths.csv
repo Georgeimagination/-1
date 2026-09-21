@@ -1,0 +1,6 @@
+﻿"precision_path_id","component_id","canonical_label","operation_class","review_status","notes"
+"PPATH-M2W3-HUAWEI-ASC950-DIE-FP8","COMP-M2W3-HUAWEI-ASC950-DIE-AI-PEAK","Ascend 950 FP8 vendor-labeled path","other","needs_resolution","Common chip label stored once on shared die; no matrix/vector/count inference."
+"PPATH-M2W3-HUAWEI-ASC950-DIE-MXFP8","COMP-M2W3-HUAWEI-ASC950-DIE-AI-PEAK","Ascend 950 MXFP8 vendor-labeled path","other","needs_resolution","Common chip label stored once on shared die; no matrix/vector/count inference."
+"PPATH-M2W3-HUAWEI-ASC950-DIE-HIF8","COMP-M2W3-HUAWEI-ASC950-DIE-AI-PEAK","Ascend 950 HiF8 vendor-labeled path","other","needs_resolution","Common chip label stored once on shared die; no matrix/vector/count inference."
+"PPATH-M2W3-HUAWEI-ASC950-DIE-MXFP4","COMP-M2W3-HUAWEI-ASC950-DIE-AI-PEAK","Ascend 950 MXFP4 vendor-labeled path","other","needs_resolution","Common chip label stored once on shared die; no matrix/vector/count inference."
+"PPATH-M2W3-HUAWEI-ASC950PR-VENDOR-MAX","COMP-M2W3-HUAWEI-ASC950PR-VENDOR-PEAK","Ascend 950PR maximum TFLOPS path, datatype unresolved","other","needs_resolution","H-6 omits datatype and operation count."

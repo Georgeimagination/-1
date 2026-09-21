@@ -1,0 +1,834 @@
+<!DOCTYPE html><html lang="en-US" style="font-size: 15.6px;"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="bytedance-verification-code" content="4P6uu4kSAL4SSnPQ+BJd">
+    <script type="text/javascript" src="/static/js/iscroll.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js" integrity="sha384-bhnoAf0QbZ3a4P9JqPJNMlBxDP0bxxqnuRLFdwyTOUOUqCcvFKk6Jv4M+x9r+P+d" crossorigin="anonymous"></script>
+    <!-- TDK -->
+    <title>YOLOv3-Atlas Community</title>
+    <link rel="canonical" href="https://www.hikunpeng.com/en/software/modelzoo/models/detail/2/7b5f73072a24453389602051affe9b31"><style>
+      .for-seo {
+        position: absolute;
+        left: -99999px;
+        top: 0;
+      }
+    </style>
+    <script>
+      // 去掉路由中的 #/
+      if (window.location.href.indexOf('#/') > -1) {
+        window.location.href = window.location.href.replace('#/', '');
+      }
+    </script>
+    <script>
+      if (window.location.href.indexOf('/en/') > -1 || window.location.href.indexOf('/zh/') > -1) {
+        let base = document.createElement('base');
+        base.setAttribute('href', '../');
+        document.head.appendChild(base);
+      }
+    </script><base href="../">
+    <script type="text/javascript" src="https://res.hc-cdn.com/CDP-Jssdk/2.6.4/web/uga-cdp-jssdk.window.js" integrity="sha384-7EXGhvu9dHFeQV8ZOOY/ribLbKDBhViDN2K1DLuvaEiqk7WYO6MUQZCJmC9IarpC" crossorigin="anonymous"></script>
+    <script type="module" crossorigin="" src="/static/js/index-DxPO5XFI.js"></script>
+    <link rel="modulepreload" crossorigin="" href="/static/js/chunk-vendors-BVByZ470.js">
+    <link rel="modulepreload" crossorigin="" href="/static/js/chunk-elementUI-CYX7n2Jd.js">
+    <link rel="modulepreload" crossorigin="" href="/static/js/chunk-common-B7vyR-no.js">
+    <link rel="stylesheet" crossorigin="" href="/static/css/index-mKtwdq6L.css">
+  <style type="text/css">
+.vue-cropper[data-v-6dae58fd] {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  direction: ltr;
+  touch-action: none;
+  text-align: left;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC");
+}
+.cropper-box[data-v-6dae58fd],
+.cropper-box-canvas[data-v-6dae58fd],
+.cropper-drag-box[data-v-6dae58fd],
+.cropper-crop-box[data-v-6dae58fd],
+.cropper-face[data-v-6dae58fd] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  user-select: none;
+}
+.cropper-box-canvas img[data-v-6dae58fd] {
+  position: relative;
+  text-align: left;
+  user-select: none;
+  transform: none;
+  max-width: none;
+  max-height: none;
+}
+.cropper-box[data-v-6dae58fd] {
+  overflow: hidden;
+}
+.cropper-move[data-v-6dae58fd] {
+  cursor: move;
+}
+.cropper-crop[data-v-6dae58fd] {
+  cursor: crosshair;
+}
+.cropper-modal[data-v-6dae58fd] {
+  background: rgba(0, 0, 0, 0.5);
+}
+.cropper-crop-box[data-v-6dae58fd] {
+  /*border: 2px solid #39f;*/
+}
+.cropper-view-box[data-v-6dae58fd] {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  outline: 1px solid #39f;
+  outline-color: rgba(51, 153, 255, 0.75);
+  user-select: none;
+}
+.cropper-view-box img[data-v-6dae58fd] {
+  user-select: none;
+  text-align: left;
+  max-width: none;
+  max-height: none;
+}
+.cropper-face[data-v-6dae58fd] {
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  opacity: 0.1;
+}
+.crop-info[data-v-6dae58fd] {
+  position: absolute;
+  left: 0px;
+  min-width: 65px;
+  text-align: center;
+  color: white;
+  line-height: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  font-size: 12px;
+}
+.crop-line[data-v-6dae58fd] {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+}
+.line-w[data-v-6dae58fd] {
+  top: -3px;
+  left: 0;
+  height: 5px;
+  cursor: n-resize;
+}
+.line-a[data-v-6dae58fd] {
+  top: 0;
+  left: -3px;
+  width: 5px;
+  cursor: w-resize;
+}
+.line-s[data-v-6dae58fd] {
+  bottom: -3px;
+  left: 0;
+  height: 5px;
+  cursor: s-resize;
+}
+.line-d[data-v-6dae58fd] {
+  top: 0;
+  right: -3px;
+  width: 5px;
+  cursor: e-resize;
+}
+.crop-point[data-v-6dae58fd] {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  opacity: 0.75;
+  background-color: #39f;
+  border-radius: 100%;
+}
+.point1[data-v-6dae58fd] {
+  top: -4px;
+  left: -4px;
+  cursor: nw-resize;
+}
+.point2[data-v-6dae58fd] {
+  top: -5px;
+  left: 50%;
+  margin-left: -3px;
+  cursor: n-resize;
+}
+.point3[data-v-6dae58fd] {
+  top: -4px;
+  right: -4px;
+  cursor: ne-resize;
+}
+.point4[data-v-6dae58fd] {
+  top: 50%;
+  left: -4px;
+  margin-top: -3px;
+  cursor: w-resize;
+}
+.point5[data-v-6dae58fd] {
+  top: 50%;
+  right: -4px;
+  margin-top: -3px;
+  cursor: e-resize;
+}
+.point6[data-v-6dae58fd] {
+  bottom: -5px;
+  left: -4px;
+  cursor: sw-resize;
+}
+.point7[data-v-6dae58fd] {
+  bottom: -5px;
+  left: 50%;
+  margin-left: -3px;
+  cursor: s-resize;
+}
+.point8[data-v-6dae58fd] {
+  bottom: -5px;
+  right: -4px;
+  cursor: se-resize;
+}
+@media screen and (max-width: 500px) {
+.crop-point[data-v-6dae58fd] {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    opacity: 0.45;
+    background-color: #39f;
+    border-radius: 100%;
+}
+.point1[data-v-6dae58fd] {
+    top: -10px;
+    left: -10px;
+}
+.point2[data-v-6dae58fd],
+  .point4[data-v-6dae58fd],
+  .point5[data-v-6dae58fd],
+  .point7[data-v-6dae58fd] {
+    display: none;
+}
+.point3[data-v-6dae58fd] {
+    top: -10px;
+    right: -10px;
+}
+.point4[data-v-6dae58fd] {
+    top: 0;
+    left: 0;
+}
+.point6[data-v-6dae58fd] {
+    bottom: -10px;
+    left: -10px;
+}
+.point8[data-v-6dae58fd] {
+    bottom: -10px;
+    right: -10px;
+}
+}
+</style><link rel="modulepreload" as="script" crossorigin="" href="/static/js/modelzooDe-COzkDkGq.js"><link rel="modulepreload" as="script" crossorigin="" href="/static/js/ratingStar-DDSv3QPF.js"><link rel="modulepreload" as="script" crossorigin="" href="/static/js/star-rating-xFGVcGar.js"><link rel="stylesheet" crossorigin="" href="/static/css/star-rating-B3mEIOZn.css"><link rel="modulepreload" as="script" crossorigin="" href="/static/js/index-BcFmH3_J.js"><link rel="stylesheet" crossorigin="" href="/static/css/index-amGWlbLp.css"><link rel="stylesheet" crossorigin="" href="/static/css/ratingStar-B04s1HQG.css"><link rel="modulepreload" as="script" crossorigin="" href="/static/js/videoModal2-BtzQ9BHa.js"><link rel="stylesheet" crossorigin="" href="/static/css/videoModal2-CH0lcUmh.css"><link rel="modulepreload" as="script" crossorigin="" href="/static/js/index-Des22dwX.js"><link rel="modulepreload" as="script" crossorigin="" href="/static/js/tabPanel-Dyf_pPAR.js"><link rel="stylesheet" crossorigin="" href="/static/css/tabPanel-D6OZzuCa.css"><link rel="modulepreload" as="script" crossorigin="" href="/static/js/dom-BZ9Izw9l.js"><link rel="stylesheet" crossorigin="" href="/static/css/index-gVRbVtFg.css"><link rel="modulepreload" as="script" crossorigin="" href="/static/js/index-D0LnomQe.js"><link rel="stylesheet" crossorigin="" href="/static/css/index-BEwiJkCj.css"><link rel="modulepreload" as="script" crossorigin="" href="/static/js/index-ByKfLh06.js"><link rel="stylesheet" crossorigin="" href="/static/css/index-My8qeJo0.css"><link rel="modulepreload" as="script" crossorigin="" href="/static/js/index-BmRsbntX.js"><link rel="stylesheet" crossorigin="" href="/static/css/index-BuefN4Ji.css"><link rel="stylesheet" crossorigin="" href="/static/css/modelzooDe-DuqRQbUp.css"></head>
+
+  <body style="min-width: 1280px; overflow: auto;">
+    <noscript>
+      <strong> We're sorry but this app doesn't work properly without JavaScript enabled. Please enable it to continue. </strong>
+    </noscript>
+    <h1 class="for-seo">昇腾社区</h1>
+    <h2 class="for-seo">昇腾开发者</h2>
+    <h2 class="for-seo">昇腾开发者社区</h2>
+    <h3 class="for-seo">昇腾开源</h3>
+    <h3 class="for-seo">昇腾论坛</h3>
+    <h3 class="for-seo">Ascend</h3>
+    <h3 class="for-seo">Powered by ascend</h3>
+    <div id="app-container" data-v-app=""><div id="app" class="app-en"><div data-v-cd3a430c="" class="container containerEn" id="st-nav"><div data-v-cd3a430c="" class="header"><!----><div data-v-cd3a430c="" class="left"><!----><div data-v-cd3a430c="" class="item"><img data-v-cd3a430c="" class="menu-m isM" src="https://r.huaweistatic.com/s/ascendstatic/lst/header/menu-m-new.svg"></div><div data-v-cd3a430c="" class="left-mobile-line isM"></div><img data-v-cd3a430c="" class="logo-m isM" src="https://r.huaweistatic.com/s/ascendstatic/lst/header/logo-app.svg"><!----><div data-v-cd3a430c="" class="meta-title isM">YOLOv3</div></div><div data-v-cd3a430c="" class="center"><!----><div data-v-cd3a430c="" class="tabs"><div data-v-cd3a430c="" class="tab-line"><div data-v-cd3a430c="" class="line" style="left: 0px; width: 0px; transition: 0.2s ease-in-out;"></div></div><div data-v-cd3a430c="" class="tab-item" href=""><div data-v-cd3a430c=""><span data-v-cd3a430c="">Home</span></div></div><div data-v-cd3a430c="" class="tab-item" href=""><div data-v-cd3a430c=""><span data-v-cd3a430c="">Products</span></div></div><div data-v-cd3a430c="" class="tab-item" href=""><div data-v-cd3a430c=""><span data-v-cd3a430c="">Solutions</span></div></div><div data-v-cd3a430c="" class="tab-item" href=""><div data-v-cd3a430c=""><span data-v-cd3a430c="">Developers</span></div></div><div data-v-cd3a430c="" class="s-header"><div data-v-cd3a430c="" class="s-header-main"><div data-v-cd3a430c="" class="s-header-left"><p data-v-cd3a430c="" class="title">Products</p></div><div data-v-cd3a430c="" class="s-header-center"><div data-v-cd3a430c="" class="center-col SuperPoD"><div data-v-cd3a430c="" class="center-col-title disable en" title="SuperPoD"><span data-v-cd3a430c="">SuperPoD</span><!----></div><div data-v-cd3a430c="" class="center-col-link canHover"><a data-v-cd3a430c="" href="/en/hardware/cluster?tag=950">Atlas 950 SuperPoD</a><!----></div><div data-v-cd3a430c="" class="center-col-link canHover"><a data-v-cd3a430c="" href="/en/hardware/cluster?tag=850e">Atlas 850E SuperPoD Server</a><!----></div><!----><!----></div><div data-v-cd3a430c="" class="center-col AI Server"><div data-v-cd3a430c="" class="center-col-title disable en" title="AI Server"><span data-v-cd3a430c="">AI Server</span><!----></div><div data-v-cd3a430c="" class="center-col-link canHover"><a data-v-cd3a430c="" href="/en/hardware/ai-server?tag=650e">Atlas 650E</a><!----></div><!----><!----></div><div data-v-cd3a430c="" class="center-col Cluster O&amp;M"><div data-v-cd3a430c="" class="center-col-title disable en" title="Cluster O&amp;M"><span data-v-cd3a430c="">Cluster O&amp;M</span><!----></div><div data-v-cd3a430c="" class="center-col-link canHover"><a data-v-cd3a430c="" href="/en/software/ccae">CCAE</a><!----></div><!----><!----></div><img data-v-cd3a430c="" src="https://r.huaweistatic.com/s/ascendstatic/lst/header/close.svg" class="close"></div><div data-v-cd3a430c="" class="s-header-right"><!----></div></div></div></div><div data-v-cd3a430c="" class="empty" style="display: none;"></div><!----></div><div data-v-cd3a430c="" class="right"><div data-v-cd3a430c="" class="item hr"><a data-v-cd3a430c="" href="/document">Documentation</a></div><!----></div><div data-v-cd3a430c="" class="right mobile isM"></div></div><!----><div data-v-cd3a430c="" class="m-menu-hox" style="height: 672px;"><div data-v-cd3a430c="" class="menu-1"><div data-v-cd3a430c="" class="menu-1-top"><div data-v-cd3a430c="" class="tab-item"><div data-v-cd3a430c="" class="title">Home</div></div><div data-v-cd3a430c="" class="tab-item"><div data-v-cd3a430c="" class="title">Products</div></div><div data-v-cd3a430c="" class="tab-item"><div data-v-cd3a430c="" class="title">Solutions</div></div><div data-v-cd3a430c="" class="tab-item"><div data-v-cd3a430c="" class="title">Developers</div></div></div><div data-v-cd3a430c="" class="menu-0-bottom"><div data-v-cd3a430c="" class="docM">Documentation</div></div><div data-v-cd3a430c="" class="menu-0-bottom" style="display: none;"><div data-v-cd3a430c="" class="docM vocM"><span data-v-cd3a430c="">{}</span></div></div><!----></div><!----></div></div><!----><div data-v-7479ff9e="" id="isLoading" class="isLoading-en" style="display: none;"><div data-v-7479ff9e="" class="tip"></div></div><div data-v-b72e00e6="" class="argeementTip"></div><div class="first-view"><div class="resourceDetail container-modelzoo resource-detail-example" bi_parent_name="modelzooDetails"><!----><!----><div style="height: 16px; background: rgb(245, 246, 248); width: 100%; z-index: 99; position: fixed;"></div><a id="downHref"><span id="clicka"></span></a><div class="container-box"><div data-v-3a1a1050="" class="bread-box"><div data-v-3a1a1050="" class="bread-item"><span data-v-3a1a1050="" class="title isLink">ModelZoo</span><span data-v-3a1a1050="" class="icon"> &gt; </span></div><div data-v-3a1a1050="" class="bread-item"><span data-v-3a1a1050="" class="title isLink">Model</span><span data-v-3a1a1050="" class="icon"> &gt; </span></div><div data-v-3a1a1050="" class="bread-item"><span data-v-3a1a1050="" class="title">YOLOv3</span><!----></div></div><div style="width: 100%;"><div class="left-bar info"><div><div class="clear-fix-top"><img class="banner" src="https://r.huaweistatic.com/s/ascendstatic/lst/as/aoftware/mindx/modelzoo/lists/img_modelzoo_22073.png" alt=""><!----><div class="right-wrap"><div class="right-box"><div class="center-box center-boxEn"><div class="top-title"><div class="title FZXH" title="YOLOv3">YOLOv3</div><div class="scoreAll"><img class="share_icon" src="https://r.huaweistatic.com/s/ascendstatic/lst/public/img/modelzoo/icon/share.svg" alt=""><div data-v-d1091c18="" class="share"><div data-v-d1091c18="" class="share-box top"><!----><div data-v-d1091c18="" class="left en"><div data-v-d1091c18="" class="left-item"><a data-v-d1091c18=""><img data-v-d1091c18="" src="/static/img/twitter-BNmp1Fh8.svg" class="icon"><img data-v-d1091c18="" src="https://r.huaweistatic.com/s/ascendstatic/lst/footer/twitter_h.svg" class="icon-h"></a><span data-v-d1091c18="">Twitter</span></div><div data-v-d1091c18="" class="left-item"><a data-v-d1091c18=""><img data-v-d1091c18="" src="/static/img/facebook-BjIMgdCS.svg" class="icon"><img data-v-d1091c18="" src="https://r.huaweistatic.com/s/ascendstatic/lst/footer/facebook_h.svg" class="icon-h"></a><span data-v-d1091c18="">Facebook</span></div><div data-v-d1091c18="" class="left-item"><a data-v-d1091c18=""><img data-v-d1091c18="" src="/static/img/linkedin-D8RFhZoJ.svg" class="icon"><img data-v-d1091c18="" src="https://r.huaweistatic.com/s/ascendstatic/lst/footer/ins_h.svg" class="icon-h"></a><span data-v-d1091c18="">Linkedin</span></div><div data-v-d1091c18="" class="left-item"><img data-v-d1091c18="" src="/static/img/link-JQWKwJSy.svg"><span data-v-d1091c18="" class="">Copy Link</span></div></div><!----><span data-v-d1091c18="" class="before"></span></div></div></div><!----></div><!----><div class="details detalis-en"><div><span class="left-title">Published By</span><span class="right-desc">Huawei</span></div><div><span class="left-title">By Field </span><span class="right-desc">Object Detection</span></div><div><span class="left-title">Application Level</span><span class="right-desc">Research</span></div><div><span class="left-title">Release </span><span class="right-desc">1.3</span></div><!----><div><span class="left-title">By Framework </span><span class="right-desc">TensorFlow</span><!----><!----></div><div><span class="left-title">By Precision </span><span class="right-desc">Mixed</span></div><div><span class="left-title">Model Format</span><span class="right-desc">N/A</span></div><!----><div><span class="left-title">Processor </span><span class="right-desc">Ascend 910</span></div><div><span class="left-title">Date</span><span class="right-desc">2020/11/06</span></div><!----><div><span class="left-title">Total Downloads</span><span class="right-desc">224</span></div><div><span class="left-title">Views</span><span class="right-desc">1042</span></div></div><!----><!----></div><div class="score-box"><div data-v-606da236="" class="rating-function"><div data-v-606da236="" class="rating-card"><div data-v-606da236="" class="score-box"><div data-v-606da236="" class="score">5.0</div><div data-v-606da236="" class="right-star-box"><div data-v-a0b9ce0c="" data-v-606da236="" class="vue-star-rating rating"><div data-v-a0b9ce0c="" class="sr-only"><span data-v-a0b9ce0c="">Rated 5 stars out of 5</span></div><div data-v-a0b9ce0c="" class="vue-star-rating"><span data-v-a0b9ce0c="" class="vue-star-rating-star" style="margin-right: 4px;"><div data-v-5c6dbf13="" data-v-a0b9ce0c="" class="star-rating-box" step="10"><!----><svg data-v-5c6dbf13="" class="vue-star-rating-star" width="12" height="12" viewBox="0 0 13.5 13.5"><linearGradient data-v-5c6dbf13="" id="5heru7" x1="0" x2="100%" y1="0" y2="0"><stop data-v-5c6dbf13="" offset="100%" stop-color="#D3B42D" stop-opacity="1"></stop><stop data-v-5c6dbf13="" offset="100%" stop-color="white" stop-opacity="1"></stop></linearGradient><filter data-v-5c6dbf13="" id="x062n" height="130%" width="130%" filterUnits="userSpaceOnUse"><feGaussianBlur data-v-5c6dbf13="" stdDeviation="0" result="coloredBlur"></feGaussianBlur><feMerge data-v-5c6dbf13=""><feMergeNode data-v-5c6dbf13="" in="coloredBlur"></feMergeNode><feMergeNode data-v-5c6dbf13="" in="SourceGraphic"></feMergeNode></feMerge></filter><polygon data-v-5c6dbf13="" fill="url(#5heru7)" points="7.6485909479077705,0.40990606319385137,9.452177625960715,4.068317677198975,13.5,4.662681468830059,10.56917164816396,7.5115286080273265,11.266011955593509,11.52860802732707,7.6485909479077705,9.632792485055507,4.031169940222032,11.52860802732707,4.7280102476515795,7.5115286080273265,1.7971818958155423,4.662681468830059,5.845004269854825,4.068317677198975" stroke-width="1" filter="url(#x062n)" stroke="#fff" style="display: none;"></polygon><polygon data-v-5c6dbf13="" points="7.6485909479077705,0.40990606319385137,9.452177625960715,4.068317677198975,13.5,4.662681468830059,10.56917164816396,7.5115286080273265,11.266011955593509,11.52860802732707,7.6485909479077705,9.632792485055507,4.031169940222032,11.52860802732707,4.7280102476515795,7.5115286080273265,1.7971818958155423,4.662681468830059,5.845004269854825,4.068317677198975" stroke="#D3B42D" fill="url(#5heru7)" stroke-linejoin="round" stroke-width="1"></polygon><polygon data-v-5c6dbf13="" points="7.6485909479077705,0.40990606319385137,9.452177625960715,4.068317677198975,13.5,4.662681468830059,10.56917164816396,7.5115286080273265,11.266011955593509,11.52860802732707,7.6485909479077705,9.632792485055507,4.031169940222032,11.52860802732707,4.7280102476515795,7.5115286080273265,1.7971818958155423,4.662681468830059,5.845004269854825,4.068317677198975" fill="url(#5heru7)"></polygon></svg></div></span><span data-v-a0b9ce0c="" class="vue-star-rating-star" style="margin-right: 4px;"><div data-v-5c6dbf13="" data-v-a0b9ce0c="" class="star-rating-box" step="10"><!----><svg data-v-5c6dbf13="" class="vue-star-rating-star" width="12" height="12" viewBox="0 0 13.5 13.5"><linearGradient data-v-5c6dbf13="" id="yw5ysd" x1="0" x2="100%" y1="0" y2="0"><stop data-v-5c6dbf13="" offset="100%" stop-color="#D3B42D" stop-opacity="1"></stop><stop data-v-5c6dbf13="" offset="100%" stop-color="white" stop-opacity="1"></stop></linearGradient><filter data-v-5c6dbf13="" id="41ovek" height="130%" width="130%" filterUnits="userSpaceOnUse"><feGaussianBlur data-v-5c6dbf13="" stdDeviation="0" result="coloredBlur"></feGaussianBlur><feMerge data-v-5c6dbf13=""><feMergeNode data-v-5c6dbf13="" in="coloredBlur"></feMergeNode><feMergeNode data-v-5c6dbf13="" in="SourceGraphic"></feMergeNode></feMerge></filter><polygon data-v-5c6dbf13="" fill="url(#yw5ysd)" points="7.6485909479077705,0.40990606319385137,9.452177625960715,4.068317677198975,13.5,4.662681468830059,10.56917164816396,7.5115286080273265,11.266011955593509,11.52860802732707,7.6485909479077705,9.632792485055507,4.031169940222032,11.52860802732707,4.7280102476515795,7.5115286080273265,1.7971818958155423,4.662681468830059,5.845004269854825,4.068317677198975" stroke-width="1" filter="url(#41ovek)" stroke="#fff" style="display: none;"></polygon><polygon data-v-5c6dbf13="" points="7.6485909479077705,0.40990606319385137,9.452177625960715,4.068317677198975,13.5,4.662681468830059,10.56917164816396,7.5115286080273265,11.266011955593509,11.52860802732707,7.6485909479077705,9.632792485055507,4.031169940222032,11.52860802732707,4.7280102476515795,7.5115286080273265,1.7971818958155423,4.662681468830059,5.845004269854825,4.068317677198975" stroke="#D3B42D" fill="url(#yw5ysd)" stroke-linejoin="round" stroke-width="1"></polygon><polygon data-v-5c6dbf13="" points="7.6485909479077705,0.40990606319385137,9.452177625960715,4.068317677198975,13.5,4.662681468830059,10.56917164816396,7.5115286080273265,11.266011955593509,11.52860802732707,7.6485909479077705,9.632792485055507,4.031169940222032,11.52860802732707,4.7280102476515795,7.5115286080273265,1.7971818958155423,4.662681468830059,5.845004269854825,4.068317677198975" fill="url(#yw5ysd)"></polygon></svg></div></span><span data-v-a0b9ce0c="" class="vue-star-rating-star" style="margin-right: 4px;"><div data-v-5c6dbf13="" data-v-a0b9ce0c="" class="star-rating-box" step="10"><!----><svg data-v-5c6dbf13="" class="vue-star-rating-star" width="12" height="12" viewBox="0 0 13.5 13.5"><linearGradient data-v-5c6dbf13="" id="p1alpt9" x1="0" x2="100%" y1="0" y2="0"><stop data-v-5c6dbf13="" offset="100%" stop-color="#D3B42D" stop-opacity="1"></stop><stop data-v-5c6dbf13="" offset="100%" stop-color="white" stop-opacity="1"></stop></linearGradient><filter data-v-5c6dbf13="" id="lozwr9" height="130%" width="130%" filterUnits="userSpaceOnUse"><feGaussianBlur data-v-5c6dbf13="" stdDeviation="0" result="coloredBlur"></feGaussianBlur><feMerge data-v-5c6dbf13=""><feMergeNode data-v-5c6dbf13="" in="coloredBlur"></feMergeNode><feMergeNode data-v-5c6dbf13="" in="SourceGraphic"></feMergeNode></feMerge></filter><polygon data-v-5c6dbf13="" fill="url(#p1alpt9)" points="7.6485909479077705,0.40990606319385137,9.452177625960715,4.068317677198975,13.5,4.662681468830059,10.56917164816396,7.5115286080273265,11.266011955593509,11.52860802732707,7.6485909479077705,9.632792485055507,4.031169940222032,11.52860802732707,4.7280102476515795,7.5115286080273265,1.7971818958155423,4.662681468830059,5.845004269854825,4.068317677198975" stroke-width="1" filter="url(#lozwr9)" stroke="#fff" style="display: none;"></polygon><polygon data-v-5c6dbf13="" points="7.6485909479077705,0.40990606319385137,9.452177625960715,4.068317677198975,13.5,4.662681468830059,10.56917164816396,7.5115286080273265,11.266011955593509,11.52860802732707,7.6485909479077705,9.632792485055507,4.031169940222032,11.52860802732707,4.7280102476515795,7.5115286080273265,1.7971818958155423,4.662681468830059,5.845004269854825,4.068317677198975" stroke="#D3B42D" fill="url(#p1alpt9)" stroke-linejoin="round" stroke-width="1"></polygon><polygon data-v-5c6dbf13="" points="7.6485909479077705,0.40990606319385137,9.452177625960715,4.068317677198975,13.5,4.662681468830059,10.56917164816396,7.5115286080273265,11.266011955593509,11.52860802732707,7.6485909479077705,9.632792485055507,4.031169940222032,11.52860802732707,4.7280102476515795,7.5115286080273265,1.7971818958155423,4.662681468830059,5.845004269854825,4.068317677198975" fill="url(#p1alpt9)"></polygon></svg></div></span><span data-v-a0b9ce0c="" class="vue-star-rating-star" style="margin-right: 4px;"><div data-v-5c6dbf13="" data-v-a0b9ce0c="" class="star-rating-box" step="10"><!----><svg data-v-5c6dbf13="" class="vue-star-rating-star" width="12" height="12" viewBox="0 0 13.5 13.5"><linearGradient data-v-5c6dbf13="" id="kzl9np" x1="0" x2="100%" y1="0" y2="0"><stop data-v-5c6dbf13="" offset="100%" stop-color="#D3B42D" stop-opacity="1"></stop><stop data-v-5c6dbf13="" offset="100%" stop-color="white" stop-opacity="1"></stop></linearGradient><filter data-v-5c6dbf13="" id="yylbdq" height="130%" width="130%" filterUnits="userSpaceOnUse"><feGaussianBlur data-v-5c6dbf13="" stdDeviation="0" result="coloredBlur"></feGaussianBlur><feMerge data-v-5c6dbf13=""><feMergeNode data-v-5c6dbf13="" in="coloredBlur"></feMergeNode><feMergeNode data-v-5c6dbf13="" in="SourceGraphic"></feMergeNode></feMerge></filter><polygon data-v-5c6dbf13="" fill="url(#kzl9np)" points="7.6485909479077705,0.40990606319385137,9.452177625960715,4.068317677198975,13.5,4.662681468830059,10.56917164816396,7.5115286080273265,11.266011955593509,11.52860802732707,7.6485909479077705,9.632792485055507,4.031169940222032,11.52860802732707,4.7280102476515795,7.5115286080273265,1.7971818958155423,4.662681468830059,5.845004269854825,4.068317677198975" stroke-width="1" filter="url(#yylbdq)" stroke="#fff" style="display: none;"></polygon><polygon data-v-5c6dbf13="" points="7.6485909479077705,0.40990606319385137,9.452177625960715,4.068317677198975,13.5,4.662681468830059,10.56917164816396,7.5115286080273265,11.266011955593509,11.52860802732707,7.6485909479077705,9.632792485055507,4.031169940222032,11.52860802732707,4.7280102476515795,7.5115286080273265,1.7971818958155423,4.662681468830059,5.845004269854825,4.068317677198975" stroke="#D3B42D" fill="url(#kzl9np)" stroke-linejoin="round" stroke-width="1"></polygon><polygon data-v-5c6dbf13="" points="7.6485909479077705,0.40990606319385137,9.452177625960715,4.068317677198975,13.5,4.662681468830059,10.56917164816396,7.5115286080273265,11.266011955593509,11.52860802732707,7.6485909479077705,9.632792485055507,4.031169940222032,11.52860802732707,4.7280102476515795,7.5115286080273265,1.7971818958155423,4.662681468830059,5.845004269854825,4.068317677198975" fill="url(#kzl9np)"></polygon></svg></div></span><span data-v-a0b9ce0c="" class="vue-star-rating-star" style="margin-right: 4px;"><div data-v-5c6dbf13="" data-v-a0b9ce0c="" class="star-rating-box" step="10"><!----><svg data-v-5c6dbf13="" class="vue-star-rating-star" width="12" height="12" viewBox="0 0 13.5 13.5"><linearGradient data-v-5c6dbf13="" id="1vzanw" x1="0" x2="100%" y1="0" y2="0"><stop data-v-5c6dbf13="" offset="100%" stop-color="#D3B42D" stop-opacity="1"></stop><stop data-v-5c6dbf13="" offset="100%" stop-color="white" stop-opacity="1"></stop></linearGradient><filter data-v-5c6dbf13="" id="gxea0p" height="130%" width="130%" filterUnits="userSpaceOnUse"><feGaussianBlur data-v-5c6dbf13="" stdDeviation="0" result="coloredBlur"></feGaussianBlur><feMerge data-v-5c6dbf13=""><feMergeNode data-v-5c6dbf13="" in="coloredBlur"></feMergeNode><feMergeNode data-v-5c6dbf13="" in="SourceGraphic"></feMergeNode></feMerge></filter><polygon data-v-5c6dbf13="" fill="url(#1vzanw)" points="7.6485909479077705,0.40990606319385137,9.452177625960715,4.068317677198975,13.5,4.662681468830059,10.56917164816396,7.5115286080273265,11.266011955593509,11.52860802732707,7.6485909479077705,9.632792485055507,4.031169940222032,11.52860802732707,4.7280102476515795,7.5115286080273265,1.7971818958155423,4.662681468830059,5.845004269854825,4.068317677198975" stroke-width="1" filter="url(#gxea0p)" stroke="#fff" style="display: none;"></polygon><polygon data-v-5c6dbf13="" points="7.6485909479077705,0.40990606319385137,9.452177625960715,4.068317677198975,13.5,4.662681468830059,10.56917164816396,7.5115286080273265,11.266011955593509,11.52860802732707,7.6485909479077705,9.632792485055507,4.031169940222032,11.52860802732707,4.7280102476515795,7.5115286080273265,1.7971818958155423,4.662681468830059,5.845004269854825,4.068317677198975" stroke="#D3B42D" fill="url(#1vzanw)" stroke-linejoin="round" stroke-width="1"></polygon><polygon data-v-5c6dbf13="" points="7.6485909479077705,0.40990606319385137,9.452177625960715,4.068317677198975,13.5,4.662681468830059,10.56917164816396,7.5115286080273265,11.266011955593509,11.52860802732707,7.6485909479077705,9.632792485055507,4.031169940222032,11.52860802732707,4.7280102476515795,7.5115286080273265,1.7971818958155423,4.662681468830059,5.845004269854825,4.068317677198975" fill="url(#1vzanw)"></polygon></svg></div></span><!----></div></div><p data-v-606da236="" class="number">1 customer ratings</p><!----><!----></div></div><div data-v-606da236="" class="title-score title-score-box"><img data-v-606da236="" class="score-img" src="https://r.huaweistatic.com/s/kunpengstatic/lst/kp/app/market/details/mb/ic_details_pf922.svg" alt=""><div data-v-606da236="" class="score-title">Rate this</div></div></div><!----><!----></div></div></div></div></div></div></div><!----><div class="clear-fix clear-fix-l" style="background: rgb(255, 255, 255);"><div class="btn-wrappera"></div><div class="modelzooTabs"><div class="topLogo"><div class="top-title"><div><h3 class="top-title-top FZXH" style="font-weight: normal;">YOLOv3</h3></div><div class="konwe-more"><!----></div></div></div></div><!----><!----><div class="typeCOver"></div><!----><div class="typeCData"><div data-v-f5cd8ffe="" class="compilerSifti"><div data-v-f5cd8ffe="" class="contentMain"><ul data-v-f5cd8ffe="" data-aos="my-fadeIn"><!----><li data-v-f5cd8ffe="" class="parentActive"><div data-v-f5cd8ffe="" class="undold currentActive select1"><p data-v-f5cd8ffe="">Overview</p><!----></div><!----></li><li data-v-f5cd8ffe="" class=""><div data-v-f5cd8ffe="" class="undold"><p data-v-f5cd8ffe="">Before You Start</p><!----></div><!----></li><li data-v-f5cd8ffe="" class=""><div data-v-f5cd8ffe="" class="undold"><p data-v-f5cd8ffe="">Quick Start</p><!----></div><!----></li><li data-v-f5cd8ffe="" class=""><div data-v-f5cd8ffe="" class="undold"><p data-v-f5cd8ffe="">Advanced References</p><!----></div><!----></li><li data-v-f5cd8ffe="" class=""><div data-v-f5cd8ffe="" class="undold"><p data-v-f5cd8ffe="">Environment</p><!----></div><!----></li><li data-v-f5cd8ffe="" class=""><div data-v-f5cd8ffe="" class="undold"><p data-v-f5cd8ffe="">Version History</p><!----></div><!----></li></ul></div></div></div><div class="el-tabs el-tabs--top typeC"><div class="el-tabs__header is-top" style="display: block;"><div class="el-tabs__nav-wrap is-top"><!----><div class="el-tabs__nav-scroll"><div class="el-tabs__nav is-top" role="tablist" style="transform: translateX(0px);"><div class="el-tabs__active-bar is-top" style="transform: translateX(0px);"></div><div class="el-tabs__item is-top is-active" id="tab-Overview" aria-controls="pane-Overview" role="tab" aria-selected="true" tabindex="0">Overview<!----></div><div class="el-tabs__item is-top" id="tab-Before You Start" aria-controls="pane-Before You Start" role="tab" aria-selected="false" tabindex="-1">Before You Start<!----></div><div class="el-tabs__item is-top" id="tab-Quick Start" aria-controls="pane-Quick Start" role="tab" aria-selected="false" tabindex="-1">Quick Start<!----></div><div class="el-tabs__item is-top" id="tab-Advanced References" aria-controls="pane-Advanced References" role="tab" aria-selected="false" tabindex="-1">Advanced References<!----></div><div class="el-tabs__item is-top" id="tab-Environment" aria-controls="pane-Environment" role="tab" aria-selected="false" tabindex="-1">Environment<!----></div><div class="el-tabs__item is-top" id="tab-Version History" aria-controls="pane-Version History" role="tab" aria-selected="false" tabindex="-1">Version History<!----></div></div></div></div><!----></div><div class="el-tabs__content"><div id="pane-Overview" class="el-tab-pane" role="tabpanel" aria-hidden="false" aria-labelledby="tab-Overview"><div class="help-content">&lt;html&gt;
+ &lt;head&gt;&lt;/head&gt;
+ &lt;body&gt;
+  <a></a>
+  <a></a> 
+  <h1 class="topictitle1">Overview</h1> 
+  <div id="body1586597117736">
+   <div class="section" id="EN-US_TOPIC_0257040384__section194554031510">
+    <h4 class="sectiontitle"><span id="EN-US_TOPIC_0257040384__ph17326115413431">Introduction</span></h4>
+    <p id="EN-US_TOPIC_0257040384__p109774416271">YOLOv3 is a widely used and effective object detection network with high accuracy and performance. YOLOv3 is the third version of the YOLO series. Compared with YOLOv2, <span style="color:#404040">YOLOv3 integrates some good solutions into YOLO</span><span style="color:#404040"> to improve the prediction accuracy while maintaining the speed advantage. In particular, YOLOv3 enhances the capability of identifying small objects. </span><span style="color:#404040">YOLOv3 has the following improvements: the network structure is adjusted; multi-scale feature is used to detect objects; replaces the softmax with the logistic classifiers for object classification.</span></p> 
+    <p id="EN-US_TOPIC_0257040384__p87341163325">The YOLOv3 provided by Ascend is based on the third-party TensorFlow open-source code, uses DarkNet-53 as the backbone network, and supports both single-scale and multi-scale training.</p> 
+    <p id="EN-US_TOPIC_0257040384__p286183072111"><span style="color:#222222" id="EN-US_TOPIC_0257040384__ph10541152219202">Reference:</span> <a href="https://arxiv.org/abs/1804.02767" target="_blank">Redmon, Joseph, and Ali Farhadi. YOLOv3: An Incremental Improvement.</a></p> 
+    <p id="EN-US_TOPIC_0257040384__p02762267544"><span id="EN-US_TOPIC_0257040384__ph163271026142019">Implementation:</span> <a href="https://github.com/wizyoung/YOLOv3_TensorFlow" target="_blank">https://github.com/wizyoung/YOLOv3_TensorFlow</a></p> 
+   </div> 
+   <div class="section" id="EN-US_TOPIC_0257040384__section136021153756">
+    <h4 class="sectiontitle"><span id="EN-US_TOPIC_0257040384__ph613013555435">Default Configuration</span></h4>
+    <ul id="EN-US_TOPIC_0257040384__ul75501618101810">
+     <li id="EN-US_TOPIC_0257040384__li116371517193"><span id="EN-US_TOPIC_0257040384__ph14193101478">Training dataset preprocessing</span> (The COCO 2014 training set is used as an example.)<p id="EN-US_TOPIC_0257040384__p169892026103310">Set the input image size to 416 x 416 for single-scale training.</p> <p id="EN-US_TOPIC_0257040384__p1540162263813">For multi-scale training, the value can be 320 x 320, 352 x 352, 384 x 384, 416 x 416, 448 x 448, 480 x 480, 512 x 512, 544 x 544, 576 x 576, or 608 x 608.</p> <p id="EN-US_TOPIC_0257040384__p810973312336">Image input formats: JPEG</p> <p id="EN-US_TOPIC_0257040384__p59235394310">Randomly scale the image.</p> <p id="EN-US_TOPIC_0257040384__p14275182194319">Perform random argumentation.</p> <p id="EN-US_TOPIC_0257040384__p176751575121"><span id="EN-US_TOPIC_0257040384__ph860320813124">Randomly crop an image size.</span></p> <p id="EN-US_TOPIC_0257040384__p1897117133123"><span id="EN-US_TOPIC_0257040384__ph16883181413126">Randomly and horizontally flip an image.</span></p> <p id="EN-US_TOPIC_0257040384__p59891726173313">Normalize the image to 0-1.</p> <p id="EN-US_TOPIC_0257040384__p836644734413">Randomly dither color.</p> </li>
+     <li id="EN-US_TOPIC_0257040384__li1555252910209"><span id="EN-US_TOPIC_0257040384__ph5547171717159">Validation dataset preprocessing</span> (The COCO 2014 validation set is used as an example.)<p id="EN-US_TOPIC_0257040384__p6552122922014">Set the input image size to 416 x 416. (Resize the width of an image to 416, maintain the aspect ratio, and crop the image in the center.)</p> <p id="EN-US_TOPIC_0257040384__p12684689483">Image input formats: JPEG</p> <p id="EN-US_TOPIC_0257040384__p1955212297204">Normalize the image to 0-1.</p> </li>
+     <li id="EN-US_TOPIC_0257040384__li89161132539"><span id="EN-US_TOPIC_0257040384__ph385516307250">Training hyperparameters</span> (single-device, multi-scale)
+      <ul id="EN-US_TOPIC_0257040384__ul1016624261614">
+       <li id="EN-US_TOPIC_0257040384__li109810372292">Batch size: 16</li>
+       <li id="EN-US_TOPIC_0257040384__li1753219845816">Momentum: 0.9</li>
+       <li id="EN-US_TOPIC_0257040384__li756416196540">LR scheduler: cosine</li>
+       <li id="EN-US_TOPIC_0257040384__li167471183290">Base Learning rate: 0.0075</li>
+       <li id="EN-US_TOPIC_0257040384__li1244310155527">Learning rate base batch size: 64</li>
+       <li id="EN-US_TOPIC_0257040384__li7422263159">Loss scale: 128</li>
+       <li id="EN-US_TOPIC_0257040384__li446445417292">Weight decay: 0.0005</li>
+       <li id="EN-US_TOPIC_0257040384__li953512143553">Batch norm decay: 0.99</li>
+       <li id="EN-US_TOPIC_0257040384__li132541110219">Warm up epoch: 3</li>
+       <li id="EN-US_TOPIC_0257040384__li1759316333157">Train epoch: 200</li>
+      </ul> </li>
+     <li id="EN-US_TOPIC_0257040384__li113417401408">Training hyperparameters (single-device, single-scale)
+      <ul id="EN-US_TOPIC_0257040384__ul268617201919">
+       <li id="EN-US_TOPIC_0257040384__li943816215115">Batch size: 32</li>
+       <li id="EN-US_TOPIC_0257040384__li174381921511">Momentum: 0.9</li>
+       <li id="EN-US_TOPIC_0257040384__li6438162120118">LR scheduler: cosine</li>
+       <li id="EN-US_TOPIC_0257040384__li13438182110119">Base Learning rate: 0.005</li>
+       <li id="EN-US_TOPIC_0257040384__li1743992113114">Learning rate base batch size: 64</li>
+       <li id="EN-US_TOPIC_0257040384__li154394217111">Loss scale: 128</li>
+       <li id="EN-US_TOPIC_0257040384__li144391621515">Weight decay: 0.0005</li>
+       <li id="EN-US_TOPIC_0257040384__li5439192115112">Batch norm decay: 0.99</li>
+       <li id="EN-US_TOPIC_0257040384__li124810331424">Warm up epoch: 3</li>
+       <li id="EN-US_TOPIC_0257040384__li184391121412">Train epoch: 200</li>
+      </ul> </li>
+    </ul> 
+   </div> 
+   <div class="section" id="EN-US_TOPIC_0257040384__section1458417413713">
+    <h4 class="sectiontitle"><span id="EN-US_TOPIC_0257040384__ph438643913416">Supported Features</span></h4>
+    <p id="EN-US_TOPIC_0257040384__p93991145111518"><span id="EN-US_TOPIC_0257040384__ph1374924591510">The following features are supported: distributed training, mixed precision, and data parallelism.</span></p> 
+    <p id="EN-US_TOPIC_0257040384__p1370018181613"><span id="EN-US_TOPIC_0257040384__ph96321918171610">8-device training script, supporting parallel distributed training. By default, the mixed precision is enabled in the script. For details, see "Enabling Mixed Precision."</span></p> 
+    <p id="EN-US_TOPIC_0257040384__p148317491748">The 8-device training script supports distributed training of parallel data. YOLOv3 supports multi-scale training. During training, 10 images with different sizes are randomly input as the input of the model, which can improve the model accuracy to some extent. You can use the built-in multi-scale training script and parameter settings of the project for training. For details, see <a href="">Quick Start</a>.</p> 
+   </div> 
+   <div class="section" id="EN-US_TOPIC_0257040384__section5525141011373">
+    <h4 class="sectiontitle"><span id="EN-US_TOPIC_0257040384__ph1847924810507">Mixed Precision Training</span></h4>
+    <p id="EN-US_TOPIC_0257040384__p043963554915"><span id="EN-US_TOPIC_0257040384__ph144793482500">Ascend 910 AI Processor provides the automatic mixed precision function. For operators of the FP32 data type on the entire network, some FP32 operators can be automatically converted to FP16 operators based on the built-in optimization policy. In this way, the system performance is improved and the memory usage is reduced with little accuracy loss.</span></p> 
+   </div> 
+   <div class="section" id="EN-US_TOPIC_0257040384__section476211158376">
+    <h4 class="sectiontitle"><span id="EN-US_TOPIC_0257040384__ph10660155617437">Mixed Precision Enabled</span></h4>
+    <pre class="screen" id="EN-US_TOPIC_0257040384__screen62961450152"># npu modifiedconfig = tf.ConfigProto()custom_op = config.graph_options.rewrite_options.custom_optimizers.add()custom_op.name = "NpuOptimizer"custom_op.parameter_map["use_off_line"].b = True  # training on Ascend chipscustom_op.parameter_map["enable_data_pre_proc"].b = Truecustom_op.parameter_map["iterations_per_loop"].i = args.iterations_per_loopconfig.graph_options.rewrite_options.remapping = RewriterConfig.OFF</pre> 
+   </div> 
+  </div> 
+  <div></div> 
+ &lt;/body&gt;
+&lt;/html&gt;</div></div><div id="pane-Before You Start" class="el-tab-pane" role="tabpanel" aria-hidden="true" aria-labelledby="tab-Before You Start" style="display: none;"><div class="help-content">&lt;html&gt;
+ &lt;head&gt;&lt;/head&gt;
+ &lt;body&gt;
+  <a></a>
+  <a></a> 
+  <h1 class="topictitle1">Before You Start</h1> 
+  <div id="body1583927064139">
+   <p id="EN-US_TOPIC_0257040382__p1766564673614"><span id="EN-US_TOPIC_0257040382__ph1566594623611">Before executing this sample, ensure that the following environment is available:</span></p> 
+   <ul id="EN-US_TOPIC_0257040382__ul19665144619363">
+    <li id="EN-US_TOPIC_0257040382__li566564618367"><span id="EN-US_TOPIC_0257040382__ph1366519463369">The Ascend AI Processor is installed.</span></li>
+   </ul> 
+   <p id="EN-US_TOPIC_0257040382__p146864344411"></p> 
+   <p id="EN-US_TOPIC_0257040382__p145483495311">Test Notes</p> 
+   <p id="EN-US_TOPIC_0257040382__p1152818202546">Note 1: <a href="https://opencv.org/" target="_blank">OPENCV-PYTHON</a> needs to be compiled and installed on the ARM server.</p> 
+   <ul id="EN-US_TOPIC_0257040382__ul9625130112812">
+    <li id="EN-US_TOPIC_0257040382__li6138103216576">The official documentation <a href="https://docs.opencv.org/4.2.0/d7/d9f/tutorial_linux_install.html" target="_blank">tutorial_linux_install</a> for version 4.2.0 is displayed.</li>
+    <li id="EN-US_TOPIC_0257040382__li76251401281">The following dependencies must be installed in CentOS or Euler:
+     <ul id="EN-US_TOPIC_0257040382__ul152731916144420">
+      <li id="EN-US_TOPIC_0257040382__li64376149446"><pre class="screen" id="EN-US_TOPIC_0257040382__screen230832018471">yum install epel-release git gcc gcc-c++ cmake3 qt5-qtbase-devel python python-devel python-pip cmake -y
+yum install python-devel numpy python-numpy gtk2-devel libpng-devel jasper-devel openexr-devel libwebp-devel -y
+yum install libjpeg-turbo-devel libtiff-devel  libdc1394-devel tbb-devel eigen3-devel gstreamer-plugins-base-devel –y
+yum install freeglut-devel mesa-libGL mesa-libGL-devel  boost boost-thread boost-devel libv4l-devel -y</pre> </li>
+     </ul> </li>
+    <li id="EN-US_TOPIC_0257040382__li97503115440">The compilation and installation method is shown below.
+     <ul id="EN-US_TOPIC_0257040382__ul17750131117442">
+      <li id="EN-US_TOPIC_0257040382__li167501511184411"><pre class="screen" id="EN-US_TOPIC_0257040382__screen153071014124718">export GIT_SSL_NO_VERIFY=true
+git clone https://github.com/opencv/opencv.git
+cd opencv
+# Tag 3.4.10 is checked.
+git checkout 3.4.10
+mkdir -p build
+cd build
+cmake -D BUILD_opencv_python3=yes -D BUILD_opencv_python2=no -D PYTHON3_EXECUTABLE=/usr/local/python3.7.5/bin/python3.7m -D PYTHON3_INCLUDE_DIR=/usr/local/python3.7.5/include/python3.7m -D PYTHON3_LIBRARY=/usr/local/python3.7.5/lib/libpython3.7m.so -D PYTHON3_NUMPY_INCLUDE_DIRS=/usr/local/python3.7.5/lib/python3.7/site-packages/numpy/core/include -D PYTHON3_PACKAGES_PATH=/usr/local/python3.7.5/lib/python3.7/site-packages -D PYTHON_DEFAULT_EXECUTABLE=/usr/local/python3.7.5/bin/python3.7m ..
+make -j$nproc
+make install</pre> </li>
+     </ul> <p id="EN-US_TOPIC_0257040382__p207504115447"></p> </li>
+   </ul> 
+   <p id="EN-US_TOPIC_0257040382__p789353173311">Note 2: YOLOv3 has performance requirements on the CPU. The following is a configuration example that meets the requirements.</p> 
+   <ul id="EN-US_TOPIC_0257040382__ul1829511013496">
+    <li id="EN-US_TOPIC_0257040382__li880642394914">Atlas 800-9000 (A + K)
+     <ul id="EN-US_TOPIC_0257040382__ul780692374911">
+      <li id="EN-US_TOPIC_0257040382__li18806162334910">CPU Model: Kunpeng 920 (2.6 GHz, 24 x 8 CPUs)</li>
+      <li id="EN-US_TOPIC_0257040382__li128068231497">CPU Mode: Performance</li>
+      <li id="EN-US_TOPIC_0257040382__li168065239498">NPU: Ascend 910 (32 GB x 8)</li>
+      <li id="EN-US_TOPIC_0257040382__li1821252133211">OS: Euler</li>
+      <li id="EN-US_TOPIC_0257040382__li19876297553">Memory: 755 GB</li>
+      <li id="EN-US_TOPIC_0257040382__li142761032145513">Disk: NVMe</li>
+     </ul> </li>
+   </ul> 
+   <ul id="EN-US_TOPIC_0257040382__ul11983181712344">
+    <li id="EN-US_TOPIC_0257040382__li298321715348">Atlas 800-9010 (A + X)
+     <ul id="EN-US_TOPIC_0257040382__ul9380728103818">
+      <li id="EN-US_TOPIC_0257040382__li1182332783811">CPU Model: Intel Xeon Platinum 8168 (2.7 GHz, 48 x 2 CPUs)</li>
+      <li id="EN-US_TOPIC_0257040382__li20304131118464">CPU Mode: Performance</li>
+      <li id="EN-US_TOPIC_0257040382__li15197175854714">NPU: Ascend 910 (32 GB x 8)</li>
+      <li id="EN-US_TOPIC_0257040382__li10463101983210">OS: Euler</li>
+      <li id="EN-US_TOPIC_0257040382__li15721143175811">Memory: 755 GB</li>
+      <li id="EN-US_TOPIC_0257040382__li972113117587">Disk: NVMe</li>
+     </ul> </li>
+   </ul> 
+  </div> 
+ &lt;/body&gt;
+&lt;/html&gt;</div></div><div id="pane-Quick Start" class="el-tab-pane" role="tabpanel" aria-hidden="true" aria-labelledby="tab-Quick Start" style="display: none;"><div class="help-content">&lt;html&gt;
+ &lt;head&gt;&lt;/head&gt;
+ &lt;body&gt;
+  <a></a>
+  <a></a> 
+  <h1 class="topictitle1">Quick Start</h1> 
+  <div id="body1583927064139">
+   <ol id="EN-US_TOPIC_0257040387__ol028143017536">
+    <li id="EN-US_TOPIC_0257040387__li0704202120114"><span>Click <span><img id="EN-US_TOPIC_0257040387__en-us_topic_0263754044_image14907104910144" src="https://obs-9be7.obs.cn-east-2.myhuaweicloud.com/turing/resourcecenter/img/en-us_image_0263780145.png"></span> in the upper right corner and select a download method to download the source code package.</span></li>
+    <li id="EN-US_TOPIC_0257040387__li16259138205414"><span><span id="EN-US_TOPIC_0257040387__ph49968509239">Prepare datasets.</span></span><p></p>
+     <ol id="EN-US_TOPIC_0257040387__ol1798331122619">
+      <li id="EN-US_TOPIC_0257040387__li167986313261">Prepare a training dataset and a validation dataset. COCO 2014 and COCO 2017 are recommended. The default path for reading the dataset in the script is <strong id="EN-US_TOPIC_0257040387__b15921192513591">/opt/npu/dataset/coco</strong>. You can soft link the actual data to the default path to simplify operations.</li>
+      <li id="EN-US_TOPIC_0257040387__li1222269200">In the training script that is provided in this section, the COCO 2014 dataset is used as an example to describe how to preprocess data during training. To modify the dataset, modify the dataset loading and preprocessing methods in the training script before using the script.</li>
+      <li id="EN-US_TOPIC_0257040387__li5183199546">Use <strong id="EN-US_TOPIC_0257040387__b1950523945110">coco_trainval_anns.py</strong> and <strong id="EN-US_TOPIC_0257040387__b050503915513">coco_minival_anns.py</strong> to generate the training and validation sample annotation files <strong id="EN-US_TOPIC_0257040387__b12505193935115">coco2014_trainval.txt</strong> and <strong id="EN-US_TOPIC_0257040387__b05061939205114">coco2014_minival.txt</strong> respectively based on the actual path of the COCO 2014 dataset, and save them to the <strong id="EN-US_TOPIC_0257040387__b18506739115110">data</strong> directory. In the code repository, the annotation has been generated in the <strong id="EN-US_TOPIC_0257040387__b5809164931419">data </strong>directory based on the default dataset location. If the actual dataset directory is the same as the default directory, skip this step.</li>
+     </ol> <p></p></li>
+    <li id="EN-US_TOPIC_0257040387__li1030014140292"><span>Prepare a pre-trained model. Loading the ImageNet pre-training parameters to the backbone of the detection model can effectively avoid model non-convergence and accelerate model convergence. Therefore, it is recommended that the ImageNet pre-training parameters are downloaded. Download the pre-trained model in the Darknet framework from <a href="">https://pjreddie.com/media/files/darknet53.conv.74</a> and use the <strong id="EN-US_TOPIC_0257040387__b9504967531">convert_weight.py</strong> script to convert the model to a checkpoint file in TensorFlow framework. By default, the Darknet pre-training weight is read from <strong id="EN-US_TOPIC_0257040387__b84348462414">./data/darknet_weights/</strong>. Set <strong id="EN-US_TOPIC_0257040387__b20457101115612">restore_path </strong>to the path of the converted checkpoint file in <strong id="EN-US_TOPIC_0257040387__b7997733102411">Step 4</strong>.</span></li>
+    <li id="EN-US_TOPIC_0257040387__li877251683316"><span>Change related paths in the <strong id="EN-US_TOPIC_0257040387__b17570115417209">args_single.py</strong> (single-scale) or <strong id="EN-US_TOPIC_0257040387__b510735710203">args_multi.py</strong> (multi-scale) configuration file to the actual paths. <a href="#EN-US_TOPIC_0257040387__table1253104533515">Table 1</a> describes the fields.</span><p> </p>
+     <div class="tablenoborder">
+      <a></a>
+      <a></a>
+      <table id="EN-US_TOPIC_0257040387__table1253104533515" border="1">
+       <caption>
+        <b>Table 1 </b>Configuration file description
+       </caption>
+       <thead align="left">
+        <tr id="EN-US_TOPIC_0257040387__row13253545173516">
+         <th align="left" class="cellrowborder" valign="top" width="50%" id="mcps1.3.1.4.2.1.2.3.1.1"><p id="EN-US_TOPIC_0257040387__p122536456353">Field</p> </th> 
+         <th align="left" class="cellrowborder" valign="top" width="50%" id="mcps1.3.1.4.2.1.2.3.1.2"><p id="EN-US_TOPIC_0257040387__p1725364512358">Description</p> </th> 
+        </tr> 
+       </thead> 
+       <tbody>
+        <tr id="EN-US_TOPIC_0257040387__row2253114533513">
+         <td class="cellrowborder" valign="top" width="50%"><p id="EN-US_TOPIC_0257040387__p9253114563519">work_path</p> </td> 
+         <td class="cellrowborder" valign="top" width="50%"><p id="EN-US_TOPIC_0257040387__p15253645163516">Absolute path of the project (configured before training)</p> </td> 
+        </tr> 
+        <tr id="EN-US_TOPIC_0257040387__row325319453354">
+         <td class="cellrowborder" valign="top" width="50%"><p id="EN-US_TOPIC_0257040387__p11253114523515">train_file</p> </td> 
+         <td class="cellrowborder" valign="top" width="50%"><p id="EN-US_TOPIC_0257040387__p92539450352">Path of a training sample annotation file</p> </td> 
+        </tr> 
+        <tr id="EN-US_TOPIC_0257040387__row4253124513517">
+         <td class="cellrowborder" valign="top" width="50%"><p id="EN-US_TOPIC_0257040387__p9253194519354">val_file</p> </td> 
+         <td class="cellrowborder" valign="top" width="50%"><p id="EN-US_TOPIC_0257040387__p112534453352">Path of a validation sample annotation file</p> </td> 
+        </tr> 
+        <tr id="EN-US_TOPIC_0257040387__row8328349193614">
+         <td class="cellrowborder" valign="top" width="50%"><p id="EN-US_TOPIC_0257040387__p1732817492361">restore_path</p> </td> 
+         <td class="cellrowborder" valign="top" width="50%"><p id="EN-US_TOPIC_0257040387__p232834943615">Path for storing a pre-trained model</p> </td> 
+        </tr> 
+        <tr id="EN-US_TOPIC_0257040387__row588720514371">
+         <td class="cellrowborder" valign="top" width="50%"><p id="EN-US_TOPIC_0257040387__p48871652372">anchor_path</p> </td> 
+         <td class="cellrowborder" valign="top" width="50%"><p id="EN-US_TOPIC_0257040387__p168871556378">Path for storing an anchor file</p> </td> 
+        </tr> 
+        <tr id="EN-US_TOPIC_0257040387__row144941820203714">
+         <td class="cellrowborder" valign="top" width="50%"><p id="EN-US_TOPIC_0257040387__p1949442019371">class_name_path</p> </td> 
+         <td class="cellrowborder" valign="top" width="50%"><p id="EN-US_TOPIC_0257040387__p9494172019379">Path for storing a class name file</p> </td> 
+        </tr> 
+       </tbody> 
+      </table> 
+     </div> <p></p></li>
+    <li id="EN-US_TOPIC_0257040387__li94632336549"><span>In the JSON configuration file in the <strong id="EN-US_TOPIC_0257040387__b420075112818">hccl_config</strong> directory, set the IP address to the current one and <strong id="EN-US_TOPIC_0257040387__b81481621102814">board_id</strong> to the local board ID.</span><p></p><p id="EN-US_TOPIC_0257040387__p889075620287">Note: <strong id="EN-US_TOPIC_0257040387__b3571161516513">board_id</strong> is <strong id="EN-US_TOPIC_0257040387__b1957519150513">0x0000</strong> in the x86 architecture and <strong id="EN-US_TOPIC_0257040387__b195751015185115">0x002f</strong> in the Arm architecture.</p> <p id="EN-US_TOPIC_0257040387__p148081337123511">The single-device ranktable file is used as an example.</p> <pre class="screen" id="EN-US_TOPIC_0257040387__screen1018163182912">{
+    "board_id": "0x0000",
+    "chip_info": "910",
+    "deploy_mode": "lab",
+    "group_count": "1",
+    "group_list": [
+        {
+            "device_num": "1",
+            "server_num": "1",
+            "group_name": "",
+            "instance_count": "1",
+            "instance_list": [
+                {
+                    "devices": [
+                        {
+                            "device_id": "0",
+                            "device_ip": "192.168.100.101"
+                        }
+                    ],
+                    "rank_id": "0",
+                    "server_id": "0.0.0.0"
+                }
+           ]
+        }
+    ],
+    "para_plane_nic_location": "device",
+    "para_plane_nic_name": [
+        "eth0"
+    ],
+    "para_plane_nic_num": "1",
+    "status": "completed"
+}</pre> <p id="EN-US_TOPIC_0257040387__p1564811717271">The 8-device ranktable file is used as an example.</p> <pre class="screen" id="EN-US_TOPIC_0257040387__screen1541335514303">{
+    "board_id": "0x0000",
+    "chip_info": "910",
+    "deploy_mode": "lab",
+    "group_count": "1",
+    "group_list": [
+        {
+            "device_num": "8",
+            "server_num": "1",
+            "group_name": "",
+            "instance_count": "8",
+            "instance_list": [
+                {
+                    "devices": [
+                        {
+                            "device_id": "0",
+                            "device_ip": "192.168.100.101"
+                        }
+                    ],
+                    "rank_id": "0",
+                    "server_id": "0.0.0.0"
+                },
+                {
+                    "devices": [
+                        {
+                            "device_id": "1",
+                            "device_ip": "192.168.101.101"
+                        }
+                    ],
+                    "rank_id": "1",
+                    "server_id": "0.0.0.0"
+                },
+                {
+                    "devices": [
+                        {
+                            "device_id": "2",
+                            "device_ip": "192.168.102.101"
+                        }
+                    ],
+                    "rank_id": "2",
+                    "server_id": "0.0.0.0"
+                },
+                {
+                    "devices": [
+                        {
+                            "device_id": "3",
+                            "device_ip": "192.168.103.101"
+                        }
+                    ],
+                    "rank_id": "3",
+                    "server_id": "0.0.0.0"
+                },
+                {
+                    "devices": [
+                        {
+                            "device_id": "4",
+                            "device_ip": "192.168.100.100"
+                        }
+                    ],
+                    "rank_id": "4",
+                    "server_id": "0.0.0.0"
+                },
+                {
+                    "devices": [
+                        {
+                            "device_id": "5",
+                            "device_ip": "192.168.101.100"
+                        }
+                    ],
+                    "rank_id": "5",
+                    "server_id": "0.0.0.0"
+                },
+                {
+                    "devices": [
+                        {
+                            "device_id": "6",
+                            "device_ip": "192.168.102.100"
+                        }
+                    ],
+                    "rank_id": "6",
+                    "server_id": "0.0.0.0"
+                },
+                {
+                    "devices": [
+                        {
+                            "device_id": "7",
+                            "device_ip": "192.168.103.100"
+                        }
+                    ],
+                    "rank_id": "7",
+                    "server_id": "0.0.0.0"
+                }
+            ]
+        }
+    ],
+    "para_plane_nic_location": "device",
+    "para_plane_nic_name": [
+        "eth0",
+        "eth1",
+        "eth2",
+        "eth3",
+        "eth4",
+        "eth5",
+        "eth6",
+        "eth7"
+    ],
+    "para_plane_nic_num": "8",
+    "status": "completed"
+}</pre> <p></p></li>
+    <li id="EN-US_TOPIC_0257040387__li1879685310313"><span><span id="EN-US_TOPIC_0257040387__ph348525113239">Start training.</span></span><p></p><p id="EN-US_TOPIC_0257040387__p67377815366">To start training, configure the environment variables for program running. The environment variable configuration is as follows:</p> <p id="EN-US_TOPIC_0257040387__p8612201979">On Atlas Data Center Solution V100R020C00, use the following environment variables:</p> <pre class="screen" id="EN-US_TOPIC_0257040387__screen1961281271">#!/bin/bash
+export install_path=/usr/local/Ascend
+export PATH=${install_path}/nnae/latest/fwkacllib/ccec_compiler/bin:${PATH}
+export ASCEND_OPP_PATH=${install_path}/nnae/latest/opp
+export PYTHONPATH=$PYTHONPATH:${install_path}/nnae/latest/opp/op_impl/built-in/ai_core/tbe:${install_path}/tfplugin/latest/tfplugin/python/site-packages/:${install_path}/nnae/latest/fwkacllib/python/site-packages/hccl:${install_path}/nnae/latest/fwkacllib/python/site-packages/te:${install_path}/nnae/latest/fwkacllib/python/site-packages/topi
+export LD_LIBRARY_PATH=/usr/local/:/usr/local/lib/:/usr/lib/:${install_path}/nnae/latest/fwkacllib/lib64/:${install_path}/driver/lib64/common/:${install_path}/driver/lib64/driver/:${install_path}/add-ons</pre> <p id="EN-US_TOPIC_0257040387__p10613115718">On Atlas Data Center Solution V100R020C10, use the following environment variables:</p> <pre class="screen" id="EN-US_TOPIC_0257040387__screen18613111879">export install_path=/usr/local/Ascend/nnae/latest
+# Driver dependency
+export LD_LIBRARY_PATH=/usr/local/Ascend/driver/lib64/common/:/usr/local/Ascend/driver/lib64/driver:$LD_LIBRARY_PATH # Required only in the container-based training scenario
+export LD_LIBRARY_PATH=/usr/local/Ascend/add-ons:$LD_LIBRARY_PATH
+# FwkACLlib dependency
+export LD_LIBRARY_PATH=${install_path}/fwkacllib/lib64:$LD_LIBRARY_PATH
+export 
+PYTHONPATH=${install_path}/fwkacllib/python/site-packages:${install_path}/fwkacllib/python/site-packages/auto_tune.egg/auto_tune:${install_path}/fwkacllib/python/site-packages/schedule_search.egg:$PYTHONPATH
+export
+PATH=${install_path}/fwkacllib/ccec_compiler/bin:${install_path}/fwkacllib/bin:$PATH
+# TFPlugin dependency
+export PYTHONPATH=/usr/local/Ascend/tfplugin/latest/tfplugin/python/site-packages:$PYTHONPATH
+# OPP dependency
+export ASCEND_OPP_PATH=${install_path}/opp</pre> 
+     <div class="p" id="EN-US_TOPIC_0257040387__p690514723619">
+      Single-device single-scale training command:
+      <pre class="screen" id="EN-US_TOPIC_0257040387__screen890520718366">bash npu_train_1p_single.sh</pre> 
+     </div> <p id="EN-US_TOPIC_0257040387__p96602342435">Single-device multi-scale training command:</p> <pre class="screen" id="EN-US_TOPIC_0257040387__screen18571550154318">bash npu_train_1p_multi.sh</pre> 
+     <div class="p" id="EN-US_TOPIC_0257040387__p9435202315451">
+      8-device single-scale training command:
+      <pre class="screen" id="EN-US_TOPIC_0257040387__screen5435142313459">bash npu_train_8p_single.sh</pre> 
+     </div> 
+     <div class="p" id="EN-US_TOPIC_0257040387__p1339442713398">
+      8-device multi-scale training command:
+      <pre class="screen" id="EN-US_TOPIC_0257040387__screen123948279390">bash npu_train_8p_multi.sh</pre> 
+     </div> <p></p></li>
+    <li id="EN-US_TOPIC_0257040387__li137421234"><span><span id="EN-US_TOPIC_0257040387__ph11979175116234">Test the trained model.</span></span><p></p><p id="EN-US_TOPIC_0257040387__p10794182017139">During the test, set <strong id="EN-US_TOPIC_0257040387__b12761758183612">RESTORE_PATH</strong> in the <strong id="EN-US_TOPIC_0257040387__b15325121018376">eval.sh</strong> script to the actual path.</p> 
+     <div class="note" id="EN-US_TOPIC_0257040387__note156561313152410">
+      <img src="https://obs-9be7.obs.cn-east-2.myhuaweicloud.com/turing/resourcecenter/img/public_sys-resources/note_3.0-en-us.png">
+      <span class="notetitle"> </span>
+      <div class="notebody">
+       <p id="EN-US_TOPIC_0257040387__p13656613192419">In abnormal scenarios such as incorrect training data or extremely low training accuracy, unexpected computation failures may occur when <strong id="EN-US_TOPIC_0257040387__b86291512184">eval</strong> is executed. In this case, you need to check the correctness of the training data or try to train more epochs to ensure the basic accuracy required by <strong id="EN-US_TOPIC_0257040387__b46561541819">eval</strong>.</p> 
+      </div>
+     </div> 
+     <div class="p" id="EN-US_TOPIC_0257040387__p1782124614281">
+      Test command:
+      <pre class="screen" id="EN-US_TOPIC_0257040387__screen14782144611286">bash eval.sh</pre> 
+     </div> <p></p></li>
+   </ol> 
+  </div> 
+  <div></div> 
+ &lt;/body&gt;
+&lt;/html&gt;</div></div><div id="pane-Advanced References" class="el-tab-pane" role="tabpanel" aria-hidden="true" aria-labelledby="tab-Advanced References" style="display: none;"><div class="help-content">&lt;html&gt;
+ &lt;head&gt;&lt;/head&gt;
+ &lt;body&gt;
+  <a></a>
+  <a></a> 
+  <h1 class="topictitle1">Advanced References</h1> 
+  <div id="body1583927064139">
+   <div class="section" id="EN-US_TOPIC_0257040386__section08421615141513">
+    <h4 class="sectiontitle"><span id="EN-US_TOPIC_0257040386__ph680417220406">Script and Sample Code</span></h4>
+    <pre class="screen" id="EN-US_TOPIC_0257040386__screen63931449185718">├── 00-access
+  ├── args_multi.py                 # Multi-scale parameter configuration file
+  ├── args_single.py                # Single-scale parameter configuration file
+  ├── coco_minival_anns.py          # Script for generating COCO validation dataset annotations
+  ├── coco_trainval_anns.py         # Script for generating COCO training dataset annotations
+  ├── convert_weight.py             # Script for converting the darknet pre-training model to the checkpoint
+  ├── data                          # Including the pre-training model, training dataset annotations, validation set annotations, anchor, and class names used for training
+  ├── docs                          # Description document
+  ├── eval_coco.py                  # Script for computing the COCO map
+  ├── eval.py                       # Test script
+  ├── eval.sh                       # Test startup script
+  ├── get_kmeans.py                 # Script for generating an anchor
+  ├── hccl_config                   # Containing the HCCL configuration files in different devices
+  ├── misc                          # Contained in source code and is not used.
+  ├── model.py                      # Model building file
+  ├── npu_train_1p_multi.sh         # Single-device multi-scale training startup script
+  ├── npu_train_1p_single.sh        # Single-device single-scale training startup script
+  ├── npu_train_8p_multi.sh         # 8-device multi-scale training startup script
+  ├── npu_train_8p_single.sh        # 8-device single-scale training startup script
+  ├── npu_train.sh                  # Setting environment variables using <strong id="EN-US_TOPIC_0257040386__b5615164745217">run_yolov3.sh</strong>
+  ├── npu_train_wort.sh             # Setting environment variables using <strong id="EN-US_TOPIC_0257040386__b17192103685411">run_yolov3.sh</strong>
+  ├── README.md                     # Description document
+  ├── README_raw.md                 # Readme description document of the original repository
+  ├── run_yolov3.sh                 # Starting <strong id="EN-US_TOPIC_0257040386__b141247615519">train.py</strong>
+  ├── test_single_image.py          # Testing an image
+  ├── train.py                      # Building a training script
+  ├── utils                         # Tool package, including scripts such as data preprocessing and NMS
+  └── video_test.py                 # Contained in source code and is not used.
+</pre> 
+   </div> 
+   <div class="section" id="EN-US_TOPIC_0257040386__section69119771519">
+    <h4 class="sectiontitle"><span id="EN-US_TOPIC_0257040386__ph333902364019">Script Options</span></h4>
+    <p id="EN-US_TOPIC_0257040386__p1045119714513">In this project, the training parameters are configured by modifying the <strong id="EN-US_TOPIC_0257040386__b0483810205811">args_multi.py</strong> and <strong id="EN-US_TOPIC_0257040386__b13722171335819">args_single.py</strong> files. The configurable fields in the two files are the same. You do not need to transfer parameters by scripts. The <strong id="EN-US_TOPIC_0257040386__b126521575598">args_multi.py</strong> is used as an example to describe the configurable parameters.</p> 
+    <pre class="screen" id="EN-US_TOPIC_0257040386__screen5368510954">save_dir =          './training/'  # Path for storing checkpoints
+log_dir =           './training/logs/'  # Path for storing log files
+progress_log_path = './training/train.log'  # Path for storing training process log files
+
+if not os.path.exists(save_dir):
+    os.makedirs(save_dir)
+if not os.path.exists(log_dir):
+    os.makedirs(log_dir)
+work_path = '../../../'
+### Some paths
+train_file =        os.path.join(work_path, './data/coco2014_trainval.txt')  # Path of training annotation file
+val_file =          os.path.join(work_path, './data/coco2014_minival.txt')  # Path of validation annotation file
+restore_path =      os.path.join(work_path, './data/darknet_weights/darknet53.ckpt')  # Path of the pre-trained model
+anchor_path =       os.path.join(work_path, './data/yolo_anchors.txt')  # Path of an anchor file
+class_name_path =   os.path.join(work_path, './data/coco.names')  # Path of the class name file
+
+### Distribution setting
+num_gpus=int(os.environ['RANK_SIZE'])
+iterations_per_loop=10 # Number of iterations per loop for each offloading.
+
+### Training releated numbersls
+
+batch_size = 16 # Batch size on each NPU. The value is <strong id="EN-US_TOPIC_0257040386__b797314516149">16</strong> for the multi-scale mode or <strong id="EN-US_TOPIC_0257040386__b1078320162142">32</strong> for the single-scale mode.
+img_size = [608, 608]  # Input width and height of an image. The multi-scale is 608 x 608, and the single-scale is 416 x 416.
+letterbox_resize = True  # Specifies whether to retain the aspect ratio of an image. The value must be <strong id="EN-US_TOPIC_0257040386__b1834345716494">True</strong>.
+total_epoches = 200 # Total number of training epochs
+train_evaluation_step = 1000 # This parameter is invalid currently.
+val_evaluation_epoch = 2 # This parameter is invalid currently.
+save_epoch = 10 # Epoch interval for saving checkpoints
+ batch_norm_decay = 0.99  # Decay parameter in the BN operator
+weight_decay = 5e-4 # Weight decay parameter
+global_step = 0 # Specifies a step where the training continues.
+
+### tf.data parameters
+num_threads = 8 # Number of data preprocessing threads
+prefetech_buffer = batch_size * 4  # Number of buffer prefetched during data preprocessing
+
+### Learning rate and optimizer
+optimizer_name = 'momentum'  # Optimizer. The value can be <strong id="EN-US_TOPIC_0257040386__b20605133416369">sgd</strong>, <strong id="EN-US_TOPIC_0257040386__b1024093633612">momentum</strong>, <strong id="EN-US_TOPIC_0257040386__b113921537163615">adam</strong>, or <strong id="EN-US_TOPIC_0257040386__b61357395364">rmsprop</strong>.
+save_optimizer = True # Specifies whether to save the optimizer in the .ckpt file.
+learning_rate_base = 75e-4 # Basic learning rate
+learning_rate_base_batch_size = 64 # Batch size corresponding to the basic learning rate. The actual basic learning rate varies according to the batch size.</pre> 
+   </div> 
+   <div class="section" id="EN-US_TOPIC_0257040386__section1550141375118">
+    <h4 class="sectiontitle"><span id="EN-US_TOPIC_0257040386__ph48981223114011">Obtaining Data</span></h4>
+    <p id="EN-US_TOPIC_0257040386__p1675171163319">If you want to use your own dataset for training, perform the following steps to prepare data:</p> 
+    <ol id="EN-US_TOPIC_0257040386__ol183915975318">
+     <li id="EN-US_TOPIC_0257040386__li1839592532"><span>Generate annotation files for the training dataset and validation dataset, for example, <strong id="EN-US_TOPIC_0257040386__b2020719910291">train.txt</strong> and <strong id="EN-US_TOPIC_0257040386__b7501811162910">val.txt</strong>. Each line indicates a sample. The format is as follows:</span><p></p><p id="EN-US_TOPIC_0257040386__p1743713395548">image index | image path | box1_class box1_xmin box1_ymin box1_xmax box1_ymax | box2_class box2_xmin box2_ymin box2_xmax box2_ymax | ...</p> <p></p></li>
+     <li id="EN-US_TOPIC_0257040386__li86292234593"><span>Use the clustering algorithm to generate an anchor file required by the model based on the sample and save the anchor file as a .txt file.</span></li>
+     <li id="EN-US_TOPIC_0257040386__li4410161106"><span>Generate a text file containing all class names based on the sample.</span></li>
+    </ol> 
+    <div class="note" id="EN-US_TOPIC_0257040386__note1649241410390">
+     <img src="https://obs-9be7.obs.cn-east-2.myhuaweicloud.com/turing/resourcecenter/img/public_sys-resources/note_3.0-en-us.png">
+     <span class="notetitle"> </span>
+     <div class="notebody">
+      <p id="EN-US_TOPIC_0257040386__en-us_topic_0263754045_p12623639133012">The training process script with the dataset is for reference only.</p> 
+     </div>
+    </div> 
+   </div> 
+   <div class="section" id="EN-US_TOPIC_0257040386__section4356162115117">
+    <h4 class="sectiontitle"><span id="EN-US_TOPIC_0257040386__ph75146245401">Training Workflow</span></h4>
+    <p id="EN-US_TOPIC_0257040386__p12688202791110"><span id="EN-US_TOPIC_0257040386__ph1725611072413">Start single-device or multi-device training by running the training command given in "Quick Start".</span> These two training modes are enabled by different scripts.</p> 
+    <p id="EN-US_TOPIC_0257040386__p1847829141311">The model storage path is <strong id="EN-US_TOPIC_0257040386__b8230953162611">training/t1/Dx/training</strong>. The training script log contains the following information:</p> 
+    <pre class="screen" id="EN-US_TOPIC_0257040386__screen1741115280523">63%|██████▎   | 57/91 [02:57&lt;01:45,  3.12s/it] 63%|██████▎   | 57/91 [02:57&lt;01:45,  3.12s/it]2020-06-24 12:02:05.685374: I tf_adapter/kernels/geop_npu.cc:545] [GEOP] Begin GeOp::ComputeAsync, kernel_name:GeOp12_0, num_inputs:0, num_outputs:12
+2020-06-24 12:02:05.685458: I tf_adapter/kernels/geop_npu.cc:412] [GEOP] tf session directfd59c855eab295f1, graph id: 71 no need to rebuild
+2020-06-24 12:02:05.685482: I tf_adapter/kernels/geop_npu.cc:753] [GEOP] Call ge session RunGraphAsync, kernel_name:GeOp12_0 ,tf session: directfd59c855eab295f1 ,graph id: 71
+2020-06-24 12:02:05.685626: I tf_adapter/kernels/geop_npu.cc:767] [GEOP] End GeOp::ComputeAsync, kernel_name:GeOp12_0, ret_status:success ,tf session: directfd59c855eab295f1 ,graph id: 71 [0 ms]
+2020-06-24 12:02:05.685817: I tf_adapter/kernels/geop_npu.cc:545] [GEOP] Begin GeOp::ComputeAsync, kernel_name:GeOp12_0, num_inputs:0, num_outputs:12
+2020-06-24 12:02:05.685921: I tf_adapter/kernels/geop_npu.cc:412] [GEOP] tf session direct98999627cf85b7bb, graph id: 71 no need to rebuild
+2020-06-24 12:02:05.685946: I tf_adapter/kernels/geop_npu.cc:753] [GEOP] Call ge session RunGraphAsync, kernel_name:GeOp12_0 ,tf session: direct98999627cf85b7bb ,graph id: 71
+2020-06-24 12:02:05.686020: I tf_adapter/kernels/geop_npu.cc:767] [GEOP] End GeOp::ComputeAsync, kernel_name:GeOp12_0, ret_status:success ,tf session: direct98999627cf85b7bb ,graph id: 71 [0 ms]
+2020-06-24 12:02:05.686620: I tf_adapter/kernels/geop_npu.cc:93] BuildOutputTensorInfo, output index:11, total_bytes:8, shape:, tensor_ptr:281440890763904, output281440891385152
+2020-06-24 12:02:05.686697: I tf_adapter/kernels/geop_npu.cc:745] [GEOP] RunGraphAsync callback, status:0, kernel_name:GeOp12_0[ 3112012us]
+^M 63%|██████▎   | 57/91 [02:57&lt;01:45,  3.12s/it]2020-06-24 12:02:05.687733: I tf_adapter/kernels/geop_npu.cc:545] [GEOP] Begin GeOp::ComputeAsync, kernel_name:GeOp12_0, num_inputs:0, num_outputs:12
+2020-06-24 12:02:05.687876: I tf_adapter/kernels/geop_npu.cc:412] [GEOP] tf session directd7a66187adfa39cd, graph id: 71 no need to rebuild
+2020-06-24 12:02:05.687900: I tf_adapter/kernels/geop_npu.cc:753] [GEOP] Call ge session RunGraphAsync, kernel_name:GeOp12_0 ,tf session: directd7a66187adfa39cd ,graph id: 71
+2020-06-24 12:02:05.687982: I tf_adapter/kernels/geop_npu.cc:767] [GEOP] End GeOp::ComputeAsync, kernel_name:GeOp12_0, ret_status:success ,tf session: directd7a66187adfa39cd ,graph id: 71 [0 ms]
+^M 63%|██████▎   | 57/91 [02:57&lt;01:45,  3.12s/it]2020-06-24 12:02:05.689515: I tf_adapter/kernels/geop_npu.cc:93] BuildOutputTensorInfo, output index:11, total_bytes:8, shape:, tensor_ptr:281441491235200, output281441496185648
+2020-06-24 12:02:05.689626: I tf_adapter/kernels/geop_npu.cc:745] [GEOP] RunGraphAsync callback, status:0, kernel_name:GeOp12_0[ 3118090us]
+2020-06-24 12:02:05.690087: I tf_adapter/kernels/geop_npu.cc:545] [GEOP] Begin GeOp::ComputeAsync, kernel_name:GeOp12_0, num_inputs:0, num_outputs:12
+2020-06-24 12:02:05.690201: I tf_adapter/kernels/geop_npu.cc:412] [GEOP] tf session directf44cd73022bdba7d, graph id: 71 no need to rebuild
+2020-06-24 12:02:05.690221: I tf_adapter/kernels/geop_npu.cc:753] [GEOP] Call ge session RunGraphAsync, kernel_name:GeOp12_0 ,tf session: directf44cd73022bdba7d ,graph id: 71
+2020-06-24 12:02:05.690301: I tf_adapter/kernels/geop_npu.cc:767] [GEOP] End GeOp::ComputeAsync, kernel_name:GeOp12_0, ret_status:success ,tf session: directf44cd73022bdba7d ,graph id: 71 [0 ms]
+^M 63%|██████▎   | 57/91 [02:57&lt;01:45,  3.12s/it]2020-06-24 12:02:05.693091: I tf_adapter/kernels/geop_npu.cc:545] [GEOP] Begin GeOp::ComputeAsync, kernel_name:GeOp12_0, num_inputs:0, num_outputs:12</pre> 
+   </div> 
+   <div class="section" id="EN-US_TOPIC_0257040386__section02151710240">
+    <h4 class="sectiontitle"><span id="EN-US_TOPIC_0257040386__ph1243962816469">Validation/Inference Workflow</span></h4>
+    <p id="EN-US_TOPIC_0257040386__p213834582410"><span id="EN-US_TOPIC_0257040386__ph11359162324613">Start single-device or multi-device training by running the training command given in "Quick Start".</span> The configuration of a single device is the same as the training process.</p> 
+    <p id="EN-US_TOPIC_0257040386__p1693632220618"><span id="EN-US_TOPIC_0257040386__ph197041581563">Currently, only the checkpoints trained by the project can be used for inference testing. </span></p> 
+    <p id="EN-US_TOPIC_0257040386__p52061920115910">After the test is complete, the map result of the validation set is displayed, as shown in the following:</p> 
+    <p id="EN-US_TOPIC_0257040386__p198901400392"></p> 
+    <pre class="screen" id="EN-US_TOPIC_0257040386__screen1913041023912">Average Precision (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.311
+Average Precision (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.551
+Average Precision (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.317
+Average Precision (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.134
+Average Precision (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.339
+Average Precision (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.463
+Average Recall    (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.277
+Average Recall    (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=10  ] = 0.430
+Average Recall    (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.459
+Average Recall    (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.254
+Average Recall    (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.508
+Average Recall    (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.631</pre> 
+    <p id="EN-US_TOPIC_0257040386__p924218381113">Continue training after interruption.</p> 
+    <p id="EN-US_TOPIC_0257040386__p3947153913317">Add the <strong id="EN-US_TOPIC_0257040386__b498017342556">--resume</strong> parameter to line 25 in the <strong id="EN-US_TOPIC_0257040386__b71871942105511">run_yolov3.sh</strong> file.</p> 
+    <pre class="screen" id="EN-US_TOPIC_0257040386__screen7557121610416">taskset -c $PID_START-$PID_END python3 $3/train.py --mode $4 --resume</pre> 
+    <p id="EN-US_TOPIC_0257040386__p0977133018598"></p> 
+   </div> 
+  </div> 
+ &lt;/body&gt;
+&lt;/html&gt;</div></div><div id="pane-Environment" class="el-tab-pane" role="tabpanel" aria-hidden="true" aria-labelledby="tab-Environment" style="display: none;"><div class="help-content">&lt;html&gt;
+ &lt;head&gt;&lt;/head&gt;
+ &lt;body&gt;
+  <a></a>
+  <a></a> 
+  <h1 class="topictitle1">Environment</h1> 
+  <div id="body1597658060723"> 
+   <div class="tablenoborder">
+    <table id="EN-US_TOPIC_0270469956__table118815645911" border="1">
+     <thead align="left">
+      <tr id="EN-US_TOPIC_0270469956__row1134626185919">
+       <th align="left" class="cellrowborder" valign="top" width="11.65116511651165%" id="mcps1.3.1.1.8.1.1"><p id="EN-US_TOPIC_0270469956__p1634616625912">Network</p> </th> 
+       <th align="left" class="cellrowborder" valign="top" width="14.06140614061406%" id="mcps1.3.1.1.8.1.2"><p id="EN-US_TOPIC_0270469956__p634656155917">Network Type</p> </th> 
+       <th align="left" class="cellrowborder" valign="top" width="13.101310131013102%" id="mcps1.3.1.1.8.1.3"><p id="EN-US_TOPIC_0270469956__p14346176125913">Framework</p> </th> 
+       <th align="left" class="cellrowborder" valign="top" width="12.691269126912694%" id="mcps1.3.1.1.8.1.4"><p id="EN-US_TOPIC_0270469956__p113461262596">Atlas NPU Model</p> </th> 
+       <th align="left" class="cellrowborder" valign="top" width="13.521352135213519%" id="mcps1.3.1.1.8.1.5"><p id="EN-US_TOPIC_0270469956__p203461764597">Server</p> </th> 
+       <th align="left" class="cellrowborder" valign="top" width="16.36163616361636%" id="mcps1.3.1.1.8.1.6"><p id="EN-US_TOPIC_0270469956__p1734714620593">Ascend AI Processor</p> </th> 
+       <th align="left" class="cellrowborder" valign="top" width="18.61186118611861%" id="mcps1.3.1.1.8.1.7"><p id="EN-US_TOPIC_0270469956__p20347126185916">NPU Version</p> </th> 
+      </tr> 
+     </thead> 
+     <tbody>
+      <tr id="EN-US_TOPIC_0270469956__row13481668595">
+       <td class="cellrowborder" valign="top" width="11.65116511651165%"><p id="EN-US_TOPIC_0270469956__p97123491411">YOLOv3 (single-scale)</p> </td> 
+       <td class="cellrowborder" valign="top" width="14.06140614061406%"><p id="EN-US_TOPIC_0270469956__p11554531413">CNN</p> </td> 
+       <td class="cellrowborder" valign="top" width="13.101310131013102%"><p id="EN-US_TOPIC_0270469956__p15348136205920">TensorFlow</p> </td> 
+       <td class="cellrowborder" valign="top" width="12.691269126912694%"><p id="EN-US_TOPIC_0270469956__p934866135912">Atlas 800-9000</p> </td> 
+       <td class="cellrowborder" valign="top" width="13.521352135213519%"><p id="EN-US_TOPIC_0270469956__p203486613597">Atlas 800-9000</p> </td> 
+       <td class="cellrowborder" valign="top" width="16.36163616361636%"><p id="EN-US_TOPIC_0270469956__p53497675914">Ascend 910</p> </td> 
+       <td class="cellrowborder" valign="top" width="18.61186118611861%"><p id="EN-US_TOPIC_0270469956__p1534916615594">Atlas 800-9000</p> </td> 
+      </tr> 
+      <tr id="EN-US_TOPIC_0270469956__row15532615143">
+       <td class="cellrowborder" valign="top" width="11.65116511651165%"><p id="EN-US_TOPIC_0270469956__p13514265141">YOLOv3 (multi-scale)</p> </td> 
+       <td class="cellrowborder" valign="top" width="14.06140614061406%"><p id="EN-US_TOPIC_0270469956__p17603750171419">CNN</p> </td> 
+       <td class="cellrowborder" valign="top" width="13.101310131013102%"><p id="EN-US_TOPIC_0270469956__p1060319509142">TensorFlow</p> </td> 
+       <td class="cellrowborder" valign="top" width="12.691269126912694%"><p id="EN-US_TOPIC_0270469956__p2603165011415">Atlas 800-9000</p> </td> 
+       <td class="cellrowborder" valign="top" width="13.521352135213519%"><p id="EN-US_TOPIC_0270469956__p560345021410">Atlas 800-9000</p> </td> 
+       <td class="cellrowborder" valign="top" width="16.36163616361636%"><p id="EN-US_TOPIC_0270469956__p160414505146">Ascend 910</p> </td> 
+       <td class="cellrowborder" valign="top" width="18.61186118611861%"><p id="EN-US_TOPIC_0270469956__p196041750191413">Atlas 800-9000</p> </td> 
+      </tr> 
+     </tbody> 
+    </table> 
+   </div> 
+  </div> 
+  <div></div> 
+ &lt;/body&gt;
+&lt;/html&gt;</div></div><div id="pane-Version History" class="el-tab-pane" role="tabpanel" aria-hidden="true" aria-labelledby="tab-Version History" style="display: none;"><div class="el-table--fit el-table--border el-table--scrollable-x el-table--enable-row-hover el-table--enable-row-transition el-table el-table--layout-fixed is-scrolling-right" data-prefix="el" style="width: 100%;"><div class="el-table__inner-wrapper"><div class="hidden-columns"><div></div><div></div><div></div><div></div><!----><div></div><!----><div></div></div><div class="el-table__header-wrapper"><table class="el-table__header" border="0" cellpadding="0" cellspacing="0" style="width: 480px;"><colgroup><col name="el-table_1_column_1" width="80"><col name="el-table_1_column_2" width="80"><col name="el-table_1_column_3" width="80"><col name="el-table_1_column_4" width="80"><col name="el-table_1_column_5" width="80"><col name="el-table_1_column_6" width="80"></colgroup><thead class=""><tr class=""><th class="el-table_1_column_1 is-center is-leaf el-table__cell" colspan="1" rowspan="1"><div class="cell">Release<!----><!----></div></th><th class="el-table_1_column_2 is-center is-leaf el-table__cell" colspan="1" rowspan="1"><div class="cell">Data<!----><!----></div></th><th class="el-table_1_column_3 is-center is-leaf el-table__cell" colspan="1" rowspan="1"><div class="cell">Precision<!----><!----></div></th><th class="el-table_1_column_4 is-center is-leaf el-table__cell" colspan="1" rowspan="1"><div class="cell">Processor Type<!----><!----></div></th><th class="el-table_1_column_5 is-center is-leaf el-table__cell" colspan="1" rowspan="1"><div class="cell">CANN Version<!----><!----></div></th><th class="el-table_1_column_6 is-center is-leaf el-table__cell" colspan="1" rowspan="1"><div class="cell">Operation<!----><!----></div></th></tr></thead></table></div><div class="el-table__body-wrapper"><div class="el-scrollbar"><div class="el-scrollbar__wrap el-scrollbar__wrap--hidden-default"><div class="el-scrollbar__view" style="display: inline-block; vertical-align: middle;"><table class="el-table__body" cellspacing="0" cellpadding="0" border="0" style="table-layout: fixed; width: 480px;"><colgroup><col name="el-table_1_column_1" width="80"><col name="el-table_1_column_2" width="80"><col name="el-table_1_column_3" width="80"><col name="el-table_1_column_4" width="80"><col name="el-table_1_column_5" width="80"><col name="el-table_1_column_6" width="80"></colgroup><!--v-if--><tbody tabindex="-1"><tr class="el-table__row"><td colspan="1" rowspan="1" class="el-table_1_column_1 is-center el-table__cell"><div class="cell"><!----></div></td><td colspan="1" rowspan="1" class="el-table_1_column_2 is-center el-table__cell"><div class="cell"><!----></div></td><td colspan="1" rowspan="1" class="el-table_1_column_3 is-center el-table__cell"><div class="cell"><!----></div></td><td colspan="1" rowspan="1" class="el-table_1_column_4 is-center el-table__cell"><div class="cell"><!----></div></td><td colspan="1" rowspan="1" class="el-table_1_column_5 is-center el-table__cell"><div class="cell"><!----></div></td><td colspan="1" rowspan="1" class="el-table_1_column_6 is-center el-table__cell"><div class="cell"><!----><div class="edit"><button class="downBtn_1" bi_name="Download" style="">Download</button><!----><!----></div></div></td></tr></tbody><!--v-if--></table><!--v-if--><!--v-if--></div></div><div class="el-scrollbar__bar is-horizontal" style="display: none;"><div class="el-scrollbar__thumb" style="transform: translateX(0%);"></div></div><div class="el-scrollbar__bar is-vertical" style="display: none;"><div class="el-scrollbar__thumb" style="transform: translateY(0%);"></div></div></div></div><!--v-if--><div class="el-table__border-left-patch"></div></div><div class="el-table__column-resize-proxy" style="display: none;"></div></div><div class="list-mobile"><div class="el-collapse el-collapse-icon-position-right"><div class="el-collapse-item"><div id="el-collapse-head-4" class="el-collapse-item__header" aria-expanded="false" aria-controls="el-collapse-content-4" aria-describedby="el-collapse-content-4" tabindex="0" role="button"><span class="el-collapse-item__title">1.1</span><i class="el-icon el-collapse-item__arrow"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path fill="currentColor" d="M340.864 149.312a30.59 30.59 0 0 0 0 42.752L652.736 512 340.864 831.872a30.59 30.59 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z"></path></svg></i></div><div id="el-collapse-content-4" role="region" class="el-collapse-item__wrap" aria-hidden="true" aria-labelledby="el-collapse-head-4" style="display: none;"><div class="el-collapse-item__content"><div class="collapse-item-content"><div class="list-mb"><span class="left">Data</span><span class="right"></span></div><div class="list-mb"><span class="left">Precision</span><span class="right">Mixed</span></div><div class="list-mb"><span class="left">Processor Type</span><span class="right">Ascend 910</span></div><div class="list-mb"><span class="left">File Size</span><span class="right"></span></div><div class="list-mb"><span class="left">CANN Version</span><span class="right"></span></div><!----><div class="list-mb"><span class="left">Operation</span><div class="edit"><button class="downBtn_1" bi_name="下载" style=""><span class="right">Download</span></button><!----><!----></div></div></div></div></div></div></div></div><div class="pagination-wrapper"><!----></div></div></div></div></div></div></div></div></div><!----><div data-v-bba5174b=""><!----><div data-v-bba5174b="" class="site-info"><div data-v-bba5174b="" class="view2"><div data-v-bba5174b="" class="site-info-right mobile mobileEn"><span data-v-bba5174b="">Terms of Use</span><span data-v-bba5174b="">Privacy Policy</span><span data-v-bba5174b="">Cookies Policy</span><span data-v-bba5174b="">User Agreement</span></div><div data-v-bba5174b="" class="site-info-left"><p data-v-bba5174b="" class="banquan">Copyright © 2021-2026 Huawei Technologies Co., Ltd. All rights reserved.</p><div data-v-bba5174b="" class="banquan-mobile"><p data-v-bba5174b="">Copyright © 2021-2026 Huawei Technologies Co., Ltd.</p><p data-v-bba5174b=""> All rights reserved.</p></div></div><div data-v-bba5174b="" class="site-info-right"><a data-v-bba5174b="" href="/legal/law" class="" target="_blank" rel="nofollow">Terms of Use</a><a data-v-bba5174b="" href="/legal/privacy" class="" target="_blank" rel="nofollow">Privacy Policy</a><a data-v-bba5174b="" href="/legal/cookies" class="" target="_blank" rel="nofollow">Cookies Policy</a><a data-v-bba5174b="" href="/legal/user" class="" target="_blank" rel="nofollow">User Agreement</a></div></div></div></div><!----><div data-v-76786226=""><div data-v-76786226="" class="notice-container"><div data-v-76786226="" class="cookie-content-zh"><svg data-v-76786226="" viewBox="0 0 48 48" class="cookie-info-icon"><path data-v-76786226="" d="M24,6 C33.9411255,6 42,14.0588745 42,24 C42,33.9411255 33.9411255,42 24,42 C14.0588745,42 6,33.9411255 6,24 C6,14.0588745 14.0588745,6 24,6 Z M24,20.5659696 C23.1715729,20.5659696 22.5,21.2375425 22.5,22.0659696 L22.5,33.0659696 C22.5,33.8943967 23.1715729,34.5659696 24,34.5659696 C24.8284271,34.5659696 25.5,33.8943967 25.5,33.0659696 L25.5,22.0659696 C25.5,21.2375425 24.8284271,20.5659696 24,20.5659696 Z M24,14.8005084 C22.8954305,14.8005084 22,15.6959389 22,16.8005084 C22,17.9050779 22.8954305,18.8005084 24,18.8005084 C25.1045695,18.8005084 26,17.9050779 26,16.8005084 C26,15.6959389 25.1045695,14.8005084 24,14.8005084 Z" fill="currentColor"></path></svg><div data-v-76786226="" class="cookie-content-txt"><span data-v-76786226="" class="content-info">This site uses cookies to improve your browsing experience. By continuing to browse this site, you agree to our use of cookies.</span><a data-v-76786226="" href="/en/legal/cookies" target="_blank" rel="noopener noreferrer" class="policy-link-zh">View Details</a></div><img data-v-76786226="" class="close-icon-zh" src="https://r.huaweistatic.com/s/ascendstatic/lst/tip/close.svg" alt=""></div></div></div><div data-v-ca9c2d95="" class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div data-v-ca9c2d95="" class="pswp__bg"></div><div data-v-ca9c2d95="" class="pswp__scroll-wrap"><div data-v-ca9c2d95="" class="pswp__container"><div data-v-ca9c2d95="" class="pswp__item"></div><div data-v-ca9c2d95="" class="pswp__item"></div><div data-v-ca9c2d95="" class="pswp__item"></div></div><div data-v-ca9c2d95="" class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar" data-v-ca9c2d95=""><div class="pswp__counter" data-v-ca9c2d95=""></div><div class="pswp__preloader" data-v-ca9c2d95=""><div class="pswp__preloader__icn" data-v-ca9c2d95=""><div class="pswp__preloader__cut" data-v-ca9c2d95=""><div class="pswp__preloader__donut" data-v-ca9c2d95=""></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap" data-v-ca9c2d95=""><div class="pswp__share-tooltip" data-v-ca9c2d95=""></div></div><div data-v-c1c7fbf1="" data-v-ca9c2d95="" class="btn-box white pswp__button pswp__button--arrow--left" title="Previous (arrow left)" style="opacity: 1;"><a data-v-c1c7fbf1="" class="more" href=""><span data-v-c1c7fbf1="">function String() { [native code] }</span><img data-v-c1c7fbf1="" src="https://www.hiascend.com/static/img/right-red-BuwZ2vNV.svg"></a></div><div data-v-c1c7fbf1="" data-v-ca9c2d95="" class="btn-box white pswp__button pswp__button--arrow--right" title="Next (arrow right)" style="opacity: 1;"><a data-v-c1c7fbf1="" class="more" href=""><span data-v-c1c7fbf1="">function String() { [native code] }</span><img data-v-c1c7fbf1="" src="https://www.hiascend.com/static/img/right-red-BuwZ2vNV.svg"></a></div><div data-v-ca9c2d95="" class="pswp__caption"><div data-v-ca9c2d95="" class="pswp__caption__center"></div></div></div></div></div><!----><div class="el-overlay el-modal-dialog" style="z-index: 2001; display: none;"><div role="dialog" aria-modal="true" aria-label="昇腾开发者服务协议" aria-describedby="el-id-8335-1" class="el-overlay-dialog"></div></div><div class="el-overlay el-modal-dialog" style="z-index: 2002; display: none;"><div role="dialog" aria-modal="true" aria-label="提示" aria-describedby="el-id-8335-3" class="el-overlay-dialog"></div></div></div></div>
+    <!-- built files will be auto injected -->
+    <link rel="stylesheet" href="https://r.huaweistatic.com/s/ascendstatic/lst/js/animate.min.css" integrity="sha384-Gu3KVV2H9d+yA4QDpVB7VcOyhJlAVrcXd0thEjr4KznfaFPLe0xQJyonVxONa4ZC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://r.huaweistatic.com/s/ascendstatic/lst/js/photoswipe.css" integrity="sha384-pHxDhcd+x1/i3W3UkHyKhEJUAJu5VoAas6WdB/6FTYsQm759QyPTwvRqvKHPzojj" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://r.huaweistatic.com/s/ascendstatic/lst/js/default-skin.css" integrity="sha384-l1SztmGx0+dLuv3KaKXY/qdp4TO8ofo0FIroHiVOpSu1r2oVzqwV6r1iLmHHyPk7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://r.huaweistatic.com/s/ascendstatic/lst/css/jquery-ui.min.css" integrity="sha384-VK/ia2DWrvtO05YDcbWI8WE3WciOH0RhfPNuRJGSa3dpAs5szXWQuCnPNv/yzpO4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://r.huaweistatic.com/s/ascendstatic/lst/js/aos.css" integrity="sha384-/rJKQnzOkEo+daG0jMjU1IwwY9unxt1NBw3Ef2fmOJ3PW/TfAg2KXVoWwMZQZtw9" crossorigin="anonymous">
+    <script src="https://r.huaweistatic.com/s/ascendstatic/lst/js/flexsearch.es5.min.js" integrity="sha384-Uw7GV6akjW5shTcVjsex8ez4alKXtHDchkjfGEoZWAZqb3C9HqEexE/CWgmQXUkq" crossorigin="anonymous"></script>
+    <script src="https://r.huaweistatic.com/s/ascendstatic/lst/js/clipboard.min.js" integrity="sha384-Exdl7hU074DIu0FDUo/yWzxSmUwkPA3JUnxKitQvJKlrEJJON8FoNTh8xVJqwEBR" crossorigin="anonymous"></script>
+    <script src="https://r.huaweistatic.com/s/ascendstatic/lst/js/base64.min.js" integrity="sha384-PbaWsrMeyjHvYiV69WCSfzXyD2v9oFaIjI1FWVQ1B6vt+DZSzSP51VxE4vE5J+up" crossorigin="anonymous"></script>
+    <script src="https://r.huaweistatic.com/s/ascendstatic/lst/js/photoswipe.min.js" integrity="sha384-jkeJ/ETDRD/P4Y3I3CQi1QIwrEJjR9GdAZV2/aqDwwgA5ldCNiExYJeBwKyQC/+q" crossorigin="anonymous"></script>
+    <script src="https://r.huaweistatic.com/s/ascendstatic/lst/js/photoswipe-ui-default.min.js" integrity="sha384-HotcxRWS6/oszHPwknjGnd066fV8+ycnO5TXDcOscFWvTtaiCtEEv+9s5Qrn1iJD" crossorigin="anonymous"></script>
+
+  
+
+</body></html>

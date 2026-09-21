@@ -1,0 +1,8 @@
+"vendor_id","vendor_name","country_or_region","review_status","notes"
+"VEN-NVIDIA","NVIDIA","美国","approved","目标产品线"
+"VEN-GOOGLE","Google","美国","approved","Google TPU 目标产品线"
+"VEN-AWS","Amazon Web Services","美国","approved","AWS Trainium 与 Inferentia 目标产品线"
+"VEN-GROQ","Groq","美国","approved","Groq LPU 目标产品线"
+"VEN-CAMBRICON","寒武纪","中国","approved","思元 MLU 目标产品线"
+"VEN-HUAWEI","华为","中国","approved","华为昇腾目标产品线"
+"VEN-AMD","AMD","美国","approved","AMD Instinct 目标产品线"

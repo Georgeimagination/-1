@@ -1,0 +1,2 @@
+"source_family_id","canonical_title","family_kind","publisher_or_organization","persistent_work_id","review_status","notes"
+"SFAM-CAMBRICON-MLU-OPS-REPOSITORY","Cambricon MLU-OPS repository","document_revision_series","Cambricon","github:Cambricon/mlu-ops","reviewed","Official source-code repository; each cited source version must be fixed to a commit."

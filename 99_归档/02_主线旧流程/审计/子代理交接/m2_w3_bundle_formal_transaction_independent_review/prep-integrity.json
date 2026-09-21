@@ -1,0 +1,19 @@
+{
+    "status":  "in_progress",
+    "review_scope":  "bundle_formal_transaction_independent_review",
+    "prep_manifest_sha256":  "efdb763a24c0e97fd483735bba5d68dd01f0768553f963988436efa933ebbaba",
+    "prep_package_aggregate":  "package_aggregate_sha256=958e1b5106b6c42ae116fe643b3b8ec63a190cc20951654380d86c45a2ad332f;manifest_sha256=efdb763a24c0e97fd483735bba5d68dd01f0768553f963988436efa933ebbaba;manifest_rows=75;in_aggregate_rows=75",
+    "expected_manifest_sha256":  "efdb763a24c0e97fd483735bba5d68dd01f0768553f963988436efa933ebbaba",
+    "expected_package_aggregate":  "958e1b5106b6c42ae116fe643b3b8ec63a190cc20951654380d86c45a2ad332f",
+    "formal_preaggregate":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "candidate_postaggregate":  "5f62191bfc737535802cd6e0524b1fdf7a742ca36300db11b5a9233d4540052a",
+    "candidate_validation_checks":  125619,
+    "authorized_pk_rows":  1057,
+    "payload_files":  15,
+    "affected_tables":  20,
+    "guard_rows":  11,
+    "formal_writes_observed":  0,
+    "formal_payload_targets_present":  0,
+    "temporary_lock_files":  0,
+    "created_at":  "2026-08-13"
+}

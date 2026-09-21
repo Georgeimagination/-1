@@ -1,0 +1,2 @@
+PASS: 32-table research data model; 93179 checks executed.
+Registry: 323 columns, 488 enum values.

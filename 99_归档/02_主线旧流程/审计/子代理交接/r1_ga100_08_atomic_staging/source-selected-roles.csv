@@ -1,0 +1,8 @@
+"source_selected_role_id","source_id","selected_role","rationale","review_status","notes"
+"SROLE-R1-GA100-NVIDIA-GPU-MEM-ERROR-MGMT-DA-09826-002-V001-CORE_SPEC","SRC-NVIDIA-GPU-MEM-ERROR-MGMT-DA-09826-002-V001","core_spec","Role used by the provisional GA100 die selection run.","draft","Selection is provisional until formal merge and reverse-removal rerun."
+"SROLE-R1-GA100-NVIDIA-CUDA-C-PROGRAMMING-GUIDE-11-0-ARCHITECTURE_MECHANISM","SRC-NVIDIA-CUDA-C-PROGRAMMING-GUIDE-11-0","architecture_mechanism","Role used by the provisional GA100 die selection run.","draft","Selection is provisional until formal merge and reverse-removal rerun."
+"SROLE-R1-GA100-NVIDIA-PTX-ISA-7-0-ARCHITECTURE_MECHANISM","SRC-NVIDIA-PTX-ISA-7-0","architecture_mechanism","Role used by the provisional GA100 die selection run.","draft","Selection is provisional until formal merge and reverse-removal rerun."
+"SROLE-R1-GA100-NVIDIA-PTX-ISA-7-2-ARCHITECTURE_MECHANISM","SRC-NVIDIA-PTX-ISA-7-2","architecture_mechanism","Role used by the provisional GA100 die selection run.","draft","Selection is provisional until formal merge and reverse-removal rerun."
+"SROLE-R1-GA100-NVIDIA-MIG-USER-GUIDE-610-IDENTITY","SRC-NVIDIA-MIG-USER-GUIDE-610","identity","Role used by the provisional GA100 die selection run.","draft","Selection is provisional until formal merge and reverse-removal rerun."
+"SROLE-R1-GA100-NVIDIA-AMPERE-WP-CORE","SRC-M2NA-NVIDIA-AMPERE-WP-2020","core_spec","Direct GA100 identity, physical design, full-design component counts, media support, and implementation details.","draft","The existing architecture_mechanism role remains unchanged."
+

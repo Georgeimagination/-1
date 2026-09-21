@@ -1,0 +1,6 @@
+"source_selected_role_id","source_id","selected_role","rationale","review_status","notes"
+"SROLE-M2W3-AMD-MI455X-PRODUCT-IDENTITY","SRC-M2W3-AMD-MI455X-PRODUCT-20260813","identity","Exact object name, family, SKU, launch-date field, current page identity and controlled announced-status context at cutoff.","draft","Launch date supports announced classification only; it is not availability evidence."
+"SROLE-M2W3-AMD-MI455X-PRODUCT-CORE","SRC-M2W3-AMD-MI455X-PRODUCT-20260813","core_spec","Unique L2, WGP, transistor and protocol-labeled product specs plus current rounded corroboration.","draft","Dynamic page is cited through the fixed snapshot."
+"SROLE-M2W3-AMD-MI455X-BROCHURE-CORE","SRC-M2W3-AMD-MI455X-BROCHURE-202607","core_spec","Exact theoretical-peak table, package die counts, host interconnect and RAS evidence.","draft","System statements on page 2 are excluded."
+"SROLE-M2W3-AMD-MI400-MODULE-PHYSICAL","SRC-M2W2-AMD-MI400-LANDING-20260813","core_spec","Unique single-MI455X CoWoS-L and 3D hybrid-bonded chiplet implementation statement.","draft","Helios values on the same page migrate zero facts."
+"SROLE-M2W3-AMD-CDNA5-RELATION","SRC-M2NA-AMD-CDNA5-WP","architecture_mechanism","Architecture-generation semantics reached only through OREL-AMD-MI455X-IMPLEMENTS-CDNA5.","draft","No CDNA 5 mechanism fact is copied into this package."

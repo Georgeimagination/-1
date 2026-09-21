@@ -1,0 +1,4 @@
+﻿SUBJECT-CONTRACT AUDIT: 1 issue(s); mode=audit.
+ - Subject contract order is not canonical: 数据/fields.csv:FIELD-PHY-CLOCK.allowed_subject_kinds='component;object'; expected='object;component'
+FAIL: 1 validation error(s); 97920 checks executed; subject_contract_mode=audit.
+ - Subject contract order is not canonical: 数据/fields.csv:FIELD-PHY-CLOCK.allowed_subject_kinds='component;object'; expected='object;component'

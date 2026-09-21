@@ -1,0 +1,4 @@
+manifest_rows=11
+manifest_validation=PASS
+payload_bytes=2750222
+header_bytes=15204

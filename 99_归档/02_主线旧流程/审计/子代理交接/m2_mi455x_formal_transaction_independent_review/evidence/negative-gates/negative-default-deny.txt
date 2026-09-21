@@ -1,0 +1,9 @@
+Current formal root is denied by default. Supply -AllowFormalRoot only after the formal backup and authorization are re
+ady.
+At Z:\scripts\Invoke-MI455XFormalTransaction.ps1:30 char:28
++     if (-not $Condition) { throw $Message }
++                            ~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Current formal ...tion are ready.:String) [], RuntimeException
+    + FullyQualifiedErrorId : Current formal root is denied by default. Supply -AllowFormalRoot only after the formal  
+   backup and authorization are ready.
+ 

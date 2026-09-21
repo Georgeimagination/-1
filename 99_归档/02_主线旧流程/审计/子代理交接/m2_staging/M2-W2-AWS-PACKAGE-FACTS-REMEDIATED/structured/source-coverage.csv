@@ -1,0 +1,2 @@
+﻿"coverage_id","covered_source_id","covering_source_id","coverage_scope","equivalence_status","rationale","reviewed_by","review_date","review_status","notes"
+"COV-M2W2-AWS-PKG-A10-BY-A07","SRC-M2-GA-A10","SRC-M2-GA-A07","selected_fact_set","fully_covered","A07 直接支持 A10 在本轮涉及的五条 package 事实，包括 NCv4 Vector/Scalar 各 1.2 TFLOPS；A10 对本轮不再不可替代。","m2_w2_aws_package_facts_remediation","2026-08-13","draft","只用于本轮 package selection；不得删除 A10 来源、endpoint 或既有架构断言。"

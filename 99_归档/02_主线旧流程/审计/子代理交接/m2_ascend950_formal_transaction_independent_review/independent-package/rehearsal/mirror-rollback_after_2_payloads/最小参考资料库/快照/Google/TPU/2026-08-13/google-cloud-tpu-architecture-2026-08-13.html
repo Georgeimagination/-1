@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Web extract snapshot: https://docs.cloud.google.com/tpu/docs/system-architecture-tpu-vm</title></head><body>
+<h1>Web extract snapshot</h1>
+<dl><dt>Source URL</dt><dd><a href="https://docs.cloud.google.com/tpu/docs/system-architecture-tpu-vm">https://docs.cloud.google.com/tpu/docs/system-architecture-tpu-vm</a></dd><dt>Access date</dt><dd>2026-08-13</dd><dt>Capture method</dt><dd>Codex web open rendered-text extract; not an upstream byte-identical response body.</dd></dl>
+<pre>TPU architecture  |  Google Cloud Documentation (https://docs.cloud.google.com/tpu/docs/system-architecture-tpu-vm)
+citeturn352view0 [wordlim: 200] Crawled: today; Content type: text/html; Source: open({"ref_id":"https://docs.cloud.google.com/tpu/docs/system-architecture-tpu-vm","lineno":null}); Total lines: 303
+L0: [Button: ]
+L1: 
+L2: cite0†Technology areas cite1†Cross-product tools L3: 
+L4: [Input: Search]
+L5: 
+L6: `/`
+L7: 
+L8: cite2†Console†console.cloud.google.com L9: 
+L10:   * English
+L11:   * Deutsch
+L12:   * Español
+L13:   * Español – América Latina
+L14:   * Français
+L15:   * Indonesia
+L16:   * Italiano
+L17:   * Português
+L18:   * Português – Brasil
+L19:   * עברית
+L20:   * 中文 – 简体
+L21:   * 中文 – 繁體
+L22:   * 日本語
+L23:   * 한국어
+L24: Sign in
+L25: 
+L26: cite3†Start free†console.cloud.google.com L27: 
+L28: cite4†Overview cite5†Guides cite6†Reference cite7†Samples cite8†Support cite9†Resources L29: 
+L30: [Input: Filter]
+L31: 
+L32: [Button: ]
+L33: 
+L34:   * Discover
+L35: 
+L36:   * TPU versions
+L37:   * Get started
+L38: 
+L39:   * Quickstarts
+L40: 
+L41:   * Reserve TPUs
+L42: 
+L43:     * cite10†Share a reservation L44: 
+L45:   * Create TPUs
+L46: 
+L47:   * Configure TPUs
+L48: 
+L49:   * Manage storage
+L50: 
+L51:   * Manage TPUs
+L52: 
+L53:   * Manage TPUs in All Capacity mode
+L54: 
+L55:     * cite11†All Capacity mode overview L56:     * cite12†Request an All Capacity mode reservation L57:     * cite13†View the topology and health of All Capacity mode TPUs L58:     * cite14†Report and repair faulty hosts in All Capacity mode L59:     * cite15†Manage maintenance events in All Capacity mode L60: 
+L61:   * Run workloads
+L62:   * Work with image datasets
+L63: 
+L64:     * cite16†Convert an image classification dataset for use with Cloud TPU L65: 
+L66:   * Optimize performance
+L67: 
+L68:   * Monitor and troubleshoot TPUs
+L69: 
+L70:   * ML Diagnostics platform
+L71: 
+L72:   * Profile TPUs
+L73: 
+L74:   * Cloud TPU API
+L75: 
+L76:   * Discover
+L77: 
+L78:     * cite17†TPU software versions L79:     * TPU versions
+L80: 
+L81:       * cite18†TPU v3 L82:       * cite19†TPU v2 L83: 
+L84:   * Get started
+L85:     * cite20†Set up a Google Cloud project L86:     * cite21†Create TPUs L87:     * cite22†Consume a reservation L88:     * cite23†Run JAX on Cloud TPU VM L89:     * cite24†Run PyTorch on Cloud TPU VM L90:     * cite25†Run JAX on Cloud TPU slices L91:     * cite26†Run PyTorch on Cloud TPU slices L92: 
+L93:   * Configure TPUs
+L94:     * cite27†Connect a TPU to a shared VPC network L95:     * cite28†Connect to a TPU VM without a public IP address L96:     * cite29†Configure networking and access L97:     * cite30†Encrypt a TPU VM boot disk with a CMEK L98:     * cite31†Use a cross-project service account L99:     * cite32†Attach durable block storage to a TPU VM L100:     * cite33†Connect to Cloud Storage buckets L101:     * cite34†Mount a Filestore instance on a TPU VM L102: 
+L103:   * Manage TPUs
+L104:     * cite35†Manage TPU resources L105:     * cite36†Manage queued resources L106:     * cite37†Request TPU Flex-start VMs L107:     * cite38†Manage TPU Spot VMs L108:     * cite39†Prepare for maintenance events L109:     * cite40†Autocheckpoint L110:     * cite41†View maintenance notifications L111:     * cite42†Manually start host maintenance L112:     * cite43†Preemptible TPUs L113: 
+L114:   * Run workloads
+L115: 
+L116:     * cite44†Train a model using v6e L117:     * cite45†Train a model using v5e L118:     * cite46†Scale ML workloads using Ray L119:     * cite47†Run TPU applications in a Docker container L120:   * Monitor and troubleshoot TPUs
+L121: 
+L122:     * cite48†Troubleshoot TPU VMs L123:     * cite49†Monitor TPU VMs L124:     * cite50†Dashboards for monitoring and logging L125:     * cite51†Troubleshoot TensorFlow models L126:     * cite52†Cloud TPU error glossary L127:     * cite53†Cloud TPU audit logs L128: 
+L129:   * Tutorials and notebooks
+L130: 
+L131:     * cite54†Train ResNet with PyTorch L132:     * cite55†MaxDiffusion inference on v6e L133:     * cite56†Notebooks L134: 
+L135: [Button: Send feedback ] Stay organized with collections Save and categorize content based on your preferences.
+L136: # TPU architecture
+L137: 
+L138: Tensor Processing Units (TPUs) are application specific integrated circuits (ASICs) designed by Google to accelerate machine learning workloads. You can use TPUs through Compute Engine, Google Kubernetes Engine, and Vertex AI.
+L139: 
+L140: TPUs are designed to perform matrix operations quickly making them ideal for machine learning workloads. You can run machine learning workloads on TPUs using frameworks such as cite57†PyTorch and cite58†JAX†jax.readthedocs.io .
+L141: ## How do TPUs work?
+L142: 
+L143: To understand how TPUs work, it helps to understand how other accelerators address the computational challenges of training ML models.
+L144: ### How a CPU works
+L145: 
+L146: A CPU is a general-purpose processor based on the cite59†von Neumann architecture†en.wikipedia.org . That means a CPU works with software and memory like this:
+L147: 
+L148: cite60†Image: An illustration of how a CPU works L149: 
+L150: Note: This animation is designed for conceptual presentation purpose only, and does not reflect the actual behavior of real processors.
+L151: The greatest benefit of CPUs is their flexibility. You can load any kind of software on a CPU for many different types of applications. For example, you can use a CPU for word processing on a PC, controlling rocket engines, executing bank transactions, or classifying images with a neural network.
+L152: A CPU loads values from memory, performs a calculation on the values and stores the result back in memory for every calculation. Memory access is slow when compared to the calculation speed and can limit the total throughput of CPUs. This is often referred to as the cite61†Von Neumann bottleneck†en.wikipedia.org .
+L153: ### How a GPU works
+L154: 
+L155: To gain higher throughput, GPUs contain thousands of cite62†Arithmetic Logic Units†en.wikipedia.org (ALUs) in a single processor. A modern GPU usually contains between 2,500–5,000 ALUs. The large number of processors means you can execute thousands of multiplications and additions simultaneously.
+L156: 
+L157: cite63†Image: An illustration of how a GPU works L158: 
+L159: Note: This animation is designed for conceptual presentation purpose only, and does not reflect the actual behavior of real processors.
+L160: This GPU architecture works well on applications with massive parallelism, such as matrix operations in a neural network. In fact, on a typical training workload for deep learning, a GPU can provide an order of magnitude higher throughput than a CPU.
+L161: But, the GPU is still a general-purpose processor that has to support many different applications and software. Therefore, GPUs have the same problem as CPUs. For every calculation in the thousands of ALUs, a GPU must access registers or shared memory to read operands and store the intermediate calculation results.
+L162: ### How a TPU works
+L163: 
+L164: Google designed Cloud TPUs as a matrix processor specialized for neural network workloads. TPUs can't run word processors, control rocket engines, or execute bank transactions, but they can handle massive matrix operations used in neural networks at fast speeds.
+L165: The primary task for TPUs is matrix processing, which is a combination of multiply and accumulate operations. TPUs contain thousands of multiply-accumulators that are directly connected to each other to form a large physical matrix. This is called a cite64†systolic array†en.wikipedia.org architecture. Cloud TPU v3, contain two systolic arrays of 128 x 128 ALUs, on a single processor.
+L166: The TPU host streams data into an infeed queue. The TPU loads data from the infeed queue and stores them in High Bandwidth Memory (HBM). When the computation is completed, the TPU loads the results into the outfeed queue. The TPU host then reads the results from the outfeed queue and stores them in the host's memory.
+L167: 
+L168: To perform the matrix operations, the TPU loads the parameters from HBM into the Matrix Multiplication Unit (MXU).
+L169: 
+L170: cite65†Image: An illustration of how a TPU loads parameters from memory L171: Then, the TPU loads data from HBM. As each multiplication is executed, the result is passed to the next multiply-accumulator. The output is the summation of all multiplication results between the data and parameters. No memory access is required during the matrix multiplication process.
+L172: 
+L173: cite66†Image: An illustration of how a TPU loads data from memory L174: 
+L175: As a result, TPUs can achieve a high-computational throughput on neural network calculations.
+L176: ## TPU system architecture
+L177: 
+L178: The following sections describe the key concepts of a TPU system. For more information about common machine learning terms, see cite67†Machine Learning Glossary†developers.google.com .
+L179: 
+L180: If you are new to Cloud TPU, check out the cite68†TPU documentation home page†cloud.google.com .
+L181: ### TPU chip
+L182: 
+L183: A TPU chip contains one or more TensorCores. The number of TensorCores depends on the version of the TPU chip. Each TensorCore consists of one or more matrix-multiply units (MXUs), a vector unit, and a scalar unit. For more information about TensorCores, see cite69†A Domain-Specific Supercomputer for Training Deep Neural Networks†dl.acm.org .
+L184: An MXU is composed of either 256 x 256 (TPU v6e and TPU7x) or 128 x 128 (TPU versions prior to v6e) multiply-accumulators in a cite64†systolic array†en.wikipedia.org . MXUs provide the bulk of the compute power in a TensorCore. Each MXU is capable of performing 16K multiply-accumulate operations per cycle. All multiplies take cite70†bfloat16†en.wikipedia.org inputs, but all accumulations are performed in FP32 number format.
+L185: The vector unit is used for general computation such as activations and softmax. The scalar unit is used for control flow, calculating memory addresses, and other maintenance operations.
+L186: ### TPU Pod
+L187: 
+L188: A TPU Pod is a contiguous set of TPUs grouped together over a specialized network. The number of TPU chips in a TPU Pod is dependent on the TPU version.
+L189: 
+L190: ### Slice
+L191: 
+L192: A slice is a collection of chips all located inside the same TPU Pod connected by high-speed inter-chip interconnects (ICI). Slices are described in terms of chips or TensorCores, depending on the TPU version.
+L193: ### Topology
+L194: 
+L195: The topology defines the physical arrangement of TPUs within a TPU slice. TPU slices have two-dimensional (2D) or three-dimensional (3D) topologies, depending on the TPU version. You specify a topology as the number of TPU chips in each dimension as follows:
+L196:   * 3D topologies: You define the topology as a 3-tuple (`{A}x{B}x{C}`), for example, `4x4x4`. The product of `{A}x{B}x{C}` defines the number of TPU chips in the slice. If you use a topology with more than 64 chips, the values you assign to `{A}`, `{B}`, and `{C}` must meet the following conditions:
+L197:     * `{A}`, `{B}`, and `{C}` must be multiples of four.
+L198:     * The assigned values must follow this pattern: `{A}` ≤ `{B}` ≤ `{C}`. For example, `4x4x8` or `8x8x8`.
+L199:   * 2D topologies: You define the topology as a 2-tuple (`{A}x{B}`), for example, `2x4`. The product of `{A}x{B}` defines the number of TPU chips in the slice.
+L200: A single-host topology refers to a topology with TPU chips from a single compute host. For example, for TPU7x, each host is connected to four chips. A `2x2x1` slice has four chips connected to a single host, so `2x2x1` is a single-host topology.
+L201: 
+L202: A multi-host topology refers to a topology with TPU chips from more than one compute host. For example, for TPU7x, `2x2x2` (eight chips from two hosts) and larger slices are multi-host topologies.
+L203: ### Multislice versus single slice
+L204: 
+L205: Multislice is a group of slices, extending TPU connectivity beyond the inter-chip interconnect (ICI) connections and leveraging the data-center network (DCN) for transmitting data beyond a slice. Data within each slice is still transmitted by ICI. Using this hybrid connectivity, Multislice enables parallelism across slices and lets you use a greater number of TPU cores for a single job than what a single slice can accommodate.
+L206: TPUs can be used to run a job either on a single slice or multiple slices. Refer to the cite71†Multislice introduction for more details.
+L207: ### TPU cube
+L208: 
+L209: A 4x4x4 topology of interconnected TPU chips. This is only applicable to 3D topologies (beginning with TPU v4).
+L210: ### SparseCore
+L211: SparseCores are dataflow processors that accelerate models using sparse operations. A primary use case is accelerating recommendation models, which rely heavily on embeddings. v5p and TPU7x have four SparseCores per chip, and v6e has two SparseCores per chip. For an in-depth explanation on how SparseCores can be used, see cite72†A deep dive into SparseCore for Large Embedding Models (LEM)†openxla.org . You control how the XLA compiler uses SparseCores using XLA flags.
+L212: For more information, see: cite73†TPU XLA flags†openxla.org .
+L213: ### Cloud TPU ICI resiliency
+L214: 
+L215: ICI resiliency helps improve fault tolerance of optical links and optical circuit switches (OCS) that connect TPUs between cite74†cubes . (ICI connections within a cube use copper links that are not impacted). ICI resiliency allows ICI connections to be routed around OCS and optical ICI faults. As a result, it improves the scheduling availability of TPU slices, with the trade-off of temporary degradation in ICI performance.
+L216: For Cloud TPU v4, v5p, and TPU7x, ICI resiliency is enabled by default for slices that are one cube or larger, for example:
+L217: 
+L218:   * v5p-128 when specifying accelerator type
+L219:   * 4x4x4 when specifying accelerator config
+L220: ### TPU versions
+L221: 
+L222: The exact architecture of a TPU chip depends on the TPU version that you use. Each TPU version also supports different slice sizes and configurations. For more information about the system architecture and supported configurations, see the following pages:
+L223:   * cite75†TPU7x (Ironwood) L224:   * cite76†TPU v6e L225:   * cite77†TPU v5p L226:   * cite78†TPU v5e L227:   * cite79†TPU v4 L228:   * cite18†TPU v3 L229:   * cite19†TPU v2 L230: Note: You can run the same code on different versions of TPUs as long as the TPUs have the same number of TensorCores or chips (for example, `v3-128` and `v4-128`). However, if you change to a TPU type with a larger or smaller number of TensorCores or chips, you will need to perform significant tuning and optimization. For more information, see cite80†Training on TPU Pods .
+L231: ## TPU cloud architecture
+L232: 
+L233: Google Cloud makes TPUs available as compute resources through TPU VMs. You can use TPUs for your workloads through Compute Engine, Google Kubernetes Engine, Vertex AI. The following sections describe key components of the TPU cloud architecture.
+L234: ### TPU VM architecture
+L235: 
+L236: The TPU VM architecture lets you directly connect to the VM physically connected to the TPU device using SSH. A TPU VM, also known as a worker, is a virtual machine running Linux that has access to the underlying TPUs. You have root access to the VM, so you can run arbitrary code. You can access compiler and runtime debug logs and error messages.
+L237: 
+L238: cite81†Image: The TPU VM architecture L239: ### Single host, multi host, and sub host
+L240: 
+L241: A TPU host is a VM that runs on a physical computer connected to TPU hardware. TPU workloads can use one or more host.
+L242: 
+L243: A single-host workload is limited to one TPU VM. A multi-host workload distributes training across multiple TPU VMs. A sub-host workload doesn't use all of the chips on a TPU VM.
+L244: ### TPU topology visualizer
+L245: 
+L246: The cite82†TPU topology visualizer†tpu-visualizer.uc.r.appspot.com is a tool that lets you visualize the physical layout of TPUs and their associated networking infrastructure within a physical data center. Use the tool to understand the physical infrastructure layout for different TPU generations and topologies.
+L247: ## What's next
+L248: 
+L249:   * cite83†Getting started guides L250:   * cite84†Tutorials L251: 
+L252: [Button: Send feedback ]
+L253: 
+L254: Except as otherwise noted, the content of this page is licensed under the cite85†Creative Commons Attribution 4.0 License†creativecommons.org , and code samples are licensed under the cite86†Apache 2.0 License†www.apache.org . For details, see the cite87†Google Developers Site Policies†developers.google.com . Java is a registered trademark of Oracle and/or its affiliates.
+L255: 
+L256: Last updated 2026-08-05 UTC.
+L257:   * ### Products and pricing
+L258: 
+L259:     * cite88†See all products†cloud.google.com L260:     * cite89†Google Cloud pricing†cloud.google.com L261:     * cite90†Google Cloud Marketplace†cloud.google.com L262:     * cite91†Contact sales†cloud.google.com L263:   * ### Support
+L264: 
+L265:     * cite92†Community forums†discuss.google.dev L266:     * cite93†Support†cloud.google.com L267:     * cite94†Release Notes L268:     * cite95†System status†status.cloud.google.com L269:   * ### Resources
+L270:     * cite96†GitHub†github.com L271:     * cite97†Getting Started with Google Cloud L272:     * cite98†Code samples L273:     * cite99†Cloud Architecture Center L274:     * cite100†Training and Certification†cloud.google.com L275:   * ### Engage
+L276: 
+L277:     * cite101†Blog†cloud.google.com L278:     * cite102†Events†cloud.google.com L279:     * cite103†X (Twitter)†x.com L280:     * cite104†Google Cloud on YouTube†www.youtube.com L281:     * cite105†Google Cloud Tech on YouTube†www.youtube.com L282:   * cite106†About Google†about.google L283:   * cite107†Privacy†policies.google.com L284:   * cite108†Site terms†policies.google.com L285:   * cite109†Google Cloud terms†cloud.google.com L286:   * cite110†Our third decade of climate action: join us†cloud.google.com L287:   * Sign up for the Google Cloud newsletter cite111†Subscribe†cloud.google.com L288: 
+L289:   * English
+L290:   * Deutsch
+L291:   * Español
+L292:   * Español – América Latina
+L293:   * Français
+L294:   * Indonesia
+L295:   * Italiano
+L296:   * Português
+L297:   * Português – Brasil
+L298:   * עברית
+L299:   * 中文 – 简体
+L300:   * 中文 – 繁體
+L301:   * 日本語
+L302:   * 한국어
+</pre>
+</body></html>

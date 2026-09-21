@@ -1,0 +1,2 @@
+"object_relation_id","subject_object_id","relation_type","object_object_id","relation_fingerprint","review_status","notes"
+"OREL-NVIDIA-GA100-IMPLEMENTS-AMPERE","OBJ-NVIDIA-GA100-DIE","implements_architecture","OBJ-NVIDIA-AMPERE-ARCH","OBJ-NVIDIA-GA100-DIE|implements_architecture|OBJ-NVIDIA-AMPERE-ARCH","draft","Architecture mechanisms are reused through this relation. Implementation-specific quantities remain on GA100 entities."

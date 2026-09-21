@@ -1,0 +1,23 @@
+{
+    "status":  "pass",
+    "checked_at":  "2026-08-13",
+    "checks":  1087,
+    "counts":  {
+                   "facts":  41,
+                   "assertions":  50,
+                   "requirements":  106,
+                   "completeness":  27,
+                   "sources":  4,
+                   "endpoints":  5,
+                   "search_logs":  53,
+                   "search_results":  212
+               },
+    "object_fact_counts":  {
+                               "die":  12,
+                               "ascend950pr":  16,
+                               "ascend950dt":  13
+                           },
+    "failures":  [
+
+                 ]
+}

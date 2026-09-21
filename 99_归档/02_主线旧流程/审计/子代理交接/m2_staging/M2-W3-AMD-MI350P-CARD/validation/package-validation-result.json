@@ -1,0 +1,14 @@
+{
+    "status":  "passed",
+    "checks":  1082,
+    "errors":  [
+
+               ],
+    "facts":  40,
+    "assertions":  49,
+    "requirements":  46,
+    "fact_subject_contract_mismatches":  0,
+    "requirement_target_contract_mismatches":  0,
+    "completeness_rows":  9,
+    "formal_baseline_files":  32
+}

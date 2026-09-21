@@ -1,0 +1,2 @@
+﻿"selection_run_id","scope_kind","scope_id","cutoff_date","algorithm_version","created_date","reviewer","status","review_status","notes"
+"SELRUN-M2W2-AMD-HELIOS-20260813","object","OBJ-AMD-HELIOS-72-MI455X","2026-08-12","manual-reverse-removal-v1","2026-08-13","m2_wave2_amd_helios_system","draft","draft","Manual reverse removal was rerun after Helios remediation. The three-source set remains minimal: CES is uniquely required for 3 AI exaflops and the dated early-look anchor; independent final sign-off remains pending."

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="880" viewBox="0 0 1280 880" role="img">
+<title>MLU590: verified software-visible resource scopes and physical specification boundaries</title>
+<defs><marker id="a" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0 0 L7 3.5 L0 7Z" fill="#687984"/></marker></defs>
+<rect width="1280" height="880" fill="white"/>
+<text x="35" y="39" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="27" font-weight="700" text-anchor="start" fill="#26333D">Cambricon MLU590 / Siyuan 590</text>
+<text x="35" y="70" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="17" font-weight="400" text-anchor="start" fill="#5C6770">Compiler capacities and source-code paths from reviewed sources; no physical floorplan is implied.</text>
+<rect x="35" y="110" width="270" height="590" rx="10" fill="#FFFFFF" stroke="#9AA3AA" stroke-width="2"/>
+<text x="55" y="142" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="18" font-weight="700" text-anchor="start" fill="#26333D">Product / external interfaces</text>
+<rect x="55" y="167" width="230" height="124" rx="10" fill="#EEF7FA" stroke="#387991" stroke-width="2"/>
+<text x="170" y="198" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="700" text-anchor="middle" fill="#26333D">Cloud AI training</text>
+<text x="170" y="229" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="17" font-weight="400" text-anchor="middle" fill="#26333D">MLUarch05</text>
+<text x="170" y="255" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="17" font-weight="400" text-anchor="middle" fill="#26333D">BANG v5.0 / mtp_592</text>
+<rect x="55" y="319" width="230" height="116" rx="10" fill="#F3F6EA" stroke="#637D38" stroke-width="2"/>
+<text x="170" y="351" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="19" font-weight="700" text-anchor="middle" fill="#26333D">Host PCIe interface</text>
+<text x="170" y="382" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="400" text-anchor="middle" fill="#26333D">Vendor states an upgrade</text>
+<text x="170" y="407" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="400" text-anchor="middle" fill="#26333D">Gen. / lanes: not established</text>
+<rect x="55" y="483" width="230" height="145" rx="10" fill="#FCF1F6" stroke="#AB5678" stroke-width="2"/>
+<text x="170" y="516" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="19" font-weight="700" text-anchor="middle" fill="#26333D">Global memory</text>
+<text x="170" y="547" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="400" text-anchor="middle" fill="#26333D">GDRAM address space</text>
+<text x="170" y="572" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="400" text-anchor="middle" fill="#26333D">Type / capacity / bandwidth</text>
+<text x="170" y="597" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="400" text-anchor="middle" fill="#26333D">not established for this SKU</text>
+<text x="55" y="671" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="17" font-weight="400" text-anchor="start" fill="#26333D">Board suffixes: H8 / M9</text>
+<rect x="330" y="110" width="610" height="590" rx="10" fill="#FFFFFF" stroke="#9AA3AA" stroke-width="2"/>
+<text x="350" y="142" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="19" font-weight="700" text-anchor="start" fill="#26333D">Cluster software resource scope</text>
+<text x="350" y="168" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#5C6770">Instance counts are queried at runtime.</text>
+<rect x="365" y="194" width="545" height="96" rx="10" fill="#FCF1F6" stroke="#AB5678" stroke-width="2"/>
+<text x="637" y="227" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="700" text-anchor="middle" fill="#26333D">Shared SRAM: 2,048 KiB per cluster</text>
+<text x="637" y="259" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="400" text-anchor="middle" fill="#26333D">Explicit buffers and cluster synchronization</text>
+<rect x="365" y="333" width="545" height="309" rx="10" fill="#FFFFFF" stroke="#9AA3AA" stroke-width="2"/>
+<text x="385" y="361" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="18" font-weight="700" text-anchor="start" fill="#26333D">Core software resource scope</text>
+<rect x="385" y="386" width="240" height="90" rx="10" fill="#FCF1F6" stroke="#AB5678" stroke-width="2"/>
+<text x="505" y="418" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="700" text-anchor="middle" fill="#26333D">NRAM: 512 KiB</text>
+<text x="505" y="448" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="15" font-weight="400" text-anchor="middle" fill="#26333D">Local data / intermediate results</text>
+<rect x="660" y="386" width="230" height="90" rx="10" fill="#FCF1F6" stroke="#AB5678" stroke-width="2"/>
+<text x="775" y="418" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="700" text-anchor="middle" fill="#26333D">WRAM: 512 KiB</text>
+<text x="775" y="448" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="15" font-weight="400" text-anchor="middle" fill="#26333D">Reformatted tensor operands</text>
+<rect x="385" y="537" width="505" height="81" rx="10" fill="#EEF7FA" stroke="#387991" stroke-width="2"/>
+<text x="637" y="568" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="700" text-anchor="middle" fill="#26333D">Vector and convolution calls</text>
+<text x="637" y="596" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="400" text-anchor="middle" fill="#26333D">NRAM operands/results; WRAM convolution operand</text>
+<path d="M505 290 L505 305 L653 305 L653 375 L505 375 L505 386" fill="none" stroke="#687984" stroke-width="2" marker-end="url(#a)" marker-start="url(#a)"/>
+<text x="662" y="322" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="15" font-weight="400" text-anchor="start" fill="#26333D">SRAM ↔ NRAM</text>
+<path d="M625 431 L660 431" fill="none" stroke="#687984" stroke-width="2" marker-end="url(#a)"/>
+<path d="M505 476 L505 537" fill="none" stroke="#687984" stroke-width="2" marker-end="url(#a)" marker-start="url(#a)"/>
+<path d="M775 476 L775 537" fill="none" stroke="#687984" stroke-width="2" marker-end="url(#a)"/>
+<path d="M285 556 L345 556 L345 242 L365 242" fill="none" stroke="#687984" stroke-width="2" marker-end="url(#a)" marker-start="url(#a)"/>
+<text x="395" y="672" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="400" text-anchor="start" fill="#5C6770">Target capacities shown before kernel-specific reserves.</text>
+<rect x="965" y="110" width="280" height="590" rx="10" fill="#FFFFFF" stroke="#9AA3AA" stroke-width="2"/>
+<text x="985" y="142" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="18" font-weight="700" text-anchor="start" fill="#26333D">Verified software paths</text>
+<rect x="985" y="178" width="240" height="230" rx="10" fill="#EEF7FA" stroke="#387991" stroke-width="2"/>
+<text x="1000" y="210" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="18" font-weight="700" text-anchor="start" fill="#26333D">Compute and transfers</text>
+<text x="1000" y="242" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="15" font-weight="400" text-anchor="start" fill="#26333D">FP16 / FP32 vector division</text>
+<text x="1000" y="270" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="15" font-weight="400" text-anchor="start" fill="#26333D">BF16 abs interface</text>
+<text x="1000" y="298" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="15" font-weight="400" text-anchor="start" fill="#26333D">TF32 selection conditions</text>
+<text x="1000" y="326" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="15" font-weight="400" text-anchor="start" fill="#26333D">NRAM → WRAM → conv</text>
+<text x="1000" y="354" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="15" font-weight="400" text-anchor="start" fill="#26333D">Gather / scatter interfaces</text>
+<text x="1000" y="382" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="15" font-weight="400" text-anchor="start" fill="#26333D">Peak: no value in these sources</text>
+<rect x="985" y="440" width="240" height="223" rx="10" fill="#FCF1F6" stroke="#AB5678" stroke-width="2"/>
+<text x="1000" y="472" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="18" font-weight="700" text-anchor="start" fill="#26333D">Cache-related evidence</text>
+<text x="1000" y="504" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="15" font-weight="400" text-anchor="start" fill="#26333D">L2 capacity query API</text>
+<text x="1000" y="530" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="15" font-weight="400" text-anchor="start" fill="#26333D">592-specific LLC test path</text>
+<text x="1000" y="556" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="15" font-weight="400" text-anchor="start" fill="#26333D">scmlock / scmunlock</text>
+<text x="1000" y="582" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="15" font-weight="400" text-anchor="start" fill="#26333D">scmnormal load modifiers</text>
+<text x="1000" y="608" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="15" font-weight="400" text-anchor="start" fill="#26333D">Capacity and topology</text>
+<text x="1000" y="634" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="15" font-weight="400" text-anchor="start" fill="#26333D">not established</text>
+<rect x="35" y="727" width="1210" height="112" rx="10" fill="#FFFFFF" stroke="#9AA3AA" stroke-width="2" stroke-dasharray="8 6"/>
+<text x="55" y="760" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="19" font-weight="700" text-anchor="start" fill="#26333D">Physical specifications unresolved in the reviewed sources</text>
+<text x="55" y="791" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="17" font-weight="400" text-anchor="start" fill="#26333D">Total cores / matrix shape / frequency / peak throughput / cache geometry / die count / process / package / power</text>
+<text x="55" y="817" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="17" font-weight="400" text-anchor="start" fill="#26333D">MLU-Link endpoints and bandwidth; external-memory type, capacity and stack count</text>
+<text x="35" y="862" font-family="Arial, Microsoft YaHei, SimHei, sans-serif" font-size="15" font-weight="400" text-anchor="start" fill="#5C6770">Arrows denote software copy / operand paths. Source mapping and limits are stated in the article figure caption.</text>
+</svg>

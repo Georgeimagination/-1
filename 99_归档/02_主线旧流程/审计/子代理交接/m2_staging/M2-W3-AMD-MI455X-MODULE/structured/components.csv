@@ -1,0 +1,6 @@
+"component_id","owner_object_id","parent_component_id","component_domain","component_type","canonical_label","review_status","notes"
+"COMP-M2W3-AMD-MI455X-WGP","OBJ-AMD-MI455X","","control","control","MI455X Work Group Processor configuration","draft","Product-scoped WGP identity for the published enabled count; CDNA 5 execution semantics remain on the architecture object."
+"COMP-M2W3-AMD-MI455X-MATRIX","OBJ-AMD-MI455X","","compute","matrix","MI455X published matrix peak paths","draft","Logical product aggregate for vendor-published matrix peaks; not an added physical block."
+"COMP-M2W3-AMD-MI455X-VECTOR","OBJ-AMD-MI455X","","compute","vector","MI455X published vector peak paths","draft","Logical product aggregate for vendor-published vector peaks; not an added physical block."
+"COMP-M2W3-AMD-MI455X-HBM4","OBJ-AMD-MI455X","","memory","memory_level","MI455X integrated HBM4 memory","draft","Product-local HBM4 capacity and peak nameplate bandwidth only."
+"COMP-M2W3-AMD-MI455X-L2","OBJ-AMD-MI455X","","memory","memory_level","MI455X L2 cache","draft","Product page publishes 192 MB; no MiB reinterpretation."

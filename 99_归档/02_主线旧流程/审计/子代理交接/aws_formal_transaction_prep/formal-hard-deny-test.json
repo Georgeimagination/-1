@@ -1,0 +1,11 @@
+{
+    "status":  "PASS",
+    "exit_code":  1,
+    "expected_denial_seen":  true,
+    "formal_tables_changed":  0,
+    "payload_targets_before":  0,
+    "payload_targets_after":  0,
+    "transaction_temps_before":  0,
+    "transaction_temps_after":  0,
+    "error_excerpt":  " "
+}

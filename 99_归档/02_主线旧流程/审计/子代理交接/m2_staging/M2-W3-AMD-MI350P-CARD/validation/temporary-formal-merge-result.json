@@ -1,0 +1,9 @@
+{
+    "status":  "passed",
+    "exit_code":  0,
+    "output":  [
+                   "PASS: 32-table research data model; 111343 checks executed; subject_contract_mode=gate.",
+                   "Registry: 324 columns, 488 enum values."
+               ],
+    "temporary_root":  "D:\\Workspace\\2026projects\\调研-训练推理芯片调研-资料汇总\\审计\\子代理交接\\m2_staging\\M2-W3-AMD-MI350P-CARD\\validation\\tmp-formal-merge"
+}

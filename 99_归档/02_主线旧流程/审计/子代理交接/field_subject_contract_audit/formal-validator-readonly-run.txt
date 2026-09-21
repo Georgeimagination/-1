@@ -1,0 +1,12 @@
+run_date=2026-08-13
+exit_code=0
+command=Validate-ResearchData.ps1 -RootPath <project-root>
+stdout:
+PASS: 32-table research data model; 93251 checks executed.
+Registry: 323 columns, 488 enum values.
+
+allowed_subject_kinds_reference_count=0
+target_check_source_lines:
+142:$targetColumns = @('object_id','component_id','link_id','object_relation_id','precision_path_id','capability_id','topology_id')
+146:$count = @($targetColumns | Where-Object { -not (Test-Empty $row.$_) }).Count
+148:if ($count -ne 1) { Add-ValidationError "Exactly one target is required: $tablePath" }

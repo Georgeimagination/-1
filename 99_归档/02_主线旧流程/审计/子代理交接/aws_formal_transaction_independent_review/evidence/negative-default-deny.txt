@@ -1,0 +1,9 @@
+Current formal root is denied by default. Supply -AllowFormalRoot only after the formal backup and authorization are re
+ady.
+At D:\Workspace\2026projects\调研-训练推理芯片调研-codex-v3\.tmp-aws-tx-review\p\Invoke-AwsFormalTransaction.ps1:30 char:28
++     if (-not $Condition) { throw $Message }
++                            ~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Current formal ...tion are ready.:String) [], RuntimeException
+    + FullyQualifiedErrorId : Current formal root is denied by default. Supply -AllowFormalRoot only after the formal  
+   backup and authorization are ready.
+ 

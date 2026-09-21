@@ -1,0 +1,2 @@
+"object_id","vendor_id","canonical_label","object_type","curator_slug","review_status","notes"
+"OBJ-NVIDIA-GA100-DIE","VEN-NVIDIA","NVIDIA GA100 die","die","nvidia-ga100-die","draft","Frozen subject is the full GA100 physical die design. A100 enabled products, packages, modules, cards, HBM stacks, and benchmark subjects are separate objects not created by this overlay."

@@ -1,0 +1,25 @@
+{
+    "checked_at":  "2026-08-13",
+    "status":  "passed",
+    "root_path":  "D:\\Workspace\\2026projects\\调研-训练推理芯片调研-资料汇总",
+    "temporary_root":  "D:\\Workspace\\2026projects\\调研-训练推理芯片调研-资料汇总\\审计\\子代理交接\\m2_mi455x_rebase\\.temporary-merge",
+    "current_baseline_table_count":  32,
+    "current_baseline_aggregate_before":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "signed_structured_rows":  242,
+    "source_file_binding_failures":  0,
+    "source_pk_failures":  0,
+    "current_formal_pk_conflicts":  0,
+    "copied_artifacts":  3,
+    "local_endpoint_files_copied":  69,
+    "temporary_table_count":  32,
+    "temporary_postmerge_aggregate":  "0d94c60e136fab58941ad8d1f6b5b55a4d2013a370c9a1dc938bd8005fa57bca",
+    "validator_exit_code":  0,
+    "validator_checks":  111040,
+    "validator_status":  "passed",
+    "current_baseline_aggregate_after":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "formal_static_after":  true,
+    "temporary_root_removed":  true,
+    "errors":  [
+
+               ]
+}

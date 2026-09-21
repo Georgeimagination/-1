@@ -1,0 +1,7 @@
+"gate_id","status","exit_code","expected_pattern","pattern_match","formal_aggregate_after","formal_targets_absent","source_status"
+"default-deny","PASS","1","denied by default","True","f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10","True","passed"
+"wrong-token","PASS","1","authorization token differs","True","f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10","True","passed"
+"pending-independent-signoff","PASS","1","reviewer identity differs","True","f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10","True","passed"
+"wrong-mirror-marker","PASS","1","marker content differs","True","f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10","True","passed"
+"preexisting-target","PASS","1","New-file target already exists","True","f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10","True","passed"
+"wrong-premerge-hash","PASS","1","TargetRoot formal aggregate differs","True","f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10","True","passed"

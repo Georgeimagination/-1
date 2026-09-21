@@ -1,0 +1,11 @@
+[
+  "01_compute",
+  "02_numeric",
+  "03_onchip",
+  "04_dram_36",
+  "04b_resource_balance",
+  "05_package",
+  "06_interconnect",
+  "07_control",
+  "08_power"
+]

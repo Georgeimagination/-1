@@ -1,0 +1,5 @@
+﻿"source_selected_role_id","source_id","selected_role","rationale","review_status","notes"
+"SROLE-M2W2-TRN2INST-S06-CORE","SRC-AWS-TRN2-S06","core_spec","实例配置、峰值、内存、拓扑和实例内互联的主要一手来源","draft","本包来源角色草案"
+"SROLE-M2W2-TRN2INST-S07-CORE","SRC-AWS-TRN2-S07","core_spec","trn2.3xlarge 配置和三实例 EFA 的动态产品页；2026-08-13 快照已固定","draft","本包来源角色草案"
+"SROLE-M2W2-TRN2INST-S09-STATUS","SRC-AWS-TRN2-S09","status_version_evidence","trn2.48xlarge 2024-12-03 正式可用的固定日期证据","draft","本包来源角色草案"
+"SROLE-M2W2-TRN2INST-S10-CONFLICT","SRC-AWS-TRN2-S10","conflict_evidence","2024 发布博客的 83.2 PFLOPS 稀疏历史口径，保留版本冲突","draft","本包来源角色草案"

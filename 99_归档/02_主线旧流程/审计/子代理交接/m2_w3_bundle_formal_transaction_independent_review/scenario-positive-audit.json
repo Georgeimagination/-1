@@ -1,0 +1,18 @@
+{
+    "status":  "passed",
+    "scenario":  "positive",
+    "executor_exit_code":  0,
+    "outcome":  "PASS",
+    "journal_rows":  72,
+    "lock_acquired_rows":  1,
+    "csv_commit_complete":  20,
+    "payload_commit_complete":  15,
+    "rollback_rows":  0,
+    "mirror_aggregate_after":  "5f62191bfc737535802cd6e0524b1fdf7a742ca36300db11b5a9233d4540052a",
+    "formal_aggregate_before":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "formal_aggregate_after":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "journal_sha256":  "cf34844b9e1517ca5215011e941408aa49a9440f3c3801405dfc883008fcf5f3",
+    "transaction_outcome_sha256":  "016f5cde074e16ebc82b6ed56d7f26030426fd5156b2f95f5fd0d528c6bcd509",
+    "console_sha256":  "e7df65fdffb2f095bacdad1094b646e87029a17b6b105ce1ee5ce1308951a3c5",
+    "formal_writes_performed":  0
+}

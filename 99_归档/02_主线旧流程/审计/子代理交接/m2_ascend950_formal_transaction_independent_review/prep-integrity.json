@@ -1,0 +1,17 @@
+{
+    "status":  "passed",
+    "review_status":  "in_progress",
+    "generated_at":  "2026-08-13",
+    "prep_manifest_sha256":  "91af02c00a0e75854473503628ba49c4c3b062ffaca25199486cdb01fcb7c316",
+    "prep_manifest_rows":  66,
+    "prep_in_aggregate_rows":  66,
+    "prep_duplicate_paths":  0,
+    "prep_missing_files":  0,
+    "prep_hash_mismatches":  0,
+    "prep_byte_mismatches":  0,
+    "prep_aggregate_sha256":  "a83dc6f86c06dc44daa70a76525f2ea2dc3e4047eca1e3b15bea09245f42d418",
+    "formal_table_count":  32,
+    "formal_aggregate_sha256":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "formal_expected_new_targets_existing":  0,
+    "formal_writes_performed":  0
+}

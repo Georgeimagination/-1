@@ -1,0 +1,13 @@
+{
+    "status":  "PASS",
+    "documents":  2,
+    "scene":  "engineering_transaction_review_handoff",
+    "report_humanizer_scans_passed":  2,
+    "protected_hashes_checked":  7,
+    "protected_hashes_missing":  0,
+    "counts_and_verdicts_preserved":  true,
+    "operator_event_count_preserved":  true,
+    "responsibility_subjects_clear":  true,
+    "formal_execution_nonclaim_preserved":  true,
+    "minimal_changes_after_review":  "none_required"
+}

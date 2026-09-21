@@ -1,0 +1,1810 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NeuronCore-v1 Architecture &#8212; AWS Neuron Documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/contentui.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../../_static/contentui.js"></script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <link rel="canonical" href="https://awsdocs-neuron.readthedocs-hosted.com/en/latest/general/arch/neuron-hardware/neuron-core-v1.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+      
+<style type="text/css">
+  ul.ablog-archive {
+    list-style: none;
+    overflow: auto;
+    margin-left: 0px;
+  }
+  ul.ablog-archive li {
+    float: left;
+    margin-right: 5px;
+    font-size: 80%;
+  }
+  ul.postlist a {
+    font-style: italic;
+  }
+  ul.postlist-style-disc {
+    list-style-type: disc;
+  }
+  ul.postlist-style-none {
+    list-style-type: none;
+  }
+  ul.postlist-style-circle {
+    list-style-type: circle;
+  }
+</style>
+
+  
+<!-- RTD Extra Head -->
+
+
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.com", "build_date": "2023-04-19T18:52:36Z", "builder": "sphinx", "canonical_url": null, "commit": "7e4a689e", "docroot": "/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-2", "language": "en", "page": "general/arch/neuron-hardware/neuron-core-v1", "programming_language": "py", "project": "awsdocs-neuron", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_book_theme", "user_analytics_code": "G-2Q13EGB80H", "version": "v2.9.1"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+
+
+<!-- end RTD <extrahead> -->
+<script async type="text/javascript" src="/_/static/javascript/readthedocs-addons.js"></script><meta name="readthedocs-project-slug" content="awsdocs-neuron" /><meta name="readthedocs-version-slug" content="v2.9.1" /><meta name="readthedocs-resolver-filename" content="/general/arch/neuron-hardware/neuron-core-v1.html" /><meta name="readthedocs-http-status" content="200" /></head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint">Neuron 2.9 is released! check <a class='reference internal' style='color:white;' href='https://awsdocs-neuron.readthedocs-hosted.com/en/latest/release-notes/index.html#latest-neuron-release'> What's New  </a> and <a class='reference internal' style='color:white;' href='https://awsdocs-neuron.readthedocs-hosted.com/en/latest/general/announcements/index.html'> Announcements  </a></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../_static/Site-Merch_Neuron-ML-SDK_Editorial.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">AWS Neuron Documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Overview
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../quick-start/docs-quicklinks.html">
+   Quick Links
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../quick-start/torch-neuron.html">
+   Get Started with PyTorch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../quick-start/tensorflow-neuron.html">
+   Get Started with TensorFlow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../quick-start/mxnet-neuron.html">
+   Get Started with MXNet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../quick-start/github-samples.html">
+   GitHub Samples
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../benchmarks/index.html">
+   Performance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../release-notes/index.html">
+   What’s New
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../announcements/index.html">
+   Announcements
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  ML Frameworks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../frameworks/torch/index.html">
+   PyTorch Neuron
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../frameworks/torch/torch-setup.html">
+     Pytorch Neuron Setup
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../frameworks/torch/training-torch-neuronx.html">
+     Training
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../frameworks/torch/torch-neuronx/tutorials/training/tutorials-training-torch-neuronx.html">
+       Tutorials
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+      <label for="toctree-checkbox-3">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/torch/torch-neuronx/tutorials/training/bert.html">
+         Hugging Face BERT Pretraining Tutorial
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/torch/torch-neuronx/tutorials/training/mlp.html">
+         Multi-Layer Perceptron Training Tutorial
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/torch/torch-neuronx/tutorials/training/finetune_hftrainer.html">
+         PyTorch Neuron for Trainium Hugging Face BERT MRPC task finetuning using Hugging Face Trainer API
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/torch/torch-neuronx/tutorials/training/finetune_t5.html">
+         Fine-tune T5 model on Trn1
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/torch/torch-neuronx/tutorials/training/megatron_lm_gpt.html">
+         Megatron-LM GPT Pretraining Tutorial
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/torch/torch-neuronx/tutorials/training/distributed_data_parallel.html">
+         Distributed Data Parallel Training Tutorial
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../neuron-customops/tutorials/customop-mlp-training.html">
+         Neuron Custom C++ Operators in MLP Training
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../frameworks/torch/torch-neuronx/additional-examples-training.html">
+       Additional Examples
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../frameworks/torch/torch-neuronx/api-reference-guide/training/index.html">
+       API Reference Guide
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../frameworks/torch/torch-neuronx/programming-guide/training/index.html">
+       Developer Guide
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../frameworks/torch/torch-neuronx/misc-training.html">
+       Misc
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../frameworks/torch/inference.html">
+     Inference
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../frameworks/torch/inference-torch-neuronx.html">
+       Inference with torch-neuronx (Inf2 &amp; Trn1)
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+      <label for="toctree-checkbox-5">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/torch/torch-neuronx/tutorials/inference/tutorials-torch-neuronx.html">
+         Tutorials
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/torch/torch-neuronx/additional-examples-inference-torch-neuronx.html">
+         Additional Examples
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/torch/torch-neuronx/api-reference-guide/inference/inference-api-guide-torch-neuronx.html">
+         API Reference Guide
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/torch/torch-neuronx/programming-guide/inference/index.html">
+         Developer Guide
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/torch/torch-neuronx/misc-inference-torch-neuronx.html">
+         Misc
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../frameworks/torch/inference-torch-neuron.html">
+       Inference with torch-neuron (Inf1)
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+      <label for="toctree-checkbox-6">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/torch/torch-neuron/tutorials/tutorials-inference-torch-neuron.html">
+         Tutorials
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/torch/torch-neuron/additional-examples-inference-torch-neuron.html">
+         Additional Examples
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/torch/torch-neuron/api-reference-guide-torch-neuron.html">
+         API Reference Guide
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/torch/torch-neuron/developer-guide-torch-neuron.html">
+         Developer Guide
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/torch/torch-neuron/misc-inference-torch-neuron.html">
+         Misc
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../frameworks/torch/guide-torch-neuron-vs-torch-neuronx-inference.html">
+       Comparison of
+       <span class="xref std std-ref">
+        torch-neuron
+       </span>
+       (
+       <span class="xref std std-ref">
+        Inf1
+       </span>
+       ) versus
+       <span class="xref std std-ref">
+        torch-neuronx
+       </span>
+       (
+       <span class="xref std std-ref">
+        Inf2
+       </span>
+       &amp;
+       <span class="xref std std-ref">
+        Trn1
+       </span>
+       ) for Inference
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../frameworks/tensorflow/index.html">
+   TensorFlow Neuron
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../frameworks/tensorflow/tensorflow-setup.html">
+     Tensorflow Neuron Setup
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../frameworks/tensorflow/inference.html">
+     Inference
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+    <label for="toctree-checkbox-8">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../frameworks/tensorflow/tensorflow-neuronx-inference.html">
+       Inference on Inf2 &amp; Trn1 (``tensorflow-neuronx``)
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+      <label for="toctree-checkbox-9">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/tensorflow/tensorflow-neuronx/tutorials/tutorials-tensorflow-neuronx.html">
+         Tutorials
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/tensorflow/tensorflow-neuronx/api-reference-guide.html">
+         API Reference Guide
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/tensorflow/tensorflow-neuronx/misc-tensorflow-neuronx.html">
+         Misc
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../frameworks/tensorflow/tensorflow-neuron-inference.html">
+       Inference on Inf1 (``tensorflow-neuron``)
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+      <label for="toctree-checkbox-10">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/tensorflow/tensorflow-neuron/tutorials/tutorials-tensorflow-neuron.html">
+         Tutorials
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/tensorflow/tensorflow-neuron/additional-examples.html">
+         Additional Examples
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/tensorflow/tensorflow-neuron/api-reference-guide.html">
+         API Reference Guide
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/tensorflow/tensorflow-neuron/misc-tensorflow-neuron.html">
+         Misc
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../frameworks/tensorflow/training.html">
+     Training
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../frameworks/mxnet-neuron/index.html">
+   Apache MXNet (Incubating)
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../frameworks/mxnet-neuron/mxnet-neuron-setup.html">
+     MXNet Neuron Setup
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../frameworks/mxnet-neuron/inference-mxnet-neuron.html">
+     Inference (mxnet-neuron)
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+    <label for="toctree-checkbox-12">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../frameworks/mxnet-neuron/tutorials/tutorials-mxnet-neuron.html">
+       Tutorials
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+      <label for="toctree-checkbox-13">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/mxnet-neuron/tutorials/tutorials-mxnet-computervision.html">
+         Computer Vision Tutorials
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/mxnet-neuron/tutorials/tutorials-mxnet-nlp.html">
+         Natural Language Processing (NLP) Tutorials
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/mxnet-neuron/tutorials/tutorials-mxnet-utilizing-neuron-capabilities.html">
+         Utilizing Neuron Capabilities Tutorials
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../frameworks/mxnet-neuron/api-reference-guide.html">
+       API Reference Guide
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../frameworks/mxnet-neuron/developer-guide.html">
+       Developer Guide
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../frameworks/mxnet-neuron/misc-mxnet-neuron.html">
+       Misc
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+      <label for="toctree-checkbox-14">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../frameworks/mxnet-neuron/troubleshooting-guide.html">
+         Troubleshooting Guide for Neuron Apache MXNet (Incubating)
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../release-notes/mxnet-neuron/mxnet-neuron.html">
+         What's New
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../release-notes/compiler/neuron-cc/neuron-cc-ops/neuron-cc-ops-mxnet.html">
+         Neuron Apache MXNet (Incubating) Supported operators
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  User Guide
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../neuron-runtime/index.html">
+   Neuron Runtime
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../neuron-runtime/api-reference-guide.html">
+     API Reference Guide
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+    <label for="toctree-checkbox-16">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../neuron-runtime/nrt-api-guide.html">
+       Runtime API
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../neuron-runtime/configuration-guide.html">
+     Configuration Guide
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
+    <label for="toctree-checkbox-17">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../neuron-runtime/nrt-configurable-parameters.html">
+       Runtime Configuration
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../neuron-runtime/misc-runtime.html">
+     Misc
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/>
+    <label for="toctree-checkbox-18">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../neuron-runtime/nrt-troubleshoot.html">
+       Troubleshooting on Inf1 and Trn1
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../neuron-runtime/faq.html">
+       FAQ
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../release-notes/runtime/aws-neuronx-runtime-lib/index.html">
+       Neuron Runtime Release Notes
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../release-notes/runtime/aws-neuronx-dkms/index.html">
+       Neuron Driver Release Notes
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../release-notes/runtime/aws-neuronx-collectives/index.html">
+       Neuron Collectives Release Notes
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../compiler/index.html">
+   Neuron Compiler
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/>
+  <label for="toctree-checkbox-19">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../compiler/neuronx-cc.html">
+     Neuron Compiler for Trn1 &amp; Inf2
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/>
+    <label for="toctree-checkbox-20">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../compiler/neuronx-cc/api-reference-guide.html">
+       API Reference Guide
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/>
+      <label for="toctree-checkbox-21">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../compiler/neuronx-cc/api-reference-guide/neuron-compiler-cli-reference-guide.html">
+         Neuron Compiler CLI Reference Guide
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../compiler/neuronx-cc/developer-guide.html">
+       Developer Guide
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/>
+      <label for="toctree-checkbox-22">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../appnotes/neuronx-cc/neuronx-cc-training-mixed-precision.html">
+         Mixed Precision and Performance-accuracy Tuning (
+         <code class="docutils literal notranslate">
+          <span class="pre">
+           neuronx-cc
+          </span>
+         </code>
+         )
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../compiler/neuronx-cc/misc-neuronx-cc.html">
+       Misc
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/>
+      <label for="toctree-checkbox-23">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../compiler/neuronx-cc/faq.html">
+         FAQ
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../release-notes/compiler/neuronx-cc/index.html">
+         What's New
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../compiler/neuron-cc.html">
+     Neuron Compiler for Inf1
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/>
+    <label for="toctree-checkbox-24">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../compiler/neuron-cc/api-reference-guide.html">
+       API Reference Guide
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/>
+      <label for="toctree-checkbox-25">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../compiler/neuron-cc/command-line-reference.html">
+         Neuron compiler CLI Reference Guide (
+         <code class="docutils literal notranslate">
+          <span class="pre">
+           neuron-cc
+          </span>
+         </code>
+         )
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../compiler/neuron-cc/developer-guide.html">
+       Developer Guide
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/>
+      <label for="toctree-checkbox-26">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../appnotes/neuron-cc/mixed-precision.html">
+         Mixed precision and performance-accuracy tuning (
+         <code class="docutils literal notranslate">
+          <span class="pre">
+           neuron-cc
+          </span>
+         </code>
+         )
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../compiler/neuron-cc/misc-neuron-cc.html">
+       Misc
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/>
+      <label for="toctree-checkbox-27">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../compiler/neuron-cc/faq.html">
+         FAQ
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../release-notes/compiler/neuron-cc/neuron-cc.html">
+         What's New
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../release-notes/compiler/neuron-cc/neuron-cc-ops/index.html">
+         Neuron Supported operators
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../neuron-customops/index.html">
+   Neuron C++ Custom Operators
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" type="checkbox"/>
+  <label for="toctree-checkbox-28">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../neuron-customops/api-reference-guide/api-reference-guide.html">
+     API Reference Guide
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" type="checkbox"/>
+    <label for="toctree-checkbox-29">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../neuron-customops/api-reference-guide/custom-ops-ref-guide.html">
+       Custom Operators API Reference Guide [Experimental]
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../neuron-customops/programming-guide/programming-guide.html">
+     Developer Guide
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" type="checkbox"/>
+    <label for="toctree-checkbox-30">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../neuron-customops/programming-guide/custom-c%2B%2B-operators-devguide.html">
+       Neuron Custom C++ Operators Developer Guide [Experimental]
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../neuron-customops/tutorials/tutorials.html">
+     Tutorials
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" type="checkbox"/>
+    <label for="toctree-checkbox-31">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../neuron-customops/tutorials/customop-mlp-training.html">
+       Neuron Custom C++ Operators in MLP Training
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../neuron-customops/misc-customops.html">
+     Misc (Neuron Custom C++ Operators)
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" type="checkbox"/>
+    <label for="toctree-checkbox-32">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../release-notes/customcxxps/gpsimd-tools.html">
+       Neuron Custom C++ Tools Release Notes
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../release-notes/customcxxps/gpsimd-customop-lib.html">
+       Neuron Custom C++ Library Release Notes
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../tools/index.html">
+   Neuron Tools
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-33" name="toctree-checkbox-33" type="checkbox"/>
+  <label for="toctree-checkbox-33">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../tools/neuron-sys-tools/index.html">
+     System Tools
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-34" name="toctree-checkbox-34" type="checkbox"/>
+    <label for="toctree-checkbox-34">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../tools/neuron-sys-tools/neuron-monitor-user-guide.html">
+       Neuron-Monitor User Guide
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../tools/neuron-sys-tools/neuron-top-user-guide.html">
+       Neuron-Top User Guide
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../tools/neuron-sys-tools/neuron-ls.html">
+       Neuron-LS User Guide
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../tools/neuron-sys-tools/neuron-sysfs-user-guide.html">
+       Neuron-Sysfs User Guide
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../release-notes/tools/aws-neuronx-tools.html">
+       What's New
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../tools/tensorboard/index.html">
+     TensorBoard
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-35" name="toctree-checkbox-35" type="checkbox"/>
+    <label for="toctree-checkbox-35">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../tools/tutorials/tutorial-tensorboard-scalars-mnist.html">
+       Track Training Progress in TensorBoard using PyTorch Neuron
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../tools/tensorboard/getting-started-tensorboard-neuronx-plugin.html">
+       TensorBoard Plugin for Neuron (Trn1)
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../release-notes/tools/tensorboard-neuron.html">
+       What's New
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../tools/tensorboard/getting-started-tensorboard-neuron-plugin.html">
+       TensorBoard Plugin for Neuron (Inf1)
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../tools/helper-tools/index.html">
+     Helper Tools
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-36" name="toctree-checkbox-36" type="checkbox"/>
+    <label for="toctree-checkbox-36">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../tools/helper-tools/tutorial-neuron-check-model.html">
+       Check Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../tools/helper-tools/tutorial-neuron-gatherinfo.html">
+       GatherInfo
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../tools/neuronperf/index.html">
+     NeuronPerf (Beta)
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-37" name="toctree-checkbox-37" type="checkbox"/>
+    <label for="toctree-checkbox-37">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../tools/neuronperf/neuronperf_overview.html">
+       Overview
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../tools/neuronperf/neuronperf_terminology.html">
+       Terminology
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../tools/neuronperf/neuronperf_examples.html">
+       Examples
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../tools/neuronperf/neuronperf_benchmark_guide.html">
+       Benchmark Guide
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../tools/neuronperf/neuronperf_evaluate_guide.html">
+       Evaluate Guide
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../tools/neuronperf/neuronperf_compile_guide.html">
+       Compile Guide
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../tools/neuronperf/neuronperf_model_index_guide.html">
+       Model Index Guide
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../tools/neuronperf/neuronperf_api.html">
+       API
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../tools/neuronperf/neuronperf_framework_notes.html">
+       Framework Notes
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../tools/neuronperf/neuronperf_faq.html">
+       FAQ
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../tools/neuronperf/neuronperf_troubleshooting.html">
+       Troubleshooting
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../tools/neuronperf/rn.html">
+       What’s New
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-38" name="toctree-checkbox-38" type="checkbox"/>
+      <label for="toctree-checkbox-38">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../release-notes/tools/neuronperf.html">
+         NeuronPerf 1.x Release Notes
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/index.html">
+   Setup Guide
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../containers/index.html">
+   Containers Deployment
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-39" name="toctree-checkbox-39" type="checkbox"/>
+  <label for="toctree-checkbox-39">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../containers/tutorials/training/tutorial-training.html">
+     Run training in Pytorch Neuron container
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../containers/tutorials/training/k8s_mlp_train_demo.html">
+     Deploy a simple mlp training script as a Kubernetes job
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../containers/tutorials/inference/tutorial-infer.html">
+     Run inference in pytorch neuron container
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../containers/tutorials/inference/k8s_rn50_demo.html">
+     Deploy a TensorFlow Resnet50 model as a Kubernetes service
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../containers/dlc-then-ec2-devflow.html">
+     Deploy Neuron Container on EC2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../containers/dlc-then-ecs-devflow.html">
+     Deploy  Neuron Container on Elastic Container Service (ECS)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../containers/dlc-then-eks-devflow.html">
+     Deploy  Neuron Container on Elastic Kubernetes Service (EKS)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../containers/container-sm-hosting-devflow.html">
+     Bring Your Own Neuron Container to Sagemaker Hosting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../containers/faq.html">
+     FAQ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../containers/troubleshooting.html">
+     Troubleshooting Neuron Containers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../release-notes/containers/neuron-containers.html">
+     Neuron Containers Release Notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../release-notes/containers/neuron-k8.html">
+     Neuron K8 Release Notes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../devflows/index.html">
+   Developer Flows
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-40" name="toctree-checkbox-40" type="checkbox"/>
+  <label for="toctree-checkbox-40">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../containers/index.html">
+     Deploy Containers with Neuron
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-41" name="toctree-checkbox-41" type="checkbox"/>
+    <label for="toctree-checkbox-41">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../containers/tutorials/training/tutorial-training.html">
+       Run training in Pytorch Neuron container
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../containers/tutorials/training/k8s_mlp_train_demo.html">
+       Deploy a simple mlp training script as a Kubernetes job
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../containers/tutorials/inference/tutorial-infer.html">
+       Run inference in pytorch neuron container
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../containers/tutorials/inference/k8s_rn50_demo.html">
+       Deploy a TensorFlow Resnet50 model as a Kubernetes service
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../containers/dlc-then-ec2-devflow.html">
+       Deploy Neuron Container on EC2
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../containers/dlc-then-ecs-devflow.html">
+       Deploy  Neuron Container on Elastic Container Service (ECS)
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../containers/dlc-then-eks-devflow.html">
+       Deploy  Neuron Container on Elastic Kubernetes Service (EKS)
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../containers/container-sm-hosting-devflow.html">
+       Bring Your Own Neuron Container to Sagemaker Hosting
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../containers/faq.html">
+       FAQ
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../containers/troubleshooting.html">
+       Troubleshooting Neuron Containers
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../release-notes/containers/neuron-containers.html">
+       Neuron Containers Release Notes
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../release-notes/containers/neuron-k8.html">
+       Neuron K8 Release Notes
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../devflows/inference/ec2-then-ec2-devflow.html">
+     Compile with Framework API and Deploy on EC2 Inf1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../devflows/inference/ec2-then-ec2-devflow-inf2.html">
+     Compile with Framework API and Deploy on EC2 Inf2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../devflows/training/ec2/ec2-training.html">
+     Train your model on EC2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../devflows/inference/dlc-then-eks-devflow.html">
+     Deploy  Neuron Container on Elastic Kubernetes Service (EKS)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../devflows/inference/dlc-then-ecs-devflow.html">
+     Deploy  Neuron Container on Elastic Container Service (ECS)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../devflows/inference/neo-then-hosting-devflow.html">
+     Compile with Sagemaker Neo and Deploy on Sagemaker Hosting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../devflows/inference/byoc-hosting-devflow.html">
+     Bring Your Own Neuron Container to Sagemaker Hosting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../devflows/training/sm-devflow/sm-training-devflow.html">
+     Train your model on SageMaker
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../devflows/training/parallelcluster/parallelcluster-training.html">
+     Train your model on ParallelCluster
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Learning Neuron
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../index.html">
+   Architecture
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-42" name="toctree-checkbox-42" type="checkbox"/>
+  <label for="toctree-checkbox-42">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="inf1-arch.html">
+     AWS Inf1 Architecture
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="trn1-arch.html">
+     AWS Trn1/Trn1n Architecture
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="inf2-arch.html">
+     AWS Inf2 Architecture
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="inferentia.html">
+     Inferentia Architecture
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="inferentia2.html">
+     Inferentia2 Architecture
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="trainium.html">
+     Trainium Architecture
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="neuroncores-arch.html">
+     AWS NeuronCore Architecture
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../model-architecture-fit.html">
+     Neuron Model Architecture Fit Guidelines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../glossary.html">
+     Neuron Glossary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../neuron-features/index.html">
+   Features
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-43" name="toctree-checkbox-43" type="checkbox"/>
+  <label for="toctree-checkbox-43">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../neuron-features/data-types.html">
+     Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../neuron-features/rounding-modes.html">
+     Rounding Modes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../neuron-features/neuroncore-batching.html">
+     Neuron Batching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../neuron-features/neuroncore-pipeline.html">
+     NeuronCore Pipeline
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../neuron-features/neuron-caching.html">
+     Neuron Persistent Cache
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../neuron-features/collective-communication.html">
+     Collective Communication
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../neuron-features/control-flow.html">
+     Neuron Control Flow
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../neuron-features/custom-c%2B%2B-operators.html">
+     Neuron Custom C++ Operators
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../neuron-features/dynamic-shapes.html">
+     Neuron Dynamic Shapes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../appnotes/index.html">
+   Application Notes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-44" name="toctree-checkbox-44" type="checkbox"/>
+  <label for="toctree-checkbox-44">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../announcements/neuron2.x/neuron2-intro.html">
+     Introducing first release of Neuron 2.x enabling EC2 Trn1 general availability (GA)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../appnotes/neuron1x/introducing-libnrt.html">
+     Introducing Neuron Runtime 2.x (libnrt.so)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../appnotes/perf/neuron-cc/performance-tuning.html">
+     Performance Tuning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../appnotes/perf/neuron-cc/parallel-ncgs.html">
+     Parallel Execution using NEURON_RT_NUM_CORES
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../appnotes/torch-neuron/rcnn-app-note.html">
+     Running R-CNNs on Inf1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../faq.html">
+   FAQ
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../troubleshooting.html">
+   Troubleshooting
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  About Neuron
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../release-notes/release.html">
+   Release Details
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../roadmap-readme.html">
+   Roadmap
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-45" name="toctree-checkbox-45" type="checkbox"/>
+  <label for="toctree-checkbox-45">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference external" href="https://github.com/orgs/aws-neuron/projects/1/views/1">
+     Neuron Public Roadmap
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../support.html">
+   Support
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-46" name="toctree-checkbox-46" type="checkbox"/>
+  <label for="toctree-checkbox-46">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../sdk-policy.html">
+     SDK Maintenance Policy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../security.html">
+     Security Disclosures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../contact.html">
+     Contact Us
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/aws-neuron/aws-neuron-sdk"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/aws-neuron/aws-neuron-sdk/issues/new?title=Issue%20on%20page%20%2Fgeneral/arch/neuron-hardware/neuron-core-v1.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/aws-neuron/aws-neuron-sdk/edit/v2.9.1/general/arch/neuron-hardware/neuron-core-v1.rst"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../../_sources/general/arch/neuron-hardware/neuron-core-v1.rst.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.rst</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>NeuronCore-v1 Architecture</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                 <p><em>This document is relevant for</em>: <code class="docutils literal notranslate"><span class="pre">Inf1</span></code></p>
+<div class="section" id="neuroncore-v1-architecture">
+<span id="neuroncores-v1-arch"></span><h1>NeuronCore-v1 Architecture<a class="headerlink" href="#neuroncore-v1-architecture" title="Permalink to this headline">#</a></h1>
+<p>NeuronCore-v1 is the first generation of the NeuronCore engine, powering
+the Inferentia NeuronDevices. Each NeuronCore-v1 is a fully-independent
+heterogenous compute-unit, with 3 main engines (Tensor/Vector/Scalar
+Engines), and on-chip software-managed SRAM memory, for
+maximizing data locality (compiler managed, for maximum data locality
+and optimized data prefetch).</p>
+<img alt="../../../_images/nc-v1.png" src="../../../_images/nc-v1.png" />
+<p>The ScalarEngine is optimized for scalar-computations, in which every
+element of the output is dependent on one element of the input, e.g.
+non-linearities like GELU, SIGMOID or EXP. The ScalarEngine is highly
+parallelized, and can process 512 floating point operations per cycle.
+It can handle various data-types, including FP16, BF16, FP32, INT8,
+INT16 and INT32.</p>
+<p>The VectorEngine is optimized for vector-computations,
+in which every element of the output is dependent on multiple input
+elements. Examples include ‘axpy’ operations (Z=aX+Y), Layer
+Normalization, Pooling operations, and many more. The VectorEngine is
+also highly parallelized, and can perform 256 floating point operations
+per cycle. It can handle various data-types, including FP16, BF16, FP32,
+INT8, INT16 and INT32.</p>
+<p>The TensorEngine is based on a power-optimized systolic-array which is
+highly optimized for tensor computations (e.g. GEMM, CONV, Reshape,
+Transpose), and supports mixed-precision computations (FP16/BF16/INT8
+inputs, FP32/INT32 outputs). Each NeuronCore-v1 TensorEngine delivers 16
+TFLOPS of FP16/BF16 tensor computations.</p>
+<p><em>This document is relevant for</em>: <code class="docutils literal notranslate"><span class="pre">Inf1</span></code></p>
+</div>
+
+<div class="section">
+   
+</div>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By AWS<br/>
+  
+      &copy; Copyright 2023, Amazon.com.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

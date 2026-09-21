@@ -1,0 +1,33 @@
+{
+    "source_pdf_occurrences":  108,
+    "unique_pdfs":  107,
+    "duplicates_removed":  1,
+    "v4_online_urls":  588,
+    "codex_online_urls":  326,
+    "online_url_overlap":  21,
+    "combined_online_urls":  893,
+    "pending_papers":  11,
+    "codex_source_records":  226,
+    "paper_inventory_records":  112,
+    "paper_inventory_downloaded":  101,
+    "platform_pdf_counts":  {
+                                "Google TPU":  25,
+                                "NVIDIA GPU":  65,
+                                "华为昇腾/达芬奇":  15,
+                                "Groq LPU":  2
+                            },
+    "category_pdf_counts":  {
+                                "Google TPU / 厂商直接架构论文":  13,
+                                "Google TPU / 独立逆向与微基准":  7,
+                                "Google TPU / 系统与性能补充":  5,
+                                "NVIDIA GPU / 厂商直接架构论文":  12,
+                                "NVIDIA GPU / 官方白皮书与技术资料":  11,
+                                "NVIDIA GPU / 独立逆向与微基准":  38,
+                                "NVIDIA GPU / 系统与性能补充":  4,
+                                "华为昇腾/达芬奇 / 厂商直接架构论文":  2,
+                                "华为昇腾/达芬奇 / 独立逆向与微基准":  8,
+                                "华为昇腾/达芬奇 / 系统与性能补充":  5,
+                                "Groq LPU / 厂商直接架构论文":  1,
+                                "Groq LPU / 官方白皮书与技术资料":  1
+                            }
+}

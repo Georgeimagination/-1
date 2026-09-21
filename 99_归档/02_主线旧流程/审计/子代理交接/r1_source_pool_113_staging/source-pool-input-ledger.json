@@ -1,0 +1,287 @@
+{
+  "schema_version": "source-pool-ledger-v2",
+  "purpose": "Reproduce the 113-PDF manifest and summary without scanning mutable sibling projects or paper inventory files.",
+  "mainline_root_marker": "02_主线调研-49款芯片资料库",
+  "formal_stable_input_directory": "清单/资料池受控输入",
+  "formal_ledger_relative_path": "清单/资料池受控输入/source-pool-input-ledger.json",
+  "manifest_columns": [
+    "平台",
+    "年份",
+    "资料类别",
+    "论文或资料标题",
+    "发表期刊或会议",
+    "主要作者",
+    "作者单位",
+    "DOI",
+    "来源链接",
+    "来源项目",
+    "源文件",
+    "汇总后文件",
+    "页数",
+    "文件大小_字节",
+    "SHA256",
+    "PDF解析"
+  ],
+  "formal_prewrite_guards": {
+    "runtime_guards": [
+      {
+        "relative_path": "清单/论文PDF清单.csv",
+        "allowed_sha256": [
+          "c8c43df658daa1671e32b5389e29a33cf5179c269ae56f29d9e95404cdb38b27",
+          "4df7c2212c827e34d3483f6021d7af5bf854f374d0000b42bc5d88d57316c1ab"
+        ],
+        "role": "Accept the 111-row legacy prestate for the first apply or the expected 113-row output for an idempotent replay."
+      },
+      {
+        "relative_path": "清单/汇总统计.json",
+        "allowed_sha256": [
+          "eee940c5b1fdaa871fe0f2ea734216136471db28a68f43ff10cfdc2602b41db7",
+          "994a4950577914114e66f195b3900f2d9f9bd1baf50ca62cb7d5b9bce1a4785e"
+        ],
+        "role": "Accept the legacy summary prestate for the first apply or the expected 113-PDF summary for an idempotent replay."
+      }
+    ],
+    "audit_only_observations": [
+      {
+        "relative_path": "清单/网页与在线资料.csv",
+        "sha256_at_ledger_creation": "f19991c731fcdca8e0dee65601a2637a5568bc1fde46b357757d19292aa1395f",
+        "role": "Unchanged online manifest at ledger creation. It is not read or hash-locked by this PDF/summary-only generator."
+      },
+      {
+        "relative_path": "清单/待补论文清单.csv",
+        "sha256_at_ledger_creation": "b5a5993c0a29364c5be3c2d6d35321e3150b5599913e3fafe887bff3a02307bd",
+        "role": "Unchanged pending manifest at ledger creation. It is not read or hash-locked by this PDF/summary-only generator."
+      }
+    ]
+  },
+  "frozen_legacy_pdf_manifest": {
+    "relative_path": "frozen-legacy-pdf-manifest.csv",
+    "sha256": "c8c43df658daa1671e32b5389e29a33cf5179c269ae56f29d9e95404cdb38b27",
+    "row_count": 111,
+    "source_pdf_occurrences": 112,
+    "unique_pdfs": 111,
+    "duplicates_removed": 1,
+    "total_bytes": 313921821,
+    "total_pages": 2210,
+    "provenance": "Byte-identical staging copy of the formal 111-row manifest before the 113-PDF repair. It is a frozen input, not a generated output."
+  },
+  "frozen_paper_inventory_summary": {
+    "paper_inventory_records": 112,
+    "paper_inventory_downloaded": 101,
+    "semantic_scope": "Historical paper inventory snapshot only; M2 product brochures are intentionally excluded.",
+    "current_mutable_input_observation": "codex-v3/.tmp/paper_inventory_final.json currently has 111 records and 100 downloaded records. It is not read by this generator and is not a replacement for the frozen summary."
+  },
+  "formal_source_registry": {
+    "runtime_validation": "selected_rows_only",
+    "runtime_inputs": {
+      "sources_csv": {
+        "relative_path": "最小参考资料库/sources.csv",
+        "primary_key": "source_id"
+      },
+      "source_endpoints_csv": {
+        "relative_path": "最小参考资料库/source-endpoints.csv",
+        "primary_key": "endpoint_id"
+      },
+      "selection_members_csv": {
+        "relative_path": "最小参考资料库/selection-members.csv",
+        "primary_key": "selection_member_id"
+      }
+    },
+    "creation_audit_observations": {
+      "sources_csv_sha256": "eee9a5dd3161d1fc83cbf141c3af930e87fbdef1cf1eb4dda3a13388837518eb",
+      "source_endpoints_csv_sha256": "e4984fef2846fbc299e93dd4573aa3252858848cd7eb7ecc42c4a0d7a249f7bd",
+      "selection_members_csv_sha256": "33489268f80d30d4b1d0063da8cb7a15e8ad0fe3d1f1c961bc19d41339dfbd30",
+      "note": "These three whole-file fingerprints record the ledger-creation observation only. Runtime accepts legitimate unrelated registry additions and validates only the two supplemental rows by ID and required fields."
+    }
+  },
+  "supplemental_pdfs": [
+    {
+      "source_id": "SRC-M2W3-AMD-MI455X-BROCHURE-202607",
+      "selection_member_id": "SELMEM-M2W3-AMD-MI455X-BROCHURE",
+      "local_endpoint_id": "END-M2W3-AMD-MI455X-BROCHURE-LOCAL",
+      "remote_endpoint_id": "END-M2W3-AMD-MI455X-BROCHURE-REMOTE",
+      "registry_contract": {
+        "source_required_fields": {
+          "source_id": "SRC-M2W3-AMD-MI455X-BROCHURE-202607",
+          "title": "AMD Instinct™ MI455X GPU",
+          "author_or_organization": "AMD",
+          "source_type": "product_brief",
+          "version_label": "LE-93204-00 07/26; PID 5158303",
+          "language": "en",
+          "source_authority": "first_party",
+          "source_status": "current",
+          "content_fingerprint": "sha256:6555fef1399a35f472e325dc61936d293e129735ec1e191d5fd0f3b6fa0c4208",
+          "review_status": "reviewed"
+        },
+        "local_endpoint_required_fields": {
+          "endpoint_id": "END-M2W3-AMD-MI455X-BROCHURE-LOCAL",
+          "source_id": "SRC-M2W3-AMD-MI455X-BROCHURE-202607",
+          "endpoint_type": "local_pdf",
+          "local_path": "论文/AMD_Instinct/02_厂商产品资料/2026_AMD_Instinct_MI455X_GPU_Brochure.pdf",
+          "sha256": "6555fef1399a35f472e325dc61936d293e129735ec1e191d5fd0f3b6fa0c4208",
+          "page_count": "2",
+          "mime_type": "application/pdf",
+          "is_preferred_endpoint": "true",
+          "accessibility_status": "accessible",
+          "review_status": "reviewed"
+        },
+        "remote_endpoint_required_fields": {
+          "endpoint_id": "END-M2W3-AMD-MI455X-BROCHURE-REMOTE",
+          "source_id": "SRC-M2W3-AMD-MI455X-BROCHURE-202607",
+          "endpoint_type": "pdf_direct",
+          "url": "https://www.amd.com/content/dam/amd/en/documents/products/accelerators/instinct/amd-instinct-mi455x_brochure.pdf",
+          "mime_type": "application/pdf",
+          "http_status": "200",
+          "is_preferred_endpoint": "false",
+          "accessibility_status": "accessible",
+          "review_status": "reviewed"
+        },
+        "selection_member_required_fields": {
+          "selection_member_id": "SELMEM-M2W3-AMD-MI455X-BROCHURE",
+          "source_id": "SRC-M2W3-AMD-MI455X-BROCHURE-202607",
+          "selected_role": "core_spec",
+          "review_status": "reviewed"
+        }
+      },
+      "fixed_candidate_path": "审计/子代理交接/m2_staging/M2-W3-AMD-MI455X-MODULE/fixed-candidates/amd-instinct-mi455x-brochure-2026-08-13.pdf",
+      "manifest_row": {
+        "平台": "AMD Instinct",
+        "年份": "2026",
+        "资料类别": "厂商产品资料",
+        "论文或资料标题": "AMD Instinct™ MI455X GPU",
+        "发表期刊或会议": "LE-93204-00 07/26; PID 5158303",
+        "主要作者": "AMD",
+        "作者单位": "AMD",
+        "DOI": "",
+        "来源链接": "https://www.amd.com/content/dam/amd/en/documents/products/accelerators/instinct/amd-instinct-mi455x_brochure.pdf",
+        "来源项目": "本项目 M2 第三波 AMD 工作包",
+        "源文件": "审计/子代理交接/m2_staging/M2-W3-AMD-MI455X-MODULE/fixed-candidates/amd-instinct-mi455x-brochure-2026-08-13.pdf",
+        "汇总后文件": "论文/AMD_Instinct/02_厂商产品资料/2026_AMD_Instinct_MI455X_GPU_Brochure.pdf",
+        "页数": "2",
+        "文件大小_字节": "659374",
+        "SHA256": "6555fef1399a35f472e325dc61936d293e129735ec1e191d5fd0f3b6fa0c4208",
+        "PDF解析": "通过"
+      }
+    },
+    {
+      "source_id": "SRC-M2W3-AMD-MI350P-BROCHURE-202605",
+      "selection_member_id": "SELMEM-M2W3-AMD-MI350P-BROCHURE",
+      "local_endpoint_id": "END-M2W3-AMD-MI350P-BROCHURE-LOCAL",
+      "remote_endpoint_id": "END-M2W3-AMD-MI350P-BROCHURE-REMOTE",
+      "registry_contract": {
+        "source_required_fields": {
+          "source_id": "SRC-M2W3-AMD-MI350P-BROCHURE-202605",
+          "title": "AMD Instinct™ MI350P PCIe® Card",
+          "author_or_organization": "AMD",
+          "source_type": "product_brief",
+          "version_label": "LE-93401-00 05/26",
+          "language": "en",
+          "source_authority": "first_party",
+          "source_status": "current",
+          "content_fingerprint": "sha256:a4e93edffc6c2a03668eef72b84d85e1d2586afb331c2228595d1549609afb29",
+          "review_status": "reviewed"
+        },
+        "local_endpoint_required_fields": {
+          "endpoint_id": "END-M2W3-AMD-MI350P-BROCHURE-LOCAL",
+          "source_id": "SRC-M2W3-AMD-MI350P-BROCHURE-202605",
+          "endpoint_type": "local_pdf",
+          "local_path": "论文/AMD_Instinct/02_厂商产品资料/2026_AMD_Instinct_MI350P_PCIe_Card_Brochure.pdf",
+          "sha256": "a4e93edffc6c2a03668eef72b84d85e1d2586afb331c2228595d1549609afb29",
+          "page_count": "2",
+          "mime_type": "application/pdf",
+          "is_preferred_endpoint": "true",
+          "accessibility_status": "accessible",
+          "review_status": "reviewed"
+        },
+        "remote_endpoint_required_fields": {
+          "endpoint_id": "END-M2W3-AMD-MI350P-BROCHURE-REMOTE",
+          "source_id": "SRC-M2W3-AMD-MI350P-BROCHURE-202605",
+          "endpoint_type": "pdf_direct",
+          "url": "https://www.amd.com/content/dam/amd/en/documents/epyc-business-docs/other/amd-instinct-mi350p-product-brochure.pdf",
+          "mime_type": "application/pdf",
+          "http_status": "200",
+          "is_preferred_endpoint": "false",
+          "accessibility_status": "accessible",
+          "review_status": "reviewed"
+        },
+        "selection_member_required_fields": {
+          "selection_member_id": "SELMEM-M2W3-AMD-MI350P-BROCHURE",
+          "source_id": "SRC-M2W3-AMD-MI350P-BROCHURE-202605",
+          "selected_role": "core_spec",
+          "review_status": "reviewed"
+        }
+      },
+      "fixed_candidate_path": "审计/子代理交接/m2_staging/M2-W3-AMD-MI350P-CARD/fixed-candidates/amd-instinct-mi350p-product-brochure-2026-08-13.pdf",
+      "manifest_row": {
+        "平台": "AMD Instinct",
+        "年份": "2026",
+        "资料类别": "厂商产品资料",
+        "论文或资料标题": "AMD Instinct™ MI350P PCIe® Card",
+        "发表期刊或会议": "LE-93401-00 05/26",
+        "主要作者": "AMD",
+        "作者单位": "AMD",
+        "DOI": "",
+        "来源链接": "https://www.amd.com/content/dam/amd/en/documents/epyc-business-docs/other/amd-instinct-mi350p-product-brochure.pdf",
+        "来源项目": "本项目 M2 第三波 AMD 工作包",
+        "源文件": "审计/子代理交接/m2_staging/M2-W3-AMD-MI350P-CARD/fixed-candidates/amd-instinct-mi350p-product-brochure-2026-08-13.pdf",
+        "汇总后文件": "论文/AMD_Instinct/02_厂商产品资料/2026_AMD_Instinct_MI350P_PCIe_Card_Brochure.pdf",
+        "页数": "2",
+        "文件大小_字节": "782486",
+        "SHA256": "a4e93edffc6c2a03668eef72b84d85e1d2586afb331c2228595d1549609afb29",
+        "PDF解析": "通过"
+      }
+    }
+  ],
+  "fixed_summary_fields": {
+    "v4_online_urls": 588,
+    "codex_online_urls": 326,
+    "online_url_overlap": 21,
+    "combined_online_urls": 893,
+    "pending_papers": 11,
+    "codex_source_records": 226
+  },
+  "expected_outputs": {
+    "manifest_relative_path": "清单/论文PDF清单.csv",
+    "manifest_sha256": "4df7c2212c827e34d3483f6021d7af5bf854f374d0000b42bc5d88d57316c1ab",
+    "summary_relative_path": "清单/汇总统计.json",
+    "summary_sha256": "994a4950577914114e66f195b3900f2d9f9bd1baf50ca62cb7d5b9bce1a4785e",
+    "row_count": 113,
+    "source_pdf_occurrences": 114,
+    "unique_pdfs": 113,
+    "duplicates_removed": 1,
+    "total_bytes": 315363681,
+    "total_pages": 2214,
+    "platform_pdf_counts": {
+      "Google TPU": 25,
+      "NVIDIA GPU": 65,
+      "华为昇腾/达芬奇": 15,
+      "Groq LPU": 2,
+      "AMD Instinct": 6
+    },
+    "category_pdf_counts": {
+      "Google TPU / 厂商直接架构论文": 13,
+      "Google TPU / 独立逆向与微基准": 7,
+      "Google TPU / 系统与性能补充": 5,
+      "NVIDIA GPU / 厂商直接架构论文": 12,
+      "NVIDIA GPU / 官方白皮书与技术资料": 11,
+      "NVIDIA GPU / 独立逆向与微基准": 38,
+      "NVIDIA GPU / 系统与性能补充": 4,
+      "华为昇腾/达芬奇 / 厂商直接架构论文": 2,
+      "华为昇腾/达芬奇 / 独立逆向与微基准": 8,
+      "华为昇腾/达芬奇 / 系统与性能补充": 5,
+      "Groq LPU / 厂商直接架构论文": 1,
+      "Groq LPU / 官方白皮书与技术资料": 1,
+      "AMD Instinct / 官方白皮书与技术资料": 4,
+      "AMD Instinct / 厂商产品资料": 2
+    }
+  },
+  "write_scope": {
+    "outputs": [
+      "清单/论文PDF清单.csv",
+      "清单/汇总统计.json"
+    ],
+    "preview_output_root_must_be_fully_disjoint_from_mainline": true,
+    "never_copy_or_rewrite_pdf_files": true,
+    "never_regenerate_online_or_pending_manifests": true
+  }
+}

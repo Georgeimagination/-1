@@ -1,0 +1,30 @@
+event_id,snapshot_id,action,access_date,result,failure_class,retry_path,notes
+CAPTURE-001,R1GA100-WEB-001,curl_follow_redirects_raw_html,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,Full HTML body plus complete redirect-header capture retained.
+CAPTURE-002,R1GA100-WEB-002,curl_follow_redirects_raw_html,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,Full HTML body plus complete redirect-header capture retained.
+CAPTURE-003,R1GA100-WEB-003,curl_follow_redirects_pdf,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,Original PDF bytes retained.
+CAPTURE-004,R1GA100-WEB-004,curl_follow_redirects_pdf,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,Original PDF bytes retained for internal version inspection.
+CAPTURE-005,R1GA100-WEB-005,curl_follow_redirects_pdf,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,Original PDF bytes retained for URL-vs-internal version inspection.
+CAPTURE-006,R1GA100-WEB-006,curl_follow_redirects_raw_html,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,Latest-path snapshot retained.
+CAPTURE-007,R1GA100-WEB-007,curl_follow_redirects_raw_html,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,Current supported-GPUs page retained.
+CAPTURE-008,R1GA100-WEB-008,curl_follow_redirects_pdf,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,Unversioned endpoint fixed through internal release and hash.
+CAPTURE-009,R1GA100-WEB-009,curl_follow_redirects_raw_html,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,Status-page snapshot retained.
+CAPTURE-010,R1GA100-WEB-010,curl_follow_redirects_raw_html,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,Infra 8.2 matrix snapshot retained.
+CAPTURE-011,R1GA100-WEB-011,curl_follow_redirects_raw_html,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,A100 types page retained.
+CAPTURE-012,R1GA100-WEB-012,curl_follow_redirects_raw_html,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,Live Migration feature page retained.
+CAPTURE-013,R1GA100-WEB-013,curl_follow_redirects_raw_html,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,Suspend-Resume feature page retained.
+CAPTURE-014,R1GA100-WEB-014,curl_follow_redirects_raw_html,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,MIG-Backed vGPU feature page retained.
+CAPTURE-015,R1GA100-WEB-015,curl_follow_redirects_raw_html,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,Scheduling Policies feature page retained.
+CAPTURE-016,R1GA100-WEB-016,curl_follow_redirects_pdf,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,Original versioned PDF bytes retained.
+CAPTURE-017,R1GA100-WEB-017,curl_follow_redirects_raw_html,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,PyTorch 20.06 page retained.
+CAPTURE-018,R1GA100-WEB-018,curl_follow_redirects_raw_html,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,PyTorch 20.07 page retained.
+CAPTURE-019,R1GA100-WEB-019,curl_follow_redirects_raw_html,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,TensorFlow 20.06 page retained.
+CAPTURE-020,R1GA100-WEB-020,curl_follow_redirects_raw_html,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,TensorFlow 20.07 page retained.
+CAPTURE-021,R1GA100-WEB-021,curl_follow_redirects_raw_html,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,CUDA 11.0 GA release-notes page retained.
+CAPTURE-022,R1GA100-WEB-022,curl_follow_redirects_raw_html,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,NCCL 2.7.6 release-notes page retained.
+CAPTURE-023,R1GA100-WEB-023,curl_follow_redirects_raw_html,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,cuDNN archive release-notes page retained.
+CAPTURE-024,R1GA100-WEB-024,curl_follow_redirects_raw_html,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,cuSPARSELt 0.0.1 guide retained.
+CAPTURE-025,R1GA100-WEB-025,curl_follow_redirects_raw_html,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,TensorRT final archive host retained after redirect.
+CAPTURE-026,R1GA100-WEB-026,curl_follow_redirects_raw_html,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,TensorRT final archive host retained after redirect.
+CAPTURE-027,R1GA100-WEB-027,curl_follow_redirects_raw_html,2026-08-21,captured_success,none,Re-run the requested URL and compare SHA-256,TensorRT final archive host retained after redirect.
+CAPTURE-028,R1GA100-REJECT-001,no_download_rejected_endpoint,2026-08-21,not_captured,rejected_by_scope,Do not retry unless scope changes,DGX system price cannot support GA100 die price.
+CAPTURE-029,R1GA100-REJECT-002,no_download_rejected_endpoint,2026-08-21,not_captured,rejected_by_scope,Do not retry unless scope changes,Forum reply is not a formal lifecycle source.

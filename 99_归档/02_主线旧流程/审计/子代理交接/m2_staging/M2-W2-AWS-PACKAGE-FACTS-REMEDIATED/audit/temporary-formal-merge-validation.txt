@@ -1,0 +1,3 @@
+PASS: 32-table research data model; 101048 checks executed.
+Registry: 323 columns, 488 enum values.
+Temporary formal merge passed; official validator exit=0; 32 formal table hashes unchanged; temporary directory removed.

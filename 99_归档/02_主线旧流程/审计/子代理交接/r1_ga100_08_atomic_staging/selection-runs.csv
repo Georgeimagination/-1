@@ -1,0 +1,3 @@
+"selection_run_id","scope_kind","scope_id","cutoff_date","algorithm_version","created_date","reviewer","status","review_status","notes"
+"SELRUN-GA100-DIE-20260821-PROVISIONAL","object","OBJ-NVIDIA-GA100-DIE","2026-08-21","reverse-removal-v1-staging","2026-08-21","r1_ga100_atomic_staging","draft","draft","Provisional overlay run. Rerun after payload copy, formal merge, assertion review, and any fact or source change."
+

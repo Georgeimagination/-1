@@ -1,0 +1,15 @@
+{
+    "status":  "passed",
+    "generated_at":  "2026-08-13",
+    "preflight_checks":  "9379",
+    "validator_checks":  111040,
+    "formal_baseline_aggregate":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "candidate_aggregate":  "0d94c60e136fab58941ad8d1f6b5b55a4d2013a370c9a1dc938bd8005fa57bca",
+    "write_tables":  19,
+    "write_rows":  242,
+    "payloads":  3,
+    "endpoint_files_copied":  69,
+    "posthash_manifest_sha256":  "7f9425cae6b74fc5af5e6c6fbb86815f339ff8ef3d112f0ad87bc0aab8f6d85f",
+    "formal_writes_performed":  0,
+    "target_aggregate_after":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10"
+}

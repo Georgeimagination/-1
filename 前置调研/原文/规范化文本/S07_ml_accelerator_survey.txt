@@ -1,0 +1,3637 @@
+# S07 规范化文本
+
+题名：Survey and Benchmarking of Machine Learning Accelerators
+固定版本：arXiv 1908.11348v1 / HPEC 2019
+原始网址：https://www.ll.mit.edu/r-d/publications/survey-and-benchmarking-machine-learning-accelerators
+全文网址：https://arxiv.org/pdf/1908.11348
+
+
+## 本地原文：原文/网页快照/S07_mit_metadata.html
+
+# 页面标题：Survey and benchmarking of machine learning accelerators | MIT Lincoln Laboratory
+MIT Lincoln Laboratory is open.
+## What Are You Searching For?
+- Our Impact
+- Research and Development 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Advanced Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Air, Missile, and Maritime Defense Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Air Traffic Control 
+
+ 
+ 
+
+ 
+ 
+ 
+ Biotechnology and Human Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Communication Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Cyber Security and Information Sciences 
+
+ 
+ 
+
+ 
+ 
+ 
+ Engineering 
+
+ 
+ 
+
+ 
+ 
+ 
+ Homeland Protection 
+
+ 
+ 
+
+ 
+ 
+ 
+ ISR Systems and Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Space Systems and Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Tactical Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Technology Office 
+
+ 
+ 
+
+ 
+ 
+ 
+ Projects 
+
+ 
+ 
+
+ 
+ 
+ 
+ Publications 
+
+ 
+ 
+
+ 
+ 
+ 
+ Datasets 
+
+ 
+ 
+
+ 
+ 
+ 
+ Staff Biographies 
+
+ 
+ 
+
+ 
+ 
+ 
+ Key Initiatives 
+
+ 
+ 
+
+ 
+ 
+ 
+ Civil Space Systems and Technology
+- Advanced Technology
+- Air, Missile, and Maritime Defense Technology
+- Air Traffic Control
+- Biotechnology and Human Systems
+- Communication Systems
+- Cyber Security and Information Sciences
+- Engineering
+- Homeland Protection
+- ISR Systems and Technology
+- Space Systems and Technology
+- Tactical Systems
+- Technology Office
+- Projects
+- Publications
+- Datasets
+- Staff Biographies
+- Key Initiatives
+- Civil Space Systems and Technology
+- Careers 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Benefits 
+
+ 
+ 
+
+ 
+ 
+ 
+ People and Culture 
+
+ 
+ 
+
+ 
+ 
+ 
+ Business Areas 
+
+ 
+ 
+
+ 
+ 
+ 
+ Student Opportunities 
+
+ 
+ 
+
+ 
+ 
+ 
+ Military Programs 
+
+ 
+ 
+
+ 
+ 
+ 
+ BROWSE ALL OPPORTUNITIES
+- Benefits
+- People and Culture
+- Business Areas
+- Student Opportunities
+- Military Programs
+- BROWSE ALL OPPORTUNITIES
+- Partner With Us 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Available Technologies 
+
+ 
+ 
+
+ 
+ 
+ 
+ Small Business Program 
+
+ 
+ 
+
+ 
+ 
+ 
+ Working with Lincoln Laboratory 
+
+ 
+ 
+
+ 
+ 
+ 
+ Government 
+
+ 
+ 
+
+ 
+ 
+ 
+ Academia & Not-for-Profits 
+
+ 
+ 
+
+ 
+ 
+ 
+ About Technology Transfer
+- Available Technologies
+- Small Business Program
+- Working with Lincoln Laboratory
+- Government
+- Academia & Not-for-Profits
+- About Technology Transfer
+- Outreach 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ STEM Programs 
+
+ 
+ 
+
+ 
+ 
+ 
+ Online STEM Courses 
+
+ 
+ 
+
+ 
+ 
+ 
+ Education Resources 
+
+ 
+ 
+
+ 
+ 
+ 
+ Community Giving
+- STEM Programs
+- Online STEM Courses
+- Education Resources
+- Community Giving
+- Visitor Information 
+
+ 
+ 
+
+ 
+ 
+ 
+ About 
+
+ 
+ 
+
+ 
+ 
+ 
+ News 
+
+ 
+ 
+
+ 
+ 
+ 
+ Newsletter 
+
+ 
+ 
+
+ 
+ 
+ 
+ Conferences & Events 
+
+ 
+ 
+
+ 
+ 
+ 
+ Contact Us
+- Visitor Information
+- About
+- News
+- Newsletter
+- Conferences & Events
+- Contact Us
+## Section navigation
+- Research and Development 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Advanced Technology 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Advanced Imager Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Advanced Materials and Microsystems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Laser Technology and Applications 
+
+ 
+ 
+
+ 
+ 
+ 
+ Quantum-Enabled Computation 
+
+ 
+ 
+
+ 
+ 
+ 
+ Integrated RF and Photonics 
+
+ 
+ 
+
+ 
+ 
+ 
+ Leadership 
+
+ 
+ 
+
+ 
+ 
+ 
+ Microsystems Prototyping Foundry 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Advanced Imaging Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Design 
+
+ 
+ 
+
+ 
+ 
+ 
+ Fabrication 
+
+ 
+ 
+
+ 
+ 
+ 
+ Fully Depleted Silicon-on-Insulator CMOS 
+
+ 
+ 
+
+ 
+ 
+ 
+ Gallium Nitride on Silicon 
+
+ 
+ 
+
+ 
+ 
+ 
+ Integrated Photonics Platforms  
+
+ 
+ 
+
+ 
+ 
+ 
+ Low-Temperature Additive Manufacturing of Glass 
+
+ 
+ 
+
+ 
+ 
+ 
+ Materials 
+
+ 
+ 
+
+ 
+ 
+ 
+ Microhydraulic Actuator Development 
+
+ 
+ 
+
+ 
+ 
+ 
+ Nanocomposite Inks for 3D Printing RF Devices 
+
+ 
+ 
+
+ 
+ 
+ 
+ Packaging Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Packaging 
+
+ 
+ 
+
+ 
+ 
+ 
+ Superconducting Integrated Circuits 
+
+ 
+ 
+
+ 
+ 
+ 
+ Test 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Air, Missile, and Maritime Defense Technology 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Advanced Concepts and Technologies 
+
+ 
+ 
+
+ 
+ 
+ 
+ Advanced Sensor Systems and Test Beds 
+
+ 
+ 
+
+ 
+ 
+ 
+ Advanced Undersea Systems and Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Integrated Missile Defense Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Interceptor and Sensor Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Systems and Architectures 
+
+ 
+ 
+
+ 
+ 
+ 
+ Leadership 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Air Traffic Control 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Air Traffic Control and Weather Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Transportation Safety and Resilience 
+
+ 
+ 
+
+ 
+ 
+ 
+ Leadership 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Biotechnology and Human Systems 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Biological and Chemical Technologies 
+
+ 
+ 
+
+ 
+ 
+ 
+ Counter–Weapons of Mass Destruction Systems 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Counter–Weapons of Mass Destruction Systems Leadership 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Human Resilience Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Human Health and Performance Systems 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Human Health and Performance Systems Leadership 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Leadership 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Communication Systems 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Communication Networks and Analysis 
+
+ 
+ 
+
+ 
+ 
+ 
+ Laser Communications 
+
+ 
+ 
+
+ 
+ 
+ 
+ Optical and Quantum Communications 
+
+ 
+ 
+
+ 
+ 
+ 
+ Strategic and Long-Range Communications 
+
+ 
+ 
+
+ 
+ 
+ 
+ Tactical Edge Communications 
+
+ 
+ 
+
+ 
+ 
+ 
+ Tactical Satellite Communications 
+
+ 
+ 
+
+ 
+ 
+ 
+ Leadership 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Cyber Security and Information Sciences 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Artifical Intelligence Technology and Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Cyber-Physical Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Cyber Operations and Analysis Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Cyber System Assessments 
+
+ 
+ 
+
+ 
+ 
+ 
+ Lincoln Laboratory Supercomputing Center 
+
+ 
+ 
+
+ 
+ 
+ 
+ Secure Resilient Systems and Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Cyber Grand Challenge 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Final Event 
+
+ 
+ 
+
+ 
+ 
+ 
+ Qualifying Event 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ pMatlab 
+
+ 
+ 
+
+ 
+ 
+ 
+ Leadership 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Engineering 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Software and Electronics Engineering 
+
+ 
+ 
+
+ 
+ 
+ 
+ Fabrication Engineering 
+
+ 
+ 
+
+ 
+ 
+ 
+ Mechanical Engineering 
+
+ 
+ 
+
+ 
+ 
+ 
+ Optical Engineering 
+
+ 
+ 
+
+ 
+ 
+ 
+ Rapid Prototyping 
+
+ 
+ 
+
+ 
+ 
+ 
+ Structural and Thermal-Fluids Engineering 
+
+ 
+ 
+
+ 
+ 
+ 
+ Systems Engineering 
+
+ 
+ 
+
+ 
+ 
+ 
+ Leadership 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Homeland Protection 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Homeland Decision Support Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Energy Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Homeland Protection Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Homeland Sensors and Analytics 
+
+ 
+ 
+
+ 
+ 
+ 
+ Leadership 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ ISR Systems and Technology 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Active Optical Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Airborne Radar Systems and Techniques 
+
+ 
+ 
+
+ 
+ 
+ 
+ Embedded and Open Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ ISR Systems and Architectures 
+
+ 
+ 
+
+ 
+ 
+ 
+ Leadership 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Space Systems and Technology 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Advanced Capabilities and Technologies 
+
+ 
+ 
+
+ 
+ 
+ 
+ Advanced Sensors and Techniques 
+
+ 
+ 
+
+ 
+ 
+ 
+ Applied Space Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Space Tactics and Test 
+
+ 
+ 
+
+ 
+ 
+ 
+ Integrated Systems and Concepts 
+
+ 
+ 
+
+ 
+ 
+ 
+ Space Systems Analysis and Test 
+
+ 
+ 
+
+ 
+ 
+ 
+ Leadership 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Tactical Systems 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Advanced Capabilities and Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Tactical Defense Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Systems and Analysis 
+
+ 
+ 
+
+ 
+ 
+ 
+ Leadership 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Technology Office 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Mission Critical Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Technology Office Challenges 
+
+ 
+ 
+
+ 
+ 
+ 
+ Technology Office Leadership 
+
+ 
+ 
+
+ 
+ 
+ 
+ Emerging Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Innovation and Collaboration 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Projects 
+
+ 
+ 
+
+ 
+ 
+ 
+ Publications 
+
+ 
+ 
+
+ 
+ 
+ 
+ Datasets 
+
+ 
+ 
+
+ 
+ 
+ 
+ Staff Biographies 
+
+ 
+ 
+
+ 
+ 
+ 
+ Key Initiatives 
+
+ 
+ 
+
+ 
+ 
+ 
+ Civil Space Systems and Technology
+- Advanced Technology 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Advanced Imager Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Advanced Materials and Microsystems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Laser Technology and Applications 
+
+ 
+ 
+
+ 
+ 
+ 
+ Quantum-Enabled Computation 
+
+ 
+ 
+
+ 
+ 
+ 
+ Integrated RF and Photonics 
+
+ 
+ 
+
+ 
+ 
+ 
+ Leadership 
+
+ 
+ 
+
+ 
+ 
+ 
+ Microsystems Prototyping Foundry 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Advanced Imaging Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Design 
+
+ 
+ 
+
+ 
+ 
+ 
+ Fabrication 
+
+ 
+ 
+
+ 
+ 
+ 
+ Fully Depleted Silicon-on-Insulator CMOS 
+
+ 
+ 
+
+ 
+ 
+ 
+ Gallium Nitride on Silicon 
+
+ 
+ 
+
+ 
+ 
+ 
+ Integrated Photonics Platforms  
+
+ 
+ 
+
+ 
+ 
+ 
+ Low-Temperature Additive Manufacturing of Glass 
+
+ 
+ 
+
+ 
+ 
+ 
+ Materials 
+
+ 
+ 
+
+ 
+ 
+ 
+ Microhydraulic Actuator Development 
+
+ 
+ 
+
+ 
+ 
+ 
+ Nanocomposite Inks for 3D Printing RF Devices 
+
+ 
+ 
+
+ 
+ 
+ 
+ Packaging Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Packaging 
+
+ 
+ 
+
+ 
+ 
+ 
+ Superconducting Integrated Circuits 
+
+ 
+ 
+
+ 
+ 
+ 
+ Test
+- Advanced Imager Technology
+- Advanced Materials and Microsystems
+- Laser Technology and Applications
+- Quantum-Enabled Computation
+- Integrated RF and Photonics
+- Leadership
+- Microsystems Prototyping Foundry 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Advanced Imaging Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Design 
+
+ 
+ 
+
+ 
+ 
+ 
+ Fabrication 
+
+ 
+ 
+
+ 
+ 
+ 
+ Fully Depleted Silicon-on-Insulator CMOS 
+
+ 
+ 
+
+ 
+ 
+ 
+ Gallium Nitride on Silicon 
+
+ 
+ 
+
+ 
+ 
+ 
+ Integrated Photonics Platforms  
+
+ 
+ 
+
+ 
+ 
+ 
+ Low-Temperature Additive Manufacturing of Glass 
+
+ 
+ 
+
+ 
+ 
+ 
+ Materials 
+
+ 
+ 
+
+ 
+ 
+ 
+ Microhydraulic Actuator Development 
+
+ 
+ 
+
+ 
+ 
+ 
+ Nanocomposite Inks for 3D Printing RF Devices 
+
+ 
+ 
+
+ 
+ 
+ 
+ Packaging Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Packaging 
+
+ 
+ 
+
+ 
+ 
+ 
+ Superconducting Integrated Circuits 
+
+ 
+ 
+
+ 
+ 
+ 
+ Test
+- Advanced Imaging Technology
+- Design
+- Fabrication
+- Fully Depleted Silicon-on-Insulator CMOS
+- Gallium Nitride on Silicon
+- Integrated Photonics Platforms
+- Low-Temperature Additive Manufacturing of Glass
+- Materials
+- Microhydraulic Actuator Development
+- Nanocomposite Inks for 3D Printing RF Devices
+- Packaging Technology
+- Packaging
+- Superconducting Integrated Circuits
+- Test
+- Air, Missile, and Maritime Defense Technology 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Advanced Concepts and Technologies 
+
+ 
+ 
+
+ 
+ 
+ 
+ Advanced Sensor Systems and Test Beds 
+
+ 
+ 
+
+ 
+ 
+ 
+ Advanced Undersea Systems and Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Integrated Missile Defense Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Interceptor and Sensor Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Systems and Architectures 
+
+ 
+ 
+
+ 
+ 
+ 
+ Leadership
+- Advanced Concepts and Technologies
+- Advanced Sensor Systems and Test Beds
+- Advanced Undersea Systems and Technology
+- Integrated Missile Defense Technology
+- Interceptor and Sensor Technology
+- Systems and Architectures
+- Air Traffic Control 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Air Traffic Control and Weather Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Transportation Safety and Resilience 
+
+ 
+ 
+
+ 
+ 
+ 
+ Leadership
+- Air Traffic Control and Weather Systems
+- Transportation Safety and Resilience
+- Biotechnology and Human Systems 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Biological and Chemical Technologies 
+
+ 
+ 
+
+ 
+ 
+ 
+ Counter–Weapons of Mass Destruction Systems 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Counter–Weapons of Mass Destruction Systems Leadership 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Human Resilience Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Human Health and Performance Systems 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Human Health and Performance Systems Leadership 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Leadership
+- Biological and Chemical Technologies
+- Counter–Weapons of Mass Destruction Systems 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Counter–Weapons of Mass Destruction Systems Leadership
+- Counter–Weapons of Mass Destruction Systems Leadership
+- Human Resilience Technology
+- Human Health and Performance Systems 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Human Health and Performance Systems Leadership
+- Human Health and Performance Systems Leadership
+- Communication Systems 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Communication Networks and Analysis 
+
+ 
+ 
+
+ 
+ 
+ 
+ Laser Communications 
+
+ 
+ 
+
+ 
+ 
+ 
+ Optical and Quantum Communications 
+
+ 
+ 
+
+ 
+ 
+ 
+ Strategic and Long-Range Communications 
+
+ 
+ 
+
+ 
+ 
+ 
+ Tactical Edge Communications 
+
+ 
+ 
+
+ 
+ 
+ 
+ Tactical Satellite Communications 
+
+ 
+ 
+
+ 
+ 
+ 
+ Leadership
+- Communication Networks and Analysis
+- Laser Communications
+- Optical and Quantum Communications
+- Strategic and Long-Range Communications
+- Tactical Edge Communications
+- Tactical Satellite Communications
+- Cyber Security and Information Sciences 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Artifical Intelligence Technology and Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Cyber-Physical Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Cyber Operations and Analysis Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Cyber System Assessments 
+
+ 
+ 
+
+ 
+ 
+ 
+ Lincoln Laboratory Supercomputing Center 
+
+ 
+ 
+
+ 
+ 
+ 
+ Secure Resilient Systems and Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Cyber Grand Challenge 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Final Event 
+
+ 
+ 
+
+ 
+ 
+ 
+ Qualifying Event 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ pMatlab 
+
+ 
+ 
+
+ 
+ 
+ 
+ Leadership
+- Artifical Intelligence Technology and Systems
+- Cyber-Physical Systems
+- Cyber Operations and Analysis Technology
+- Cyber System Assessments
+- Lincoln Laboratory Supercomputing Center
+- Secure Resilient Systems and Technology
+- Cyber Grand Challenge 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Final Event 
+
+ 
+ 
+
+ 
+ 
+ 
+ Qualifying Event
+- Final Event
+- Qualifying Event
+- pMatlab
+- Engineering 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Software and Electronics Engineering 
+
+ 
+ 
+
+ 
+ 
+ 
+ Fabrication Engineering 
+
+ 
+ 
+
+ 
+ 
+ 
+ Mechanical Engineering 
+
+ 
+ 
+
+ 
+ 
+ 
+ Optical Engineering 
+
+ 
+ 
+
+ 
+ 
+ 
+ Rapid Prototyping 
+
+ 
+ 
+
+ 
+ 
+ 
+ Structural and Thermal-Fluids Engineering 
+
+ 
+ 
+
+ 
+ 
+ 
+ Systems Engineering 
+
+ 
+ 
+
+ 
+ 
+ 
+ Leadership
+- Software and Electronics Engineering
+- Fabrication Engineering
+- Mechanical Engineering
+- Optical Engineering
+- Rapid Prototyping
+- Structural and Thermal-Fluids Engineering
+- Systems Engineering
+- Homeland Protection 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Homeland Decision Support Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Energy Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Homeland Protection Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Homeland Sensors and Analytics 
+
+ 
+ 
+
+ 
+ 
+ 
+ Leadership
+- Homeland Decision Support Systems
+- Energy Systems
+- Homeland Protection Systems
+- Homeland Sensors and Analytics
+- ISR Systems and Technology 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Active Optical Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Airborne Radar Systems and Techniques 
+
+ 
+ 
+
+ 
+ 
+ 
+ Embedded and Open Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ ISR Systems and Architectures 
+
+ 
+ 
+
+ 
+ 
+ 
+ Leadership
+- Active Optical Systems
+- Airborne Radar Systems and Techniques
+- Embedded and Open Systems
+- ISR Systems and Architectures
+- Space Systems and Technology 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Advanced Capabilities and Technologies 
+
+ 
+ 
+
+ 
+ 
+ 
+ Advanced Sensors and Techniques 
+
+ 
+ 
+
+ 
+ 
+ 
+ Applied Space Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Space Tactics and Test 
+
+ 
+ 
+
+ 
+ 
+ 
+ Integrated Systems and Concepts 
+
+ 
+ 
+
+ 
+ 
+ 
+ Space Systems Analysis and Test 
+
+ 
+ 
+
+ 
+ 
+ 
+ Leadership
+- Advanced Capabilities and Technologies
+- Advanced Sensors and Techniques
+- Applied Space Systems
+- Space Tactics and Test
+- Integrated Systems and Concepts
+- Space Systems Analysis and Test
+- Tactical Systems 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Advanced Capabilities and Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Tactical Defense Systems 
+
+ 
+ 
+
+ 
+ 
+ 
+ Systems and Analysis 
+
+ 
+ 
+
+ 
+ 
+ 
+ Leadership
+- Advanced Capabilities and Systems
+- Tactical Defense Systems
+- Systems and Analysis
+- Technology Office 
+
+ 
+ 
+ Toggle menu section 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Mission Critical Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Technology Office Challenges 
+
+ 
+ 
+
+ 
+ 
+ 
+ Technology Office Leadership 
+
+ 
+ 
+
+ 
+ 
+ 
+ Emerging Technology 
+
+ 
+ 
+
+ 
+ 
+ 
+ Innovation and Collaboration
+- Mission Critical Technology
+- Technology Office Challenges
+- Technology Office Leadership
+- Emerging Technology
+- Innovation and Collaboration
+## Breadcrumb
+- MIT Lincoln Laboratory
+- R&D
+## Survey and benchmarking of machine learning accelerators
+- Peter W. Michaleas
+- Michael S. Jones
+- Vijay N. Gadepally
+- Siddharth S. Samsi
+- Jeremy Kepner
+- machine learning
+#### Looking for more information?
+For questions or additional details about this or other Lincoln Laboratory publications, 
+contact us at the link below.
+Contact Us
+## Utility menu
+- Status
+- Visit
+- Contact
+- Privacy & Terms
+
+## 本地原文：原文/PDF/S07_ml_accelerator_survey.pdf
+
+
+=== PDF页 1 ===
+1
+Survey and Benchmarking of Machine Learning
+Accelerators
+Albert Reuther, Peter Michaleas, Michael Jones, Vijay Gadepally, Siddharth Samsi, and Jeremy Kepner
+MIT Lincoln Laboratory Supercomputing Center
+Lexington, MA, USA
+{reuther,pmichaleas,michael.jones,vijayg,sid,kepner}@ll.mit.edu
+Abstract—Advances in multicore processors and accelerators
+have opened the ﬂood gates to greater exploration and application
+of machine learning techniques to a variety of applications. These
+advances, along with breakdowns of several trends including
+Moore’s Law, have prompted an explosion of processors and
+accelerators that promise even greater computational and ma-
+chine learning capabilities. These processors and accelerators are
+coming in many forms, from CPUs and GPUs to ASICs, FPGAs,
+and dataﬂow accelerators.
+This paper surveys the current state of these processors and
+accelerators that have been publicly announced with performance
+and power consumption numbers. The performance and power
+values are plotted on a scatter graph and a number of dimensions
+and observations from the trends on this plot are discussed and
+analyzed. For instance, there are interesting trends in the plot
+regarding power consumption, numerical precision, and inference
+versus training. We then select and benchmark two commercially-
+available low size, weight, and power (SWaP) accelerators as
+these processors are the most interesting for embedded and
+mobile machine learning inference applications that are most
+applicable to the DoD and other SWaP constrained users. We
+determine how they actually perform with real-world images and
+neural network models, compare those results to the reported
+performance and power consumption values and evaluate them
+against an Intel CPU that is used in some embedded applications.
+Index Terms —Machine learning, GPU, TPU, dataﬂow, accel-
+erator, embedded inference
+I. I NTRODUCTION
+Artiﬁcial Intelligence (AI) and machine learning (ML) have
+the opportunity to revolutionize the way many industries,
+militaries, and other organizations address the challenges of
+evolving events, data deluge, and rapid courses of action.
+Innovations in computations, data sets, and algorithms have
+driven many advances for machine learning and its application
+to many different areas. AI solutions involve a number of
+different pieces that must work together in order to provide
+capabilities that can be used by decision makers, warﬁghters,
+and analysts; Figure 1 depicts these important pieces that are
+needed when developing an end-to-end AI solution. While
+certain components may not be as visible to end-users as
+others, our experience has shown that each of these interrelated
+This material is based upon work supported by the Assistant Secretary of
+Defense for Research and Engineering under Air Force Contract No. FA8721-
+05-C-0002 and/or FA8702-15-D-0001. Any opinions, ﬁndings, conclusions or
+recommendations expressed in this material are those of the author(s) and do
+not necessarily reﬂect the views of the Assistant Secretary of Defense for
+Research and Engineering.
+components play a major role in the success or failure of an
+AI system.
+Fig. 1. Canonical AI architecture consists of sensors, data conditioning,
+algorithms, modern computing, robust AI, human-machine teaming, and users
+(missions). Each step is critical in developing end-to-end AI applications and
+systems.
+On the left side of Figure 1, structured and unstructured
+data sources provide different views of entities and/or phe-
+nomenology. These raw data products are fed into a data con-
+ditioning step in which they are fused, aggregated, structured,
+accumulated, and converted to information. The information
+generated by the data conditioning step feeds into a host
+of supervised and unsupervised algorithms such as neural
+networks, which extract patterns, predict new events, ﬁll in
+missing data, or look for similarities across datasets, thereby
+converting the input information to actionable knowledge.
+This actionable knowledge is then passed to human beings
+for decision-making processes in the human-machine teaming
+phase. The phase of human-machine teaming provides the
+users with useful and relevant insight turning knowledge into
+actionable intelligence or insight.
+Underlying all of these phases is a bedrock of modern
+computing systems that is comprised of one or more heteroge-
+nous computing elements. For example, sensor processing may
+occur on low power embedded computers, while algorithms
+may be computed in very large data centers. With regard to
+performance advances in these computing elements, Moore’s
+law trends have ended [1], as have a number of related
+laws and trends including Denard’s scaling (power density),
+clock frequency, core counts, instructions per clock cycle, and
+instructions per Joule (Koomey’s law) [2]. Many of the tech-
+nologies, tricks and techniques of processor chip designers that
+arXiv:1908.11348v1  [cs.PF]  29 Aug 2019
+
+=== PDF页 2 ===
+2
+extended these trends have been exhausted. However, all is not
+lost, yet; advancements and innovations are still progressing.
+In fact, there has been a Cambrian explosion of computing
+technologies and architectures in recent years. Specializa-
+tion of circuits for certain functionalities is being exploited
+whereby certain often-used operational kernels, methods, or
+functions are being accelerated with specialized circuit blocks
+and chips. These accelerators are designed with a different
+balance between performance and functional ﬂexibility. One
+area in which we are seeing an explosion of accelerators is
+ML processors and accelerators [3]. Understanding the relative
+beneﬁts of these technologies is of particular importance to
+applying AI to domains under signiﬁcant constraints such as
+size, weight, and power, both in embedded applications and
+in data centers.
+But before we get to the survey of ML processors and
+accelerators, we must cover several topic that are important for
+understanding several dimensions of evaluation in the survey.
+We must discuss the types of neural networks for which these
+ML accelerators are being designed; the distinction between
+neural network training and inference; and the numerical
+precision with which the neural networks are being used for
+training and inference:
+• Types of Neural Networks – AI and machine learning
+encompass a wide set of statistics-based technologies as
+one can see in the taxonomy detailed in the algorithm
+section (Section 3) of this MIT Lincloln Laboratory
+technical report [4]. Even among neural networks, there
+are a growing number of neural network patterns [5].
+This paper will focus on processors that are geared
+toward deep neural networks (DNNs) and convolutional
+neural networks (CNNs). Overall, the most emphasis of
+computational capability for machine learning is on DNN
+and CNNs because they are quite computationally inten-
+sive [6], with the fully connected and convolutional lay-
+ers being the most computationally intense. Conversely,
+pooling, dropout, softmax, and recurrent/skip connection
+layers are not computationally intensive since these types
+of layers stipulate datapaths for weight and data operands.
+• Neural Network Training versus Inference – Neural net-
+work training uses libraries of input data to converge
+model weight parameters by applying the labeled input
+data (forward projection), measuring the output predic-
+tions and then adjusting the model weight parameters
+to better predict output predictions (back projections).
+Neural network inference is using a trained model of
+weight parameters and applying it to input data to receive
+output predictions. Processors designed for training can
+also perform well at inference, but the converse is not
+always true.
+• Numerical precision – The numerical precision with
+which the model weight parameters are stored and com-
+puted has an impact on the effectiveness and efﬁciency
+with which networks are trained and used for inference.
+Generally higher numerical precision representations,
+particularly ﬂoating point representations, are used for
+training, while lower numerical precision representations,
+including integer representations, have been shown to
+be reasonably effective for inference [7], [8]. However,
+it has also generally been established that very limited
+numerical precisions like int4, int2, and int1 do not
+adequately represent model weight parameters and sig-
+niﬁcantly affect model output predictions.
+The survey in the next section of this paper focuses on the
+computational throughput of the processors and accelerators
+along with the power that is consumed to achieve that perfor-
+mance. Other factors include the memory bandwidth to load
+and update model parameters and data; memory capacity for
+model weight parameters and input data, both close to the
+arithmetic units and the global memory of the processors and
+accelerator; and arithmetic intensity [9] of the neural network
+models being processed by the processor or accelerator. These
+factors are involved in managing model parameters and input
+data ﬂows within the model; hence, they also inﬂuence the
+trade-offs between chip bandwidth capabilities, data ﬂow
+ﬂexibility, and conﬁguration and amount of computational
+capability. These factors, however, are beyond the scope of
+this paper, and they will be addressed in future phases of this
+research.
+II. S URVEY OF PROCESSORS
+Many recent advances in AI can be at least partly credited
+to advances in computing hardware [10], [11]. In particular,
+modern computing advances have been able to realize many
+computationally heavy machine-learning algorithms such as
+neural networks. While machine-learning algorithms such as
+neural networks have had a rich theoretic history [12], recent
+advances in computing have made the application of such
+algorithms a reality by providing the computational power
+needed to train and process massive quantities of data. Al-
+though the computing landscape of the past decade has been
+rich with numerous innovations, more embedded and mobile
+applications that require low size, weight, and power (SWaP)
+systems will need capabilities that are beyond those delivered
+by the traditional architectures of central processing units
+(CPUs) and graphics processing units (GPUs). For example,
+in commercial applications, it is common to off-load data
+conditioning and algorithms to non-SWaP constrained plat-
+forms such high-performance computing clusters or processing
+clouds. Defense applications among others, on the other hand,
+may need AI applications to be performed inside low-SWaP
+platforms or local networks (edge computing) and without the
+use of the cloud due to insufﬁcient security or communication
+infrastructure.
+The survey in this section gathers performance and power
+information from publicly available materials including re-
+search papers, technical trade press, company benchmarks, etc.
+While there are ways to access information from companies
+and startups (including those in their silent period), this infor-
+mation is intentionally left out of this survey; such data will
+be included in this survey when it becomes publicly available.
+The key metrics of this public data are plotted in Figure 2,
+which graphs recent processor capabilities (as of May 2019)
+mapping peak performance vs. power consumption. The x-axis
+
+=== PDF页 3 ===
+3
+indicates peak power, and the y-axis indicate peak giga opera-
+tions per second. (GOps/s) Note the legend on the right, which
+indicates various parameters used to differentiate computing
+techniques and technologies. The computational precision of
+the processing capability is depicted by the geometric shape
+used; the computational precision spans from single bit int1
+to single byte int8 and four-byte ﬂoat32 to eight-byte ﬂoat64.
+The form factor is depicted by the color; this is important
+for showing how much power is consumed, but also how
+much computation can be packed onto a single chip, a single
+PCI card, and a full system. Blue is only the performance
+and power consumption of a single chip. Orange shows the
+performance and power of a card (note that they all are in
+the 200-300 Watt zone). Green shows the performance and
+power of entire systems – in this case, single node desktop and
+server systems. This survey is limited to single motherboard,
+single memory-space systems. Finally, the hollow geometric
+objects are performance for inference only, while the solid
+geometric ﬁgures are performance for training (and inference)
+processing. Mostly, low power solutions are only capable
+of inference, though there are some high-power accelerators
+(WaveDPU, Goya, Arria, and Turing) that are targeting high
+performance for inference only.
+From Figure 2, we can make a number of general obser-
+vations. First, much of the recent efforts have focused on
+processors that are in the 10-300W range in terms of power
+utilization, since they are being designed and deployed as pro-
+cessing accelerators. (300W is the upper limit for a PCI-based
+accelerator card.) For this power envelope, the performance
+can vary depending on a variety of factors such as architecture,
+precision, and workload (training vs. inference). There are
+many solutions under the 1 TeraOps/W line; however, there
+are several inference solutions and a few training solutions
+that are reporting greater than 1 TeraOps/W.
+With the current offerings, at least 100W must be employed
+to perform training; all of the points on the scatter plot below
+100W are inference-only processors/accelerators. There are a
+number of possible explanations for this, but it is likely that
+there is currently little driving a requirement for low-power
+training, though there is much demand for low-power infer-
+ence on devices ranging from smartphones to remotely piloted
+aircraft (RPA) and autonomous vehicles. From a technology
+standpoint, this may suggests that the trade-offs necessary to
+do neural network training under the 100W envelope affect
+the performance, numerical accuracy, and prediction accuracy
+too greatly.
+Many hardware manufacturers, faced with limitations in
+fabrication processes, have been able to exploit the fact that
+machine-learning algorithms such as neural networks can
+perform well even when using limited or mixed precision [8],
+[13] representation of activation functions, weights, and bi-
+ases. Such hardware platforms (often designed speciﬁcally for
+inference) may quantize weights and biases to half precision
+(16 bits) or even single bit representations in order to improve
+the number of operations/second without signiﬁcant impact to
+model prediction, accuracy, or power utilization. To that point,
+in the inference engines, the entire neural network model is
+usually loaded onto the chip before any inference is performed.
+Loading the model turns the model’s parameters into constants
+that are stored with the operator rather than operands that must
+be loaded from volatile (DRAM or SRAM) memory thereby
+reducing the number of operand/parameter loads that must
+occur separate from the instruction load.
+There are a number of dimensions with which we can
+present the processors and accelerators in this survey. We have
+chosen to roughly categorize the scatter plot into six regions
+that roughly correspond to performance and power consump-
+tion: Very Low Power and Research Chips, Cell (Smartphone)
+GPUs, Mobile and Embedded Chips and Systems, FPGA
+Accelerators, Data Center Chips and Cards, and Data Center
+Systems. In the following listings, the angle-bracketed string is
+the label of the item on the scatter plot, and the square bracket
+after the angle bracket is literature reference from which the
+performance and power values came. Some of the performance
+values are reported in frames per second (fps) with a given
+machine learning model. For those values, Samuel Albanie has
+Matlab code and a web site that lists all of the major machine
+learning models with their operations per epoch/inference,
+parameter memory, feature memory, and input size [14]; the
+operations per epoch/inference are used to compute operations
+per second from frames per second. Finally, if a neural network
+model is not mentioned, the performance reported is peak
+performance.
+A. Very Low Power and Research Chips
+Chips in the very low power regime have been mainly
+university and industry research chips. However, a few vendors
+have announced or are offering products in this space.
+• MIT Eyeriss chip ⟨Eyeriss⟩ [7], [15], [16] is a research
+chip from Vivienne Sze’s group in MIT CSAIL. Their
+goal was to develop the most energy efﬁcient inference
+chip possible. The result was acquired running AlexNet
+with no mention of batch size.
+• The TrueNorth ⟨TrueNorth⟩ [17], [18] is a digital neuro-
+morphic research chip from the IBM Almaden research
+lab. It was developed under DARPA funding in the
+Synapse program to demonstrate the efﬁcacy of digital
+spiking neural network (neuromorphic) chips. Note that
+there are points on the graph for both the system, which
+draws the 44 W power, and the chip, which itself only
+draws up to 275 mW.
+• The Intel MovidiusX processor ⟨MovidiusX⟩ [19] is an
+embedded video processor that includes a Neural Engine
+for video processing and object detection.
+• In early 2019, Google released a TPU Edge processor
+⟨TPUEdge⟩ [20] for embedded inference application. The
+TPU Edge uses TensorFlow Lite, which encodes the
+neural network model with low precision parameters for
+inference.
+• The DianNao series of dataﬂow research chips came
+from a university research team in China. They pub-
+lished four different designs aimed at different types
+of ML processing [21]. The DianNao ⟨DianNao⟩ [21]
+is a neural network inference accelerator, and the Da-
+DianNao ⟨DaDianNao⟩ [22] is a many-tile version of
+
+=== PDF页 4 ===
+4
+Presentation Name -26of Author Initials  MM/DD/YY
+Peak Power (W)
+Neural Network Processing PerformancePeak GOps/Second
+Slide courtesy of Albert Reuther, MIT Lincoln Laboratory Supercomputing Center
+Computation Precision
+ChipCardSystem
+Form Factor
+InferenceTrainingComputation Type
+Legend
+Int8Int8 -> Int16
+Float16Float16 -> Float32Float32Float64
+Int1Int2
+Int12 -> Int16Int16Int32
+1 TeraOps/W10 TeraOps/W
+100 GigaOps/W
+DGX-1
+MIT Eyeriss
+MovidiusXJetsonTX1JetsonTX2
+Xavier
+DGX-Station
+DGX-2WaveSystem
+WaveDPU
+TrueNorthSys
+GraphCoreNode
+GraphCoreC2K80P100
+V100
+2xSkyLakeSPPhi7210FPhi7290F
+ArriaGX1150
+NervanaGoyaTPU3
+TPU1
+TPU2
+Turing
+TPUEdge
+TrueNorth
+Zynq-020
+ArriaGX1155
+Zynq-020 XilinxCluster
+ZCU102
+AIStorm
+CambriconCambricon
+Baidu
+Rockchip
+DianNao
+DaDianNao
+ShiDianNao
+PuDianNao
+Zynq-020S835
+A12Mali-76Mali-75S845Stratix-V
+ArriaGX1150ArriaGX1150
+Nervana2
+Zynq-060ArriaGX1150ArriaGX1150
+AMD-MI6
+AMD-MI60Very Low Power
+Cell GPUs
+Mobile
+FPGAs
+Data Center Systems
+Data Center Chips & Cards
+Fig. 2. Performance vs. power scatter plot of publicly announced AI accelerators and processors.
+the DianNao for larger NN model inference. The ShiD-
+ianNao ⟨ShiDianNao⟩ [23] is designed speciﬁcally for
+convolutional neural network inference. Finally, the Pu-
+DianNao ⟨PuDianNao⟩ [24] is designed for seven repre-
+sentative machine learning techniques: k-means, k-NN,
+na¨ıve Bayes, support vector machines, linear regression,
+classiﬁcation tree, and deep neural networks.
+• San Jose startup AIStorm ⟨AIStorm⟩ [25] claims to do
+some of the math of inference up at the sensor in the
+analog domain. They originally came to the embedded
+space scene with biometric sensors and processing. They
+call their chip an AI-on-Sensor capability.
+• The Rockchip RK3399Pro ⟨Rockchip⟩ [26] is an im-
+age and neural co-processor from Chinese company
+Rockchip. They published raw performance numbers for
+8bit inference. This appears to be a GPU-based co-
+processor but details are few.
+B. Cell / Smartphone GPU-based Neural Engines
+A number of smartphone vendors are embedding GPU-
+based neural engines in their smartphones to enable object
+detection, face recognition, and other inference-based tasks.
+The performance metrics for ﬁve inference neural engines,
+which were benchmarked with AImark, are included in this
+survey. AImark runs VGG-16, ResNet34 and InceptionV3 on
+smartphones, and it is available in the Apple App Store and
+the Google Play Store. It is reasonably safe to assume that
+these GPU-based vector processors are executing with Int8
+precision.
+• The Apple A12 processor ⟨A12⟩ [27], [28] in the iPhone
+Xs tops out this set. This A12 neural engine bursts its
+power utilization to 5.5W for short time periods (above its
+usually 5W maximum for battery life) for fast inference
+runs, and this performance point is on the VGG-16 model.
+• The Huawei Kirin 980 (with AMD Mali-76 GPU IP)
+⟨Mali-76⟩ [29] and Kirin 970 (with AMD Mali-75 GPU
+IP) ⟨Mali-75⟩ [30] make their performance mark with the
+ResNet34 and VGG-16 models, respectively.
+• Finally, the Qualcomm Snapdragon 835 ⟨S835⟩ and 845
+⟨S845⟩ [29] are also on the chart with performance
+numbers using the ResNet34 and InceptionV3 models,
+respectively.
+C. Embedded Chips and Systems
+The systems in this category are aimed at automotive
+AI/ML, autonomous vehicles, UA Vs, robots, etc. They all have
+several ARM cores that are mated with NVIDIA CUDA GPU
+cores.
+• The NVIDIA Jetson-TX1 ⟨JetsonTX1⟩ [31] incorporates
+4 ARM cores and 256 CUDA Maxwell cores. It is
+aimed at low power applications for inference only. The
+performance was achieved with GoogLeNet with a batch
+size of 128.
+• The Jetson-TX2 ⟨JetsonTX2⟩ [31] mates 6 ARM cores
+with 256 CUDA Pascal cores. It also is aimed at low
+power applications for inference only. The performance
+was achieved with GoogLeNet with a batch size of 128.
+• The NVIDIA Xavier ⟨Xavier⟩ [32] deploys 8 ARM cores
+with 512 CUDA V olta cores and 64 Tensor cores. It is
+aimed also at low power applications for inference only.
+D. FPGA Co-processors
+In public literature, the use of FPGAs for neural net-
+works has been primarily in the technical research domain.
+
+=== PDF页 5 ===
+5
+Quite a number of research teams around the world have
+mapped one or more neural network models onto one or
+more FPGAs and collected a variety of performance and
+model prediction accuracy metrics. Several survey papers
+have been published including [33] and [34], and the most
+comprehensive survey paper of mapping and running DNNs
+on FPGAs is here [35]. This last paper lists 25 top results
+from published research literature, of which we have chosen 12
+that are the performance leaders for their numerical precision
+and/or FPGA model. They are labeled with an abbreviation
+of their chip type: ⟨Zynq-020⟩ int1 [36], int2 [37], int8 [38];
+⟨Zynq-060⟩ int16 accumulator/int12 result [39], ⟨ZCU102⟩
+int16 [40], ⟨Stratix-V⟩ int32 [41], ⟨ArriaGX1150⟩ int16 ac-
+cumulator/int8 result [42], int16 [43], fp16 [44], fp32 [43];
+and ⟨ArriaGX1155⟩ 1-bit [45] points with different numerical
+precisions. They are all used for inference. Finally, there is
+a 7-FPGA Xilinx Cluster ⟨XilinxCluster⟩ [46] in which the
+research team ganged together one control FPGA and six
+computational FPGAs to execute much larger neural network
+models. All of these results are from running one of the
+following models: AlexNet, VGG-16, VGG-19, DoReFa-Net,
+and an LSTM model. Details are in [35].
+E. Data Center Chips and Cards
+There are a variety of technologies in this category including
+several CPUs, a number of GPUs, a CPU-controlled FPGA
+solution, and dataﬂow accelerators. They are addressed in their
+own subsections to group similar processing technologies.
+1) CPU-based Processors:
+• The Intel SkyLake SP processors ⟨2xSkyLakeSP⟩ [47],
+[48] are conventional Xeon server processors. Intel has
+been marketing these chips to data analytics companies
+as very versatile inference engines with reasonable power
+budgets. The performance numbers were measured using
+Caffe ResNet-50 with batch size of 64 on a 2-socket
+SkyLakeSP system.
+• The Intel Xeon Phi processor chips have 64, 68, or 72
+cores, with each core having four hardware hyper-threads
+and two A VX-512 (512-bit wide) vector units [49]. Hav-
+ing these 128 A VX-512 vector units on a 64-core chip
+is equal to 2048 double precision ﬂoating point vector
+ALUs or 4096 single precision ﬂoating point vector
+ALUs. The Phi7210F ⟨Phi7210F⟩ [50] is the 64-core
+chip we have in the TX-Green Petaﬂop system, while the
+Phi7290F ⟨Phi7290F⟩ [50] is the top bin, 72-core Xeon
+Phi (KNL).
+2) CPU-Controlled FPGA: The Intel Arria solution pairs
+an Intel Xeon CPU with an Altera Arria FPGA ⟨Arria
+GX1150⟩ [51], [52] (next to the Baidu point). The CPU is
+used to rapidly download FPGA hardware conﬁgurations to
+the Arria, and then farms out the operations to the Arria for
+processing certain key kernels. Since inference models do not
+change, this technique is well geared toward this CPU-FPGA
+processing paradigm. However, it would be more challenging
+to farm ML model training out to the FPGAs. The performance
+benchmark was on an Arria 10 1150 FPGA using GoogLeNet
+reporting 900 fps.
+3) GPU-based Accelerators: There are four NVIDIA cards
+and two AMD/ATI cards on the chart (listed respectively):
+the Maxwell architecture K80 ⟨K80⟩ [53], the Pascal archi-
+tecture P100 ⟨P100⟩ [54], [55], the V olta architecture V100
+⟨V100⟩ [56], [57], the TU106 Turing ⟨Turing⟩ [58], the MI6
+⟨MI6⟩ [59], and MI60 ⟨MI60⟩ [60]. The K80, P100, V100,
+MI6, and MI60 GPUs are pure computation cards intended for
+both inference and training, while the TU106 Turing GPU is
+geared to the gaming/graphics market for including inference
+processing within the graphics processing.
+4) Data Center Chips and Cards: This subsection lists a
+series of chips and cards intended for data center deployment.
+• Intel Corp. bought AI chip startup Nervana in August
+2016 to enter the AI accelerator market. The ﬁrst Ner-
+vana chip ⟨Nervana⟩ [61] called Lake Crest is scheduled
+to ship in 2019. The follow-on is called Spring Crest
+⟨Nervana2⟩ [61], and it is scheduled to ship in late 2019.
+• Google has released three versions of their Tensor Pro-
+cessing Unit (TPU) [11]. The TPU1 ⟨TPU1⟩ [62] is
+only for inference, but Google soon made improvements
+that enabled both training and inference on the TPU2
+⟨TPU2⟩ [62] and TPU3 ⟨TPU3⟩ [62].
+• GraphCore.ai has released their C2 card
+⟨GraphCoreC2⟩ [63] in early 2019, which is being
+shipped in their GraphCore server node (see below).
+This company is a startup headquartered in Bristol,
+UK with an ofﬁce in Palo Alto. They have strong
+venture backing from Dell, Samsung, and others. The
+performance values were achieved with ResNet-50
+training for the single C2 card with a batch size for
+training of 8. The card power is an estimate based on a
+typical PCI card power draw.
+• The Goya chip ⟨Goya⟩ [64], [65] is an inference chip
+being developed by startup Habana Labs, which is based
+in San Jose and Tel Aviv. The performance was achieved
+on ResNet50 inference. Habana Labs is also working on
+a training chip called the Gaudi, which is expected to be
+released in mid-2019.
+• Wave Computing has released their Dataﬂow Processing
+Unit (DPU) ⟨WaveDPU⟩ [66]. Each card has four DPUs.
+• The Cambricon dataﬂow chip ⟨Cambricon⟩ [67] was
+designed by a Chinese university team along with the
+Cambricon company, which came out of the university
+team. They published both int8 inference and ﬂoat16
+training numbers that are both signiﬁcant, so both are on
+the chart. This is the same team that is behind the AMD
+Mali GPU-based Huawei Kirin chip series (see above)
+that are integrated into Huawei smartphones.
+• Baidu has announced an AI accelerator chip called Kun-
+lun ⟨Baidu⟩ [68], [69]. Presumably this chip is aimed
+at low power data center training and inference and is
+supposed to be deployed in early 2019. The two variants
+of the Kunlun are the 818-100 for inference and the 818-
+300 for training. The performance number in this chart
+is the Kunlun 818-300 for training.
+
+=== PDF页 6 ===
+6
+F . Data Center Systems
+• There are three NVIDIA server systems on the graph: the
+DGX-Station, the DGX-1, and the DGX-2: The DGX-
+Station is a tower workstation ⟨DGX-Station⟩ [70] for
+use as a desktop system that includes four V100 GPUs.
+The DGX-1 ⟨DGX-1⟩ [70], [71] is a server that includes
+eight V100 GPUs that occupies three rack units, while the
+DGX-2 ⟨DGX-2⟩ [71] is a server that includes sixteen
+V100 GPUs that occupies ten rack units. The DGX-2
+networks those sixteen GPUs together using a proprietary
+NV-Link switch.
+• GraphCore.ai has released a Dell/EMC based server
+⟨GraphCoreNode⟩ [63] in early 2019, which contains
+eight C2 cards (see above). The performance values were
+achieved with ResNet-50 training on the full server with
+eight C2 cards. The training batch size for full server
+was 64. The server power is an estimate based on the
+components of a typical Intel based, dual-socket server
+with 8 PCI cards.
+• Along with the aforementioned card, Wave Computing
+also released a server appliance ⟨WaveSystem⟩ [66], [72].
+The Wave server appliance includes four cards for a total
+of sixteen DPUs in the server chassis.
+G. Announced Chips
+A number of other accelerator chips have been announced
+but have not published any performance and power numbers.
+These include: Intel Loihi [73], Facebook [74], Groq [75],
+Mythic [76], Amazon Web Services Inferentia [77], Stanford’s
+Braindrop [78], Brainchip’s Akida [79], [80], Tesla [81],
+Adapteva [82], Horizon Robotics [83], Bitmain [84], Simple
+Machines [85], Eta Compute [86], and Alibaba [87], among
+others. As performance and power numbers become available
+for these and other chips, they will be added in future iterations
+of this work.
+III. B ENCHMARKING
+Most of the processors in the very low power space are
+either research chips that were developed as proof of concepts
+in university research labs or they are FPGA-based solutions,
+also usually from university research labs. However, there are
+a few processors that have been commercially released. These
+commercial low-power accelerators are of interest for many
+embedded machine learning inference applications in the DoD
+and beyond. Amazon Web Services has disclosed that ”...
+inference actually accounts for the majority of the cost and
+complexity for running machine learning in production (for ev-
+ery dollar spent on training, nine are spent on inference).” [88].
+In this section, we will present the preliminary results of
+benchmarking Google TPU Edge [20] and Intel Movidius
+X-based [32] Neural Compute Stick 2 (NCS2) systems and
+comparing them to an Intel Core i9-9900k processor system.
+All of the benchmarks in this section were executed on
+an Intel-based tower desktop computer with an Intel Core
+i9-9900k, 32GB (3200Mhz) RAM, and a Samsung 970
+Pro NVME storage disk. It was running Windows 10 Pro
+TABLE I
+EMBEDDED DEVICE DESCRIPTIONS
+EdgeTPU NCS2 i9-SSE4 i9-A VX2
+NN
+Environment
+TensorFlow
+Lite
+OpenVINO TensorFlow TensorFlow
+Mobilenet
+Model
+v1 v2 v2 v2
+Reported GOPS 58.5 160
+Measured GOPS 47.4 8.29 38.4 40.9
+Reported Power
+(W)
+2.0 2.0 205 205
+Measured Power
+(W)
+0.85 1.35
+Reported
+GOPS/W
+29.3 80.0
+Measured
+GOPS/W
+55.8 6.14
+Avg. Model
+Load Time (s)
+3.66 5.32 0.36 0.36
+Avg. Single
+Image Inference
+Time (ms)
+27.4 96.4 19.6 20.8
+(10.0.17763 Build 17763) in a VirtualBox v 6.0 virtual ma-
+chine. The neural network model that the Google EdgeTPU
+ran was Mobilenet v1 [89] with single shot multibox detec-
+tors (SSD) [90] trained with the Microsoft COCO images
+library [91]. The model that the Intel Neural Compute Stick
+2 (NCS2) and the Intel i9 9900 system ran was Mobilenet
+v2 [92] also with SSD and trained with COCO. The Edge TPU
+and NCS2 both had throttles imposed by the software that only
+allowed one image to be submitted for classiﬁcation at a time
+(batch size = 1). Further, for both systems the entire neural
+network model had to be loaded onto the device for each image
+that is processed. This seems to be in place to emphasize
+that these are development products rather than production
+products, but in an actual embedded system, this limitation
+would not be in place since more performance would be
+gained by simultaneously submitting more than one image for
+classiﬁcation (batch size > 1), but that was not enabled or
+tested with this benchmarking effort. The NCS2 model was
+prepared for download to the device with the Intel Distribution
+of the OpenVINO (Open Visual Inference and Neural network
+Optimization) toolkit: 2018 R5.0.1 (30, Jan 2019). For both
+the TPU Edge and NCS2 devices, power draw was measured
+with a USB multimeter. Finally, on the Intel Core i9-9900k,
+TensorFlow was compiled to separately use the SSE4 and
+A VX2 vector engine instruction sets. The measurements for
+these two trials are depicted as i9-SSE4 and i9-A VX2, respec-
+tively. The Intel Core i9-9900k performs somewhat better and
+draws more power than typical VPX board based embedded
+single board computers from companies including Curtiss-
+Wright and Mercury Systems [93], [94], which generally are
+based on Intel Core i7 processors that draw a maximum of
+70W for the entire system.
+Table I summarizes the reported and measured giga oper-
+ations per second (GOPS), power (W), and GOPS/W along
+with average model load time in seconds and average single
+image inference time in milliseconds. One can observe that the
+TPU Edge and NCS2 have much lower power consumption
+and much higher model load times then the Intel i9. However,
+
+=== PDF页 7 ===
+7
+Edge TPU        Intel NCS2           i9-SSE4              i9-AVX2
+0
+0.02
+0.04
+0.06
+0.08
+0.1
+0.12Single Image  Average Inference Time (s)
+Fig. 3. Box and whisker plot of single image inference times.
+single image inference times are generally the same, though
+the NCS2 is somewhat slower. Also, the Edge TPU GOPS/W
+numbers are reasonably similar, while the measured GOPS/W
+is much lower than the reported GOPS/W for the NCS2.
+Further, Figure 3 shows a box and whiskers plot of the average
+and standard deviation of single image inference times for each
+of the four technologies. From the box and whiskers plot,
+we see that the single image inference times are reasonably
+uniform across all four technologies.
+As more low power commercial systems become available,
+we intend to purchase and benchmark them to add to this body
+of work. We expect to have performance and power numbers
+for the NVIDIA Jetson Xavier [32] and perhaps the NVIDIA
+Jetson NANO in time for the conference.
+IV. S UMMARY
+In this paper, we have presented a survey of processors
+and accelerators for machine learning, speciﬁcally deep neural
+networks along with some benchmarking results that we con-
+ducted on commercial low power processing systems that are
+relevant to DoD and other embedded applications. We started
+by overviewing the trends in machine learning processor
+technologies – that many processor trends including transistor
+density, power density, clock frequency, and core counts are
+no longer increasing. This is prompting a drive to application
+speciﬁc accelerators that are designed speciﬁcally for deep
+neural networks. Several factors that determine accelerator
+designs were discussed including the types of neural networks,
+training versus inference, and numerical precision for the com-
+putations. We then surveyed and analyzed machine learning
+processors categorized into six regions that roughly correspond
+to performance and power consumption. Finally, we presented
+benchmarking results for two low power machine learning
+accelerator systems, the Google Edge TPU and the Intel
+Movidius X Neural Compute Stick 2 (NCS2) and compared
+the results to an Intel i9-9900k processor system using the
+SSE4 and A VX2 vector engine instruction sets.
+REFERENCES
+[1] T. N. Theis and H. . P. Wong, “The End of Moore’s Law: A New Begin-
+ning for Information Technology,” Computing in Science Engineering ,
+vol. 19, no. 2, pp. 41–50, mar 2017.
+[2] M. Horowitz, “Computing’s Energy Problem (and What We Can Do
+About It),” in 2014 IEEE International Solid-State Circuits Conference
+Digest of Technical Papers (ISSCC) . IEEE, feb 2014, pp. 10–14.
+[Online]. Available: http://ieeexplore.ieee.org/document/6757323/
+[3] J. L. Hennessy and D. A. Patterson, “A New Golden Age for
+Computer Architecture,” Communications of the ACM , vol. 62, no. 2,
+pp. 48–60, jan 2019. [Online]. Available: http://dl.acm.org/citation.cfm?
+doid=3310134.3282307
+[4] V . Gadepally, J. Goodwin, J. Kepner, A. Reuther, H. Reynolds, S. Samsi,
+J. Su, and D. Martinez, “AI Enabling Technologies,” MIT Lincoln
+Laboratory, Lexington, MA, Tech. Rep., 2019.
+[5] F. A. I. Van Veen and S. A. I. Leijnen, “The Neural Network Zoo,” 2019.
+[Online]. Available: http://www.asimovinstitute.org/neural-network-zoo/
+[6] A. Canziani, A. Paszke, and E. Culurciello, “An Analysis of Deep
+Neural Network Models for Practical Applications,” arXiv preprint
+arXiv:1605.07678, 2016.
+[7] V . Sze, Y . Chen, T. Yang, and J. S. Emer, “Efﬁcient Processing of Deep
+Neural Networks: A Tutorial and Survey,” Proceedings of the IEEE, vol.
+105, no. 12, pp. 2295–2329, dec 2017.
+[8] S. Narang, G. Diamos, E. Elsen, P. Micikevicius, J. Alben, D. Garcia,
+B. Ginsburg, M. Houston, O. Kuchaiev, G. Venkatesh, and Others,
+“Mixed precision training,” Proc. of ICLR,(Vancouver Canada) , 2018.
+[9] S. Williams, A. Waterman, and D. Patterson, “Rooﬂine: An Insightful
+Visual Performance Model for Multicore Architectures,” Commun.
+ACM, vol. 52, no. 4, pp. 65–76, apr 2009. [Online]. Available:
+http://doi.acm.org/10.1145/1498765.1498785
+[10] A. Krizhevsky, I. Sutskever, and G. E. Hinton, “ImageNet Classiﬁca-
+tion with Deep Convolutional Neural Networks,” Neural Information
+Processing Systems, vol. 25, 2012.
+[11] N. P. Jouppi, C. Young, N. Patil, and D. Patterson, “A Domain-Speciﬁc
+Architecture for Deep Neural Networks,” Communications of the
+ACM, vol. 61, no. 9, pp. 50–59, aug 2018. [Online]. Available:
+http://doi.acm.org/10.1145/3154484
+[12] M. L. Minsky, Computation: Finite and Inﬁnite Machines . Upper
+Saddle River, NJ, USA: Prentice-Hall, Inc., 1967.
+[13] S. Gupta, A. Agrawal, K. Gopalakrishnan, and P. Narayanan, “Deep
+Learning with Limited Numerical Precision,” in Proceedings of the
+32Nd International Conference on International Conference on Machine
+Learning - Volume 37, ser. ICML’15. JMLR.org, 2015, pp. 1737–1746.
+[Online]. Available: http://dl.acm.org/citation.cfm?id=3045118.3045303
+[14] S. Albanie, “Convnet Burden,” 2019. [Online]. Available: https:
+//github.com/albanie/convnet-burden
+[15] Y . Chen, J. Emer, and V . Sze, “Eyeriss: A Spatial Architecture for
+Energy-Efﬁcient Dataﬂow for Convolutional Neural Networks,” IEEE
+Micro, p. 1, 2018.
+[16] Y . Chen, T. Krishna, J. S. Emer, and V . Sze, “Eyeriss: An Energy-
+Efﬁcient Reconﬁgurable Accelerator for Deep Convolutional Neural
+Networks,” IEEE Journal of Solid-State Circuits , vol. 52, no. 1, pp.
+127–138, jan 2017.
+[17] F. Akopyan, J. Sawada, A. Cassidy, R. Alvarez-Icaza, J. Arthur,
+P. Merolla, N. Imam, Y . Nakamura, P. Datta, G. Nam, B. Taba,
+M. Beakes, B. Brezzo, J. B. Kuang, R. Manohar, W. P. Risk, B. Jackson,
+and D. S. Modha, “TrueNorth: Design and Tool Flow of a 65 mW 1
+Million Neuron Programmable Neurosynaptic Chip,” IEEE Transactions
+on Computer-Aided Design of Integrated Circuits and Systems , vol. 34,
+no. 10, pp. 1537–1557, oct 2015.
+[18] M. Feldman, “IBM Finds Killer App for TrueNorth Neuromorphic
+Chip,” sep 2016. [Online]. Available: https://www.top500.org/news/
+ibm-ﬁnds-killer-app-for-truenorth-neuromorphic-chip/
+[19] J. Hruska, “New Movidius Myriad X VPU Packs a Custom Neural
+Compute Engine,” aug 2017.
+[20] “Edge TPU,” 2019. [Online]. Available: https://cloud.google.com/
+edge-tpu/
+[21] Y . Chen, T. Chen, Z. Xu, N. Sun, and O. Temam, “DianNao Family:
+Energy-Efﬁcient Accelerators For Machine Learning,” Communications
+of the ACM, vol. 59, no. 11, pp. 105–112, oct 2016. [Online]. Available:
+http://dl.acm.org/citation.cfm?doid=3013530.2996864
+[22] Y . Chen, T. Luo, S. Liu, S. Zhang, L. He, J. Wang, L. Li, T. Chen,
+Z. Xu, N. Sun, and O. Temam, “DaDianNao: A Machine-Learning
+Supercomputer,” in 2014 47th Annual IEEE/ACM International
+Symposium on Microarchitecture . IEEE, dec 2014, pp. 609–622.
+[Online]. Available: http://ieeexplore.ieee.org/document/7011421/
+[23] Z. Du, R. Fasthuber, T. Chen, P. Ienne, L. Li, T. Luo, X. Feng, Y . Chen,
+and O. Temam, “ShiDianNao: Shifting vision processing closer to the
+sensor,” in ACM SIGARCH Computer Architecture News, vol. 43, no. 3.
+ACM, 2015, pp. 92–104.
+
+=== PDF页 8 ===
+8
+[24] D. Liu, T. Chen, S. Liu, J. Zhou, S. Zhou, O. Teman, X. Feng, X. Zhou,
+and Y . Chen, “Pudiannao: A polyvalent machine learning accelerator,”
+in ACM SIGARCH Computer Architecture News, vol. 43, no. 1. ACM,
+2015, pp. 369–381.
+[25] R. Merritt, “Startup Accelerates AI at the Sensor,” feb 2019. [Online].
+Available: https://www.eetimes.com/document.asp?doc{ }id=1334301
+[26] “Rockchip Released Its First AI Processor RK3399Pro NPU Perfor-
+mance up to 2.4TOPs,” jan 2018.
+[27] A. Frumusanu, “The iPhone XS & XS Max Review: Unveiling the Sili-
+con Secrets,” oct 2018. [Online]. Available: https://www.anandtech.com/
+show/13392/the-iphone-xs-xs-max-review-unveiling-the-silicon-secrets
+[28] T. Peng, “AI Chip Duel: Apple A12 Bionic vs Huawei Kirin
+980,” sep 2018. [Online]. Available: https://medium.com/syncedreview/
+ai-chip-duel-apple-a12-bionic-vs-huawei-kirin-980-ec29cfe68632
+[29] A. Frumusanu, “The Samsung Galaxy S9 and S9+ Review: Exynos and
+Snapdragon at 960fps,” mar 2018.
+[30] ——, “HiSilicon Announces The Kirin 980: First A76, G76 on 7nm,”
+aug 2018.
+[31] D. Franklin, “NVIDIA Jetson TX2 Delivers Twice the Intelligence to
+the Edge,” mar 2017.
+[32] J. Hruska, “Nvidia’s Jetson Xavier Stuffs V olta Performance Into Tiny
+Form Factor,” jun 2018.
+[33] Z. Li, Y . Wang, T. Zhi, and T. Chen, “A survey of neural network
+accelerators,” Frontiers of Computer Science , vol. 11, no. 5, pp.
+746–761, oct 2017. [Online]. Available: http://link.springer.com/10.
+1007/s11704-016-6159-1
+[34] S. Mittal, “A survey of FPGA-based accelerators for convolutional
+neural networks,” Neural Computing and Applications , pp. 1–
+31, oct 2018. [Online]. Available: http://link.springer.com/10.1007/
+s00521-018-3761-1
+[35] K. Guo, S. Zeng, J. Yu, Y . Wang, and H. Yang, “A Survey of FPGA-
+Based Neural Network Accelerator,” arXiv preprint arXiv:1712.08934 ,
+dec 2017. [Online]. Available: http://arxiv.org/abs/1712.08934
+[36] H. Nakahara, T. Fujii, and S. Sato, “A Fully Connected Layer Elimi-
+nation for a Binarizec Convolutional Neural Network on an FPGA,” in
+2017 27th International Conference on Field Programmable Logic and
+Applications (FPL), 2017, pp. 1–4.
+[37] L. Jiao, C. Luo, W. Cao, X. Zhou, and L. Wang, “Accelerating Low
+Bit-Width Convolutional Neural Networks with Embedded FPGA,” in
+2017 27th International Conference on Field Programmable Logic and
+Applications (FPL) . IEEE, sep 2017, pp. 1–4. [Online]. Available:
+http://ieeexplore.ieee.org/document/8056820/
+[38] K. Guo, L. Sui, J. Qiu, J. Yu, J. Wang, S. Yao, S. Han, Y . Wang,
+and H. Yang, “Angel-Eye: A Complete Design Flow for Mapping
+CNN Onto Embedded FPGA,” IEEE Transactions on Computer-Aided
+Design of Integrated Circuits and Systems, vol. 37, no. 1, pp. 35–47, jan
+2018. [Online]. Available: http://ieeexplore.ieee.org/document/7930521/
+[39] S. Han, J. Kang, H. Mao, Y . Hu, X. Li, Y . Li, D. Xie, H. Luo,
+S. Yao, Y . Wang, H. Yang, and W. B. J. Dally, “ESE: Efﬁcient Speech
+Recognition Engine with Sparse LSTM on FPGA,” in Proceedings of
+the 2017 ACM/SIGDA International Symposium on Field-Programmable
+Gate Arrays, ser. FPGA ’17. New York, NY , USA: ACM, 2017, pp. 75–
+84. [Online]. Available: http://doi.acm.org/10.1145/3020078.3021745
+[40] L. Lu, Y . Liang, Q. Xiao, and S. Yan, “Evaluating Fast Algorithms for
+Convolutional Neural Networks on FPGAs,” in 2017 IEEE 25th Annual
+International Symposium on Field-Programmable Custom Computing
+Machines (FCCM). IEEE, apr 2017, pp. 101–108. [Online]. Available:
+http://ieeexplore.ieee.org/document/7966660/
+[41] A. Podili, C. Zhang, and V . Prasanna, “Fast and efﬁcient implementation
+of Convolutional Neural Networks on FPGA,” in 2017 IEEE 28th
+International Conference on Application-speciﬁc Systems, Architectures
+and Processors (ASAP) . IEEE, jul 2017, pp. 11–18. [Online].
+Available: http://ieeexplore.ieee.org/document/7995253/
+[42] Y . Ma, Y . Cao, S. Vrudhula, and J.-s. Seo, “Optimizing
+Loop Operation and Dataﬂow in FPGA Acceleration of Deep
+Convolutional Neural Networks,” in Proceedings of the 2017
+ACM/SIGDA International Symposium on Field-Programmable Gate
+Arrays, ser. FPGA ’17. New York, NY , USA: ACM, 2017, pp. 45–
+54. [Online]. Available: http://dl.acm.org/citation.cfm?doid=3020078.
+3021736http://doi.acm.org/10.1145/3020078.3021736
+[43] J. Zhang and J. Li, “Improving the Performance of OpenCL-based FPGA
+Accelerator for Convolutional Neural Network,” in Proceedings of the
+2017 ACM/SIGDA International Symposium on Field-Programmable
+Gate Arrays, ser. FPGA ’17. New York, NY , USA: ACM, 2017, pp. 25–
+34. [Online]. Available: http://doi.acm.org/10.1145/3020078.3021698
+[44] U. Aydonat, S. O’Connell, D. Capalija, A. C. Ling, and G. R.
+Chiu, “An OpenCL \texttrademark Deep Learning Accelerator on
+Arria 10,” in Proceedings of the 2017 ACM/SIGDA International
+Symposium on Field-Programmable Gate Arrays , ser. FPGA
+’17. New York, NY , USA: ACM, 2017, pp. 55–64. [Online].
+Available: http://dl.acm.org/citation.cfm?doid=3020078.3021738http://
+doi.acm.org/10.1145/3020078.3021738
+[45] D. J. M. Moss, E. Nurvitadhi, J. Sim, A. Mishra, D. Marr,
+S. Subhaschandra, and P. H. W. Leong, “High performance
+binary neural networks on the Xeon+FPGA platform,” in 2017
+27th International Conference on Field Programmable Logic and
+Applications (FPL) . IEEE, sep 2017, pp. 1–4. [Online]. Available:
+http://ieeexplore.ieee.org/document/8056823/
+[46] C. Zhang, D. Wu, J. Sun, G. Sun, G. Luo, and J. Cong,
+“Energy-Efﬁcient CNN Implementation on a Deeply Pipelined FPGA
+Cluster,” in Proceedings of the 2016 International Symposium
+on Low Power Electronics and Design , ser. ISLPED ’16. New
+York, NY , USA: ACM, 2016, pp. 326–331. [Online]. Available:
+http://doi.acm.org/10.1145/2934583.2934644
+[47] A. Rodriguez, “Intel Processors for Deep Learning Training,”
+nov 2017. [Online]. Available: https://software.intel.com/en-us/articles/
+intel-processors-for-deep-learning-training
+[48] “Intel Xeon Platinum 8180 Processor,” 2019. [Online]. Avail-
+able: https://ark.intel.com/content/www/us/en/ark/products/120496/
+intel-xeon-platinum-8180-processor-38-5m-cache-2-50-ghz.html
+[49] J. Jeffers, J. Reinders, and A. Sodani, Intel Xeon Phi Processor High Per-
+formance Programming: Knights Landing Edition 2Nd Edition , 2nd ed.
+San Francisco, CA, USA: Morgan Kaufmann Publishers Inc., 2016.
+[50] “Xeon Phi,” 2019. [Online]. Available: https://en.wikipedia.org/wiki/
+Xeon{ }Phi
+[51] N. Hemsoth, “Intel FPGA Architecture Focuses on Deep Learning
+Inference,” jul 2018. [Online]. Available: https://www.nextplatform.com/
+2018/07/31/intel-fpga-architecture-focuses-on-deep-learning-inference/
+[52] M. S. Abdelfattah, D. Han, A. Bitar, R. DiCecco, S. O’Connell,
+N. Shanker, J. Chu, I. Prins, J. Fender, A. C. Ling, and G. R. Chiu,
+“DLA: Compiler and FPGA Overlay for Neural Network Inference
+Acceleration,” in 2018 28th International Conference on Field Pro-
+grammable Logic and Applications (FPL) , aug 2018, pp. 411–4117.
+[53] R. Smith, “NVIDIA Launches Tesla K80, GK210 GPU,” nov
+2014. [Online]. Available: https://www.anandtech.com/show/8729/
+nvidia-launches-tesla-k80-gk210-gpu
+[54] “NVIDIA Tesla P100.” [Online]. Available: https://www.nvidia.com/
+en-us/data-center/tesla-p100/
+[55] R. Smith, “NVIDIA Announces Tesla P100 Ac-
+celerator - Pascal GP100 Power for HPC,” apr
+2016. [Online]. Available: https://www.anandtech.com/show/10222/
+nvidia-announces-tesla-p100-accelerator-pascal-power-for-hpc
+[56] “NVIDIA Tesla V100 Tensor Core GPU,” 2019. [Online]. Available:
+https://www.nvidia.com/en-us/data-center/tesla-v100/
+[57] R. Smith, “16GB NVIDIA Tesla V100 Gets
+Reprieve; Remains in Production,” may 2018.
+[Online]. Available: https://www.anandtech.com/show/12809/
+16gb-nvidia-tesla-v100-gets-reprieve-remains-in-production
+[58] E. Kilgariff, H. Moreton, N. Stam, and B. Bell, “NVIDIA Turing
+Architecture In-Depth,” sep 2018.
+[59] ExxactCorp, “Taking a Deeper Look at AMD Radeon Instinct GPUs for
+Deep Learning,” dec 2017. [Online]. Available: https://blog.exxactcorp.
+com/taking-deeper-look-amd-radeon-instinct-gpus-deep-learning/
+[60] R. Smith, “AMD Announces Radeon Instinct MI60 &
+MI50 Accelerators Powered By 7nm Vega,” nov 2018.
+[Online]. Available: https://www.anandtech.com/show/13562/
+amd-announces-radeon-instinct-mi60-mi50-accelerators-powered-by-7nm-vega
+[61] N. Rao, “Beyond the CPU or GPU: Why Enterprise-Scale Artiﬁcial
+Intelligence Requires a More Holistic Approach,” may 2018.
+[62] P. Teich, “Tearing Apart Google’s TPU 3.0 AI Coprocessor,” may 2018.
+[63] D. Lacey, “Preliminary IPU Benchmarks,” oct
+2017. [Online]. Available: https://www.graphcore.ai/posts/
+preliminary-ipu-benchmarks-providing-previously-unseen-performance-for-a-range-of-machine-learning-applications
+[64] L. Armasu, “Move Over GPUs: Startup’s Chip
+Claims to Do Deep Learning Inference Better,” sep
+2018. [Online]. Available: https://www.tomshardware.com/news/
+habana-inference-goya-custom-chip,37821.html
+[65] M. Feldman, “AI Chip Startup Puts Inference Cards on the Table,”
+jan 2019. [Online]. Available: https://www.nextplatform.com/2019/01/
+28/ai-chip-startup-puts-inference-cards-on-the-table/
+[66] N. Hemsoth, “First In-Depth View of Wave
+Computing’s DPU Architecture, System,” aug 2017.
+[Online]. Available: https://www.nextplatform.com/2017/08/23/
+ﬁrst-depth-view-wave-computings-dpu-architecture-systems/
+
+=== PDF页 9 ===
+9
+[67] I. Cutress, “Cambricon, Maker of Hauwei’s Kirin NPU
+IP, Build a Big AI Chip and PCIe Card,” may 2018.
+[Online]. Available: https://www.anandtech.com/show/12815/
+cambricon-makers-of-huaweis-kirin-npu-ip-build-a-big-ai-chip-and-pcie-card
+[68] R. Merritt, “Baidu Accelerator Rises in AI,” jul 2018. [Online].
+Available: https://www.eetimes.com/document.asp?doc{ }id=1333449
+[69] C. Duckett, “Baidu Creates Kunlun Silicon for AI,”
+jul 2018. [Online]. Available: https://www.zdnet.com/article/
+baidu-creates-kunlun-silicon-for-ai/
+[70] P. Alcorn, “Nvidia Infuses DGX-1 with V olta, Eight V100s in a Single
+Chassis,” may 2017. [Online]. Available: https://www.tomshardware.
+com/news/nvidia-volta-v100-dgx-1-hgx-1,34380.html
+[71] I. Cutress, “NVIDIA’s DGX-2: Sixteen Tesla
+V100s, 30TB of NVMe, Only $400K,” mar
+2018. [Online]. Available: https://www.anandtech.com/show/12587/
+nvidias-dgx2-sixteen-v100-gpus-30-tb-of-nvme-only-400k
+[72] M. Feldman, “Wave Computing Launches Machine Learning
+Appliance,” apr 2017. [Online]. Available: https://www.top500.org/
+news/wave-computing-launches-machine-learning-appliance/
+[73] N. Hemsoth, “First Wave of Spiking Neural Network Hardware Hits,”
+sep 2018. [Online]. Available: https://www.nextplatform.com/2018/09/
+11/ﬁrst-wave-of-spiking-neural-network-hardware-hits/
+[74] W. Knight, “Cheaper AI for Everyone is the Promise with
+Intel and Facebook’s New Chip,” MIT Technology Review , jan
+2019. [Online]. Available: https://www.technologyreview.com/s/612722/
+cheaper-ai-for-everyone-is-the-promise-with-intel-and-facebooks-new-chip/
+[75] J. Morra, “Groq Portrays Power of Its Ar-
+tiﬁcial Intelligence Silicon,” nov 2017. [Online].
+Available: https://www.electronicdesign.com/industrial-automation/
+groq-outlines-potential-power-artiﬁcial-intelligence-chip
+[76] N. Hemsoth, “A Mythic Approach to Deep Learning Inference,” aug
+2018. [Online]. Available: https://www.nextplatform.com/2018/08/23/
+a-mythic-approach-to-deep-learning-inference/
+[77] “Announcing AWS Inferentia: Machine Learning Inference Chip,” nov
+2018.
+[78] R. Merritt, “AI Vet Pushes for Neuromorphic Chips — EE Times,”
+may 2019. [Online]. Available: https://www.eetimes.com/document.asp?
+doc{ }id=1334679{#}
+[79] W. Wong, “BrainChip Unveils Akida Architecture,” sep 2018.
+[80] R. Merritt, “BrainChip Discloses SNN Chip,” sep 2018. [Online].
+Available: https://www.eetimes.com/document.asp?doc{ }id=1333677
+[81] K. Hao, “Tesla Says Its New Self-Driving Chip Will Help Make Its Cars
+Autonomous,” MIT Technology Review, apr 2019.
+[82] A. Olofsson, “Epiphany-V: A 1024-core 64-bit RISC processor —
+Parallella,” oct 2016. [Online]. Available: https://www.parallella.org/
+2016/10/05/epiphany-v-a-1024-core-64-bit-risc-processor/
+[83] J. Horwitz, “Chinese AI chip maker Horizon Robotics raises $600
+million from SK Hynix, others - Reuters,” feb 2019. [Online]. Available:
+https://www.reuters.com/article/us-china-tech-semiconductors/
+chinese-ai-chip-maker-horizon-robotics-raises-600-million-from-sk-hynix-others-idUSKCN1QG0HW
+[84] M. Chafkin and D. Ramli, “China’s Crypto-Chips King
+Sets His Sights on AI - Bloomberg,” jun 2018. [On-
+line]. Available: https://www.bloomberg.com/news/features/2018-05-17/
+china-s-crypto-chips-king-sets-his-sights-on-ai
+[85] D. Tenenbaum, “As computing moves to cloud, UW-
+Madison spinoff offers faster, cleaner chip for data
+centers,” may 2017. [Online]. Available: https://news.wisc.edu/
+as-computing-moves-to-cloud-uw-madison-spinoff-offers-faster-cleaner-chip-for-data-centers/
+[86] J. Yoshida, “Startup Runs Spiking Neural Network on Arm —
+EE Times,” mar 2018. [Online]. Available: https://www.eetimes.com/
+document.asp?doc{ }id=1333080{#}
+[87] E. Yu, “Alibaba to launch own AI chip next year —
+ZDNet,” sep 2018. [Online]. Available: https://www.zdnet.com/article/
+alibaba-to-launch-own-ai-chip-next-year/
+[88] “Amazon Web Services Announces 13 New Machine Learning
+Services and Capabilities, Including a Custom Chip for
+Machine Learning Inference, and a 1/18 Scale Autonomous
+Race Car for Developers,” nov 2018. [Online]. Avail-
+able: https://press.aboutamazon.com/news-releases/news-release-details/
+amazon-web-services-announces-13-new-machine-learning-services
+[89] A. G. Howard, M. Zhu, B. Chen, D. Kalenichenko, W. Wang,
+T. Weyand, M. Andreetto, and H. Adam, “MobileNets: Efﬁcient
+Convolutional Neural Networks for Mobile Vision Applications,”
+arXiv preprint arXiv:1704.04861 , apr 2017. [Online]. Available:
+https://arxiv.org/abs/1704.04861
+[90] W. Liu, D. Anguelov, D. Erhan, C. Szegedy, S. Reed, C.-Y .
+Fu, and A. C. Berg, “SSD: Single Shot MultiBox Detector,” in
+Computer Vision – ECCV 2016 . Springer International Publishing,
+2016, pp. 21–37. [Online]. Available: http://link.springer.com/10.1007/
+978-3-319-46448-0 { }2
+[91] T.-Y . Lin, M. Maire, S. Belongie, J. Hays, P. Perona, D. Ramanan,
+P. Doll ´ar, and C. L. Zitnick, “Microsoft COCO: Common Objects in
+Context,” in Computer Vision – ECCV 2014 . Springer International
+Publishing, 2014, pp. 740–755. [Online]. Available: http://link.springer.
+com/10.1007/978-3-319-10602-1 { }48
+[92] M. Sandler, A. Howard, M. Zhu, A. Zhmoginov, and L.-C.
+Chen, “MobileNetV2: Inverted Residuals and Linear Bottlenecks,”
+arXiv preprint arXiv:1801.04381 , jan 2018. [Online]. Available:
+https://arxiv.org/abs/1801.04381
+[93] “Curtiss-Wright 3U Intel Single Board Computers,” 2019. [On-
+line]. Available: https://www.curtisswrightds.com/products/cots-boards/
+processor-cards/3u-intel-sbc/
+[94] “Mercury Systems BuiltSAFE CIOV-2231,” 2019. [On-
+line]. Available: https://www.mrcy.com/mission-computing-safety-dal/
+single-board-computers-products/avionics-ciov-2231/

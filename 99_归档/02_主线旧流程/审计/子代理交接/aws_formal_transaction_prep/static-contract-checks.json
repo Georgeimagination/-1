@@ -1,0 +1,93 @@
+{
+    "status":  "PASS",
+    "checks":  17,
+    "failed":  0,
+    "script_sha256":  "15664cdc8459ddb6bd34fb9fbecb7cfc00b114af3b4e16fdb6a5d16e9b1ee5a0",
+    "results":  [
+                    {
+                        "check_id":  "parser_clean",
+                        "passed":  true,
+                        "evidence":  "errors=0"
+                    },
+                    {
+                        "check_id":  "formal_temp_under_backup_root",
+                        "passed":  true,
+                        "evidence":  "transactionContainer selects BackupRoot for formal and WorkRoot for mirror"
+                    },
+                    {
+                        "check_id":  "formal_backup_manifest_before_result_write",
+                        "passed":  true,
+                        "evidence":  "backup_manifest_index=12316;result_index=17859"
+                    },
+                    {
+                        "check_id":  "formal_absence_before_result_write",
+                        "passed":  true,
+                        "evidence":  "absence_index=14405;result_index=17859"
+                    },
+                    {
+                        "check_id":  "formal_posthash_before_result_write",
+                        "passed":  true,
+                        "evidence":  "posthash_index=14649;result_index=17859"
+                    },
+                    {
+                        "check_id":  "formal_marker_before_result_write",
+                        "passed":  true,
+                        "evidence":  "marker_index=15235;result_index=17859"
+                    },
+                    {
+                        "check_id":  "formal_temp_created_after_all_preconditions",
+                        "passed":  true,
+                        "evidence":  "transaction_index=20269;candidate_index=23213;lock_index=22453"
+                    },
+                    {
+                        "check_id":  "backup_manifest_exact_25",
+                        "passed":  true,
+                        "evidence":  "25 = 20 write tables + 3 distinct guard tables + absent list + candidate posthash"
+                    },
+                    {
+                        "check_id":  "review_schema_exact",
+                        "passed":  true,
+                        "evidence":  "exact headers, fixed review ID, package ID, reviewer/date/scope"
+                    },
+                    {
+                        "check_id":  "manifest_aggregate_bound",
+                        "passed":  true,
+                        "evidence":  "dynamic aggregate over manifest in_aggregate rows"
+                    },
+                    {
+                        "check_id":  "atomic_exclusive_lock",
+                        "passed":  true,
+                        "evidence":  "CreateNew + FileShare.None + ownership tracking"
+                    },
+                    {
+                        "check_id":  "lock_failure_cleanup_owned_only",
+                        "passed":  true,
+                        "evidence":  "owned lock removed on acquisition failure and finally"
+                    },
+                    {
+                        "check_id":  "critical_full_aggregate_guard_recheck",
+                        "passed":  true,
+                        "evidence":  "full 32-table aggregate plus nine signed guards"
+                    },
+                    {
+                        "check_id":  "strict_reverse_rollback",
+                        "passed":  true,
+                        "evidence":  "actual payload and table journals traversed by descending index"
+                    },
+                    {
+                        "check_id":  "payload_delete_hash_gate",
+                        "passed":  true,
+                        "evidence":  "delete only signed created target with unchanged expected hash"
+                    },
+                    {
+                        "check_id":  "temporary_artifact_assertions",
+                        "passed":  true,
+                        "evidence":  "success and rollback temp assertions"
+                    },
+                    {
+                        "check_id":  "guard_defensive_backup_recheck",
+                        "passed":  true,
+                        "evidence":  "drift alarms; no silent guard overwrite"
+                    }
+                ]
+}

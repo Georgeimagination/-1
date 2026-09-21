@@ -1,0 +1,2 @@
+﻿"topology_id","owner_object_id","canonical_label","review_status","notes"
+"TOPO-NVG3-HIGH-RADIX","OBJ-NVIDIA-GROQ3-ARCH","Groq 3 high-radix point-to-point C2C fabric","needs_resolution","厂商原文为 high-radix point-to-point C2C fabric；现有 topology_type 枚举不能无损表达，因此不生成枚举事实，分类问题由 REQ-NVG3-TOPOLOGY-CLASS 保留"

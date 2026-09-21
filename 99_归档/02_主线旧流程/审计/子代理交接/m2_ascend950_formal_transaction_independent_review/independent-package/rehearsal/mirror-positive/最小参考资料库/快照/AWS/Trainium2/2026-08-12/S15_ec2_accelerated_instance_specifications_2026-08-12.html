@@ -1,0 +1,5279 @@
+<!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Specifications for Amazon EC2 accelerated computing instances - Amazon EC2</title><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="assets_root" content="/assets" /><meta name="target_state" content="ac" /><meta name="default_state" content="ac" /><link rel="icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="shortcut icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="canonical" href="https://docs.aws.amazon.com/ec2/latest/instancetypes/ac.html" /><meta name="description" content="Detailed specifications for Amazon EC2 accelerated computing instance types." /><meta name="deployment_region" content="IAD" /><meta name="product" content="Amazon EC2" /><meta name="guide" content="Instance Types" /><meta name="abstract" content="When you launch an instance, the instance type that you specify determines the hardware of the host computer used for your instance. Each instance type offers different compute, memory, and storage capabilities." /><meta name="guide-locale" content="en_us" /><meta name="tocs" content="toc-contents.json" /><link rel="canonical" href="https://docs.aws.amazon.com/ec2/latest/instancetypes/ac.html" /><link rel="alternate" href="https://docs.aws.amazon.com/id_id/ec2/latest/instancetypes/ac.html" hreflang="id-id" /><link rel="alternate" href="https://docs.aws.amazon.com/id_id/ec2/latest/instancetypes/ac.html" hreflang="id" /><link rel="alternate" href="https://docs.aws.amazon.com/de_de/ec2/latest/instancetypes/ac.html" hreflang="de-de" /><link rel="alternate" href="https://docs.aws.amazon.com/de_de/ec2/latest/instancetypes/ac.html" hreflang="de" /><link rel="alternate" href="https://docs.aws.amazon.com/ec2/latest/instancetypes/ac.html" hreflang="en-us" /><link rel="alternate" href="https://docs.aws.amazon.com/ec2/latest/instancetypes/ac.html" hreflang="en" /><link rel="alternate" href="https://docs.aws.amazon.com/es_es/ec2/latest/instancetypes/ac.html" hreflang="es-es" /><link rel="alternate" href="https://docs.aws.amazon.com/es_es/ec2/latest/instancetypes/ac.html" hreflang="es" /><link rel="alternate" href="https://docs.aws.amazon.com/fr_fr/ec2/latest/instancetypes/ac.html" hreflang="fr-fr" /><link rel="alternate" href="https://docs.aws.amazon.com/fr_fr/ec2/latest/instancetypes/ac.html" hreflang="fr" /><link rel="alternate" href="https://docs.aws.amazon.com/it_it/ec2/latest/instancetypes/ac.html" hreflang="it-it" /><link rel="alternate" href="https://docs.aws.amazon.com/it_it/ec2/latest/instancetypes/ac.html" hreflang="it" /><link rel="alternate" href="https://docs.aws.amazon.com/ja_jp/ec2/latest/instancetypes/ac.html" hreflang="ja-jp" /><link rel="alternate" href="https://docs.aws.amazon.com/ja_jp/ec2/latest/instancetypes/ac.html" hreflang="ja" /><link rel="alternate" href="https://docs.aws.amazon.com/ko_kr/ec2/latest/instancetypes/ac.html" hreflang="ko-kr" /><link rel="alternate" href="https://docs.aws.amazon.com/ko_kr/ec2/latest/instancetypes/ac.html" hreflang="ko" /><link rel="alternate" href="https://docs.aws.amazon.com/pt_br/ec2/latest/instancetypes/ac.html" hreflang="pt-br" /><link rel="alternate" href="https://docs.aws.amazon.com/pt_br/ec2/latest/instancetypes/ac.html" hreflang="pt" /><link rel="alternate" href="https://docs.aws.amazon.com/zh_cn/ec2/latest/instancetypes/ac.html" hreflang="zh-cn" /><link rel="alternate" href="https://docs.aws.amazon.com/zh_tw/ec2/latest/instancetypes/ac.html" hreflang="zh-tw" /><link rel="alternate" href="https://docs.aws.amazon.com/ec2/latest/instancetypes/ac.html" hreflang="x-default" /><meta name="feedback-item" content="EC2" /><meta name="this_doc_product" content="Amazon EC2" /><meta name="this_doc_guide" content="Instance Types" /><head xmlns="http://www.w3.org/1999/xhtml"> <script defer="" src="/assets/r/awsdocs-doc-page.2.0.0.js"></script><link href="/assets/r/awsdocs-doc-page.2.0.0.css" rel="stylesheet"/></head>
+<script defer="" id="awsc-panorama-bundle" type="text/javascript" src="https://prod.pa.cdn.uis.awsstatic.com/panorama-nav-init.js" data-config="{'appEntity':'aws-documentation','region':'us-east-1','service':'ec2'}"></script><meta id="panorama-serviceSubSection" value="Instance Types" /><meta id="panorama-serviceConsolePage" value="Specifications for Amazon EC2 accelerated computing instances" /></head><body class="awsdocs awsui"><div class="awsdocs-container"><p><a href="ac.md">View a markdown version of this page</a></p><awsdocs-header></awsdocs-header><awsui-app-layout id="app-layout" class="awsui-util-no-gutters" ng-controller="ContentController as $ctrl" header-selector="awsdocs-header" navigation-hide="false" navigation-width="$ctrl.navWidth" navigation-open="$ctrl.navOpen" navigation-change="$ctrl.onNavChange($event)" tools-hide="$ctrl.hideTools" tools-width="$ctrl.toolsWidth" tools-open="$ctrl.toolsOpen" tools-change="$ctrl.onToolsChange($event)"><div id="guide-toc" dom-region="navigation"><awsdocs-toc></awsdocs-toc></div><div id="main-column" dom-region="content" tabindex="-1"><awsdocs-view class="awsdocs-view"><div id="awsdocs-content"><head><title>Specifications for Amazon EC2 accelerated computing instances - Amazon EC2</title><meta name="pdf" content="/pdfs/ec2/latest/instancetypes/ec2-types.pdf#ac" /><meta name="rss" content="ec2-types.rss" /><meta name="forums" content="https://repost.aws/tags/TAO-wqN9fYRoyrpdULLa5y7g" /><meta name="feedback" content="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=EC2&amp;topic_url=https://docs.aws.amazon.com/en_us/ec2/latest/instancetypes/ac.html" /><meta name="feedback-yes" content="feedbackyes.html?topic_url=https://docs.aws.amazon.com/en_us/ec2/latest/instancetypes/ac.html" /><meta name="feedback-no" content="feedbackno.html?topic_url=https://docs.aws.amazon.com/en_us/ec2/latest/instancetypes/ac.html" /><meta name="keywords" content="Amazon EC2,ec2,EC2 instance types,EC2 graphics instance specifications,EC2 GPU instance specifications,EC2 machine learning instance specifications,EC2 FPGA instance specifications,EC2 video transcoding instance specifications" /><link rel="alternate" type="text/markdown" href="ac.md" title="Markdown version" /><script type="application/ld+json">
+{
+    "@context" : "https://schema.org",
+    "@type" : "BreadcrumbList",
+    "itemListElement" : [
+      {
+        "@type" : "ListItem",
+        "position" : 1,
+        "name" : "AWS",
+        "item" : "https://aws.amazon.com"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 2,
+        "name" : "Amazon EC2",
+        "item" : "https://docs.aws.amazon.com/ec2/index.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 3,
+        "name" : "Instance Types",
+        "item" : "https://docs.aws.amazon.com/ec2/latest/instancetypes"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 4,
+        "name" : "Amazon EC2 instance type specifications",
+        "item" : "https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-instance-type-specifications.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 5,
+        "name" : "Specifications for Amazon EC2 accelerated computing instances",
+        "item" : "https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-instance-type-specifications.html"
+      }
+    ]
+}
+</script></head><body><div id="main"><div style="display: none"><a href="/pdfs/ec2/latest/instancetypes/ec2-types.pdf#ac" target="_blank" rel="noopener noreferrer" title="Open PDF"></a></div><div id="breadcrumbs" class="breadcrumb"><a href="/index.html">Documentation</a><a href="/ec2/index.html">Amazon EC2</a><a href="instance-types.html">Instance Types</a></div><div id="page-toc-src"><a href="#ac-sizes">Instance families and instance types</a><a href="#ac_summary">Instance family summary</a><a href="#ac_hardware">Performance specifications</a><a href="#ac_network">Network specifications</a><a href="#ac_storage-ebs">Amazon EBS specifications</a><a href="#ac_instance-store">Instance store specifications</a><a href="#ac_security">Security specifications</a></div><div id="main-content" class="awsui-util-container"><div id="main-col-body"><awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner><h1 class="topictitle" id="ac">Specifications for Amazon EC2 accelerated computing instances</h1><div class="awsdocs-page-header-container"><awsdocs-page-header></awsdocs-page-header><awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector></div><p>Accelerated computing instances use hardware accelerators, or co-processors, to perform functions, 
+        such as floating point number calculations, graphics processing, or data pattern matching, more 
+        efficiently than is possible in software running on CPUs.</p><p>For information on previous generation instance types of this category, such as G3 instances,
+        see <a href="./pg.html">Specifications for Amazon EC2 previous generation instances</a>.</p><div class="highlights" id="inline-topiclist"><h6>Contents</h6><ul><li><p><a href="#ac-sizes">Instance families and instance types</a></p></li><li><p><a href="#ac_summary">Instance family summary</a></p></li><li><p><a href="#ac_hardware">Performance specifications</a></p></li><li><p><a href="#ac_network">Network specifications</a></p></li><li><p><a href="#ac_storage-ebs">Amazon EBS specifications</a></p></li><li><p><a href="#ac_instance-store">Instance store specifications</a></p></li><li><p><a href="#ac_security">Security specifications</a></p></li></ul></div>
+        <h6>Pricing</h6>
+        <p>For pricing information, see <a href="https://aws.amazon.com/ec2/pricing/on-demand/" rel="noopener noreferrer" target="_blank"><span>Amazon EC2 On-Demand Pricing</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.</p>
+     
+        <h2 id="ac-sizes">Instance families and instance types</h2>
+        <div class="table-container"><div class="table-contents"><table id="w228aab9c23c11b3"><thead>
+            <tr>
+            <th>Instance family</th>
+            <th>Available instance types</th>
+        </tr>
+        </thead>
+            <tr>
+  <td tabindex="-1">DL1</td>
+  <td tabindex="-1"><code class="code">dl1.24xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">DL2q</td>
+  <td tabindex="-1"><code class="code">dl2q.24xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">F2</td>
+  <td tabindex="-1"><code class="code">f2.6xlarge</code> | <code class="code">f2.12xlarge</code> | <code class="code">f2.48xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">G4ad</td>
+  <td tabindex="-1"><code class="code">g4ad.xlarge</code> | <code class="code">g4ad.2xlarge</code> | <code class="code">g4ad.4xlarge</code> | <code class="code">g4ad.8xlarge</code> | <code class="code">g4ad.16xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">G4dn</td>
+  <td tabindex="-1"><code class="code">g4dn.xlarge</code> | <code class="code">g4dn.2xlarge</code> | <code class="code">g4dn.4xlarge</code> | <code class="code">g4dn.8xlarge</code> | <code class="code">g4dn.12xlarge</code> | <code class="code">g4dn.16xlarge</code> | <code class="code">g4dn.metal</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">G5</td>
+  <td tabindex="-1"><code class="code">g5.xlarge</code> | <code class="code">g5.2xlarge</code> | <code class="code">g5.4xlarge</code> | <code class="code">g5.8xlarge</code> | <code class="code">g5.12xlarge</code> | <code class="code">g5.16xlarge</code> | <code class="code">g5.24xlarge</code> | <code class="code">g5.48xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">G5g</td>
+  <td tabindex="-1"><code class="code">g5g.xlarge</code> | <code class="code">g5g.2xlarge</code> | <code class="code">g5g.4xlarge</code> | <code class="code">g5g.8xlarge</code> | <code class="code">g5g.16xlarge</code> | <code class="code">g5g.metal</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">G6</td>
+  <td tabindex="-1"><code class="code">g6.xlarge</code> | <code class="code">g6.2xlarge</code> | <code class="code">g6.4xlarge</code> | <code class="code">g6.8xlarge</code> | <code class="code">g6.12xlarge</code> | <code class="code">g6.16xlarge</code> | <code class="code">g6.24xlarge</code> | <code class="code">g6.48xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">G6e</td>
+  <td tabindex="-1"><code class="code">g6e.xlarge</code> | <code class="code">g6e.2xlarge</code> | <code class="code">g6e.4xlarge</code> | <code class="code">g6e.8xlarge</code> | <code class="code">g6e.12xlarge</code> | <code class="code">g6e.16xlarge</code> | <code class="code">g6e.24xlarge</code> | <code class="code">g6e.48xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">G6f</td>
+  <td tabindex="-1"><code class="code">g6f.large</code> | <code class="code">g6f.xlarge</code> | <code class="code">g6f.2xlarge</code> | <code class="code">g6f.4xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">Gr6</td>
+  <td tabindex="-1"><code class="code">gr6.4xlarge</code> | <code class="code">gr6.8xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">Gr6f</td>
+  <td tabindex="-1"><code class="code">gr6f.4xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">G7</td>
+  <td tabindex="-1"><code class="code">g7.2xlarge</code> | <code class="code">g7.4xlarge</code> | <code class="code">g7.8xlarge</code> | <code class="code">g7.12xlarge</code> | <code class="code">g7.24xlarge</code> | <code class="code">g7.48xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">G7e</td>
+  <td tabindex="-1"><code class="code">g7e.2xlarge</code> | <code class="code">g7e.4xlarge</code> | <code class="code">g7e.8xlarge</code> | <code class="code">g7e.12xlarge</code> | <code class="code">g7e.24xlarge</code> | <code class="code">g7e.48xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">Inf1</td>
+  <td tabindex="-1"><code class="code">inf1.xlarge</code> | <code class="code">inf1.2xlarge</code> | <code class="code">inf1.6xlarge</code> | <code class="code">inf1.24xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">Inf2</td>
+  <td tabindex="-1"><code class="code">inf2.xlarge</code> | <code class="code">inf2.8xlarge</code> | <code class="code">inf2.24xlarge</code> | <code class="code">inf2.48xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">P4d</td>
+  <td tabindex="-1"><code class="code">p4d.24xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">P4de</td>
+  <td tabindex="-1"><code class="code">p4de.24xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">P5</td>
+  <td tabindex="-1"><code class="code">p5.4xlarge</code> | <code class="code">p5.48xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">P5e</td>
+  <td tabindex="-1"><code class="code">p5e.48xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">P5en</td>
+  <td tabindex="-1"><code class="code">p5en.48xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">P6-B200</td>
+  <td tabindex="-1"><code class="code">p6-b200.48xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">P6-B300</td>
+  <td tabindex="-1"><code class="code">p6-b300.48xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">P6e-GB200</td>
+  <td tabindex="-1"><code class="code">p6e-gb200.36xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">Trn1</td>
+  <td tabindex="-1"><code class="code">trn1.2xlarge</code> | <code class="code">trn1.32xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">Trn1n</td>
+  <td tabindex="-1"><code class="code">trn1n.32xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">Trn2</td>
+  <td tabindex="-1"><code class="code">trn2.3xlarge</code> | <code class="code">trn2.48xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">Trn2u</td>
+  <td tabindex="-1"><code class="code">trn2u.48xlarge</code></td>
+</tr> 
+<tr>
+  <td tabindex="-1">VT1</td>
+  <td tabindex="-1"><code class="code">vt1.3xlarge</code> | <code class="code">vt1.6xlarge</code> | <code class="code">vt1.24xlarge</code></td>
+</tr> 
+
+        </table></div></div>
+     
+        <h2 id="ac_summary">Instance family summary</h2>
+        <div class="table-container"><div class="table-contents"><table id="w228aab9c23c13b3"><thead>
+            <tr>
+                <th>Instance family</th>
+                <th>Hypervisor</th>
+                <th>Processor type (architecture)</th>
+                <th>Metal instances available</th>
+                <th>Dedicated Hosts support</th>
+                <th>Spot support</th>
+                <th>Hibernation support</th>
+                <th>Supported operating systems</th>
+            </tr>
+        </thead>
+            <tr>
+  <td tabindex="-1">DL1</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v3</a></td>
+  <td tabindex="-1">Intel (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">DL2q</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v3</a></td>
+  <td tabindex="-1">Intel (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">F2</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v4</a></td>
+  <td tabindex="-1">AMD (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">G4ad</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v3</a></td>
+  <td tabindex="-1">AMD (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Windows | Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">G4dn</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v3</a></td>
+  <td tabindex="-1">Intel (x86_64)</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Windows | Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">G5</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v3</a></td>
+  <td tabindex="-1">AMD (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Windows | Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">G5g</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v2</a></td>
+  <td tabindex="-1">AWS Graviton (arm64)</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">G6</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v4</a></td>
+  <td tabindex="-1">AMD (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Windows | Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">G6e</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v4</a></td>
+  <td tabindex="-1">AMD (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Windows | Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">G6f</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v4</a></td>
+  <td tabindex="-1">AMD (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Windows | Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">Gr6</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v4</a></td>
+  <td tabindex="-1">AMD (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Windows | Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">Gr6f</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v4</a></td>
+  <td tabindex="-1">AMD (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Windows | Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">G7</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v6</a></td>
+  <td tabindex="-1">Intel (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Windows | Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">G7e</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v6</a></td>
+  <td tabindex="-1">Intel (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Windows | Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">Inf1</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v3</a></td>
+  <td tabindex="-1">Intel (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">Inf2</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v4</a></td>
+  <td tabindex="-1">AMD (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">P4d</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v3</a></td>
+  <td tabindex="-1">Intel (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">P4de</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v3</a></td>
+  <td tabindex="-1">Intel (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">P5</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v4</a></td>
+  <td tabindex="-1">AMD (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Windows (<code class="code">p5.4xlarge</code> only) | Linux <sup>1</sup></td>
+</tr>
+<tr>
+  <td tabindex="-1">P5e</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v4</a></td>
+  <td tabindex="-1">AMD (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">P5en</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v5</a></td>
+  <td tabindex="-1">Intel (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">P6-B200</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v6</a></td>
+  <td tabindex="-1">Intel (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">P6-B300</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v6</a></td>
+  <td tabindex="-1">Intel (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">P6e-GB200</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v5</a></td>
+  <td tabindex="-1">NVIDIA Grace (arm64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">Trn1</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v4</a></td>
+  <td tabindex="-1">Intel (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">Trn1n</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v4</a></td>
+  <td tabindex="-1">Intel (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">Trn2</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v5</a></td>
+  <td tabindex="-1">Intel (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">Trn2u</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v5</a></td>
+  <td tabindex="-1">Intel (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Linux</td>
+</tr>
+<tr>
+  <td tabindex="-1">VT1</td>
+  <td tabindex="-1"><a href="./ec2-nitro-instances.html">Nitro v3</a></td>
+  <td tabindex="-1">Intel (x86_64)</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Linux</td>
+</tr>
+
+        </table></div></div>
+        <div class="awsdocs-note"><div class="awsdocs-note-title"><awsui-icon name="status-info" variant="link"></awsui-icon><h6>Note</h6></div><div class="awsdocs-note-text"><p><sup>1</sup> <code class="code">p5.4xlarge</code> supports both Windows and 
+                Linux operating systems. <code class="code">p5.48xlarge</code> supports Linux operating systems only.</p></div></div>
+     
+        <h2 id="ac_hardware">Performance specifications</h2>
+        <div class="table-container"><div class="table-contents"><table id="w228aab9c23c15b3"><thead>
+            <tr>
+                <th>Instance type</th>
+                <th>Memory (GiB)</th>
+                <th>Processor</th>
+                <th>vCPUs</th>
+                <th>CPU cores</th>
+                <th>Threads per core</th>
+                <th>Accelerators</th>
+                <th>Accelerator memory</th>
+            </tr>
+        </thead>
+            <tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>DL1</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">dl1.24xlarge</td>
+  <td tabindex="-1">768.00</td>
+  <td tabindex="-1">Intel Xeon Platinum 8275CL</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">48</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">8 x Habana Gaudi HL-205 GPU</td>
+  <td tabindex="-1">256 GiB (8 x 32 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>DL2q</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">dl2q.24xlarge</td>
+  <td tabindex="-1">768.00</td>
+  <td tabindex="-1">Intel Xeon Cascade Lake</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">48</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">8 x Qualcomm Qualcomm AI100 inference accelerator</td>
+  <td tabindex="-1">125 GiB (8 x 15 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>F2</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">f2.6xlarge</td>
+  <td tabindex="-1">256.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">24</td>
+  <td tabindex="-1">12</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x Xilinx Virtex UltraScale+ (VU47P) FPGA</td>
+  <td tabindex="-1">80 GiB (1 x 80 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">f2.12xlarge</td>
+  <td tabindex="-1">512.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">48</td>
+  <td tabindex="-1">24</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">2 x Xilinx Virtex UltraScale+ (VU47P) FPGA</td>
+  <td tabindex="-1">160 GiB (2 x 80 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">f2.48xlarge</td>
+  <td tabindex="-1">2048.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">192</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">8 x Xilinx Virtex UltraScale+ (VU47P) FPGA</td>
+  <td tabindex="-1">640 GiB (8 x 80 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>G4ad</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4ad.xlarge</td>
+  <td tabindex="-1">16.00</td>
+  <td tabindex="-1">2nd Gen AMD EPYC 7R32</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x AMD Radeon Pro V520 GPU</td>
+  <td tabindex="-1">8 GiB (1 x 8 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4ad.2xlarge</td>
+  <td tabindex="-1">32.00</td>
+  <td tabindex="-1">2nd Gen AMD EPYC 7R32</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x AMD Radeon Pro V520 GPU</td>
+  <td tabindex="-1">8 GiB (1 x 8 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4ad.4xlarge</td>
+  <td tabindex="-1">64.00</td>
+  <td tabindex="-1">2nd Gen AMD EPYC 7R32</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x AMD Radeon Pro V520 GPU</td>
+  <td tabindex="-1">8 GiB (1 x 8 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4ad.8xlarge</td>
+  <td tabindex="-1">128.00</td>
+  <td tabindex="-1">2nd Gen AMD EPYC 7R32</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">2 x AMD Radeon Pro V520 GPU</td>
+  <td tabindex="-1">16 GiB (2 x 8 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4ad.16xlarge</td>
+  <td tabindex="-1">256.00</td>
+  <td tabindex="-1">2nd Gen AMD EPYC 7R32</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">4 x AMD Radeon Pro V520 GPU</td>
+  <td tabindex="-1">32 GiB (4 x 8 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>G4dn</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.xlarge</td>
+  <td tabindex="-1">16.00</td>
+  <td tabindex="-1">Intel Xeon P-8259L</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA T4 GPU</td>
+  <td tabindex="-1">16 GiB (1 x 16 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.2xlarge</td>
+  <td tabindex="-1">32.00</td>
+  <td tabindex="-1">Intel Xeon P-8259L</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA T4 GPU</td>
+  <td tabindex="-1">16 GiB (1 x 16 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.4xlarge</td>
+  <td tabindex="-1">64.00</td>
+  <td tabindex="-1">Intel Xeon P-8259L</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA T4 GPU</td>
+  <td tabindex="-1">16 GiB (1 x 16 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.8xlarge</td>
+  <td tabindex="-1">128.00</td>
+  <td tabindex="-1">Intel Xeon P-8259L</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA T4 GPU</td>
+  <td tabindex="-1">16 GiB (1 x 16 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.12xlarge</td>
+  <td tabindex="-1">192.00</td>
+  <td tabindex="-1">Intel Xeon P-8259L</td>
+  <td tabindex="-1">48</td>
+  <td tabindex="-1">24</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">4 x NVIDIA T4 GPU</td>
+  <td tabindex="-1">64 GiB (4 x 16 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.16xlarge</td>
+  <td tabindex="-1">256.00</td>
+  <td tabindex="-1">Intel Xeon P-8259L</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA T4 GPU</td>
+  <td tabindex="-1">16 GiB (1 x 16 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.metal</td>
+  <td tabindex="-1">384.00</td>
+  <td tabindex="-1">Intel Xeon P-8259L</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">48</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">8 x NVIDIA T4 GPU</td>
+  <td tabindex="-1">128 GiB (8 x 16 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>G5</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.xlarge</td>
+  <td tabindex="-1">16.00</td>
+  <td tabindex="-1">2nd Gen AMD EPYC 7R32</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA A10G GPU</td>
+  <td tabindex="-1">22 GiB (1 x 22 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.2xlarge</td>
+  <td tabindex="-1">32.00</td>
+  <td tabindex="-1">2nd Gen AMD EPYC 7R32</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA A10G GPU</td>
+  <td tabindex="-1">22 GiB (1 x 22 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.4xlarge</td>
+  <td tabindex="-1">64.00</td>
+  <td tabindex="-1">2nd Gen AMD EPYC 7R32</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA A10G GPU</td>
+  <td tabindex="-1">22 GiB (1 x 22 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.8xlarge</td>
+  <td tabindex="-1">128.00</td>
+  <td tabindex="-1">2nd Gen AMD EPYC 7R32</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA A10G GPU</td>
+  <td tabindex="-1">22 GiB (1 x 22 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.12xlarge</td>
+  <td tabindex="-1">192.00</td>
+  <td tabindex="-1">2nd Gen AMD EPYC 7R32</td>
+  <td tabindex="-1">48</td>
+  <td tabindex="-1">24</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">4 x NVIDIA A10G GPU</td>
+  <td tabindex="-1">89 GiB (4 x 22 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.16xlarge</td>
+  <td tabindex="-1">256.00</td>
+  <td tabindex="-1">2nd Gen AMD EPYC 7R32</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA A10G GPU</td>
+  <td tabindex="-1">22 GiB (1 x 22 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.24xlarge</td>
+  <td tabindex="-1">384.00</td>
+  <td tabindex="-1">2nd Gen AMD EPYC 7R32</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">48</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">4 x NVIDIA A10G GPU</td>
+  <td tabindex="-1">89 GiB (4 x 22 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.48xlarge</td>
+  <td tabindex="-1">768.00</td>
+  <td tabindex="-1">2nd Gen AMD EPYC 7R32</td>
+  <td tabindex="-1">192</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">8 x NVIDIA A10G GPU</td>
+  <td tabindex="-1">178 GiB (8 x 22 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>G5g</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5g.xlarge</td>
+  <td tabindex="-1">8.00</td>
+  <td tabindex="-1">AWS Graviton2 Processor</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">1 x NVIDIA T4g GPU</td>
+  <td tabindex="-1">16 GiB (1 x 16 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5g.2xlarge</td>
+  <td tabindex="-1">16.00</td>
+  <td tabindex="-1">AWS Graviton2 Processor</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">1 x NVIDIA T4g GPU</td>
+  <td tabindex="-1">16 GiB (1 x 16 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5g.4xlarge</td>
+  <td tabindex="-1">32.00</td>
+  <td tabindex="-1">AWS Graviton2 Processor</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">1 x NVIDIA T4g GPU</td>
+  <td tabindex="-1">16 GiB (1 x 16 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5g.8xlarge</td>
+  <td tabindex="-1">64.00</td>
+  <td tabindex="-1">AWS Graviton2 Processor</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">1 x NVIDIA T4g GPU</td>
+  <td tabindex="-1">16 GiB (1 x 16 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5g.16xlarge</td>
+  <td tabindex="-1">128.00</td>
+  <td tabindex="-1">AWS Graviton2 Processor</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">2 x NVIDIA T4g GPU</td>
+  <td tabindex="-1">32 GiB (2 x 16 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5g.metal</td>
+  <td tabindex="-1">128.00</td>
+  <td tabindex="-1">AWS Graviton2 Processor</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">2 x NVIDIA T4g GPU</td>
+  <td tabindex="-1">32 GiB (2 x 16 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>G6</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.xlarge</td>
+  <td tabindex="-1">16.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA L4 GPU</td>
+  <td tabindex="-1">22 GiB (1 x 22 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.2xlarge</td>
+  <td tabindex="-1">32.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA L4 GPU</td>
+  <td tabindex="-1">22 GiB (1 x 22 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.4xlarge</td>
+  <td tabindex="-1">64.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA L4 GPU</td>
+  <td tabindex="-1">22 GiB (1 x 22 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.8xlarge</td>
+  <td tabindex="-1">128.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA L4 GPU</td>
+  <td tabindex="-1">22 GiB (1 x 22 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.12xlarge</td>
+  <td tabindex="-1">192.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">48</td>
+  <td tabindex="-1">24</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">4 x NVIDIA L4 GPU</td>
+  <td tabindex="-1">89 GiB (4 x 22 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.16xlarge</td>
+  <td tabindex="-1">256.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA L4 GPU</td>
+  <td tabindex="-1">22 GiB (1 x 22 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.24xlarge</td>
+  <td tabindex="-1">384.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">48</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">4 x NVIDIA L4 GPU</td>
+  <td tabindex="-1">89 GiB (4 x 22 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.48xlarge</td>
+  <td tabindex="-1">768.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">192</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">8 x NVIDIA L4 GPU</td>
+  <td tabindex="-1">178 GiB (8 x 22 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>G6e</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.xlarge</td>
+  <td tabindex="-1">32.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA L40S GPU</td>
+  <td tabindex="-1">44 GiB (1 x 44 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.2xlarge</td>
+  <td tabindex="-1">64.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA L40S GPU</td>
+  <td tabindex="-1">44 GiB (1 x 44 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.4xlarge</td>
+  <td tabindex="-1">128.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA L40S GPU</td>
+  <td tabindex="-1">44 GiB (1 x 44 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.8xlarge</td>
+  <td tabindex="-1">256.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA L40S GPU</td>
+  <td tabindex="-1">44 GiB (1 x 44 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.12xlarge</td>
+  <td tabindex="-1">384.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">48</td>
+  <td tabindex="-1">24</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">4 x NVIDIA L40S GPU</td>
+  <td tabindex="-1">178 GiB (4 x 44 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.16xlarge</td>
+  <td tabindex="-1">512.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA L40S GPU</td>
+  <td tabindex="-1">44 GiB (1 x 44 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.24xlarge</td>
+  <td tabindex="-1">768.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">48</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">4 x NVIDIA L40S GPU</td>
+  <td tabindex="-1">178 GiB (4 x 44 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.48xlarge</td>
+  <td tabindex="-1">1536.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">192</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">8 x NVIDIA L40S GPU</td>
+  <td tabindex="-1">357 GiB (8 x 44 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>G6f</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6f.large</td>
+  <td tabindex="-1">8.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">0.125 x NVIDIA L4 GPU</td>
+  <td tabindex="-1">2.79 GiB</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6f.xlarge</td>
+  <td tabindex="-1">16.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">0.125 x NVIDIA L4 GPU</td>
+  <td tabindex="-1">2.79 GiB</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6f.2xlarge</td>
+  <td tabindex="-1">32.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">0.25 x NVIDIA L4 GPU</td>
+  <td tabindex="-1">5.59 GiB</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6f.4xlarge</td>
+  <td tabindex="-1">64.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">0.5 x NVIDIA L4 GPU</td>
+  <td tabindex="-1">11.18 GiB</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>Gr6</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">gr6.4xlarge</td>
+  <td tabindex="-1">128.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA L4 GPU</td>
+  <td tabindex="-1">22 GiB (1 x 22 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">gr6.8xlarge</td>
+  <td tabindex="-1">256.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA L4 GPU</td>
+  <td tabindex="-1">22 GiB (1 x 22 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>Gr6f</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">gr6f.4xlarge</td>
+  <td tabindex="-1">128.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">0.5 x NVIDIA L4 GPU</td>
+  <td tabindex="-1">11.18 GiB</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>G7</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.2xlarge</td>
+  <td tabindex="-1">32.00</td>
+  <td tabindex="-1">Intel Xeon Granite Rapids</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">1 x NVIDIA RTX PRO 4500 GPU</td>
+  <td tabindex="-1">32 GiB (1 x 32 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.4xlarge</td>
+  <td tabindex="-1">64.00</td>
+  <td tabindex="-1">Intel Xeon Granite Rapids</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">1 x NVIDIA RTX PRO 4500 GPU</td>
+  <td tabindex="-1">32 GiB (1 x 32 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.8xlarge</td>
+  <td tabindex="-1">128.00</td>
+  <td tabindex="-1">Intel Xeon Granite Rapids</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">1 x NVIDIA RTX PRO 4500 GPU</td>
+  <td tabindex="-1">32 GiB (1 x 32 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.12xlarge</td>
+  <td tabindex="-1">192.00</td>
+  <td tabindex="-1">Intel Xeon Granite Rapids</td>
+  <td tabindex="-1">48</td>
+  <td tabindex="-1">48</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">2 x NVIDIA RTX PRO 4500 GPU</td>
+  <td tabindex="-1">64 GiB (2 x 32 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.24xlarge</td>
+  <td tabindex="-1">384.00</td>
+  <td tabindex="-1">Intel Xeon Granite Rapids</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">4 x NVIDIA RTX PRO 4500 GPU</td>
+  <td tabindex="-1">128 GiB (4 x 32 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.48xlarge</td>
+  <td tabindex="-1">768.00</td>
+  <td tabindex="-1">Intel Xeon Granite Rapids</td>
+  <td tabindex="-1">192</td>
+  <td tabindex="-1">192</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8 x NVIDIA RTX PRO 4500 GPU</td>
+  <td tabindex="-1">256 GiB (8 x 32 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>G7e</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.2xlarge</td>
+  <td tabindex="-1">64.00</td>
+  <td tabindex="-1">Intel Xeon Emerald Rapids</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA RTX PRO Server 6000 GPU</td>
+  <td tabindex="-1">96 GiB (1 x 96 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.4xlarge</td>
+  <td tabindex="-1">128.00</td>
+  <td tabindex="-1">Intel Xeon Emerald Rapids</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA RTX PRO Server 6000 GPU</td>
+  <td tabindex="-1">96 GiB (1 x 96 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.8xlarge</td>
+  <td tabindex="-1">256.00</td>
+  <td tabindex="-1">Intel Xeon Emerald Rapids</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA RTX PRO Server 6000 GPU</td>
+  <td tabindex="-1">96 GiB (1 x 96 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.12xlarge</td>
+  <td tabindex="-1">512.00</td>
+  <td tabindex="-1">Intel Xeon Emerald Rapids</td>
+  <td tabindex="-1">48</td>
+  <td tabindex="-1">24</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">2 x NVIDIA RTX PRO Server 6000 GPU</td>
+  <td tabindex="-1">192 GiB (2 x 96 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.24xlarge</td>
+  <td tabindex="-1">1024.00</td>
+  <td tabindex="-1">Intel Xeon Emerald Rapids</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">48</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">4 x NVIDIA RTX PRO Server 6000 GPU</td>
+  <td tabindex="-1">384 GiB (4 x 96 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.48xlarge</td>
+  <td tabindex="-1">2048.00</td>
+  <td tabindex="-1">Intel Xeon Emerald Rapids</td>
+  <td tabindex="-1">192</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">8 x NVIDIA RTX PRO Server 6000 GPU</td>
+  <td tabindex="-1">768 GiB (8 x 96 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>Inf1</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf1.xlarge</td>
+  <td tabindex="-1">8.00</td>
+  <td tabindex="-1">Intel Xeon P-8259L</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x AWS Inferentia inference accelerator</td>
+  <td tabindex="-1">8 GiB (1 x 8 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf1.2xlarge</td>
+  <td tabindex="-1">16.00</td>
+  <td tabindex="-1">Intel Xeon P-8259L</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x AWS Inferentia inference accelerator</td>
+  <td tabindex="-1">8 GiB (1 x 8 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf1.6xlarge</td>
+  <td tabindex="-1">48.00</td>
+  <td tabindex="-1">Intel Xeon P-8259L</td>
+  <td tabindex="-1">24</td>
+  <td tabindex="-1">12</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">4 x AWS Inferentia inference accelerator</td>
+  <td tabindex="-1">32 GiB (4 x 8 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf1.24xlarge</td>
+  <td tabindex="-1">192.00</td>
+  <td tabindex="-1">Intel Xeon P-8259L</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">48</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">16 x AWS Inferentia inference accelerator</td>
+  <td tabindex="-1">128 GiB (16 x 8 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>Inf2</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf2.xlarge</td>
+  <td tabindex="-1">16.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x AWS Inferentia2 inference accelerator</td>
+  <td tabindex="-1">32 GiB (1 x 32 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf2.8xlarge</td>
+  <td tabindex="-1">128.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x AWS Inferentia2 inference accelerator</td>
+  <td tabindex="-1">32 GiB (1 x 32 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf2.24xlarge</td>
+  <td tabindex="-1">384.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">48</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">6 x AWS Inferentia2 inference accelerator</td>
+  <td tabindex="-1">192 GiB (6 x 32 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf2.48xlarge</td>
+  <td tabindex="-1">768.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">192</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">12 x AWS Inferentia2 inference accelerator</td>
+  <td tabindex="-1">384 GiB (12 x 32 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>P4d</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p4d.24xlarge</td>
+  <td tabindex="-1">1152.00</td>
+  <td tabindex="-1">Intel Xeon Platinum 8275CL</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">48</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">8 x NVIDIA A100 GPU</td>
+  <td tabindex="-1">320 GiB (8 x 40 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>P4de</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p4de.24xlarge</td>
+  <td tabindex="-1">1152.00</td>
+  <td tabindex="-1">Intel Xeon Platinum 8275CL</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">48</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">8 x NVIDIA A100 GPU</td>
+  <td tabindex="-1">640 GiB (8 x 80 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>P5</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p5.4xlarge</td>
+  <td tabindex="-1">256.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x NVIDIA H100 GPU</td>
+  <td tabindex="-1">80 GiB (1 x 80 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">p5.48xlarge</td>
+  <td tabindex="-1">2048.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">192</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">8 x NVIDIA H100 GPU</td>
+  <td tabindex="-1">640 GiB (8 x 80 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>P5e</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p5e.48xlarge</td>
+  <td tabindex="-1">2048.00</td>
+  <td tabindex="-1">AMD EPYC 7R13</td>
+  <td tabindex="-1">192</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">8 x NVIDIA H200 GPU</td>
+  <td tabindex="-1">1128 GiB (8 x 141 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>P5en</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p5en.48xlarge</td>
+  <td tabindex="-1">2048.00</td>
+  <td tabindex="-1">Intel Xeon Sapphire Rapids</td>
+  <td tabindex="-1">192</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">8 x NVIDIA H200 GPU</td>
+  <td tabindex="-1">1128 GiB (8 x 141 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>P6-B200</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p6-b200.48xlarge</td>
+  <td tabindex="-1">2048.00</td>
+  <td tabindex="-1">Intel Xeon Emerald Rapids</td>
+  <td tabindex="-1">192</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">8 x NVIDIA B200 GPU</td>
+  <td tabindex="-1">1432 GiB (8 x 179 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>P6-B300</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p6-b300.48xlarge</td>
+  <td tabindex="-1">4096.00</td>
+  <td tabindex="-1">Intel Xeon Emerald Rapids</td>
+  <td tabindex="-1">192</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">8 x NVIDIA B300 GPU</td>
+  <td tabindex="-1">2148 GiB (8 x 268 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>P6e-GB200</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p6e-gb200.36xlarge</td>
+  <td tabindex="-1">960.00</td>
+  <td tabindex="-1">Nvidia Grace CPU</td>
+  <td tabindex="-1">144</td>
+  <td tabindex="-1">144</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">4 x NVIDIA B200 GPU</td>
+  <td tabindex="-1">740 GiB (4 x 185 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>Trn1</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn1.2xlarge</td>
+  <td tabindex="-1">32.00</td>
+  <td tabindex="-1">Intel Xeon Ice Lake 8375C</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x AWS Trainium accelerators</td>
+  <td tabindex="-1">32 GiB (1 x 32 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn1.32xlarge</td>
+  <td tabindex="-1">512.00</td>
+  <td tabindex="-1">Intel Xeon Ice Lake 8375C</td>
+  <td tabindex="-1">128</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">16 x AWS Trainium accelerators</td>
+  <td tabindex="-1">512 GiB (16 x 32 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>Trn1n</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn1n.32xlarge</td>
+  <td tabindex="-1">512.00</td>
+  <td tabindex="-1">Intel Xeon Ice Lake</td>
+  <td tabindex="-1">128</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">16 x AWS Trainium accelerators</td>
+  <td tabindex="-1">512 GiB (16 x 32 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>Trn2</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn2.3xlarge</td>
+  <td tabindex="-1">128.00</td>
+  <td tabindex="-1">Intel Xeon Sapphire Rapids</td>
+  <td tabindex="-1">12</td>
+  <td tabindex="-1">6</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x AWS Trainium2 accelerators</td>
+  <td tabindex="-1">512 GiB (1 x 512 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn2.48xlarge</td>
+  <td tabindex="-1">2048.00</td>
+  <td tabindex="-1">Intel Xeon Sapphire Rapids</td>
+  <td tabindex="-1">192</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">16 x AWS Trainium2 accelerators</td>
+  <td tabindex="-1">8192 GiB (16 x 512 GiB)</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>Trn2u</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn2u.48xlarge</td>
+  <td tabindex="-1">2048.00</td>
+  <td tabindex="-1">Intel Xeon Sapphire Rapids</td>
+  <td tabindex="-1">192</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+</tr>
+<tr> 
+  <td colspan="8" align="center" style="text-align: center;" tabindex="-1"><b>VT1</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">vt1.3xlarge</td>
+  <td tabindex="-1">24.00</td>
+  <td tabindex="-1">Intel Cascade Lake P-8259CL</td>
+  <td tabindex="-1">12</td>
+  <td tabindex="-1">6</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1 x Xilinx U30 media accelerator</td>
+  <td tabindex="-1">24 GiB (1 x 24 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">vt1.6xlarge</td>
+  <td tabindex="-1">48.00</td>
+  <td tabindex="-1">Intel Cascade Lake P-8259CL</td>
+  <td tabindex="-1">24</td>
+  <td tabindex="-1">12</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">2 x Xilinx U30 media accelerator</td>
+  <td tabindex="-1">48 GiB (2 x 24 GiB)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">vt1.24xlarge</td>
+  <td tabindex="-1">192.00</td>
+  <td tabindex="-1">Intel Cascade Lake P-8259CL</td>
+  <td tabindex="-1">96</td>
+  <td tabindex="-1">48</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">8 x Xilinx U30 media accelerator</td>
+  <td tabindex="-1">192 GiB (8 x 24 GiB)</td>
+</tr>
+
+        </table></div></div>    
+     
+        <h2 id="ac_network">Network specifications</h2>
+        <div class="table-container"><div class="table-contents"><table id="w228aab9c23c17b3"><thead>
+            <tr>
+                <th>Instance type</th>
+                <th>Baseline / Burst bandwidth (Gbps)</th>
+                <th>EFA</th>
+                <th>ENA</th>
+                <th>ENA Express</th>
+                <th>ENA queues per interface (Default/Maximum)</th>
+                <th>Network cards</th>
+                <th>Max. network interfaces</th>
+                <th>IP addresses per interface</th>
+                <th>IPv6</th>
+            </tr>
+        </thead>
+            <tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>DL1</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">dl1.24xlarge <sup>2</sup></td>
+  <td tabindex="-1">4x 100 Gigabit</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">60</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>DL2q</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">dl2q.24xlarge <sup>2</sup></td>
+  <td tabindex="-1">100 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>F2</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">f2.6xlarge <sup>2</sup></td>
+  <td tabindex="-1">12.5 Gigabit</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">30</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">f2.12xlarge <sup>2</sup></td>
+  <td tabindex="-1">25 Gigabit</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">30</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">f2.48xlarge <sup>2</sup></td>
+  <td tabindex="-1">100 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>G4ad</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4ad.xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">2.0 / 10.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4ad.2xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">4.167 / 10.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4ad.4xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">8.333 / 10.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">3</td>
+  <td tabindex="-1">10</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4ad.8xlarge <sup>2</sup></td>
+  <td tabindex="-1">15 Gigabit</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4ad.16xlarge <sup>2</sup></td>
+  <td tabindex="-1">25 Gigabit</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">30</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>G4dn</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">5.0 / 25.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">3</td>
+  <td tabindex="-1">10</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.2xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">10.0 / 25.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">3</td>
+  <td tabindex="-1">10</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.4xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">20.0 / 25.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">3</td>
+  <td tabindex="-1">10</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.8xlarge <sup>2</sup></td>
+  <td tabindex="-1">50 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.12xlarge <sup>2</sup></td>
+  <td tabindex="-1">50 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">30</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.16xlarge <sup>2</sup></td>
+  <td tabindex="-1">50 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.metal <sup>2</sup></td>
+  <td tabindex="-1">100 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>G5</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">2.5 / 10.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.2xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">5.0 / 10.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.4xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">10.0 / 25.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">30</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.8xlarge <sup>2</sup></td>
+  <td tabindex="-1">25 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">30</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.12xlarge <sup>2</sup></td>
+  <td tabindex="-1">40 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.16xlarge <sup>2</sup></td>
+  <td tabindex="-1">25 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">30</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.24xlarge <sup>2</sup></td>
+  <td tabindex="-1">50 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.48xlarge <sup>2</sup></td>
+  <td tabindex="-1">100 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">7</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>G5g</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5g.xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">1.25 / 10.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5g.2xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">2.5 / 10.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5g.4xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">5.0 / 10.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">30</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5g.8xlarge <sup>2</sup></td>
+  <td tabindex="-1">12 Gigabit</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">30</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5g.16xlarge <sup>2</sup></td>
+  <td tabindex="-1">25 Gigabit</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5g.metal <sup>2</sup></td>
+  <td tabindex="-1">25 Gigabit</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>G6</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">2.5 / 10.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.2xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">5.0 / 10.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.4xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">10.0 / 25.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">30</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.8xlarge <sup>2</sup></td>
+  <td tabindex="-1">25 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">30</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.12xlarge <sup>2</sup></td>
+  <td tabindex="-1">40 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">30</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.16xlarge <sup>2</sup></td>
+  <td tabindex="-1">25 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.24xlarge <sup>2</sup></td>
+  <td tabindex="-1">50 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.48xlarge <sup>2</sup></td>
+  <td tabindex="-1">100 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>G6e</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">2.5 / 20.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.2xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">5.0 / 20.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.4xlarge <sup>2</sup></td>
+  <td tabindex="-1">20 Gigabit</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">30</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.8xlarge <sup>2</sup></td>
+  <td tabindex="-1">25 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">30</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.12xlarge <sup>2</sup></td>
+  <td tabindex="-1">100 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">10</td>
+  <td tabindex="-1">30</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.16xlarge <sup>2</sup></td>
+  <td tabindex="-1">35 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.24xlarge <sup>2</sup></td>
+  <td tabindex="-1">200 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">20</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.48xlarge <sup>2</sup></td>
+  <td tabindex="-1">400 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">40</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>G6f</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6f.large <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">1.5 / 10.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">10</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6f.xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">2.5 / 10.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6f.2xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">5.0 / 10.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6f.4xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">10.0 / 25.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">30</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>Gr6</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">gr6.4xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">10.0 / 25.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">30</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">gr6.8xlarge <sup>2</sup></td>
+  <td tabindex="-1">25 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">30</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>Gr6f</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">gr6f.4xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">10.0 / 25.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">30</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>G7</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.2xlarge <sup>1</sup></td>
+  <td tabindex="-1">40.0 / 60.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8 / 8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.4xlarge <sup>1</sup></td>
+  <td tabindex="-1">80.0 / 100.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8 / 16</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.8xlarge</td>
+  <td tabindex="-1">100 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8 / 32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">10</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.12xlarge</td>
+  <td tabindex="-1">175 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">16 / 64</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">12</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.24xlarge</td>
+  <td tabindex="-1">350 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">16 / 128</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">24</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.48xlarge</td>
+  <td tabindex="-1">700 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">32 / 128</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">24</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>G7e</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.2xlarge <sup>2</sup></td>
+  <td tabindex="-1">50 Gigabit</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.4xlarge <sup>2</sup></td>
+  <td tabindex="-1">50 Gigabit</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.8xlarge <sup>2</sup></td>
+  <td tabindex="-1">100 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.12xlarge <sup>2</sup></td>
+  <td tabindex="-1">400 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">10</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.24xlarge <sup>2</sup></td>
+  <td tabindex="-1">800 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">20</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.48xlarge <sup>2</sup></td>
+  <td tabindex="-1">1600 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">40</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>Inf1</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf1.xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">5.0 / 25.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">10</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf1.2xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">5.0 / 25.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">10</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf1.6xlarge <sup>2</sup></td>
+  <td tabindex="-1">25 Gigabit</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">30</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf1.24xlarge <sup>2</sup></td>
+  <td tabindex="-1">100 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">11</td>
+  <td tabindex="-1">30</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>Inf2</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf2.xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">2.083 / 15.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf2.8xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">16.667 / 25.0</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">30</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf2.24xlarge <sup>2</sup></td>
+  <td tabindex="-1">50 Gigabit</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf2.48xlarge <sup>2</sup></td>
+  <td tabindex="-1">100 Gigabit</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>P4d</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p4d.24xlarge <sup>2</sup></td>
+  <td tabindex="-1">4x 100 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">60</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>P4de</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p4de.24xlarge <sup>2</sup></td>
+  <td tabindex="-1">4x 100 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">60</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>P5</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p5.4xlarge <sup>2</sup></td>
+  <td tabindex="-1">100 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">30</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">p5.48xlarge <sup>2</sup></td>
+  <td tabindex="-1">3200 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>P5e</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p5e.48xlarge <sup>2</sup></td>
+  <td tabindex="-1">3200 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>P5en</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p5en.48xlarge <sup>2</sup></td>
+  <td tabindex="-1">3200 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">64</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>P6-B200</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p6-b200.48xlarge <sup>2</sup></td>
+  <td tabindex="-1">3200 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>P6-B300</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p6-b300.48xlarge <sup>2</sup></td>
+  <td tabindex="-1">6400 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">17</td>
+  <td tabindex="-1">68</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>P6e-GB200</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p6e-gb200.36xlarge <sup>2</sup></td>
+  <td tabindex="-1">3200 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">17</td>
+  <td tabindex="-1">39</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>Trn1</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn1.2xlarge <sup>1</sup> <sup>2</sup></td>
+  <td tabindex="-1">3.125 / 12.5</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn1.32xlarge <sup>2</sup></td>
+  <td tabindex="-1">8x 100 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">40</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>Trn1n</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn1n.32xlarge <sup>2</sup></td>
+  <td tabindex="-1">16x 100 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">80</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>Trn2</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn2.3xlarge <sup>2</sup></td>
+  <td tabindex="-1">200 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">2</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn2.48xlarge <sup>2</sup></td>
+  <td tabindex="-1">16x 200 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>Trn2u</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn2u.48xlarge <sup>2</sup></td>
+  <td tabindex="-1">16x 200 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">16</td>
+  <td tabindex="-1">32</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="10" align="center" style="text-align: center;" tabindex="-1"><b>VT1</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">vt1.3xlarge <sup>2</sup></td>
+  <td tabindex="-1">3.12 Gigabit</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">4</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">vt1.6xlarge <sup>2</sup></td>
+  <td tabindex="-1">6.25 Gigabit</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">30</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">vt1.24xlarge <sup>2</sup></td>
+  <td tabindex="-1">25 Gigabit</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">8</td>
+  <td tabindex="-1">1</td>
+  <td tabindex="-1">15</td>
+  <td tabindex="-1">50</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+
+        </table></div></div>
+        <div class="awsdocs-note"><div class="awsdocs-note-title"><awsui-icon name="status-info" variant="link"></awsui-icon><h6>Note</h6></div><div class="awsdocs-note-text"><p><sup>1</sup> These instances have a baseline bandwidth and can
+                use a network I/O credit mechanism to burst beyond their baseline bandwidth on a best effort basis.
+                Other instances types can sustain their maximum performance indefinitely. For more information,
+                see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-network-bandwidth.html">
+                    instance network bandwidth</a>.</p><p><sup>2</sup> These instance types do not support configurable ENA queue allocation.</p></div></div>
+     
+        <h2 id="ac_storage-ebs">Amazon EBS specifications</h2>
+        <p>The following table indicates which instance types are Amazon EBS optimized by default and which
+optionally support it. It also describes their EBS-optimized performance, including dedicated bandwidth to Amazon EBS, the
+typical maximum aggregate throughput that can be achieved on that dedicated connection with a streaming read workload
+and 128 KiB I/O size, and the maximum IOPS the instance type can support when using a 16 KiB I/O size. Instance types
+not listed do not support Amazon EBS optimization.</p>
+<div class="awsdocs-note awsdocs-important"><div class="awsdocs-note-title"><awsui-icon name="status-warning" variant="error"></awsui-icon><h6>Important</h6></div><div class="awsdocs-note-text"><p>An instance's EBS performance is bounded by the instance's performance limits, or the
+            aggregated performance of its attached volumes, whichever is smaller. To achieve maximum
+            EBS performance, an instance must have attached volumes that provide a combined performance
+            equal to or greater than the maximum instance performance. For example, to achieve
+            <code class="code">80,000</code> IOPS for <code class="code">r6i.16xlarge</code>, the instance must have at least
+            <code class="code">5</code> <code class="code">gp3</code> volumes provisioned with <code class="code">16,000</code> IOPS each
+            (<code class="code">5</code> volumes x <code class="code">16,000</code> IOPS = <code class="code">80,000</code> IOPS).</p><p>We recommend that you choose an EBS–optimized instance type that provides more
+            dedicated Amazon EBS throughput than your application needs; otherwise, the connection between
+            Amazon EBS and Amazon EC2 can become a performance bottleneck.</p></div></div>
+        <div class="table-container"><div class="table-contents"><table id="w228aab9c23c19b7"><thead>
+            <tr>
+                <th>Instance type</th>
+                <th>Baseline / Maximum bandwidth (Mbps)</th>
+                <th>Baseline / Maximum throughput (MB/s, 128 KiB I/O)</th>
+                <th>Baseline / Maximum IOPS (16 KiB I/O)</th>
+                <th>NVMe</th>
+                <th>Multiple EBS cards</th>
+                <th>EBS volume limit</th>
+            </tr>
+        </thead>
+            <tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>DL1</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">dl1.24xlarge</td>
+  <td tabindex="-1">19000.00</td>
+  <td tabindex="-1">2375.00</td>
+  <td tabindex="-1">80000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 28 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>DL2q</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">dl2q.24xlarge</td>
+  <td tabindex="-1">19000.00</td>
+  <td tabindex="-1">2375.00</td>
+  <td tabindex="-1">80000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 19 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>F2</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">f2.6xlarge</td>
+  <td tabindex="-1">7500.00</td>
+  <td tabindex="-1">937.50</td>
+  <td tabindex="-1">30000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">f2.12xlarge</td>
+  <td tabindex="-1">15000.00</td>
+  <td tabindex="-1">1875.00</td>
+  <td tabindex="-1">60000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">f2.48xlarge</td>
+  <td tabindex="-1">60000.00</td>
+  <td tabindex="-1">7500.00</td>
+  <td tabindex="-1">240000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">128 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>G4ad</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4ad.xlarge <sup>1</sup></td>
+  <td tabindex="-1">400.00 / 3170.00</td>
+  <td tabindex="-1">50.00 / 396.25</td>
+  <td tabindex="-1">1700.00 / 13333.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 25 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4ad.2xlarge <sup>1</sup></td>
+  <td tabindex="-1">800.00 / 3170.00</td>
+  <td tabindex="-1">100.00 / 396.25</td>
+  <td tabindex="-1">3400.00 / 13333.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 25 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4ad.4xlarge <sup>1</sup></td>
+  <td tabindex="-1">1580.00 / 3170.00</td>
+  <td tabindex="-1">197.50 / 396.25</td>
+  <td tabindex="-1">6700.00 / 13333.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 25 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4ad.8xlarge</td>
+  <td tabindex="-1">3170.00</td>
+  <td tabindex="-1">396.25</td>
+  <td tabindex="-1">13333.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 24 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4ad.16xlarge</td>
+  <td tabindex="-1">6300.00</td>
+  <td tabindex="-1">787.50</td>
+  <td tabindex="-1">26667.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 21 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>G4dn</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.xlarge <sup>1</sup></td>
+  <td tabindex="-1">950.00 / 3500.00</td>
+  <td tabindex="-1">118.75 / 437.50</td>
+  <td tabindex="-1">3000.00 / 20000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 25 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.2xlarge <sup>1</sup></td>
+  <td tabindex="-1">1150.00 / 3500.00</td>
+  <td tabindex="-1">143.75 / 437.50</td>
+  <td tabindex="-1">6000.00 / 20000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 25 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.4xlarge</td>
+  <td tabindex="-1">4750.00</td>
+  <td tabindex="-1">593.75</td>
+  <td tabindex="-1">20000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 25 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.8xlarge</td>
+  <td tabindex="-1">9500.00</td>
+  <td tabindex="-1">1187.50</td>
+  <td tabindex="-1">40000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 25 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.12xlarge</td>
+  <td tabindex="-1">9500.00</td>
+  <td tabindex="-1">1187.50</td>
+  <td tabindex="-1">40000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 22 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.16xlarge</td>
+  <td tabindex="-1">9500.00</td>
+  <td tabindex="-1">1187.50</td>
+  <td tabindex="-1">40000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 25 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.metal</td>
+  <td tabindex="-1">19000.00</td>
+  <td tabindex="-1">2375.00</td>
+  <td tabindex="-1">80000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 31 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>G5</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.xlarge <sup>1</sup></td>
+  <td tabindex="-1">700.00 / 3500.00</td>
+  <td tabindex="-1">87.50 / 437.50</td>
+  <td tabindex="-1">3000.00 / 15000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 25 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.2xlarge <sup>1</sup></td>
+  <td tabindex="-1">850.00 / 3500.00</td>
+  <td tabindex="-1">106.25 / 437.50</td>
+  <td tabindex="-1">3500.00 / 15000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 25 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.4xlarge</td>
+  <td tabindex="-1">4750.00</td>
+  <td tabindex="-1">593.75</td>
+  <td tabindex="-1">20000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 25 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.8xlarge</td>
+  <td tabindex="-1">16000.00</td>
+  <td tabindex="-1">2000.00</td>
+  <td tabindex="-1">65000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 25 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.12xlarge</td>
+  <td tabindex="-1">16000.00</td>
+  <td tabindex="-1">2000.00</td>
+  <td tabindex="-1">65000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 22 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.16xlarge</td>
+  <td tabindex="-1">16000.00</td>
+  <td tabindex="-1">2000.00</td>
+  <td tabindex="-1">65000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 25 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.24xlarge</td>
+  <td tabindex="-1">19000.00</td>
+  <td tabindex="-1">2375.00</td>
+  <td tabindex="-1">80000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 22 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.48xlarge</td>
+  <td tabindex="-1">19000.00</td>
+  <td tabindex="-1">2375.00</td>
+  <td tabindex="-1">80000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 9 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>G5g</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5g.xlarge <sup>1</sup></td>
+  <td tabindex="-1">1188.00 / 4750.00</td>
+  <td tabindex="-1">148.50 / 593.75</td>
+  <td tabindex="-1">6000.00 / 20000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 26 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5g.2xlarge <sup>1</sup></td>
+  <td tabindex="-1">2375.00 / 4750.00</td>
+  <td tabindex="-1">296.88 / 593.75</td>
+  <td tabindex="-1">12000.00 / 20000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 26 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5g.4xlarge</td>
+  <td tabindex="-1">4750.00</td>
+  <td tabindex="-1">593.75</td>
+  <td tabindex="-1">20000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 26 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5g.8xlarge</td>
+  <td tabindex="-1">9500.00</td>
+  <td tabindex="-1">1187.50</td>
+  <td tabindex="-1">40000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 26 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5g.16xlarge</td>
+  <td tabindex="-1">19000.00</td>
+  <td tabindex="-1">2375.00</td>
+  <td tabindex="-1">80000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 25 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5g.metal</td>
+  <td tabindex="-1">19000.00</td>
+  <td tabindex="-1">2375.00</td>
+  <td tabindex="-1">80000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 31 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>G6</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.xlarge <sup>1</sup></td>
+  <td tabindex="-1">1000.00 / 5000.00</td>
+  <td tabindex="-1">125.00 / 625.00</td>
+  <td tabindex="-1">4000.00 / 20000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.2xlarge <sup>1</sup></td>
+  <td tabindex="-1">2000.00 / 5000.00</td>
+  <td tabindex="-1">250.00 / 625.00</td>
+  <td tabindex="-1">8000.00 / 20000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.4xlarge</td>
+  <td tabindex="-1">8000.00</td>
+  <td tabindex="-1">1000.00</td>
+  <td tabindex="-1">32000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.8xlarge</td>
+  <td tabindex="-1">16000.00</td>
+  <td tabindex="-1">2000.00</td>
+  <td tabindex="-1">64000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.12xlarge</td>
+  <td tabindex="-1">20000.00</td>
+  <td tabindex="-1">2500.00</td>
+  <td tabindex="-1">80000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.16xlarge</td>
+  <td tabindex="-1">20000.00</td>
+  <td tabindex="-1">2500.00</td>
+  <td tabindex="-1">80000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">48 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.24xlarge</td>
+  <td tabindex="-1">30000.00</td>
+  <td tabindex="-1">3750.00</td>
+  <td tabindex="-1">120000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">64 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.48xlarge</td>
+  <td tabindex="-1">60000.00</td>
+  <td tabindex="-1">7500.00</td>
+  <td tabindex="-1">240000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">128 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>G6e</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.xlarge <sup>1</sup></td>
+  <td tabindex="-1">1000.00 / 5000.00</td>
+  <td tabindex="-1">125.00 / 625.00</td>
+  <td tabindex="-1">4000.00 / 20000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.2xlarge <sup>1</sup></td>
+  <td tabindex="-1">2000.00 / 5000.00</td>
+  <td tabindex="-1">250.00 / 625.00</td>
+  <td tabindex="-1">8000.00 / 20000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.4xlarge</td>
+  <td tabindex="-1">8000.00</td>
+  <td tabindex="-1">1000.00</td>
+  <td tabindex="-1">32000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.8xlarge</td>
+  <td tabindex="-1">16000.00</td>
+  <td tabindex="-1">2000.00</td>
+  <td tabindex="-1">64000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.12xlarge</td>
+  <td tabindex="-1">20000.00</td>
+  <td tabindex="-1">2500.00</td>
+  <td tabindex="-1">80000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.16xlarge</td>
+  <td tabindex="-1">20000.00</td>
+  <td tabindex="-1">2500.00</td>
+  <td tabindex="-1">80000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">48 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.24xlarge</td>
+  <td tabindex="-1">30000.00</td>
+  <td tabindex="-1">3750.00</td>
+  <td tabindex="-1">120000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">64 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.48xlarge</td>
+  <td tabindex="-1">60000.00</td>
+  <td tabindex="-1">7500.00</td>
+  <td tabindex="-1">240000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">128 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>G6f</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6f.large <sup>1</sup></td>
+  <td tabindex="-1">936.00 / 5000.00</td>
+  <td tabindex="-1">117.00 / 625.00</td>
+  <td tabindex="-1">3750.00 / 20000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6f.xlarge <sup>1</sup></td>
+  <td tabindex="-1">1000.00 / 5000.00</td>
+  <td tabindex="-1">125.00 / 625.00</td>
+  <td tabindex="-1">4000.00 / 20000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6f.2xlarge <sup>1</sup></td>
+  <td tabindex="-1">2000.00 / 5000.00</td>
+  <td tabindex="-1">250.00 / 625.00</td>
+  <td tabindex="-1">8000.00 / 20000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6f.4xlarge</td>
+  <td tabindex="-1">6000.00</td>
+  <td tabindex="-1">750.00</td>
+  <td tabindex="-1">24000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>Gr6</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">gr6.4xlarge</td>
+  <td tabindex="-1">8000.00</td>
+  <td tabindex="-1">1000.00</td>
+  <td tabindex="-1">32000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">gr6.8xlarge</td>
+  <td tabindex="-1">16000.00</td>
+  <td tabindex="-1">2000.00</td>
+  <td tabindex="-1">64000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>Gr6f</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">gr6f.4xlarge</td>
+  <td tabindex="-1">8000.00</td>
+  <td tabindex="-1">1000.00</td>
+  <td tabindex="-1">32000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>G7</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.2xlarge <sup>1</sup></td>
+  <td tabindex="-1">4000.00 / 8000.00</td>
+  <td tabindex="-1">500.00 / 1000.00</td>
+  <td tabindex="-1">16000.00 / 32000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.4xlarge</td>
+  <td tabindex="-1">8000.00</td>
+  <td tabindex="-1">1000.00</td>
+  <td tabindex="-1">32000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.8xlarge</td>
+  <td tabindex="-1">16000.00</td>
+  <td tabindex="-1">2000.00</td>
+  <td tabindex="-1">64000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.12xlarge</td>
+  <td tabindex="-1">20000.00</td>
+  <td tabindex="-1">2500.00</td>
+  <td tabindex="-1">80000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.24xlarge</td>
+  <td tabindex="-1">40000.00</td>
+  <td tabindex="-1">5000.00</td>
+  <td tabindex="-1">160000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">64 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.48xlarge</td>
+  <td tabindex="-1">80000.00</td>
+  <td tabindex="-1">10000.00</td>
+  <td tabindex="-1">320000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs_cards.html">2 EBS cards</a>)</td>  <td tabindex="-1">128 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>G7e</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.2xlarge <sup>1</sup></td>
+  <td tabindex="-1">2000.00 / 5000.00</td>
+  <td tabindex="-1">250.00 / 625.00</td>
+  <td tabindex="-1">8000.00 / 20000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.4xlarge</td>
+  <td tabindex="-1">8000.00</td>
+  <td tabindex="-1">1000.00</td>
+  <td tabindex="-1">32000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.8xlarge</td>
+  <td tabindex="-1">16000.00</td>
+  <td tabindex="-1">2000.00</td>
+  <td tabindex="-1">64000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.12xlarge</td>
+  <td tabindex="-1">25000.00</td>
+  <td tabindex="-1">3125.00</td>
+  <td tabindex="-1">100000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.24xlarge</td>
+  <td tabindex="-1">50000.00</td>
+  <td tabindex="-1">6250.00</td>
+  <td tabindex="-1">200000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">64 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.48xlarge</td>
+  <td tabindex="-1">100000.00</td>
+  <td tabindex="-1">12500.00</td>
+  <td tabindex="-1">400000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">128 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>Inf1</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf1.xlarge <sup>1</sup></td>
+  <td tabindex="-1">1190.00 / 4750.00</td>
+  <td tabindex="-1">148.75 / 593.75</td>
+  <td tabindex="-1">4000.00 / 20000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 26 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf1.2xlarge <sup>1</sup></td>
+  <td tabindex="-1">1190.00 / 4750.00</td>
+  <td tabindex="-1">148.75 / 593.75</td>
+  <td tabindex="-1">6000.00 / 20000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 26 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf1.6xlarge</td>
+  <td tabindex="-1">4750.00</td>
+  <td tabindex="-1">593.75</td>
+  <td tabindex="-1">20000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 23 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf1.24xlarge</td>
+  <td tabindex="-1">19000.00</td>
+  <td tabindex="-1">2375.00</td>
+  <td tabindex="-1">80000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 11 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>Inf2</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf2.xlarge <sup>1</sup></td>
+  <td tabindex="-1">1250.00 / 10000.00</td>
+  <td tabindex="-1">156.25 / 1250.00</td>
+  <td tabindex="-1">6000.00 / 40000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 26 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf2.8xlarge</td>
+  <td tabindex="-1">10000.00</td>
+  <td tabindex="-1">1250.00</td>
+  <td tabindex="-1">40000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 26 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf2.24xlarge</td>
+  <td tabindex="-1">30000.00</td>
+  <td tabindex="-1">3750.00</td>
+  <td tabindex="-1">120000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 28 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf2.48xlarge</td>
+  <td tabindex="-1">60000.00</td>
+  <td tabindex="-1">7500.00</td>
+  <td tabindex="-1">240000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 28 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>P4d</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p4d.24xlarge</td>
+  <td tabindex="-1">19000.00</td>
+  <td tabindex="-1">2375.00</td>
+  <td tabindex="-1">80000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">28 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>P4de</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p4de.24xlarge</td>
+  <td tabindex="-1">19000.00</td>
+  <td tabindex="-1">2375.00</td>
+  <td tabindex="-1">80000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">28 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>P5</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p5.4xlarge</td>
+  <td tabindex="-1">10000.00</td>
+  <td tabindex="-1">1250.00</td>
+  <td tabindex="-1">32500.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">p5.48xlarge</td>
+  <td tabindex="-1">80000.00</td>
+  <td tabindex="-1">10000.00</td>
+  <td tabindex="-1">260000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">64 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>P5e</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p5e.48xlarge</td>
+  <td tabindex="-1">80000.00</td>
+  <td tabindex="-1">10000.00</td>
+  <td tabindex="-1">260000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">64 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>P5en</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p5en.48xlarge</td>
+  <td tabindex="-1">100000.00</td>
+  <td tabindex="-1">12500.00</td>
+  <td tabindex="-1">400000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">64 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>P6-B200</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p6-b200.48xlarge</td>
+  <td tabindex="-1">100000.00</td>
+  <td tabindex="-1">12500.00</td>
+  <td tabindex="-1">400000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">64 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>P6-B300</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p6-b300.48xlarge</td>
+  <td tabindex="-1">100000.00</td>
+  <td tabindex="-1">12500.00</td>
+  <td tabindex="-1">400000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">64 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>P6e-GB200</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p6e-gb200.36xlarge</td>
+  <td tabindex="-1">60000.00</td>
+  <td tabindex="-1">7500.00</td>
+  <td tabindex="-1">240000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">64 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>Trn1</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn1.2xlarge <sup>1</sup></td>
+  <td tabindex="-1">5000.00 / 20000.00</td>
+  <td tabindex="-1">625.00 / 2500.00</td>
+  <td tabindex="-1">16250.00 / 65000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 25 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn1.32xlarge</td>
+  <td tabindex="-1">80000.00</td>
+  <td tabindex="-1">10000.00</td>
+  <td tabindex="-1">260000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 28 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>Trn1n</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn1n.32xlarge</td>
+  <td tabindex="-1">80000.00</td>
+  <td tabindex="-1">10000.00</td>
+  <td tabindex="-1">260000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 28 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>Trn2</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn2.3xlarge</td>
+  <td tabindex="-1">5000.00</td>
+  <td tabindex="-1">625.00</td>
+  <td tabindex="-1">16250.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">32 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn2.48xlarge</td>
+  <td tabindex="-1">80000.00</td>
+  <td tabindex="-1">10000.00</td>
+  <td tabindex="-1">260000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">64 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>Trn2u</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn2u.48xlarge</td>
+  <td tabindex="-1">80000.00</td>
+  <td tabindex="-1">10000.00</td>
+  <td tabindex="-1">260000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">64 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#dedicated-limit">Dedicated limit</a>)</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>VT1</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">vt1.3xlarge <sup>1</sup></td>
+  <td tabindex="-1">2375.00 / 4750.00</td>
+  <td tabindex="-1">296.88 / 593.75</td>
+  <td tabindex="-1">10000.00 / 20000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 25 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">vt1.6xlarge</td>
+  <td tabindex="-1">4750.00</td>
+  <td tabindex="-1">593.75</td>
+  <td tabindex="-1">20000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 23 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+<tr> 
+  <td tabindex="-1">vt1.24xlarge</td>
+  <td tabindex="-1">19000.00</td>
+  <td tabindex="-1">2375.00</td>
+  <td tabindex="-1">80000.00</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">Up to 27 (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html#shared-limit">Shared limit</a>)</td>
+</tr>
+
+        </table></div></div>
+        <div class="awsdocs-note"><div class="awsdocs-note-title"><awsui-icon name="status-info" variant="link"></awsui-icon><h6>Note</h6></div><div class="awsdocs-note-text"><p><sup>1</sup> These instances can support maximum performance for 30 minutes at least once every 
+    24 hours, after which they revert to their baseline performance. Other instances can sustain the maximum performance 
+    indefinitely. If your workload requires sustained maximum performance for longer than 30 minutes, use one of these 
+    instances.</p></div></div>
+     
+        <h2 id="ac_instance-store">Instance store specifications</h2>
+        <p>The following table shows the instance store volume configuration for supported instance types,
+    along with the aggregated IOPS performance with 4,096 byte block size at queue depth saturation. </p>
+        <div class="table-container"><div class="table-contents"><table id="w228aab9c23c21b5"><thead>
+            <tr>
+                <th>Instance type</th>
+                <th>Instance store volumes</th>
+                <th>Instance store type</th>
+                <th>100% random read IOPS / Write IOPS</th>
+                <th>Needs initialization <sup>1</sup></th>
+                <th>TRIM support <sup>2</sup></th>
+            </tr>
+        </thead>
+            <tr> 
+  <td colspan="6" align="center" style="text-align: center;" tabindex="-1"><b>DL1</b></td>
+</tr> 
+<tr> 
+  <td tabindex="-1">dl1.24xlarge</td>
+  <td tabindex="-1">4 x 1000 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">1,000,000 / 800,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="6" align="center" style="text-align: center;" tabindex="-1"><b>F2</b></td>
+</tr> 
+<tr> 
+  <td tabindex="-1">f2.6xlarge</td>
+  <td tabindex="-1">1 x 940 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">400,000 / 125,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">f2.12xlarge</td>
+  <td tabindex="-1">2 x 940 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">800,000 / 250,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">f2.48xlarge</td>
+  <td tabindex="-1">8 x 940 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">3,200,000 / 1,000,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="6" align="center" style="text-align: center;" tabindex="-1"><b>G4ad</b></td>
+</tr> 
+<tr> 
+  <td tabindex="-1">g4ad.xlarge</td>
+  <td tabindex="-1">1 x 150 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">10,417 / 8,333</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4ad.2xlarge</td>
+  <td tabindex="-1">1 x 300 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">20,833 / 16,667</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4ad.4xlarge</td>
+  <td tabindex="-1">1 x 600 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">41,667 / 33,333</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4ad.8xlarge</td>
+  <td tabindex="-1">1 x 1200 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">83,333 / 66,667</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4ad.16xlarge</td>
+  <td tabindex="-1">2 x 1200 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">166,666 / 133,332</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="6" align="center" style="text-align: center;" tabindex="-1"><b>G4dn</b></td>
+</tr> 
+<tr> 
+  <td tabindex="-1">g4dn.xlarge</td>
+  <td tabindex="-1">1 x 125 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">42,500 / 32,500</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.2xlarge</td>
+  <td tabindex="-1">1 x 225 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">42,500 / 32,500</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.4xlarge</td>
+  <td tabindex="-1">1 x 225 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">85,000 / 65,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.8xlarge</td>
+  <td tabindex="-1">1 x 900 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">250,000 / 200,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.12xlarge</td>
+  <td tabindex="-1">1 x 900 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">250,000 / 200,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.16xlarge</td>
+  <td tabindex="-1">1 x 900 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">250,000 / 200,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.metal</td>
+  <td tabindex="-1">2 x 900 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">500,000 / 400,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="6" align="center" style="text-align: center;" tabindex="-1"><b>G5</b></td>
+</tr> 
+<tr> 
+  <td tabindex="-1">g5.xlarge</td>
+  <td tabindex="-1">1 x 250 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">40,625 / 20,313</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.2xlarge</td>
+  <td tabindex="-1">1 x 450 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">40,625 / 20,313</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.4xlarge</td>
+  <td tabindex="-1">1 x 600 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">125,000 / 62,500</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.8xlarge</td>
+  <td tabindex="-1">1 x 900 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">250,000 / 125,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.12xlarge</td>
+  <td tabindex="-1">1 x 3800 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">312,500 / 156,250</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.16xlarge</td>
+  <td tabindex="-1">1 x 1900 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">250,000 / 125,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.24xlarge</td>
+  <td tabindex="-1">1 x 3800 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">312,500 / 156,250</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.48xlarge</td>
+  <td tabindex="-1">2 x 3800 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">625,000 / 312,500</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="6" align="center" style="text-align: center;" tabindex="-1"><b>G6</b></td>
+</tr> 
+<tr> 
+  <td tabindex="-1">g6.xlarge</td>
+  <td tabindex="-1">1 x 250 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">40,625 / 20,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.2xlarge</td>
+  <td tabindex="-1">1 x 450 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">40,625 / 20,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.4xlarge</td>
+  <td tabindex="-1">1 x 600 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">125,000 / 40,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.8xlarge</td>
+  <td tabindex="-1">2 x 450 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">250,000 / 80,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.12xlarge</td>
+  <td tabindex="-1">4 x 940 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">312,500 / 125,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.16xlarge</td>
+  <td tabindex="-1">2 x 940 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">250,000 / 80,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.24xlarge</td>
+  <td tabindex="-1">4 x 940 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">312,500 / 156,248</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.48xlarge</td>
+  <td tabindex="-1">8 x 940 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">625,000 / 312,496</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="6" align="center" style="text-align: center;" tabindex="-1"><b>G6e</b></td>
+</tr> 
+<tr> 
+  <td tabindex="-1">g6e.xlarge</td>
+  <td tabindex="-1">1 x 250 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">40,625 / 20,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.2xlarge</td>
+  <td tabindex="-1">1 x 450 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">40,625 / 20,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.4xlarge</td>
+  <td tabindex="-1">1 x 600 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">125,000 / 40,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.8xlarge</td>
+  <td tabindex="-1">2 x 450 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">250,000 / 80,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.12xlarge</td>
+  <td tabindex="-1">2 x 1900 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">312,500 / 125,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.16xlarge</td>
+  <td tabindex="-1">2 x 950 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">250,000 / 80,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.24xlarge</td>
+  <td tabindex="-1">2 x 1900 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">312,500 / 156,250</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.48xlarge</td>
+  <td tabindex="-1">4 x 1900 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">625,000 / 312,500</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="6" align="center" style="text-align: center;" tabindex="-1"><b>G6f</b></td>
+</tr> 
+<tr> 
+  <td tabindex="-1">g6f.large</td>
+  <td tabindex="-1">1 x 100 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">16,250 / 8,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6f.xlarge</td>
+  <td tabindex="-1">1 x 100 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">27,100 / 13,333</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6f.2xlarge</td>
+  <td tabindex="-1">1 x 200 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">40,625 / 20,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6f.4xlarge</td>
+  <td tabindex="-1">1 x 450 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">125,000 / 40,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="6" align="center" style="text-align: center;" tabindex="-1"><b>Gr6</b></td>
+</tr> 
+<tr> 
+  <td tabindex="-1">gr6.4xlarge</td>
+  <td tabindex="-1">1 x 600 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">125,000 / 40,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">gr6.8xlarge</td>
+  <td tabindex="-1">2 x 450 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">250,000 / 80,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="6" align="center" style="text-align: center;" tabindex="-1"><b>Gr6f</b></td>
+</tr> 
+<tr> 
+  <td tabindex="-1">gr6f.4xlarge</td>
+  <td tabindex="-1">1 x 450 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">125,000 / 40,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="6" align="center" style="text-align: center;" tabindex="-1"><b>G7</b></td>
+</tr> 
+<tr> 
+  <td tabindex="-1">g7.2xlarge</td>
+  <td tabindex="-1">1 x 440 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">127,368 / 98,421</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.4xlarge</td>
+  <td tabindex="-1">1 x 875 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">253,375 / 195,789</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.8xlarge</td>
+  <td tabindex="-1">1 x 930 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">269,211 / 208,026</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.12xlarge</td>
+  <td tabindex="-1">1 x 1900 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">550,000 / 425,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.24xlarge</td>
+  <td tabindex="-1">1 x 3800 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">1,100,000 / 850,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.48xlarge</td>
+  <td tabindex="-1">2 x 3800 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">2,200,000 / 1,700,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="6" align="center" style="text-align: center;" tabindex="-1"><b>G7e</b></td>
+</tr> 
+<tr> 
+  <td tabindex="-1">g7e.2xlarge</td>
+  <td tabindex="-1">1 x 1900 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">275,000 / 137,500</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.4xlarge</td>
+  <td tabindex="-1">1 x 1900 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">275,000 / 137,500</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.8xlarge</td>
+  <td tabindex="-1">1 x 1900 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">275,000 / 137,500</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.12xlarge</td>
+  <td tabindex="-1">1 x 3800 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">550,000 / 275,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.24xlarge</td>
+  <td tabindex="-1">2 x 3800 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">1,100,000 / 550,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.48xlarge</td>
+  <td tabindex="-1">4 x 3800 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">2,200,000 / 1,100,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="6" align="center" style="text-align: center;" tabindex="-1"><b>P4d</b></td>
+</tr> 
+<tr> 
+  <td tabindex="-1">p4d.24xlarge</td>
+  <td tabindex="-1">8 x 1000 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">2,000,000 / 1,600,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="6" align="center" style="text-align: center;" tabindex="-1"><b>P4de</b></td>
+</tr> 
+<tr> 
+  <td tabindex="-1">p4de.24xlarge</td>
+  <td tabindex="-1">8 x 1000 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">2,000,000 / 1,600,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="6" align="center" style="text-align: center;" tabindex="-1"><b>P5</b></td>
+</tr> 
+<tr> 
+  <td tabindex="-1">p5.4xlarge</td>
+  <td tabindex="-1">1 x 3800 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">550,000 / 275,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">p5.48xlarge</td>
+  <td tabindex="-1">8 x 3800 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">4,400,000 / 2,200,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="6" align="center" style="text-align: center;" tabindex="-1"><b>P5e</b></td>
+</tr> 
+<tr> 
+  <td tabindex="-1">p5e.48xlarge</td>
+  <td tabindex="-1">8 x 3800 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">4,400,000 / 2,200,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="6" align="center" style="text-align: center;" tabindex="-1"><b>P5en</b></td>
+</tr> 
+<tr> 
+  <td tabindex="-1">p5en.48xlarge</td>
+  <td tabindex="-1">8 x 3800 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">4,400,000 / 2,200,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="6" align="center" style="text-align: center;" tabindex="-1"><b>P6-B200</b></td>
+</tr> 
+<tr> 
+  <td tabindex="-1">p6-b200.48xlarge</td>
+  <td tabindex="-1">8 x 3800 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">4,400,000 / 2,200,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="6" align="center" style="text-align: center;" tabindex="-1"><b>P6-B300</b></td>
+</tr> 
+<tr> 
+  <td tabindex="-1">p6-b300.48xlarge</td>
+  <td tabindex="-1">8 x 3800 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">4,400,000 / 2,200,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="6" align="center" style="text-align: center;" tabindex="-1"><b>P6e-GB200</b></td>
+</tr> 
+<tr> 
+  <td tabindex="-1">p6e-gb200.36xlarge</td>
+  <td tabindex="-1">3 x 7500 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">2,550,000 / 2,400,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="6" align="center" style="text-align: center;" tabindex="-1"><b>Trn1</b></td>
+</tr> 
+<tr> 
+  <td tabindex="-1">trn1.2xlarge</td>
+  <td tabindex="-1">1 x 474 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">107,500 / 45,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn1.32xlarge</td>
+  <td tabindex="-1">4 x 1900 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">1,720,000 / 720,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="6" align="center" style="text-align: center;" tabindex="-1"><b>Trn1n</b></td>
+</tr> 
+<tr> 
+  <td tabindex="-1">trn1n.32xlarge</td>
+  <td tabindex="-1">4 x 1900 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">1,720,000 / 720,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="6" align="center" style="text-align: center;" tabindex="-1"><b>Trn2</b></td>
+</tr> 
+<tr> 
+  <td tabindex="-1">trn2.3xlarge</td>
+  <td tabindex="-1">1 x 470 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">107,500 / 45,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn2.48xlarge</td>
+  <td tabindex="-1">4 x 1900 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">1,720,000 / 720,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="6" align="center" style="text-align: center;" tabindex="-1"><b>Trn2u</b></td>
+</tr> 
+<tr> 
+  <td tabindex="-1">trn2u.48xlarge</td>
+  <td tabindex="-1">4 x 1900 GB</td>
+  <td tabindex="-1">NVMe SSD</td>
+  <td tabindex="-1">1,720,000 / 720,000</td>
+  <td tabindex="-1"> </td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+
+        </table></div></div>
+        <p><sup>1</sup> Volumes attached to certain instances suffer a first-write
+            penalty unless initialized. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/disk-performance.html">Optimize disk performance for
+                instance store volumes</a>.</p>
+        <p><sup>2</sup> For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html#InstanceStoreTrimSupport">Instance
+            store volume TRIM support</a>.</p>
+     
+        <h2 id="ac_security">Security specifications</h2>
+        <div class="table-container"><div class="table-contents"><table id="w228aab9c23c23b3"><thead>
+            <tr>
+                <th>Instance type</th>
+                <th>EBS encryption</th>
+                <th>Instance store encryption</th>
+                <th>Encryption in transit</th>
+                <th>AMD SEV-SNP</th>
+                <th>NitroTPM</th>
+                <th>Nitro Enclaves</th>
+            </tr>
+        </thead>
+            <tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>DL1</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">dl1.24xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>DL2q</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">dl2q.24xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">Instance store not supported</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>F2</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">f2.6xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">f2.12xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">f2.48xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>G4ad</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4ad.xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4ad.2xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4ad.4xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4ad.8xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4ad.16xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>G4dn</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.2xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.4xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.8xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.12xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.16xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g4dn.metal</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>G5</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.2xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.4xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.8xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.12xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.16xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.24xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5.48xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>G5g</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5g.xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">Instance store not supported</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5g.2xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">Instance store not supported</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5g.4xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">Instance store not supported</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5g.8xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">Instance store not supported</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5g.16xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">Instance store not supported</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g5g.metal</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">Instance store not supported</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>G6</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.2xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.4xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.8xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.12xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.16xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.24xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6.48xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>G6e</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.2xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.4xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.8xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.12xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.16xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.24xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6e.48xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>G6f</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6f.large</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6f.xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6f.2xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g6f.4xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>Gr6</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">gr6.4xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">gr6.8xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>Gr6f</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">gr6f.4xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>G7</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.2xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.4xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.8xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.12xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.24xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7.48xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>G7e</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.2xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.4xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.8xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.12xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.24xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">g7e.48xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>Inf1</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf1.xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">Instance store not supported</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf1.2xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">Instance store not supported</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf1.6xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">Instance store not supported</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf1.24xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">Instance store not supported</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>Inf2</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf2.xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">Instance store not supported</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf2.8xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">Instance store not supported</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf2.24xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">Instance store not supported</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">inf2.48xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">Instance store not supported</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>P4d</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p4d.24xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>P4de</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p4de.24xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>P5</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p5.4xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">p5.48xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>P5e</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p5e.48xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>P5en</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p5en.48xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>P6-B200</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p6-b200.48xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>P6-B300</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p6-b300.48xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>P6e-GB200</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">p6e-gb200.36xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>Trn1</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn1.2xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn1.32xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>Trn1n</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn1n.32xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>Trn2</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn2.3xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn2.48xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>Trn2u</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">trn2u.48xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✓ Yes</td>
+</tr>
+<tr> 
+  <td colspan="7" align="center" style="text-align: center;" tabindex="-1"><b>VT1</b></td>
+</tr>
+<tr> 
+  <td tabindex="-1">vt1.3xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">Instance store not supported</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+</tr>
+<tr> 
+  <td tabindex="-1">vt1.6xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">Instance store not supported</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+</tr>
+<tr> 
+  <td tabindex="-1">vt1.24xlarge</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">Instance store not supported</td>
+  <td tabindex="-1">✓ Yes</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+  <td tabindex="-1">✗ No</td>
+</tr>
+
+        </table></div></div>        
+    <awsdocs-copyright class="copyright-print"></awsdocs-copyright><awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback></div><noscript><div><div><div><div id="js_error_message"><p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning" /> <strong>Javascript is disabled or is unavailable in your browser.</strong></p><p>To use the Amazon Web Services Documentation, Javascript must be enabled. Please refer to your browser's Help pages for instructions.</p></div></div></div></div></noscript><div id="main-col-footer" class="awsui-util-font-size-0"><div id="doc-conventions"><a target="_top" href="/general/latest/gr/docconventions.html">Document Conventions</a></div><div class="prev-next"><div id="previous" class="prev-link" accesskey="p" href="./so.html">Storage optimized</div><div id="next" class="next-link" accesskey="n" href="./hpc.html">High-performance computing</div></div></div><awsdocs-page-utilities></awsdocs-page-utilities></div><div id="quick-feedback-yes" style="display: none;"><div class="title">Did this page help you? - Yes</div><div class="content"><p>Thanks for letting us know we're doing a good job!</p><p>If you've got a moment, please tell us what we did right so we can do more of it.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=EC2&amp;topic_url=https://docs.aws.amazon.com/en_us/ec2/latest/instancetypes/ac.html"></awsui-button></p></div></div><div id="quick-feedback-no" style="display: none;"><div class="title">Did this page help you? - No</div><div class="content"><p>Thanks for letting us know this page needs work. We're sorry we let you down.</p><p>If you've got a moment, please tell us how we can make the documentation better.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=EC2&amp;topic_url=https://docs.aws.amazon.com/en_us/ec2/latest/instancetypes/ac.html"></awsui-button></p></div></div></div></body></div></awsdocs-view><div class="page-loading-indicator" id="page-loading-indicator"><awsui-spinner size="large"></awsui-spinner></div></div><div id="tools-panel" dom-region="tools"><awsdocs-tools-panel id="awsdocs-tools-panel"></awsdocs-tools-panel></div></awsui-app-layout><awsdocs-cookie-banner class="doc-cookie-banner"></awsdocs-cookie-banner></div></body></html>

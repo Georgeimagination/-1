@@ -1,0 +1,2 @@
+﻿"selection_run_id","scope_kind","scope_id","cutoff_date","algorithm_version","created_date","reviewer","status","review_status","notes"
+"SELRUN-M2W2-AWS-PKG-20260813","custom","M2-W2-AWS-PACKAGE-FACTS","2026-08-12","atomic-fact-reverse-removal-v1","2026-08-13","pending_independent_reviewer","draft","draft","按 56 条 package 实现候选及五组冲突执行逐来源反向移除。九个 source_id 各有不可替代事实；A01/A07 的 latest 与 v2.31.0 入口正文相同，只计一个来源。等待独立复核后升级。"

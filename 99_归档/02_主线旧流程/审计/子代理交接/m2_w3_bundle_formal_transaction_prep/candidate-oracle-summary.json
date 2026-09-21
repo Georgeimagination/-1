@@ -1,0 +1,13 @@
+{
+    "status":  "passed",
+    "generated_at":  "2026-08-13",
+    "validator_checks":  125619,
+    "formal_baseline_aggregate":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "candidate_aggregate":  "5f62191bfc737535802cd6e0524b1fdf7a742ca36300db11b5a9233d4540052a",
+    "write_tables":  20,
+    "write_rows":  1057,
+    "payloads":  15,
+    "posthash_manifest_sha256":  "78956df9394146d39ded5e6e0740157e4ccd9cc50e44699ec6f8b8eca0ea1394",
+    "formal_writes_performed":  0,
+    "formal_aggregate_after":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10"
+}

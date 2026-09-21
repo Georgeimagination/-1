@@ -1,0 +1,2 @@
+"owner_object_id","formal_fact_id","formal_requirement_id","target_relation_id","exclusion_reason","formal_fact_review_status","formal_relation_review_status"
+"OBJ-AWS-TRN2U-48XLARGE","FACT-AWS-TRN2-ULTRA64-INSTANCE-QTY","REQ-AWS-TRN2-0092","OREL-AWS-TRN2U-48XLARGE-DEPLOYED-IN-ULTRASERVER","该事实表示一个 UltraServer 包含 4 个 trn2u.48xlarge，属于系统组成；不进入实例卡","reviewed","needs_resolution"

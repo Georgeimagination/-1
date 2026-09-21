@@ -1,0 +1,4 @@
+﻿SUBJECT-CONTRACT AUDIT: 1 issue(s); mode=audit.
+ - Requirement lacks same-target same-field fact: 数据/field-requirements.csv:REQ-AWS-TRN2-0175 status=value_available field=FIELD-DER-COMPUTE-BW-SPEC target_kind=precision_path
+PASS: 32-table research data model; 97920 checks executed; subject_contract_mode=audit.
+Registry: 324 columns, 488 enum values.

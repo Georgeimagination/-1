@@ -1,0 +1,8 @@
+"finding_id","card","line","observed","expected","severity"
+"CARD-STATE-001","资料卡/AMD/封装/AMD_Instinct_MI455X_模组资料卡.md","4","卡片状态：草稿，待独立复核","正式合并后状态","blocker"
+"CARD-STATE-002","资料卡/AMD/封装/AMD_Instinct_MI455X_模组资料卡.md","219","独立复核与总控合并验收未勾选","合并后勾选","blocker"
+"CARD-STATE-003","资料卡/AMD/产品/AMD_Instinct_MI350P_PCIe_卡资料卡.md","4","卡片状态：修正后冻结，待最终独立复核","正式合并后状态","blocker"
+"CARD-STATE-004","资料卡/AMD/产品/AMD_Instinct_MI350P_PCIe_卡资料卡.md","205","本卡目前是 staging 草稿，不构成正式合并。","删除或改为正式合并事实","blocker"
+"CARD-STATE-005","资料卡/华为昇腾/封装/华为_Ascend950_共享裸片资料卡.md","4","卡片状态：草稿，返修完成，待最终独立复核","正式合并后状态","blocker"
+"CARD-STATE-006","资料卡/华为昇腾/封装/华为_Ascend950PR_封装资料卡.md","4","卡片状态：草稿，返修完成，待最终独立复核","正式合并后状态","blocker"
+"CARD-STATE-007","资料卡/华为昇腾/封装/华为_Ascend950DT_封装资料卡.md","4","卡片状态：草稿，返修完成，待最终独立复核","正式合并后状态","blocker"

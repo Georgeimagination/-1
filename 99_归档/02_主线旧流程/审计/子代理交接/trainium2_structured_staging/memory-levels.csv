@@ -1,0 +1,8 @@
+"memory_level_id","parent_memory_level_id","level_class","canonical_label","review_status","notes"
+"CMP-AWS-TRN2-HBM","","hbm","Trainium2 HBM","draft","芯片级设备内存"
+"CMP-AWS-TRN2-SBUF","CMP-AWS-TRN2-HBM","local_scratchpad","NCv3 SBUF","draft","每核软件管理 SRAM"
+"CMP-AWS-TRN2-PSUM","CMP-AWS-TRN2-SBUF","accumulator_store","NCv3 PSUM","draft","每核部分和存储"
+"CMP-AWS-TRN2-3XL-MEMORY","","logical_memory_view","trn2.3xlarge accelerator memory view","needs_resolution","实例逻辑视图"
+"CMP-AWS-TRN2-48XL-MEMORY","","logical_memory_view","trn2.48xlarge aggregate accelerator memory","needs_resolution","实例聚合逻辑视图"
+"CMP-AWS-TRN2U-48XL-MEMORY","","logical_memory_view","trn2u.48xlarge aggregate accelerator memory","draft","实例聚合逻辑视图"
+"CMP-AWS-TRN2-ULTRA64-MEMORY","","logical_memory_view","Trn2 UltraServer aggregate accelerator memory","draft","系统聚合逻辑视图"

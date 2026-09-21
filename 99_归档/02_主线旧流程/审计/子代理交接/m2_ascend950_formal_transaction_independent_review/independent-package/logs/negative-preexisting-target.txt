@@ -1,0 +1,7 @@
+New-file target already exists: 资料卡/华为昇腾/封装/华为_Ascend950_共享裸片资料卡.md
+At X:\independent-package\scripts\Test-Ascend950FormalTransactionPreflight.ps1:31 char:87
++ ... ndition,[string]$Message); if(-not $Condition){throw $Message}; $scri ...
++                                                    ~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (New-file target...d950_共享裸片资料卡.md:String) [], RuntimeException
+    + FullyQualifiedErrorId : New-file target already exists: 资料卡/华为昇腾/封装/华为_Ascend950_共享裸片资料卡.md
+ 

@@ -1,0 +1,6 @@
+angle_id,angle,queries,selection_rule,selected_external_ids,access_date,notes
+A01,执行状态与内存,"site:arxiv.org LLM inference prefill decode compute bound memory bound; site:arxiv.org KV cache memory PagedAttention; site:arxiv.org ZeRO optimizer states gradients parameters",只选论文原始入口并去重,E01|E03|E04|E13,2026-08-14,用于训练状态、KV cache、碎片和阶段瓶颈的独立核验
+A02,评价目标,"site:mlcommons.org MLPerf inference TTFT TPOT; site:mlcommons.org MLPerf training time to train",只选MLCommons官方基准定义,E06|E07,2026-08-14,区分目标质量训练时间与在线推理延迟/吞吐
+A03,精度与量化,"site:arxiv.org mixed precision training gradients master weights; site:arxiv.org SmoothQuant W8A8 LLM inference quantization",选择训练与推理各一项原始论文,E02|E12,2026-08-14,检查训练稳定性与推理低精度是否支持条件化差异
+A04,互联与MoE,"site:arxiv.org Megatron-LM tensor pipeline data parallel; site:arxiv.org Switch Transformer communication; site:arxiv.org DeepSpeed-MoE inference training",选择训练并行和MoE原始论文,E08|E09|E10,2026-08-14,检查通信模式而非仅检索产品宣传
+A05,Roofline与分相服务,"site:lbl.gov Roofline arithmetic intensity bandwidth; USENIX DistServe prefill decode goodput",选择研究机构方法页与会议官方论文页,E05|E11,2026-08-14,核验机器平衡的适用条件与分相服务反例

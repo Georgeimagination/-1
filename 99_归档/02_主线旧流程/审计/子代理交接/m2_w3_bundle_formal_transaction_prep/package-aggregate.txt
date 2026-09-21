@@ -1,0 +1,4 @@
+package_aggregate_sha256=958e1b5106b6c42ae116fe643b3b8ec63a190cc20951654380d86c45a2ad332f
+manifest_sha256=efdb763a24c0e97fd483735bba5d68dd01f0768553f963988436efa933ebbaba
+manifest_rows=75
+in_aggregate_rows=75

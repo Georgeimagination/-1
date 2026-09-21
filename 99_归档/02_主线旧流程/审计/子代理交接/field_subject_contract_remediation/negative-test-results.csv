@@ -1,0 +1,7 @@
+"test_case","mode","mutation","expected_exit_code","actual_exit_code","expected_pattern","pattern_found","result"
+"syntax_noncanonical_order","audit","FIELD-PHY-CLOCK.allowed_subject_kinds=component;object","1","1","Subject contract order is not canonical","true","passed"
+"semantic_fact_kind_mismatch_audit","audit","FIELD-PHY-CLOCK.allowed_subject_kinds=object","0","0","Fact subject contract mismatch","true","passed"
+"semantic_fact_kind_mismatch_gate","gate","FIELD-PHY-CLOCK.allowed_subject_kinds=object","1","1","Fact subject contract mismatch","true","passed"
+"closure_same_target_missing_audit","audit","REQ-AWS-TRN2-0175 target=old NCv3 path","0","0","Requirement lacks same-target same-field fact","true","passed"
+"closure_same_target_missing_gate","gate","REQ-AWS-TRN2-0175 target=old NCv3 path","1","1","Requirement lacks same-target same-field fact","true","passed"
+"arch_relation_wrong_type_gate","gate","FIELD-ID-ARCH target=non-implements relation","1","1","FIELD-ID-ARCH projection requires a unique implements_architecture relation","true","passed"

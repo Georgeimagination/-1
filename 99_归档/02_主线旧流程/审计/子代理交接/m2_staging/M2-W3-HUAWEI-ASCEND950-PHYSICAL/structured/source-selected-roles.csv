@@ -1,0 +1,7 @@
+﻿"source_selected_role_id","source_id","selected_role","rationale","review_status","notes"
+"M2W3-HUAWEI-SROLE-H2-ID","SRC-M2W3-HUAWEI-H2-ASC950-KEYNOTE-20250918","identity","Shared die and two package identities.","draft","Three-object physical scope only."
+"M2W3-HUAWEI-SROLE-H2-CORE","SRC-M2W3-HUAWEI-H2-ASC950-KEYNOTE-20250918","core_spec","Common labels, packaging and DT roadmap specs.","draft","Three-object physical scope only."
+"M2W3-HUAWEI-SROLE-H2-STATUS","SRC-M2W3-HUAWEI-H2-ASC950-KEYNOTE-20250918","status_version_evidence","Q1 PR and Q4 DT roadmap windows.","draft","Three-object physical scope only."
+"M2W3-HUAWEI-SROLE-H6-ID","SRC-M2W3-HUAWEI-H6-PROCESSOR-20260813","identity","Current PR body and DT route identity.","draft","Three-object physical scope only."
+"M2W3-HUAWEI-SROLE-H6-CORE","SRC-M2W3-HUAWEI-H6-PROCESSOR-20260813","core_spec","Current PR memory, unresolved maximum and Lingqu.","draft","Three-object physical scope only."
+"M2W3-HUAWEI-SROLE-H12-STATUS","SRC-M2W3-HUAWEI-H12-ATLAS350-LAUNCH-20260320","status_version_evidence","Dated Atlas 350 launch carrying PR.","draft","Three-object physical scope only."

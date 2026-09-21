@@ -1,0 +1,44 @@
+{
+    "status":  "accept",
+    "ready_for_formal_execution":  true,
+    "package_id":  "M2-W3-AMD-MI350P-FORMAL-TRANSACTION-V1",
+    "reviewer":  "m2_mi350p_formal_transaction_independent_review",
+    "review_date":  "2026-08-13",
+    "authorization_scope":  "formal_execution_of_exact_274_row_signoff_via_transaction_v1",
+    "prep_manifest_sha256":  "c21612350bae17288e365d26f95b5f669426ba99fd33cefce746644986cb3c98",
+    "prep_aggregate_sha256":  "e7138b42baee6b2d138cb5d8f31593c4f6c62319fa16688e866b840d2e419949",
+    "formal_baseline_aggregate_sha256":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "candidate_aggregate_sha256":  "28923f7aa9dea488152f699e6879319d1fb96222fe72745754cf8ffd7b46518e",
+    "candidate_validator_checks":  111390,
+    "static_contract_checks":  8811,
+    "preflight_checks":  11290,
+    "formal_baseline_validator_checks":  106160,
+    "independent_evidence_checks":  261,
+    "signoff":  {
+                    "rows":  1,
+                    "sha256":  "788beb80ca67c6dbf84a4ef949247bbe161240a028206151fbf0d7189104eaf3"
+                },
+    "report":  {
+                   "sha256":  "3fdb8d17ee624ef8b3e5732a7b074fd3b5ae1f4a1c513e0adbb38e2559a42d95",
+                   "report_humanizer":  "passed",
+                   "shuorenhua":  "passed"
+               },
+    "validation_summary_sha256":  "3bc41c1ee63653bdd92eb5254b8195d152a00dff3d33c260983b4271d621e6b8",
+    "cleanup":  {
+                    "formal_writes":  0,
+                    "formal_targets_present":  0,
+                    "temporary_roots_present":  0,
+                    "transaction_temp_directories":  0,
+                    "lock_files":  0,
+                    "mapped_drives":  0
+                },
+    "operator_errors":  {
+                            "count":  12,
+                            "formal_impact":  0,
+                            "approval_or_sandbox_failures":  0
+                        },
+    "root_documents":  {
+                           "README.md":  "read_only_checked_no_change_needed",
+                           "AGENTS.md":  "read_only_checked_no_change_needed"
+                       }
+}

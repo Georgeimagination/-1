@@ -1,0 +1,7 @@
+﻿"coverage_id","covered_source_id","covering_source_id","coverage_scope","equivalence_status","rationale","reviewed_by","review_date","review_status","notes"
+"COV-M2GA-A01","SRC-M2-GA-A01","SRC-M2-GA-A02","selected_fact_set","fully_covered","A01 在修复后不贡献事实；Inferentia1 身份由 A02 支撑，A01 的动态软件总览不在所选事实集内","m2_arch_google_aws","2026-08-12","draft","反向移除后 141 条架构事实与断言集合不损失"
+"COV-M2GA-G04","SRC-M2-GA-G04","SRC-M2-GA-G01","selected_fact_set","fully_covered","G04 在修复后不贡献架构事实；G01 覆盖共同结构，dual-die、HBM、D2D 与 I/O 只留作实现层线索","m2_arch_google_aws","2026-08-12","draft","反向移除后 141 条架构事实与断言集合不损失"
+"COV-M2GA-G06","SRC-M2-GA-G06","SRC-M2-GA-G02","selected_fact_set","fully_covered","v3 动态页的架构事实被固定论文覆盖","m2_arch_google_aws","2026-08-12","draft","反向移除后 141 条架构事实与断言集合不损失"
+"COV-M2GA-G07","SRC-M2-GA-G07","SRC-M2-GA-G03","selected_fact_set","fully_covered","v4 动态页的架构事实被固定论文覆盖","m2_arch_google_aws","2026-08-12","draft","反向移除后 141 条架构事实与断言集合不损失"
+"COV-M2GA-G09","SRC-M2-GA-G09","SRC-M2-GA-G01","selected_fact_set","fully_covered","v5p 动态页独有 95 GiB 属实现层，不进入架构最小集","m2_arch_google_aws","2026-08-12","draft","反向移除后 141 条架构事实与断言集合不损失"
+"COV-M2GA-G12","SRC-M2-GA-G12","SRC-M2-GA-G01","selected_fact_set","fully_covered","性能指南的每核容量与实现边界不进入架构事实","m2_arch_google_aws","2026-08-12","draft","反向移除后 141 条架构事实与断言集合不损失"

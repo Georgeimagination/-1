@@ -1,0 +1,795 @@
+{
+  "dimension": 7,
+  "title": "运行控制、隔离与可靠性：公开机制矩阵",
+  "verified_date": "2026-09-17",
+  "purpose": "用于绘制7×5类别矩阵；不计算行合计、能力分数或优劣排名。",
+  "status_legend": {
+    "yes": "来源明确支持该机制（只在格内注明的作用域）",
+    "no": "来源明确否定；本矩阵仅用于L4/L40S的MIG否定",
+    "unknown": "当前既有来源未披露或不能确认，绝不是不支持",
+    "conflict": "既有来源存在版本/时序或口径冲突"
+  },
+  "columns": [
+    "hardware_partition",
+    "sr_iov",
+    "main_memory_ecc",
+    "bad_page_row",
+    "link_datapath_protection"
+  ],
+  "rows": [
+    {
+      "product": "A100 SXM4 80GB",
+      "article": "/Users/gxli/Documents/Workspace/2026projects/调研-训练推理芯片调研-资料汇总/芯片调研/产品详解/NVIDIA/NVIDIA_A100_SXM4_80GB.md",
+      "reference_map": {
+        "1": "NVIDIA，*NVIDIA A100 Tensor Core GPU Datasheet*，2188504，2022-05。[本地PDF](../../原始资料/论文/NVIDIA_GPU/90_官方白皮书与技术资料/NVIDIA_A100_Tensor_Core_GPU_Datasheet_2188504.pdf)",
+        "2": "NVIDIA，*NVIDIA A100 Tensor Core GPU Architecture In-Depth*，2020。[本地PDF](../../原始资料/论文/NVIDIA_GPU/90_官方白皮书与技术资料/2020_NVIDIA_A100_Architecture_Whitepaper.pdf)",
+        "3": "NVIDIA，*MIG User Guide: Supported GPUs and A100 MIG Profiles*。[原文](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/supported-gpus.html)；[原文](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/supported-mig-profiles.html)",
+        "4": "NVIDIA，*NVIDIA Doubles Down: Announces A100 80GB GPU, Supercharging World's Most Powerful GPU for AI Supercomputing*，2020-11-16。[原文](https://nvidianews.nvidia.com/news/nvidia-doubles-down-announces-a100-80gb-gpu-supercharging-worlds-most-powerful-gpu-for-ai-supercomputing)",
+        "5": "NVIDIA，*vGPU Software Lifecycle on Supported GPUs*，2026-08-03。[原文](https://docs.nvidia.com/vgpu/news/vgpu-software-lifecycle-on-supported-gpus/index.html)",
+        "6": "NVIDIA，*Convolutional Layers User's Guide*。[原文](https://docs.nvidia.com/deeplearning/performance/dl-performance-convolutional/index.html)"
+      },
+      "cells": {
+        "hardware_partition": {
+          "status": "yes",
+          "plot_text": "MIG ≤7",
+          "scope_note": "GPU Instance对计算与内存路径进行空间隔离；SM、crossbar端口、L2 bank、memory controller和DRAM地址总线分配给实例。不是单纯软件QoS。",
+          "evidence": [
+            {
+              "article_reference": 2,
+              "locator": "pp.16,45,47–51；MIG Architecture",
+              "scope": "A100 architecture"
+            },
+            {
+              "article_reference": 3,
+              "locator": "A100 MIG Profiles, Table 12",
+              "scope": "A100 80GB profiles"
+            }
+          ]
+        },
+        "sr_iov": {
+          "status": "yes",
+          "plot_text": "PF / VF",
+          "scope_note": "A100白皮书明确SR-IOV；这是PCIe功能虚拟化，不等同MIG。该证据没有给80GB SXM SKU的VF上限或具体驱动启用条件。",
+          "evidence": [
+            {
+              "article_reference": 2,
+              "locator": "p.53, PCIe Gen 4 with SR-IOV",
+              "scope": "A100 architecture"
+            }
+          ]
+        },
+        "main_memory_ecc": {
+          "status": "yes",
+          "plot_text": "HBM ECC",
+          "scope_note": "HBM及L2/L1/register file有SECDED ECC；此列只计HBM。白皮书介绍首发A100架构，80GB容量型号沿用机制，不能由此推导其DRAM粒数。",
+          "evidence": [
+            {
+              "article_reference": 2,
+              "locator": "p.35, ECC Memory Resiliency",
+              "scope": "A100 architecture"
+            }
+          ]
+        },
+        "bad_page_row": {
+          "status": "unknown",
+          "plot_text": "?",
+          "scope_note": "当前详解及入选白皮书未明确说明物理坏页退役/行重映射。p.54的remote page faults是访问/地址故障传播，不能当作坏页修复证据。",
+          "evidence": [
+            {
+              "article_reference": 2,
+              "locator": "pp.53–54, Error and Fault Detection, Isolation, and Containment",
+              "scope": "reviewed scope; not affirmative evidence"
+            }
+          ]
+        },
+        "link_datapath_protection": {
+          "status": "yes",
+          "plot_text": "NVLink replay",
+          "scope_note": "NVLink链路级错误检测和packet replay；远端访问故障可归属到源执行context。不宣称所有片内通路同样采用此机制。",
+          "evidence": [
+            {
+              "article_reference": 2,
+              "locator": "pp.52–54, Third-Generation NVLink / Error and Fault Detection",
+              "scope": "NVLink"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "product": "L4 24GB",
+      "article": "/Users/gxli/Documents/Workspace/2026projects/调研-训练推理芯片调研-资料汇总/芯片调研/产品详解/NVIDIA/NVIDIA_L4_24GB.md",
+      "reference_map": {
+        "1": "NVIDIA，*NVIDIA L4 GPU Accelerator Product Brief*，PB-11316-001_v01，2023-03-09。[本地 PDF](../../原始资料/论文/NVIDIA_GPU/90_官方白皮书与技术资料/2023_NVIDIA_L4_GPU_Accelerator_Product_Brief_v01.pdf)",
+        "2": "NVIDIA，*NVIDIA Ada GPU Architecture*，v2.02，2022。[本地 PDF](../../原始资料/论文/NVIDIA_GPU/90_官方白皮书与技术资料/2022_NVIDIA_Ada_Architecture_Whitepaper.pdf)",
+        "3": "NVIDIA，*NVIDIA L4 Tensor Core GPU*。[原文](https://www.nvidia.com/en-us/data-center/l4/)",
+        "4": "NVIDIA，*NVIDIA Launches Inference Platforms for Large Language Models and Generative AI Workloads*，2023-03-21。[原文](https://nvidianews.nvidia.com/news/nvidia-launches-inference-platforms-for-large-language-models-and-generative-ai-workloads)",
+        "5": "NVIDIA，*NVIDIA Virtual PC: Sizing and GPU Selection Guide: Recommended NVIDIA GPUs for NVIDIA vPC*，更新于 2026-08-19。[原文](https://docs.nvidia.com/vgpu/sizing/virtual-pc/latest/gpu-vpc.html)"
+      },
+      "cells": {
+        "hardware_partition": {
+          "status": "no",
+          "plot_text": "No MIG",
+          "scope_note": "官方明确不支持MIG。此格的否定范围是MIG，未推广成“不具备任何硬件保护”；时间分片vGPU和32 VF不计为计算/内存物理分区。",
+          "evidence": [
+            {
+              "article_reference": 5,
+              "locator": "Recommended NVIDIA GPUs for NVIDIA vPC, Table 1, L4 MIG Support=No",
+              "scope": "product"
+            }
+          ]
+        },
+        "sr_iov": {
+          "status": "yes",
+          "plot_text": "32 VF",
+          "scope_note": "支持32个PCIe VF，需SBIOS及OS/hypervisor配合；32VF不是32个独立SM/cache/DRAM分区。",
+          "evidence": [
+            {
+              "article_reference": 1,
+              "locator": "印刷p.3 / PDF p.7, Table 3；印刷p.6 / PDF p.10, Single Root I/O Virtualization Support",
+              "scope": "product"
+            }
+          ]
+        },
+        "main_memory_ecc": {
+          "status": "yes",
+          "plot_text": "GDDR6 ECC",
+          "scope_note": "24GB GDDR6 ECC默认开启，可由软件关闭；yes表示支持而非每次运行必然启用。",
+          "evidence": [
+            {
+              "article_reference": 1,
+              "locator": "印刷p.3 / PDF p.7, Tables 2–3",
+              "scope": "product"
+            }
+          ]
+        },
+        "bad_page_row": {
+          "status": "unknown",
+          "plot_text": "?",
+          "scope_note": "入选产品简报/当前详解没有型号级坏页退役、avoidance或行重映射说明。",
+          "evidence": [
+            {
+              "article_reference": 1,
+              "locator": "印刷pp.2–4, Specifications",
+              "scope": "reviewed scope; non-disclosure"
+            }
+          ]
+        },
+        "link_datapath_protection": {
+          "status": "unknown",
+          "plot_text": "?",
+          "scope_note": "未在当前详解及入选产品brief中找到明确的型号级通路检测/重传机制。不从PCIe标准或“无NVLink”推定yes或no。",
+          "evidence": [
+            {
+              "article_reference": 1,
+              "locator": "印刷pp.6–7, Product Features",
+              "scope": "reviewed scope; non-disclosure"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "product": "L40S 48GB",
+      "article": "/Users/gxli/Documents/Workspace/2026projects/调研-训练推理芯片调研-资料汇总/芯片调研/产品详解/NVIDIA/NVIDIA_L40S_48GB.md",
+      "reference_map": {
+        "1": "NVIDIA，*NVIDIA L40S GPU Accelerator Product Brief*，PB-11470-001_v02，2023-08-08。[本地 PDF](../../原始资料/论文/NVIDIA_GPU/90_官方白皮书与技术资料/2023_NVIDIA_L40S_GPU_Accelerator_Product_Brief_v02.pdf)",
+        "2": "NVIDIA，*NVIDIA L40S GPU for AI and Graphics Performance*。[原文](https://www.nvidia.com/en-us/data-center/l40s/)",
+        "3": "NVIDIA，*NVIDIA Ada GPU Architecture*，v2.02，2022。[本地 PDF](../../原始资料/论文/NVIDIA_GPU/90_官方白皮书与技术资料/2022_NVIDIA_Ada_Architecture_Whitepaper.pdf)",
+        "4": "NVIDIA，*NVIDIA, Global Data Center System Manufacturers to Supercharge Generative AI and Industrial Digitalization*，2023-08-08。[原文](https://nvidianews.nvidia.com/news/nvidia-global-data-center-system-manufacturers-to-supercharge-generative-ai-and-industrial-digitalization)",
+        "5": "NVIDIA，*Hardware Setup and Requirements: NVIDIA Omniverse NuRec*，更新于 2026-06-24。[原文](https://docs.nvidia.com/nurec/basics/hardware.html)"
+      },
+      "cells": {
+        "hardware_partition": {
+          "status": "no",
+          "plot_text": "No MIG",
+          "scope_note": "产品brief与产品页明确MIG Not supported；有vGPU/SR-IOV并不改变这项否定。",
+          "evidence": [
+            {
+              "article_reference": 1,
+              "locator": "印刷p.2 / PDF p.6, Table 1",
+              "scope": "product"
+            },
+            {
+              "article_reference": 2,
+              "locator": "GPU Specifications, MIG Support",
+              "scope": "product"
+            }
+          ]
+        },
+        "sr_iov": {
+          "status": "yes",
+          "plot_text": "32 VF",
+          "scope_note": "既有参考[1]明确32VF，即使当前详解正文未展开仍可由同一来源补本矩阵。需SBIOS及OS/hypervisor启用；并非32个MIG实例。",
+          "evidence": [
+            {
+              "article_reference": 1,
+              "locator": "印刷p.3 / PDF p.7, Table 3；印刷p.6 / PDF p.10, Single Root I/O Virtualization Support",
+              "scope": "product"
+            }
+          ]
+        },
+        "main_memory_ecc": {
+          "status": "yes",
+          "plot_text": "GDDR6 ECC",
+          "scope_note": "48GB GDDR6 ECC，产品brief列Enabled；未把它扩写为全部计算单元/互联均受保护。",
+          "evidence": [
+            {
+              "article_reference": 1,
+              "locator": "印刷pp.3–4 / PDF pp.7–8, Tables 2–3",
+              "scope": "product"
+            },
+            {
+              "article_reference": 2,
+              "locator": "GPU Memory",
+              "scope": "product"
+            }
+          ]
+        },
+        "bad_page_row": {
+          "status": "unknown",
+          "plot_text": "?",
+          "scope_note": "既有产品brief/详解未明确披露型号级故障页退役或行修复。",
+          "evidence": [
+            {
+              "article_reference": 1,
+              "locator": "印刷pp.2–4, Specifications",
+              "scope": "reviewed scope; non-disclosure"
+            }
+          ]
+        },
+        "link_datapath_protection": {
+          "status": "unknown",
+          "plot_text": "?",
+          "scope_note": "无NVLink只意味着没有这种互联，不意味着没有任何传输保护；当前来源未给可明确计入的型号级链路/通路机制。",
+          "evidence": [
+            {
+              "article_reference": 1,
+              "locator": "印刷pp.2,6–7, Table 1 / Product Features",
+              "scope": "reviewed scope; non-disclosure"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "product": "MI350P",
+      "article": "/Users/gxli/Documents/Workspace/2026projects/调研-训练推理芯片调研-资料汇总/芯片调研/产品详解/AMD/MI350P.md",
+      "reference_map": {
+        "1": "AMD，*AMD Instinct MI350P PCIe Cards*。<https://www.amd.com/en/products/accelerators/instinct/mi350/mi350p.html>",
+        "2": "AMD，*AMD Instinct MI350P PCIe Card*，LE-93401-00，05/26。[本地 PDF](../../原始资料/论文/AMD_Instinct/02_厂商产品资料/2026_AMD_Instinct_MI350P_PCIe_Card_Brochure.pdf)",
+        "3": "AMD，*AMD Instinct MI350P PCIe GPUs: Run Enterprise AI on Your Existing Infrastructure*，2026-05-07。<https://www.amd.com/en/blogs/2026/amd-instinct-mi350p-pcie-gpus-run-enterprise-ai-on-your.html>",
+        "4": "AMD，*Introducing AMD CDNA 4 Architecture*。[本地 PDF](../../原始资料/论文/AMD_Instinct/01_厂商直接架构论文/2025_AMD_CDNA_4_Architecture_White_Paper.pdf)",
+        "5": "AMD，*AMD Instinct MI350 Series GPUs*。<https://www.amd.com/en/products/accelerators/instinct/mi350.html>",
+        "6": "AMD，*AAI 2026: AMD Delivers Full-Stack Compute for the Agentic AI Era*，2026-07-23。<https://ir.amd.com/news-events/press-releases/detail/1294/aai-2026-amd-delivers-full-stack-compute-for-the-agentic-ai-era>",
+        "7": "AMD，*CDNA4 Instruction Set Architecture: Reference Guide*，2025-08-05。正文引用本手册的印刷页码。<https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/instruction-set-architectures/amd-instinct-cdna4-instruction-set-architecture.pdf>"
+      },
+      "cells": {
+        "hardware_partition": {
+          "status": "yes",
+          "plot_text": "≤4 physical",
+          "scope_note": "型号brochure明确最多4个GPU物理分区、每份36GB；Memory Partitions=1是另一字段。不能按4物理分区推成NPS4，也不借MI350X的8XCD图填写MI350P。",
+          "evidence": [
+            {
+              "article_reference": 2,
+              "locator": "p.1, GPU Physical Partitions / Memory Partitions",
+              "scope": "product"
+            }
+          ]
+        },
+        "sr_iov": {
+          "status": "conflict",
+          "plot_text": "Yes / future",
+          "scope_note": "当前型号页Additional Features写SR-IOV Yes；05/26 brochure p.2仍写Future SR-IOV support for up to four partitions。属于时序/资料版本差异，保留conflict，不判硬件不支持，也不保证全部软件栈已可用。",
+          "evidence": [
+            {
+              "article_reference": 1,
+              "locator": "Additional Features, SR-IOV=Yes",
+              "scope": "product"
+            },
+            {
+              "article_reference": 2,
+              "locator": "p.2, Future SR-IOV support",
+              "scope": "product"
+            }
+          ]
+        },
+        "main_memory_ecc": {
+          "status": "yes",
+          "plot_text": "HBM3E ECC",
+          "scope_note": "144GB HBM3E，Full-chip ECC memory；该术语仅作为公开RAS声明，不补纠错码位宽或跨通路覆盖。",
+          "evidence": [
+            {
+              "article_reference": 1,
+              "locator": "GPU Memory, Memory ECC Support",
+              "scope": "product"
+            },
+            {
+              "article_reference": 2,
+              "locator": "p.1, RAS Features",
+              "scope": "product"
+            }
+          ]
+        },
+        "bad_page_row": {
+          "status": "yes",
+          "plot_text": "Retire / avoid",
+          "scope_note": "产品brochure与产品页明确page retirement和page avoidance，未公开故障行级修复粒度。",
+          "evidence": [
+            {
+              "article_reference": 2,
+              "locator": "p.1, RAS Features",
+              "scope": "product"
+            },
+            {
+              "article_reference": 1,
+              "locator": "Additional Features, Page Retirement / Page Avoidance",
+              "scope": "product"
+            }
+          ]
+        },
+        "link_datapath_protection": {
+          "status": "unknown",
+          "plot_text": "?",
+          "scope_note": "Full-chip ECC memory和RAS Support不能自动变成PCIe/Infinity Fabric链路纠错。当前入选型号资料没有明确的链路/数据通路保护机制。",
+          "evidence": [
+            {
+              "article_reference": 2,
+              "locator": "p.1, RAS Features / Bus Interface",
+              "scope": "product"
+            },
+            {
+              "article_reference": 1,
+              "locator": "Additional Features / Board Specifications",
+              "scope": "product"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "product": "MI350X",
+      "article": "/Users/gxli/Documents/Workspace/2026projects/调研-训练推理芯片调研-资料汇总/芯片调研/产品详解/AMD/MI350X.md",
+      "reference_map": {
+        "1": "AMD，*AMD Instinct MI350X GPUs*。<https://www.amd.com/en/products/accelerators/instinct/mi350/mi350x.html>",
+        "2": "AMD，*AMD Instinct MI350X GPU*，LE-92701-00 C，09/25。<https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/product-briefs/amd-instinct-mi350x-gpu-brochure.pdf>",
+        "3": "AMD，*Introducing AMD CDNA 4 Architecture*。[本地 PDF](../../原始资料/论文/AMD_Instinct/01_厂商直接架构论文/2025_AMD_CDNA_4_Architecture_White_Paper.pdf)",
+        "4": "AMD，*AMD Unveils Vision for an Open AI Ecosystem, Detailing New Silicon, Software and Systems at Advancing AI 2025*，2025-06-12。<https://ir.amd.com/news-events/press-releases/detail/1255/amd-unveils-vision-for-an-open-ai-ecosystem-detailing-new-silicon-software-and-systems-at-advancing-ai-2025>",
+        "5": "AMD，*AMD Instinct MI350 Series GPUs*。<https://www.amd.com/en/products/accelerators/instinct/mi350.html>",
+        "6": "AMD，*CDNA4 Instruction Set Architecture: Reference Guide*，2025-08-05。正文引用本手册的印刷页码。<https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/instruction-set-architectures/amd-instinct-cdna4-instruction-set-architecture.pdf>"
+      },
+      "cells": {
+        "hardware_partition": {
+          "status": "yes",
+          "plot_text": "1/2/4/8",
+          "scope_note": "沿XCD空间划分1/2/4/8份，内存NPS1/NPS2；brochure的Memory Partitions=1 or 4与白皮书口径不一致。冲突是具体内存模式字段，不影响“存在硬件分区”判yes，不能以此称NPS4。",
+          "evidence": [
+            {
+              "article_reference": 3,
+              "locator": "pp.11–13, Figure 6, Compute and Memory Partitioning",
+              "scope": "product"
+            },
+            {
+              "article_reference": 2,
+              "locator": "p.1, Memory Partitions",
+              "scope": "product"
+            }
+          ]
+        },
+        "sr_iov": {
+          "status": "yes",
+          "plot_text": "SR-IOV",
+          "scope_note": "CDNA4白皮书产品表明确MI350X SR-IOV Support=Yes；空间分区与PCIe VF是两个概念。",
+          "evidence": [
+            {
+              "article_reference": 3,
+              "locator": "p.19, MI350X Specifications, SR-IOV Support",
+              "scope": "product"
+            },
+            {
+              "article_reference": 1,
+              "locator": "Additional Features",
+              "scope": "product"
+            }
+          ]
+        },
+        "main_memory_ecc": {
+          "status": "yes",
+          "plot_text": "HBM3E ECC",
+          "scope_note": "288GB HBM3E支持Full-chip ECC；不推断具体码型与全链路保护。",
+          "evidence": [
+            {
+              "article_reference": 3,
+              "locator": "p.19, Full-chip ECC",
+              "scope": "product"
+            },
+            {
+              "article_reference": 1,
+              "locator": "GPU Memory",
+              "scope": "product"
+            }
+          ]
+        },
+        "bad_page_row": {
+          "status": "yes",
+          "plot_text": "Retire / avoid",
+          "scope_note": "型号表明确Page Retirement和Page Avoidance。",
+          "evidence": [
+            {
+              "article_reference": 3,
+              "locator": "p.19, MI350X Specifications",
+              "scope": "product"
+            },
+            {
+              "article_reference": 2,
+              "locator": "p.1, RAS Features",
+              "scope": "product"
+            }
+          ]
+        },
+        "link_datapath_protection": {
+          "status": "unknown",
+          "plot_text": "?",
+          "scope_note": "当前详解与CDNA4白皮书只给链路速率/拓扑及memory ECC，不足以确证特定链路检测/重传或通路ECC。",
+          "evidence": [
+            {
+              "article_reference": 3,
+              "locator": "p.13, Infinity Fabric；p.19, RAS specification",
+              "scope": "reviewed scope; non-disclosure"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "product": "MI455X",
+      "article": "/Users/gxli/Documents/Workspace/2026projects/调研-训练推理芯片调研-资料汇总/芯片调研/产品详解/AMD/MI455X.md",
+      "reference_map": {
+        "1": "AMD，*AMD Instinct MI455X GPUs*。<https://www.amd.com/en/products/accelerators/instinct/mi400/mi455x.html>",
+        "2": "AMD，*AMD Instinct MI455X GPU*，LE-93204-00，07/26。[本地 PDF](../../原始资料/论文/AMD_Instinct/02_厂商产品资料/2026_AMD_Instinct_MI455X_GPU_Brochure.pdf)",
+        "3": "AMD，*AMD CDNA Architecture*。<https://www.amd.com/en/technologies/cdna.html>",
+        "4": "AMD，*Introducing AMD CDNA 5 Architecture*。[本地 PDF](../../原始资料/论文/AMD_Instinct/01_厂商直接架构论文/2026_AMD_CDNA_5_Architecture_White_Paper.pdf)",
+        "5": "AMD，*AMD Instinct MI400 Series GPUs*。<https://www.amd.com/en/products/accelerators/instinct/mi400.html>",
+        "7": "AMD，*AAI 2026: AMD Delivers Full-Stack Compute for the Agentic AI Era*，2026-07-23。<https://ir.amd.com/news-events/press-releases/detail/1294/aai-2026-amd-delivers-full-stack-compute-for-the-agentic-ai-era>",
+        "8": "AMD，*AMD Helios Rackscale Solutions*。<https://www.amd.com/en/products/rackscale-solutions/helios.html>",
+        "9": "AMD，*CDNA5 Instruction Set Architecture: Reference Guide*。正文引用本手册的印刷页码。<https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/instruction-set-architectures/amd-instinct-cdna5-instruction-set-architecture.pdf>"
+      },
+      "cells": {
+        "hardware_partition": {
+          "status": "yes",
+          "plot_text": "1/2/4/8",
+          "scope_note": "开机配置1/2/4/8空间分区，各含1至8个XCD及等份HBM4，隔离VM。brochure Memory Partitions=4与NPS1/NPS2不一致，不能当作唯一可用模式。",
+          "evidence": [
+            {
+              "article_reference": 4,
+              "locator": "p.8, Figure 5, internal spatial partitioning",
+              "scope": "product"
+            },
+            {
+              "article_reference": 2,
+              "locator": "pp.1–2, Memory Partitions / Flexible Partitioning",
+              "scope": "product"
+            }
+          ]
+        },
+        "sr_iov": {
+          "status": "yes",
+          "plot_text": "SR-IOV",
+          "scope_note": "白皮书明确SR-IOV在空间分区之外提供PCIe功能虚拟化保护；不使用Helios机架分区数量替代GPU资源。",
+          "evidence": [
+            {
+              "article_reference": 4,
+              "locator": "p.8, spatial partitioning；p.22, SR-IOV Support",
+              "scope": "product"
+            },
+            {
+              "article_reference": 2,
+              "locator": "p.1, Virtualization Support",
+              "scope": "product"
+            }
+          ]
+        },
+        "main_memory_ecc": {
+          "status": "yes",
+          "plot_text": "HBM4 ECC",
+          "scope_note": "432GB HBM4 Full-chip ECC memory，作用域为单GPU封装的主存储；不是Helios CPU DDR5 ECC。",
+          "evidence": [
+            {
+              "article_reference": 2,
+              "locator": "p.1, Memory / RAS Features",
+              "scope": "product"
+            },
+            {
+              "article_reference": 1,
+              "locator": "GPU Memory",
+              "scope": "product"
+            }
+          ]
+        },
+        "bad_page_row": {
+          "status": "yes",
+          "plot_text": "Page retirement",
+          "scope_note": "公开page retirement；所引表未给page avoidance或行级repair，不能把MI350X的额外机制沿用过来。",
+          "evidence": [
+            {
+              "article_reference": 2,
+              "locator": "p.1, RAS Features",
+              "scope": "product"
+            },
+            {
+              "article_reference": 4,
+              "locator": "p.22, Page Retirement",
+              "scope": "product"
+            }
+          ]
+        },
+        "link_datapath_protection": {
+          "status": "unknown",
+          "plot_text": "?",
+          "scope_note": "当前来源未明确给MI455X GPU芯片链路/内部数据通路的错误保护机制；Helios网络/DPU能力不向下移植。",
+          "evidence": [
+            {
+              "article_reference": 4,
+              "locator": "pp.7–10, GPU architecture / interconnect；p.22, specifications",
+              "scope": "reviewed scope; non-disclosure"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "product": "GroqChip 第一代",
+      "article": "/Users/gxli/Documents/Workspace/2026projects/调研-训练推理芯片调研-资料汇总/芯片调研/产品详解/Groq/Groq_GroqChip_Processor_第一代.md",
+      "reference_map": {
+        "1": "Abts et al.，*Think Fast: A Tensor Streaming Processor (TSP) for Accelerating Deep Learning Workloads*，ISCA 2020。[本地 PDF](../../原始资料/论文/Groq_LPU/01_厂商直接架构论文/2020_Groq_Think_Fast_Tensor_Streaming_Processor_ISCA.pdf)",
+        "2": "Groq，*GroqChip Processor Product Brief v1.7*，2024。[本地 PDF](../../原始资料/论文/Groq_LPU/90_官方白皮书与技术资料/2024_GroqChip_Processor_Product_Brief_v1.7.pdf)",
+        "3": "Groq，*What Is a Language Processing Unit?*，2025-03-07。<https://groq.com/blog/the-groq-lpu-explained>",
+        "4": "Groq，*GroqChip Processor Product Brief v1.5*，2022。<https://www.groq.com/GroqDocs/Product%20Spec%20Sheet%20-%20GroqChip%E2%84%A2%20Processor.pdf>",
+        "5": "Groq，*Groq Partners with Aljammaz Technologies to Power AI Inference Across MENA*，2025-10-17。<https://groq.com/newsroom/groq-partners-with-aljammaz-technologies-to-power-ai-inference-across-mena>"
+      },
+      "cells": {
+        "hardware_partition": {
+          "status": "unknown",
+          "plot_text": "?",
+          "scope_note": "88个MEM slice及分区全局地址空间是数据存放/功能切片，不是多租户硬件实例隔离；编译器确定性执行也不等于资源隔离。未披露MIG式或GPU物理分区机制。",
+          "evidence": [
+            {
+              "article_reference": 1,
+              "locator": "PDF pp.3–6, functional slices / partitioned global address space",
+              "scope": "reviewed scope; not tenant partition evidence"
+            }
+          ]
+        },
+        "sr_iov": {
+          "status": "unknown",
+          "plot_text": "?",
+          "scope_note": "既有论文与v1.7产品brief只给PCIe Gen4×16，不披露PF/VF或SR-IOV，不能从PCIe代际推定支持。",
+          "evidence": [
+            {
+              "article_reference": 1,
+              "locator": "PDF pp.4–5, C2C / host interface",
+              "scope": "product"
+            },
+            {
+              "article_reference": 2,
+              "locator": "p.2, I/O",
+              "scope": "product"
+            }
+          ]
+        },
+        "main_memory_ecc": {
+          "status": "yes",
+          "plot_text": "SRAM SECDED",
+          "scope_note": "主存是片内220MiB/约230MB SRAM，非外部HBM、非cache。128-bit memory word另带9-bit SECDED，单错纠正/双错检测。",
+          "evidence": [
+            {
+              "article_reference": 1,
+              "locator": "PDF p.6 / proceedings p.150, §II-D Error handling and reliability",
+              "scope": "product"
+            }
+          ]
+        },
+        "bad_page_row": {
+          "status": "unknown",
+          "plot_text": "?",
+          "scope_note": "论文描述软错自动纠正和CSR记录；未明确物理故障页退役或行重映射。错误日志不能计成坏页修复。",
+          "evidence": [
+            {
+              "article_reference": 1,
+              "locator": "PDF p.6 / proceedings p.150, §II-D",
+              "scope": "reviewed scope; no retirement claim"
+            }
+          ]
+        },
+        "link_datapath_protection": {
+          "status": "yes",
+          "plot_text": "Stream ECC",
+          "scope_note": "同一ECC伴随片内stream registers传输，在消费者切片检查；本格仅证实片内数据通路，不宣称16条C2C链路具有相同保护/重传。",
+          "evidence": [
+            {
+              "article_reference": 1,
+              "locator": "PDF p.6 / proceedings p.150, §II-D Error handling and reliability",
+              "scope": "on-chip streaming datapath"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "matrix": [
+    [
+      "yes",
+      "yes",
+      "yes",
+      "unknown",
+      "yes"
+    ],
+    [
+      "no",
+      "yes",
+      "yes",
+      "unknown",
+      "unknown"
+    ],
+    [
+      "no",
+      "yes",
+      "yes",
+      "unknown",
+      "unknown"
+    ],
+    [
+      "yes",
+      "conflict",
+      "yes",
+      "yes",
+      "unknown"
+    ],
+    [
+      "yes",
+      "yes",
+      "yes",
+      "yes",
+      "unknown"
+    ],
+    [
+      "yes",
+      "yes",
+      "yes",
+      "yes",
+      "unknown"
+    ],
+    [
+      "unknown",
+      "unknown",
+      "yes",
+      "unknown",
+      "yes"
+    ]
+  ],
+  "row_labels": [
+    "A100 SXM4 80GB",
+    "L4 24GB",
+    "L40S 48GB",
+    "MI350P",
+    "MI350X",
+    "MI455X",
+    "GroqChip 第一代"
+  ],
+  "figure_notes": [
+    "MIG/物理分区 ≠ SR-IOV；L4与L40S的32VF不表示32个空间隔离GPU实例。",
+    "ECC列对Groq指片内SRAM，对其余产品指HBM/GDDR。",
+    "链路/数据通路列中A100为NVLink，Groq为片内stream；两者覆盖范围不同，不应按同等可靠性强度解读。",
+    "MI350P SR-IOV“当前Yes / 旧brochure Future”保留冲突。MI350X/MI455X分区数量口径冲突写注释，不否定分区存在。",
+    "A100远端page fault传播不等于物理坏页退役；未在选定来源确认的格子保持unknown。"
+  ],
+  "reading_findings": [
+    "L40S现有详解正文未写SR-IOV，但既有参考[1]印刷pp.3、6明确32VF，可直接用于比较且无需新增文献。",
+    "A100现有详解正文未写SR-IOV，既有白皮书[2]p.53明确支持；矩阵保留架构级证据范围。"
+  ],
+  "verification": "读取7篇当前详解并重读其既有产品brief与架构白皮书相关段；L4/L40S SR-IOV表已渲染目视核对；AMD物理分区与RAS表以及Groq ECC页沿用本线程已完成的原文核验并复读相关文本。网页仅复核现有引用，无新增来源；原文未修改。",
+  "products": [
+    {
+      "label": "A100 SXM4 80GB",
+      "states": {
+        "hardware_partition": "yes",
+        "sr_iov": "yes",
+        "main_memory_ecc": "yes",
+        "bad_page_row": "unknown",
+        "link_datapath_protection": "yes"
+      }
+    },
+    {
+      "label": "L4 24GB",
+      "states": {
+        "hardware_partition": "no",
+        "sr_iov": "yes",
+        "main_memory_ecc": "yes",
+        "bad_page_row": "unknown",
+        "link_datapath_protection": "unknown"
+      }
+    },
+    {
+      "label": "L40S 48GB",
+      "states": {
+        "hardware_partition": "no",
+        "sr_iov": "yes",
+        "main_memory_ecc": "yes",
+        "bad_page_row": "unknown",
+        "link_datapath_protection": "unknown"
+      }
+    },
+    {
+      "label": "MI350P",
+      "states": {
+        "hardware_partition": "yes",
+        "sr_iov": "conflict",
+        "main_memory_ecc": "yes",
+        "bad_page_row": "yes",
+        "link_datapath_protection": "unknown"
+      }
+    },
+    {
+      "label": "MI350X",
+      "states": {
+        "hardware_partition": "yes",
+        "sr_iov": "yes",
+        "main_memory_ecc": "yes",
+        "bad_page_row": "yes",
+        "link_datapath_protection": "unknown"
+      }
+    },
+    {
+      "label": "MI455X",
+      "states": {
+        "hardware_partition": "yes",
+        "sr_iov": "yes",
+        "main_memory_ecc": "yes",
+        "bad_page_row": "yes",
+        "link_datapath_protection": "unknown"
+      }
+    },
+    {
+      "label": "GroqChip Gen1",
+      "states": {
+        "hardware_partition": "unknown",
+        "sr_iov": "unknown",
+        "main_memory_ecc": "yes",
+        "bad_page_row": "unknown",
+        "link_datapath_protection": "yes"
+      }
+    }
+  ],
+  "column_definitions": [
+    {
+      "id": "hardware_partition",
+      "label": "硬件计算/内存分区",
+      "plot_label": "HW partition",
+      "definition": "有明确MIG或空间/物理资源分区。单纯SR-IOV、软件调度、编译器数据分片均不计入；no标签仅对应来源明确否定的MIG。"
+    },
+    {
+      "id": "sr_iov",
+      "label": "SR-IOV",
+      "plot_label": "SR-IOV",
+      "definition": "PCIe PF/VF虚拟化支持，与计算/存储物理分区分开。"
+    },
+    {
+      "id": "main_memory_ecc",
+      "label": "主存ECC",
+      "plot_label": "Main-memory ECC",
+      "definition": "加速器保存权重/激活的主存储保护；GPU为HBM/GDDR，Groq为片内SRAM，不含host系统内存。"
+    },
+    {
+      "id": "bad_page_row",
+      "label": "故障页/行处理",
+      "plot_label": "Bad-page / row handling",
+      "definition": "物理失效页retirement/avoidance或故障行重映射。虚拟地址page fault、单纯ECC纠错和错误日志不计入。"
+    },
+    {
+      "id": "link_datapath_protection",
+      "label": "链路/数据通路错误保护",
+      "plot_label": "Link / datapath protection",
+      "definition": "来源明确给出链路检测/重传或片内数据通路保护；yes只确认注释中的通路，不意味着所有链路均受保护。"
+    }
+  ]
+}

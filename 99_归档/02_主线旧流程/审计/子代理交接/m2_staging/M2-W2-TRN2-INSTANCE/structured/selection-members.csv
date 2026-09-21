@@ -1,0 +1,5 @@
+﻿"selection_member_id","selection_run_id","source_id","selected_role","mandatory_reason","review_status","notes"
+"SELMEM-M2W2-TRN2INST-S06","SELRUN-M2W2-TRN2INST-20260813","SRC-AWS-TRN2-S06","core_spec","移除会使 33 条实例事实失去唯一直接断言，包括 16 芯片组成、实例峰值、内存、拓扑和实例内互联","draft","事实集合或 S06 版本改变后重跑"
+"SELMEM-M2W2-TRN2INST-S07","SELRUN-M2W2-TRN2INST-20260813","SRC-AWS-TRN2-S07","core_spec","移除会使 4 条实例事实失去唯一直接断言：trn2.3xlarge 的 96 GB 与 0.2 Tbps EFA、两个 48xlarge SKU 的 3.2 Tbps EFA","draft","2026-08-13 快照语义未变；页面内容改变后重跑"
+"SELMEM-M2W2-TRN2INST-S09","SELRUN-M2W2-TRN2INST-20260813","SRC-AWS-TRN2-S09","status_version_evidence","移除会使 FACT-AWS-TRN2-48XL-STATUS-GA 失去固定 2024-12-03 日期证据","draft","事实集合改变后重跑"
+"SELMEM-M2W2-TRN2INST-S10","SELRUN-M2W2-TRN2INST-20260813","SRC-AWS-TRN2-S10","conflict_evidence","移除会丢失 8 条 2024 年 83.2 PFLOPS 稀疏历史事实与版本冲突链","draft","冲突被一手同口径证据裁决后再评估"

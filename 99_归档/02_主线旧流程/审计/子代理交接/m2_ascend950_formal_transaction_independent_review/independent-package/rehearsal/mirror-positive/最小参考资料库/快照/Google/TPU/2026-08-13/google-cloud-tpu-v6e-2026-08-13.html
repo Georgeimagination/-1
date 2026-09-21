@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Web extract snapshot: https://docs.cloud.google.com/tpu/docs/v6e</title></head><body>
+<h1>Web extract snapshot</h1>
+<dl><dt>Source URL</dt><dd><a href="https://docs.cloud.google.com/tpu/docs/v6e">https://docs.cloud.google.com/tpu/docs/v6e</a></dd><dt>Access date</dt><dd>2026-08-13</dd><dt>Capture method</dt><dd>Codex web open rendered-text extract; not an upstream byte-identical response body.</dd></dl>
+<pre>TPU v6e  |  Google Cloud Documentation (https://docs.cloud.google.com/tpu/docs/v6e)
+citeturn355view0 [wordlim: 200] Crawled: today; Content type: text/html; Source: open({"ref_id":"https://docs.cloud.google.com/tpu/docs/v6e","lineno":null}); Total lines: 255
+L0: [Button: ]
+L1: 
+L2: cite0†Technology areas cite1†Cross-product tools L3: 
+L4: [Input: Search]
+L5: 
+L6: `/`
+L7: 
+L8: cite2†Console†console.cloud.google.com L9: 
+L10:   * English
+L11:   * Deutsch
+L12:   * Español
+L13:   * Español – América Latina
+L14:   * Français
+L15:   * Indonesia
+L16:   * Italiano
+L17:   * Português
+L18:   * Português – Brasil
+L19:   * עברית
+L20:   * 中文 – 简体
+L21:   * 中文 – 繁體
+L22:   * 日本語
+L23:   * 한국어
+L24: Sign in
+L25: 
+L26: cite3†Start free†console.cloud.google.com L27: 
+L28: cite4†Overview cite5†Guides cite6†Reference cite7†Samples cite8†Support cite9†Resources L29: 
+L30: [Input: Filter]
+L31: 
+L32: [Button: ]
+L33: 
+L34:   * Discover
+L35: 
+L36:   * TPU versions
+L37:   * Get started
+L38: 
+L39:   * Quickstarts
+L40: 
+L41:   * Reserve TPUs
+L42: 
+L43:     * cite10†Share a reservation L44: 
+L45:   * Create TPUs
+L46: 
+L47:   * Configure TPUs
+L48: 
+L49:   * Manage storage
+L50: 
+L51:   * Manage TPUs
+L52: 
+L53:   * Manage TPUs in All Capacity mode
+L54: 
+L55:     * cite11†All Capacity mode overview L56:     * cite12†Request an All Capacity mode reservation L57:     * cite13†View the topology and health of All Capacity mode TPUs L58:     * cite14†Report and repair faulty hosts in All Capacity mode L59:     * cite15†Manage maintenance events in All Capacity mode L60: 
+L61:   * Run workloads
+L62:   * Work with image datasets
+L63: 
+L64:     * cite16†Convert an image classification dataset for use with Cloud TPU L65: 
+L66:   * Optimize performance
+L67: 
+L68:   * Monitor and troubleshoot TPUs
+L69: 
+L70:   * ML Diagnostics platform
+L71: 
+L72:   * Profile TPUs
+L73: 
+L74:   * Cloud TPU API
+L75: 
+L76:   * Discover
+L77: 
+L78:     * cite17†TPU software versions L79:     * TPU versions
+L80: 
+L81:       * cite18†TPU v3 L82:       * cite19†TPU v2 L83: 
+L84:   * Get started
+L85:     * cite20†Set up a Google Cloud project L86:     * cite21†Create TPUs L87:     * cite22†Consume a reservation L88:     * cite23†Run JAX on Cloud TPU VM L89:     * cite24†Run PyTorch on Cloud TPU VM L90:     * cite25†Run JAX on Cloud TPU slices L91:     * cite26†Run PyTorch on Cloud TPU slices L92: 
+L93:   * Configure TPUs
+L94:     * cite27†Connect a TPU to a shared VPC network L95:     * cite28†Connect to a TPU VM without a public IP address L96:     * cite29†Configure networking and access L97:     * cite30†Encrypt a TPU VM boot disk with a CMEK L98:     * cite31†Use a cross-project service account L99:     * cite32†Attach durable block storage to a TPU VM L100:     * cite33†Connect to Cloud Storage buckets L101:     * cite34†Mount a Filestore instance on a TPU VM L102: 
+L103:   * Manage TPUs
+L104:     * cite35†Manage TPU resources L105:     * cite36†Manage queued resources L106:     * cite37†Request TPU Flex-start VMs L107:     * cite38†Manage TPU Spot VMs L108:     * cite39†Prepare for maintenance events L109:     * cite40†Autocheckpoint L110:     * cite41†View maintenance notifications L111:     * cite42†Manually start host maintenance L112:     * cite43†Preemptible TPUs L113: 
+L114:   * Run workloads
+L115: 
+L116:     * cite44†Train a model using v6e L117:     * cite45†Train a model using v5e L118:     * cite46†Scale ML workloads using Ray L119:     * cite47†Run TPU applications in a Docker container L120:   * Monitor and troubleshoot TPUs
+L121: 
+L122:     * cite48†Troubleshoot TPU VMs L123:     * cite49†Monitor TPU VMs L124:     * cite50†Dashboards for monitoring and logging L125:     * cite51†Troubleshoot TensorFlow models L126:     * cite52†Cloud TPU error glossary L127:     * cite53†Cloud TPU audit logs L128: 
+L129:   * Tutorials and notebooks
+L130: 
+L131:     * cite54†Train ResNet with PyTorch L132:     * cite55†MaxDiffusion inference on v6e L133:     * cite56†Notebooks L134: 
+L135: [Button: Send feedback ] Stay organized with collections Save and categorize content based on your preferences.
+L136: # TPU v6e
+L137: 
+L138: This document describes the architecture and supported configurations of Cloud TPU v6e (Trillium). On all technical surfaces, such as the API and logs, and throughout this document, Trillium will be referred to as v6e.
+L139: 
+L140: With a 256-chip footprint per Pod, v6e shares many similarities with cite57†v5e . This system is optimized for transformer, text-to-image, and convolutional neural network (CNN) training, fine-tuning, and serving.
+L141: ## System architecture
+L142: 
+L143: Each v6e chip contains one TensorCore. Each TensorCore has 2 matrix-multiply units (MXU), a vector unit, and a scalar unit. The following table shows the key specifications and their values for TPU v6e.
+L144: Specification  | Values
+L145: --- | ---
+L146: Performance/total cost of ownership (TCO) (expected)  | 1
+L147: Peak compute per chip (bf16)  | 918 TFLOPs
+L148: Peak compute per chip (Int8)  | 1836 TOPs
+L149: HBM capacity per chip  | 32 GB
+L150: HBM bandwidth per chip  | 1638 GBps
+L151: Bidirectional inter-chip interconnect (ICI) bandwidth (per chip)  | 800 GBps
+L152: ICI ports per chip  | 4
+L153: DRAM per host  | 1536 GiB
+L154: Chips per host  | 8
+L155: TPU Pod size  | 256 chips
+L156: Interconnect topology  | 2D torus
+L157: BF16 peak compute per Pod  | 234.9 PFLOPs
+L158: All-reduce bandwidth per Pod  | 102.4 TB/s
+L159: Bisection bandwidth per Pod  | 3.2 TB/s
+L160: Per-host NIC configuration  | 4 x 200 Gbps NIC
+L161: Data center network bandwidth per Pod  | 25.6 Tbps
+L162: Special features  | cite58†SparseCore L163: ## Supported configurations
+L164: 
+L165: Note: Use the cite59†TPU topology visualizer†tpu-visualizer.uc.r.appspot.com to view 3D renderings of different TPU configurations.
+L166: 
+L167: The following table shows the 2D slice shapes that are supported for v6e:
+L168: Topology  | TPU chips  | Hosts  | VMs  | Machine type  | Scope
+L169: --- | --- | --- | --- | --- | ---
+L170: 1x1  | 1  | 1/8  | 1  | `ct6e-standard-1t`  | Sub-host
+L171: 2x2  | 4  | 1/2  | 1  | `ct6e-standard-4t`  | Sub-host
+L172: 2x4  | 8  | 1  | 1  | `ct6e-standard-8t`  | Single-host
+L173: 2x4  | 8  | 1  | 2  | `ct6e-standard-4t`  | Multi-host
+L174: 4x4  | 16  | 2  | 4  | `ct6e-standard-4t`  | Multi-host
+L175: 4x8  | 32  | 4  | 8  | `ct6e-standard-4t`  | Multi-host
+L176: 8x8  | 64  | 8  | 16  | `ct6e-standard-4t`  | Multi-host
+L177: 8x16  | 128  | 16  | 32  | `ct6e-standard-4t`  | Multi-host
+L178: 16x16  | 256  | 32  | 64  | `ct6e-standard-4t`  | Multi-host
+L179: Note: The 8-chip (2x4) configuration attached to 2 VMs is only supported when using the GKE API.
+L180: Slices with 8 chips (`v6e-8`) attached to a single VM are optimized for inference, allowing all 8 chips to be used in a single serving workload. You can perform multi-host inference using Pathways on Cloud. For more information, see cite60†Perform multihost inference using Pathways .
+L181: 
+L182: For information about the number of VMs for each topology, see cite61†VM Types .
+L183: ### VM types
+L184: 
+L185: Each TPU v6e VM can contain 1, 4, or 8 chips. 4-chip and smaller slices have the same non-uniform memory access (NUMA) node. For more information about NUMA nodes, see cite62†Non-uniform memory access†en.wikipedia.org on Wikipedia.
+L186: 
+L187: cite63†Image: Diagram of a v6e host L188: 
+L189: v6e slices are created using half-host VMs, each with 4 TPU chips. There are two exceptions to this rule:
+L190:   * `v6e-1`: A VM with only a single chip, primarily intended for testing
+L191:   * `v6e-8`: A full-host VM that has been optimized for an inference use case with all 8 chips attached to a single VM.
+L192: 
+L193: The following table shows a comparison of TPU v6e VM types:
+L194: VM type  | Number of vCPUs per VM  | RAM (GB) per VM  | Number of NUMA nodes per VM
+L195: --- | --- | --- | ---
+L196: 1-chip VM  | 44  | 176  | 1
+L197: 4-chip VM  | 180  | 720  | 1
+L198: 8-chip VM  | 360  | 1440  | 2
+L199: Note: We don't recommend using a full-host VM (`v6e-8` with one VM) for dual networks due to performance impacts.
+L200: ## What's next
+L201: 
+L202:   * Run cite64†training and inference using TPU v6e L203: 
+L204: [Button: Send feedback ]
+L205: 
+L206: Except as otherwise noted, the content of this page is licensed under the cite65†Creative Commons Attribution 4.0 License†creativecommons.org , and code samples are licensed under the cite66†Apache 2.0 License†www.apache.org . For details, see the cite67†Google Developers Site Policies†developers.google.com . Java is a registered trademark of Oracle and/or its affiliates.
+L207: 
+L208: Last updated 2026-08-05 UTC.
+L209:   * ### Products and pricing
+L210: 
+L211:     * cite68†See all products†cloud.google.com L212:     * cite69†Google Cloud pricing†cloud.google.com L213:     * cite70†Google Cloud Marketplace†cloud.google.com L214:     * cite71†Contact sales†cloud.google.com L215:   * ### Support
+L216: 
+L217:     * cite72†Community forums†discuss.google.dev L218:     * cite73†Support†cloud.google.com L219:     * cite74†Release Notes L220:     * cite75†System status†status.cloud.google.com L221:   * ### Resources
+L222:     * cite76†GitHub†github.com L223:     * cite77†Getting Started with Google Cloud L224:     * cite78†Code samples L225:     * cite79†Cloud Architecture Center L226:     * cite80†Training and Certification†cloud.google.com L227:   * ### Engage
+L228: 
+L229:     * cite81†Blog†cloud.google.com L230:     * cite82†Events†cloud.google.com L231:     * cite83†X (Twitter)†x.com L232:     * cite84†Google Cloud on YouTube†www.youtube.com L233:     * cite85†Google Cloud Tech on YouTube†www.youtube.com L234:   * cite86†About Google†about.google L235:   * cite87†Privacy†policies.google.com L236:   * cite88†Site terms†policies.google.com L237:   * cite89†Google Cloud terms†cloud.google.com L238:   * cite90†Our third decade of climate action: join us†cloud.google.com L239:   * Sign up for the Google Cloud newsletter cite91†Subscribe†cloud.google.com L240: 
+L241:   * English
+L242:   * Deutsch
+L243:   * Español
+L244:   * Español – América Latina
+L245:   * Français
+L246:   * Indonesia
+L247:   * Italiano
+L248:   * Português
+L249:   * Português – Brasil
+L250:   * עברית
+L251:   * 中文 – 简体
+L252:   * 中文 – 繁體
+L253:   * 日本語
+L254:   * 한국어
+</pre>
+</body></html>

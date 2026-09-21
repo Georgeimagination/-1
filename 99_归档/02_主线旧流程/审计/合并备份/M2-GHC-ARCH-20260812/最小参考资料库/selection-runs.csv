@@ -1,0 +1,2 @@
+"selection_run_id","scope_kind","scope_id","cutoff_date","algorithm_version","created_date","reviewer","status","review_status","notes"
+"SELRUN-M1-PILOTS-20260812","custom","M1-H100-TRAINIUM2-MLU590","2026-08-12","reverse-removal-v1","2026-08-12","root","reviewed","reviewed","基于当前三张试填卡 formal assertions、selected roles 与 source coverage 的反向移除。Tuning Guide 因当前 7 条断言均由白皮书覆盖而移出 selected；其 PDF 仍保留。"

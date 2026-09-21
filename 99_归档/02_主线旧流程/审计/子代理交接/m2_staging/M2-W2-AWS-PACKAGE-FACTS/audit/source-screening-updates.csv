@@ -1,0 +1,2 @@
+﻿"screening_id","source_id","screening_status","rationale","full_text_read_status","screened_by","screened_date","screening_fingerprint","review_status","notes"
+"SCREEN-M2-GA-A01","SRC-M2-GA-A01","selected","Inferentia1 package 实现量的唯一固定一手来源；v2.31.0 快照支持芯片级 NCv1 数量、峰值和 DRAM 规格。","relevant_sections_read","m2_w2_aws_package_facts","2026-08-13","SRC-M2-GA-A01|selected|M2-W2-AWS-PACKAGE-FACTS|2026-08-13","draft","候选更新只改变本轮 package 事实选择语义；需由总控或独立复核者批准。"

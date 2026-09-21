@@ -1,0 +1,10 @@
+{
+    "status":  "passed",
+    "generated_at":  "2026-08-13",
+    "signoff_sha256":  "b40f064127a7ac2c5e8de9b4728501381974b661373e9cf5c2dd46954dde2394",
+    "bindings_checked":  12,
+    "failed_bindings":  0,
+    "ready_for_formal_execution":  true,
+    "formal_execution_performed":  false,
+    "formal_aggregate":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10"
+}

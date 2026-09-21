@@ -1,0 +1,4 @@
+"link_id","owner_object_id","endpoint_a_id","endpoint_b_id","link_level","canonical_label","review_status","notes"
+"LINK-M2W3-AMD-MI455X-CPU-GPU","OBJ-AMD-MI455X","OBJ-AMD-MI455X","","host_device","MI455X CPU-to-GPU AMD Infinity Fabric connection","draft","Brochure table publishes 256 GB/s; direction and payload basis are not stated."
+"LINK-M2W3-AMD-MI455X-SCALEUP-UALOE","OBJ-AMD-MI455X","OBJ-AMD-MI455X","","rack_scale_up","MI455X UALoE scale-up endpoint","draft","Product page publishes 3.6 TB/s peak bidirectional bandwidth per device."
+"LINK-M2W3-AMD-MI455X-SCALEOUT-UALINK","OBJ-AMD-MI455X","OBJ-AMD-MI455X","","datacenter_scale_out","MI455X UALink scale-out endpoint","draft","Dedicated product page labels the 600 GB/s peak bidirectional endpoint UALink; rack-level Ethernet and UEC statements are not migrated."

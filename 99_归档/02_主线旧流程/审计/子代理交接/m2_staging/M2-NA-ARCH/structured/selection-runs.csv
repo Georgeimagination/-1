@@ -1,0 +1,2 @@
+"selection_run_id","scope_kind","scope_id","cutoff_date","algorithm_version","created_date","reviewer","status","review_status","notes"
+"SELRUN-M2NA-ARCH-20260812","custom","M2-NA-ARCH","2026-08-12","reverse-removal-v1","2026-08-12","m2_arch_nvidia_amd","draft","draft","Rechecked on 2026-08-13 after field and canonical-unit normalization: 185 current facts and 17 selected sources. Each selected source remains necessary because every current fact has one selected assertion; total-control merge review remains required."

@@ -1,0 +1,5 @@
+"memory_level_id","parent_memory_level_id","level_class","canonical_label","review_status","notes"
+"COMP-NVIDIA-H100-REGISTER-FILE","","register","Register file","draft","65536 32-bit registers per SM."
+"COMP-NVIDIA-H100-L1-SMEM","","l1","Combined L1 texture cache and shared memory","draft","Combined 256 KB per SM resource; shared-memory carveout up to 228 KB."
+"COMP-NVIDIA-H100-L2","","l2","L2 cache","draft","50 MB GPU-wide cache."
+"COMP-NVIDIA-H100-HBM3","","hbm","HBM3 device memory","draft","80 GB across five stacks."

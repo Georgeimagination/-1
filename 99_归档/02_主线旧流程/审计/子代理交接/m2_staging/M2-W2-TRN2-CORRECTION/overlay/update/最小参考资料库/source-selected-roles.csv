@@ -1,0 +1,8 @@
+"source_selected_role_id","source_id","selected_role","rationale","review_status","notes"
+"SROLE-AWS-TRN2-008","SRC-AWS-TRN2-S06","core_spec","实例与 UltraServer 聚合规格、拓扑和 NeuronLink 分层；不含 3XL 芯片数","draft","Trainium2 正式事实修复后复核的来源角色；2026-08-13"
+"SROLE-AWS-TRN2-009","SRC-AWS-TRN2-S06","conflict_evidence","trn2.48xlarge 当前 FP8 稀疏值的冲突一侧；不再包含 UltraServer EFA 伪冲突","draft","Trainium2 正式事实修复后复核的来源角色；2026-08-13"
+"SROLE-AWS-TRN2-010","SRC-AWS-TRN2-S07","core_spec","3XL 芯片数、实例配置/内存/网络与 UltraServer 12.8 Tbps 系统聚合规格","draft","Trainium2 正式事实修复后复核的来源角色；2026-08-13"
+"SROLE-AWS-TRN2-011","SRC-AWS-TRN2-S07","conflict_evidence","UltraServer 当前状态与 S15 内存质量审计的冲突证据；EFA 伪冲突已移除","draft","Trainium2 正式事实修复后复核的来源角色；2026-08-13"
+"SROLE-AWS-TRN2-012","SRC-AWS-TRN2-S07","status_version_evidence","2026-08-13 复核的动态页状态观察；正文与 2026-08-12 语义等价","draft","Trainium2 正式事实修复后复核的来源角色；2026-08-13"
+"SROLE-AWS-TRN2-015","SRC-AWS-TRN2-S10","conflict_evidence","仅保留芯片 FP8 5.2 PFLOPS 与 trn2.48xlarge FP8 83.2 PFLOPS 两条 2024 历史值","draft","Trainium2 正式事实修复后复核的来源角色；2026-08-13"
+"SROLE-AWS-TRN2-016","SRC-AWS-TRN2-S10","status_version_evidence","2024-12-03 首发状态、区域与 UltraServer preview 语境","draft","Trainium2 正式事实修复后复核的来源角色；2026-08-13"

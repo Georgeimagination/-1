@@ -1,0 +1,20 @@
+{
+    "status":  "passed",
+    "generated_at":  "2026-08-13",
+    "scenarios":  3,
+    "positive_passed":  1,
+    "rollback_scenarios_passed":  2,
+    "exact_injection_points_verified":  2,
+    "reverse_csv_rollback_orders_verified":  3,
+    "reverse_payload_rollback_orders_verified":  3,
+    "formal_baseline_aggregate":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "candidate_postmerge_aggregate":  "bcb16e932019c1625e9b5a5309a37f569c0bb230b7c921a589dd3f7175632b8c",
+    "validator_checks":  115509,
+    "write_rows":  545,
+    "write_tables":  20,
+    "payload_targets":  8,
+    "all_formal_targets_absent":  true,
+    "all_temp_and_lock_counts_zero":  true,
+    "formal_writes_performed":  0,
+    "formal_mode":  "hard_deny_pending_independent_review"
+}

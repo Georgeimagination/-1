@@ -1,0 +1,6 @@
+"source_family_id","canonical_title","family_kind","publisher_or_organization","persistent_work_id","review_status","notes"
+"SFAM-NVIDIA-H100-DATASHEET","NVIDIA H100 Tensor Core GPU Datasheet","document_revision_series","NVIDIA","NVIDIA-2287922","draft","Current product datasheet revision series."
+"SFAM-NVIDIA-HOPPER-TUNING-GUIDE","CUDA Hopper Tuning Guide","document_revision_series","NVIDIA","CUDA-HOPPER-TUNING-GUIDE","draft","Current developer documentation revision series."
+"SFAM-NVIDIA-H100-HOTCHIPS34","NVIDIA Hopper H100 GPU Hot Chips 34 material","event_material_set","NVIDIA","HOTCHIPS34-NVIDIA-H100","draft","Launch-stage architecture and preliminary specification evidence."
+"SFAM-NVIDIA-H100-IEEE-MICRO","NVIDIA Hopper H100 GPU: Scaling Performance","publication_versions","IEEE","10.1109/MM.2023.3256796","draft","Journal treatment overlapping the whitepaper and Hot Chips material."
+"SFAM-NVIDIA-HOPPER-MICROBENCH","Dissecting NVIDIA Hopper through microbenchmarking","publication_versions","Independent researchers","ARXIV-2402.13499-2501.12084","draft","2024 paper and 2025 extended version; measured hardware is H800, not H100 SXM5."

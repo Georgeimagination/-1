@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Web extract snapshot: https://docs.cloud.google.com/tpu/docs/v5p</title></head><body>
+<h1>Web extract snapshot</h1>
+<dl><dt>Source URL</dt><dd><a href="https://docs.cloud.google.com/tpu/docs/v5p">https://docs.cloud.google.com/tpu/docs/v5p</a></dd><dt>Access date</dt><dd>2026-08-13</dd><dt>Capture method</dt><dd>Codex web open rendered-text extract; not an upstream byte-identical response body.</dd></dl>
+<pre>TPU v5p  |  Google Cloud Documentation (https://docs.cloud.google.com/tpu/docs/v5p)
+citeturn354view0 [wordlim: 200] Crawled: today; Content type: text/html; Source: open({"ref_id":"https://docs.cloud.google.com/tpu/docs/v5p","lineno":null}); Total lines: 288
+L0: [Button: ]
+L1: 
+L2: cite0†Technology areas cite1†Cross-product tools L3: 
+L4: [Input: Search]
+L5: 
+L6: `/`
+L7: 
+L8: cite2†Console†console.cloud.google.com L9: 
+L10:   * English
+L11:   * Deutsch
+L12:   * Español
+L13:   * Español – América Latina
+L14:   * Français
+L15:   * Indonesia
+L16:   * Italiano
+L17:   * Português
+L18:   * Português – Brasil
+L19:   * עברית
+L20:   * 中文 – 简体
+L21:   * 中文 – 繁體
+L22:   * 日本語
+L23:   * 한국어
+L24: Sign in
+L25: 
+L26: cite3†Start free†console.cloud.google.com L27: 
+L28: cite4†Overview cite5†Guides cite6†Reference cite7†Samples cite8†Support cite9†Resources L29: 
+L30: [Input: Filter]
+L31: 
+L32: [Button: ]
+L33: 
+L34:   * Discover
+L35: 
+L36:   * TPU versions
+L37:   * Get started
+L38: 
+L39:   * Quickstarts
+L40: 
+L41:   * Reserve TPUs
+L42: 
+L43:     * cite10†Share a reservation L44: 
+L45:   * Create TPUs
+L46: 
+L47:   * Configure TPUs
+L48: 
+L49:   * Manage storage
+L50: 
+L51:   * Manage TPUs
+L52: 
+L53:   * Manage TPUs in All Capacity mode
+L54: 
+L55:     * cite11†All Capacity mode overview L56:     * cite12†Request an All Capacity mode reservation L57:     * cite13†View the topology and health of All Capacity mode TPUs L58:     * cite14†Report and repair faulty hosts in All Capacity mode L59:     * cite15†Manage maintenance events in All Capacity mode L60: 
+L61:   * Run workloads
+L62:   * Work with image datasets
+L63: 
+L64:     * cite16†Convert an image classification dataset for use with Cloud TPU L65: 
+L66:   * Optimize performance
+L67: 
+L68:   * Monitor and troubleshoot TPUs
+L69: 
+L70:   * ML Diagnostics platform
+L71: 
+L72:   * Profile TPUs
+L73: 
+L74:   * Cloud TPU API
+L75: 
+L76:   * Discover
+L77: 
+L78:     * cite17†TPU software versions L79:     * TPU versions
+L80: 
+L81:       * cite18†TPU v3 L82:       * cite19†TPU v2 L83: 
+L84:   * Get started
+L85:     * cite20†Set up a Google Cloud project L86:     * cite21†Create TPUs L87:     * cite22†Consume a reservation L88:     * cite23†Run JAX on Cloud TPU VM L89:     * cite24†Run PyTorch on Cloud TPU VM L90:     * cite25†Run JAX on Cloud TPU slices L91:     * cite26†Run PyTorch on Cloud TPU slices L92: 
+L93:   * Configure TPUs
+L94:     * cite27†Connect a TPU to a shared VPC network L95:     * cite28†Connect to a TPU VM without a public IP address L96:     * cite29†Configure networking and access L97:     * cite30†Encrypt a TPU VM boot disk with a CMEK L98:     * cite31†Use a cross-project service account L99:     * cite32†Attach durable block storage to a TPU VM L100:     * cite33†Connect to Cloud Storage buckets L101:     * cite34†Mount a Filestore instance on a TPU VM L102: 
+L103:   * Manage TPUs
+L104:     * cite35†Manage TPU resources L105:     * cite36†Manage queued resources L106:     * cite37†Request TPU Flex-start VMs L107:     * cite38†Manage TPU Spot VMs L108:     * cite39†Prepare for maintenance events L109:     * cite40†Autocheckpoint L110:     * cite41†View maintenance notifications L111:     * cite42†Manually start host maintenance L112:     * cite43†Preemptible TPUs L113: 
+L114:   * Run workloads
+L115: 
+L116:     * cite44†Train a model using v6e L117:     * cite45†Train a model using v5e L118:     * cite46†Scale ML workloads using Ray L119:     * cite47†Run TPU applications in a Docker container L120:   * Monitor and troubleshoot TPUs
+L121: 
+L122:     * cite48†Troubleshoot TPU VMs L123:     * cite49†Monitor TPU VMs L124:     * cite50†Dashboards for monitoring and logging L125:     * cite51†Troubleshoot TensorFlow models L126:     * cite52†Cloud TPU error glossary L127:     * cite53†Cloud TPU audit logs L128: 
+L129:   * Tutorials and notebooks
+L130: 
+L131:     * cite54†Train ResNet with PyTorch L132:     * cite55†MaxDiffusion inference on v6e L133:     * cite56†Notebooks L134: 
+L135: [Button: Send feedback ] Stay organized with collections Save and categorize content based on your preferences.
+L136: # TPU v5p
+L137: 
+L138: This document describes the architecture and supported configurations of Cloud TPU v5p.
+L139: ## System architecture
+L140: 
+L141: This section describes the system architecture specific to the v5p version. Each TensorCore has four Matrix Multiply Units (MXU), a vector unit, and a scalar unit.
+L142: 
+L143: There are 8960 chips in a v5p Pod. The largest job that can be scheduled is a 96 cube (6144 chip) job.
+L144: 
+L145: The following table shows the key specifications for TPU v5p.
+L146: Specification  | Values
+L147: --- | ---
+L148: Number of chips per pod  | 8960
+L149: Peak compute per chip (BF16) (TFLOPs)  | 459
+L150: Peak compute per chip (FP8) (TFLOPs)  | 459
+L151: HBM capacity per chip (GiB)  | 95
+L152: HBM bandwidth per chip (GBps)  | 2765
+L153: Number of vCPUs (4-chip VM)  | 208
+L154: RAM (GB) (4-chip VM)  | 448
+L155: Number of TensorCores per chip  | 2
+L156: Number of SparseCores per chip  | 4
+L157: Bidirectional inter-chip interconnect (ICI) bandwidth per chip (GBps)  | 1200
+L158: Data center network (DCN) bandwidth per chip (Gbps)  | 50
+L159: Interconnect topology  | 3D torus *
+L160: Important: All 4x4x4 and larger slices (one cube) have full 3D torus connectivity. Slices smaller than a full cube are 3D connected, however, they don't have wrap-around links that make them a 3D torus.
+L161: ## Configurations
+L162: 
+L163: Note: Use the cite57†TPU topology visualizer†tpu-visualizer.uc.r.appspot.com to view 3D renderings of different TPU configurations.
+L164: 
+L165: A TPU v5p Pod is composed of 8960 chips interconnected with reconfigurable high-speed links. TPU v5p's flexible networking lets you connect the chips in a same-sized slice in multiple ways.
+L166: The following table shows the most common single-slice shapes supported with v5p, plus most (but not all) full cube shapes greater than 1 cube. The maximum v5p shape is 16x16x24 (6144 chips, 96 cubes).
+L167: Note: All v5p TPU topologies use the `ct5p-hightpu-4t` machine type.
+L168: Topology  | Cores  | Chips  | Hosts  | Cubes  | Machine type  | Supports twisted?
+L169: --- | --- | --- | --- | --- | --- | ---
+L170: 2x2x1  | 8  | 4  | 1  | N/A  | `ct5p-hightpu-4t`  | N/A
+L171: 2x2x2  | 16  | 8  | 2  | N/A  | `ct5p-hightpu-4t`  | N/A
+L172: 2x4x4  | 64  | 32  | 8  | N/A  | `ct5p-hightpu-4t`  | N/A
+L173: 4x4x4  | 128  | 64  | 16  | 1  | `ct5p-hightpu-4t`  | N/A
+L174: 4x4x8  | 256  | 128  | 32  | 2  | `ct5p-hightpu-4t`  | Yes
+L175: 4x8x8  | 512  | 256  | 64  | 4  | `ct5p-hightpu-4t`  | Yes
+L176: 8x8x8  | 1024  | 512  | 128  | 8  | `ct5p-hightpu-4t`  | N/A
+L177: 8x8x16  | 2048  | 1024  | 256  | 16  | `ct5p-hightpu-4t`  | Yes
+L178: 8x16x16  | 4096  | 2048  | 512  | 32  | `ct5p-hightpu-4t`  | Yes
+L179: 16x16x16  | 8192  | 4096  | 1024  | 64  | `ct5p-hightpu-4t`  | N/A
+L180: 16x16x24  | 12288  | 6144  | 1536  | 96  | `ct5p-hightpu-4t`  | N/A
+L181: Single slice training is supported for up to 6144 chips. You can scale up to 18432 chips using Multislice. For more information about Multislice, see cite58†Cloud TPU Multislice Overview .
+L182: ### Twisted torus topologies
+L183: 
+L184: Note: Specifying a twisted topology is only supported using the Cloud TPU API.
+L185: For some 3D slice shapes, you can use a twisted torus topology. These topologies offer significantly higher bisection bandwidth. For example, a 4x4x8 twisted topology provides a 70% theoretical increase in bisection bandwidth compared to a non-twisted 4x4x8 slice. This increased bandwidth helps workloads that use global communication patterns. Twisted topologies can improve performance for most models, with large cite59†TPU embedding workloads†www.tensorflow.org providing the greatest benefit.
+L186: TPU software supports twisted topologies on slices where each dimension is either equal to or twice the size of the smallest dimension. For example, 4x4x8, 4×8×8, or 12x12x24. Twisted topologies are supported on TPU v4 and TPU v5p through the Cloud TPU API.
+L187: For workloads that use data parallelism as the only parallelism strategy, twisted topologies might perform slightly better. With large language models (LLMs), twisted topology performance varies depending on the type of parallelism used (for example, data parallelism or model parallelism). To find the best performance for your model, train your LLM both with and without a twisted topology.
+L188: Some experiments on the cite60†FSDP MaxText model†maxtext.readthedocs.io showed 1-2 percentage point improvements in model FLOPs utilization (MFU) when using a twisted topology.
+L189: The main benefit of twisted topologies is that they change an asymmetric torus topology (for example, 4×4×8) into a symmetric one. A symmetric topology offers:
+L190: 
+L191:   * Improved load balancing
+L192:   * Higher bisection bandwidth
+L193:   * Shorter packet routes
+L194: 
+L195: These benefits result in improved performance for many global communication patterns.
+L196: 
+L197: For example, consider this 4×2 torus topology with TPUs labeled with X and Y coordinates in the slice:
+L198: cite61†Image: An illustration of an untwisted 4x2 torus topology with TPUs labeled by X and Y coordinates L199: 
+L200: For clarity, the graph shows connections as undirected edges. In practice, each edge is a bidirectional connection between TPUs. The edges between one side of this grid and the opposite side are wrap-around edges.
+L201: 
+L202: Twisting this topology creates a symmetric 4×2 twisted torus topology:
+L203: 
+L204: cite62†Image: An illustration of a twisted 4x2 torus topology with TPUs labeled by X and Y coordinates L205: The difference between this twisted diagram and the untwisted one lies in the Y wrap-around edges. Instead of connecting to another TPU with the same X coordinate, these wrap-around edges shift to connect to the TPU at coordinate X+2 mod 4.
+L206: 
+L207: This principle applies to different dimension sizes and numbers of dimensions. The resulting network is symmetric if each dimension is equal to or twice the size of the smallest dimension.
+L208: The following table shows some of the supported twisted topologies and the theoretical increase in bisection bandwidth they provide versus untwisted topologies.
+L209: 
+L210: Topology  | Theoretical increase in bisection bandwidth versus a non-twisted torus
+L211: --- | ---
+L212: 4×4×8  | ~70%
+L213: 8x8x16
+L214: 12×12×24
+L215: 4×8×8  | ~40%
+L216: 8×16×16
+L217: ### Cloud TPU ICI resiliency
+L218: 
+L219: ICI resiliency helps improve fault tolerance of optical links and optical circuit switches (OCS) that connect TPUs between cubes. (ICI connections within a cube use copper links that are not impacted). ICI resiliency allows ICI connections to be routed around OCS and optical ICI faults. As a result, it improves the scheduling availability of TPU slices, with the trade-off of temporary degradation in ICI performance.
+L220: Similar to Cloud TPU v4, ICI resiliency is enabled by default for v5p slices that are one cube or larger (4x4x4 topology).
+L221: ### VM, host and slice properties
+L222: 
+L223: Property  | Value in a TPU
+L224: --- | ---
+L225: # of v5p chips  | 4
+L226: # of vCPUs  | 208 (only half is usable if using NUMA binding to avoid cross-NUMA performance penalty)
+L227: RAM (GB)  | 448 (only half is usable if using NUMA binding to avoid cross-NUMA performance penalty)
+L228: # of NUMA nodes  | 2
+L229: NIC throughput (Gbps)  | 200
+L230: 
+L231: Relationship between the number of TensorCores, chips, hosts/VMs, and cubes in a Pod:
+L232:  | Cores  | Chips  | Hosts/VMs  | Cubes
+L233: Host  | 8  | 4  | 1
+L234: Cube (rack)  | 128  | 64  | 16  | 1
+L235: Largest supported slice  | 12288  | 6144  | 1536  | 96
+L236: v5p full Pod  | 17920  | 8960  | 2240  | 140
+L237: 
+L238: [Button: Send feedback ]
+L239: Except as otherwise noted, the content of this page is licensed under the cite63†Creative Commons Attribution 4.0 License†creativecommons.org , and code samples are licensed under the cite64†Apache 2.0 License†www.apache.org . For details, see the cite65†Google Developers Site Policies†developers.google.com . Java is a registered trademark of Oracle and/or its affiliates.
+L240: 
+L241: Last updated 2026-08-05 UTC.
+L242: 
+L243:   * ### Products and pricing
+L244:     * cite66†See all products†cloud.google.com L245:     * cite67†Google Cloud pricing†cloud.google.com L246:     * cite68†Google Cloud Marketplace†cloud.google.com L247:     * cite69†Contact sales†cloud.google.com L248:   * ### Support
+L249: 
+L250:     * cite70†Community forums†discuss.google.dev L251:     * cite71†Support†cloud.google.com L252:     * cite72†Release Notes L253:     * cite73†System status†status.cloud.google.com L254:   * ### Resources
+L255:     * cite74†GitHub†github.com L256:     * cite75†Getting Started with Google Cloud L257:     * cite76†Code samples L258:     * cite77†Cloud Architecture Center L259:     * cite78†Training and Certification†cloud.google.com L260:   * ### Engage
+L261: 
+L262:     * cite79†Blog†cloud.google.com L263:     * cite80†Events†cloud.google.com L264:     * cite81†X (Twitter)†x.com L265:     * cite82†Google Cloud on YouTube†www.youtube.com L266:     * cite83†Google Cloud Tech on YouTube†www.youtube.com L267:   * cite84†About Google†about.google L268:   * cite85†Privacy†policies.google.com L269:   * cite86†Site terms†policies.google.com L270:   * cite87†Google Cloud terms†cloud.google.com L271:   * cite88†Our third decade of climate action: join us†cloud.google.com L272:   * Sign up for the Google Cloud newsletter cite89†Subscribe†cloud.google.com L273: 
+L274:   * English
+L275:   * Deutsch
+L276:   * Español
+L277:   * Español – América Latina
+L278:   * Français
+L279:   * Indonesia
+L280:   * Italiano
+L281:   * Português
+L282:   * Português – Brasil
+L283:   * עברית
+L284:   * 中文 – 简体
+L285:   * 中文 – 繁體
+L286:   * 日本語
+L287:   * 한국어
+</pre>
+</body></html>

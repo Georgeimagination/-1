@@ -1,0 +1,1 @@
+PASS: MI455X static transaction contract; 6540 checks; 242 rows across 19 tables; 3 absent file targets; formal aggregate unchanged.

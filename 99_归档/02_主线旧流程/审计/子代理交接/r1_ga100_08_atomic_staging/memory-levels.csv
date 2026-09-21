@@ -1,0 +1,5 @@
+"memory_level_id","parent_memory_level_id","level_class","canonical_label","review_status","notes"
+"COMP-R1-GA100-REG","","register","GA100 SM register file","draft","Per-SM 256 KB capacity is staged separately. No aggregate capacity or bandwidth is asserted."
+"COMP-R1-GA100-L1SMEM","","shared_scratchpad","GA100 unified L1 data cache and shared memory","draft","Schema chooses shared_scratchpad while preserving the combined cache role. Per-SM 192 KB is one combined physical capacity, not separate L1 plus shared capacities."
+"COMP-R1-GA100-L2","","l2","GA100 L2 cache","draft","No enabled-product capacity is asserted."
+

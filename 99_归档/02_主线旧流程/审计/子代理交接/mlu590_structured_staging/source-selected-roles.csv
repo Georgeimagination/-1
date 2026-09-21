@@ -1,0 +1,2 @@
+"source_selected_role_id","source_id","selected_role","rationale","review_status","notes"
+"SROLE-CAMBRICON-MLU-OPS-MLU590-TARGET","SRC-CAMBRICON-MLU-OPS-COMMIT-67B3707F","architecture_mechanism","Supports the MLU590-specific software build target at a fixed commit; it does not support physical-memory capacities or whole-chip architecture scale.","draft",""

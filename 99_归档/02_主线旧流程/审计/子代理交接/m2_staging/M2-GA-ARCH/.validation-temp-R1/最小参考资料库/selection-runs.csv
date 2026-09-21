@@ -1,0 +1,4 @@
+﻿"selection_run_id","scope_kind","scope_id","cutoff_date","algorithm_version","created_date","reviewer","status","review_status","notes"
+"SELRUN-M1-PILOTS-20260812","custom","M1-H100-TRAINIUM2-MLU590","2026-08-12","reverse-removal-v1","2026-08-12","root","reviewed","reviewed","基于当前三张试填卡 formal assertions、selected roles 与 source coverage 的反向移除。Tuning Guide 因当前 7 条断言均由白皮书覆盖而移出 selected；其 PDF 仍保留。"
+"SELRUN-M2-GHC-ARCH-20260812","custom","M2-GHC-ARCH","2026-08-12","reverse-removal-v1","2026-08-12","root","reviewed","reviewed","按正式合并后的 35 条架构事实、架构实体和身份边界执行反向移除；7 个来源入选，其余 4 个分别为重复覆盖、仅作线索或正文不可访问。后续新增事实时需重跑。"
+"SEL-M2GA-ARCH-20260812-R2","custom","M2-GA-ARCH","2026-08-12","m2-arch-minset-v0.4-source-contract","2026-08-12","m2_arch_google_aws","draft","draft","基于第二次修复后的 141 条事实和 141 条逐来源断言重新执行：25 个包内候选中入选 19 个、反向移除 6 个；跨代 Top-K 只保留边界记录，不进入事实集合；Trainium2 既有正式来源不纳入本包 run；动态页保持 dynamic_unfrozen，正式合并后仍须按全库事实集合复核"

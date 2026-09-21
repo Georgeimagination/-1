@@ -1,0 +1,20 @@
+{
+    "status":  "passed",
+    "scenario":  "rollback_after_3_tables",
+    "executor_exit_code":  1,
+    "outcome":  "FAIL_ROLLED_BACK",
+    "journal_rows":  14,
+    "lock_acquired_rows":  1,
+    "csv_commit_complete":  3,
+    "csv_rollback_complete":  3,
+    "rollback_order_exact_reverse":  true,
+    "payload_commit_complete":  0,
+    "payload_rollback_complete":  0,
+    "mirror_aggregate_after":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "formal_aggregate_before":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "formal_aggregate_after":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "journal_sha256":  "026b38c76db303cf72bf499ea7d7c5d5087e5a74c639263c5f4d59c321896f6b",
+    "transaction_outcome_sha256":  "cc0e54a8c5421c307081ad00b4ac842dc0f31e2ae4e0766428a19bbdfedf0783",
+    "console_sha256":  "5eccf57986d8799484f93a4b7b1896e8a059324a5ba85be26031ef23b220180e",
+    "formal_writes_performed":  0
+}

@@ -1,0 +1,10 @@
+"source_family_id","canonical_title","family_kind","publisher_or_organization","persistent_work_id","review_status","notes"
+"SFAM-NVIDIA-A100-ISSCC-2021","The A100 Datacenter GPU and Ampere Architecture","publication_versions","NVIDIA","doi:10.1109/ISSCC42613.2021.9365803","draft","Family identity follows the revised GA100 source-registration plan."
+"SFAM-NVIDIA-A100-IEEE-MICRO-2021","NVIDIA A100 Tensor Core GPU: Performance and Innovation","publication_versions","NVIDIA","doi:10.1109/MM.2021.3061394","draft","Family identity follows the revised GA100 source-registration plan."
+"SFAM-NVIDIA-AMPERE-MICROBENCH-2022","Demystifying the NVIDIA Ampere Architecture through Microbenchmarking and Instruction-level Analysis","publication_versions","Independent authors","arxiv:2208.11174","draft","Family identity follows the revised GA100 source-registration plan."
+"SFAM-NVIDIA-A100-RANDOM-ACCESS-2024","Enabling Full-Speed Random Access to the Entire Memory on the A100 GPU","publication_versions","Independent authors","arxiv:2405.11425","draft","Family identity follows the revised GA100 source-registration plan."
+"SFAM-NVIDIA-GPU-MEMORY-ERROR-MGMT","NVIDIA GPU Memory Error Management","document_revision_series","NVIDIA","NVIDIA-DA-09826-002","draft","Family identity follows the revised GA100 source-registration plan."
+"SFAM-NVIDIA-CUDA-C-PROGRAMMING-GUIDE","CUDA C++ Programming Guide","document_revision_series","NVIDIA","NVIDIA-CUDA-C-PROGRAMMING-GUIDE","draft","Family identity follows the revised GA100 source-registration plan."
+"SFAM-NVIDIA-PTX-ISA","Parallel Thread Execution ISA","document_revision_series","NVIDIA","NVIDIA-PTX-ISA","draft","Family identity follows the revised GA100 source-registration plan."
+"SFAM-NVIDIA-MIG-USER-GUIDE","NVIDIA Multi-Instance GPU User Guide","document_revision_series","NVIDIA","NVIDIA-MIG-USER-GUIDE","draft","Family identity follows the revised GA100 source-registration plan."
+

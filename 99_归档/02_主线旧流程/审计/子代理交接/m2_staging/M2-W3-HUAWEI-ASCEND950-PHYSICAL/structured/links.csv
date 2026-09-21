@@ -1,0 +1,4 @@
+﻿"link_id","owner_object_id","endpoint_a_id","endpoint_b_id","link_level","canonical_label","review_status","notes"
+"LINK-M2W3-HUAWEI-ASC950-DIE-INTERCONNECT","OBJ-HUAWEI-ASCEND-950-DIE","OBJ-HUAWEI-ASCEND-950-DIE","","device_direct","Ascend 950 common chip interconnect","draft","No per-link, payload or topology inference."
+"LINK-M2W3-HUAWEI-ASC950PR-LINGQU2","OBJ-HUAWEI-ASCEND-950PR","OBJ-HUAWEI-ASCEND-950PR","","device_direct","Ascend 950PR Lingqu 2.0","draft","No per-link, payload or topology inference."
+"LINK-M2W3-HUAWEI-ASC950DT-INTERCONNECT","OBJ-HUAWEI-ASCEND-950DT","OBJ-HUAWEI-ASCEND-950DT","","device_direct","Ascend 950DT total interconnect","draft","No per-link, payload or topology inference."

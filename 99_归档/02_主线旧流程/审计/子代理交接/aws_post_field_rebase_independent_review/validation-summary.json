@@ -1,0 +1,20 @@
+{
+    "status":  "PASS",
+    "rehearsal_checks":  372,
+    "merge_checks":  25467,
+    "authorized_writes":  477,
+    "no_write_guards":  9,
+    "old_signoff_sha_rejection_exit":  1,
+    "negative_existing_target_exit":  1,
+    "positive_post_field_rebase_exit":  0,
+    "formal_validator_exit":  0,
+    "formal_validator_checks":  106160,
+    "current_post_field_aggregate":  "d10ad305a820f0fc1db7f2bf7030ca149ea7b556ceacd0a32d593f08a7cc01ff",
+    "signed_pre_field_aggregate":  "97ebb17a2518e3a43b18a382dcfc879c1f5e2b08118a6149c8fa984e65017453",
+    "field_contract_changed_tables":  3,
+    "field_contract_retargeted_requirements":  12,
+    "aws_field_contract_write_set_conflicts":  0,
+    "post_field_signoff_rows":  486,
+    "current_formal_tables_unchanged":  32,
+    "temporary_root_removed":  true
+}

@@ -1,0 +1,62 @@
+{
+    "binding_id":  "AWS-SIGNOFF-POST-FIELD-CONTRACT-20260813",
+    "verdict":  "accept_pending_independent_signoff",
+    "reviewer":  "aws_post_field_rebase",
+    "date":  "2026-08-13",
+    "prior_rebase_signoff":  {
+                                 "path":  "审计/子代理交接/aws_signoff_rebase/aws-signoff-rebase.csv",
+                                 "sha256":  "9429d80f0ba649724ed1276523df8ecfcf269e6e748b15a6cbe4dd11013b42c0",
+                                 "rows":  486,
+                                 "writes":  478,
+                                 "guards":  8,
+                                 "aggregate":  "97ebb17a2518e3a43b18a382dcfc879c1f5e2b08118a6149c8fa984e65017453"
+                             },
+    "field_contract_migration":  {
+                                     "independent_signoff_sha256":  "10a1e1f177f41ed2845ea7a6a1c28bbc375de2deb053a25a2610d6dac3fb0d02",
+                                     "remediation_manifest_sha256":  "16d721dde2c39154d40d6c3cef6f6525ac8fd24ef5e3c7ad29c2daef94fa0239",
+                                     "current_fields_columns":  13,
+                                     "frozen_staged_fields_columns":  12,
+                                     "field_clock_already_satisfied":  true
+                                 },
+    "current_baseline":  {
+                             "aggregate":  "d10ad305a820f0fc1db7f2bf7030ca149ea7b556ceacd0a32d593f08a7cc01ff",
+                             "formal_tables":  32,
+                             "schema_rows":  324,
+                             "fields_sha256":  "1723cd5ef441ea12c53e785a4d2e2101f81ecdc5ce10872a02152cfb6539e2ee",
+                             "field_requirements_sha256":  "93c27127b6124331368e24ccec97c48620d2e85f08057d14d049d87edb91d347"
+                         },
+    "post_field_signoff":  {
+                               "path":  "审计/子代理交接/aws_post_field_rebase/aws-signoff-post-field-rebase.csv",
+                               "sha256":  "b9fa74876dfa4769df99277359f5c0be7dff268a353964abf1d392eb3708e4e3",
+                               "rows":  486,
+                               "writes":  477,
+                               "guards":  9,
+                               "exact_cell_writes":  0,
+                               "target_hash_cells_changed":  72,
+                               "aggregate_cells_changed":  486,
+                               "overlap_row":  "AWS-SIGN-0458",
+                               "strict_rehearsal":  {
+                                                        "status":  "PASS",
+                                                        "rehearsal_checks":  372,
+                                                        "merge_checks":  25467,
+                                                        "authorized_writes":  477,
+                                                        "guards":  9,
+                                                        "validator_checks":  106160,
+                                                        "validator_mode":  "gate",
+                                                        "formal_table_hash_changes":  0,
+                                                        "temporary_root_removed":  true
+                                                    }
+                           },
+    "input_read_audit":  {
+                             "files":  150,
+                             "path":  "审计/子代理交接/aws_post_field_rebase/input-read-audit.csv"
+                         },
+    "formal_current_validator":  {
+                                     "status":  "PASS",
+                                     "checks":  97920,
+                                     "mode":  "gate",
+                                     "columns":  324,
+                                     "enum_values":  488
+                                 },
+    "independent_signoff_required":  true
+}

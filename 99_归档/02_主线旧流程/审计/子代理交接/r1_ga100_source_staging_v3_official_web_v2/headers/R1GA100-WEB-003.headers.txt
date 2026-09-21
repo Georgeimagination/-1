@@ -1,0 +1,15 @@
+HTTP/2 200 
+date: Thu, 20 Aug 2026 20:52:54 GMT
+content-type: application/pdf; charset=utf-8
+content-length: 33646
+content-disposition: attachment; filename=NVIDIAsN.pdf
+x-cache-timestamp: Thu, 20 Aug 2026 20:52:54 GMT
+x-varnish: 2102099983 2093776950
+age: 656
+accept-ranges: bytes
+x-varnish-2023-age: 656.398
+x-varnish-2023-ttl: -356.398
+x-varnish-2023-cache: GRACE
+via: 1.1 ipr-varnish-2023 (Varnish/7.4), 1.1 google
+alt-svc: h3=":443"; ma=2592000
+

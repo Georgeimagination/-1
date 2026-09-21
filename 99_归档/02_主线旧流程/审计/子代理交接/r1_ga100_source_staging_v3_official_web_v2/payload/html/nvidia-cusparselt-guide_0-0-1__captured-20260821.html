@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
+  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
+</script>
+<script type="text/javascript">
+  function OptanonWrapper() {
+    var event = new Event('bannerLoaded');
+    window.dispatchEvent(event);
+  }
+</script>
+<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
+</script>
+
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>cuSPARSELt: A High-Performance CUDA Library for Sparse Matrix-Matrix Multiplication — NVIDIA cuSPARSELt 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css">
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css">
+  <link rel="stylesheet" href="_static/cusparseLt_override.css" type="text/css">
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="next" title="Getting Started" href="getting_started.html"> 
+<link rel="stylesheet" href="/common-libs/common.css">
+<script src="/common-libs/common.js"></script>
+<script src="//assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+           
+
+          
+            <a href="#" class="icon icon-home" alt="Documentation Home"> NVIDIA cuSPARSELt
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs">
+    <input type="hidden" name="check_keywords" value="yes">
+    <input type="hidden" name="area" value="default">
+  </form>
+</div>
+
+          
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #76b900;
+    }
+
+    .wy-side-nav-search a:link, .wy-nav-top a:link {
+      color: #fff;
+    }
+    .wy-side-nav-search a:visited, .wy-nav-top a:visited {
+      color: #fff;
+    }
+    .wy-side-nav-search a:hover, .wy-nav-top a:hover {
+      color: #fff;
+    }
+
+    .wy-menu-vertical a:link, .wy-menu-vertical a:visited {
+      color: #d9d9d9
+    }
+
+    .wy-menu-vertical a:active {
+      background-color: #76b900
+    }
+
+    .wy-side-nav-search>div.version {
+      color: rgba(0, 0, 0, 0.3)
+    }
+
+    /* override table width restrictions */
+    .wy-table-responsive table td, .wy-table-responsive table th {
+        white-space: normal;
+    }
+
+    .wy-table-responsive {
+        margin-bottom: 24px;
+        max-width: 100%;
+        overflow: visible;
+    }
+  </style>
+  
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1">
+<a class="reference internal" href="getting_started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#cusparselt-workflow">cuSPARSELt Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#installation-and-compilation">Installation and Compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#code-example">Code Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="types.html">cuSPARSELt Data Types</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="types.html#opaque-data-structures">Opaque Data Structures</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="types.html#cusparselthandle-t"><code class="code docutils literal notranslate"><span class="pre">cusparseLtHandle_t</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="types.html#cusparseltmatdescriptor-t"><code class="code docutils literal notranslate"><span class="pre">cusparseLtMatDescriptor_t</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="types.html#cusparseltmatmuldescriptor-t"><code class="code docutils literal notranslate"><span class="pre">cusparseLtMatmulDescriptor_t</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="types.html#cusparseltmatmulalgselection-t"><code class="code docutils literal notranslate"><span class="pre">cusparseLtMatmulAlgSelection_t</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="types.html#cusparseltmatmulplan-t"><code class="code docutils literal notranslate"><span class="pre">cusparseLtMatmulPlan_t</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="types.html#enumerators">Enumerators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="types.html#cusparseltsparsity-t"><code class="code docutils literal notranslate"><span class="pre">cusparseLtSparsity_t</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="types.html#cusparsecomputetype"><code class="code docutils literal notranslate"><span class="pre">cusparseComputeType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="types.html#cusparseltmatmulalg-t"><code class="code docutils literal notranslate"><span class="pre">cusparseLtMatmulAlg_t</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="types.html#cusparseltmatmulalgattribute-t"><code class="code docutils literal notranslate"><span class="pre">cusparseLtMatmulAlgAttribute_t</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="types.html#cusparseltprunealg-t"><code class="code docutils literal notranslate"><span class="pre">cusparseLtPruneAlg_t</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="functions.html">cuSPARSELt Functions</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="functions.html#library-management-functions">Library Management Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#cusparseltinit"><code class="code docutils literal notranslate"><span class="pre">cusparseLtInit</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#cusparseltdestroy"><code class="code docutils literal notranslate"><span class="pre">cusparseLtDestroy</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="functions.html#matmul-functions">Matmul Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#cusparseltdensedescriptorinit"><code class="code docutils literal notranslate"><span class="pre">cusparseLtDenseDescriptorInit</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#cusparseltstructureddescriptorinit"><code class="code docutils literal notranslate"><span class="pre">cusparseLtStructuredDescriptorInit</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#cusparseltmatmuldescriptorinit"><code class="code docutils literal notranslate"><span class="pre">cusparseLtMatmulDescriptorInit</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#cusparseltmatmulalgselectioninit"><code class="code docutils literal notranslate"><span class="pre">cusparseLtMatmulAlgSelectionInit</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#cusparseltmatmulalgsetattribute"><code class="code docutils literal notranslate"><span class="pre">cusparseLtMatmulAlgSetAttribute</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#cusparseltmatmulalggetattribute"><code class="code docutils literal notranslate"><span class="pre">cusparseLtMatmulAlgGetAttribute</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#cusparseltmatmulgetworkspace"><code class="code docutils literal notranslate"><span class="pre">cusparseLtMatmulGetWorkspace</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#cusparseltmatmulplaninit"><code class="code docutils literal notranslate"><span class="pre">cusparseLtMatmulPlanInit</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#cusparseltmatmulplandestroy"><code class="code docutils literal notranslate"><span class="pre">cusparseLtMatmulPlanDestroy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#cusparseltmatmul"><code class="code docutils literal notranslate"><span class="pre">cusparseLtMatmul</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#cusparseltmatmulsearch"><code class="code docutils literal notranslate"><span class="pre">cusparseLtMatmulSearch</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2">
+<a class="reference internal" href="functions.html#helper-functions">Helper Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#cusparseltspmmaprune"><code class="code docutils literal notranslate"><span class="pre">cusparseLtSpMMAPrune</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#cusparseltspmmaprunecheck"><code class="code docutils literal notranslate"><span class="pre">cusparseLtSpMMAPruneCheck</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#cusparseltspmmacompressedsize"><code class="code docutils literal notranslate"><span class="pre">cusparseLtSpMMACompressedSize</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#cusparseltspmmacompress"><code class="code docutils literal notranslate"><span class="pre">cusparseLtSpMMACompress</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">NVIDIA cuSPARSELt</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li>
+<a href="#" class="icon icon-home"></a> »</li>
+        
+      <li>cuSPARSELt: A High-Performance CUDA Library for Sparse Matrix-Matrix Multiplication</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cusparselt-a-high-performance-cuda-library-for-sparse-matrix-matrix-multiplication">
+<h1>cuSPARSELt: A High-Performance CUDA Library for Sparse Matrix-Matrix Multiplication<a class="headerlink" href="#cusparselt-a-high-performance-cuda-library-for-sparse-matrix-matrix-multiplication" title="Permalink to this headline">¶</a>
+</h1>
+<p><strong>NVIDIA cuSPARSELt</strong> is a high-performance CUDA library dedicated to general matrix-matrix operations in which at least one operand is a sparse matrix:</p>
+<div class="math">
+<p><img src="_images/math/590b9682d7ab68ae0bb7ae90f0813d9ed3ebd012.svg" alt="D = \alpha op(A) * op(B) + \beta op(C)"></p>
+</div>
+<p>where <img class="math" src="_images/math/091b43675f4cc2ad6c153635e6311adc4d6c330b.svg" alt="op(A)/op(B)"> refers to in-place operations such as transpose/non-transpose</p>
+<p>The <em>cuSPARSELt APIs</em> allow flexibility in the algorithm/operation selection, epilogue, and matrix characteristics, including memory layout, alignment, and data types.</p>
+<p><strong>Download:</strong> <a class="reference external" href="https://developer.nvidia.com/cusparselt/downloads">developer.nvidia.com/cusparselt/downloads</a></p>
+<div class="section" id="key-features">
+<h2>Key Features<a class="headerlink" href="#key-features" title="Permalink to this headline">¶</a>
+</h2>
+<ul>
+<li><p><em>NVIDIA Ampere architecture Sparse MMA tensor core</em> support</p></li>
+<li>
+<p>Mixed-precision support:</p>
+<blockquote>
+<div>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">FP16</span></code> inputs/output, <code class="code docutils literal notranslate"><span class="pre">FP32</span></code> Tensor Core accumulate</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">BFLOAT16</span></code> inputs/output, <code class="code docutils literal notranslate"><span class="pre">BFLOAT32</span></code> Tensor Core accumulate</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">INT8</span></code> inputs/output, <code class="code docutils literal notranslate"><span class="pre">INT32</span></code> Tensor Core compute</p></li>
+</ul>
+</div>
+</blockquote>
+</li>
+<li><p>Memory Layouts: row-major, column-major</p></li>
+<li><p>Matrix pruning and compression functionalities</p></li>
+<li><p>Auto-tuning functionality (see <a class="reference internal" href="functions.html#cusparseltmatmulsearch-label"><span class="std std-ref">cusparseLtMatmulSearch()</span></a>)</p></li>
+</ul>
+</div>
+<div class="section" id="support">
+<h2>Support<a class="headerlink" href="#support" title="Permalink to this headline">¶</a>
+</h2>
+<ul class="simple">
+<li><p><em>Supported SM Architectures</em>: <code class="code docutils literal notranslate"><span class="pre">SM</span> <span class="pre">8.0</span></code></p></li>
+<li><p><em>Supported OSes</em>: <code class="code docutils literal notranslate"><span class="pre">Linux</span></code></p></li>
+<li><p><em>Supported CPU Architectures</em>: <code class="code docutils literal notranslate"><span class="pre">x86_64</span></code></p></li>
+</ul>
+<p><em>Other platforms will be added in the future releases</em>.</p>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a>
+</h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://developer.nvidia.com/cuda-11.0-download-archive">CUDA 11.0 toolkit</a> and compatible driver (see <a class="reference external" href="https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html#cuda-major-component-versions">CUDA Driver Release Notes</a>).</p></li>
+<li><p><em>Dependencies</em>: <code class="code docutils literal notranslate"><span class="pre">cudart</span></code>, <code class="code docutils literal notranslate"><span class="pre">cusparse.h</span></code> header</p></li>
+</ul>
+</div>
+<div class="section" id="index">
+<h2>Index<a class="headerlink" href="#index" title="Permalink to this headline">¶</a>
+</h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="getting_started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#cusparselt-workflow">cuSPARSELt Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#installation-and-compilation">Installation and Compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#code-example">Code Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="types.html">cuSPARSELt Data Types</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="types.html#opaque-data-structures">Opaque Data Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#enumerators">Enumerators</a></li>
+</ul>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="functions.html">cuSPARSELt Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#library-management-functions">Library Management Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#matmul-functions">Matmul Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#helper-functions">Helper Functions</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="getting_started.html" class="btn btn-neutral float-right" title="Getting Started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr>
+
+  <div role="contentinfo">
+    <p>
+        
+        © Copyright 2020, NVIDIA Corporation
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    
+
+  <style>
+  a:link, a:visited {
+    color: #76b900;
+  }
+
+  a:hover {
+    color: #8c0;
+  }
+
+  .rst-content dl:not(.docutils) dt {
+    background: rgba(118, 185, 0, 0.1);
+    color: rgba(59,93,0,1);
+    border-top: solid 3px rgba(59,93,0,1);
+  }
+  </style>
+  
+
+<script type="text/javascript">_satellite.pageBottom();</script>
+</body>
+</html>

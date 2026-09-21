@@ -1,0 +1,4 @@
+"capability_id","owner_object_id","component_id","capability_type","canonical_label","review_status","notes"
+"CAP-CAMBRICON-MLU590-TOPK","OBJ-CAMBRICON-MLU590-ARCH","","top_k","MLU590 Top-K implementation query","draft","Research target only. CNNL evidence is inaccessible and no dedicated hardware mechanism is accepted."
+"CAP-CAMBRICON-MLU590-MOE-ROUTING","OBJ-CAMBRICON-MLU590-ARCH","","moe_route","MLU590 dedicated MoE routing query","draft","Research target only. No dedicated module, instruction or network offload evidence was found."
+"CAP-CAMBRICON-MLU590-ATTENTION","OBJ-CAMBRICON-MLU590-ARCH","","other","MLU590 dedicated Attention hardware query","draft","Research target only. No MLU590-specific dedicated Attention hardware evidence was found."

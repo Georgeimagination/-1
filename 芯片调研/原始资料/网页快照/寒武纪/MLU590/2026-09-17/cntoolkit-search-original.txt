@@ -1,0 +1,605 @@
+3. 组件介绍 — 寒武纪CNToolkit安装升级使用手册 3.8.4 文档 (https://sdk.cambricon.com/static/independent/CNToolkit/3.8.4/releasenote/3.8.4/build/html/chapter_components/index.html)
+citeturn18search0 [wordlim: 200] Crawled: 2.7 years ago; CNToolkit是寒武纪SDK中的主要组件，为用户提供基于Cambricon BANG异构计算平台的编译、调试、分析、运行的工具集。 ...  | MLU570 MLU590  | MLU570 MLU590-H8/M9
+
+3.8.4
+
+[Input: Search docs] [Input] [Input]
+
+寒武纪CNToolkit安装升级使用手册
+
+# 3. 组件介绍¶
+
+CNToolkit是寒武纪SDK中的主要组件，为用户提供基于Cambricon BANG异构计算平台的编译、调试、分析、运行的工具集。CNToolkit安装包内提供了各个组件的示例代码和用户手册。
+
+## 3.1. Cambricon BANG 异构计算平台¶
+
+以一个Device为视角定义 Cambricon BANG 异构计算平台的计算能力、缩写、版本号，例如， `mtp_270.41` ，该版本号定义了某一代 MLU 硬件支持的硬件特性、指令集等。
+
+MLU 的计算能力使用如下命名规则： `mtp_NWG.QC` 。其中：
+
+  * `mtp` 表示 Multi-Tensor-Processor。
+
+  * `NWG` 组成 3 位版本号表示编译时感知的计算能力。不同编号具备的计算能力，参见《Cambricon BANG C/C++编程指南》。
+
+  * `QC` 两位数字表示运行时感知的并行可扩展能力，即可以识别到芯片是如何被虚拟化成多个设备。
+
+    * `Q` 值使用 CNDrv 的 `cnDeviceGetAttribute()` 接口和 `CN_DEVICE_ATTRIBUTE_MAX_QUADRANT_COUNT` 枚举型获取。
+
+    * `C` 值使用 CNDrv 的 `cnDeviceGetAttribute()` 接口和 `CN_DEVICE_ATTRIBUTE_MAX_UNION_TYPE_PER_QUADRANT` 枚举型获取。
+
+表 3.1 Cambricon BANG异构计算平台架构编号¶
+Compute  | Core/Cluster Level  | Chip Level  | Board Level
+--- | --- | --- | ---
+v2.0  | 
+
+  * tp_210.{10}
+  * (1024WFU+256WRAM, 256NRAM, 0SRAM)
+ | 1M10  | N/A
+
+  * tp_220.{10}
+  * (2048WFU+512WRAM, 512NRAM, 0SRAM)
+ | 1M20  | N/A
+
+  * tp_270.{10}
+  * (4096WFU+1024WRAM, 512NRAM, 0SRAM)
+ | 1M70  | N/A
+
+  * mtp_220.{11}
+  * (2048WFU+512WRAM, 512NRAM, 2048SRAM)
+ | MLU220  | MLU220-M.2/Edge
+
+  * mtp_270.{41/11}
+  * (4096WFU+1024WRAM, 512NRAM, 2048SRAM)
+ | MLU270  | MLU270-F4/S4/V4/X5K
+
+  * mtp_290.{44/14}
+  * (4096WFU+512WRAM, 512NRAM, 2048SRAM)
+ | MLU290  | MLU290-M5
+v3.0  | 
+
+  * tp_322.{10}
+  * (2048WFU+1024WRAM, 768NRAM, 0SRAM)
+ | CE3226  | CE3226-V100/V101
+
+  * mtp_372.{14/22/24}
+  * (4096WFU+1024WRAM, 768NRAM, 4096SRAM)
+ | MLU370  | MLU370-S4/X4/X8/M8
+v5.0  | 
+
+  * mtp_592.{18}
+  * (4096WFU+512WRAM, 512NRAM, 2048SRAM)
+ | MLU570 MLU590  | MLU570 MLU590-H8/M9
+
+注解
+
+有关 `mtp` 架构的详细解释和兼容性，参见《寒武纪MLU架构调优指南》。
+
+## 3.2. Compilers¶
+
+编译类组件主要支持Cambricon BANG C和Cambricon BANG C++编程语言的编译，生成可以和Host端目标平台obj文件链接的对象文件并进行优化，还提供丰富的编译选项配合调试和性能分析工具使用。
+
+### 3.2.1. CNCC¶
+
+CNCC（Cambricon Compiler Collection，寒武纪Cambricon BANG C语言编译器）是基于Clang和LLVM开发的Cambricon BANG C和Cambricon BANG C++的编译器主驱动程序，负责将 `*.mlu` 的C或C++源码文件编译为 `*.s` 的MLISA汇编文件。
+
+x86_64平台和aarch64平台，安装后的目录结构为：
+    
+    $ tree /usr/local/neuware/ -L 2
+    /usr/local/neuware/
+    ├── bin
+    │   └── cncc
+    │   └── llvm-config
+    │   └── llvm-cov
+    │   └── llvm-profdata
+    ├── cmake
+    │   └── modules
+    ├── lib
+    │   └── clang
+    ├── mlvm
+    │   └── libdevice
+    └── samples
+        └── BANG
+    
+
+其中 `cmake` 目录提供了 `FindBANG.cmake` 文件帮助用户快速构建一个使用CNCC的C或C++工程。 `lib` 目录是编译内置库或头文件的存放目录。
+
+CNCC当前版本不支持运行在寒武纪的Edge硬件平台。
+
+CNCC对Cambricon BANG异构计算平台的编译选项支持如下：
+
+表 3.2 CNCC和Cambricon BANG异构计算平台的编译选项¶
+Cambricon BANG Arch  | --bang-arch  | --bang-mlu-arch  | Product Name
+--- | --- | --- | ---
+v2.0  | N/A  | tp_210  | 1M10
+tp_220  | 1M20
+tp_270  | 1M70
+compute_20  | mtp_220  | MLU220
+mtp_270  | MLU270
+mtp_290  | MLU290
+v3.0  | N/A  | tp_322  | CE3226
+compute_30  | mtp_372  | MLU370
+v5.0  | compute_50  | mtp_592  | MLU570 MLU590
+
+注意
+
+寒武纪Edge-OS上不支持CNCC。
+
+### 3.2.2. CNAS¶
+
+CNAS（Cambricon Assembler，寒武纪MLISA语言编译器）负责将 `*.s` 的MLISA汇编文件编译为 `*.cncode` （REL-Device端可重定位）或 `*.cnbin` （EXE-Device端链接后）或 `*.cnfatbin` （集合多个cnbin的胖二进制）或 `*.o` （可与Host端目标平台链接的）的ELF格式的obj文件。
+
+x86_64平台和aarch64平台，安装后的目录结构为：
+    
+    $ tree /usr/local/neuware/ -L 2
+    /usr/local/neuware/
+    ├── bin
+    │   └── cnas
+    └── samples
+        └── MLISA
+    
+
+CNAS支持运行在寒武纪的Edge硬件平台。当面向Edge形态部署运行环境时，请使用runfile发布包在Edge的操作系统上执行安装。具体安装步骤见 Edge平台安装流程 。
+
+CNAS对Cambricon BANG异构计算平台的编译选项支持如下：
+
+表 3.3 CNAS和Cambricon BANG异构计算平台的编译选项¶
+Cambricon BANG Arch  | --mlu-arch  | Product Name
+--- | --- | ---
+v2.0  | tp_210  | 1M10
+tp_220  | 1M20
+tp_270  | 1M70
+mtp_220  | MLU220
+mtp_270  | MLU270
+mtp_290  | MLU290
+v3.0  | tp_322  | CE3226
+mtp_372  | MLU370
+v5.0  | mtp_592  | MLU570 MLU590
+
+注意
+
+寒武纪Edge-OS上不支持CNAS。
+
+### 3.2.3. LLVM-MM¶
+
+LLVM-MM（Cambricon LLVM For MagicMind，寒武纪LLVM开发包之MagicMind定制版）基于LLVM社区开源版本加入了MLISA后端功能，并提供了基于MLU架构的MLIR编程接口，主要是提供给MagicMind作为编译器后端使用。
+
+当前只支持x86_64平台，安装后的目录结构为：
+    
+    $ tree /usr/local/neuware/ -L 2
+    /usr/local/neuware/lib/llvm-mm
+    ├── bin
+    │   ├── mlir-mlu-compiler
+    │   ├── ...
+    │   └── llvm-config
+    ├── include
+    │   ├── llvm
+    │   ├── llvm-c
+    │   ├── mlir
+    │   └── mlir-c
+    ├── lib
+    │   ├── libLLVM.so
+    │   ├── ...
+    │   ├── libLLVMMLISACodeGen.a
+    │   ├── libLLVMMLISADesc.a
+    │   ├── libLLVMMLISAInfo.a
+    │   ├── ...
+    │   ├── libMLIR.so
+    │   ├── ...
+    │   └── libMLIRMLU.a
+    └── share
+        └── opt-viewer
+    
+
+从安装后的目录和内容看，LLVM-MM软件包除了提供LLVM原生的开发工具、二次开发头文件、动态静态库外，还为Cambricon BANG异构计算平台提供了MLIR的编译器前端 `mlir-mlu-compiler` ，二次开发用的MLISA后端静态库 `libLLVMMLISA*.a` ，基于MLU架构的MLIR静态库 `libMLIRMLU.a` 。
+
+注意
+
+寒武纪Edge-OS上不支持LLVM-MM。
+
+注意
+
+LLVM-MM 在 Ubuntu16、Ubuntu18、Debian9、Debian10 等系统上处理会提供 `llvm-mm_xxx.deb` 的包，还会提供兼容 CXX11 Old ABI 的包 `llvm-mm-cxx11-old-abi_xxx.deb` 。
+
+注意
+
+CentOS7 系统由于默认的 GCC-v4.9.x 只支持 CXX11 Old ABI ，所以 CentOS7 的发布包 `llvm-mm-X.Y.Z-B.el7.x86_64.rpm` 和 `llvm-mm-cxx11-old-abi-X.Y.Z-B.el7.x86_64.rpm` 都是 CXX11 Old ABI 的。
+
+## 3.3. Tools¶
+
+工具类组件主要帮助用户解决开发中遇到的功能和性能调试问题。
+
+### 3.3.1. CNGDB¶
+
+CNGDB（Cambricon GNU Debugger，寒武纪Cambricon BANG语言调试工具）基于GDB修改，添加了对Cambricon BANG C和C++语言的支持，可同时调试Host端和Device端的代码，并遵循GPL协议。目前已开放源代码。源代码信息，参见 https://github.com/Cambricon/CN-GDB。
+
+x86_64平台，安装后的目录结构为：
+    
+    $ tree /usr/local/neuware/ -L 2
+    /usr/local/neuware/
+    ├── bin
+    │   └── cngdb
+    ├── lib64
+    │   ├── libcngdb_backend.so
+    │   └── libinproctrace.so
+    ├── share
+    │   └── cngdb
+    └── edge
+        └── bin
+            └── cngdbserver
+    
+
+注意
+
+CNGDB 在 Edge 平台上只支持 gdbserver ，用户可以在 Edge 上启动 gdbserver 后在 Cloud 平台上进行远程调试。
+
+### 3.3.2. CNPerf¶
+
+CNPerf（Cambricon Performance，寒武纪性能剖析工具）是一款针对寒武纪基础软件平台设计的性能剖析工具。以性能事件为基础，可对MLU异构并行编程查找性能瓶颈和热点函数。
+
+x86_64平台和aarch64平台，安装后的目录结构为：
+    
+    $ tree /usr/local/neuware/ -L 3
+    /usr/local/neuware/
+    ├── bin
+    │   ├── cnperf-cli
+    │   └── cnperf.json
+    ├── lib64
+    │   └── libdltrace.so
+    └── edge
+        ├── bin
+        │   ├── cnperf-cli
+        │   └── cnperf.json
+        └── lib64
+            └── libdltrace.so
+    
+
+CNPerf支持运行在寒武纪的Edge硬件平台。当面向Edge形态部署运行环境时，请使用runfile发布包在Edge的操作系统上执行安装。具体安装步骤见 Edge平台安装流程 。
+
+注意
+
+`libdltrace.so` 动态库不是用户可以直接使用的库，它仅供二进制工具 `cnperf_cli` 使用，用户不需要也不建议在开发中链接此动态库。
+
+### 3.3.3. CNStudio¶
+
+CNStudio（Cambricon Studio，寒武纪集成开发环境）为用户开发和调试Cambricon BANG C/C++语言提供IDE级的环境。当前CNStudio只提供了Visual Studio Code的插件，帮助用户在VSCode中快速开发、构建、调试Cambricon BANG C/C++的工程。
+
+x86_64平台安装后的目录结构为：
+    
+    $ tree /usr/local/neuware/ -L 3
+    /usr/local/neuware/
+    └── data
+        └── cnstudio
+            └── cnstudio.vsix
+    
+
+注意
+
+CNStudio当前版本不支持aarch64平台。
+
+注意
+
+CNStudio当前版本不支持运行在寒武纪的Edge硬件平台。
+
+### 3.3.4. CNVS¶
+
+CNVS（Cambricon Validation Suite，寒武纪验证套件）是面向生产环境进行系统集成或导入场景设计的验证套件，内置丰富的测试项和选项功能，用来帮助用户侦测硬件故障、软件版本匹配度、关键性能指标、压测稳定性或拓扑问题等。
+
+x86_64平台和aarch64平台，安装后的目录结构为：
+    
+    $ tree /usr/local/neuware/ -L 3
+    /usr/local/neuware/
+    └── bin
+        ├── cnvs
+        ├── cnvs_default_config/
+        └── cnvs.example.yml
+    
+
+注意
+
+CNVS当前不支持寒武纪的Edge边缘计算平台，是专门为Cloud平台设计的服务器稳定性验证工具。
+
+## 3.4. Libraries¶
+
+运行库类组件主要为用户提供部署环境和开发环境中的运行时支持。各个组件可以定制化独立安装在部署环境或开发环境中，但需要注意各组件之间的版本依赖，以及开发部署两种环境的版本要尽量保持一致。
+
+### 3.4.1. CNBin¶
+
+CNBin（Cambricon Binary Library，寒武纪二进制文件格式库）主要为Cambricon BANG异构计算平台提供统一的二进制设备侧文件格式。用户不需要使用此库的API进行编程。CNDrv依赖此库进行运行时的二进制格式解析和解压缩。 从CNToolkit v3.7.0 版本开始，CNBin 的软件包中新增了 cnlink 的二进制工具，用来链接多个 *.cnbin 文件生成一个新的 *.cnbin 文件。
+
+x86_64平台和aarch64平台，安装后的目录结构为：
+    
+    $ tree /usr/local/neuware/ -L 3
+    /usr/local/neuware/
+    ├── bin
+    │    └── cnlink
+    ├── lib64
+    │   └── libcnbin.so
+    └── edge
+        ├── bin
+        │   └── cnlink
+        └── lib64
+            └── libcnbin.so
+    
+
+CNBin支持运行在寒武纪的Edge硬件平台。当面向Edge形态部署运行环境时，请使用runfile发布包在Edge的操作系统上执行安装。具体安装步骤见 Edge平台安装流程 。
+
+### 3.4.2. CNDev¶
+
+CNDev（Cambricon Device Interface Library，寒武纪设备接口库）主要为上层库或工具提供公共统一的获取硬件设备信息的API。
+
+x86_64平台和aarch64平台，安装后的目录结构为：
+    
+    $ tree /usr/local/neuware/ -L 3
+    /usr/local/neuware/
+    ├── include
+    │   └── cndev.h
+    ├── lib64
+    │   └── libcndev.so
+    ├── samples
+    │   └── cndev
+    └── edge
+        ├── include
+        │   └── cndev.h
+        ├── lib64
+        │   └── libcndev.so
+        └── samples
+            └── edge-cndev
+    
+
+CNDev支持运行在寒武纪的Edge硬件平台。当面向Edge形态部署运行环境时，请使用runfile发布包在Edge的操作系统上执行安装。具体安装步骤见 Edge平台安装流程 。
+
+### 3.4.3. CNDrv¶
+
+CNDrv（Cambricon Driver API，寒武纪驱动接口库）主要为上层库或工具提供异构编程中Host和Device内存管理、异步执行和控制、设备管理、多卡多机协同等能力。
+
+x86_64平台和aarch64平台，安装后的目录结构为：
+    
+    $ tree /usr/local/neuware/ -L 3
+    /usr/local/neuware/
+    ├── include
+    │   └── cn_api.h
+    ├── lib64
+    │   └── libcndrv.so
+    ├── samples
+    │   └── cndrv
+    └── edge
+        ├── include
+        │   └── cn_api.h
+        ├── lib64
+        │   └── libcndrv.so
+        └── samples
+            └── edge-cndrv
+    
+
+CNDrv支持运行在寒武纪的Edge硬件平台。当面向Edge形态部署运行环境时，请使用runfile发布包在Edge的操作系统上执行安装。具体安装步骤见 Edge平台安装流程 。
+
+### 3.4.4. CNRT¶
+
+CNRT（Cambricon Runtime Library，寒武纪运行时库）提供和CNDrv类似的Host和Device内存管理、异步执行和控制、设备管理、多卡多机协同等功能API。二者差异在于CNRT将CNDrv若干API做了流程上或逻辑上的友好封装，帮助用户降低编程复杂度。
+
+寒武纪基础软件平台中在CNToolkit之上还有很多高层级的库或框架，例如，CNML是一个面向推理场景的引擎算子库，它会依赖CNRT提供一些离线模型的解析和执行能力。
+
+x86_64平台和aarch64平台，安装后的目录结构为：
+    
+    $ tree /usr/local/neuware/ -L 3
+    /usr/local/neuware/
+    ├── include
+    │   └── cnrt.h
+    ├── lib64
+    │   └── libcnrt.so
+    ├── samples
+    │   └── cnrt
+    └── edge
+        ├── include
+        │   └── cnrt.h
+        ├── lib64
+        │   └── libcnrt.so
+        └── samples
+            └── edge-cnrt
+    
+
+CNRT支持运行在寒武纪的Edge硬件平台。当面向Edge形态部署运行环境时，请使用runfile发布包在Edge的操作系统上执行安装。具体安装步骤见 Edge平台安装流程 。
+
+### 3.4.5. CNCodec¶
+
+CNCodec（Cambricon Codec Library，寒武纪硬件编解码库）为带有视频或图片编解码能力的MLU设备提供Host端的API支持。
+
+x86_64平台，安装后的目录结构为：
+    
+    $ tree /usr/local/neuware/ -L 3
+    /usr/local/neuware/
+    ├── include
+    │   ├── cn_codec_common.h
+    │   ├── cn_codec_define.h
+    │   ├── cn_codec_memory.h
+    │   ├── cn_jpeg_dec.h
+    │   ├── cn_jpeg_enc.h
+    │   ├── cn_video_dec.h
+    │   └── cn_video_enc.h
+    ├── lib64
+    │   └── libcncodec.so
+    ├── samples
+    │   └── cncodec
+    └── edge
+        ├── include
+        │   ├── cn_codec_common.h
+        │   ├── cn_codec_define.h
+        │   ├── cn_codec_memory.h
+        │   ├── cn_jpeg_dec.h
+        │   ├── cn_jpeg_enc.h
+        │   ├── cn_video_dec.h
+        │   └── cn_video_enc.h
+        ├── lib64
+        │   └── libcncodec.so
+        └── samples
+            └── edge-cncodec
+    
+
+x86_64平台，CNToolkit的源中有名为 `edge-scaler` 的软件包，只包含头文件和示例，用户使用时需要配合 `edge-cncodec` 包一起使用。安装后的目录结构为：
+    
+    $ tree /usr/local/neuware/ -L 3
+    /usr/local/neuware/
+    └── edge
+        ├── include
+        │   └── scaler_list.h
+        └── samples
+            └── edge-scaler
+    
+
+aarch64平台，安装后的目录结构为：
+    
+    $ tree /usr/local/neuware/ -L 3
+    /usr/local/neuware/
+    ├── include
+    │   ├── cn_codec_common.h
+    │   ├── cn_codec_define.h
+    │   ├── cn_codec_memory.h
+    │   ├── cn_jpeg_dec.h
+    │   ├── cn_jpeg_enc.h
+    │   ├── cn_video_dec.h
+    │   └── cn_video_enc.h
+    ├── lib64
+    │   └── libcncodec.so
+    └── samples
+        └── cncodec
+    
+
+CNCodec支持运行在寒武纪的Edge硬件平台。当面向Edge形态部署运行环境时，请使用runfile发布包在Edge的操作系统上执行安装。具体安装步骤见 Edge平台安装流程 。
+
+注意
+
+CNCodec只支持MLU200系列的板卡。
+
+### 3.4.6. CNCodec3¶
+
+CNCodec3（Cambricon Codec V3 Library，寒武纪硬件编解码库）为带有视频或图片编解码能力的MLU设备提供Host端的API支持。
+
+x86_64平台，安装后的目录结构为：
+    
+    $ tree /usr/local/neuware/ -L 2
+    /usr/local/neuware/
+    ├── include
+    │   ├── cncodec_v3_common.h
+    │   ├── cncodec_v3_dec.h
+    │   └── cncodec_v3_enc.h
+    ├── lib64
+    │   └── libcncodec_v3.so
+    └── samples
+        └── cncodec_v3
+    
+
+注意
+
+CNCodec3不支持寒武纪的Edge系列硬件，只支持寒武纪Cloud平台MLU系列板卡。在Edge平台上的编解码开发，请参考Edge解决方案提供的文档。
+
+注意
+
+CNCodec3仅支持MLU300系列的板卡，CNCodec为MLU200系列专用。
+
+### 3.4.7. Cambricon CNRTC¶
+
+Cambricon CNRTC（Cambricon Runtime Compilation Library，寒武纪运行时编译库）是Cambricon BANG C/C++的运行时编译库，通过API接收字符串形式的Cambricon BANG语言源码，并创建可在多架构MLU上执行的cnfatbin，然后配合CNDrv层Module解析和Kernel执行接口实现JIT方式的编译执行。
+
+该库多用于AI框架中的Runtime层，用来实现框架级编译器的JIT功能。
+
+x86_64平台和aarch64平台，安装后的目录结构为：
+    
+    $ tree /usr/local/neuware/ -L 2
+    /usr/local/neuware/
+    ├── include
+    │   └── cnrtc.h
+    ├── lib64
+    │   └── libcnrtc.so
+    └── samples
+        └── cnrtc
+    
+
+注意
+
+Cambricon CNRTC当前版本不支持寒武纪Edge硬件平台。
+
+### 3.4.8. CNPAPI¶
+
+CNPAPI（Cambricon Performance API，寒武纪性能分析接口库）是一套面向用户开发定制化性能分析工具的软件接口。通过使用这些 API 接口，用户可以精确观察到应用内部 CPU 和 MLU 的行为，便于用户对程序进行性能调优或开发特定场景下使用的性能分析工具。CNPerf 性能剖析工具就是调用该接口实现。
+
+x86_64平台和aarch64平台，安装后的目录结构为：
+    
+    $ tree /usr/local/neuware/ -L 3
+    /usr/local/neuware/
+    ├── include
+    │   ├── cnpapi.h
+    │   ├── cnpapi_types.h
+    │   ├── cnpapi_callback_api.h
+    │   ├── cnpapi_activity_api.h
+    │   ├── cnpapi_pmu_api.h
+    │   ├── cnpapi_callback_api_types.h
+    │   ├── cnpapi_cndrv_id.h
+    │   ├── cnpapi_generated_cndrv_params.h
+    │   ├── cnpapi_cnml_id.h
+    │   ├── cnpapi_generated_cnml_params.h
+    │   ├── cnpapi_cnrt_id.h
+    │   ├── cnpapi_generated_cnrt_params.h
+    │   ├── cnpapi_cnnl_extra_id.h
+    │   ├── cnpapi_generated_cnnl_extra_params.h
+    │   ├── cnpapi_cnnl_id.h
+    │   ├── cnpapi_generated_cnnl_params.h
+    │   ├── cnpapi_cnpx_id.h
+    │   ├── cnpapi_generated_cnpx_params.h
+    │   ├── cnpapi_cncl_id.h
+    │   └── cnpapi_generated_cncl_params.h
+    ├── lib64
+    │   └── libcnpapi.so
+    ├── samples
+    │   └── cnpapi
+    └── edge
+        ├── include
+        │   ├── cnpapi.h
+        │   ├── cnpapi_types.h
+        │   ├── cnpapi_callback_api.h
+        │   ├── cnpapi_activity_api.h
+        │   ├── cnpapi_pmu_api.h
+        │   ├── cnpapi_callback_api_types.h
+        │   ├── cnpapi_cndrv_id.h
+        │   ├── cnpapi_generated_cndrv_params.h
+        │   ├── cnpapi_cnml_id.h
+        │   ├── cnpapi_generated_cnml_params.h
+        │   ├── cnpapi_cnrt_id.h
+        │   ├── cnpapi_generated_cnrt_params.h
+        │   ├── cnpapi_cnnl_extra_id.h
+        │   ├── cnpapi_generated_cnnl_extra_params.h
+        │   ├── cnpapi_cnpx_id.h
+        │   ├── cnpapi_generated_cnpx_params.h
+        │   ├── cnpapi_cnnl_id.h
+        │   ├── cnpapi_generated_cnnl_params.h
+        │   ├── cnpapi_cncl_id.h
+        │   └── cnpapi_generated_cncl_params.h
+        ├── lib64
+        │   └── libcnpapi.so
+        └── samples
+            └── edge-cnpapi
+    
+
+### 3.4.9. CNPX¶
+
+CNPX（Cambricon Performance Extension，寒武纪性能分析扩展库）是性能分析模块拓展接口库，用于标记事件、程序范围和系统资源。该库只面向用户提供了一套头文件接口，在没有性能调优接口或工具运行时，无运行时开销。
+
+安装后的目录结构为：
+    
+    $ tree /usr/local/neuware/ -L 3
+    /usr/local/neuware/
+    ├── include
+    │   ├── cnpx.h
+    │   ├── cnpx_internal_defs.h
+    │   └── cnpx_internal_types.h
+    ├── samples
+    │   └── cnpx
+    └── edge
+        ├── include
+        │   ├── cnpx.h
+        │   ├── cnpx_internal_defs.h
+        │   └── cnpx_internal_types.h
+        └── samples
+            └── edge-cnpx
+    
+
+* * *

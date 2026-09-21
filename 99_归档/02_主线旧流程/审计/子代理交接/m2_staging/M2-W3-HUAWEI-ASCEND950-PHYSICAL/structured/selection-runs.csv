@@ -1,0 +1,2 @@
+﻿"selection_run_id","scope_kind","scope_id","cutoff_date","algorithm_version","created_date","reviewer","status","review_status","notes"
+"SELRUN-M2W3-HUAWEI-ASC950-PHYSICAL-20260813","custom","M2-W3-HUAWEI-ASCEND950-PHYSICAL","2026-08-13","reverse-removal-v1+layer-adversarial-check","2026-08-13","m2_w3_huawei_asc950_physical","draft","draft","41 direct facts; zero Atlas-card, Da Vinci-backlog or third-party migration."

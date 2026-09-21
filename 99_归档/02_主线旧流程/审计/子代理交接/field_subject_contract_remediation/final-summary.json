@@ -1,0 +1,19 @@
+﻿{
+    "verdict":  "accept",
+    "ready_for_independent_review":  true,
+    "formal_targets_unchanged":  true,
+    "formal_current_validator_checks":  93378,
+    "adjudication_rows":  132,
+    "adjudication_unique_pks":  132,
+    "field_proposals":  26,
+    "overlay_rows":  12,
+    "action_counts":  {
+                          "expand_contract":  12,
+                          "retarget_row":  12,
+                          "no_change_with_rationale":  108
+                      },
+    "migration_manifest_rows":  166,
+    "positive_validation_checks":  97920,
+    "negative_tests_passed":  6,
+    "temporary_directories":  0
+}

@@ -1,0 +1,7 @@
+TRANSACTION FAILED; ROLLBACK SUCCEEDED. INJECTED_TEST_FAILURE_AFTER_3_REPLACEMENTS
+At X:\independent-package\scripts\Invoke-Ascend950FormalTransaction.ps1:562 char:5
++     throw "TRANSACTION FAILED; ROLLBACK SUCCEEDED. $($originalError.E ...
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (TRANSACTION FAI..._3_REPLACEMENTS:String) [], RuntimeException
+    + FullyQualifiedErrorId : TRANSACTION FAILED; ROLLBACK SUCCEEDED. INJECTED_TEST_FAILURE_AFTER_3_REPLACEMENTS
+ 

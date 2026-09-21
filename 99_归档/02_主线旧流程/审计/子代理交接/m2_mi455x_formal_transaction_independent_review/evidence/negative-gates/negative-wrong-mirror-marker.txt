@@ -1,0 +1,7 @@
+Non-formal TargetRoot marker content differs.
+At Z:\scripts\Invoke-MI455XFormalTransaction.ps1:30 char:28
++     if (-not $Condition) { throw $Message }
++                            ~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Non-formal Targ...ontent differs.:String) [], RuntimeException
+    + FullyQualifiedErrorId : Non-formal TargetRoot marker content differs.
+ 

@@ -1,0 +1,5 @@
+"reference_id","referenced_object_id","fact_id","source_id","allowed_card_use","prohibited_use","copy_to_staging_fact"
+"REF-M2W2-TRN2INST-ARCH-RELEASE","OBJ-AWS-TRAINIUM2-ARCH","FACT-AWS-TRN2-ARCH-RELEASE-DATE","SRC-AWS-TRN2-S11","说明 Trainium2 架构或产品首次正式公布日期","不得改写为三个实例的首次可用日期","false"
+"REF-M2W2-TRN2INST-ARCH-SW-MODEL","OBJ-AWS-TRAINIUM2-ARCH","FACT-AWS-TRN2-ARCH-SW-MODEL","SRC-AWS-TRN2-S07","共享编程模型引用","不得复制为 cloud_instance 自身事实","false"
+"REF-M2W2-TRN2INST-ARCH-SW-RUNTIME","OBJ-AWS-TRAINIUM2-ARCH","FACT-AWS-TRN2-ARCH-SW-RUNTIME","SRC-AWS-TRN2-S14","共享 AWS Neuron SDK 运行时引用","不得复制为实例专属软件版本","false"
+"REF-M2W2-TRN2INST-CHIP-REUSE","OBJ-AWS-TRAINIUM2-CHIP","DEF-M2GA-ATRN2-01","SRC-AWS-TRN2-S01..S14","通过正式实现待办与既有关系引用 109 条芯片和组件事实","不得把芯片、组件、链路、precision path 或 capability 事实复制到实例对象","false"

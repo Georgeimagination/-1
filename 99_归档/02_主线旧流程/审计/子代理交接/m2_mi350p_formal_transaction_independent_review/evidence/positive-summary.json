@@ -1,0 +1,17 @@
+{
+    "scenario":  "positive",
+    "status":  "passed",
+    "executor_exit_code":  0,
+    "expected_outcome":  "PASS",
+    "rollback_succeeded":  false,
+    "mirror_aggregate_after":  "28923f7aa9dea488152f699e6879319d1fb96222fe72745754cf8ffd7b46518e",
+    "formal_aggregate_before":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "formal_aggregate_after":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "journal_rows":  48,
+    "csv_commit_complete":  19,
+    "csv_rollback_complete":  0,
+    "payload_commit_complete":  4,
+    "payload_rollback_complete":  0,
+    "endpoint_files_seeded":  69,
+    "formal_writes_performed":  0
+}

@@ -1,0 +1,82 @@
+GroqChip™ Processor - Product Brief v1.5 (https://www.groq.com/GroqDocs/Product%20Spec%20Sheet%20-%20GroqChip%E2%84%A2%20Processor.pdf)
+citeturn13view0 [wordlim: 200] Crawled: 2 days ago; Content type: application/pdf; Number of pages: 2; Source: open({"ref_id":"https://www.groq.com/GroqDocs/Product%20Spec%20Sheet%20-%20GroqChip%E2%84%A2%20Processor.pdf","lineno":null}); Total lines: 80
+L0@P0: GroqChip Processor.
+L1@P0: Unlock the power of ultra-low latency.
+L2@P0: The revolutionary, fully deterministic GroqChip processor is the core of scalable performance. Built
+L3@P0: from the ground up to accelerate AI, ML, and HPC workloads, GroqChip reduces data movement
+L4@P0: for predictable low-latency performance, bottleneck-free. This standalone chip provides flexible
+L5@P0: integration into compute intensive applications.
+L6@P0: Key Features
+L7@P0: Fully deterministic processor
+L8@P0: provides predictable and
+L9@P0: repeatable performance with
+L10@P0: no run-to-run variation.
+L11@P0: 16 chip-to-chip interconnects
+L12@P0: allow chips to talk directly to
+L13@P0: each other for scalable
+L14@P0: low-latency performance
+L15@P0: without the need for extra
+L16@P0: switches, cards, or CPUs.
+L17@P0: Up to 80 TBs on-die memory
+L18@P0: bandwidth
+L19@P0: facilitates massive concurrency
+L20@P0: and data parallelism needed
+L21@P0: for bandwidth sensitive
+L22@P0: applications.
+L23@P0: Simplified
+L24@P0: SIMD architecture
+L25@P0: leads to an easy-to-use
+L26@P0: software suite, accelerating
+L27@P0: developer velocity.
+L28@P0: 230 MB of on-die memory
+L29@P0: delivers large globally sharable
+L30@P0: SRAM for high-bandwidth,
+L31@P0: low-latency access to model
+L32@P0: parameters without the need
+L33@P0: for external memory.
+L34@P0: End-to-end on-chip
+L35@P0: protection improves uptime
+L36@P0: and reliability with errorcorrection code (ECC)
+L37@P0: protection throughout the
+L38@P0: entire GroqChip data path.
+L39@P0: © 2022 Groq, Inc. All rights reserved. This document is approved for public release. Distribution is unlimited. For
+L40@P0: informational use only. Groq, the Groq logo, TruePoint, RealScale, GroqView, GroqChip, GroqCard, GroqNode, GroqRack,
+L41@P0: GroqWare, GroqFlow and other Groq marks are either registered trademarks or trademarks of Groq, Inc. in the United
+L42@P0: States and/or other countries. Other names and brands may be claimed as the property of others. Reference to specific
+L43@P0: trade names, trademarks or otherwise, does not necessarily constitute or imply its endorsement or recommendation by
+L44@P0-1: Groq. Other names and brands may be claimed as the property of others.Product Spec Sheet - GroqChip™ Processor v1.5
+L45@P1: Targeted Applications
+L46@P1: Government Financial
+L47@P1: Services
+L48@P1: Enterprise
+L49@P1: Comms
+L50@P1: Oil & Gas Cyber &
+L51@P1: InfoSec
+L52@P1: Research &
+L53@P1: Sciences
+L54@P1: Specifications
+L55@P1: Item Description
+L56@P1: Availability In production. Contact Groq support at info@groq.com
+L57@P1: Process Node 14nm
+L58@P1: Performance
+L59@P1: Up to 750 TOPs, 188 TFLOPs
+L60@P1: (INT8, FP16 @900 MHz)
+L61@P1: Memory
+L62@P1: 230 MB SRAM per chip
+L63@P1: Up to 80 TB/s on-die memory bandwidth
+L64@P1: Chip Scaling 16 integrated RealScale™ chip-to-chip interconnects
+L65@P1: I/O Integrated PCIe Gen4 x16 controller
+L66@P1: Numerics
+L67@P1: INT8, INT16, INT32 & TruePoint™ technology MXM: FP32
+L68@P1: VXM: FP16, FP32
+L69@P1: Power Max: 300W; TDP: 215W; Average: 185W
+L70@P1: Groq Inc. HQ
+L71@P1: 2700 Zanker Road, Suite 150
+L72@P1: San Jose, CA 95134
+L73@P1: Mailing Address
+L74@P1: PO Box 1778
+L75@P1: Mountain View, CA 94041
+L76@P1: www.groq.com
+L77@P1: support.groq.com
+L78@P1: For more information visit groq.com,
+L79@P1: Page 2 of 2 Public

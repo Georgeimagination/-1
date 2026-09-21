@@ -1,0 +1,41 @@
+exit_code=0
+Source pool baseline validation
+RootPath: D:\Workspace\2026projects\调研-训练推理芯片调研-资料汇总
+Mode: read-only
+PDF page verifier: C:\Users\Huashuo\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\poppler\Library\bin\pdfinfo.exe
+
+Checks:
+[PASS] Required file exists: 清单\论文PDF清单.csv: expected=present; actual=present
+[PASS] Required file exists: 清单\网页与在线资料.csv: expected=present; actual=present
+[PASS] Required file exists: 清单\待补论文清单.csv: expected=present; actual=present
+[PASS] Required file exists: 清单\汇总统计.json: expected=present; actual=present
+[PASS] Baseline SHA-256: 清单\论文PDF清单.csv: expected=c8c43df658daa1671e32b5389e29a33cf5179c269ae56f29d9e95404cdb38b27; actual=c8c43df658daa1671e32b5389e29a33cf5179c269ae56f29d9e95404cdb38b27
+[PASS] Baseline SHA-256: 清单\网页与在线资料.csv: expected=f19991c731fcdca8e0dee65601a2637a5568bc1fde46b357757d19292aa1395f; actual=f19991c731fcdca8e0dee65601a2637a5568bc1fde46b357757d19292aa1395f
+[PASS] Baseline SHA-256: 清单\待补论文清单.csv: expected=b5a5993c0a29364c5be3c2d6d35321e3150b5599913e3fafe887bff3a02307bd; actual=b5a5993c0a29364c5be3c2d6d35321e3150b5599913e3fafe887bff3a02307bd
+[PASS] Baseline SHA-256: 清单\汇总统计.json: expected=eee940c5b1fdaa871fe0f2ea734216136471db28a68f43ff10cfdc2602b41db7; actual=eee940c5b1fdaa871fe0f2ea734216136471db28a68f43ff10cfdc2602b41db7
+[PASS] PDF manifest required columns missing: expected=0; actual=0
+[PASS] Web manifest required columns missing: expected=0; actual=0
+[PASS] PDF manifest row count: expected=111; actual=111
+[PASS] Web manifest row count: expected=914; actual=914
+[PASS] Pending manifest row count: expected=11; actual=11
+[PASS] PDF files on disk: expected=111; actual=111
+[PASS] PDF manifest rows versus disk files: expected=111; actual=111
+[PASS] Manifest paths outside RootPath or invalid: expected=0; actual=0
+[PASS] Duplicate PDF paths in manifest: expected=0; actual=0
+[PASS] Manifest PDF files present: expected=111; actual=111
+[PASS] PDF file sizes match manifest: expected=111; actual=111
+[PASS] PDF SHA-256 values match manifest: expected=111; actual=111
+[PASS] Unlisted PDF files on disk: expected=0; actual=0
+[PASS] PDF total bytes: expected=313921821; actual=313921821
+[PASS] PDF page counts parsed: expected=111; actual=111
+[PASS] PDF page counts match manifest: expected=111; actual=111
+[PASS] PDF total pages: expected=2210; actual=2210
+[WARN] PDF parser diagnostic files: expected=0; actual=1; D:\Workspace\2026projects\调研-训练推理芯片调研-资料汇总\论文\Google_TPU\01_厂商直接架构论文\2020_Google_Training_Chips_TPUv2_TPUv3_HotChips32.pdf
+[PASS] Blank URL rows: expected=0; actual=0
+[PASS] Unique URLs (StringComparer.Ordinal): expected=893; actual=893
+[PASS] Unique URLs (StringComparer.OrdinalIgnoreCase): expected=892; actual=892
+[PASS] Summary unique_pdfs: expected=111; actual=111
+[PASS] Summary combined_online_urls: expected=893; actual=893
+[PASS] Summary pending_papers: expected=11; actual=11
+
+RESULT: PASS (1 warning(s))

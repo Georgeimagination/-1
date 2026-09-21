@@ -1,0 +1,16 @@
+{
+    "status":  "pass",
+    "refreshed_after_remediation":  "2026-08-13",
+    "file_count":  32,
+    "changed_file_count":  0,
+    "formal_validator_checks":  106160,
+    "temp_merge_validator_checks":  115461,
+    "transaction_algorithm_path_sha":  "UTF-8 without BOM of forward-slash table_path|lowercase_sha256 lines sorted by table_path, LF joined, no trailing LF",
+    "aggregate_path_sha256":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "package_algorithm_path_sha_bytes":  "UTF-8 without BOM of Windows relative_path|lowercase_sha256|bytes lines sorted by relative_path, LF joined, no trailing LF",
+    "aggregate_path_sha256_bytes":  "f58d455018ba4a9580427e23948acdd553ad3d61da9e6177c2ca20d9af3633cd",
+    "transaction_expected":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "package_expected":  "f58d455018ba4a9580427e23948acdd553ad3d61da9e6177c2ca20d9af3633cd",
+    "comparison_basis":  "formal-32-post-aws-baseline.csv; identical per-file SHA-256 and byte comparisons after Ascend 950 remediation validation",
+    "concurrent_change_note":  "The AWS formal merge was independently authorized and completed before this refreshed baseline; it is not attributed to this package."
+}

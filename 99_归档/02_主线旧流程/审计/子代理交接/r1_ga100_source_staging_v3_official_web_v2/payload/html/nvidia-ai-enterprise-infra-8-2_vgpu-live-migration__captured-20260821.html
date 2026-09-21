@@ -1,0 +1,725 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Live Migration &#8212; NVIDIA AI Enterprise</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=7f76b32a3354e82990f2" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=7f76b32a3354e82990f2" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=767de534" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=7f76b32a3354e82990f2"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=7f76b32a3354e82990f2" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=7f76b32a3354e82990f2" />
+
+
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
+  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
+</script>
+<script type="text/javascript">
+  function OptanonWrapper() {
+    var event = new Event('bannerLoaded');
+    window.dispatchEvent(event);
+  }
+</script>
+<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
+</script>
+
+
+    <script rel="preload" src="../../../_static/modal-table.js"></script>
+    <script src="../../../_static/documentation_options.js?v=65ea9091"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/external-links.js"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=65e89d2a"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'infra-software/vgpu/features/live-migration';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../../../_static/version-patch.js?v=3e13fdd2"></script>
+
+<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
+
+    <link rel="icon" href="../../../_static/favicon.ico"/>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Multi-vGPU and P2P" href="multi-vgpu-p2p.html" />
+    <link rel="prev" title="Heterogeneous vGPU" href="heterogeneous-vgpu.html" />
+
+<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+    <meta name="docbuild:last-update" content="Aug 17, 2026"/>
+  
+    
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
+  
+
+    <meta name="docs_products" content="NVIDIA AI Enterprise">
+    <meta name="docs_version" content="8.2">
+    <meta name="docs_books" content="NVIDIA AI Enterprise 8.2">
+    
+
+
+  </head>
+
+  <body data-default-mode="">
+
+<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
+
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA AI Enterprise - Home"/>
+    <img src="../../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="NVIDIA AI Enterprise - Home"/>
+  
+  
+    <p class="title logo__title">NVIDIA AI Enterprise</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+
+<div>
+  <ul class="bd-navbar-elements navbar-nav">
+  
+    <li class="nav-item pst-header-nav-item">
+      
+      <a class="nav-link nav-external" href="https://docs.nvidia.com/ai-enterprise/">Documentation Home</a>
+      
+    </li>
+  
+  </ul>
+</div>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA AI Enterprise - Home"/>
+    <img src="../../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="NVIDIA AI Enterprise - Home"/>
+  
+  
+    <p class="title logo__title">NVIDIA AI Enterprise</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+
+<div>
+  <ul class="bd-navbar-elements navbar-nav">
+  
+    <li class="nav-item pst-header-nav-item">
+      
+      <a class="nav-link nav-external" href="https://docs.nvidia.com/ai-enterprise/">Documentation Home</a>
+      
+    </li>
+  
+  </ul>
+</div>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../getting-started/quick-start-guide.html">Quick Start Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../support/support-matrix.html">Support Matrix</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../support/support-matrix-8/8.2.html">8.2 (Latest)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../support/support-matrix-8/8.1.html">8.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../support/support-matrix-8/8.0.html">8.0</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Releases</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../overview/release-notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview/release-notes-8/8.2.html">8.2 (Latest)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview/release-notes-8/8.1.html">8.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview/release-notes-8/8.0.html">8.0</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../releases/upgrading.html">Upgrading from 8.1 to 8.2</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">NVIDIA vGPU for Compute</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../limitations.html">Limitations</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../features.html">Features</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="mig-backed-vgpu.html">MIG-Backed vGPU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device-groups.html">Device Groups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpudirect.html">GPUDirect RDMA and GPUDirect Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heterogeneous-vgpu.html">Heterogeneous vGPU</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Live Migration</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="multi-vgpu-p2p.html">Multi-vGPU and P2P</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="multi-vgpu.html">Multi-vGPU</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi-vgpu-support.html">Multi-vGPU Board Support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="p2p.html">Peer-To-Peer (P2P) CUDA Transfers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="nvswitch.html">NVIDIA NVSwitch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nvlink-multicast.html">NVLink Multicast</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scheduling.html">Scheduling Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="suspend-resume.html">Suspend-Resume</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="uvm.html">Unified Virtual Memory (UVM)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="uvm-support.html">UVM Board Support</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="inference-mode-decision.html">Choosing a vGPU Mode for Inference</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../installation.html">Installation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation/host-setup.html">Host Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/guest-driver.html">Installing NVIDIA vGPU Guest Driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/ai-workload.html">AI Enterprise Workload Setup</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../licensing.html">Licensing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../configuration.html">Configuration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/host-mig-provisioning.html">Host MIG Provisioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration/guest-mig-reconfig.html">Guest MIG Reconfiguration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/index.html">NVIDIA vGPU Types by Hardware</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/blackwell.html">Blackwell Architecture vGPU Types</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/hopper.html">Hopper Architecture vGPU Types</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/hopper-h800.html">Hopper H800 vGPU Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/hopper-h200.html">Hopper H200 vGPU Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/hopper-h100.html">Hopper H100 vGPU Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/hopper-h20.html">Hopper H20 vGPU Types</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/ada-lovelace.html">Ada Lovelace Architecture vGPU Types</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/ampere.html">Ampere Architecture vGPU Types</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/ampere-workstation.html">Ampere Workstation and General Compute vGPU Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/ampere-a800.html">Ampere A800 and AX800 vGPU Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/ampere-a100.html">Ampere A100 vGPU Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/ampere-a30.html">Ampere A30 vGPU Types</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/turing.html">Turing Architecture vGPU Types</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Troubleshooting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting/index.html">Overview</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/glossary.html">Glossary</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../features.html" class="nav-link">Features</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Live Migration</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+<div class="header-article-item">
+  <div class="d-flex justify-content-end w-100">
+    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+  </div>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="live-migration">
+<span id="feature-live-migration"></span><h1>Live Migration<a class="headerlink" href="#live-migration" title="Link to this heading">#</a></h1>
+<p>Live migration moves VMs that use NVIDIA vGPUs from one physical host to another
+without guest downtime. Typical uses include host maintenance, load balancing,
+and moving GPU-backed VMs between hosts.</p>
+<p>For additional information about this feature and instructions on how to perform the operation across different hypervisors, refer to the <a class="reference external" href="https://docs.nvidia.com/vgpu/knowledge-base/latest/vgpu-features.html#live-migration">vGPU Live Migration</a> documentation.</p>
+<section id="live-migration-known-issues-and-limitations">
+<h2>Live Migration Known Issues and Limitations<a class="headerlink" href="#live-migration-known-issues-and-limitations" title="Link to this heading">#</a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" data-sync-group="hypervisor" data-sync-id="hypervisor-rhel-kvm" for="sd-tab-item-0">
+Red Hat Enterprise Linux with KVM</label><div class="sd-tab-content docutils">
+<p>Refer to <a class="reference external" href="https://docs.nvidia.com/vgpu/latest/grid-vgpu-release-notes-red-hat-el-kvm/index.html#vgpu-migration-support">Known Issues and Limitations with NVIDIA vGPU for Compute Migration on RHEL KVM</a>.</p>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" data-sync-group="hypervisor" data-sync-id="hypervisor-ubuntu-kvm" for="sd-tab-item-1">
+Ubuntu with KVM</label><div class="sd-tab-content docutils">
+<p>Refer to <a class="reference external" href="https://docs.nvidia.com/vgpu/latest/grid-vgpu-release-notes-ubuntu/index.html#vgpu-migration-support">Known Issues and Limitations with NVIDIA vGPU for Compute Migration on Ubuntu KVM</a>.</p>
+</div>
+<input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" data-sync-group="hypervisor" data-sync-id="hypervisor-vmware-vsphere" for="sd-tab-item-2">
+VMware vSphere</label><div class="sd-tab-content docutils">
+<p>Refer to <a class="reference external" href="https://docs.nvidia.com/vgpu/latest/grid-vgpu-release-notes-vmware-vsphere/index.html#vgpu-migration-support">Known Issues and Limitations with NVIDIA vGPU for Compute Migration on VMware vSphere</a>.</p>
+</div>
+</div>
+</section>
+<section id="platform-support-for-live-migration">
+<h2>Platform Support for Live Migration<a class="headerlink" href="#platform-support-for-live-migration" title="Link to this heading">#</a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" data-sync-group="hypervisor" data-sync-id="hypervisor-rhel-kvm" for="sd-tab-item-3">
+Red Hat Enterprise Linux with KVM</label><div class="sd-tab-content docutils">
+<p>Versions:</p>
+<ul class="simple">
+<li><p>10.0</p></li>
+<li><p>9.6</p></li>
+<li><p>9.4</p></li>
+</ul>
+<p>NVIDIA AI Enterprise Infra Releases:</p>
+<ul class="simple">
+<li><p>NVIDIA AI Enterprise Infra 8.x</p></li>
+<li><p>NVIDIA AI Enterprise Infra 7.x</p></li>
+</ul>
+<p>Refer to <a class="reference external" href="https://docs.nvidia.com/vgpu/latest/grid-vgpu-user-guide/index.html#migrating-vm-with-vgpu-linux-with-kvm">Migrating a VM Configured with NVIDIA vGPU for Compute on RHEL KVM</a>.</p>
+</div>
+<input id="sd-tab-item-4" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" data-sync-group="hypervisor" data-sync-id="hypervisor-ubuntu-kvm" for="sd-tab-item-4">
+Ubuntu with KVM</label><div class="sd-tab-content docutils">
+<p>Version: 24.04 LTS</p>
+<p>NVIDIA AI Enterprise Infra Releases:</p>
+<ul class="simple">
+<li><p>NVIDIA AI Enterprise Infra 8.x</p></li>
+<li><p>NVIDIA AI Enterprise Infra 7.x</p></li>
+</ul>
+<p>Refer to <a class="reference external" href="https://docs.nvidia.com/vgpu/latest/grid-vgpu-user-guide/index.html#migrating-vm-with-vgpu-linux-with-kvm">Migrating a VM Configured with NVIDIA vGPU for Compute on Linux KVM</a>.</p>
+</div>
+<input id="sd-tab-item-5" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" data-sync-group="hypervisor" data-sync-id="hypervisor-vmware-vsphere" for="sd-tab-item-5">
+VMware vSphere</label><div class="sd-tab-content docutils">
+<p>Versions:</p>
+<ul class="simple">
+<li><p>9</p></li>
+<li><p>8</p></li>
+</ul>
+<p>NVIDIA AI Enterprise Infra Release: All active NVIDIA AI Enterprise Infra Releases</p>
+<p>Refer to <a class="reference external" href="https://docs.nvidia.com/vgpu/latest/grid-vgpu-user-guide/index.html#migrating-vm-with-vgpu-vmware-vsphere">Migrating a VM Configured with NVIDIA vGPU for Compute on VMware vSphere</a>.</p>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Live Migration is not supported between RHEL 10 and RHEL 9.4.</p>
+</div>
+</section>
+<section id="vgpu-support-for-live-migration">
+<h2>vGPU Support for Live Migration<a class="headerlink" href="#vgpu-support-for-live-migration" title="Link to this heading">#</a></h2>
+<p>For a list of supported GPUs, refer to the <a class="reference external" href="https://docs.nvidia.com/ai-enterprise/overview/latest/platform-overview.html#infra-software-branch-support-matrix">Supported NVIDIA GPUs and Networking</a> section in the NVIDIA AI Enterprise Infra Support Matrix.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul class="simple">
+<li><p>Live Migration is not supported between 80 GB PCIe and 94 GB NVL variants of GPU Boards</p></li>
+<li><p>Live Migration is not supported between H200 / H800 / H100 GPU Boards</p></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="heterogeneous-vgpu.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Heterogeneous vGPU</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="multi-vgpu-p2p.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Multi-vGPU and P2P</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#live-migration-known-issues-and-limitations">Live Migration Known Issues and Limitations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#platform-support-for-live-migration">Platform Support for Live Migration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vgpu-support-for-live-migration">vGPU Support for Live Migration</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=7f76b32a3354e82990f2"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=7f76b32a3354e82990f2"></script>
+
+
+<script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+<a class="footer-brand logo" href="https://www.nvidia.com">
+  <img src="../../../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
+  <img src="../../../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+</a></div>
+      
+        <div class="footer-item">
+
+<div class="footer-links">
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+  
+  
+  
+</div>
+</div>
+      
+        <div class="footer-item">
+
+
+
+
+  <p class="copyright">
+    
+      Copyright © 2021-2026, NVIDIA Corporation.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item"><p class="last-updated">
+  Last updated on Aug 17, 2026.
+  <br/>
+</p></div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

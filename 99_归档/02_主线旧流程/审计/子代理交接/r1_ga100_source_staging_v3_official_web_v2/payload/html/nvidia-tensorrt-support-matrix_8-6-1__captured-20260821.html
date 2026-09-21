@@ -1,0 +1,956 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+   <head>
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
+  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
+</script>
+<script type="text/javascript">
+  function OptanonWrapper() {
+    var event = new Event('bannerLoaded');
+    window.dispatchEvent(event);
+  }
+</script>
+<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
+</script>
+
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+      <meta name="copyright" content="(C) Copyright 2005"></meta>
+      <meta name="DC.rights.owner" content="(C) Copyright 2005"></meta>
+      <meta name="DC.Type" content="concept"></meta>
+      <meta name="DC.Title" content="Abstract"></meta>
+      <meta name="abstract" content="These support matrices provide a look into the supported platforms, features, and hardware capabilities of the NVIDIA TensorRT 8.6.1 APIs, parsers, and layers."></meta>
+      <meta name="description" content="These support matrices provide a look into the supported platforms, features, and hardware capabilities of the NVIDIA TensorRT 8.6.1 APIs, parsers, and layers."></meta>
+      <meta name="DC.Coverage" content="Getting Started"></meta>
+      <meta name="DC.subject" content="Support Matrix"></meta>
+      <meta name="keywords" content="Support Matrix"></meta>
+      <meta name="DC.Format" content="XHTML"></meta>
+      <meta name="DC.Identifier" content="abstract"></meta>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/commonltr.css"></link>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/site.css"></link>
+      <title>Support Matrix :: NVIDIA Deep Learning TensorRT Documentation</title>
+      <!--[if lt IE 9]>
+      <script src="../common/formatting/html5shiv-printshiv.min.js"></script>
+      <![endif]-->
+      <script src="//assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.ba-hashchange.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.scrollintoview.min.js"></script>
+      <script type="text/javascript" src="../search/htmlFileList.js"></script>
+      <script type="text/javascript" src="../search/htmlFileInfoList.js"></script>
+      <script type="text/javascript" src="../search/nwSearchFnt.min.js"></script>
+      <script type="text/javascript" src="../search/stemmers/en_stemmer.min.js"></script>
+      <script type="text/javascript" src="../search/index-1.js"></script>
+      <script type="text/javascript" src="../search/index-2.js"></script>
+      <script type="text/javascript" src="../search/index-3.js"></script>
+      <link rel="canonical" href="https://docs.nvidia.com/deeplearning/tensorrt/support-matrix/index.html"></link>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/qwcode.highlight.css"></link>
+   <link rel="stylesheet" href="/common-libs/common.css">
+<script src="/common-libs/common.js"></script>
+</head>
+   <body>
+      
+      <header id="header"><span id="company">NVIDIA</span><span id="site-title">NVIDIA Deep Learning TensorRT Documentation</span><form id="search" method="get" action="search">
+            <input type="text" name="search-text"></input><fieldset id="search-location">
+               <legend>Search In:</legend>
+               <label><input type="radio" name="search-type" value="site"></input>Entire Site</label>
+               <label><input type="radio" name="search-type" value="document"></input>Just This Document</label></fieldset>
+            <button type="reset">clear search</button>
+            <button id="submit" type="submit">search</button></form>
+      </header>
+      <div id="site-content">
+         <nav id="site-nav">
+            <div class="category closed"><a href="../index.html" title="The root of the site.">Getting Started</a></div>
+            <div class="category"><a href="index.html" title="Support Matrix">Support Matrix</a></div>
+            <ul>
+               <li>
+                  <div class="section-link"><a href="#platform-matrix">1.&nbsp;Features for Platforms and Software</a></div>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#hardware-precision-matrix">2.&nbsp;Hardware and Precision</a></div>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#compute-capability-platform">3.&nbsp;Compute Capability Per Platform</a></div>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#software-version-platform">4.&nbsp;Software Versions Per Platform</a></div>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#supported-ops">5.&nbsp;ONNX Operator Support</a></div>
+               </li>
+            </ul>
+         </nav>
+         <div id="resize-nav"></div>
+         <nav id="search-results">
+            <h2>Search Results</h2>
+            <ol></ol>
+         </nav>
+         
+         <div id="contents-container">
+            <div id="breadcrumbs-container">
+               <div id="release-info">Support Matrix (<a href="../pdf/TensorRT-Support-Matrix-Guide.pdf">PDF</a>)
+                  -
+                  
+                  
+                  
+                  -
+                  
+                  Last updated April 25, 2024
+               </div>
+            </div>
+            <article id="contents">
+               <div class="topic nested0" id="abstract"><a name="abstract" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#abstract" name="abstract" shape="rect">Abstract</a></h2>
+                  <div class="body conbody">
+                     <p class="shortdesc">These support matrices provide a look into the supported platforms, features, and
+                        hardware capabilities of the NVIDIA TensorRT 8.6.1 APIs, parsers, and layers.
+                     </p>
+                     <p class="p">For previously released TensorRT documentation, refer to the  <a class="xref" href="https://docs.nvidia.com/deeplearning/tensorrt/archives/index.html" target="_blank" shape="rect">TensorRT Archives</a>.
+                     </p>
+                  </div>
+               </div>
+               <div class="topic task nested0" id="platform-matrix"><a name="platform-matrix" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#platform-matrix" name="platform-matrix" shape="rect">1.&nbsp;Features for Platforms and Software</a></h2>
+                  <div class="body taskbody">
+                     <div class="abstract"><span class="shortdesc">This section lists the supported NVIDIA<sup>®</sup> TensorRT™
+                           features based on which platform and software.</span></div>
+                     <div class="section">
+                        <div class="p">
+                           <div class="tablenoborder"><a name="platform-matrix__table_bq1_2xx_tdb" shape="rect">
+                                 <!-- --></a><table cellpadding="4" cellspacing="0" summary="" id="platform-matrix__table_bq1_2xx_tdb" class="table" frame="border" border="1" rules="all">
+                                 <caption><span class="tablecap">Table 1. List of Supported Features per Platform</span></caption>
+                                 <thead class="thead" align="left">
+                                    <tr class="row">
+                                       <th class="entry" rowspan="2" valign="top" width="20%" id="d54e90" colspan="1">&nbsp;</th>
+                                       <th class="entry" valign="top" width="20%" id="d54e92" rowspan="1" colspan="1">Linux x86-64</th>
+                                       <th class="entry" valign="top" width="20%" id="d54e95" rowspan="1" colspan="1">Windows x64</th>
+                                       <th class="entry" valign="top" width="20%" id="d54e98" rowspan="1" colspan="1">Linux ppc64le</th>
+                                       <th class="entry" valign="top" width="20%" id="d54e101" rowspan="1" colspan="1">Linux AArch64</th>
+                                    </tr>
+                                    <tr class="row">
+                                       <th class="entry" valign="top" width="20%" id="d54e107" rowspan="1" colspan="1">8.6.x</th>
+                                       <th class="entry" valign="top" width="20%" id="d54e110" rowspan="1" colspan="1">8.6.x</th>
+                                       <th class="entry" valign="top" width="20%" id="d54e113" rowspan="1" colspan="1">8.5.x</th>
+                                       <th class="entry" valign="top" width="20%" id="d54e116" rowspan="1" colspan="1">8.6.x</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody class="tbody">
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="20%" headers="d54e90 d54e107" rowspan="1" colspan="1"><a class="xref" href="https://docs.nvidia.com/cuda/index.html" target="_blank" shape="rect">Supported NVIDIA CUDA<sup>®</sup> versions</a></td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e92 d54e110" rowspan="1" colspan="1">
+                                          <p class="p"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">12.1 update
+                                                1</a><a name="fnsrc_1" href="#fntarg_1" shape="rect"><sup>1</sup></a></p>
+                                          <p class="p"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">12.0 update 1</a></p>
+                                          <p class="p"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">11.8</a></p>
+                                          <p class="p"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">11.7 update 1</a><a name="fnsrc_2" href="#fntarg_2" shape="rect"><sup>2</sup></a></p>
+                                          <p class="p"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">11.6 update 2</a><a name="fnsrc_3" href="#fntarg_3" shape="rect"><sup>3</sup></a></p>
+                                          <p class="p"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">11.5 update 2</a><a name="fnsrc_4" href="#fntarg_4" shape="rect"><sup>4</sup></a></p>
+                                          <p class="p"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">11.4 update 4</a><a name="fnsrc_5" href="#fntarg_5" shape="rect"><sup>5</sup></a></p>
+                                          <p class="p"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">11.3 update 1</a><a name="fnsrc_6" href="#fntarg_6" shape="rect"><sup>6</sup></a></p>
+                                          <p class="p"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">11.2 update 2</a><a name="fnsrc_7" href="#fntarg_7" shape="rect"><sup>7</sup></a></p>
+                                          <p class="p"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">11.1 update 1</a><a name="fnsrc_8" href="#fntarg_8" shape="rect"><sup>8</sup></a></p>
+                                          <p class="p"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">11.0 update 1</a><a name="fnsrc_9" href="#fntarg_9" shape="rect"><sup>9</sup></a></p>
+                                       </td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e95 d54e113" rowspan="1" colspan="1">
+                                          <p class="p"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">12.1 update
+                                                1</a><a name="fnsrc_10" href="#fntarg_10" shape="rect"><sup>10</sup></a></p>
+                                          <p class="p"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">12.0 update 1</a></p>
+                                          <p class="p"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">11.8</a></p>
+                                          <p class="p"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">11.7 update 1</a><a name="fnsrc_11" href="#fntarg_11" shape="rect"><sup>11</sup></a></p>
+                                          <p class="p"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">11.6 update 2</a><a name="fnsrc_12" href="#fntarg_12" shape="rect"><sup>12</sup></a></p>
+                                          <p class="p"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">11.5 update 2</a><a name="fnsrc_13" href="#fntarg_13" shape="rect"><sup>13</sup></a></p>
+                                          <p class="p"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">11.4 update 4</a><a name="fnsrc_14" href="#fntarg_14" shape="rect"><sup>14</sup></a></p>
+                                          <p class="p"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">11.3 update 1</a><a name="fnsrc_15" href="#fntarg_15" shape="rect"><sup>15</sup></a></p>
+                                          <p class="p"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">11.2 update 2</a><a name="fnsrc_16" href="#fntarg_16" shape="rect"><sup>16</sup></a></p>
+                                          <p class="p"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">11.1 update 1</a><a name="fnsrc_17" href="#fntarg_17" shape="rect"><sup>17</sup></a></p>
+                                          <p class="p"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">11.0 update 1</a><a name="fnsrc_18" href="#fntarg_18" shape="rect"><sup>18</sup></a></p>
+                                       </td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e98 d54e116" rowspan="1" colspan="1"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">11.8</a></td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e101" rowspan="1" colspan="1">
+                                          <p class="p"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">12.0 update 1</a> (SBSA)
+                                          </p>
+                                          <p class="p"><a class="xref" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" shape="rect">11.4</a> (JetPack)
+                                          </p>
+                                       </td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="20%" headers="d54e90 d54e107" rowspan="1" colspan="1"><a class="xref" href="https://docs.nvidia.com/cuda/cublas/index.html" target="_blank" shape="rect">Supported cuBLAS versions</a></td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e92 d54e110" rowspan="1" colspan="1">
+                                          <p class="p">12.1.3.1</p>
+                                          <p class="p">12.0.2.224</p>
+                                          <p class="p">11.11.3.6</p>
+                                          <p class="p">11.10.3.66</p>
+                                          <p class="p">11.9.2.110</p>
+                                          <p class="p">11.7.4.6</p>
+                                          <p class="p">11.6.5.2</p>
+                                          <p class="p">11.5.1.109</p>
+                                          <p class="p">11.4.1.1043</p>
+                                          <p class="p">11.3.0.106</p>
+                                          <p class="p">11.2.0.252</p>
+                                       </td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e95 d54e113" rowspan="1" colspan="1">
+                                          <p class="p">12.1.3.1</p>
+                                          <p class="p">12.0.2.224</p>
+                                          <p class="p">11.11.3.6</p>
+                                          <p class="p">11.10.3.66</p>
+                                          <p class="p">11.9.2.110</p>
+                                          <p class="p">11.7.4.6</p>
+                                          <p class="p">11.6.5.2</p>
+                                          <p class="p">11.5.1.109</p>
+                                          <p class="p">11.4.1.1043</p>
+                                          <p class="p">11.3.0.106</p>
+                                          <p class="p">11.2.0.252</p>
+                                       </td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e98 d54e116" rowspan="1" colspan="1">11.11.3.6</td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e101" rowspan="1" colspan="1">
+                                          <p class="p">12.0.2.224</p>
+                                          <p class="p">11.6.5.2</p>
+                                       </td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="20%" headers="d54e90 d54e107" rowspan="1" colspan="1"><a class="xref" href="https://docs.nvidia.com/deeplearning/cudnn/index.html" target="_blank" shape="rect">Supported cuDNN versions</a></td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e92 d54e110" rowspan="1" colspan="1"><a class="xref" href="https://docs.nvidia.com/deeplearning/cudnn/release-notes/index.html#rel-890" target="_blank" shape="rect">cuDNN 8.9.0</a></td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e95 d54e113" rowspan="1" colspan="1"><a class="xref" href="https://docs.nvidia.com/deeplearning/cudnn/release-notes/index.html#rel-890" target="_blank" shape="rect">cuDNN 8.9.0</a></td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e98 d54e116" rowspan="1" colspan="1"><a class="xref" href="https://docs.nvidia.com/deeplearning/cudnn/release-notes/index.html#rel-860" target="_blank" shape="rect">cuDNN 8.6.0</a></td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e101" rowspan="1" colspan="1"><a class="xref" href="https://docs.nvidia.com/deeplearning/cudnn/release-notes/index.html#rel-890" target="_blank" shape="rect">cuDNN 8.9.0</a></td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="20%" headers="d54e90 d54e107" rowspan="1" colspan="1">TensorRT Python API</td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e92 d54e110" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e95 d54e113" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e98 d54e116" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e101" rowspan="1" colspan="1">Yes</td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="20%" headers="d54e90 d54e107" rowspan="1" colspan="1">NvUffParser</td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e92 d54e110" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e95 d54e113" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e98 d54e116" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e101" rowspan="1" colspan="1">Yes</td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="20%" headers="d54e90 d54e107" rowspan="1" colspan="1">NvOnnxParser</td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e92 d54e110" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e95 d54e113" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e98 d54e116" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e101" rowspan="1" colspan="1">Yes</td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="20%" headers="d54e90 d54e107" rowspan="1" colspan="1"><a class="xref" href="https://docs.nvidia.com/deeplearning/sdk/tensorrt-developer-guide/index.html#work-with-loops" target="_blank" shape="rect">Loops</a></td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e92 d54e110" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e95 d54e113" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e98 d54e116" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="20%" headers="d54e101" rowspan="1" colspan="1">Yes</td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div>
+                        <div class="note note"><span class="notetitle">Note:</span><a name="platform-matrix__ul_gm5_pzd_jpb" shape="rect">
+                              <!-- --></a><ul class="ul" id="platform-matrix__ul_gm5_pzd_jpb">
+                              <li class="li">Serialized engines are not portable across platforms. </li>
+                              <li class="li">If a serialized engine was created using the version compatible flag, then it can run
+                                 with newer versions of TensorRT within the same major version.
+                              </li>
+                              <li class="li">If a serialized engine was created with hardware compatibility mode enabled, it can
+                                 run on more than one kind of GPU architecture; the specifics depend on the hardware
+                                 compatibility level used. Otherwise, serialized engines are not portable across
+                                 devices.
+                              </li>
+                              <li class="li">Refer to the minimum compatible driver versions in the <a class="xref" href="https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html" target="_blank" shape="rect">NVIDIA CUDA Release Notes</a> for specific <a class="xref" href="https://www.nvidia.com/Download/index.aspx?lang=en-us" target="_blank" shape="rect">NVIDIA Driver</a> versions.
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="topic task nested0" id="hardware-precision-matrix"><a name="hardware-precision-matrix" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#hardware-precision-matrix" name="hardware-precision-matrix" shape="rect">2.&nbsp;Hardware and Precision</a></h2>
+                  <div class="body taskbody">
+                     <div class="abstract"><span class="shortdesc">The following table lists NVIDIA hardware and which precision modes that each
+                           hardware supports. TensorRT supports all NVIDIA hardware with capability SM 6.0 or higher. It
+                           also lists the availability of DLA on this hardware. Refer to the following tables for the
+                           specifics.</span></div>
+                     <div class="section">
+                        <div class="p">
+                           <div class="tablenoborder"><a name="hardware-precision-matrix__table_bq1_2xx_tdb" shape="rect">
+                                 <!-- --></a><table cellpadding="4" cellspacing="0" summary="" id="hardware-precision-matrix__table_bq1_2xx_tdb" class="table" frame="border" border="1" rules="all">
+                                 <caption><span class="tablecap">Table 2. Supported Hardware</span></caption>
+                                 <thead class="thead" align="left">
+                                    <tr class="row">
+                                       <th class="entry" valign="top" width="11.11111111111111%" id="d54e549" rowspan="1" colspan="1"><a class="xref" href="https://developer.nvidia.com/cuda-gpus" target="_blank" shape="rect">CUDA Compute Capability</a></th>
+                                       <th class="entry" valign="top" width="11.11111111111111%" id="d54e553" rowspan="1" colspan="1">Example Device</th>
+                                       <th class="entry" valign="top" width="11.11111111111111%" id="d54e556" rowspan="1" colspan="1">TF32</th>
+                                       <th class="entry" valign="top" width="11.11111111111111%" id="d54e559" rowspan="1" colspan="1">FP32</th>
+                                       <th class="entry" valign="top" width="11.11111111111111%" id="d54e562" rowspan="1" colspan="1">FP16</th>
+                                       <th class="entry" valign="top" width="11.11111111111111%" id="d54e566" rowspan="1" colspan="1">INT8</th>
+                                       <th class="entry" valign="top" width="11.11111111111111%" id="d54e569" rowspan="1" colspan="1">FP16 Tensor Cores</th>
+                                       <th class="entry" valign="top" width="11.11111111111111%" id="d54e572" rowspan="1" colspan="1">INT8 Tensor Cores</th>
+                                       <th class="entry" valign="top" width="11.11111111111111%" id="d54e575" rowspan="1" colspan="1">DLA</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody class="tbody">
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e549" rowspan="1" colspan="1">9.0</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e553" rowspan="1" colspan="1">NVIDIA H100</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e556" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e559" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e562" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e566" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e569" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e572" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e575" rowspan="1" colspan="1">No</td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e549" rowspan="1" colspan="1">8.9</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e553" rowspan="1" colspan="1">NVIDIA RTX 4090</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e556" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e559" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e562" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e566" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e569" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e572" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e575" rowspan="1" colspan="1">No</td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e549" rowspan="1" colspan="1">8.7</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e553" rowspan="1" colspan="1">NVIDIA DRIVE AGX Orin™</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e556" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e559" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e562" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e566" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e569" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e572" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e575" rowspan="1" colspan="1">Yes</td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e549" rowspan="1" colspan="1">8.6</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e553" rowspan="1" colspan="1">NVIDIA A10</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e556" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e559" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e562" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e566" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e569" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e572" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e575" rowspan="1" colspan="1">No</td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e549" rowspan="1" colspan="1">8.0</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e553" rowspan="1" colspan="1">NVIDIA A100/GA100 GPU</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e556" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e559" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e562" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e566" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e569" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e572" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e575" rowspan="1" colspan="1">No</td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e549" rowspan="1" colspan="1">7.5</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e553" rowspan="1" colspan="1">NVIDIA T4 </td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e556" rowspan="1" colspan="1">No</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e559" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e562" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e566" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e569" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e572" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e575" rowspan="1" colspan="1">No</td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e549" rowspan="1" colspan="1">7.2</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e553" rowspan="1" colspan="1">Jetson AGX Xavier</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e556" rowspan="1" colspan="1">No</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e559" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e562" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e566" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e569" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e572" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e575" rowspan="1" colspan="1">Yes</td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e549" rowspan="1" colspan="1">7.0</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e553" rowspan="1" colspan="1">NVIDIA V100</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e556" rowspan="1" colspan="1">No</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e559" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e562" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e566" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e569" rowspan="1" colspan="1">Yes</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e572" rowspan="1" colspan="1">No</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e575" rowspan="1" colspan="1">No</td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e549" rowspan="1" colspan="1">&nbsp;</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e553" rowspan="1" colspan="1">&nbsp;</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e556" rowspan="1" colspan="1">&nbsp;</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e559" rowspan="1" colspan="1">&nbsp;</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e562" rowspan="1" colspan="1">&nbsp;</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e566" rowspan="1" colspan="1">&nbsp;</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e569" rowspan="1" colspan="1">&nbsp;</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e572" rowspan="1" colspan="1">&nbsp;</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e575" rowspan="1" colspan="1">&nbsp;</td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e549" rowspan="1" colspan="1">&nbsp;</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e553" rowspan="1" colspan="1">&nbsp;</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e556" rowspan="1" colspan="1">&nbsp;</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e559" rowspan="1" colspan="1">&nbsp;</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e562" rowspan="1" colspan="1">&nbsp;</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e566" rowspan="1" colspan="1">&nbsp;</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e569" rowspan="1" colspan="1">&nbsp;</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e572" rowspan="1" colspan="1">&nbsp;</td>
+                                       <td class="entry" valign="top" width="11.11111111111111%" headers="d54e575" rowspan="1" colspan="1">&nbsp;</td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                           <div class="note note"><span class="notetitle">Note:</span> Version compatibility does not support pre-Volta architectures.
+                           </div>
+                        </div>
+                     </div>
+                     <div class="section" id="hardware-precision-matrix__section_p3q_fdz_5wb"><a name="hardware-precision-matrix__section_p3q_fdz_5wb" shape="rect">
+                           <!-- --></a><h2 class="title sectiontitle">Deprecated Hardware</h2>
+                        <div class="tablenoborder"><a name="hardware-precision-matrix__table_q3q_fdz_5wb" shape="rect">
+                              <!-- --></a><table cellpadding="4" cellspacing="0" summary="" id="hardware-precision-matrix__table_q3q_fdz_5wb" class="table" frame="border" border="1" rules="all">
+                              <caption><span class="tablecap">Table 3. Deprecated Hardware</span></caption>
+                              <thead class="thead" align="left">
+                                 <tr class="row">
+                                    <th class="entry" valign="top" width="11.11111111111111%" id="d54e919" rowspan="1" colspan="1"><a class="xref" href="https://developer.nvidia.com/cuda-gpus" target="_blank" shape="rect">CUDA Compute Capability</a></th>
+                                    <th class="entry" valign="top" width="11.11111111111111%" id="d54e923" rowspan="1" colspan="1">Example Device</th>
+                                    <th class="entry" valign="top" width="11.11111111111111%" id="d54e926" rowspan="1" colspan="1">TF32</th>
+                                    <th class="entry" valign="top" width="11.11111111111111%" id="d54e929" rowspan="1" colspan="1">FP32</th>
+                                    <th class="entry" valign="top" width="11.11111111111111%" id="d54e932" rowspan="1" colspan="1">FP16</th>
+                                    <th class="entry" valign="top" width="11.11111111111111%" id="d54e936" rowspan="1" colspan="1">INT8</th>
+                                    <th class="entry" valign="top" width="11.11111111111111%" id="d54e939" rowspan="1" colspan="1">FP16 Tensor Cores</th>
+                                    <th class="entry" valign="top" width="11.11111111111111%" id="d54e942" rowspan="1" colspan="1">INT8 Tensor Cores</th>
+                                    <th class="entry" valign="top" width="11.11111111111111%" id="d54e945" rowspan="1" colspan="1">DLA</th>
+                                 </tr>
+                              </thead>
+                              <tbody class="tbody">
+                                 <tr class="row">
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e919" rowspan="1" colspan="1">6.1</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e923" rowspan="1" colspan="1">NVIDIA P4</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e926" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e929" rowspan="1" colspan="1">Yes</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e932" rowspan="1" colspan="1">Yes</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e936" rowspan="1" colspan="1">Yes</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e939" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e942" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e945" rowspan="1" colspan="1">No</td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e919" rowspan="1" colspan="1">6.0</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e923" rowspan="1" colspan="1">NVIDIA P100</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e926" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e929" rowspan="1" colspan="1">Yes</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e932" rowspan="1" colspan="1">Yes</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e936" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e939" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e942" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e945" rowspan="1" colspan="1">No</td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                     <div class="section" id="hardware-precision-matrix__section_lvw_dvf_vkb"><a name="hardware-precision-matrix__section_lvw_dvf_vkb" shape="rect">
+                           <!-- --></a><h2 class="title sectiontitle">Removed Hardware</h2>
+                        <div class="tablenoborder"><a name="hardware-precision-matrix__table_xxh_2vf_vkb" shape="rect">
+                              <!-- --></a><table cellpadding="4" cellspacing="0" summary="" id="hardware-precision-matrix__table_xxh_2vf_vkb" class="table" frame="border" border="1" rules="all">
+                              <caption><span class="tablecap">Table 4. Removed Hardware</span></caption>
+                              <thead class="thead" align="left">
+                                 <tr class="row">
+                                    <th class="entry" valign="top" width="11.11111111111111%" id="d54e1053" rowspan="1" colspan="1"><a class="xref" href="https://developer.nvidia.com/cuda-gpus" target="_blank" shape="rect">CUDA Compute Capability</a></th>
+                                    <th class="entry" valign="top" width="11.11111111111111%" id="d54e1057" rowspan="1" colspan="1">Example Device</th>
+                                    <th class="entry" valign="top" width="11.11111111111111%" id="d54e1060" rowspan="1" colspan="1">TF32</th>
+                                    <th class="entry" valign="top" width="11.11111111111111%" id="d54e1063" rowspan="1" colspan="1">FP32</th>
+                                    <th class="entry" valign="top" width="11.11111111111111%" id="d54e1066" rowspan="1" colspan="1">FP16</th>
+                                    <th class="entry" valign="top" width="11.11111111111111%" id="d54e1070" rowspan="1" colspan="1">INT8</th>
+                                    <th class="entry" valign="top" width="11.11111111111111%" id="d54e1073" rowspan="1" colspan="1">FP16 Tensor Cores</th>
+                                    <th class="entry" valign="top" width="11.11111111111111%" id="d54e1076" rowspan="1" colspan="1">INT8 Tensor Cores</th>
+                                    <th class="entry" valign="top" width="11.11111111111111%" id="d54e1079" rowspan="1" colspan="1">DLA</th>
+                                 </tr>
+                              </thead>
+                              <tbody class="tbody">
+                                 <tr class="row">
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1053" rowspan="1" colspan="1">5.2</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1057" rowspan="1" colspan="1">NVIDIA M4</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1060" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1063" rowspan="1" colspan="1">Yes</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1066" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1070" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1073" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1076" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1079" rowspan="1" colspan="1">No</td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1053" rowspan="1" colspan="1">5.0</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1057" rowspan="1" colspan="1">Quadro K2200</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1060" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1063" rowspan="1" colspan="1">Yes</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1066" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1070" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1073" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1076" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1079" rowspan="1" colspan="1">No</td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1053" rowspan="1" colspan="1">3.7</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1057" rowspan="1" colspan="1">NVIDIA K80</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1060" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1063" rowspan="1" colspan="1">Yes</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1066" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1070" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1073" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1076" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1079" rowspan="1" colspan="1">No</td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1053" rowspan="1" colspan="1">3.5</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1057" rowspan="1" colspan="1">NVIDIA K40</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1060" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1063" rowspan="1" colspan="1">Yes</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1066" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1070" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1073" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1076" rowspan="1" colspan="1">No</td>
+                                    <td class="entry" valign="top" width="11.11111111111111%" headers="d54e1079" rowspan="1" colspan="1">No</td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="topic task nested0" id="compute-capability-platform"><a name="compute-capability-platform" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#compute-capability-platform" name="compute-capability-platform" shape="rect">3.&nbsp;Compute Capability Per Platform</a></h2>
+                  <div class="body taskbody">
+                     <div class="abstract"><span class="shortdesc">The section lists the supported compute capability based on platform.</span></div>
+                     <div class="section">
+                        <div class="p">
+                           <div class="tablenoborder"><a name="compute-capability-platform__table_ykm_njw_xfb" shape="rect">
+                                 <!-- --></a><table cellpadding="4" cellspacing="0" summary="" id="compute-capability-platform__table_ykm_njw_xfb" class="table" frame="border" border="1" rules="all">
+                                 <caption><span class="tablecap">Table 5. Compute Capability per Platform</span></caption>
+                                 <thead class="thead" align="left">
+                                    <tr class="row">
+                                       <th class="entry" valign="top" width="50%" id="d54e1248" rowspan="1" colspan="1">Platform</th>
+                                       <th class="entry" valign="top" width="50%" id="d54e1251" rowspan="1" colspan="1">Compute capability</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody class="tbody">
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="50%" headers="d54e1248" rowspan="1" colspan="1">Linux x86-64</td>
+                                       <td class="entry" valign="top" width="50%" headers="d54e1251" rowspan="1" colspan="1">6.0, 6.1, 7.0, 7.5, 8.0<a name="fnsrc_19" href="#fntarg_19" shape="rect"><sup>19</sup></a>,
+                                          8.6<a name="fnsrc_20" href="#fntarg_20" shape="rect"><sup>20</sup></a>, 8.9<a name="fnsrc_21" href="#fntarg_21" shape="rect"><sup>21</sup></a>, 9.0<a name="fnsrc_22" href="#fntarg_22" shape="rect"><sup>22</sup></a></td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="50%" headers="d54e1248" rowspan="1" colspan="1">Windows 10 x64</td>
+                                       <td class="entry" valign="top" width="50%" headers="d54e1251" rowspan="1" colspan="1">6.0, 6.1, 7.0, 7.5, 8.0<a name="fnsrc_23" href="#fntarg_23" shape="rect"><sup>23</sup></a>,
+                                          8.6<a name="fnsrc_24" href="#fntarg_24" shape="rect"><sup>24</sup></a>, 8.9<a name="fnsrc_25" href="#fntarg_25" shape="rect"><sup>25</sup></a>, 9.0<a name="fnsrc_26" href="#fntarg_26" shape="rect"><sup>26</sup></a></td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="50%" headers="d54e1248" rowspan="1" colspan="1">CentOS 8.5 ppc64le</td>
+                                       <td class="entry" valign="top" width="50%" headers="d54e1251" rowspan="1" colspan="1"> 7.0, 7.5, 8.0, 8.6, 9.0</td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="50%" headers="d54e1248" rowspan="1" colspan="1">Ubuntu 20.04 SBSA</td>
+                                       <td class="entry" valign="top" width="50%" headers="d54e1251" rowspan="1" colspan="1">7.0, 7.5, 8.0, 8.6, 9.0</td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="50%" headers="d54e1248" rowspan="1" colspan="1">NVIDIA JetPack AArch64</td>
+                                       <td class="entry" valign="top" width="50%" headers="d54e1251" rowspan="1" colspan="1">8.7</td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="topic task nested0" id="software-version-platform"><a name="software-version-platform" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#software-version-platform" name="software-version-platform" shape="rect">4.&nbsp;Software Versions Per Platform</a></h2>
+                  <div class="body taskbody">
+                     <div class="abstract"><span class="shortdesc">The section lists the supported software versions based on platform.</span></div>
+                     <div class="section">
+                        <div class="p">
+                           <div class="tablenoborder"><a name="software-version-platform__table_ykm_njw_xfb" shape="rect">
+                                 <!-- --></a><table cellpadding="4" cellspacing="0" summary="" id="software-version-platform__table_ykm_njw_xfb" class="table" frame="border" border="1" rules="all">
+                                 <caption><span class="tablecap">Table 6. List of Supported Platforms per Software Version</span></caption>
+                                 <thead class="thead" align="left">
+                                    <tr class="row">
+                                       <th class="entry" valign="top" width="33.33333333333333%" id="d54e1366" rowspan="1" colspan="1">Platform</th>
+                                       <th class="entry" valign="top" width="33.33333333333333%" id="d54e1369" rowspan="1" colspan="1">Compiler version</th>
+                                       <th class="entry" valign="top" width="33.33333333333333%" id="d54e1372" rowspan="1" colspan="1">Python version</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody class="tbody">
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1366" rowspan="1" colspan="1">Ubuntu 18.04 x86-64</td>
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1369" rowspan="1" colspan="1"><a class="xref" href="https://www.softwarecollections.org/en/scls/rhscl/devtoolset-8/" target="_blank" shape="rect">gcc 8.3.1</a></td>
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1372" rowspan="1" colspan="1"><a class="xref" href="https://www.python.org/downloads/release/python-360/" target="_blank" shape="rect">3.6</a></td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1366" rowspan="1" colspan="1">Ubuntu 20.04 x86-64</td>
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1369" rowspan="1" colspan="1"><a class="xref" href="https://www.softwarecollections.org/en/scls/rhscl/devtoolset-8/" target="_blank" shape="rect">gcc 8.3.1</a></td>
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1372" rowspan="1" colspan="1"><a class="xref" href="https://www.python.org/downloads/release/python-380/" target="_blank" shape="rect">3.8</a></td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1366" rowspan="1" colspan="1">Ubuntu 22.04 x86-64</td>
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1369" rowspan="1" colspan="1"><a class="xref" href="https://www.softwarecollections.org/en/scls/rhscl/devtoolset-8/" target="_blank" shape="rect">gcc 8.3.1</a></td>
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1372" rowspan="1" colspan="1"><a class="xref" href="https://www.python.org/downloads/release/python-3100/" target="_blank" shape="rect">3.10</a></td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1366" rowspan="1" colspan="1">CentOS 7.9 x86-64</td>
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1369" rowspan="1" colspan="1"><a class="xref" href="https://www.softwarecollections.org/en/scls/rhscl/devtoolset-8/" target="_blank" shape="rect">gcc 8.3.1</a></td>
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1372" rowspan="1" colspan="1"><a class="xref" href="https://www.python.org/downloads/release/python-360/" target="_blank" shape="rect">3.6</a></td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1366" rowspan="1" colspan="1">CentOS 8.5 x86-64</td>
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1369" rowspan="1" colspan="1"><a class="xref" href="https://www.softwarecollections.org/en/scls/rhscl/devtoolset-8/" target="_blank" shape="rect">gcc 8.3.1</a></td>
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1372" rowspan="1" colspan="1"><a class="xref" href="https://www.python.org/downloads/release/python-380/" target="_blank" shape="rect">3.8</a></td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1366" rowspan="1" colspan="1">SLES 15 x86-64</td>
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1369" rowspan="1" colspan="1"><a class="xref" href="https://www.softwarecollections.org/en/scls/rhscl/devtoolset-8/" target="_blank" shape="rect">gcc 8.3.1</a></td>
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1372" rowspan="1" colspan="1">N/A</td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1366" rowspan="1" colspan="1">Windows 10 x64</td>
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1369" rowspan="1" colspan="1"><a class="xref" href="https://docs.microsoft.com/en-us/visualstudio/releasenotes/vs2017-relnotes-v15.8#15.8.5" target="_blank" shape="rect">MSVC 2017u8</a></td>
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1372" rowspan="1" colspan="1">N/A</td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1366" rowspan="1" colspan="1">CentOS 8.5 ppc64le</td>
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1369" rowspan="1" colspan="1"><a class="xref" href="https://releases.llvm.org/14.0.0/docs/ReleaseNotes.html" target="_blank" shape="rect">Clang 14.0.6</a></td>
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1372" rowspan="1" colspan="1"><a class="xref" href="https://www.python.org/downloads/release/python-380/" target="_blank" shape="rect">3.8</a></td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1366" rowspan="1" colspan="1">Ubuntu 20.04 SBSA</td>
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1369" rowspan="1" colspan="1"><a class="xref" href="https://packages.ubuntu.com/focal/gcc-8-aarch64-linux-gnu" target="_blank" shape="rect">gcc 8.4.0</a></td>
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1372" rowspan="1" colspan="1"><a class="xref" href="https://www.python.org/downloads/release/python-380/" target="_blank" shape="rect">3.8</a></td>
+                                    </tr>
+                                    <tr class="row">
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1366" rowspan="1" colspan="1">NVIDIA JetPack AArch64</td>
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1369" rowspan="1" colspan="1"><a class="xref" href="https://toolchains.bootlin.com/" target="_blank" shape="rect">gcc 9.3.0</a></td>
+                                       <td class="entry" valign="top" width="33.33333333333333%" headers="d54e1372" rowspan="1" colspan="1"><a class="xref" href="https://www.python.org/downloads/release/python-380/" target="_blank" shape="rect">3.8</a></td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                           <div class="note note"><span class="notetitle">Note:</span> Python versions supported when using Debian or RPM packages. When using Python wheel
+                              files, versions 3.6, 3.7, 3.8, 3.9, 3.10, and 3.11 are supported.
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="topic task nested0" id="supported-ops"><a name="supported-ops" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#supported-ops" name="supported-ops" shape="rect">5.&nbsp;ONNX Operator Support</a></h2>
+                  <div class="body taskbody">
+                     <div class="abstract">The ONNX operator support list for TensorRT can be found <a class="xref" href="https://github.com/onnx/onnx-tensorrt/blob/master/docs/operators.md" target="_blank" shape="rect">here</a>. <span class="shortdesc"></span></div>
+                     <div class="section" id="supported-ops__section_xxk_jnb_4wb"><a name="supported-ops__section_xxk_jnb_4wb" shape="rect">
+                           <!-- --></a><p class="p"></p>
+                     </div>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="notices-header"><a name="notices-header" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#notices-header" name="notices-header" shape="rect">Notices</a></h2>
+                  <div class="topic reference nested1" id="notice"><a name="notice" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#notice" name="notice" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section notices" id="notice__section_kbg_pmm_flb"><a name="notice__section_kbg_pmm_flb" shape="rect">
+                              <!-- --></a><h3 class="title sectiontitle notices">Notice</h3>
+                           <p class="p" id="notice__notice-para-1"><a name="notice__notice-para-1" shape="rect">
+                                 <!-- --></a>This document is provided for information purposes
+                              only and shall not be regarded as a warranty of a certain
+                              functionality, condition, or quality of a product. NVIDIA
+                              Corporation (“NVIDIA”) makes no representations or warranties,
+                              expressed or implied, as to the accuracy or completeness of the
+                              information contained in this document and assumes no responsibility
+                              for any errors contained herein. NVIDIA shall have no liability for
+                              the consequences or use of such information or for any infringement
+                              of patents or other rights of third parties that may result from its
+                              use. This document is not a commitment to develop, release, or
+                              deliver any Material (defined below), code, or functionality.
+                           </p>
+                           <p class="p" id="notice__notice-para-2"><a name="notice__notice-para-2" shape="rect">
+                                 <!-- --></a>NVIDIA reserves the right to make corrections,
+                              modifications, enhancements, improvements, and any other changes to
+                              this document, at any time without notice.
+                           </p>
+                           <p class="p" id="notice__notice-para-3"><a name="notice__notice-para-3" shape="rect">
+                                 <!-- --></a>Customer should obtain the latest relevant information
+                              before placing orders and should verify that such information is
+                              current and complete.
+                           </p>
+                           <p class="p" id="notice__notice-para-4"><a name="notice__notice-para-4" shape="rect">
+                                 <!-- --></a>NVIDIA products are sold subject to the NVIDIA
+                              standard terms and conditions of sale supplied at the time of order
+                              acknowledgement, unless otherwise agreed in an individual sales
+                              agreement signed by authorized representatives of NVIDIA and
+                              customer (“Terms of Sale”). NVIDIA hereby expressly objects to
+                              applying any customer general terms and conditions with regards to
+                              the purchase of the NVIDIA product referenced in this document. No
+                              contractual obligations are formed either directly or indirectly by
+                              this document.
+                           </p>
+                           <p class="p" id="notice__notice-para-5"><a name="notice__notice-para-5" shape="rect">
+                                 <!-- --></a>NVIDIA products are not designed, authorized, or
+                              warranted to be suitable for use in medical, military, aircraft,
+                              space, or life support equipment, nor in applications where failure
+                              or malfunction of the NVIDIA product can reasonably be expected to
+                              result in personal injury, death, or property or environmental
+                              damage. NVIDIA accepts no liability for inclusion and/or use of
+                              NVIDIA products in such equipment or applications and therefore such
+                              inclusion and/or use is at customer’s own risk.
+                           </p>
+                           <p class="p" id="notice__notice-para-6"><a name="notice__notice-para-6" shape="rect">
+                                 <!-- --></a>NVIDIA makes no representation or warranty that
+                              products based on this document will be suitable for any specified
+                              use. Testing of all parameters of each product is not necessarily
+                              performed by NVIDIA. It is customer’s sole responsibility to
+                              evaluate and determine the applicability of any information
+                              contained in this document, ensure the product is suitable and fit
+                              for the application planned by customer, and perform the necessary
+                              testing for the application in order to avoid a default of the
+                              application or the product. Weaknesses in customer’s product designs
+                              may affect the quality and reliability of the NVIDIA product and may
+                              result in additional or different conditions and/or requirements
+                              beyond those contained in this document. NVIDIA accepts no liability
+                              related to any default, damage, costs, or problem which may be based
+                              on or attributable to: (i) the use of the NVIDIA product in any
+                              manner that is contrary to this document or (ii) customer product
+                              designs.
+                           </p>
+                           <p class="p" id="notice__notice-para-7"><a name="notice__notice-para-7" shape="rect">
+                                 <!-- --></a>No license, either expressed or implied, is granted
+                              under any NVIDIA patent right, copyright, or other NVIDIA
+                              intellectual property right under this document. Information
+                              published by NVIDIA regarding third-party products or services does
+                              not constitute a license from NVIDIA to use such products or
+                              services or a warranty or endorsement thereof. Use of such
+                              information may require a license from a third party under the
+                              patents or other intellectual property rights of the third party, or
+                              a license from NVIDIA under the patents or other intellectual
+                              property rights of NVIDIA.
+                           </p>
+                           <p class="p" id="notice__notice-para-8"><a name="notice__notice-para-8" shape="rect">
+                                 <!-- --></a>Reproduction of information in this document is
+                              permissible only if approved in advance by NVIDIA in writing,
+                              reproduced without alteration and in full compliance with all
+                              applicable export laws and regulations, and accompanied by all
+                              associated conditions, limitations, and notices.
+                           </p>
+                           <p class="p" id="notice__notice-para-9"><a name="notice__notice-para-9" shape="rect">
+                                 <!-- --></a>THIS DOCUMENT AND ALL NVIDIA DESIGN SPECIFICATIONS,
+                              REFERENCE BOARDS, FILES, DRAWINGS, DIAGNOSTICS, LISTS, AND OTHER
+                              DOCUMENTS (TOGETHER AND SEPARATELY, “MATERIALS”) ARE BEING PROVIDED
+                              “AS IS.” NVIDIA MAKES NO WARRANTIES, EXPRESSED, IMPLIED, STATUTORY,
+                              OR OTHERWISE WITH RESPECT TO THE MATERIALS, AND EXPRESSLY DISCLAIMS
+                              ALL IMPLIED WARRANTIES OF NONINFRINGEMENT, MERCHANTABILITY, AND
+                              FITNESS FOR A PARTICULAR PURPOSE. TO THE EXTENT NOT PROHIBITED BY
+                              LAW, IN NO EVENT WILL NVIDIA BE LIABLE FOR ANY DAMAGES, INCLUDING
+                              WITHOUT LIMITATION ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL,
+                              PUNITIVE, OR CONSEQUENTIAL DAMAGES, HOWEVER CAUSED AND REGARDLESS OF
+                              THE THEORY OF LIABILITY, ARISING OUT OF ANY USE OF THIS DOCUMENT,
+                              EVEN IF NVIDIA HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+                              Notwithstanding any damages that customer might incur for any reason
+                              whatsoever, NVIDIA’s aggregate and cumulative liability towards
+                              customer for the products described herein shall be limited in
+                              accordance with the Terms of Sale for the product.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="arm"><a name="arm" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#arm" name="arm" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section notices" id="arm__section_n3n_kf2_qtb"><a name="arm__section_n3n_kf2_qtb" shape="rect">
+                              <!-- --></a><h3 class="title sectiontitle notices">Arm</h3>
+                           <p class="p">Arm, AMBA and Arm Powered are registered trademarks of Arm Limited. Cortex, MPCore
+                              and Mali are trademarks of Arm Limited. "Arm" is used to represent Arm Holdings plc;
+                              its operating company Arm Limited; and the regional subsidiaries Arm Inc.; Arm KK;
+                              Arm Korea Limited.; Arm Taiwan Limited; Arm France SAS; Arm Consulting (Shanghai)
+                              Co. Ltd.; Arm Germany GmbH; Arm Embedded Technologies Pvt. Ltd.; Arm Norway, AS and
+                              Arm Sweden AB.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="hdmi"><a name="hdmi" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#hdmi" name="hdmi" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">HDMI</h3>
+                           <p class="p">HDMI, the HDMI logo, and High-Definition Multimedia Interface are trademarks or
+                              registered trademarks of HDMI Licensing LLC.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="blackberry"><a name="blackberry" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#blackberry" name="blackberry" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">Blackberry/QNX</h3>
+                           <p class="p">Copyright © 2020 BlackBerry Limited. All rights reserved.</p>
+                           <p class="p">Trademarks, including but not limited to BLACKBERRY, EMBLEM Design, QNX, AVIAGE,
+                              MOMENTICS, NEUTRINO and QNX CAR are the trademarks or registered trademarks of
+                              BlackBerry Limited, used under license, and the exclusive rights to such trademarks
+                              are expressly reserved. 
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="google"><a name="google" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#google" name="google" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">Google</h3>
+                           <p class="p">Android, Android TV, Google Play and the Google Play logo are trademarks of Google,
+                              Inc.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="trademarks"><a name="trademarks" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#trademarks" name="trademarks" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">Trademarks</h3>
+                           <p class="p">NVIDIA, the NVIDIA logo, and BlueField, CUDA, DALI, DRIVE, Hopper, JetPack, Jetson
+                              AGX Xavier, Jetson Nano, Maxwell, NGC, Nsight, Orin, Pascal, Quadro, Tegra,
+                              TensorRT, Triton, Turing and Volta are trademarks and/or registered trademarks of
+                              NVIDIA Corporation in the United States and other countries. Other company and
+                              product names may be trademarks of the respective companies with which they are
+                              associated.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="copyright-past-to-present"><a name="copyright-past-to-present" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#copyright-past-to-present" name="copyright-past-to-present" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">Copyright</h3>
+                           <p class="p">© <span class="ph">2018</span>-<span class="ph">2024</span> NVIDIA Corporation &amp;
+                              affiliates. All rights reserved.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="fn"><a name="fntarg_1" href="#fnsrc_1" shape="rect"><sup>1</sup></a>  These CUDA versions are supported using a
+                  single build, built with CUDA toolkit 12.0. It is
+                  compatible with all CUDA 12.x versions and only requires
+                  driver 525.x.
+               </div>
+               <div class="fn"><a name="fntarg_2" href="#fnsrc_2" shape="rect"><sup>2</sup></a>  These CUDA versions are supported
+                  using a single build, built with CUDA toolkit 11.8. It is compatible with all
+                  CUDA 11.x versions and only requires driver 450.x.
+               </div>
+               <div class="fn"><a name="fntarg_3" href="#fnsrc_3" shape="rect"><sup>3</sup></a>  These CUDA versions are supported
+                  using a single build, built with CUDA toolkit 11.8. It is compatible with all
+                  CUDA 11.x versions and only requires driver 450.x.
+               </div>
+               <div class="fn"><a name="fntarg_4" href="#fnsrc_4" shape="rect"><sup>4</sup></a>  These CUDA versions are supported
+                  using a single build, built with CUDA toolkit 11.8. It is compatible with all
+                  CUDA 11.x versions and only requires driver 450.x.
+               </div>
+               <div class="fn"><a name="fntarg_5" href="#fnsrc_5" shape="rect"><sup>5</sup></a>  These CUDA versions are supported
+                  using a single build, built with CUDA toolkit 11.8. It is compatible with all
+                  CUDA 11.x versions and only requires driver 450.x.
+               </div>
+               <div class="fn"><a name="fntarg_6" href="#fnsrc_6" shape="rect"><sup>6</sup></a>  These CUDA versions are supported
+                  using a single build, built with CUDA toolkit 11.8. It is compatible with all
+                  CUDA 11.x versions and only requires driver 450.x.
+               </div>
+               <div class="fn"><a name="fntarg_7" href="#fnsrc_7" shape="rect"><sup>7</sup></a>  These CUDA versions are supported
+                  using a single build, built with CUDA toolkit 11.8. It is compatible with all
+                  CUDA 11.x versions and only requires driver 450.x.
+               </div>
+               <div class="fn"><a name="fntarg_8" href="#fnsrc_8" shape="rect"><sup>8</sup></a>  These CUDA versions are supported
+                  using a single build, built with CUDA toolkit 11.8. It is compatible with all
+                  CUDA 11.x versions and only requires driver 450.x.
+               </div>
+               <div class="fn"><a name="fntarg_9" href="#fnsrc_9" shape="rect"><sup>9</sup></a>  These CUDA versions are supported
+                  using a single build, built with CUDA toolkit 11.8. It is compatible with all
+                  CUDA 11.x versions and only requires driver 450.x.
+               </div>
+               <div class="fn"><a name="fntarg_10" href="#fnsrc_10" shape="rect"><sup>10</sup></a>  These CUDA versions are supported using a
+                  single build, built with CUDA toolkit 12.0. It is
+                  compatible with all CUDA 12.x versions and only requires
+                  driver 525.x.
+               </div>
+               <div class="fn"><a name="fntarg_11" href="#fnsrc_11" shape="rect"><sup>11</sup></a>  These CUDA versions are supported
+                  using a single build, built with CUDA toolkit 11.8. It is compatible with all
+                  CUDA 11.x versions and only requires driver 450.x.
+               </div>
+               <div class="fn"><a name="fntarg_12" href="#fnsrc_12" shape="rect"><sup>12</sup></a>  These CUDA versions are supported
+                  using a single build, built with CUDA toolkit 11.8. It is compatible with all
+                  CUDA 11.x versions and only requires driver 450.x.
+               </div>
+               <div class="fn"><a name="fntarg_13" href="#fnsrc_13" shape="rect"><sup>13</sup></a>  These CUDA versions are supported
+                  using a single build, built with CUDA toolkit 11.8. It is compatible with all
+                  CUDA 11.x versions and only requires driver 450.x.
+               </div>
+               <div class="fn"><a name="fntarg_14" href="#fnsrc_14" shape="rect"><sup>14</sup></a>  These CUDA versions are supported
+                  using a single build, built with CUDA toolkit 11.8. It is compatible with all
+                  CUDA 11.x versions and only requires driver 450.x.
+               </div>
+               <div class="fn"><a name="fntarg_15" href="#fnsrc_15" shape="rect"><sup>15</sup></a>  These CUDA versions are supported
+                  using a single build, built with CUDA toolkit 11.8. It is compatible with all
+                  CUDA 11.x versions and only requires driver 450.x.
+               </div>
+               <div class="fn"><a name="fntarg_16" href="#fnsrc_16" shape="rect"><sup>16</sup></a>  These CUDA versions are supported
+                  using a single build, built with CUDA toolkit 11.8. It is compatible with all
+                  CUDA 11.x versions and only requires driver 450.x.
+               </div>
+               <div class="fn"><a name="fntarg_17" href="#fnsrc_17" shape="rect"><sup>17</sup></a>  These CUDA versions are supported
+                  using a single build, built with CUDA toolkit 11.8. It is compatible with all
+                  CUDA 11.x versions and only requires driver 450.x.
+               </div>
+               <div class="fn"><a name="fntarg_18" href="#fnsrc_18" shape="rect"><sup>18</sup></a>  These CUDA versions are supported
+                  using a single build, built with CUDA toolkit 11.8. It is compatible with all
+                  CUDA 11.x versions and only requires driver 450.x.
+               </div>
+               <div class="fn"><a name="fntarg_19" href="#fnsrc_19" shape="rect"><sup>19</sup></a>  Requires CUDA Toolkit 11.0 or newer.
+               </div>
+               <div class="fn"><a name="fntarg_20" href="#fnsrc_20" shape="rect"><sup>20</sup></a>  Requires CUDA Toolkit 11.1 or newer.
+               </div>
+               <div class="fn"><a name="fntarg_21" href="#fnsrc_21" shape="rect"><sup>21</sup></a>  Requires CUDA Toolkit
+                  11.8 or newer.
+               </div>
+               <div class="fn"><a name="fntarg_22" href="#fnsrc_22" shape="rect"><sup>22</sup></a>  Requires CUDA Toolkit 11.8 or newer.
+               </div>
+               <div class="fn"><a name="fntarg_23" href="#fnsrc_23" shape="rect"><sup>23</sup></a>  Requires CUDA Toolkit 11.0 or newer.
+               </div>
+               <div class="fn"><a name="fntarg_24" href="#fnsrc_24" shape="rect"><sup>24</sup></a>  Requires CUDA Toolkit 11.1 or newer.
+               </div>
+               <div class="fn"><a name="fntarg_25" href="#fnsrc_25" shape="rect"><sup>25</sup></a>  Requires CUDA Toolkit
+                  11.8 or newer.
+               </div>
+               <div class="fn"><a name="fntarg_26" href="#fnsrc_26" shape="rect"><sup>26</sup></a>  Requires CUDA Toolkit 11.8 or newer.
+               </div>
+               
+               
+            </article>
+            <footer id="footer"><img src="../common/formatting/NVIDIA-LogoBlack.svg"></img><div><a href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/" target="_blank">Privacy Policy</a> |
+                  <a href="https://www.nvidia.com/en-us/privacy-center/" target="_blank">Manage My Privacy</a> |
+                  <a href="https://www.nvidia.com/en-us/preferences/email-preferences/" target="_blank">Do Not Sell or Share My Data</a> |
+                  <a href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/" target="_blank">Terms of Service</a> |
+                  <a href="https://www.nvidia.com/en-us/about-nvidia/accessibility/" target="_blank">Accessibility</a> |
+                  <a href="https://www.nvidia.com/en-us/about-nvidia/company-policies/" target="_blank">Corporate Policies</a> |
+                  <a href="https://www.nvidia.com/en-us/product-security/" target="_blank">Product Security</a> |
+                  <a href="https://www.nvidia.com/en-us/contact/" target="_blank">Contact</a></div>
+               <div class="copyright">Copyright © 2024 NVIDIA Corporation</div>
+            </footer>
+         </div>
+      </div>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/formatting/common.min.js"></script>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/scripts/google-analytics/google-analytics-write.js"></script>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/scripts/google-analytics/google-analytics-tracker.js"></script>
+      <script type="text/javascript">var switchTo5x=true;</script><script type="text/javascript">stLight.options({publisher: "998dc202-a267-4d8e-bce9-14debadb8d92", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+      <script type="text/javascript">_satellite.pageBottom();</script></body>
+</html>

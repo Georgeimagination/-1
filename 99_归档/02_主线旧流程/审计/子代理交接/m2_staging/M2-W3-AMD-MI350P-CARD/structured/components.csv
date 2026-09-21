@@ -1,0 +1,6 @@
+"component_id","owner_object_id","parent_component_id","component_domain","component_type","canonical_label","review_status","notes"
+"COMP-M2W3-AMD-MI350P-CU","OBJ-AMD-MI350P","","control","control","MI350P enabled Compute Unit configuration","draft","Product-scoped count anchor only; CDNA 4 CU mechanisms remain on the architecture object."
+"COMP-M2W3-AMD-MI350P-MATRIX","OBJ-AMD-MI350P","","compute","matrix","MI350P published matrix peak paths","draft","Logical product aggregate for vendor-published matrix peaks; not an added physical block."
+"COMP-M2W3-AMD-MI350P-VECTOR","OBJ-AMD-MI350P","","compute","vector","MI350P published vector peak paths","draft","Logical product aggregate for vendor-published vector peaks; not an added physical block."
+"COMP-M2W3-AMD-MI350P-HBM3E","OBJ-AMD-MI350P","","memory","memory_level","MI350P HBM3E memory","draft","Product-local HBM3E capacity and vendor peak bandwidth only."
+"COMP-M2W3-AMD-MI350P-LLC","OBJ-AMD-MI350P","","memory","memory_level","MI350P last-level cache","draft","Product page publishes 128 MB LLC; brochure calls the same 128 MB AMD Infinity Cache last level."

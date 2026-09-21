@@ -1,0 +1,3 @@
+"component_id","owner_object_id","parent_component_id","component_domain","component_type","canonical_label","review_status","notes"
+"COMP-M2W2-AMD-HELIOS-COMPUTE-AGG","OBJ-AMD-HELIOS-72-MI455X","","compute","matrix","Helios rack aggregate matrix compute","draft","Logical rack-level aggregate for vendor-published rack peaks; not a new physical unit."
+"COMP-M2W2-AMD-HELIOS-HBM4-AGG","OBJ-AMD-HELIOS-72-MI455X","","memory","memory_level","Helios rack aggregate HBM4 memory","draft","System-level aggregate memory view directly stated by AMD; no 72x derivation."

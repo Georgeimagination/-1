@@ -1,0 +1,121 @@
+# 内存层级<a name="ZH-CN_TOPIC_0000002523359048"></a>
+
+SIMT线程可访问多种内存空间。下表汇总了SIMT编程中常见内存类型的作用域及其生命周期。
+
+| 内存类型 | 线程作用域 | 生命周期 | 物理位置 |
+|---------|----------|---------|---------|
+| 全局内存 | Grid | 应用程序 | Device |
+| 共享内存 | Block | 核函数 | Vector Core |
+| 寄存器 | Thread | 核函数 | Vector Core |
+
+-   全局内存是所有线程均可直接访问的内存资源，即Global Memory；
+-   共享内存是线程块内所有线程共享的内存，位于Unified Buffer，生命周期和线程块一致。
+-   每个线程拥有独立的寄存器，用于存储局部变量。
+-   在访问性能方面，寄存器具有最高的访问速度；共享内存的访问效率优于全局内存。
+
+内存层级如下图所示：  
+<img src="https://raw.gitcode.com/cann/asc-devkit/raw/9.1.0/docs/guide/figures/内存.png" width="50%">
+
+## 全局内存（Global Memory）<a name="section8946131492119"></a>
+
+Device侧的全局内存是整个Grid中所有线程均可访问的内存空间。全局内存具有持久性：通过全局内存分配的空间及其存储的数据将持续保留，直到该内存空间被释放或应用程序终止。用户需在核函数启动前通过Runtime API完成全局内存的分配与初始化，核函数执行期间SIMT每个线程均可读写全局内存，执行完毕后可将结果拷贝回Host。有关Runtime API的更多信息与细节，可以参考[《Runtime运行时API》](https://hiascend.com/document/redirect/CannCommunityRuntimeApi)。
+
+运行在Device侧的核函数可以通过指针直接访问全局内存。下述代码展示了全局内存的简易示例。数组x、y、z均存储于全局内存中，通过以下核函数实现每个线程对全局内存的访问和存储。
+
+```
+__global__ void add_custom(float* x, float* y, float* z, uint64_t total_length)
+{
+    // Calculate global thread ID
+    int32_t idx = blockIdx.x * blockDim.x + threadIdx.x;
+    // Maps to the row index of output tensor
+    if (idx >= total_length) {
+        return;
+    }
+    z[idx] = x[idx] + y[idx];
+}
+```
+
+## 共享内存<a name="section66329146410"></a>
+
+共享内存是同一线程块内所有线程均可访问的内存空间，位于每个Vector Core（AIV）内的Unified Buffer。与全局内存相比，共享内存的容量较小，但具有更高的带宽和更低的访问延迟，可视为内核执行期间由用户管理的高速缓存资源。
+
+用户可通过动态或者静态方式申请共享内存。
+
+1.  静态申请：分配一段指定大小的内存空间，其大小在编译时确定，不可动态修改，开发者通过数组分配申请使用。
+
+    ```
+    __global__ void add_custom(...)
+    {
+        __ubuf__ half static_buf[1024];
+        ...
+    }
+    ```
+
+    默认情况下，申请到的静态内存首地址按照数据类型对齐，也支持用户使用`__align__(N)`手动指定对齐。
+
+2.  动态申请：用户需要通过<<<\>\>\>中参数[dyn_ubuf_size](/document/detail/zh/CANNCommunityEdition/910/programug/Ascendcopdevg/docs/guide/编程指南/编程模型/AI-Core-SIMT编程/核函数.md#li12421238101815)指定动态内存的空间大小，其大小在运行期确定，SIMT编程中可通过以下方式申请使用动态内存。
+
+    ```
+    // Device侧：声明动态共享内存
+    __global__ void add_custom(...)
+    {
+        extern __ubuf__ char dynamic_buf[];
+        ...
+    }
+
+    // Host侧：通过<<<>>>中的第三个参数指定动态共享内存大小
+    int32_t main(int argc, char const *argv[])
+    {
+        ...
+        uint32_t dyn_ubuf_size = 1024 * sizeof(char);
+        add_custom<<<blocks_per_grid, threads_per_block, dyn_ubuf_size, stream>>>(...);
+        ...
+    }
+    ```
+
+### 共享内存大小的限制
+
+如下图所示，Unified Buffer内存空间总大小为256KB。默认编译模式下，UB按功能划分为四个主要区域，从低地址到高地址依次为静态内存、动态内存、预留空间和Data Cache。由于这四类区域共享同一块Unified Buffer内存，因此用户在配置共享内存大小时，应确保为Data Cache保留足够的空间（至少32KB），避免因可用空间不足导致校验报错。
+
+![](https://raw.gitcode.com/cann/asc-devkit/raw/9.1.0/docs/guide/figures/UB内存分配.png)
+
+具体结构如下：
+
+1.  静态内存和动态内存对应用户静态、动态申请方式分配的内存。
+2.  预留空间：编译器和Ascend C预留空间，大小固定为8KB。
+3.  Data Cache：SIMT专有的Data Cache空间，用于SIMT线程访问全局内存时的数据缓存，Data Cache的空间可配置范围为**最小32KB、最大128KB**，实际内存大小受用户配置的静态和动态内存大小影响，具体计算公式为：
+
+    ```
+    Data Cache = min(UB大小（256KB） - 静态内存 - 动态内存 - 预留空间（8KB）,128KB)
+    ```
+
+    Data Cache空间上限为**128KB**，即使静态与动态内存申请较少，Data Cache实际分配大小也不会超出该上限。
+
+由于Data Cache、预留空间与用户申请的UB内存共用同一块UB，因此开发者无法使用全部UB空间，应确保实际访问范围不超过已申请的静态内存和动态内存大小。
+
+静态内存和动态内存的声明或配置限定了用户使用UB内存的有效范围。若用户配置的内存大小不足，甚至未申请内存即直接访问UB地址，访问地址可能越过用户动、静态内存边界并落入Data Cache区域。由于Data Cache容量由UB总量扣除静态内存、动态内存和预留空间后确定，所以用户共享内存配置偏小会扩大可分配给Data Cache的剩余空间。当程序执行越过已申请的动、静态内存边界，发生越界写入行为时，未必立即表现为内存分配失败，但可能破坏SIMT全局内存访问的数据缓存，导致计算结果不稳定或算子精度异常。
+
+> [!NOTE]说明
+>
+> 用户可选择禁用预留空间，禁用方法为：编译时增加[--cce-disable-vf-stack-reserved-ubuf](/document/detail/zh/CANNCommunityEdition/910/programug/Ascendcopdevg/docs/guide/编程指南/编译与运行/算子编译/AI-Core算子编译基本用法.md#ZH-CN_TOPIC_0000002462746461)选项。开启该选项后，编译器不再预留该部分UB空间，该空间可作为普通UB空间使用，Data Cache空间可按如下公式估算：
+> ```
+> Data Cache = min(UB大小（256KB） - 静态内存 - 动态内存 - 预留空间（8KB）,128KB)
+> ```
+> 使用该选项时，仍需保证Data Cache空间不小于32KB，且Data Cache空间上限仍为128KB。开启该选项后，编译器将无法使用预留UB空间作为寄存器溢出的缓存空间，开发者需保证不会发生寄存器溢出。
+
+## 寄存器<a name="section1137715201010"></a>
+
+SIMT编程中，每个线程拥有独立的寄存器，其生命周期与核函数一致。寄存器的使用由编译器管理，并在核函数执行期间用于线程的局部存储。线程执行时可用寄存器数量与核函数定义时配置的最大线程数有关，详见下表。
+
+**表1**  最大线程数与每个线程可用寄存器数的对应关系
+
+| 最大线程数 | 每个线程可用寄存器数 |
+| --- | --- |
+| 1025~2048 | 16 |
+| 513~1024 | 32 |
+| 257~512 | 64 |
+| 1~256 | 127 |
+
+从上表可知，核函数定义时配置的最大线程数越多，每个线程可使用的寄存器数量就越少。如果用户设置的线程数量过大，而每个线程的计算复杂度又较高时，编译器由于缺乏足够的寄存器来存储本地变量，可能会将数据临时存放到堆栈空间，从而极易导致寄存器溢出（register spill），影响算子性能。因此，用户应根据实际的算子复杂度，合理配置最大线程数。
+
+最大线程数和线程执行时可用寄存器数量可以通过[\_\_launch\_bounds\_\_](/document/detail/zh/CANNCommunityEdition/910/programug/Ascendcopdevg/docs/guide/编程指南/语言扩展层/SIMT-BuiltIn关键字.md#li23861114618)或[\_\_maxnreg\_\_](/document/detail/zh/CANNCommunityEdition/910/programug/Ascendcopdevg/docs/guide/编程指南/语言扩展层/SIMT-BuiltIn关键字.md#section_maxnreg)来配置。

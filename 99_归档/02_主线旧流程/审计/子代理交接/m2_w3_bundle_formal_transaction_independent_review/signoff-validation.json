@@ -1,0 +1,21 @@
+{
+    "status":  "passed",
+    "signoff_sha256":  "2291a5c77c3b4fef6a94488a4f3b76cbf1df092230a279292a7246d03efa6e5c",
+    "signoff_rows":  1,
+    "signoff_columns":  19,
+    "verdict":  "accept",
+    "ready_for_formal_execution":  true,
+    "authorization_scope":  "formal_execution_of_exact_1057_rows_15_payloads_via_bundle_transaction_v1",
+    "authorization_token_sha256":  "7c2902c416f246f9f13e0462599d87f12805e6387de21810df20c140153a7a3a",
+    "prep_manifest_sha256":  "efdb763a24c0e97fd483735bba5d68dd01f0768553f963988436efa933ebbaba",
+    "prep_package_aggregate":  "958e1b5106b6c42ae116fe643b3b8ec63a190cc20951654380d86c45a2ad332f",
+    "core_scripts_bound":  3,
+    "data_signoffs_bound":  3,
+    "transaction_signoffs_bound":  3,
+    "formal_preaggregate":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "candidate_postaggregate":  "5f62191bfc737535802cd6e0524b1fdf7a742ca36300db11b5a9233d4540052a",
+    "candidate_validator_checks":  125619,
+    "formal_payload_targets_present":  0,
+    "formal_temp_lock_files":  0,
+    "formal_writes_performed":  0
+}

@@ -1,0 +1,4 @@
+exit_code=1
+findings=4
+finding_type=specific-project-residue
+manual_disposition=All four findings are protected exact local project paths inside the authorized-but-not-executed formal command (lines 51, 52, 53, and 58). The report is project-specific and the paths must remain exact. No prose AI-tell finding remains after the explicit-authorization revalidation.

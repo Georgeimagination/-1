@@ -1,0 +1,9 @@
+Formal payload target already exists before authorization: 最小参考资料库/快照/AWS/PackageImplementations/2026-08-13/A01-inferen
+tia-latest-2026-08-13.html
+At D:\Workspace\2026projects\调研-训练推理芯片调研-codex-v3\.tmp-aws-tx-review\p\Invoke-AwsFormalTransaction.ps1:30 char:28
++     if (-not $Condition) { throw $Message }
++                            ~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Formal payload ...2026-08-13.html:String) [], RuntimeException
+    + FullyQualifiedErrorId : Formal payload target already exists before authorization: 最小参考资料库/快照/AWS/PackageImpleme 
+   ntations/2026-08-13/A01-inferentia-latest-2026-08-13.html
+ 

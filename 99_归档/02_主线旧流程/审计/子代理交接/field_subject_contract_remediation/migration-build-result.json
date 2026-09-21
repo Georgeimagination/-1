@@ -1,0 +1,13 @@
+﻿{
+    "target_root":  "D:\\Workspace\\2026projects\\调研-训练推理芯片调研-资料汇总\\审计\\子代理交接\\field_subject_contract_remediation\\isolated-current",
+    "field_rows":  120,
+    "schema_rows_before":  323,
+    "schema_rows_after":  324,
+    "requirement_rows":  792,
+    "overlay_rows":  12,
+    "manifest_rows":  166,
+    "field_manifest_rows":  122,
+    "schema_manifest_rows":  11,
+    "requirement_manifest_rows":  32,
+    "validator_manifest_rows":  1
+}

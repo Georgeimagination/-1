@@ -1,0 +1,152 @@
+                                                                                                                                         ISSCC 2021 / SESSION 3 / HIGHLIGHTED CHIP RELEASES: MODERN DIGITAL SoCs / 3.2
+
+                                                                                                                                         3.2       The A100 Datacenter GPU and Ampere Architecture                                   Figure 3.2.4 shows the speedups achieved per chip for A100 vs V100. For AI workloads,
+                                                                                                                                                                                                                                     on MLPerf v0.7 training, A100 achieves 1.5-to-2.5× speedups vs. V100 and outperforms
+                                                                                                                                                                                                                                     all other commercially available solutions. The MLPerf benchmarks also demonstrate
+                                                                                                                                         Jack Choquette, Edward Lee, Ronny Krashinsky, Vishnu Balan, Brucek Khailany
+                                                                                                                                                                                                                                     A100’s breadth of support for AI, as the only system able to run all benchmarks, and
+                                                                                                                                                                                                                                     run them with high performance. The CUDA programmability and strong scaling
+                                                                                                                                         Nvidia, Santa Clara, CA
+                                                                                                                                                                                                                                     features in A100 also beneﬁt general-purpose datacenter workloads including HPC.
+                                                                                                                                                                                                                                     A100 runs 1.5-to-2× faster than V100 on key workloads from molecular dynamics,
+                                                                                                                                         The diversity of compute-intensive applications in modern cloud data centers has driven
+                                                                                                                                                                                                                                     physics, engineering, and geo science.
+                                                                                                                                         the explosion of GPU-accelerated cloud computing. Such applications include AI deep
+                                                                                                                                         learning training and inference, data analytics, scientiﬁc computing, genomics, edge
+                                                                                                                                                                                                                                     A100 also adds Multi-Instance GPU (MIG) features to address under-utilization of the
+                                                                                                                                         video analytics and 5G services, graphics rendering, and cloud gaming. The A100 GPU
+                                                                                                                                                                                                                                     system with small batches of work in datacenters. Each A100 can function as up to 7
+
+
+
+
+2021 IEEE International Solid- State Circuits Conference (ISSCC) | 978-1-7281-9549-0/20/$31.00 ©2021 IEEE | DOI: 10.1109/ISSCC42613.2021.9365803
+                                                                                                                                         introduces several features targeting these workloads: a 3rd-generation Tensor Core with
+                                                                                                                                                                                                                                     isolated GPUs, reconﬁgurable on the ﬂy to meet the instantaneous demand. Two types
+                                                                                                                                         support for ﬁne-grained sparsity, new BFloat16 (BF16), TensorFloat-32 (TF32), and FP64
+                                                                                                                                                                                                                                     of MIG instances are supported. One type isolates compute resources, but not the
+                                                                                                                                         datatypes, scale-out support with multi-instance GPU (MIG) virtualization, and scale-up
+                                                                                                                                                                                                                                     memory system, enabling an OS to schedule processes with lightweight administration.
+                                                                                                                                         support with a 3rd-generation 50Gbps NVLink I/O interface (NVLink3) and NVSwitch
+                                                                                                                                                                                                                                     The other type further provides functional and performance isolation in the memory
+                                                                                                                                         inter-GPU communication. As shown in Fig. 3.2.1, A100 contains 108 Streaming
+                                                                                                                                                                                                                                     system. In this scenario, A100 assigns each MIG physical pathways through the GPU
+                                                                                                                                         Multiprocessors (SMs) and 6912 CUDA cores. The SMs are fed by a 40MB L2 cache
+                                                                                                                                                                                                                                     (including the on-chip crossbar, the L2 cache, and the memory interface) that are not
+                                                                                                                                         and 1.56TB/s of HBM2 memory bandwidth (BW). At 1.41GHz, A100 provides an effective
+                                                                                                                                                                                                                                     shared with any other MIG instances, providing ﬂexible security boundaries for cloud
+                                                                                                                                         peak 1248TOPS (8b integers), 624TFLOPS (FP16) and 312TFLOPS (TF32) when
+                                                                                                                                                                                                                                     computing providers.
+                                                                                                                                         including sparsity optimizations. Implemented in a TSMC 7nm N7 process, the A100
+                                                                                                                                         die (Fig. 3.2.7) contains 54B transistors and measures 826mm2.
+                                                                                                                                                                                                                                     To further support strong scaling of A100 in multi-GPU systems, I/O BW was also
+                                                                                                                                                                                                                                     increased. A100’s NVLink3 doubles the BW per GPU to 300GB/s in each direction
+                                                                                                                                         Tensor Cores were ﬁrst introduced in the Volta GPU architecture for accelerating matrix
+                                                                                                                                                                                                                                     through a combination of faster signaling and increasing the links per GPU to 12.
+                                                                                                                                         multiplies. The 3rd-generation A100 Tensor Core provides 2× higher throughput on
+                                                                                                                                                                                                                                     NVLink3 is a long-reach (LR) differential interface operating at a raw bitrate of 50Gbps
+                                                                                                                                         dense FP16 matrix multiplies per SM per clock cycle, provides another 2× boost from
+                                                                                                                                                                                                                                     (Fig. 3.2.5). Unlike the prevailing 50Gbps LR standards which use PAM4 signaling and
+                                                                                                                                         ﬁne-grained sparsity (Fig.3.2.2), adds comprehensive data type support, and improves
+                                                                                                                                                                                                                                     require the use of FEC (forward error correction) to achieve low BER, the NVLink3 PHY
+                                                                                                                                         energy efﬁciency vs. V100. Combined with a 1.35× increase in SM count, A100 supports
+                                                                                                                                                                                                                                     uses NRZ signaling and achieves 1e-15 BER without requiring a FEC. This saves tens of
+                                                                                                                                         2.5× higher FP16 TFLOPS per GPU for dense data, and 5× for sparse data vs. V100.
+                                                                                                                                                                                                                                     nanoseconds of round-trip latency. In the LR mode, the NVLink3 PHY uses a
+                                                                                                                                         The A100 Tensor Cores also support new datatypes (Fig. 3.2.2). For DL training, A100
+                                                                                                                                                                                                                                     combination of 3-tap Tx FIR ﬁlter, Rx Continuous-Time Linear Equalizer (CTLE) and
+                                                                                                                                         supports BF16 data and a new TF32 format for Tensor Core input operands that contains
+                                                                                                                                                                                                                                     Partial Response Maximum-Likelihood (PRML) sequence detection to equalize the
+                                                                                                                                         1 sign, 8 exponent, and 10 mantissa bits. With TF32 everything outside of the tensor
+                                                                                                                                                                                                                                     channel and boost the SNR. The Tx FIR ﬁlter is trained through a back-channel supported
+                                                                                                                                         core remains standard FP32, including accumulators and memory storage. TF32 enables
+                                                                                                                                                                                                                                     by the NVLink protocol. The CTLE has equalization tunability at multiple frequency bands
+                                                                                                                                         AI training to use Tensor Cores by default for FP32 data without programmer effort,
+                                                                                                                                                                                                                                     to closely track the channel response. To relax the equalization requirement, partial
+                                                                                                                                         providing 10× throughput on dense FP32 data and 20× for sparse FP32 data vs. V100.
+                                                                                                                                                                                                                                     response target is used. The inter-symbol correlation from a partial response target can
+                                                                                                                                         For DL inference, A100 supports 8b integer, 4b integer, and binary datatypes with 32b
+                                                                                                                                                                                                                                     be exploited by using sequence detection instead of symbol-by-symbol detection to
+                                                                                                                                         integer accumulation at even higher throughputs. For HPC, A100 introduces FP64
+                                                                                                                                                                                                                                     boost the SNR. The Viterbi convolutional decoder is used to achieve maximum-likelihood
+                                                                                                                                         Tensor Cores, delivering a 2.5× FLOPS increase over V100.
+                                                                                                                                                                                                                                     sequence detection. A baud-rate clock recovery architecture is used to reduce the power
+                                                                                                                                                                                                                                     and area of the receiver.
+                                                                                                                                         The new A100 Tensor Cores consume 2× the data BW per SM vs. V100 for dense data
+                                                                                                                                         and 3× for sparse data (compressed weights and uncompressed activations). As shown
+                                                                                                                                                                                                                                     Figure 3.2.6 shows a DGX A100 system with 8 A100 GPUs and 6 NVSwitch chips. Each
+                                                                                                                                         in Fig. 3.2.3, A100 adds several data movement features to keep the Tensor Cores fed,       GPU connects to each of the NVSwitch chips using 2 NVLink3 links for a total of 12
+                                                                                                                                         and for improved performance and energy efﬁciency. First, wider Tensor Cores exploit        NVLink3 connections supporting 600GB/s of NVLink interconnect for each A100. The
+                                                                                                                                         more data reuse. When 4 warps (32-thread group) worked together on a matrix multiply        system supports full-BW non-blocking communication pairwise between all the GPUs.
+                                                                                                                                         in V100, its 8-thread Tensor Cores would load data 4 times from shared memory into          It also contains multiple high speed Mellanox HDR 200Gb/s Inﬁniband NICs for
+                                                                                                                                         different threads’ registers. In A100, the 32-thread Tensor Cores halve the shared          connecting to massively parallel multi-GPU systems via a full fat tree switched
+                                                                                                                                         memory load BW. Second, in V100, load-global instructions transfer data from L2 and         interconnect.
+                                                                                                                                         DRAM, through the L1 cache, and into the register ﬁle (RF) before store-shared
+                                                                                                                                         instructions write the data back to shared memory. A100 has a new combined load-            Acknowledgements:
+                                                                                                                                         global-store-shared instruction that performs an asynchronous-copy to transfer data         The authors would like to thank the countless architects and engineers who designed
+                                                                                                                                         directly into shared memory, bypassing the RF. The asynchronous copy is programmed          and built the A100 & products, and who contributed to the content of this paper.
+                                                                                                                                         with a new ISO C++20 asynchronous barrier [5] supported in CUDA 8.0.
+                                                                                                                                                                                                                                     References:
+                                                                                                                                         In aggregate, A100’s Tensor Cores run 2.5× faster than V100 for dense FP16 data but         [1] J. Choquette, “NVIDIA’s Volta GPU: Programmability and Performance for GPU
+                                                                                                                                         we set a design goal to not rely on weak scaling (growing the workload size by increasing   Computing”, Hot Chips, 2017.
+                                                                                                                                         the NN size or batch size) for achieving speedups. Instead, A100 targeted strong scaling    [2] V. Balan et al., “A 130mW 20Gb/s Half-Duplex Serial Link in 28nm CMOS,” ISSCC,
+                                                                                                                                         with 2.5× speedup on ﬁxed-size NNs, constraining the available parallelism and requiring    pp. 438-439, 2014.
+                                                                                                                                         more L2 cache BW per SM. To achieve this, the L2 was split into partitions using a          [3] P. Mattson et al., “MLPerf Training Benchmark”, arXiv:1910.01500.
+                                                                                                                                         hierarchical crossbar structure. Each L2 partition also caches data nearer to the           [4] A. Ishii et al., “NVSwitch and DGX-2: NVLink-Switching Chip and Scale-Up Compute
+                                                                                                                                         accessing SMs, lowering latency. Hardware cache coherence still maintains the memory        Server”, Hot Chips, 2018.
+                                                                                                                                         consistency supported by CUDA across the full GPU. A100 also adds memory system             [5] International Standard ISO/IEC 14882:2020 – Programming Language C++.
+                                                                                                                                         features that increase the available DRAM BW and reduce required memory trafﬁc. An
+                                                                                                                                         additional HBM2 site and faster clocks provide 1.56TB/s, a 1.7× increase over V100. To
+                                                                                                                                         reduce memory trafﬁc, A100 increases L2 capacity by almost 7× over V100 and adds
+                                                                                                                                         L2 controls to give programmers the ability to manage the on-chip residency of data.
+                                                                                                                                         A100 also provides compute data compression to exploit the available unstructured
+                                                                                                                                         sparsity in NN activations, typically over 50%. A100’s compression HW can compress
+                                                                                                                                         these activation tensors in DRAM by 2-4× and in the L2 by up to 2×.
+
+
+
+
+                                                                                                                                                             Authorized licensed use limited to: Peking University. Downloaded on July 13,2026 at 19:03:22 UTC from IEEE Xplore. Restrictions apply.
+                                                                                                                                         48          • 2021 IEEE International Solid-State Circuits Conference                                                       978-1-7281-9549-0/21/$31.00 ©2021 IEEE
+                                                                                                     ISSCC 2021 / February 15, 2021 / 8:35 AM
+
+
+
+
+                                                                                                                                                                      3
+
+
+
+
+                                                                                     Figure 3.2.2: A100 Tensor Core input/output formats and performance: TOPS
+Figure 3.2.1: A100 architecture block diagram: 108 SMs (6912 CUDA cores), 40MB       column indicates TFLOPS for ﬂoating-point ops and TOPS for integer ops. Sparse
+L2 (6.7× capacity vs. V100), 1.56TB/s HBM2 (1.7× BW vs. V100).                       TOPS represents effective TOPS / TFLOPS using the new sparsity feature.
+
+
+
+
+Figure 3.2.3: A100 Streaming Multiprocessor (SM) architecture and data movement
+efﬁciency for strong scaling: A100 improves SM BW efﬁciency compared to V100
+with a new load-global-store-shared asynchronous copy instruction that bypasses
+L1 cache and register ﬁle (RF). Additionally, A100’s more efﬁcient Tensor Cores
+reduce shared memory (SMEM) loads.                                                   Figure 3.2.4: A100 speedups on HPC and MLPerf v0.7 vs. V100 and alternatives.
+
+
+
+
+Figure 3.2.5: NVLink3 link architecture.                                             Figure 3.2.6: DGX-A100 system block diagram.
+                  Authorized licensed use limited to: Peking University. Downloaded on July 13,2026 at 19:03:22 UTC from IEEE Xplore. Restrictions apply.
+                                                                                                                DIGEST OF TECHNICAL PAPERS •                  49
+                                                       ISSCC 2021 PAPER CONTINUATIONS
+
+
+
+
+Figure 3.2.7: A100 die photo.
+
+
+
+
+                Authorized licensed use limited to: Peking University. Downloaded on July 13,2026 at 19:03:22 UTC from IEEE Xplore. Restrictions apply.
+• 2021 IEEE International Solid-State Circuits Conference                                                        978-1-7281-9549-0/21/$31.00 ©2021 IEEE
+

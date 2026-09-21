@@ -1,0 +1,7 @@
+Formal backup manifest is missing.
+At D:\Workspace\2026projects\调研-训练推理芯片调研-codex-v3\.tmp-aws-tx-review\p\Invoke-AwsFormalTransaction.ps1:30 char:28
++     if (-not $Condition) { throw $Message }
++                            ~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Formal backup manifest is missing.:String) [], RuntimeException
+    + FullyQualifiedErrorId : Formal backup manifest is missing.
+ 

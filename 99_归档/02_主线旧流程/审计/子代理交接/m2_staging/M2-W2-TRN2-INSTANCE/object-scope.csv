@@ -1,0 +1,8 @@
+"object_id","object_type","formal_review_status","package_role","card_path","in_scope_formal_fact_count","in_scope_requirement_count","boundary"
+"OBJ-AWS-TRN2-3XLARGE","cloud_instance","reviewed","card_main_object","cards/AWS_EC2_trn2.3xlarge_实例卡.md","4","5","只写实例身份、实例资源、实例内互联、EFA、状态与缺口"
+"OBJ-AWS-TRN2-48XLARGE","cloud_instance","reviewed","card_main_object","cards/AWS_EC2_trn2.48xlarge_实例卡.md","23","24","只写实例身份、实例资源、实例内互联、EFA、状态与缺口"
+"OBJ-AWS-TRN2U-48XLARGE","cloud_instance","needs_resolution","card_main_object","cards/AWS_EC2_trn2u.48xlarge_实例卡.md","21","22","只写实例身份、实例资源、实例内互联、EFA、状态与缺口"
+"OBJ-AWS-TRN2-INSTANCE-FAMILY","cloud_instance","reviewed","relation_endpoint_only","","0","0","只作 sku_variant_of 端点，不承载三个 SKU 的聚合规格"
+"OBJ-AWS-TRAINIUM2-CHIP","package","reviewed","reference_only","","0","0","通过正式关系和 fact_id 引用，不复制架构或芯片事实"
+"OBJ-AWS-TRAINIUM2-ARCH","architecture_generation","reviewed","reference_only","","0","0","通过正式关系和 fact_id 引用，不复制架构或芯片事实"
+"OBJ-AWS-TRN2-ULTRASERVER-64","server","needs_resolution","frozen_out_system","","0","0","系统聚合、64 芯片、跨实例 ring 与供货冲突均留在系统包"

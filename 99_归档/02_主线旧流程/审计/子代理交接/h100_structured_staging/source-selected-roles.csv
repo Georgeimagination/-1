@@ -1,0 +1,4 @@
+"source_selected_role_id","source_id","selected_role","rationale","review_status","notes"
+"SROLE-NVIDIA-H100-DATASHEET-CORE","SRC-NVIDIA-H100-DATASHEET-20240924","core_spec","Current product-level memory, power, interconnect and fixed-function specifications.","draft",""
+"SROLE-NVIDIA-HOPPER-TUNING-ARCH","SRC-NVIDIA-HOPPER-TUNING-GUIDE-13-3","architecture_mechanism","Programming-visible limits and mechanism behavior.","draft",""
+"SROLE-NVIDIA-H100-HOTCHIPS-STATUS","SRC-NVIDIA-H100-HOTCHIPS34-2022","status_version_evidence","Captures the preliminary 3 TB/s value and its not-finalized condition.","draft",""

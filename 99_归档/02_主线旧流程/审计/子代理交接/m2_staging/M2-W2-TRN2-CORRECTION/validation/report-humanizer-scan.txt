@@ -1,0 +1,33 @@
+=== backup-plan\rollback-plan.md ===
+No machine-detectable AI tells found. Manual reverse-audit still required.
+exit_code=0
+=== cards\AWS_EC2_trn2.3xlarge_实例卡.md ===
+No machine-detectable AI tells found. Manual reverse-audit still required.
+exit_code=0
+=== cards\AWS_EC2_trn2.48xlarge_实例卡.md ===
+No machine-detectable AI tells found. Manual reverse-audit still required.
+exit_code=0
+=== cards\AWS_EC2_trn2u.48xlarge_实例卡.md ===
+No machine-detectable AI tells found. Manual reverse-audit still required.
+exit_code=0
+=== cards\AWS_Trainium2_架构卡_修复候选.md ===
+No machine-detectable AI tells found. Manual reverse-audit still required.
+exit_code=0
+=== cards\AWS_Trainium2_试填资料卡_修复候选.md ===
+No machine-detectable AI tells found. Manual reverse-audit still required.
+exit_code=0
+=== handoff.md ===
+No machine-detectable AI tells found. Manual reverse-audit still required.
+exit_code=0
+=== README.md ===
+No machine-detectable AI tells found. Manual reverse-audit still required.
+exit_code=0
+=== sources\S07-version-and-endpoint-decision.md ===
+No machine-detectable AI tells found. Manual reverse-audit still required.
+exit_code=0
+=== sources\source-selection-and-removal.md ===
+No machine-detectable AI tells found. Manual reverse-audit still required.
+exit_code=0
+=== validation\validation-report.md ===
+No machine-detectable AI tells found. Manual reverse-audit still required.
+exit_code=0

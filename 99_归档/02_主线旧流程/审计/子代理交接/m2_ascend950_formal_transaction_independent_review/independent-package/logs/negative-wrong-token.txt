@@ -1,0 +1,7 @@
+Formal authorization token differs.
+At X:\independent-package\scripts\Invoke-Ascend950FormalTransaction.ps1:31 char:28
++     if (-not $Condition) { throw $Message }
++                            ~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Formal authorization token differs.:String) [], RuntimeException
+    + FullyQualifiedErrorId : Formal authorization token differs.
+ 

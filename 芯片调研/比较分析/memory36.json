@@ -1,0 +1,872 @@
+[
+  {
+    "id": "a100_sxm4",
+    "label": "A100 SXM4 80GB",
+    "vendor": "NVIDIA",
+    "card": "NVIDIA/NVIDIA_A100_SXM4_80GB.md",
+    "capacity_GB": [
+      80
+    ],
+    "bandwidth_TBs": [
+      2.039
+    ],
+    "kind": "HBM",
+    "note": "HBM2e；2039GB/s。",
+    "source": "[1, p.1]; [2, pp.19,36]",
+    "source_candidates": {
+      "capacity_GB": [
+        80
+      ],
+      "bandwidth_TBs": [
+        2.039
+      ]
+    }
+  },
+  {
+    "id": "h100_sxm5",
+    "label": "H100 SXM5 80GB",
+    "vendor": "NVIDIA",
+    "card": "NVIDIA/NVIDIA_H100_SXM5_80GB.md",
+    "capacity_GB": [
+      80
+    ],
+    "bandwidth_TBs": [
+      3.35,
+      3.352
+    ],
+    "kind": "HBM",
+    "note": "HBM3；3.35TB/s数据手册与3352GB/s白皮书，显示精度差异，非持续吞吐区间。",
+    "source": "[1, pp.18,36-40]; [2, p.2]",
+    "source_candidates": {
+      "capacity_GB": [
+        80
+      ],
+      "bandwidth_TBs": [
+        3.35,
+        3.352
+      ]
+    }
+  },
+  {
+    "id": "h100_pcie",
+    "label": "H100 PCIe 80GB",
+    "vendor": "NVIDIA",
+    "card": "NVIDIA/NVIDIA_H100_PCIe_80GB.md",
+    "capacity_GB": [
+      80
+    ],
+    "bandwidth_TBs": [
+      2.0
+    ],
+    "kind": "HBM",
+    "note": "HBM2e；2000GB/s为产品简报采用值；2039GB/s只为白皮书明确未定版值，绘制当前规格应优先2.000并把旧值做独立注记。",
+    "source": "2000GB/s：[2, p.4, Tables2-3]; 2039GB/s未定版：[1, pp.38-40]; 80GB：[1, pp.18,36-40]",
+    "source_candidates": {
+      "capacity_GB": [
+        80
+      ],
+      "bandwidth_TBs": [
+        2.0,
+        2.039
+      ]
+    },
+    "plot_note": "排除旧未定版2.039TB/s。"
+  },
+  {
+    "id": "h100_nvl",
+    "label": "H100 NVL 94GB",
+    "vendor": "NVIDIA",
+    "card": "NVIDIA/NVIDIA_H100_NVL_94GB.md",
+    "capacity_GB": [
+      94
+    ],
+    "bandwidth_TBs": [
+      3.938,
+      3.9
+    ],
+    "kind": "HBM",
+    "note": "HBM3；单张94GB卡，188GB为两卡。3938GB/s产品简报；3.9TB/s数据手册约写。",
+    "source": "3938GB/s与94GB：[1, p.4, Table2]; 3.9TB/s：[2, p.2]",
+    "source_candidates": {
+      "capacity_GB": [
+        94
+      ],
+      "bandwidth_TBs": [
+        3.938,
+        3.9
+      ]
+    }
+  },
+  {
+    "id": "l4",
+    "label": "L4 24GB",
+    "vendor": "NVIDIA",
+    "card": "NVIDIA/NVIDIA_L4_24GB.md",
+    "capacity_GB": [
+      24
+    ],
+    "bandwidth_TBs": [
+      0.3
+    ],
+    "kind": "GDDR",
+    "note": "板上GDDR6；300GB/s。",
+    "source": "[2, p.40]; [1, p.3]",
+    "source_candidates": {
+      "capacity_GB": [
+        24
+      ],
+      "bandwidth_TBs": [
+        0.3
+      ]
+    }
+  },
+  {
+    "id": "l40s",
+    "label": "L40S 48GB",
+    "vendor": "NVIDIA",
+    "card": "NVIDIA/NVIDIA_L40S_48GB.md",
+    "capacity_GB": [
+      48
+    ],
+    "bandwidth_TBs": [
+      0.864
+    ],
+    "kind": "GDDR",
+    "note": "板上GDDR6；864GB/s。",
+    "source": "[1, pp.3-4, Tables2-3]",
+    "source_candidates": {
+      "capacity_GB": [
+        48
+      ],
+      "bandwidth_TBs": [
+        0.864
+      ]
+    }
+  },
+  {
+    "id": "h200_sxm5",
+    "label": "H200 SXM5 141GB",
+    "vendor": "NVIDIA",
+    "card": "NVIDIA/NVIDIA_H200_SXM5_141GB.md",
+    "capacity_GB": [
+      141
+    ],
+    "bandwidth_TBs": [
+      4.8
+    ],
+    "kind": "HBM",
+    "note": "HBM3e；单GPU。",
+    "source": "[1, pp.1,4]; [2, p.4]",
+    "source_candidates": {
+      "capacity_GB": [
+        141
+      ],
+      "bandwidth_TBs": [
+        4.8
+      ]
+    }
+  },
+  {
+    "id": "h200_nvl",
+    "label": "H200 NVL 141GB",
+    "vendor": "NVIDIA",
+    "card": "NVIDIA/NVIDIA_H200_NVL_141GB.md",
+    "capacity_GB": [
+      141
+    ],
+    "bandwidth_TBs": [
+      4.813,
+      4.8
+    ],
+    "kind": "HBM",
+    "note": "HBM3e；单张卡。4813GB/s产品简报；4.8TB/s产品页。",
+    "source": "4813GB/s与141GB：[1, p.4, Table2-2]; 4.8TB/s：[3, GPU specifications]",
+    "source_candidates": {
+      "capacity_GB": [
+        141
+      ],
+      "bandwidth_TBs": [
+        4.813,
+        4.8
+      ]
+    }
+  },
+  {
+    "id": "b200_sxm6",
+    "label": "B200 SXM6 180GB",
+    "vendor": "NVIDIA",
+    "card": "NVIDIA/NVIDIA_B200_SXM6_180GB.md",
+    "capacity_GB": [
+      180
+    ],
+    "bandwidth_TBs": [
+      7.7
+    ],
+    "kind": "HBM",
+    "note": "HBM3e；目标SKU数据手册180GB+7.7TB/s。参考架构另称最高8TB/s；技术简报容量另列最高192GB，属于带上限条件的来源候选，不能当已确认192GB SKU，更不能与带宽任意交叉配对。",
+    "source": "180GB+7.7TB/s：[1, p.8]; 最高8TB/s：[7, Table1]; 最高192GB：[2, pp.25-26, Table3]",
+    "source_candidates": {
+      "capacity_GB": [
+        180,
+        192
+      ],
+      "bandwidth_TBs": [
+        7.7,
+        8
+      ]
+    },
+    "plot_note": "只画180GB目标SKU；up to192GB/8TB/s参考配置不进入本型号点。"
+  },
+  {
+    "id": "b300_sxm6",
+    "label": "B300 SXM6 288GB",
+    "vendor": "NVIDIA",
+    "card": "NVIDIA/NVIDIA_B300_SXM6_288GB.md",
+    "capacity_GB": [
+      288
+    ],
+    "bandwidth_TBs": [
+      8
+    ],
+    "kind": "HBM",
+    "note": "HBM3e；只支持两组来源组合：(288GB,最高8TB/s)和(270GB,7.7TB/s)。不解释为容量扣减，不混配，不画连续范围。",
+    "source": "288GB+最高8TB/s：[3, Table1], [6, per-GPU VRAM tables]; 270GB+7.7TB/s：[1, pp.25-26], [10, HGX B300 specifications]",
+    "source_candidates": {
+      "capacity_GB": [
+        288,
+        270
+      ],
+      "bandwidth_TBs": [
+        8,
+        7.7
+      ]
+    },
+    "plot_note": "只画288GB目标配置；270GB/7.7TB/s另配置排除。8为官方up to。"
+  },
+  {
+    "id": "mi300x",
+    "label": "MI300X",
+    "vendor": "AMD",
+    "card": "AMD/MI300X.md",
+    "capacity_GB": [
+      192
+    ],
+    "bandwidth_TBs": [
+      5.3
+    ],
+    "kind": "HBM",
+    "note": "HBM3；单GPU；不含17.2 TB/s Infinity Cache。",
+    "source": "[2, p.11]; [1, GPU Memory]",
+    "source_candidates": {
+      "capacity_GB": [
+        192
+      ],
+      "bandwidth_TBs": [
+        5.3
+      ]
+    }
+  },
+  {
+    "id": "mi325x",
+    "label": "MI325X",
+    "vendor": "AMD",
+    "card": "AMD/MI325X.md",
+    "capacity_GB": [
+      256
+    ],
+    "bandwidth_TBs": [
+      6
+    ],
+    "kind": "HBM",
+    "note": "HBM3E；正式SKU。2024年6月预告288GB已被正式256GB取代，不纳入候选。",
+    "source": "[2, p.11]; [1, GPU Memory]; [3, Specifications]; 早期值边界[7, roadmap announcement]与[6, MI325X availability paragraph]",
+    "source_candidates": {
+      "capacity_GB": [
+        256
+      ],
+      "bandwidth_TBs": [
+        6
+      ]
+    }
+  },
+  {
+    "id": "mi350p",
+    "label": "MI350P",
+    "vendor": "AMD",
+    "card": "AMD/MI350P.md",
+    "capacity_GB": [
+      144
+    ],
+    "bandwidth_TBs": [
+      4
+    ],
+    "kind": "HBM",
+    "note": "HBM3E；单GPU PCIe卡，stack数未公开。",
+    "source": "[1, GPU Memory / Board Specifications]; [2, p.1 Specifications]",
+    "source_candidates": {
+      "capacity_GB": [
+        144
+      ],
+      "bandwidth_TBs": [
+        4
+      ]
+    }
+  },
+  {
+    "id": "mi350x",
+    "label": "MI350X",
+    "vendor": "AMD",
+    "card": "AMD/MI350X.md",
+    "capacity_GB": [
+      288
+    ],
+    "bandwidth_TBs": [
+      8
+    ],
+    "kind": "HBM",
+    "note": "HBM3E；8×36GB，单GPU。",
+    "source": "[3, pp.2,10-11]; [1, GPU Memory]",
+    "source_candidates": {
+      "capacity_GB": [
+        288
+      ],
+      "bandwidth_TBs": [
+        8
+      ]
+    }
+  },
+  {
+    "id": "mi355x",
+    "label": "MI355X",
+    "vendor": "AMD",
+    "card": "AMD/MI355X.md",
+    "capacity_GB": [
+      288
+    ],
+    "bandwidth_TBs": [
+      8
+    ],
+    "kind": "HBM",
+    "note": "HBM3E；8×36GB，单GPU。",
+    "source": "[3, pp.2,10-11]; [1, GPU Memory]",
+    "source_candidates": {
+      "capacity_GB": [
+        288
+      ],
+      "bandwidth_TBs": [
+        8
+      ]
+    }
+  },
+  {
+    "id": "mi455x",
+    "label": "MI455X",
+    "vendor": "AMD",
+    "card": "AMD/MI455X.md",
+    "capacity_GB": [
+      432
+    ],
+    "bandwidth_TBs": [
+      23.3
+    ],
+    "kind": "HBM",
+    "note": "HBM4；23.3是型号专用资料/白皮书采用值；19.6是Helios托盘段落另存值。离散来源差异，非区间，不含54 TB/s L2。",
+    "source": "432GB与23.3TB/s：[4, pp.9-10], [1, GPU Memory], [2, p.1]; 19.6TB/s：[8, Compute Tray / Rackscale Highlights]",
+    "source_candidates": {
+      "capacity_GB": [
+        432
+      ],
+      "bandwidth_TBs": [
+        23.3,
+        19.6
+      ]
+    },
+    "plot_note": "采用单GPU专用资料和白皮书23.3；Helios托盘页另列19.6，保留冲突但不用于本图。"
+  },
+  {
+    "id": "tpu_v4",
+    "label": "TPU v4",
+    "vendor": "Google-TPU",
+    "card": "Google-TPU/Google_Cloud_TPU_v4_one_chip_产品详解.md",
+    "capacity_GB": [
+      34.359738368
+    ],
+    "bandwidth_TBs": [
+      1.2
+    ],
+    "kind": "HBM",
+    "note": "HBM2；32GiB，单封装两TC共享，不含主机DRAM。",
+    "source": "[1, p.7, Table4; Figure2]; [2, Other memory system differences]",
+    "source_candidates": {
+      "capacity_GB": [
+        34.359738368
+      ],
+      "bandwidth_TBs": [
+        1.2
+      ]
+    }
+  },
+  {
+    "id": "tpu_v5e",
+    "label": "TPU v5e",
+    "vendor": "Google-TPU",
+    "card": "Google-TPU/Google_Cloud_TPU_v5e_one_chip_产品详解.md",
+    "capacity_GB": [
+      16,
+      17.179869184
+    ],
+    "bandwidth_TBs": [
+      0.8589934592,
+      0.819
+    ],
+    "kind": "HBM",
+    "note": "HBM2E；Cloud组合16GB+800GiB/s；论文组合16GiB+819GB/s。两来源不可交叉拼配，不是置信区间。",
+    "source": "16GB与800GiB/s：[1, System architecture]; 16GiB与819GB/s：[6, p.2, Table1]",
+    "source_candidates": {
+      "capacity_GB": [
+        16,
+        17.179869184
+      ],
+      "bandwidth_TBs": [
+        0.8589934592,
+        0.819
+      ]
+    }
+  },
+  {
+    "id": "tpu_v5p",
+    "label": "TPU v5p",
+    "vendor": "Google-TPU",
+    "card": "Google-TPU/Google_Cloud_TPU_v5p_one_chip_产品详解.md",
+    "capacity_GB": [
+      102.00547328,
+      103.079215104
+    ],
+    "bandwidth_TBs": [
+      2.765
+    ],
+    "kind": "HBM",
+    "note": "HBM2E；95GiB Cloud/96GiB论文，未解释差额；两来源同为2765GB/s。",
+    "source": "95GiB：[1, System architecture]; 96GiB：[2, Table1 and Figure3]; 两者同支持2765GB/s",
+    "source_candidates": {
+      "capacity_GB": [
+        102.00547328,
+        103.079215104
+      ],
+      "bandwidth_TBs": [
+        2.765
+      ]
+    }
+  },
+  {
+    "id": "tpu_v6e",
+    "label": "TPU v6e",
+    "vendor": "Google-TPU",
+    "card": "Google-TPU/Google_Cloud_TPU_v6e_one_chip_产品详解.md",
+    "capacity_GB": [
+      32,
+      34.359738368
+    ],
+    "bandwidth_TBs": [
+      1.638,
+      1.64
+    ],
+    "kind": "HBM",
+    "note": "HBM代际未公开；v6e专页32GB+1638GB/s，论文32GiB+1640GB/s；机器规格页也列32GiB。不可把来源差异画成区间。",
+    "source": "32GB与1638GB/s：[1, System architecture]; 32GiB：[2, TPU architecture specifications]; 32GiB与1640GB/s：[8, Table1]",
+    "source_candidates": {
+      "capacity_GB": [
+        32,
+        34.359738368
+      ],
+      "bandwidth_TBs": [
+        1.638,
+        1.64
+      ]
+    }
+  },
+  {
+    "id": "tpu7x",
+    "label": "TPU7x / Ironwood",
+    "vendor": "Google-TPU",
+    "card": "Google-TPU/Google_Cloud_TPU7x_one_chip_产品详解.md",
+    "capacity_GB": [
+      206.158430208,
+      192
+    ],
+    "bandwidth_TBs": [
+      7.38,
+      7.3
+    ],
+    "kind": "HBM",
+    "note": "HBM3E；当前规格表192GiB+7380GB/s；同页叙述192GB，论文192GiB+7300GB/s。单封装两个chiplet总量，非每TC。",
+    "source": "192GiB/192GB与7380GB/s：[1, System architecture, Dual-chiplet architecture and Programming model]; 192GiB与7300GB/s：[5, Table1]; HBM结构[4, p.15]",
+    "source_candidates": {
+      "capacity_GB": [
+        206.158430208,
+        192
+      ],
+      "bandwidth_TBs": [
+        7.38,
+        7.3
+      ]
+    }
+  },
+  {
+    "id": "tpu8t",
+    "label": "TPU 8t",
+    "vendor": "Google-TPU",
+    "card": "Google-TPU/Google_TPU_8t_one_chip_产品详解.md",
+    "capacity_GB": [
+      216
+    ],
+    "bandwidth_TBs": [
+      6.528
+    ],
+    "kind": "HBM",
+    "note": "HBM3E；原文GB，不作GiB转换；6 stack全chip总量。",
+    "source": "[1, Figure1; TPU 8t and TPU 8i at a glance; HBM Capacity and HBM Bandwidth]",
+    "source_candidates": {
+      "capacity_GB": [
+        216
+      ],
+      "bandwidth_TBs": [
+        6.528
+      ]
+    }
+  },
+  {
+    "id": "tpu8i",
+    "label": "TPU 8i",
+    "vendor": "Google-TPU",
+    "card": "Google-TPU/Google_TPU_8i_one_chip_产品详解.md",
+    "capacity_GB": [
+      288
+    ],
+    "bandwidth_TBs": [
+      8.601
+    ],
+    "kind": "HBM",
+    "note": "HBM3E；原文GB，不作GiB转换；8 stack全chip总量。",
+    "source": "[1, Figure4; HBM Capacity and HBM Bandwidth]",
+    "source_candidates": {
+      "capacity_GB": [
+        288
+      ],
+      "bandwidth_TBs": [
+        8.601
+      ]
+    }
+  },
+  {
+    "id": "inferentia1",
+    "label": "Inferentia1",
+    "vendor": "AWS",
+    "card": "AWS/AWS_Inferentia1_one_chip_产品详解.md",
+    "capacity_GB": [
+      8,
+      8.589934592
+    ],
+    "bandwidth_TBs": [
+      0.0536870912
+    ],
+    "kind": "DDR",
+    "note": "DDR4；8GB为产品页，8GiB为架构页；50GiB/s来自后者，不能假定两种容量是两档实物SKU。",
+    "source": "8GB：[2, Optimized for high throughput and low latency]; 8GiB与50GiB/s：[1, Device Memory]",
+    "source_candidates": {
+      "capacity_GB": [
+        8,
+        8.589934592
+      ],
+      "bandwidth_TBs": [
+        0.0536870912
+      ]
+    }
+  },
+  {
+    "id": "inferentia2",
+    "label": "Inferentia2",
+    "vendor": "AWS",
+    "card": "AWS/AWS_Inferentia2_one_chip_产品详解.md",
+    "capacity_GB": [
+      32,
+      34.359738368
+    ],
+    "bandwidth_TBs": [
+      0.88046829568,
+      0.82
+    ],
+    "kind": "HBM",
+    "note": "32GB产品页/32GiB技术页；820GiB/s芯片页/820GB/s NKI。配对证据为32GiB+820GiB/s和32GiB+820GB/s；32GB不能自行与任意带宽配对。不含1TB/s DMA。",
+    "source": "32GB：[5, high-bandwidth accelerator memory]; 32GiB与820GiB/s：[1, Device Memory]; 32GiB与820GB/s：[2, device overview]",
+    "source_candidates": {
+      "capacity_GB": [
+        32,
+        34.359738368
+      ],
+      "bandwidth_TBs": [
+        0.88046829568,
+        0.82
+      ]
+    }
+  },
+  {
+    "id": "trainium1",
+    "label": "Trainium1",
+    "vendor": "AWS",
+    "card": "AWS/AWS_Trainium1_one_chip_产品详解.md",
+    "capacity_GB": [
+      32,
+      34.359738368
+    ],
+    "bandwidth_TBs": [
+      0.88046829568,
+      0.82
+    ],
+    "kind": "HBM",
+    "note": "32GB产品页/32GiB技术页；820GiB/s芯片页/820GB/s NKI。配对证据为32GiB+820GiB/s和32GiB+820GB/s；32GB不自行配带宽。不含DMA。",
+    "source": "32GB：[5, Product details]; 32GiB与820GiB/s：[1, Device Memory]; 32GiB与820GB/s：[2, device overview]",
+    "source_candidates": {
+      "capacity_GB": [
+        32,
+        34.359738368
+      ],
+      "bandwidth_TBs": [
+        0.88046829568,
+        0.82
+      ]
+    }
+  },
+  {
+    "id": "trainium2",
+    "label": "Trainium2",
+    "vendor": "AWS",
+    "card": "AWS/AWS_Trainium2_one_chip_产品详解.md",
+    "capacity_GB": [
+      103.079215104,
+      96
+    ],
+    "bandwidth_TBs": [
+      2.9,
+      3
+    ],
+    "kind": "HBM",
+    "note": "文字96GiB；NKI图标4×24GB，96GB仅为图标容量合计。芯片页96GiB+2.9TB/s；NKI同页96GiB文字/96GB图示+3TB/s。不得把单位差异当不同SKU；不含3.5TB/s DMA。",
+    "source": "96GiB与2.9TB/s：[1, Memory]; 96GiB、4×24GB图与3TB/s：[2, Trainium2 Device Diagram and Data Movement Updates]",
+    "source_candidates": {
+      "capacity_GB": [
+        103.079215104,
+        96
+      ],
+      "bandwidth_TBs": [
+        2.9,
+        3
+      ]
+    }
+  },
+  {
+    "id": "trainium3",
+    "label": "Trainium3",
+    "vendor": "AWS",
+    "card": "AWS/AWS_Trainium3_one_chip_产品详解.md",
+    "capacity_GB": [
+      154.618822656,
+      144
+    ],
+    "bandwidth_TBs": [
+      4.9,
+      4.7
+    ],
+    "kind": "HBM",
+    "note": "HBM3e；芯片架构页144GiB+4.9TB/s，NKI144GiB+4.7TB/s，GA144GB+4.9TB/s。来源离散差异，不是峰值/有效带宽区间。",
+    "source": "144GiB与4.9TB/s：[1, Device memory]; 144GiB与4.7TB/s：[2, device overview]; 144GB与4.9TB/s：[6, each-chip paragraph]",
+    "source_candidates": {
+      "capacity_GB": [
+        154.618822656,
+        144
+      ],
+      "bandwidth_TBs": [
+        4.9,
+        4.7
+      ]
+    }
+  },
+  {
+    "id": "ascend310",
+    "label": "Ascend 310",
+    "vendor": "华为昇腾",
+    "card": "华为昇腾/华为_Ascend310.md",
+    "capacity_GB": [],
+    "bandwidth_TBs": [],
+    "kind": "DDR",
+    "note": "LPDDR4X控制器、框图LPDDR4 chips；容量和速率未公开。不能取Atlas某模组配置，不使用LLC每AI Core96GB/s代替DRAM带宽。",
+    "source": "[1, p.24]",
+    "source_candidates": {
+      "capacity_GB": [
+        null
+      ],
+      "bandwidth_TBs": [
+        null
+      ]
+    }
+  },
+  {
+    "id": "ascend910",
+    "label": "Ascend 910 *",
+    "vendor": "华为昇腾",
+    "card": "华为昇腾/华为_Ascend910.md",
+    "capacity_GB": [
+      32
+    ],
+    "bandwidth_TBs": [
+      1.2
+    ],
+    "kind": "HBM",
+    "note": "HBM2；1.2TB/s为芯片架构。32GB仅官方ModelZoo八NPU环境配置证据，并非通用封装容量保证；附带DDR4 DIMM容量/带宽未知，未合计。作图需标容量证据层级不同。",
+    "source": "4HBM与1.2TB/s：[1, p.25], [2, pp.6-7]; 32GB配置：[10, Before You Start: Test Notes]",
+    "source_candidates": {
+      "capacity_GB": [
+        32
+      ],
+      "bandwidth_TBs": [
+        1.2
+      ]
+    }
+  },
+  {
+    "id": "atlas300ia2_32",
+    "label": "Atlas 300I A2 32GB",
+    "vendor": "华为昇腾",
+    "card": "华为昇腾/华为_Atlas300I_A2_32GB.md",
+    "capacity_GB": [
+      32
+    ],
+    "bandwidth_TBs": [
+      0.8
+    ],
+    "kind": "HBM",
+    "note": "32GB卡配置，800GB/s；不能挪用64GB款1.6TB/s。",
+    "source": "[1, 技术规格]; [2, 产品规格]",
+    "source_candidates": {
+      "capacity_GB": [
+        32
+      ],
+      "bandwidth_TBs": [
+        0.8
+      ]
+    }
+  },
+  {
+    "id": "atlas300ia2_64",
+    "label": "Atlas 300I A2 64GB",
+    "vendor": "华为昇腾",
+    "card": "华为昇腾/华为_Atlas300I_A2_64GB.md",
+    "capacity_GB": [
+      64
+    ],
+    "bandwidth_TBs": [
+      1.6
+    ],
+    "kind": "HBM",
+    "note": "64GB卡配置，1600GB/s；与32GB款分开。",
+    "source": "[1, 技术规格]; [2, 产品规格]",
+    "source_candidates": {
+      "capacity_GB": [
+        64
+      ],
+      "bandwidth_TBs": [
+        1.6
+      ]
+    }
+  },
+  {
+    "id": "ascend950pr",
+    "label": "Ascend 950PR",
+    "vendor": "华为昇腾",
+    "card": "华为昇腾/华为_Ascend950PR.md",
+    "capacity_GB": [
+      128,
+      112
+    ],
+    "bandwidth_TBs": [
+      1.6,
+      1.4
+    ],
+    "kind": "HBM",
+    "note": "HiBL1.0；两个容量档位、两个带宽档位分别保留，当前详解未提供完整料号映射；不得zip两数组或做笛卡尔积构造SKU。容量与带宽宜分面各画离散点。",
+    "source": "[1, PDF pp.14-15,24-26 / 正文pp.10-11,20-22, 表3-1/表4-2]; HBM命名[2, Ascend 950PR]",
+    "source_candidates": {
+      "capacity_GB": [
+        128,
+        112
+      ],
+      "bandwidth_TBs": [
+        1.6,
+        1.4
+      ]
+    }
+  },
+  {
+    "id": "ascend950dt",
+    "label": "Ascend 950DT",
+    "vendor": "华为昇腾",
+    "card": "华为昇腾/华为_Ascend950DT.md",
+    "capacity_GB": [
+      144,
+      96
+    ],
+    "bandwidth_TBs": [
+      4
+    ],
+    "kind": "HBM",
+    "note": "HiZQ2.0；144/96GB是公开容量档位，4TB/s为白皮书产品规格；完整料号与计算/CPU/内存档位未一一映射。不得把最高容量+最高算力拼成唯一SKU；优先分面显示。",
+    "source": "[1, PDF pp.14-15,24-26 / 正文pp.10-11,20-22, 表3-1/表4-2]; HBM命名[2, Ascend 950DT]; 96GB具体系统[4, Product Features and Specifications]",
+    "source_candidates": {
+      "capacity_GB": [
+        144,
+        96
+      ],
+      "bandwidth_TBs": [
+        4
+      ]
+    }
+  },
+  {
+    "id": "groq_gen1",
+    "label": "GroqChip Gen1",
+    "vendor": "Groq",
+    "card": "Groq/Groq_GroqChip_Processor_第一代.md",
+    "capacity_GB": [],
+    "bandwidth_TBs": [],
+    "kind": "none",
+    "note": "没有外部DRAM；null表示不适用，不是零容量。230MB/220MiB与80TB/s属于片内SRAM，不纳入外部DRAM图。",
+    "source": "[1, pp.3-5, Figs.2-5]; [2, p.2]",
+    "source_candidates": {
+      "capacity_GB": [
+        null
+      ],
+      "bandwidth_TBs": [
+        null
+      ]
+    }
+  },
+  {
+    "id": "mlu590",
+    "label": "MLU590",
+    "vendor": "寒武纪",
+    "card": "寒武纪/寒武纪_思元590_MLU590.md",
+    "capacity_GB": [],
+    "bandwidth_TBs": [],
+    "kind": "unknown",
+    "note": "外部内存类型、容量与绝对带宽均未知；不能从Board Level H8/M9或软件资源名推导。null不作0。",
+    "source": "[1, 正文“据介绍”]; [2, §3.1, Table3.1]",
+    "source_candidates": {
+      "capacity_GB": [
+        null
+      ],
+      "bandwidth_TBs": [
+        null
+      ]
+    }
+  }
+]

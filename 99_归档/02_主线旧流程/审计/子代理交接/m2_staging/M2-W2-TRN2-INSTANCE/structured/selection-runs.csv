@@ -1,0 +1,2 @@
+﻿"selection_run_id","scope_kind","scope_id","cutoff_date","algorithm_version","created_date","reviewer","status","review_status","notes"
+"SELRUN-M2W2-TRN2INST-20260813","custom","M2-W2-TRN2-INSTANCE","2026-08-13","reverse-removal-v1","2026-08-13","m2_wave2_queue_audit","draft","draft","对 48 条既有正式实例事实及 48 条正式断言运行；S06/S07/S09/S10 入选，S15 保留为 rejected_unreliable 冲突审计来源但不入选"

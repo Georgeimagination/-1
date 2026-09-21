@@ -1,0 +1,294 @@
+# S06 规范化文本
+
+题名：Numerical Encoding for DNN Accelerators
+固定版本：网页访问版
+原始网址：https://www.sigarch.org/numerical-encoding-for-dnn-accelerators/
+全文网址：https://www.sigarch.org/numerical-encoding-for-dnn-accelerators/
+
+
+## 本地原文：原文/网页快照/S06_numerical_encoding.html
+
+# 页面标题：Numerical Encoding for DNN Accelerators | SIGARCH
+- Home
+- Join
+- About 
+ 
+ Bylaws 
+ Officers 
+ Committees 
+ Reports 
+ Logo
+- Bylaws
+- Officers
+- Committees
+- Reports
+- Logo
+- Contact
+- Benefit 
+ 
+ Awards and Honors 
+ Conferences 
+ 
+ Sponsored Conferences 
+ 
+ Guidelines for Sponsorship 
+ List of Sponsored Conferences 
+ 
+ 
+ Guidelines for Organizers 
+ 
+ General Chairs’ Packet 
+ Program Chairs’ Packet 
+ Best Practices for PC Chairs 
+ 
+ 
+ Best Practices for Reviewing Process 
+ PC Database 
+ Reviewer Database 
+ 
+ 
+ Grants and Support Programs
+- Awards and Honors
+- Conferences 
+ 
+ Sponsored Conferences 
+ 
+ Guidelines for Sponsorship 
+ List of Sponsored Conferences 
+ 
+ 
+ Guidelines for Organizers 
+ 
+ General Chairs’ Packet 
+ Program Chairs’ Packet 
+ Best Practices for PC Chairs 
+ 
+ 
+ Best Practices for Reviewing Process 
+ PC Database 
+ Reviewer Database
+- Sponsored Conferences 
+ 
+ Guidelines for Sponsorship 
+ List of Sponsored Conferences
+- Guidelines for Sponsorship
+- List of Sponsored Conferences
+- Guidelines for Organizers 
+ 
+ General Chairs’ Packet 
+ Program Chairs’ Packet 
+ Best Practices for PC Chairs
+- General Chairs’ Packet
+- Program Chairs’ Packet
+- Best Practices for PC Chairs
+- Best Practices for Reviewing Process
+- PC Database
+- Reviewer Database
+- Grants and Support Programs
+- Contribute 
+ 
+ Submit a Call for Contributions 
+ Submit a Call for Participation 
+ Submit an Announcement 
+ Propose a Blog Post Topic 
+ 
+ Author Guidelines and Policies 
+ 
+ 
+ Visioning Workshop Proposals 
+ FAQ
+- Submit a Call for Contributions
+- Submit a Call for Participation
+- Submit an Announcement
+- Propose a Blog Post Topic 
+ 
+ Author Guidelines and Policies
+- Author Guidelines and Policies
+- Visioning Workshop Proposals
+- FAQ
+- Discover 
+ 
+ Calls for Contributions 
+ Calls for Participation 
+ Announcements 
+ Social Media
+- Calls for Contributions
+- Calls for Participation
+- Announcements
+- Social Media
+- CARES
+- WICARCH
+- CASA
+- Blog
+# Computer Architecture Today
+# Numerical Encoding for DNN Accelerators
+by Simla Burcu Harma, Mario Drumond, Babak Falsafi on Sep 20, 2021 | Tags: Accelerators , Machine Learning , Numerical Format , Tools
+DNN training is emerging as a popular compute-intensive workload. This blog post provides an overview of the recent research on numerical encoding formats for DNN training, and presents the Hybrid Block Floating-Point (HBFP) format which reduces silicon provisioning for DNN training.
+With the emergence of big data and the increased integration of deep learning into modern digital platforms, real-world applications of deep neural networks (DNNs) have become ubiquitous. International Data Corporation (IDC) forecasts AI services to have a five-year Compound Annual Growth Rate (CAGR) of 18.4% with revenues reaching $38 billion in 2024.
+While DNNs and data are exploding in size, Moore’s Law is slowing down, steering researchers and vendors away from general-purpose platforms and towards accelerator design. Unfortunately, the two workloads laying the foundation for DNNs have vastly diverse computational and storage requirements, resulting in divergent accelerator designs. Inference workloads use DNN models to predict an outcome. These workloads are online, have tight query latency constraints, but are highly tolerant to error. The net result is that inference workloads lend themselves well to low-precision arithmetic, yielding accelerator designs with high computational density.
+In contrast, training workloads run offline to create DNN models (for use in inference), but rely on higher precision arithmetic, leading to accelerator design with both lower computational density and higher requirements for operand storage, bandwidth, and power. As an example, Google targeted inference with TPUv1 using 8- and 16-bit fixed-point arithmetic, used custom floating-point in TPUv2 and v3 for training, and has now included custom cores in TPUv4 for inference and training, that use varying numerical encoding formats.
+The salient feature of training algorithms requiring higher arithmetic precision is an algorithmic step known as backward propagation . Backward propagation not only dominates the execution time in training but also demands a wide range from the underlying numerical representation. The latter is due to the trained values in the model being gradient-based with widely varying magnitudes, necessitating the use of floating-point. Unfortunately, floating-point arithmetic requires mantissa realignment and normalization, making floating-point hardware less dense, less power-efficient, and more area-costly than fixed-point hardware.
+Figure 1: Comparison of energy and relative area costs for different precision for 45nm technology. (source: A Survey of Quantization Methods for Efficient Neural Network Inference )
+Figure 1 shows the relative area and energy costs of hardware logic and memory operations for various precisions in a 45nm technology. The figure illustrates that fixed-point and low-precision floating-point logic is significantly more efficient in area and energy than full-precision logic (e.g., 8-bit fixed-point addition is 30x more energy efficient and 116x more area efficient than FP32 addition).
+## Numerical solutions for training
+The conventional numerical encoding for training is FP32 (IEEE 754 format), which is single-precision floating-point with a [sign, exponent, mantissa] format of [1, 8, 23] bits. FP16 (IEEE 754 format), which is half-precision floating-point with a [sign, exponent, mantissa] format of [1, 5, 10] bits, has emerged as a popular denser alternative to FP32. NVIDIA’s mixed-precision training introduces a new trend in deep learning to use FP32 (e.g., for weight updates) together with FP16 to recover data loss.
+In recent years, there have been many attempts at training with low-precision number formats. The latest innovation in numerical encoding as a drop-in replacement for FP32 in accelerators is BFLOAT16 . This encoding uses the same number of exponent bits as FP32 with half the number of overall bits. Researchers are also training models with FP8, either by limiting its use to specific operands in mixed precision training or customizing its format for the forward vs. back propagation steps by varying the number of bits provisioned for the exponent/mantissa in hybrid FP8 format . Recent work suggests that because the back propagation step mostly requires representing the gradients’ magnitudes, it may also be feasible to train with FP4 with three exponent bits and no mantissa in the back propagation step.
+To compensate for data loss with low-precision number formats and to minimize reduction in accuracy, many also propose recovery techniques. These include stochastic rounding techniques , loss scaling , maintaining select layers of the network in higher precision , and chunk-based accumulation . These recovery techniques aim to provide enough range and precision to capture the variations in tensor distributions over the course of training. Unfortunately, these techniques have fallen short of broad applicability to address information loss, because they require significant fine-tuning, are not generalizable to all models, and remain an open research problem.
+Instead of using low-precision floating-point, recent research advocates the use of Block Floating-Point (BFP), which was first proposed for signal processing algorithms in the 1990’s to improve mobile platform density. BFP is a special case of floating-point which strikes a balance between fixed-point and floating-point representations. The key difference between the BFP format and the floating-point format is that the BFP format shares a single exponent across a block of values, while the floating-point format does not. Figure 2 illustrates the FP and BFP representations of a tensor when the block size is equal to the tensor size. As such, within a block, BFP enforces a fixed-point-like range, whereas different blocks can have different exponents, leading to a wide range of representation. This property enables dot products to be computed with high precision. Moreover, BFP ALUs achieve higher silicon density and energy efficiency than FP ones, because they amortize the exponent management overhead over many values. BFP’s shared exponents enable dense fixed-point logic for multiply-and-accumulate (MAC)-based operations.
+Figure 2: An n-element tensor represented in 8-bit FP and 8-bit BFP (with block size of n).
+Recent research advocates the use of BFP for DNN training (and inference in Microsoft’s Brainwave). Flexpoint and Dynamic Fixed-Point (DFP) propose BFP formats for training with a 16-bit mantissa and a shared exponent. Sharing the exponent among a large group of mantissas enables the use of fixed-point arithmetic for the majority of DNN operations and dramatically reduces operand storage, movement energy and bandwidth requirements. Unfortunately, the use of BFP remains an open research problem because not all DNN training operations lend themselves well to grouping mantissas, resulting in overall inferior accuracy as compared to floating-point.
+## Training DNNs with Hybrid Block Floating-Point
+In a NeurIPS 2018 paper , the authors propose a mixed-precision format for training using BFP, called Hybrid Block Floating-Point (HBFP). HBFP uses 8-bit BFP for tensors in the training operations which lend themselves well to grouping (e.g., dot products, convolutions), and FP32 for the remaining operations (e.g., activations, regularizations). HBFP is superior to training with pure BFP for two reasons. First, using BFP for all operations may result in divergence unless wide mantissas are employed. Second, general-purpose BFP operations have high area overhead. HBFP builds on the insight that specific DNN operations (e.g., activations, regularizations) cannot tolerate BFP inputs, because those operations often result in wide tensor distributions that can be too wide for BFP, leading to loss of values at the edge of the distributions. Thus, not all operations can tolerate taking BFP values as inputs, as they may change the value distributions in non-trivial ways, with both small and large values impacting the results. However, dot products —which dominate DNN training— are resilient to such data loss. Dot products are reductions, and thus the largest values in the input tensors dominate the sum, with small values having little impact on the final result. Therefore, HBFP judiciously uses FP32 only for operations that require it, and provides an area-efficient numerical representation for the others.
+HBFP is an arithmetic representation for DNN training that preserves accuracy and convergence rate, with ALU density and energy efficiency similar to representations used in inference accelerators. HBFP training results have been shown to match the accuracy attainable by FP32 (see Table 1 and Table 2) while achieving 8.5x higher throughput and 4x more compact models.
+Dataset | Model | FP32 | HBFP8
+CIFAR100 | ResNet-50 | 26.07% | 25.12%
+WideResNet-28-10 | 20.35% | 20.78%
+DenseNet-40 | 26.03% | 26.27%
+SVHN | ResNet-50 | 1.89% | 1.98%
+WideResNet-16-8 | 2.00% | 1.98%
+DenseNet-40 | 1.80% | 1.79%
+ImageNet | ResNet-50 | 23.64% | 23.88%
+Table 1: Test error of image classification models. HBFP8 indicates a setting with 8-bit mantissas and 16-bit weight storage.
+Penn Tree Bank(PTB) | LSTM | 61.3 | 61.9
+English Wikipedia | BERT-Tiny | 60.9 | 62.9
+BERT-Medium | 10.68 | 11.50
+BERT-Base | 7.77 | 8.14
+Table 2: Validation perplexity of language modeling models. HBFP8 indicates a setting with 8-bit mantissas and 16-bit weight storage.
+The ColTraIn (Co-located DNN Training and Inference) project at EPFL has recently released the HBFP Training Emulator . We foresee HBFP laying the foundation for accurate training algorithms running on accelerators with an order of magnitude denser arithmetic than conventional or novel floating-point-based platforms. The ColTraIn emulator repository includes several example DNN models including CNNs (ResNet, WideResNet, DenseNet, AlexNet), LSTMs, and BERT for both HBFP and a reference FP32 baseline.
+##### About the authors:
+Simla Burcu Harma is a second-year PhD student at Computer and Communication Sciences, EPFL , and a doctoral research assistant at PARSA under the supervision of Prof. Babak Falsafi. Her research is focused on novel numerical encodings for deep learning and Machine Learning accelerators.
+Mario Drumond is a Chief Technology Officer in a stealth startup. He completed his PhD thesis at Computer and Communication Sciences, EPFL , advised by Prof. Babak Falsafi. His research interests include Machine Learning accelerators, near memory processing, and FPGA acceleration.
+Babak Falsafi is a Professor in the School of Computer and Communication Sciences and the founding director of EcoCloud , an industrial/academic consortium at EPFL investigating technologies to increase efficiency and reduce emissions in datacenters. His research interests include computer architecture, datacenter systems, design for dark silicon, robust methodologies for computer system design and evaluation.
+Disclaimer: These posts are written by individual contributors to share their thoughts on the Computer Architecture Today blog for the benefit of the community. Any views or opinions represented in this blog are personal, belong solely to the blog author and do not represent those of ACM SIGARCH or its parent organization, ACM.
+### Share this:
+- Share on Facebook (Opens in new window) 
+ Facebook
+- Share on X (Opens in new window) 
+ X
+- Share on LinkedIn (Opens in new window) 
+ LinkedIn
+#### Contribute
+#### Recent Blog Posts
+- An Introduction to Zero-Knowledge Proofs for Computer Architects
+- Compressing LLMs without Compromise
+- When AI Enters the Architecture Design Loop, What Counts as a Contribution?
+- ISCA 2026 Trip Report
+- The Return of Rigorous Full-System Timing Simulation
+#### Archives
+- August 2026 (1)
+- July 2026 (3)
+- June 2026 (2)
+- May 2026 (3)
+- April 2026 (5)
+- March 2026 (1)
+- February 2026 (1)
+- January 2026 (3)
+- December 2025 (2)
+- November 2025 (2)
+- October 2025 (2)
+- September 2025 (2)
+- August 2025 (3)
+- July 2025 (3)
+- June 2025 (4)
+- May 2025 (2)
+- April 2025 (2)
+- March 2025 (2)
+- February 2025 (2)
+- January 2025 (3)
+- December 2024 (2)
+- November 2024 (1)
+- October 2024 (4)
+- September 2024 (4)
+- August 2024 (5)
+- July 2024 (4)
+- June 2024 (4)
+- May 2024 (3)
+- April 2024 (2)
+- January 2024 (1)
+- December 2023 (3)
+- November 2023 (2)
+- October 2023 (2)
+- September 2023 (2)
+- August 2023 (4)
+- July 2023 (3)
+- June 2023 (5)
+- May 2023 (3)
+- March 2023 (1)
+- January 2023 (3)
+- December 2022 (2)
+- November 2022 (1)
+- October 2022 (2)
+- September 2022 (4)
+- August 2022 (8)
+- July 2022 (5)
+- June 2022 (2)
+- May 2022 (7)
+- April 2022 (5)
+- March 2022 (1)
+- February 2022 (2)
+- January 2022 (4)
+- December 2021 (1)
+- November 2021 (2)
+- October 2021 (2)
+- September 2021 (5)
+- August 2021 (4)
+- July 2021 (4)
+- June 2021 (8)
+- May 2021 (4)
+- April 2021 (4)
+- March 2021 (1)
+- February 2021 (8)
+- January 2021 (2)
+- December 2020 (5)
+- November 2020 (5)
+- October 2020 (6)
+- September 2020 (3)
+- August 2020 (2)
+- July 2020 (4)
+- June 2020 (5)
+- May 2020 (6)
+- April 2020 (4)
+- March 2020 (6)
+- February 2020 (2)
+- January 2020 (2)
+- December 2019 (3)
+- November 2019 (6)
+- October 2019 (3)
+- September 2019 (5)
+- August 2019 (6)
+- July 2019 (5)
+- June 2019 (4)
+- May 2019 (5)
+- April 2019 (5)
+- March 2019 (4)
+- February 2019 (5)
+- January 2019 (4)
+- December 2018 (3)
+- November 2018 (3)
+- October 2018 (4)
+- September 2018 (4)
+- August 2018 (4)
+- July 2018 (6)
+- June 2018 (4)
+- May 2018 (7)
+- April 2018 (7)
+- March 2018 (6)
+- February 2018 (4)
+- January 2018 (7)
+- December 2017 (4)
+- November 2017 (4)
+- October 2017 (6)
+- September 2017 (6)
+- August 2017 (2)
+- July 2017 (4)
+- June 2017 (6)
+- May 2017 (6)
+- April 2017 (4)
+- March 2017 (2)
+#### Tags
+#### Subscribe
+#### Join Us
+#### ACM SIGARCH
+SIGARCH serves a unique community of computer professionals working on the forefront of computer design in both industry and academia. It is ACM’s primary forum to interchange ideas about tomorrow’s hardware and its interactions with software.
+#### About the Site
+This site is maintained by volunteers working in many programs of ACM SIGARCH. We thank you for visiting! If you have questions about the site, please send a note to our content editor .

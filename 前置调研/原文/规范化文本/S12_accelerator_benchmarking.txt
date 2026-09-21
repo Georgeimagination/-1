@@ -1,0 +1,814 @@
+# S12 规范化文本
+
+题名：AI Accelerator Performance and Benchmarking
+固定版本：页面最后更新时间2026-07-29 UTC
+原始网址：https://docs.cloud.google.com/docs/ai-ml/accelerator-performance-benchmarking
+全文网址：https://docs.cloud.google.com/docs/ai-ml/accelerator-performance-benchmarking
+
+
+## 本地原文：原文/网页快照/S12_accelerator_benchmarking.html
+
+# 页面标题：AI accelerator performance and benchmarking | Generative AI | Google Cloud Documentation
+- AI and ML
+- Application development
+- Application hosting
+- Compute
+- Data analytics and pipelines
+- Databases
+- Distributed, hybrid, and multicloud
+- Industry solutions
+- Migration
+- Networking
+- Observability and monitoring
+- Security
+- Storage
+- Access and resources management
+- Costs and usage management
+- Infrastructure as code
+- SDK, languages, frameworks, and tools
+- English
+- Deutsch
+- Español – América Latina
+- Français
+- Indonesia
+- Italiano
+- Português – Brasil
+- עברית
+- 中文 – 简体
+- 中文 – 繁體
+- 日本語
+- 한국어
+- Generative AI
+- Technology areas
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ More
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Overview
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Guides
+- More
+- Overview
+- Guides
+- Cross-product tools
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ More
+- Console
+- Learn about building generative AI applications 
+ When to use generative AI Development process for generative AI applications Choose models and infrastructure for your generative AI application AI accelerator performance and benchmarking Code samples and sample applications When to access Gemini through Google AI vs. Vertex AI Evaluate and define your generative AI business use case Generative AI glossary
+- When to use generative AI
+- Development process for generative AI applications
+- Choose models and infrastructure for your generative AI application
+- AI accelerator performance and benchmarking
+- Code samples and sample applications
+- When to access Gemini through Google AI vs. Vertex AI
+- Evaluate and define your generative AI business use case
+- Generative AI glossary
+- Model exploration and hosting 
+ Google Models on Vertex AI (Gemini, Imagen) Other models in the Vertex AI Model Garden Text generation models via HuggingFace AI/ML orchestration on GKE AI/ML orchestration on Cloud Run GPUs on Compute Engine
+- Google Models on Vertex AI (Gemini, Imagen)
+- Other models in the Vertex AI Model Garden
+- Text generation models via HuggingFace
+- AI/ML orchestration on GKE
+- AI/ML orchestration on Cloud Run
+- GPUs on Compute Engine
+- Prompt design and engineering 
+ Vertex AI Studio Overview of Prompting Strategies Prompt Gallery
+- Vertex AI Studio
+- Overview of Prompting Strategies
+- Prompt Gallery
+- Grounding and Retrieval-Augmented Generation (RAG) 
+ Vertex AI grounding Ground with Google Search Vector embeddings in AlloyDB Cloud SQL and pgvector Integrating BigQuery data into your LangChain application Vector embeddings in Firestore Vector embeddings in Memorystore (Redis)
+- Vertex AI grounding
+- Ground with Google Search
+- Vector embeddings in AlloyDB
+- Cloud SQL and pgvector
+- Integrating BigQuery data into your LangChain application
+- Vector embeddings in Firestore
+- Vector embeddings in Memorystore (Redis)
+- Agents and function calling 
+ Vertex AI Agent Builder Vertex AI Function calling
+- Vertex AI Agent Builder
+- Vertex AI Function calling
+- Model customization and training 
+ Evaluate models in Vertex AI Tune Vertex AI models Cloud TPU
+- Evaluate models in Vertex AI
+- Tune Vertex AI models
+- Cloud TPU
+- Generative AI products
+- Generative AI Models 
+ Google models Model Garden Model versions 
+ 
+ Open models 
+ Use open models Google Gemma Llama Hugging Face text generation models Hex-LLM 
+ 
+ Partner models 
+ Use partner models Anthropic Claude
+- Google models
+- Model Garden
+- Model versions
+- Open models 
+ Use open models Google Gemma Llama Hugging Face text generation models Hex-LLM
+- Use open models
+- Google Gemma
+- Llama
+- Hugging Face text generation models
+- Hex-LLM
+- Partner models 
+ Use partner models Anthropic Claude
+- Use partner models
+- Anthropic Claude
+- Generate an AI response 
+ Text and code generation Image generation Embeddings Prompt design and engineering
+- Text and code generation
+- Image generation
+- Embeddings
+- Prompt design and engineering
+- Improve AI responses 
+ Grounding Tuning Function calling Evaluation Safety
+- Grounding
+- Tuning
+- Function calling
+- Evaluation
+- Safety
+- Home
+- Documentation
+# AI accelerator performance and benchmarking
+Evaluating AI hardware for use with large language models (LLMs) as the primary
+workload requires a consistent, vendor-neutral approach. This guide describes a
+methodology to compare AI accelerator chip performance from different vendors
+such as NVIDIA, AMD, Google, and AWS. The principles and methodology
+are adaptable to any AI chip or workload, but examples focus on a common
+industry pairing of NVIDIA graphics processing units (GPUs) and Google
+Tensor Processing Units (TPUs) running LLM workloads.
+Models are typically optimized for a specific hardware platform, so evaluating
+only model performance is insufficient to understand the hardware's
+capabilities. When evaluating accelerator chips for LLMs, consider three key
+dimensions: microbenchmarking, roofline analysis, and model benchmarking for
+both training and inference.
+Microbenchmarking and roofline analyses are essential for understanding the
+capabilities and potential of a given accelerator platform. Once that
+information is known, model benchmarking across training and inference provides
+real workload comparisons across chips and insight into whether the model
+architecture is optimized for a specific platform.
+## Performance dimensions
+We suggest evaluators think about performance across three dimensions to create
+a more holistic understanding of a given accelerator system:
+- Microbenchmarking: Having the highest hardware specifications doesn't
+mean applications can actually make use of those specifications. You can use
+microbenchmarking to evaluate how floating point operations per second
+(FLOPS), high bandwidth memory (HBM), and networking bandwidth affect what's
+achievable in real-world workloads.
+- Roofline analysis: Optimal hardware utilization can be hindered by
+memory bandwidth or computation speed. You can use a roofline model and the
+operational intensity (OI) of different system components to see how well
+suited hardware and workloads are for each other. A combination of
+microbenchmarks and rooflines provides a theoretical assessment of what
+selected hardware can achieve for different types of workloads.
+- Model benchmarking: Benchmarking across training and inference workloads
+to measure tokens per second per chip (TPS/chip) lets you evaluate the same
+model across different platforms. If initial results differ from the
+microbenchmarking and roofline analysis, it's an indication that extra
+software work is required to achieve the previously identified rooflines.
+For example, this work might involve changing sharding strategies or
+employing custom kernels.
+Remember that model benchmarking is a snapshot in time approach for a given
+model, scale, and platform. Sophisticated users also take into consideration
+industry trends (like model architecture), microbenchmarking, and roofline
+results as they evaluate performance.
+### Model and hardware co-design
+Performance evaluations must carefully consider model architecture in the
+context of the hardware being tested. Efficiently designed models are often
+co-designed for a specific hardware platform to leverage specific platform
+nuances. Consequently, these models might not fully utilize other platforms or
+even different generations of the same platform. For example, a model designed
+for NVIDIA Hopper GPUs might not fully utilize AMD GPUs or NVIDIA Blackwell
+GPUs.
+This consideration is particularly important when moving across hardware
+platforms that might differ in capabilities because a model designed for one
+platform might need configuration changes, software changes, or both to achieve
+peak performance on a different platform. Benchmarking optimized models is
+essential for validating vendor marketing claims of "peak theoretical"
+performance and measuring real-world results. Independent analyst firm
+SemiAnalysis
+ notes ,
+"Comparing theoretical FLOPS tells only part of the story. What matters is
+effective FLOPS, since peak numbers are almost never reached in real-world
+workloads."
+#### Example: the gpt-oss-120B challenge
+A common pitfall in benchmarking is evaluating a model on hardware it was not
+designed for. The gpt-oss-120B open-weight model 
+from OpenAI is an example of why model architecture must be closely mapped to
+target silicon. The following example shows that model co-design is critical and
+must occur early in the process.
+The gpt-oss-120B model uses an attention head dimension of 64. Although this
+is standard for many GPU-optimized models, it creates an architectural mismatch
+for TPU accelerators. TPUs like Trillium and Ironwood 
+are optimized for matrix dimensions that are multiples of 256 to fully saturate
+their matrix multiplication units (MXUs). Because the head dimension, 64, is not
+optimized for TPUs, running gpt-oss-120B on a TPU system results in lower
+tokens per second (TPS) and model FLOPS utilization (MFU). The hardware
+effectively wastes clock cycles and power padding the remaining space with zeros
+to fit its 256x256 execution grids.
+Using gpt-oss-120B as a benchmark for TPUs might incorrectly signal poor
+hardware capability when in reality it reflects a software-architecture
+mismatch. To accurately assess an accelerator's "ceiling," test it with models
+co-designed for its specific geometry. For example, models with 128 or 256 head
+dimensions like Gemma 4. You can improve the performance of this model with
+custom kernels that avoid the padding of zeros and instead "fill up" the MXU,
+which requires expertise and doesn't attain the same level of performance as on
+GPUs. You can also change the head dimensions to be more optimized for TPUs, but
+this change invalidates the existing model weights, requiring retraining.
+## Benchmarking principles
+To provide fair and future-proof evaluations, consider the following principles
+for benchmarking across accelerators:
+- Focus on performance per dollar: Some vendors focus on single chip raw
+performance, but the system-level performance per dollar is more
+representative of the overall total cost of ownership (TCO) and value. If
+chip A is 20% more performant and 50% more expensive than chip B, evaluators
+should recognize the performance per dollar gains of chip B. Also consider
+performance per watt as part of the cost.
+- Represent modern AI workloads: Focus on popular transformer-based
+models, large clusters, and the latest frameworks while considering industry
+trends. For example, the industry's move to sparser mixture of experts
+( MoE ) models makes it
+harder to fully optimize FLOPS while demanding higher bisection bandwidth
+from networks.
+- Ensure broad support for developer requirements: Consider the
+performance, flexibility, and scalability across different workloads:
+training, fine-tuning, and serving across a range of LLMs and other models.
+- Choose vendor-agnostic models and tooling: Choose models and engines
+that run across accelerators to make cross-accelerator evaluations easier.
+For example, use open models such as Qwen and Gemma as well as
+open-source inference engines that run on GPUs and TPUs, such as vLLM.
+Avoid hardware-specific PyTorch/CUDA stacks. For model training
+benchmarking, vendor-specific frameworks (like
+ MaxText for TPUs and
+Megatron for GPUs) are the most useful when models are held constant across
+platforms.
+- Model co-design: Experienced users co-design their models to get the
+most out of the hardware platform. Don't expect a model trained on chip A to
+have good "out-of-the-box" performance on chip B.
+- Consider the entire hardware system: Some accelerators can advertise
+high performance in one area like FLOPS. But bottlenecks in other areas,
+like memory bandwidth, can significantly limit the accelerator's
+capabilities. Other aspects of the system to consider are chip
+specifications, chip networking, and the scale-out architecture.
+- Hardware and software reliability: Disruptions during large-scale
+training or critical inference operations can be extremely costly.
+Similarly, an AI accelerator is only as useful as the software that runs on
+it. A mature and reliable software stack, proven at scale, is essential for
+maximizing value.
+## Microbenchmarks
+In the context of accelerator benchmarking, microbenchmarking isolates specific
+hardware components such as compute cores, memory, and interconnects to measure
+their absolute limits without the interference of complex software stacks. Many
+vendors highlight "single-chip peak FLOPS," but real-world AI is a distributed
+systems problem. Microbenchmarking helps you understand if a chip is merely
+powerful in isolation or if it is designed for the data center scale.
+Use microbenchmarking to measure the peak performance of the hardware and learn
+about real-world limits of the system, independent of the model architecture.
+Microbenchmarking is especially valuable when evaluating accelerators against
+future or undetermined use cases and model architectures.
+To effectively microbenchmark accelerators, evaluate the following:
+Benchmark | Explanation
+Dense general matrix multiplication (GEMM) utilization | Execute highly optimized GEMM kernels across various precisions to
+ measure the raw, sustained mathematical horsepower of the accelerator's
+ core compute units.
+High Bandwidth Memory (HBM) streaming | Run memory bandwidth microbenchmarks to measure the sustained read,
+ write, and copy speeds of the accelerator's onboard memory.
+ Architectures that maintain a healthy byte-to-FLOP ratio prevent the
+ compute cores from sitting idle.
+Distributed collectives (all-reduce and all-gather) | Execute standardized collective communication tests across thousands
+ of chips to measure how severely network bandwidth and latency degrade
+ as the cluster scales.
+Host-to-device (H2D) and device-to-host (D2H) transfer rates | Push large, continuous streams of data between the host CPU's system
+ memory and the accelerator to measure the transfer rates across the PCIe
+ bus or custom interconnect.
+Sustained thermal throttling and power draw | Run a maximum-utilization GEMM loop continuously for 48 hours while
+ monitoring rack-level power draw to evaluate sustained thermal stability
+ and real-world power efficiency.
+### Example microbenchmark comparison
+Here's an illustrative comparison between two chips, where a hypothetical
+chip A might appear better than a hypothetical chip B, but perform worse in
+practice:
+Benchmark name | Chip A tested result | Chip A spec | Test / Spec ratio | Chip B tested result | Chip B spec | Test / Spec ratio
+Chip-to-chip networking | 800 GBps | 1,000 GBps | 80.0% | 850 GBps | 900 GBps | 94.4%
+gemm/peakTOPS | 1,800 TFLOPS | 2,500 TFLOPS | 72.0% | 1,800 TFLOPS | 2,000 TFLOPS | 90.0%
+Memory bandwidth | 6,000 GBps | 8,000 GBps | 75.0% | 6,500 GBps | 7,500 GBps | 86.7%
+Host-to-device | 58 GBps/chip | 70 GBps/chip | 82.9% | 60 GBps/chip | 65 GBps/chip | 92.3%
+Device-to-host | 55 GBps/chip | 70 GBps/chip | 78.6% | 55 GBps/chip | 65 GBps/chip | 84.6%
+## Roofline analysis
+A roofline analysis (or roofline
+model) can provide you with a visualization to analyze the operational intensity
+(OI) of different system components and how well specific designs suit specific
+platforms.
+An AI accelerator chip's throughput is constrained by three primary factors:
+- Compute capacity: The peak mathematical throughput of the chip (FLOPS).
+- Memory bandwidth: The rate at which data can be transferred to or from
+the chip's local High Bandwidth Memory (HBM).
+- Network bandwidth: The rate at which data can be shared across multiple
+chips using the chip networking during distributed training or inference.
+For example, the transfer rate of ICI (for TPUs) or NVLink (for GPUs).
+For more information about rooflines, see
+ All About Rooflines .
+The standard roofline plot consists of two axes:
+- X-axis (operational intensity): Operational intensity is the ratio of
+computing work (FLOPS) to memory traffic (bytes transferred), expressed as
+FLOPS per byte. It represents the amount of compute work done for every byte
+of data fetched from memory.
+- Y-Axis (attainable performance): Attainable performance is expressed as
+FLOPS per second. It represents the actual computational throughput
+achieved.
+The "roof" is formed by two intersecting lines representing hardware maximums:
+- The slanted roof (memory bound): Attainable Performance = Peak Memory
+Bandwidth × Operational Intensity. On this line, performance is strictly
+limited by how fast data can be fed to the compute units.
+- The flat roof (compute bound): Attainable Performance = Peak Compute
+Capacity. On this line, data is supplied fast enough that the compute units
+are running at maximum capacity.
+The point where these two lines intersect is known as the ridge point . It
+defines the minimum OI a workload requires to achieve maximum hardware
+utilization.
+In the preceding image, Algo 1 is in the portion of the graph labeled "memory
+bound" and isn't fully utilizing the compute units. In contrast, Algo 2 has a
+higher OI and is in the portion of the graph labeled "compute bound". To
+optimize Algo 1, a user would try to modify the algorithm to do more computation
+with less data movement (increase OI) to shift performance right, toward the
+ridge point.
+### Examples of low and high OI workloads
+- Low HBM operational intensity (memory bound): Workloads like
+element-wise operations (activation functions like ReLU or GeLU), Layer
+Normalization, and auto-regressive decoding (batch size = 1 inference).
+- High HBM operational intensity (compute bound): Workloads such as GEMMs
+or large-batch convolutional neural networks. Matrix multiplication reuses
+fetched data many times (multiplying rows by columns), so the OI is very
+high and the workloads sit under the flat compute roof.
+## Model benchmarking
+Model benchmarking measures real model performance. Training and inference
+benchmarks allow you to compare performance for popular models at a specific
+point in time.
+The following table compares insights you can get from model benchmarking for
+training and inference workloads:
+Insight | Training workloads | Inference workloads
+Scale | Often larger-scale tests (10k+ chips, up to 100k+ for the largest
+ models). Provides insights into distributed workloads, communication
+ overhead, and cluster-level networking limits. | Often smaller tests (1-64+ chips). Provides insights into how the
+ platform handles simultaneous users and rapid scale-up under load.
+Performance | Often more compute-bound. Measures tokens processed per second per
+ chip and Model FLOPS Utilization (MFU). | Latency sensitive. Measures Time to First Token (TTFT), inter-token
+ latency, and overall tokens generated per second per user.
+Latency | I/O and interconnect latency that highlight storage bottlenecks when
+ loading large datasets and network latency between nodes during
+ synchronous gradient updates. | End-to-end response latency that highlights queueing delays, endpoint
+ latency, and user-facing wait times.
+### Training benchmarking
+To determine true hardware and networking efficiency, you must normalize
+performance to a single, comparable metric across accelerators:
+ Tokens per second per chip (TPS/chip) , while holding a specific,
+representative model architecture constant. By tracking how TPS/chip behaves as
+you scale the size of a cluster, you uncover the hidden "scale tax" of the
+system.
+To normalize the performance with the cost of the accelerators, further divide
+TPS/chip by the cost of each chip to yield TPS/chip/$ , which becomes another
+comparison point.
+For each of model being benchmarked, evaluate the following:
+Measure baseline TPS/chip and TPS/chip/$ | Run the target model on the smallest viable cluster. Record the global
+ training throughput (total tokens processed per second) and divide by
+ the number of chips to establish the baseline TPS/chip. Divide by
+ accelerator cost to get TPS/chip/$. 
+ As another option, observe the model FLOPs utilization (MFU) during
+ training to measure the ratio of observed throughput relative to the
+ theoretical maximum. This is useful to understand how close to the
+ hardware performance is to the benchmarking. However, it doesn't provide
+ as useful of a chip-to-chip comparison as TPS/chip.
+Run the target model on the smallest viable cluster. Record the global
+ training throughput (total tokens processed per second) and divide by
+ the number of chips to establish the baseline TPS/chip. Divide by
+ accelerator cost to get TPS/chip/$.
+As another option, observe the model FLOPs utilization (MFU) during
+ training to measure the ratio of observed throughput relative to the
+ theoretical maximum. This is useful to understand how close to the
+ hardware performance is to the benchmarking. However, it doesn't provide
+ as useful of a chip-to-chip comparison as TPS/chip.
+Evaluate scaling degradation | Scale the cluster to 256, 1024, and 4096 chips, running the exact same
+ model. Recalculate TPS/chip at each scale.
+Account for goodput | Raw TPS/chip only matters if the model is actually learning.
+ Calculate goodput to measure the rate of useful computation that
+ directly advances an LLM's training state, explicitly excluding time
+ and energy wasted on hardware faults, network stalls, or checkpoint
+ recoveries. 
+ When evaluating AI accelerators at scale, goodput provides a more
+ realistic picture of your return on investment than raw theoretical
+ throughput, as it reveals how effectively the hardware sustains
+ performance in real-world, fault-prone clusters.
+Raw TPS/chip only matters if the model is actually learning.
+ Calculate goodput to measure the rate of useful computation that
+ directly advances an LLM's training state, explicitly excluding time
+ and energy wasted on hardware faults, network stalls, or checkpoint
+ recoveries.
+When evaluating AI accelerators at scale, goodput provides a more
+ realistic picture of your return on investment than raw theoretical
+ throughput, as it reveals how effectively the hardware sustains
+ performance in real-world, fault-prone clusters.
+The following table lists recommended models to benchmark for training:
+Size | Architecture | Model | Rationale
+Small (8B) | Dense | Llama 3.1 8B | Llama 3 has been a standard model, popular with benchmarking standards
+ like MLPerf for multiple years.
+Medium (70B) | Dense | Llama 3.1 70B | Llama 3 has been a standard model, popular with benchmarking standards
+ like MLPerf for multiple years.
+Large (671B) | MoE | DeepSeek-V3 671B | DeepSeek-V3 set a new standard of size and performance in 2025, and is
+ well optimized on many multi-chip platforms.
+#### Example: Normalizing to performance per dollar
+Consider a benchmark comparison between Chip_A, Chip_B, and Chip_C where you ran
+training benchmarks for common models to see performance in TPS. You then look
+at the ratio of Chip_A performance to the performance of Chip_B and Chip_C for
+the same model:
+Benchmark | Chip_A TPS as a fraction of Chip_B TPS | Chip_A TPS as a fraction of Chip_C TPS
+Small dense: Llama 3.1 8B | 0.82 | 0.62
+MoE: Mixtral 8x7B | 0.72 | 0.55
+Large dense: Llama 3.1 405B | 0.77 | 0.61
+Large MoE: DeepSeek-V3 | 0.85 | 0.62
+Average value | 0.79 | 0.60
+Based on data in the preceding table, Chip_A's performance averages 0.79 of
+Chip_B's performance and 0.60 of Chip_C's performance. With no more information,
+the conclusion would be that Chip_C is superior.
+However, if Chip_A costs $100, Chip_B costs $180, and Chip_C costs $200, then
+normalizing to the performance per dollar (perf/$) changes the outcome:
+Benchmark | Chip_A perf/$ as a fraction of Chip_B perf/$ | Chip_A perf/$ as a fraction of Chip_C perf/$
+Small dense: Llama 3.1 8B | 1.48 | 1.24
+MoE: Mixtral 8x7B | 1.30 | 1.10
+Large dense: Llama 3.1 405B | 1.39 | 1.22
+Large MoE: DeepSeek-V3 | 1.53 | 1.24
+Average value | 1.42 | 1.20
+When you consider perf/$ as the comparison point, Chip_A overtakes Chip_B by an
+average of 42% and Chip_C by an average of 20%.
+### Inference benchmarking
+Training is a massive upfront capital expenditure, but serving (and thus
+inference) represents long-term operational expenditure. A higher TPS/chip means
+you need fewer physical servers to support the same operational workloads,
+drastically reducing energy consumption and data center footprint.
+In inference, the goal is to maximize throughput without violating latency
+requirements to ensure a responsive user experience. By standardizing the
+evaluation on TPS/chip for a fixed model, you can directly compare performance
+across different chips.
+When benchmarking inference, normalize to performance by calculating TPS/chip/$:
+Establish the latency SLA | First, set a strict SLA for user experience. For example, a
+ predictable tail latency (P99) of 100 milliseconds. Measure the user
+ experience of responsiveness using TTFT (less than 500ms) and Time Per
+ Output Token (TPOT).
+First, set a strict SLA for user experience. For example, a
+ predictable tail latency (P99) of 100 milliseconds. Measure the user
+ experience of responsiveness using TTFT (less than 500ms) and Time Per
+ Output Token (TPOT).
+Push the batch size | Gradually increase the number of concurrent requests (batch size)
+ against the hardware. As batch size increases, throughput rises, but
+ latency eventually degrades.
+Record maximum sustained TPS/chip | When the hardware violates the P99 latency SLA, stop. Record the
+ total system throughput at that exact batch size, and divide by the
+ number of chips. This is your TPS/chip value. 
+ Note that some general-purpose accelerators struggle with
+ "tail latency" (random spikes in processing time) under high batch
+ loads, forcing operators to run them at lower utilizations to keep
+ users happy. 
+ Ensure to measure across the two distinct phases of prefill
+ (compute-bound) and decode (memory bandwidth-bound)
+When the hardware violates the P99 latency SLA, stop. Record the
+ total system throughput at that exact batch size, and divide by the
+ number of chips. This is your TPS/chip value.
+Note that some general-purpose accelerators struggle with
+ "tail latency" (random spikes in processing time) under high batch
+ loads, forcing operators to run them at lower utilizations to keep
+ users happy.
+Ensure to measure across the two distinct phases of prefill
+ (compute-bound) and decode (memory bandwidth-bound)
+Calculate TCO per thousand or million tokens | Divide the amortized capital and energy cost of one chip by its
+ maximum sustained TPS/chip. This translates the technical benchmark into
+ a financial metric, revealing the true cost.
+The following table lists recommended models to benchmark for inference:
+Large (480B) | MoE | Qwen3 Coder 480B | Qwen3 480B is a leading OSS coding model.
+## What's next
+- Cloud TPU architecture
+- Cloud TPU performance recipes
+- vLLM TPU documentation
+- MaxText for training models on TPUs
+- Roofline model on Wikipedia
+Except as otherwise noted, the content of this page is licensed under the Creative Commons Attribution 4.0 License , and code samples are licensed under the Apache 2.0 License . For details, see the Google Developers Site Policies . Java is a registered trademark of Oracle and/or its affiliates.
+Last updated 2026-07-29 UTC.
+- Products and pricing 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ See all products
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Google Cloud pricing
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Google Cloud Marketplace
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Contact sales
+### Products and pricing
+- See all products
+- Google Cloud pricing
+- Google Cloud Marketplace
+- Contact sales
+- Support 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Community forums
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Support
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Release Notes
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ System status
+### Support
+- Community forums
+- Support
+- Release Notes
+- System status
+- Resources 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ GitHub
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Getting Started with Google Cloud
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Code samples
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Cloud Architecture Center
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Training and Certification
+### Resources
+- GitHub
+- Getting Started with Google Cloud
+- Code samples
+- Cloud Architecture Center
+- Training and Certification
+- Engage 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Blog
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Events
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ X (Twitter)
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Google Cloud on YouTube
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Google Cloud Tech on YouTube
+### Engage
+- Blog
+- Events
+- X (Twitter)
+- Google Cloud on YouTube
+- Google Cloud Tech on YouTube
+- About Google
+- Privacy
+- Site terms
+- Google Cloud terms
+- Manage cookies
+- Our third decade of climate action: join us
+- Sign up for the Google Cloud newsletter 
+ 
+ 
+ 
+ Subscribe

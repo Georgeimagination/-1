@@ -1,0 +1,4 @@
+"table_path","guards","sha256","bytes","rows","columns","primary_key","format","authorized_writes","defensive_full_table_backup"
+"数据/fields.csv","1","1723cd5ef441ea12c53e785a4d2e2101f81ecdc5ce10872a02152cfb6539e2ee","25032","120","13","field_id","utf8;bom=none;CRLF;final_crlf=true","0","recommended"
+"数据/object-relations.csv","4","9bbe32227f7022a5f9e4fe379d805e60780c15d6987e5b20e3b94ac3241fa353","7633","27","7","object_relation_id","utf8;bom=none;CRLF;final_crlf=true","0","recommended"
+"数据/objects.csv","4","54800b32b2ee08b45bf0b9ad0aa569b406133a1f74be26d5301ee5de750a1ec7","16349","78","7","object_id","utf8;bom=none;CRLF;final_crlf=true","0","recommended"

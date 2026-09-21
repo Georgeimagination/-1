@@ -1,0 +1,3 @@
+"equivalence_group","source_id","preferred_endpoint_id","audit_only_endpoint_id","body_length","body_relation","independent_source_count","notes"
+"A01-body-v2310","SRC-M2-GA-A01","END-M2W2-AWS-PKG-A01-V2310-SNAP-20260813","END-M2W2-AWS-PKG-A01-LATEST-SNAP-20260813","1788","same_content","1","latest 与 v2.31.0 的 article 正文逐字符相同，完整页哈希差异来自页面框和导航。"
+"A07-body-v2310","SRC-M2-GA-A07","END-M2W2-AWS-PKG-A07-V2310-SNAP-20260813","END-M2W2-AWS-PKG-A07-LATEST-SNAP-20260813","31435","same_content","1","latest 与 v2.31.0 的 article 正文逐字符相同，完整页哈希差异来自页面框和导航。"

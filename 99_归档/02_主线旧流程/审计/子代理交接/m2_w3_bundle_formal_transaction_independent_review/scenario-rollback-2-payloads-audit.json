@@ -1,0 +1,22 @@
+{
+    "status":  "passed",
+    "scenario":  "rollback_after_2_payloads",
+    "executor_exit_code":  1,
+    "outcome":  "FAIL_ROLLED_BACK",
+    "journal_rows":  90,
+    "lock_acquired_rows":  1,
+    "csv_commit_complete":  20,
+    "csv_rollback_complete":  20,
+    "payload_commit_complete":  2,
+    "payload_rollback_complete":  2,
+    "payload_rollback_precedes_csv_rollback":  true,
+    "csv_rollback_order_exact_reverse":  true,
+    "payload_rollback_order_exact_reverse":  true,
+    "mirror_aggregate_after":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "formal_aggregate_before":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "formal_aggregate_after":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "journal_sha256":  "a56c565f9631c5b3035ebb3f07f954987b5c3d3770ed5add62fc47ce7cc65379",
+    "transaction_outcome_sha256":  "34433740fe3214620c7a04f930d89a0d52395121e3490620b253e7fea7638c23",
+    "console_sha256":  "0f038a0060f73d04b6b94a129e552a15fa8203e6da451f146f87f905cd7485ea",
+    "formal_writes_performed":  0
+}

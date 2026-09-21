@@ -1,0 +1,7 @@
+New-file target already exists: 资料卡/AMD/封装/AMD_Instinct_MI455X_模组资料卡.md
+At Z:\scripts\Test-MI455XFormalTransactionPreflight.ps1:31 char:87
++ ... ndition,[string]$Message); if(-not $Condition){throw $Message}; $scri ...
++                                                    ~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (New-file target...MI455X_模组资料卡.md:String) [], RuntimeException
+    + FullyQualifiedErrorId : New-file target already exists: 资料卡/AMD/封装/AMD_Instinct_MI455X_模组资料卡.md
+ 

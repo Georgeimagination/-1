@@ -1,0 +1,8 @@
+TRANSACTION FAILED; ROLLBACK SUCCEEDED. INJECTED_TEST_FAILURE_AFTER_3_REPLACEMENTS
+At D:\Workspace\2026projects\调研-训练推理芯片调研-资料汇总\审计\子代理交接\m2_ascend950_formal_transaction_prep\scripts\Invoke-Ascend950For
+malTransaction.ps1:562 char:5
++     throw "TRANSACTION FAILED; ROLLBACK SUCCEEDED. $($originalError.E ...
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (TRANSACTION FAI..._3_REPLACEMENTS:String) [], RuntimeException
+    + FullyQualifiedErrorId : TRANSACTION FAILED; ROLLBACK SUCCEEDED. INJECTED_TEST_FAILURE_AFTER_3_REPLACEMENTS
+ 

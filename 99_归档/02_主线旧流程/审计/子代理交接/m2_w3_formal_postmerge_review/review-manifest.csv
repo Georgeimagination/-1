@@ -1,0 +1,8 @@
+"relative_path","sha256","bytes","role"
+"report.md","6d086c01a5a3379ca343a62d460f4cc684ce6a34100b20ec47104fdc396e2b83","9614","independent_postmerge_report"
+"exact-postmerge-signoff.csv","43347ecdd474735aad0bb937539514767ba386a1ead9042987da72d7dee26c9e","2651","exact_postmerge_signoff"
+"review-summary.json","b325c3010545473af9fe3dd6861990c12bb6b0fb5e1aa912a016a4469be50e3d","2056","machine_readable_summary"
+"payload-postmerge-audit.csv","0e8a7a1dc19fcd53cec646a00a4b1296021868f2f9e28799c8d1fd2daaabc882","4913","payload_hash_byte_audit"
+"card-lifecycle-findings.csv","c910b217c6af48819651ded6cef587bea73d146119cf354b2a95d24dffe67eb7","1322","card_stage_findings"
+"report-humanizer-scan.txt","4864d3fabf043bf8bc0e15e7b6f53b560f75d54b785122fd54e6517b0a2dd03e","76","report_humanizer_scan"
+"humanization-review.json","256ee5dde58aebf9188190a393429023820c92b077ba1c45631a5070f8b4af4f","985","shuorenhua_manual_review"

@@ -1,0 +1,2 @@
+﻿"coverage_id","covered_source_id","covering_source_id","coverage_scope","equivalence_status","rationale","reviewed_by","review_date","review_status","notes"
+"COV-NVG3-PRODUCT-BY-ARCHBLOG","SRC-NVG3-LPX-PRODUCT-2026-08-12","SRC-NVG3-ARCH-BLOG-2026-03-16","selected_fact_set","fully_covered","本包使用的产品身份、500 MB SRAM、150 TB/s 和约 2.5 TB/s C2C 均在架构博客有直接、更具体的每 LPU 表述；产品页独有的商业状态不属于本架构事实集","M2-GHC-ARCH","2026-08-12","draft","只对本包已选事实集合成立，不声称网页全文同内容"

@@ -1,0 +1,4 @@
+"link_id","owner_object_id","endpoint_a_id","endpoint_b_id","link_level","canonical_label","review_status","notes"
+"LINK-M2W2-AWS-TRN1-NEURONLINKV2","OBJ-AWS-TRAINIUM1-CHIP","OBJ-AWS-TRAINIUM1-CHIP","","device_direct","Trainium NeuronLink-v2 aggregate interface","draft","4 个接口；协议机制引用架构关系，方向与有效载荷未补猜。"
+"LINK-M2W2-AWS-INF2-NEURONLINKV2","OBJ-AWS-INFERENTIA2-CHIP","OBJ-AWS-INFERENTIA2-CHIP","","device_direct","Inferentia2 NeuronLink-v2 aggregate interface","draft","2 个接口；协议机制引用架构关系。"
+"LINK-M2W2-AWS-TRN3-NEURONLINKV4","OBJ-AWS-TRAINIUM3-CHIP","OBJ-AWS-TRAINIUM3-CHIP","","device_direct","Trainium3 NeuronLink-v4 aggregate interface","draft","4 个接口和 2.56 TB/s；方向、线路速率与有效载荷未公开。"

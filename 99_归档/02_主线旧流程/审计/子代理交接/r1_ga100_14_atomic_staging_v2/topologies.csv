@@ -1,0 +1,2 @@
+"topology_id","owner_object_id","canonical_label","review_status","notes"
+"TOPO-R1-GA100-NVLINK-GAP","OBJ-NVIDIA-GA100-DIE","GA100 NVLink topology evidence target","needs_resolution","Structural target for topology-field requirements because the current contract requires a topology subject. It is not a claim that a published GA100 topology instance or system configuration exists."

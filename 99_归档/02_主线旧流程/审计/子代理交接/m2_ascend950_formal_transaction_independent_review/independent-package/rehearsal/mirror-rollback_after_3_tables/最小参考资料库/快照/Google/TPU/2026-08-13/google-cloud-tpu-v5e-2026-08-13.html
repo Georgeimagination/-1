@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Web extract snapshot: https://docs.cloud.google.com/tpu/docs/v5e</title></head><body>
+<h1>Web extract snapshot</h1>
+<dl><dt>Source URL</dt><dd><a href="https://docs.cloud.google.com/tpu/docs/v5e">https://docs.cloud.google.com/tpu/docs/v5e</a></dd><dt>Access date</dt><dd>2026-08-13</dd><dt>Capture method</dt><dd>Codex web open rendered-text extract; not an upstream byte-identical response body.</dd></dl>
+<pre>TPU v5e  |  Google Cloud Documentation (https://docs.cloud.google.com/tpu/docs/v5e)
+citeturn353view0 [wordlim: 200] Crawled: today; Content type: text/html; Source: open({"ref_id":"https://docs.cloud.google.com/tpu/docs/v5e","lineno":null}); Total lines: 282
+L0: [Button: ]
+L1: 
+L2: cite0†Technology areas cite1†Cross-product tools L3: 
+L4: [Input: Search]
+L5: 
+L6: `/`
+L7: 
+L8: cite2†Console†console.cloud.google.com L9: 
+L10:   * English
+L11:   * Deutsch
+L12:   * Español
+L13:   * Español – América Latina
+L14:   * Français
+L15:   * Indonesia
+L16:   * Italiano
+L17:   * Português
+L18:   * Português – Brasil
+L19:   * עברית
+L20:   * 中文 – 简体
+L21:   * 中文 – 繁體
+L22:   * 日本語
+L23:   * 한국어
+L24: Sign in
+L25: 
+L26: cite3†Start free†console.cloud.google.com L27: 
+L28: cite4†Overview cite5†Guides cite6†Reference cite7†Samples cite8†Support cite9†Resources L29: 
+L30: [Input: Filter]
+L31: 
+L32: [Button: ]
+L33: 
+L34:   * Discover
+L35: 
+L36:   * TPU versions
+L37:   * Get started
+L38: 
+L39:   * Quickstarts
+L40: 
+L41:   * Reserve TPUs
+L42: 
+L43:     * cite10†Share a reservation L44: 
+L45:   * Create TPUs
+L46: 
+L47:   * Configure TPUs
+L48: 
+L49:   * Manage storage
+L50: 
+L51:   * Manage TPUs
+L52: 
+L53:   * Manage TPUs in All Capacity mode
+L54: 
+L55:     * cite11†All Capacity mode overview L56:     * cite12†Request an All Capacity mode reservation L57:     * cite13†View the topology and health of All Capacity mode TPUs L58:     * cite14†Report and repair faulty hosts in All Capacity mode L59:     * cite15†Manage maintenance events in All Capacity mode L60: 
+L61:   * Run workloads
+L62:   * Work with image datasets
+L63: 
+L64:     * cite16†Convert an image classification dataset for use with Cloud TPU L65: 
+L66:   * Optimize performance
+L67: 
+L68:   * Monitor and troubleshoot TPUs
+L69: 
+L70:   * ML Diagnostics platform
+L71: 
+L72:   * Profile TPUs
+L73: 
+L74:   * Cloud TPU API
+L75: 
+L76:   * Discover
+L77: 
+L78:     * cite17†TPU software versions L79:     * TPU versions
+L80: 
+L81:       * cite18†TPU v3 L82:       * cite19†TPU v2 L83: 
+L84:   * Get started
+L85:     * cite20†Set up a Google Cloud project L86:     * cite21†Create TPUs L87:     * cite22†Consume a reservation L88:     * cite23†Run JAX on Cloud TPU VM L89:     * cite24†Run PyTorch on Cloud TPU VM L90:     * cite25†Run JAX on Cloud TPU slices L91:     * cite26†Run PyTorch on Cloud TPU slices L92: 
+L93:   * Configure TPUs
+L94:     * cite27†Connect a TPU to a shared VPC network L95:     * cite28†Connect to a TPU VM without a public IP address L96:     * cite29†Configure networking and access L97:     * cite30†Encrypt a TPU VM boot disk with a CMEK L98:     * cite31†Use a cross-project service account L99:     * cite32†Attach durable block storage to a TPU VM L100:     * cite33†Connect to Cloud Storage buckets L101:     * cite34†Mount a Filestore instance on a TPU VM L102: 
+L103:   * Manage TPUs
+L104:     * cite35†Manage TPU resources L105:     * cite36†Manage queued resources L106:     * cite37†Request TPU Flex-start VMs L107:     * cite38†Manage TPU Spot VMs L108:     * cite39†Prepare for maintenance events L109:     * cite40†Autocheckpoint L110:     * cite41†View maintenance notifications L111:     * cite42†Manually start host maintenance L112:     * cite43†Preemptible TPUs L113: 
+L114:   * Run workloads
+L115: 
+L116:     * cite44†Train a model using v6e L117:     * cite45†Train a model using v5e L118:     * cite46†Scale ML workloads using Ray L119:     * cite47†Run TPU applications in a Docker container L120:   * Monitor and troubleshoot TPUs
+L121: 
+L122:     * cite48†Troubleshoot TPU VMs L123:     * cite49†Monitor TPU VMs L124:     * cite50†Dashboards for monitoring and logging L125:     * cite51†Troubleshoot TensorFlow models L126:     * cite52†Cloud TPU error glossary L127:     * cite53†Cloud TPU audit logs L128: 
+L129:   * Tutorials and notebooks
+L130: 
+L131:     * cite54†Train ResNet with PyTorch L132:     * cite55†MaxDiffusion inference on v6e L133:     * cite56†Notebooks L134: 
+L135: [Button: Send feedback ] Stay organized with collections Save and categorize content based on your preferences.
+L136: # TPU v5e
+L137: 
+L138: Note: TPU v5e is supported using Google Kubernetes Engine and the Cloud TPU API. The Cloud TPU API is no longer under active development and will receive bug fixes and security updates only. For more information about TPUs and GKE, see cite57†About TPUs in GKE .
+L139: 
+L140: This document describes the architecture and supported configurations of Cloud TPU v5e.
+L141: TPU v5e supports single and multi-host training and single-host inference. Multi-host inference is supported using cite58†Sax†github.com . For more information, see cite59†Cloud TPU inference .
+L142: ## System architecture
+L143: 
+L144: Each v5e chip contains one TensorCore. Each TensorCore has four matrix-multiply units (MXUs), a vector unit, and a scalar unit.
+L145: 
+L146: The following diagram illustrates a TPU v5e chip.
+L147: 
+L148: cite60†Image: Diagram of a v5e chip L149: 
+L150: The following table shows the key specifications and their values for v5e.
+L151: Specification  | Values
+L152: --- | ---
+L153: Performance/total cost of ownership (TCO) (expected)  | 0.65x
+L154: Peak compute per chip (bf16)  | 197 TFLOPs
+L155: Peak compute per chip (Int8)  | 393 TOPs
+L156: HBM capacity per chip  | 16 GB
+L157: HBM bandwidth per chip  | 800 GiBps
+L158: Bidirectional inter-chip interconnect (ICI) bandwidth (per chip)  | 400 GBps
+L159: ICI ports per chip  | 4
+L160: DRAM per host  | 512 GiB
+L161: Chips per host  | 8
+L162: TPU Pod size  | 256 chips
+L163: Interconnect topology  | 2D torus
+L164: BF16 peak compute per Pod  | 50.63 PFLOPs
+L165: All-reduce bandwidth per Pod  | 51.2 TB/s
+L166: Bisection bandwidth per Pod  | 1.6 TB/s
+L167: Per-host NIC configuration  | 2 x 100 Gbps NIC
+L168: Data center network bandwidth per Pod  | 6.4 Tbps
+L169: Peak compute per Pod  | 100 PetaOps (Int8)
+L170: ## Configurations
+L171: 
+L172: Note: Use the cite61†TPU topology visualizer†tpu-visualizer.uc.r.appspot.com to view 3D renderings of different TPU configurations.
+L173: 
+L174: Cloud TPU v5e is a combined training and inference (serving) product. Training jobs are optimized for throughput and availability, while serving jobs are optimized for latency. A training job on TPUs provisioned for serving could have lower availability and similarly, a serving job executed on TPUs provisioned for training could have higher latency.
+L175: The following 2D slice shapes are supported for v5e:
+L176: 
+L177: Topology  | Number of TPU chips  | Number of hosts
+L178: --- | --- | ---
+L179: 1x1  | 1  | 1/8
+L180: 2x2  | 4  | 1/2
+L181: 2x4  | 8  | 1
+L182: 4x4  | 16  | 2
+L183: 4x8  | 32  | 4
+L184: 8x8  | 64  | 8
+L185: 8x16  | 128  | 16
+L186: 16x16  | 256  | 32
+L187: ### VM types
+L188: 
+L189: Each TPU VM in a v5e TPU slice contains 1, 4 or 8 chips. In 4-chip and smaller slices, all TPU chips share the same non-uniform memory access (NUMA) node.
+L190: 
+L191: For 8-chip v5e TPU VMs, CPU-TPU communication will be more efficient within NUMA partitions. For example, in the following figure, `CPU0-Chip0` communication will be faster than `CPU0-Chip4` communication.
+L192: 
+L193: cite62†Image: NUMA node communication L194: 
+L195: The following table shows a comparison of TPU v5e VM types:
+L196: VM type  | Machine type  | Number of vCPUs per VM  | RAM (GB) per VM  | Number of NUMA nodes per VM
+L197: --- | --- | --- | --- | ---
+L198: 1-chip VM  | `ct5lp-hightpu-1t`  | 24  | 48  | 1
+L199: 4-chip VM  | `ct5lp-hightpu-4t`  | 112  | 192  | 1
+L200: 8-chip VM  | `ct5lp-hightpu-8t`  | 224  | 384  | 2
+L201: ### Cloud TPU v5e types for serving
+L202: 
+L203: Single-host serving is supported for up to 8 v5e chips. The following configurations are supported: 1x1, 2x2 and 2x4 slices. Each slice has 1, 4 and 8 chips respectively.
+L204: 
+L205: cite63†Image: TPU v5e configurations that support serving: 1x1, 2x2, and 2x4. L206: 
+L207: To provision TPUs for a serving job, use one of the following TPU slice sizes in your CLI or API TPU creation request:
+L208: Number of TPU chips  | Machine type
+L209: --- | ---
+L210: `1`  | `ct5lp-hightpu-1t`
+L211: `4`  | `ct5lp-hightpu-4t`
+L212: `8`  | `ct5lp-hightpu-8t`
+L213: 
+L214: For more information about managing TPUs, see cite35†Manage TPUs . For more information about the system architecture of Cloud TPU, see cite64†System architecture .
+L215: 
+L216: Serving on more than 8 v5e chips, also called multi-host serving, is supported using cite58†Sax†github.com . For more information, see cite59†Cloud TPU inference .
+L217: ### Cloud TPU v5e types for training
+L218: 
+L219: Training is supported for up to 256 chips.
+L220: 
+L221: To provision TPUs for a v5e training job, use one of the following TPU slice sizes in your CLI or API TPU creation request:
+L222: 
+L223: Number of TPU chips  | Machine type  | Topology
+L224: --- | --- | ---
+L225: `16`  | `ct5lp-hightpu-4t`  | 4x4
+L226: `32`  | `ct5lp-hightpu-4t`  | 4x8
+L227: `64`  | `ct5lp-hightpu-4t`  | 8x8
+L228: `128`  | `ct5lp-hightpu-4t`  | 8x16
+L229: `256`  | `ct5lp-hightpu-4t`  | 16x16
+L230: For more information about managing TPUs, see cite35†Manage TPUs . For more information about the system architecture of Cloud TPU, see cite64†System architecture .
+L231: 
+L232: [Button: Send feedback ]
+L233: Except as otherwise noted, the content of this page is licensed under the cite65†Creative Commons Attribution 4.0 License†creativecommons.org , and code samples are licensed under the cite66†Apache 2.0 License†www.apache.org . For details, see the cite67†Google Developers Site Policies†developers.google.com . Java is a registered trademark of Oracle and/or its affiliates.
+L234: 
+L235: Last updated 2026-08-05 UTC.
+L236: 
+L237:   * ### Products and pricing
+L238:     * cite68†See all products†cloud.google.com L239:     * cite69†Google Cloud pricing†cloud.google.com L240:     * cite70†Google Cloud Marketplace†cloud.google.com L241:     * cite71†Contact sales†cloud.google.com L242:   * ### Support
+L243: 
+L244:     * cite72†Community forums†discuss.google.dev L245:     * cite73†Support†cloud.google.com L246:     * cite74†Release Notes L247:     * cite75†System status†status.cloud.google.com L248:   * ### Resources
+L249:     * cite76†GitHub†github.com L250:     * cite77†Getting Started with Google Cloud L251:     * cite78†Code samples L252:     * cite79†Cloud Architecture Center L253:     * cite80†Training and Certification†cloud.google.com L254:   * ### Engage
+L255: 
+L256:     * cite81†Blog†cloud.google.com L257:     * cite82†Events†cloud.google.com L258:     * cite83†X (Twitter)†x.com L259:     * cite84†Google Cloud on YouTube†www.youtube.com L260:     * cite85†Google Cloud Tech on YouTube†www.youtube.com L261:   * cite86†About Google†about.google L262:   * cite87†Privacy†policies.google.com L263:   * cite88†Site terms†policies.google.com L264:   * cite89†Google Cloud terms†cloud.google.com L265:   * cite90†Our third decade of climate action: join us†cloud.google.com L266:   * Sign up for the Google Cloud newsletter cite91†Subscribe†cloud.google.com L267: 
+L268:   * English
+L269:   * Deutsch
+L270:   * Español
+L271:   * Español – América Latina
+L272:   * Français
+L273:   * Indonesia
+L274:   * Italiano
+L275:   * Português
+L276:   * Português – Brasil
+L277:   * עברית
+L278:   * 中文 – 简体
+L279:   * 中文 – 繁體
+L280:   * 日本語
+L281:   * 한국어
+</pre>
+</body></html>

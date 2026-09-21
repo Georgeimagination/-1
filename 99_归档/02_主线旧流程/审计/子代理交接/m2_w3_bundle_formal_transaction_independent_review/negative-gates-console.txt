@@ -1,0 +1,8 @@
+negative gate suite failed
+At D:\Workspace\2026projects\调研-训练推理芯片调研-资料汇总\审计\子代理交接\m2_w3_bundle_formal_transaction_independent_review\run\scripts\T
+est-BundleNegativeGates.ps1:8 char:27
++ function Fail([string]$m){throw $m}
++                           ~~~~~~~~
+    + CategoryInfo          : OperationStopped: (negative gate suite failed:String) [], RuntimeException
+    + FullyQualifiedErrorId : negative gate suite failed
+ 

@@ -1,0 +1,7 @@
+TRANSACTION FAILED; ROLLBACK SUCCEEDED. INJECTED_TEST_FAILURE_AFTER_2_PAYLOADS
+At Z:\scripts\Invoke-MI455XFormalTransaction.ps1:560 char:5
++     throw "TRANSACTION FAILED; ROLLBACK SUCCEEDED. $($originalError.E ...
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (TRANSACTION FAI...FTER_2_PAYLOADS:String) [], RuntimeException
+    + FullyQualifiedErrorId : TRANSACTION FAILED; ROLLBACK SUCCEEDED. INJECTED_TEST_FAILURE_AFTER_2_PAYLOADS
+ 

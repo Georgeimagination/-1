@@ -1,0 +1,2 @@
+{"status":"passed","checks":9379,"formal_baseline_aggregate":"f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10","signoff_sha256":"196863031761221d825309387c563553187b0ee23630002aeaeed57bbbd6084c","rebase_freeze_manifest_sha256":"d3156e2f08b72eca66c3146a423e60264f10aa6eaa3229b684789c4b87640802","structured_rows":242,"write_tables":19,"no_write_guards":3,"new_file_targets":3,"formal_writes_performed":0}
+PASS: MI455X formal transaction preflight; 9379 checks; target remains at f152 baseline.

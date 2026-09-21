@@ -1,0 +1,2 @@
+"derived_metric_id","derived_fact_id","formula_id","formula_expression","output_unit","scope_check_status","precision_check_status","direction_check_status","review_status","notes"
+"DERMET-M2NA-CDNA4-FP16-MATRIX-VECTOR","FACT-M2NA-CDNA4-DER-FP16-MATRIX-VECTOR","FORMULA-MATRIX-DIV-VECTOR","dense FP16 matrix FLOP/cycle/CU / dense FP16 vector FLOP/cycle/CU","ratio","passed","passed","passed","draft","Both inputs use FP16, per-CU/per-cycle scope and fma_2_ops. Direction check passed because neither input is a directional interconnect bandwidth; both are per-CU compute rates."

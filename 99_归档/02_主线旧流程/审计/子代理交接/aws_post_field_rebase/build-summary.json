@@ -1,0 +1,22 @@
+{
+    "status":  "PASS",
+    "current_aggregate":  "d10ad305a820f0fc1db7f2bf7030ca149ea7b556ceacd0a32d593f08a7cc01ff",
+    "prior_signoff_sha256":  "9429d80f0ba649724ed1276523df8ecfcf269e6e748b15a6cbe4dd11013b42c0",
+    "new_signoff_sha256":  "b9fa74876dfa4769df99277359f5c0be7dff268a353964abf1d392eb3708e4e3",
+    "signoff_rows":  486,
+    "authorized_writes":  477,
+    "no_write_guards":  9,
+    "exact_cell_writes":  0,
+    "target_hash_cell_diffs":  72,
+    "aggregate_cell_diffs":  486,
+    "input_files_read":  150,
+    "field_overlap":  "already_satisfied_no_write_guard",
+    "rehearsal_checks":  372,
+    "merge_checks":  25467,
+    "isolated_validator_checks":  106160,
+    "isolated_validator_mode":  "gate",
+    "formal_validator_checks":  97920,
+    "formal_table_hash_changes":  0,
+    "temporary_roots_remaining":  0,
+    "independent_signoff_required":  true
+}

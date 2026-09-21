@@ -1,0 +1,23 @@
+{
+    "status":  "passed",
+    "generated_at":  "2026-08-13",
+    "scenarios":  3,
+    "positive_scenarios":  1,
+    "rollback_scenarios":  2,
+    "candidate_validator_checks":  125619,
+    "positive_candidate_aggregate":  "5f62191bfc737535802cd6e0524b1fdf7a742ca36300db11b5a9233d4540052a",
+    "rollback_aggregate":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "positive_csv_commits":  20,
+    "positive_payload_commits":  15,
+    "three_table_csv_commits":  3,
+    "three_table_csv_rollbacks":  3,
+    "two_payload_csv_commits":  20,
+    "two_payload_payload_commits":  2,
+    "two_payload_payload_rollbacks":  2,
+    "two_payload_csv_rollbacks":  20,
+    "single_lock_and_journal_per_scenario":  true,
+    "formal_aggregate_before":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "formal_aggregate_after":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "formal_payload_targets_existing":  0,
+    "formal_writes_performed":  0
+}

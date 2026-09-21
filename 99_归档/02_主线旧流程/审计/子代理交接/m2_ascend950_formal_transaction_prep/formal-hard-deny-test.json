@@ -1,0 +1,11 @@
+{
+    "status":  "passed",
+    "generated_at":  "2026-08-13",
+    "formal_mode":  "hard_deny_pending_independent_signoff",
+    "exit_code":  1,
+    "expected_pattern":  "denied by default",
+    "pattern_match":  true,
+    "formal_aggregate_after":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "formal_targets_absent":  true,
+    "formal_writes_performed":  0
+}

@@ -1,0 +1,5 @@
+"source_selected_role_id","source_id","selected_role","rationale","review_status","notes"
+"SROLE-M2W2-TRN2CORR-S06-CORE","SRC-AWS-TRN2-S06","core_spec","32 条当前实例规格：峰值、内存、拓扑、实例内互联和 48xlarge 芯片数","draft","三实例修复包来源角色；2026-08-13"
+"SROLE-M2W2-TRN2CORR-S07-CORE","SRC-AWS-TRN2-S07","core_spec","3XL 芯片数与内存，以及三个 SKU 的实例级 EFAv3 网络带宽","draft","三实例修复包来源角色；2026-08-13"
+"SROLE-M2W2-TRN2CORR-S09-STATUS","SRC-AWS-TRN2-S09","status_version_evidence","trn2.48xlarge 2024-12-03 正式可用的固定日期证据","draft","三实例修复包来源角色；2026-08-13"
+"SROLE-M2W2-TRN2CORR-S10-CONFLICT","SRC-AWS-TRN2-S10","conflict_evidence","仅 trn2.48xlarge FP8 83.2 PFLOPS 的 2024 历史口径","draft","三实例修复包来源角色；2026-08-13"

@@ -1,0 +1,45 @@
+Positive transaction failed: TRANSACTION FAILED; ROLLBACK SUCCEEDED. Accepted replay engine failed: D:\Workspace\2026pr
+ojects\调研-训练推理芯片调研-资料汇总\审计\子代 | 理交接\m2_ascend950_formal_transaction_independent_review\independent-pack | age\scripts\R
+eplay-Ascend950AuthorizedRows.ps | 1 : Exception calling "Copy" with "3" argument(s): "Could not find a part  | of the 
+path 'D:\Workspace\2026projects\调研- | 训练推理芯片调研-资料汇总\审计\子代理交接\m2_ascend950_formal_transaction_independent_review\ind | e
+pendent-package\.tmp-ascend950-formal- | ba20a56686374840a18bb662f9eefcfa\candidate\最小参考资料库\快照\华为\Ascend950\2026-08-13\
+hu | awei-connect-2025-ascend-roadmap-202 | 6-08-13.html'." |     + CategoryInfo          : NotSpecified: (:) [Replay-A
+scend950AuthorizedRows.ps1], MethodInvocatio | nException |     + FullyQualifiedErrorId : DirectoryNotFoundException,Re
+play-Ascend950AuthorizedRows.ps1 |   | At D:\Workspace\2026projects\调研-训练推理芯片调研-资料汇总\审计\子代理交接\m2_ascend950_formal_trans
+action_independent_review\independent-p | ackage\scripts\Invoke-Ascend950FormalTransaction.ps1:562 char:5 | +     throw
+ "TRANSACTION FAILED; ROLLBACK SUCCEEDED. $($originalError.E ... | +     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~ |     + CategoryInfo          : OperationStopped: (TRANSACTION FAI...zedRows.ps1 |  :String) [], Ru
+ntimeException |     + FullyQualifiedErrorId : TRANSACTION FAILED; ROLLBACK SUCCEEDED. Accepted replay engine failed: D
+:\Workspace\2026  |    projects\调研-训练推理芯片调研-资料汇总\审计\子代理交接\m2_ascend950_formal_transaction_independent_review\independen
+t-pack | age\scrip   |   ts\Replay-Ascend950AuthorizedRows.ps1 : Exception calling "Copy" with "3" argument(s): "Could 
+not find a part  | o    |  f the path 'D:\Workspace\2026projects\调研-训练推理芯片调研-资料汇总\审计\子代理交接\m2_ascend950_formal_transact
+ion_independent_review     | \ind | ependent-package\.tmp-ascend950-formal-ba20a56686374840a18bb662f9eefcfa\candidate\最
+小参考资料库\快照\华为\Ascend950\2    0 | 26-08-13\hu | awei-connect-2025-ascend-roadmap-2026-08-13.html'." |     + CategoryInfo 
+         : NotSpecified: (    :) |  [Replay-Ascend950AuthorizedRows.ps1], MethodInvocationException |     + FullyQualif
+iedErrorId : DirectoryNotFou    ndE | xception,Replay-Ascend950AuthorizedRows.ps1 |   |  
+At D:\Workspace\2026projects\调研-训练推理芯片调研-资料汇总\审计\子代理交接\m2_ascend950_formal_transaction_independent_review\independent-p
+ackage\scripts\Test-Ascend950FormalTransactionRehearsal.ps1:13 char:33
++ function Fail([string]$Message){throw $Message}
++                                 ~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Positive transa...ows.ps1 |   |  :String) [], RuntimeException
+    + FullyQualifiedErrorId : Positive transaction failed: TRANSACTION FAILED; ROLLBACK SUCCEEDED. Accepted replay eng 
+   ine failed: D:\Workspace\2026projects\调研-训练推理芯片调研-资料汇总\审计\子代 | 理交接\m2_ascend950_formal_transaction_independent_rev  
+  iew\independent-pack | age\scripts\Replay-Ascend950AuthorizedRows.ps | 1 : Exception calling "Copy" with "3" argum   
+ ent(s): "Could not find a part  | of the path 'D:\Workspace\2026projects\调研- | 训练推理芯片调研-资料汇总\审计\子代理交接\m2_ascend950    
+_formal_transaction_independent_review\ind | ependent-package\.tmp-ascend950-formal- | ba20a56686374840a18bb662f9e    e
+fcfa\candidate\最小参考资料库\快照\华为\Ascend950\2026-08-13\hu | awei-connect-2025-ascend-roadmap-202 | 6-08-13.html'." |        
+ + CategoryInfo          : NotSpecified: (:) [Replay-Ascend950AuthorizedRows.ps1], MethodInvocatio | nException     |  
+   + FullyQualifiedErrorId : DirectoryNotFoundException,Replay-Ascend950AuthorizedRows.ps1 |   | At D:\Workspac    e\20
+26projects\调研-训练推理芯片调研-资料汇总\审计\子代理交接\m2_ascend950_formal_transaction_independent_review\independent-p | ackage    \scri
+pts\Invoke-Ascend950FormalTransaction.ps1:562 char:5 | +     throw "TRANSACTION FAILED; ROLLBACK SUCCEEDED. $    ($orig
+inalError.E ... | +     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ |     + CategoryIn    fo     
+     : OperationStopped: (TRANSACTION FAI...zedRows.ps1 |  :String) [], RuntimeException |     + FullyQuali    fiedErro
+rId : TRANSACTION FAILED; ROLLBACK SUCCEEDED. Accepted replay engine failed: D:\Workspace\2026  |    proje    cts\调研-训练
+推理芯片调研-资料汇总\审计\子代理交接\m2_ascend950_formal_transaction_independent_review\independent-pack | age\scrip   |       ts\Repla
+y-Ascend950AuthorizedRows.ps1 : Exception calling "Copy" with "3" argument(s): "Could not find a part  |     o    |  f 
+the path 'D:\Workspace\2026projects\调研-训练推理芯片调研-资料汇总\审计\子代理交接\m2_ascend950_formal_transaction_independe    nt_review   
+  | \ind | ependent-package\.tmp-ascend950-formal-ba20a56686374840a18bb662f9eefcfa\candidate\最小参考资料库\快    照\华为\Ascend95
+0\2    0 | 26-08-13\hu | awei-connect-2025-ascend-roadmap-2026-08-13.html'." |     + CategoryInfo              : NotSpe
+cified: (    :) |  [Replay-Ascend950AuthorizedRows.ps1], MethodInvocationException |     + FullyQual    ifiedErrorId : 
+DirectoryNotFou    ndE | xception,Replay-Ascend950AuthorizedRows.ps1 |   |  
+ 

@@ -1,0 +1,4 @@
+"table_path","old_rows","new_rows","old_columns","new_columns","old_sha256","new_sha256"
+"数据/field-requirements.csv","792","792","16","16","e1df2c5584bfbaccdf4352ba8f7a7d2783250d9982473a3d15b649e5521bc62a","93c27127b6124331368e24ccec97c48620d2e85f08057d14d049d87edb91d347"
+"数据/fields.csv","120","120","12","13","7cf5442800a7e453b34bbda4ac335ccf101ce5cac2dde297be657d4f56a02cae","1723cd5ef441ea12c53e785a4d2e2101f81ecdc5ce10872a02152cfb6539e2ee"
+"数据/schema-columns.csv","323","324","14","14","85129e57f6ab927cac43ca820d7b8df6558516f956bb1525ffca615f66654a6b","4c756065e0fc3fba175b0abeb41699ec637224aa4e8a5c9e150ff60730ce9375"

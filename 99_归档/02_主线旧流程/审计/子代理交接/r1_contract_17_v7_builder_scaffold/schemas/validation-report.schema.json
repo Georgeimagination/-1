@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:contract-v7:builder-scaffold-validation-report-v1",
+  "title": "Contract v7 builder scaffold validation report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "report_contract_version",
+    "scope",
+    "python_runtime",
+    "unit_tests",
+    "live_prerequisite_preflight",
+    "formal_write_count",
+    "snapshot_candidate_count",
+    "artifact_hashes",
+    "remaining_not_implemented"
+  ],
+  "properties": {
+    "report_contract_version": {"const": "CONTRACT-V7-BUILDER-SCAFFOLD-VALIDATION-V1"},
+    "scope": {"const": "audit-only-builder-scaffold"},
+    "python_runtime": {"type": "string", "minLength": 1},
+    "unit_tests": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "tests_run", "failures", "errors", "skipped"],
+      "properties": {
+        "status": {"enum": ["PASS", "FAIL"]},
+        "tests_run": {"type": "integer", "minimum": 0},
+        "failures": {"type": "integer", "minimum": 0},
+        "errors": {"type": "integer", "minimum": 0},
+        "skipped": {"type": "integer", "minimum": 0}
+      }
+    },
+    "live_prerequisite_preflight": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "error_code", "snapshot_candidate_creation_authorized", "failed_check_ids"],
+      "properties": {
+        "status": {"enum": ["READY", "BLOCKED"]},
+        "error_code": {"type": ["string", "null"]},
+        "snapshot_candidate_creation_authorized": {"type": "boolean"},
+        "failed_check_ids": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "formal_write_count": {"const": 0},
+    "snapshot_candidate_count": {"const": 0},
+    "artifact_hashes": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+    "remaining_not_implemented": {"type": "array", "items": {"type": "string"}}
+  }
+}

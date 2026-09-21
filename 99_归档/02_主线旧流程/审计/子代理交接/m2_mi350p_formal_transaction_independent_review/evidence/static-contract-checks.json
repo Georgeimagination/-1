@@ -1,0 +1,30 @@
+{
+    "status":  "passed",
+    "generated_at":  "2026-08-13",
+    "checks":  8811,
+    "authorized_write_set":  {
+                                 "rows":  270,
+                                 "tables":  19,
+                                 "sha256":  "f2f92876b801d5bc98f0e7540010c595070a8f1103039d763d32672f3bdcb801"
+                             },
+    "formal_baseline":  {
+                            "tables":  32,
+                            "aggregate":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+                            "manifest_sha256":  "c8c424fa21838248cca020b6c5feefd9c05287adec8c077474f0f36cff834f5f"
+                        },
+    "no_write_guards":  {
+                            "rows":  3,
+                            "tables":  2,
+                            "sha256":  "1a979d0ce56346c456e1e4f372ffe92b4800c15dba724944de57242a7522e28c"
+                        },
+    "new_file_targets":  {
+                             "rows":  4,
+                             "all_absent":  true,
+                             "sha256":  "483f458ad8f65602c9ac8acc191d743b8bad65790488e3a0db6dbce05da4a0fd"
+                         },
+    "backup_rollback_inventory":  {
+                                      "rows":  25,
+                                      "sha256":  "02c08c6c81f3ebbd9d62c29a91d6e35ffd54e31623c8f78e89e9a285784afcc9"
+                                  },
+    "formal_mode":  "hard_deny_pending_independent_signoff"
+}

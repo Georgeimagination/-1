@@ -1,0 +1,18 @@
+{
+    "status":  "PASS",
+    "verdict":  "accept",
+    "ready_for_formal_execution":  true,
+    "frozen_manifest_sha256":  "23766423301f258187139cd451fc58b54f76bb3545dbea2833635e5f8651bc5a",
+    "package_aggregate_sha256":  "115319f5d187598f18525a05b0d27f8822283278daca29681ac8820858454f0c",
+    "frozen_rehearsal_checks":  352,
+    "frozen_rehearsal_scenarios":  3,
+    "positive_authorized_writes":  477,
+    "positive_guards":  9,
+    "positive_validator_checks":  106160,
+    "negative_formal_gate_scenarios":  10,
+    "formal_tables_unchanged":  32,
+    "formal_payload_targets_created":  0,
+    "formal_validator_checks":  97920,
+    "formal_subject_contract_mode":  "gate",
+    "signoff_sha256":  "491df0eb2bc2f7af0e771b966faae482bab235e9cf0fdbfcbbb9b60f8b7813c3"
+}

@@ -1,0 +1,143 @@
+
+<!-- saved from url=(0062)http://web.cse.ohio-state.edu/~panda.2/isca19_bigdata_tut.html -->
+<html coupert-item="9AF8D9A4E502F3784AD24272D81F0381" class="gr__web_cse_ohio-state_edu"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+<title>Hardware Accelerators for Training of Neural Networks</title> 
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 10%;
+  padding: 10px;
+  display: block; 
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+
+</style>
+
+<img src="./truck.png" alt="PRISM" 
+style= "display: block; margin-left: auto; margin-right: auto;" float="top" width="800" height="auto" align="center">
+
+
+</head><body data-gr-c-s-loaded="true"><center> <h2>Hardware Accelerators for Training Deep Neural Networks <br> </h2> 
+         <font size="+2" color="olive">Ardavan Pedram & Kunle Olukotun </font> <br> <font size="+" color="red">Stanford Univeristy  </font>
+         <h4>
+        <a href="https://iscaconf.org/isca2019/index.html">The 46th International Symposium on Computer Architecture (ISCA-2019)</a><br>
+         </h4> 
+        </center>
+		<hr>
+
+		<center> <font size="+1" color="maroon"> Sunday Afternoon, June 23rd, 2019;
+<br> Room 102A, Phoenix Convention Center, Phoenix, Arizona, USA<br> </font> </center>
+
+		<hr> 
+
+<p><img src="https://www.nsf.gov/images/logos/NSF_4-Color_bitmap_Logo_thumb.jpg"></p>
+<p>
+Funding for this Tutorial was provided by the National Science Foundation Division of Computing and Communication Foundations under award number <a href="https://nsf.gov/awardsearch/showAward?AWD_ID=1563113&amp;HistoricalAwards=false">1563113</a>.
+</p>
+
+
+<hr>
+
+<br> <h3><a href="https://web.stanford.edu/~perdavan/DNNTrain/DNNTrain3_Printable.pdf">Slides<a></h3>
+
+<br> <h3>Abstract</h3>
+
+In this tutorial we cover the challenges when training deep neural networks.
+We will cover the architectural techniques used to design accelerators for training systems.
+Training neural networks has demanding computational and memory complexity compared to inference. Henceforth, several techniques have been exploited by state of the art researchers to overcome these challenges. We will discuss the limitations of current solutions and the approachs to overcome those. 
+We will introduce the problem of training by examining the ubiquitous synchronous stochastic gradient descent and asynchronous variants. We will cover tricks like lowering the precision and their impact on network convergence and performance. We will also cover the challenges with respect to exploiting sparsity specially while training. We look at the problem of scaling DNN training on distributed multiprocessors and its attendant problems of increasing batch size and balancing computation and communication. We then broadly survey the architectures to support training, including special purpose accelerators.
+<br>
+
+		<h3>Recommended Background</h3>
+<ul> 
+This tutorial assumes basic knowledge about computation kernels of Deep Neural Networks and how inference is accelerated. 
+<li>We recommend the
+<a href="http://eyeriss.mit.edu/tutorial.html">Saturday tutorial</a> by MIT friends on Hardware Accelerators for Deep Learning.
+<li>Several background and reading material are available on our <a href="https://cs217.stanford.edu/"> Stanford CS217 course website</a>. 
+<li> The Hotchips30 <a href="https://youtu.be/ydsZ7A0FF0I/"> tutorial video</a> of Architectures for Accelerating Deep Neural Nets is also a quick way to get up to speed.
+
+
+
+<h3>Overview</h3> 
+<ul> 
+  <li>Fundamentals of training</li> 
+    <ul>
+     <li>Stochastic Gradient Descent
+     <li>Backpropagation
+     <li>Optimization
+     <li>Generalization
+    </ul>      
+  <li>Training from computation point of view</li> 
+      <ul>
+     <li>Data dependency
+     <li>Parallelism
+     <li>Batch size
+    </ul>
+  <li>Low/Mixed Precision Training</li>
+  <ul>
+     <li>Floating-point representations for training
+     <li>Loss Scaling
+    </ul>   
+  <li>Sparse Training </li> 
+      <ul> 
+          <li>Activation sparsity</li> 
+          <li>Weight Sparsity</li> 
+          <li>Structured Sparsity</li> 
+      </ul>  
+  <li>Normalization</li> 
+       <ul> 
+          <li>Batch normalization</li> 
+          <li>Group normalization</li>
+          <li>Layer normalization</li> 
+          <li>Online normalization</li>
+       </ul> 
+  <li>Scaling Training</li> 
+       <ul> 
+	        <li>DNN architecture scaling</li> 
+          <li>System scaling / distributed Training</li>
+       </ul> 
+    <li>Accelerators for training</li>
+    <li>A Note on ML Benchmarks</li>
+    <li>Conclusion and Q&amp;A</li> 
+</ul>
+
+		<h2>Speakers</h2>
+<table>
+    <tbody><tr>
+        <td><img src="./ardavan.jpg" alt="Ardavan Pedram" style="width:170px;"></td>
+	<td><a href="https://web.stanford.edu/~perdavan/"> Ardavan Pedram </a>
+  is currently a member of technical staff at Cerebras Systems and an adjunct professor at Stanford University directing the PRISM project. He organized and taught the first course on hardware accelerators for machine learning 
+  <a href="https://cs217.stanford.edu/">(CS217)</a> in Fall 2018 with professor Olukotun at Stanford Computer Science department. His work on algorithm/architecture codesign of specialized accelerators for linear-algebra and machine-learning has won two National Science Foundation Awards in 2012 and 2016 respectively. Ardavan received his Ph.D. in computer engineering from The University of Texas at Austin in 2013. 
+
+
+	</td>
+    </tr>
+    <tr>
+        <td><img src="./kunle.jpg" alt="Kunle Olukotun" style="width:170px;"></td>
+        <td><a href="https://profiles.stanford.edu/oyekunle-olukotun">Kunle Olukotun </a>
+ is the Cadence Design Systems Professor in the School of Engineering and Professor of Electrical Engineering and Computer Science at Stanford University. Olukotun is well known as a pioneer in multicore processor design and the leader of the Stanford Hydra chip multiprocessor (CMP) research project. Olukotun founded Afara Websystems to develop high-throughput, low-power multicore processors for server systems. The Afara multicore processor, called Niagara, was acquired by Sun Microsystems. Niagara derived processors now power all Oracle SPARC-based servers. Olukotun currently directs the Stanford Pervasive Parallelism Lab (PPL), which seeks to proliferate the use of heterogeneous parallelism in all application areas using Domain Specific Languages (DSLs). 
+
+</td>
+    </tr>
+</tbody></table>
+		<hr>
+
+
+
+</body></html>

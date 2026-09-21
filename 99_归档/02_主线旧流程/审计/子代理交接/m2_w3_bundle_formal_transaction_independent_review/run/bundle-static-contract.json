@@ -1,0 +1,23 @@
+{
+    "status":  "passed",
+    "generated_at":  "2026-08-13",
+    "formal_baseline_aggregate":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "packages":  3,
+    "lifecycle_rows":  1057,
+    "lifecycle_pk_unique":  1057,
+    "cross_package_lifecycle_pk_intersections":  0,
+    "payloads":  15,
+    "payload_target_unique":  15,
+    "cross_package_payload_target_intersections":  0,
+    "write_tables":  20,
+    "write_tables_shared_by_all_three":  19,
+    "write_tables_single_package_only":  1,
+    "no_write_guards":  11,
+    "guard_tables":  2,
+    "authorized_write_set_sha256":  "0e1ad812779656e1e9f325317f87f0bb7de8edaa161475a421aa251b4058feb1",
+    "new_file_targets_sha256":  "0adc897a424712c254979c0cca9f2fef2624ca3779d1a1fa82e9436a9981cc0d",
+    "no_write_guards_sha256":  "327b884efc6e0c3bc43539d03e0e27a269c3c8d16696967a3635e906cf9ce604",
+    "candidate_validator_checks":  125619,
+    "candidate_aggregate":  "5f62191bfc737535802cd6e0524b1fdf7a742ca36300db11b5a9233d4540052a",
+    "formal_writes_performed":  0
+}

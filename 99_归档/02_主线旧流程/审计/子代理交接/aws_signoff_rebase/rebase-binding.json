@@ -1,0 +1,85 @@
+﻿{
+    "binding_id":  "AWS-SIGNOFF-REBASE-GOOGLE-SOURCE-GATE-20260813",
+    "verdict":  "accept",
+    "generated_at":  "2026-08-13T07:01:12+08:00",
+    "original_aws_signoff":  {
+                                 "path":  "审计/子代理交接/m2_final_review_aws_package_merge_signoff.csv",
+                                 "sha256":  "58f2368764e4fb132fe63a5acc427f22cdace7c38538270a7457e566d19bbd05",
+                                 "rows":  486,
+                                 "writes":  478,
+                                 "no_write_guards":  8
+                             },
+    "original_aws_report":  {
+                                "path":  "审计/子代理交接/m2_final_review_aws_package.md",
+                                "sha256":  "72e164aab2dcba307ca4cd3183ceeb450f3513aa771f6ac5107172a793c62107"
+                            },
+    "google_review":  {
+                          "path":  "审计/子代理交接/m2_final_review_google_cloud_device.md",
+                          "sha256":  "51d0495c7350a8acb2ea24ffe99a1baa86282b1bdf424cd7af69e6b9b41cbdf8"
+                      },
+    "google_formal_acceptance":  {
+                                     "path":  "审计/M2_第二波_Google云端器件来源门正式验收.md",
+                                     "sha256":  "e4368e49bc2263da19a2e6ddc8daaadc867a4449e7026476189e804b1617943a"
+                                 },
+    "google_backup_manifest":  {
+                                   "path":  "审计/合并备份/M2-W2-GOOGLE-CLOUD-DEVICE-SOURCES-20260813/backup-hashes.csv",
+                                   "sha256":  "62ad20eb0e72dffca1237f8b3345d9122dc706efb8808775761ddfd1a45822e1"
+                               },
+    "baseline":  {
+                     "old_aggregate":  "0b4c6106bde7e2a62b1ffd6a0df7246ded62177d941c7fb9303a2cbac62f92bf",
+                     "reconstructed_old_aggregate":  "0b4c6106bde7e2a62b1ffd6a0df7246ded62177d941c7fb9303a2cbac62f92bf",
+                     "current_aggregate":  "97ebb17a2518e3a43b18a382dcfc879c1f5e2b08118a6149c8fa984e65017453",
+                     "formal_table_count":  32
+                 },
+    "authorized_google_delta":  {
+                                    "family_rows":  1,
+                                    "source_rows":  1,
+                                    "endpoint_rows":  6,
+                                    "formal_pk_total":  8,
+                                    "fixed_files":  5,
+                                    "existing_rows_changed":  0,
+                                    "rows_removed":  0
+                                },
+    "conflict_audit":  {
+                           "aws_write_rows":  478,
+                           "google_formal_pks":  8,
+                           "pk_intersection":  0,
+                           "google_fixed_files":  5,
+                           "exact_fixed_file_intersection":  0,
+                           "shared_csv_containers":  [
+                                                         "最小参考资料库/sources.csv",
+                                                         "最小参考资料库/source-endpoints.csv"
+                                                     ]
+                       },
+    "rebase_signoff":  {
+                           "path":  "审计/子代理交接/aws_signoff_rebase/aws-signoff-rebase.csv",
+                           "sha256":  "9429d80f0ba649724ed1276523df8ecfcf269e6e748b15a6cbe4dd11013b42c0",
+                           "rows":  486,
+                           "allowed_changed_columns":  [
+                                                           "formal_target_premerge_sha256",
+                                                           "formal_baseline_aggregate_sha256",
+                                                           "notes"
+                                                       ],
+                           "target_hash_cells_changed":  29,
+                           "aggregate_cells_changed":  486,
+                           "note_cells_changed":  486,
+                           "forbidden_cells_changed":  0,
+                           "original_binding_id_preserved":  true
+                       },
+    "formal_validator_before_rebase":  {
+                                           "exit_code":  0,
+                                           "checks":  93378,
+                                           "result":  "PASS"
+                                       },
+    "isolated_replay":  {
+                            "signoff_rows_preflighted":  486,
+                            "writes_executed":  478,
+                            "guards_verified":  8,
+                            "validator_exit_code":  0,
+                            "validator_checks":  101311,
+                            "merged_aggregate":  "32c2fa9a40d1f98e9243c722a637079033d881fe4efcd1e9506d91f1234373a7",
+                            "formal_table_hash_changes":  0,
+                            "immutable_input_hash_changes":  0,
+                            "temp_root_cleaned":  true
+                        }
+}

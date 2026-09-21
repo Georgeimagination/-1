@@ -1,0 +1,2 @@
+﻿"coverage_id","covered_source_id","covering_source_id","coverage_scope","equivalence_status","rationale","reviewed_by","review_date","review_status","notes"
+"COV-M2W3-HUAWEI-H7-BY-H12","SRC-M2W3-HUAWEI-H7-ACCELERATOR-CARD-20260813","SRC-M2W3-HUAWEI-H12-ATLAS350-LAUNCH-20260320","selected_fact_set","fully_covered","H-12 repeats the Atlas 350 carries PR relation and adds date/status; H-7 card values are out of scope.","m2_w3_huawei_asc950_physical","2026-08-13","draft","H-7 preserved for boundary audit, removed from minimum set."

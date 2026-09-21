@@ -1,0 +1,8 @@
+New-file target already exists: 资料卡/AMD/产品/AMD_Instinct_MI350P_PCIe_卡资料卡.md
+At D:\Workspace\2026projects\调研-训练推理芯片调研-资料汇总\审计\子代理交接\m2_mi350p_formal_transaction_prep\scripts\Test-MI350PFormalTrans
+actionPreflight.ps1:30 char:87
++ ... ndition,[string]$Message); if(-not $Condition){throw $Message}; $scri ...
++                                                    ~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (New-file target...0P_PCIe_卡资料卡.md:String) [], RuntimeException
+    + FullyQualifiedErrorId : New-file target already exists: 资料卡/AMD/产品/AMD_Instinct_MI350P_PCIe_卡资料卡.md
+ 

@@ -1,0 +1,113 @@
+{
+    "status":  "PASS",
+    "verdict":  "accept",
+    "ready_for_formal_execution":  true,
+    "formal_execution_performed":  false,
+    "reviewer":  "m2_mi455x_formal_transaction_independent_review",
+    "review_date":  "2026-08-13",
+    "package":  {
+                    "package_id":  "M2-W3-AMD-MI455X-FORMAL-TRANSACTION-V1",
+                    "manifest_rows":  67,
+                    "manifest_sha256":  "c679151bd00a1bc02ffe05c4a011c2e0532df095648eab2e40b9336c5aac783f",
+                    "aggregate_sha256":  "dc0a476e4d155df21bcb9a2f9c3bbec43060f027da129ef235b58150b802b23c",
+                    "member_hash_mismatches":  0
+                },
+    "bindings":  {
+                     "transaction_script_sha256":  "3db530494b17ca9180326f9bdd5e7a76102007ff46eb4d0da7135f221ddb6da0",
+                     "preflight_script_sha256":  "05fb0d6ca1e60d0a7c23a9af920169ae6b351784bc108125eea2a6d8e18d9917",
+                     "rehearsal_script_sha256":  "7b4e27973c648fd6ff5afbbcc76c0670f004ac932ab7b8581985bd9528e37eb3",
+                     "negative_gates_script_sha256":  "b0f352a8eadcc145fbc8d01dfc84a549791b2d6659c3e32ed0cf4d969e13a879",
+                     "mi455x_signoff_rows":  245,
+                     "mi455x_structured_rows":  242,
+                     "mi455x_artifact_rows":  3,
+                     "mi455x_signoff_sha256":  "196863031761221d825309387c563553187b0ee23630002aeaeed57bbbd6084c",
+                     "rebase_freeze_manifest_sha256":  "d3156e2f08b72eca66c3146a423e60264f10aa6eaa3229b684789c4b87640802",
+                     "authorization_scope":  "formal_execution_of_exact_245_row_signoff_via_transaction_v1",
+                     "authorization_token_sha256":  "4c71a63a07d31759982691644cb2ae2029c0ad07778f1e2ac441a7e09cb2eb91"
+                 },
+    "static_and_preflight":  {
+                                 "static_checks":  6540,
+                                 "static_status":  "PASS",
+                                 "regenerated_contract_files":  9,
+                                 "regenerated_contract_mismatches":  0,
+                                 "preflight_checks":  9379,
+                                 "preflight_status":  "PASS"
+                             },
+    "transaction_contract":  {
+                                 "write_rows":  242,
+                                 "write_tables":  19,
+                                 "no_write_guard_rows":  3,
+                                 "new_file_targets":  3,
+                                 "new_file_targets_absent_before":  3,
+                                 "formal_default_deny":  "PASS"
+                             },
+    "scenarios":  {
+                      "total":  3,
+                      "passed":  3,
+                      "positive":  {
+                                       "outcome":  "PASS",
+                                       "journal_rows":  46,
+                                       "csv_commits":  19,
+                                       "payload_commits":  3,
+                                       "candidate_validator_checks":  111040,
+                                       "post_commit_validator_checks":  111040,
+                                       "candidate_aggregate":  "0d94c60e136fab58941ad8d1f6b5b55a4d2013a370c9a1dc938bd8005fa57bca"
+                                   },
+                      "rollback_after_3_tables":  {
+                                                      "outcome":  "FAIL_ROLLED_BACK",
+                                                      "executor_exit_code":  1,
+                                                      "journal_rows":  14,
+                                                      "csv_commits":  3,
+                                                      "csv_restores":  3,
+                                                      "reverse_order":  true,
+                                                      "aggregate_after":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10"
+                                                  },
+                      "rollback_after_2_payloads":  {
+                                                        "outcome":  "FAIL_ROLLED_BACK",
+                                                        "executor_exit_code":  1,
+                                                        "journal_rows":  86,
+                                                        "csv_commits":  19,
+                                                        "csv_restores":  19,
+                                                        "payload_commits":  2,
+                                                        "payload_deletes":  2,
+                                                        "csv_reverse_order":  true,
+                                                        "payload_reverse_order":  true,
+                                                        "aggregate_after":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10"
+                                                    }
+                  },
+    "negative_gates":  {
+                           "total":  6,
+                           "passed":  6,
+                           "formal_writes_performed":  0
+                       },
+    "formal_invariants":  {
+                              "baseline_files":  32,
+                              "aggregate_before":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+                              "aggregate_after":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+                              "baseline_mismatches":  0,
+                              "validator_checks":  106160,
+                              "subject_contract_mode":  "gate",
+                              "formal_targets_created":  0,
+                              "formal_writes_performed":  0,
+                              "transaction_temp_or_lock_entries":  0,
+                              "independent_temp_exists":  false,
+                              "short_drive_mapping_entries":  0
+                          },
+    "signoff":  {
+                    "path":  "formal-execution-accept-signoff.csv",
+                    "rows":  1,
+                    "columns":  17,
+                    "sha256":  "f4b27f7c64dde754431872720f270dbccbc975ee39db9487f3403e8c229049ea",
+                    "verdict":  "accept",
+                    "ready_for_formal_execution":  true
+                },
+    "execution_events":  {
+                             "recorded":  11,
+                             "model_operator_mistakes":  10,
+                             "tool_runtime_failures":  1,
+                             "sandbox_denials":  0,
+                             "approval_failures":  0,
+                             "remote_service_errors":  0,
+                             "all_closed":  true
+                         }
+}

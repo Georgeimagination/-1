@@ -1,0 +1,4 @@
+"coverage_id","covered_source_id","covering_source_id","coverage_scope","equivalence_status","rationale","reviewed_by","review_date","review_status","notes"
+"COV-R1-GA100-IEEE-BY-WP","SRC-NVIDIA-A100-IEEE-MICRO-2021","SRC-M2NA-NVIDIA-AMPERE-WP-2020","selected_fact_set","fully_covered","Every accepted claim considered from the IEEE Micro article is covered by the fixed whitepaper.","r1_ga100_atomic_staging","2026-08-21","draft","Coverage is claim-scoped and does not assert byte identity."
+"COV-R1-GA100-R595-BY-2023","SRC-NVIDIA-GPU-MEM-ERROR-MGMT-R595","SRC-NVIDIA-GPU-MEM-ERROR-MGMT-DA-09826-002-V001","selected_fact_set","stronger_for_same_claim","The fixed June 2023 PDF is used for accepted GA100 RAS mechanisms. Moving R595 pages remain a lead and do not add selected facts.","r1_ga100_atomic_staging","2026-08-21","draft","Coverage is claim-scoped and does not assert byte identity."
+

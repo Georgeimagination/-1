@@ -1,0 +1,1752 @@
+# S17 规范化文本
+
+题名：SPRING: A Sparsity-Aware Reduced-Precision Monolithic 3D CNN Accelerator Architecture for Training and Inference
+固定版本：arXiv 1909.00557v2
+原始网址：https://arxiv.org/abs/1909.00557
+全文网址：https://arxiv.org/pdf/1909.00557v2
+
+
+## 本地原文：原文/网页快照/S17_arxiv_metadata.html
+
+# 页面标题：[1909.00557] SPRING: A Sparsity-Aware Reduced-Precision Monolithic 3D CNN Accelerator Architecture for Training and Inference
+# Computer Science > Hardware Architecture
+# Title: SPRING: A Sparsity-Aware Reduced-Precision Monolithic 3D CNN Accelerator Architecture for Training and Inference
+Subjects: | Hardware Architecture (cs.AR)
+Cite as: | arXiv:1909.00557 [cs.AR]
+(or 
+ arXiv:1909.00557v2 [cs.AR] for this version)
+https://doi.org/10.48550/arXiv.1909.00557 
+ 
+ Focus to learn more 
+ 
+ 
+ 
+ arXiv-issued DOI via DataCite
+Related DOI : | https://doi.org/10.1109/TETC.2020.3003328 
+
+ 
+ 
+ 
+ Focus to learn more 
+ 
+ 
+ 
+ 
+ DOI(s) linking to related resources
+## Submission history
+## Access Paper:
+- View PDF
+- HTML (experimental)
+- TeX Source
+### Current browse context:
+### References & Citations
+- NASA ADS
+- Google Scholar
+- Semantic Scholar
+### DBLP - CS Bibliography
+## BibTeX formatted citation
+### Bookmark
+# Bibliographic and Citation Tools
+# Code, Data and Media Associated with this Article
+# Demos
+# Recommenders and Search Tools
+- Author
+- Venue
+- Institution
+- Topic
+# arXivLabs: experimental projects with community collaborators
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+Have an idea for a project that will add value for arXiv's community? Learn more about arXivLabs .
+
+## 本地原文：原文/PDF/S17_spring_v2.pdf
+
+
+=== PDF页 1 ===
+1
+SPRING: A Sparsity-Aware Reduced-Precision
+Monolithic 3D CNN Accelerator
+Architecture for Training and Inference
+Y e Yu, and Niraj K. Jha,Fellow, IEEE
+Abstract—Convolutional neural networks (CNNs) outperform traditional machine learning algorithms across a wide range of
+applications, such as object recognition, image segmentation, and autonomous driving. However, their ever-growing computational
+complexity makes it necessary to design efﬁcient hardware accelerators. Most CNN accelerators focus on exploring various dataﬂow
+styles and designs that exploit computational parallelism. However, potential performance improvement from sparsity (in activations
+and weights) has not been adequately addressed. The computation and memory footprint of CNNs can be signiﬁcantly reduced if
+sparsity is exploited in network evaluations. Therefore, different pruning methods have been proposed to increase sparsity. To take
+advantage of sparsity, some accelerator designs explore sparsity encoding and evaluation on CNN accelerators. However, sparsity
+encoding is just performed on activation data or CNN weights and only used in inference. It has been shown that activations and
+weights also have high sparsity levels during the network training phase. Hence, sparsity-aware computation should also be
+considered in the training phase. To further improve performance and energy efﬁciency, some accelerators evaluate CNNs with limited
+precision. However, this is limited to the inference phase since reduced precision sacriﬁces network accuracy if used in training. In
+addition, CNN evaluation is usually memory-intensive, especially during training. The performance bottleneck arises from the fact that
+the memory cannot feed the computational units enough data, resulting in idling of these computational units and thus low utilization
+ratios. A 3D memory interface has been used on high-end GPUs to alleviate memory bandwidth shortage. In this article, we propose
+SPRING, a SParsity-aware Reduced-precision Monolithic 3D CNN accelerator for trainING and inference. SPRING supports both CNN
+training and inference. It uses a binary mask scheme to encode sparsities in activations and weights. It uses the stochastic rounding
+algorithm to train CNNs with reduced precision without accuracy loss. To alleviate the memory bottleneck in CNN evaluation, especially
+during training, SPRING uses an efﬁcient monolithic 3D nonvolatile memory interface to increase memory bandwidth. Compared to
+Nvidia GeForce GTX 1080 Ti, SPRING achieves 15.6×, 4.2×, and 66.0× improvements in performance, power reduction, and energy
+efﬁciency, respectively, for CNN training, and 15.5×, 4.5×, and 69.1× improvements in performance, power reduction, and energy
+efﬁciency, respectively, for inference.
+Index Terms—Convolutional neural network, deep learning, hardware accelerator, inference, reduced precision, sparsity, stochastic
+rounding, training.
+!
+1 I NTRODUCTION
+C
+ONVOLUTIONAL neural networks (CNNs) excel at var-
+ious important applications, e.g., image classiﬁcation,
+image segmentation, robotics control, and natural language
+processing. However, their high computational complexity
+necessitates specially-designed accelerators for efﬁcient pro-
+cessing. Training of CNNs requires an enormous amount of
+computing power to automatically learn the weights based
+on a large training dataset. Few ASIC-based CNN training
+accelerators have been presented [1], [2], [3]. However,
+graphical processing units (GPUs) typically play a dominant
+in the training phase as CNN computation essentially maps
+well to their single-instruction multiple-data (SIMD) units
+and the large number of SIMD units present in GPUs
+provide signiﬁcant computational throughput for training
+CNNs [4], [5]. In addition, the higher clock speed, band-
+width, and power management capabilities of the Graphics
+Double Data Rate (GDDR) memory relative to the regular
+DDR memory make GPUs the de facto accelerator choice
+• This work was supported by NSF under Grant No. CCF-1811109. Y. Yu
+and N.K. Jha are with the Department of Electrical Engineering, Princeton
+University, Princeton, NJ, 08540.
+E-mail:{yeyu,jha}@princeton.edu
+for CNN training. On the other hand, CNN inference is
+more latency- and power-sensitive as an increasing number
+of applications need real-time CNN evaluations on battery-
+constrained edge devices. Hence, ASIC- and FPGA-based
+accelerators have been widely explored for this purpose
+[6], [7], [8], [9], [10]. However, they can only process low-
+level CNN operations, such as convolution and matrix
+multiplication, and lack the ﬂexibility of a general-purpose
+processor. Although CNN models have evolved rapidly
+recently, their fundamental building blocks are common
+and long-lasting. Therefore, the ASIC- and FPGA-based
+accelerators can efﬁciently process new CNN models with
+their domain-speciﬁc architectures. FPGA-based accelera-
+tors achieve faster time-to-market and enable prototyping
+of new accelerator designs. Microsoft has used customized
+FPGA boards, called Catapult [11], in its data centers to
+accelerate Bing ranking by 2×. An FPGA-based CNN accel-
+erator that uses on-chip memory has been proposed in [12],
+where a ﬁxed-point representation is used to keep all the
+weights stored in on-chip memory thus avoiding the need
+to access external memory. To improve dynamic resource
+utilization of FPGA-based CNN accelerators, multiple accel-
+erators, each specialized for a speciﬁc CNN layer, have been
+arXiv:1909.00557v2  [cs.AR]  3 Feb 2020
+
+=== PDF页 2 ===
+2
+constructed using the same FPGA hardware resource [13]. A
+convolver design for both the convolutional (CONV) layer
+and fully-connected (FC) layer has been proposed in [14]
+to efﬁciently process CNNs on embedded FPGA platforms.
+ASIC-based CNN accelerators have better energy efﬁciency
+and can be fully customized for CNN applications. In [15],
+CNNs are mapped entirely within the on-chip memory and
+the ASIC accelerator is placed close to the image sensor so
+that all the DRAM accesses are eliminated, leading to a 60 ×
+energy efﬁciency improvement relative to previous works.
+A 1D chain ASIC architecture is used in [16] to accelerate
+the CONV layers since these layers are the most compute-
+intensive [1]. To speed up the CONV layers, a Fast Fourier
+Transform-based fast multiplication is used in [17]. This
+accelerator encodes weights using block-circulant matrices
+and converts convolutions into matrix multiplications to re-
+duce the computational complexity fromO(n2) toO(nlogn)
+and storage complexity from O(n2) to O(n). A 3D mem-
+ory system is used in [18] to reduce memory bandwidth
+pressure. This enables more chip area to be devoted to
+processing elements (PEs), thus increasing performance and
+energy efﬁciency.
+To take advantage of the underlying parallel comput-
+ing resources of CNN accelerators, an efﬁcient dataﬂow is
+necessary to minimize data movement between the on-chip
+memory and PEs. Unlike the temporal architectures, like
+SIMD or single-instruction multiple-thread, used in central
+processing units (CPUs) and GPUs, the Google Tensorﬂow
+processing unit (TPU) uses a spatial architecture, called the
+systolic array [19]. Data ﬂow into arithmetic logic units
+(ALUs) in a wave and move through adjacent ALUs in order
+to be reused. In [20], multiple CNN layers are fused and
+processed so that intermediate data can be kept in on-chip
+memory, thus obviating the need for external memory ac-
+cess. A ﬁne-grained dataﬂow accelerator is proposed in [21].
+It converts convolution into data preprocessing and matrix
+multiplication. Data are directly transferred among PEs,
+without the need for redundant control logic, as opposed
+to temporal architectures, such as DianNao [22]. In [23], a
+ﬂexible dataﬂow architecture is described for efﬁciently pro-
+cessing different types of parallelism: feature map, neuron,
+and synapse. A dataﬂow called row-stationary is used in
+[24] to reuse data and minimize data movement on a spatial
+architecture.
+Although various dataﬂow styles and computational
+parallelism designs have been explored in recent works,
+the potential speedup from weight/activation sparsity is
+still underexplored. The computation and memory foot-
+print of CNNs can be signiﬁcantly reduced if sparsity is
+exploited during network evaluations. Some recent works
+utilize sparsity to speed up CNN evaluations [25], [26], [27],
+[28], [29], [30]. However, they only consider either activation
+or weight sparsity, and only use sparsity during CNN
+inference based on various pruning methods. It has been
+shown that the average network-wide activation sparsity of
+the well-known AlexNet CNN [31] during its entire training
+process is 62% (a maximum of 93%) [32]. Therefore, the
+training process can be signiﬁcantly accelerated if sparsity
+is exploited. Another CNN acceleration technique is to use
+reduced precision to improve performance and energy efﬁ-
+ciency. For example, TPU and DianNao use 8-bit and 16-bit
+ﬁxed-point quantizations, respectively, in CNN evaluations.
+However, low-precision accelerators are currently mainly
+used in the inference phase, since CNN training involves
+gradient computation and propagation that require high-
+precision ﬂoating-point operations to achieve high accuracy.
+Apart from improving the efﬁciency of the computational
+resources employed in CNN accelerators, CNN training also
+requires a large memory bandwidth to store activations and
+weights. In the forward pass, activations must be retained in
+the memory until the backward pass commences in order to
+compute the error gradients and update weights. Besides,
+in order to ﬁll the SIMD units of GPUs, a large amount
+of data is needed from the memory. Hence, 3D memory
+systems, such as hybrid memory cube (HMC) [33] and high
+bandwidth memory (HBM) [34], have been used in high-
+end GPUs to provide signiﬁcant memory bandwidth for
+CNN training and to bring processing closer to computing.
+There are many studies on accelerators with near-memory
+processing (NMP) or processing in memory (PIM) that aim
+to reduce the memory transfer overhead [35], [36], [37],
+[38], [39], [40], [41]. In [42], an NMP-enhanced dual in-
+line memory module is proposed to reduce the latency of
+embedding fetching and gather/reduction operations used
+in recommender deep neural networks (DNNs) that take
+up 34% of the total execution time of DNN workloads in
+Facebook datacenters [43]. A PIM accelerator, FloatPIM, is
+proposed in [44]. It speeds up data movement by enabling
+parallel data transfer between neighboring blocks.
+In this article, we make the following contributions:
+1) We propose a novel sparsity-aware CNN accelera-
+tor architecture, called SPRING. It encodes activation and
+weight sparsities with binary masks and uses efﬁcient low-
+overhead hardware implementations for CNN training and
+inference.
+2) SPRING uses reduced-precision ﬁxed-point opera-
+tions for both training and inference. A dedicated module
+is used to implement the stochastic rounding algorithm [45]
+to prevent accuracy loss during CNN training.
+3) SPRING uses an efﬁcient monolithic 3D nonvolatile
+RAM (NVRAM) interface to provide signiﬁcant memory
+bandwidth for CNN processing. This alleviates the perfor-
+mance bottleneck in CNN training since the training process
+is usually memory-bound [46].
+We test the proposed SPRING architecture on seven
+well-known CNNs in the context of both training and
+inference. Simulation results show that the average exe-
+cution time, power dissipation, and energy consumption
+are reduced by 15.6 ×, 4.2 ×, and 66.0 ×, respectively, for
+CNN training, and 15.5 ×, 4.5×, and 69.1×, respectively, for
+inference, relative to Nvidia GeForce GTX 1080 Ti.
+The rest of the article is organized as follows. Section 2
+discusses the background information required to under-
+stand our sparsity-aware accelerator. Section 3 presents the
+sparsity-aware reduced-precision accelerator architecture.
+Section 4 describes our simulation setup and ﬂow. Section 5
+presents experimental results obtained on seven typical
+CNNs. Section 6 discusses the limitations of our work.
+Section 7 concludes the article.
+
+=== PDF页 3 ===
+3
+Input CONV + ACT POOL CONV + ACT POOL FC FC 
+Fig. 1. CNN architecture illustration
+2 B ACKGROUND
+In this section, we discuss the background material nec-
+essary for understanding our proposed sparsity-aware
+reduced-precision accelerator architecture. We ﬁrst give a
+primer on CNNs. We then discuss existing sparsity-aware
+designs. Then, we discuss various CNN training algorithms
+that use low numerical precision. Finally, we describe an
+efﬁcient on-chip memory interface that is used for CNN
+acceleration.
+2.1 CNN overview
+Although different CNNs have different hyperparameters,
+such as the number of layers and shapes, they share a
+similar architecture, as shown in Fig. 1. CNNs are generally
+composed of ﬁve building blocks: CONV layers, activation
+(ACT) layers, pooling (POOL) layers, batch normalization
+layers (not shown in Fig. 1), and FC layers. Among these
+basic components, the CONV and FC layers are the most
+compute-intensive [1]. We describe them next.
+CONV layers: A batch of 3D input feature maps is
+convolved with a set of 3D ﬁlter weights to generate a
+batch of 3D output feature maps. The ﬁlter weights are
+usually fetched from external memory once and stored in
+on-chip memory as they are shared among multiple con-
+volution windows. Therefore, CONV layers have relatively
+low memory bandwidth pressure and are usually compute-
+bound as they require a large number of convolution com-
+putations. Given the input feature map I and ﬁlter weights
+W, the output feature map O is computed as follows:
+O[n][k][p][q] =
+C−1∑
+c=0
+R−1∑
+r=0
+S−1∑
+s=0
+I[n][c][p ×u +r][q ×v +s]
+× W[k][c][r][s]
+(1)
+where I ∈ RN CHW , W ∈ RKCRS , and O ∈ RN KP Q. N is
+the number of images in a batch and K is the total number
+of ﬁlters in the CONV layer. C represents the number of
+channels in the input feature maps and ﬁlter weights.H and
+W denote the height and width of the input feature maps,
+respectively, whereasR andS denote the height and width
+of ﬁlter weights, respectively. The vertical and horizontal
+strides are given by u and v, respectively. The height and
+width of the output feature maps are given by P and Q,
+respectively.
+FC layers: The neurons in an FC layer are fully connected
+with neurons in the previous layer with a speciﬁc weight
+associated with each connection. It is the most memory-
+intensive layer in CNNs [14], [47] since no weight is reused.
+The computation of the FC layer can be represented by a
+matrix-vector multiplication as follows:
+y = Wx + b (2)
+where W ∈ Rm×n, y, b ∈ Rm, and x ∈ Rn. The output and
+input neurons of the FC layer are represented in vector form
+as y and x. W represents the weight matrix and b is the bias
+vector associated with the output neurons.
+2.2 Exploiting sparsity in CNN accelerators
+It is known that the sparsity levels of CNN weights typically
+range from 20% to 80% [48], [49], and when the rectiﬁed
+linear unit (ReLU) activation function is employed, the acti-
+vations are clamped to zeros in the 50% to 70% range [27].
+The combination of weight and activation sparsities can re-
+duce computations and memory accesses signiﬁcantly if the
+accelerator can support sparsity-aware operations. In order
+to speed up CNN evaluation by utilizing weight/activation
+sparsity, the ﬁrst step is to encode the sparse data in a
+compressed format that can be efﬁciently processed by
+accelerators. EIE is an accelerator that encodes a sparse
+weight matrix in a compressed sparse column (CSC) format
+[50] and uses a second vector to encode the number of zeros
+between adjacent non-zero elements [25]. However, it is only
+used to speed up the FC layers and has no impact on the
+CONV layers. Hence, a majority of CNN computations does
+not beneﬁt from sparsity-aware acceleration. A lightweight
+run-time output sparsity predictor has been developed in
+SparseNN, an architecture enhanced from EIE, to accelerate
+CNN inference [26]. Activations in the CSC format are ﬁrst
+fed to the lightweight predictor to predict the non-zero
+elements in the output neurons. Then, the activations asso-
+ciated with non-zero outputs are sent to feedforward com-
+putations to bypass computations that lead to zero outputs.
+If the number of computations skipped is large enough, the
+overhead of output predictions can be offset. However, since
+the output sparsity predicted by the lightweight predictor
+is an approximation of the real sparsity value, it incurs an
+accuracy loss that makes it unsuitable for CNN training.
+SCNN is another accelerator that uses a zero-step format
+to encode weight/activation sparsity: an index vector is
+used to indicate the number of non-zero data points and
+the number of zeros before each non-zero data point. It
+multiplies activation and weight vectors in a manner similar
+to a Cartesian product using an input stationary dataﬂow
+[27]. However, the Cartesian product does not automatically
+align non-zero weights and activations in the FC layers since
+the FC layer weights are not reused as in the case of CONV
+layers. This leads to performance degradation for FC layers
+and makes SCNN unattractive for CNNs dominated by FC
+layers. Stitch-X [51], an improved version of SCNN, adopts
+a hybrid dataﬂow by leveraging both spatial and temporal
+partial-sum reduction to dynamically stitch together non-
+zero activations and weights. Cnvlutin [29] enhances the
+DaDianNao architecture to support zero-skipping in acti-
+vations using a zero-step offset vector that is similar to
+graphics processor proposals [52], [53], [54], [55]. The lim-
+itation of this architecture is that the length of offset vectors
+in different PEs may be different. Hence, they may require
+different numbers of cycles to process the data. Thus, the
+
+=== PDF页 4 ===
+4
+PE with the longest offset vector becomes the performance
+bottleneck while other PEs idle and wait for it. Cambricon-
+X is an accelerator that also employs the zero-step sparsity
+encoding method and uses a dedicated indexing module
+to select and transfer needed neurons to PEs, with a re-
+duced memory bandwidth requirement [30]. The PEs run
+asynchronously to avoid the idling problem of Cnvlutin.
+An enhanced version, Cambricon-S, is then proposed to
+reduce the irregularity of weight sparsity using a software-
+based coarse-grained pruning technique [56]. UCNN is an
+accelerator that improves CNN inference performance by
+exploiting weight repetition in the CONV layers [28]. It uses
+a factorized dot product dataﬂow to reduce the number
+of multiplications and a memorization method to reduce
+weight memory access via weight repetition.
+Both the CSC and zero-step encoding formats compress
+data by eliminating zero-elements and the accelerators dis-
+cussed above efﬁciently process the compressed data. How-
+ever, weight/activation sparsity can not only be exploited
+at the PE level but also at the bit level. Stripes, a bit-serial
+hardware accelerator, avoids the processing of zero preﬁx
+and sufﬁx bits through serial-parallel multiplications on
+CNNs [57]. Each bit of a neuron is processed at every cycle
+and zero bits are skipped on the ﬂy. Multiple neurons are
+processed in parallel to mitigate performance loss from bit-
+serial processing. Pragmatic, a CNN accelerator enhanced
+from Stripes, supports zero-bit skipping regardless of its
+position [58]. However, it needs to convert the input neuron
+representation into a zero-bit-only format on the ﬂy, which
+leads to up to a 16-cycle latency.
+2.3 Low-precision CNN training algorithms
+The rapid evolution of CNNs in recent years has neces-
+sitated the deployment of large-scale distributed training
+using high-performance computing infrastructure [59], [60],
+[61]. Even with such a powerful computing infrastructure,
+training a CNN to convergence usually takes several days,
+sometimes even a few weeks. Hence, to speed up the
+CNN training process, various training algorithms with
+low-precision computations have been proposed.
+Single-precision ﬂoating-point (FP32) operation has
+mainly been used as the training standard on GPUs. Mean-
+while, efforts have been made to train CNNs with half-
+precision ﬂoating-point (FP16) arithmetic since it can im-
+prove training throughput by 2 ×, in theory, on the same
+computing infrastructure. However, compared to FP32,
+FP16 involves rounding off gradient values and quantizing
+to a lower-precision representation. This introduces noise in
+the training process and defers CNN convergence. To main-
+tain a balance between the convergence rate and training
+throughput, mixed-precision training algorithms that use a
+combination of FP32 and FP16 have been proposed [62],
+[63]. The FP16 representation is used in the most compute-
+intensive multiplications and the results are accumulated
+into FP32 outputs. Dynamic scaling is required to prevent
+the vanishing gradient problem [64].
+Compared to ﬂoating-point arithmetic, ﬁxed-point oper-
+ations are much faster and more energy-efﬁcient on hard-
+ware accelerators, but have a lower dynamic range. To over-
+come the dynamic range limitation, the dynamic ﬁxed-point
+format [65] is used in CNN training [66], [67]. Unlike the reg-
+ular ﬁxed-point format, the dynamic ﬁxed-point format uses
+multiple scaling factors that are updated during training to
+adjust the dynamic range of different groups of variables.
+The CNN training convergence rate is highly sensitive to
+the rounding scheme used in ﬁxed-point arithmetic [45].
+Instead of tuning the dynamic range used in the dynamic
+ﬁxed-point format, a stochastic rounding method has been
+proposed to leverage the noise tolerance of CNN algorithms
+[45]. CNNs are trained in a manner that the rounding
+error is exposed to the network and weights are updated
+accordingly to mitigate this error, without impacting the
+convergence rate.
+2.4 Efﬁcient on-chip memory interface and emerging
+NVRAM technologies
+CNN training involves feeding vast input feature maps
+and ﬁlter weights to the accelerator computing units to
+compute the error gradients used to update CNN weights
+in backpropagation. Besides the large memory size required
+to store all the CNN weights, a high memory bandwidth
+becomes indispensable to keep running the computing units
+at full throughput. Hence, through-silicon via (TSV)-based
+3D memory interfaces have been used on high-end GPUs
+[5] and specialized CNN accelerators [3]. The most widely-
+used TSV-based 3D memory interface is HBM. In each HBM
+package, multiple DRAM dies and one memory controller
+die are ﬁrst fabricated and tested individually. Then, these
+dies are aligned, thinned, and bonded using TSVs. The HBM
+package is connected to the processor using an interposer
+in a 2.5D manner. This shortens the interconnects within
+the memory system and between the memory and proces-
+sor, thus reducing memory access latency and improving
+memory bandwidth. In addition, since more DRAM dies
+are integrated within the same footprint area, HBM enables
+smaller form factors: HBM-2 uses 94% less space relative to
+GDDR5 for a 1GB memory [68].
+Apart from improving the DRAM interface, the industry
+has also been exploring various NVRAM technologies to
+replace DRAM, such as ferroelectric RAM (FeRAM), spin-
+transfer torque magnetic RAM (STT-MRAM), phase-change
+memory (PCM), nanotube RAM (NRAM), and resistive
+RAM (RRAM). It has been shown in [69], [70] that RRAM
+can be used in an efﬁcient 3D memory interface to deliver
+high memory bandwidth and energy efﬁciency. Information
+is represented by different resistance levels in an RRAM
+cell. Compared to a DRAM, an RRAM cell needs a higher
+current to change its resistance level. Therefore, the access
+transistors of an RRAM are larger than those of a DRAM
+[71]. However, DRAM is expected to reach the scaling limit
+at 16nm [72] whereas RRAM is believed to be suitable for
+sub-10nm nodes [73]. Hence, the smaller technology node
+of an RRAM should offset the access transistor overhead.
+Besides, the nonvolatility of RRAM eliminates the need for
+a periodic refresh that a DRAM requires. This not only saves
+energy and reduces latency, but also gets rid of the refresh
+circuitry used in DRAM.
+
+=== PDF页 5 ===
+5
+C5
+Memory 
+controllers
+Accelerator 
+tier
+MIVs
+RRAM tiers
+Fig. 2. The SPRING architecture
+3 S PARSITY -AWARE REDUCED -PRECISION AC -
+CELERATOR ARCHITECTURE
+In this section, we present the proposed architecture,
+SPRING: a sparsity-aware reduced-precision CNN accel-
+erator for both training and inference. We ﬁrst discuss
+accelerator architecture design and then dive into sparsity-
+aware acceleration, reduced-precision processing, and the
+monolithic 3D NVRAM interface.
+Fig. 2 shows the high-level view of the architecture.
+SPRING uses monolithic 3D integration to connect the ac-
+celerator tier with an RRAM interface. Unlike TSV-based
+3D integration, monolithic 3D integration only has one
+substrate wafer, where devices are fabricated tier over tier.
+Hence, the alignment, thinning, and bonding steps of TSV-
+based 3D integration can be eliminated. In addition, tiers are
+connected through monolithic inter-tier vias (MIVs), whose
+diameter is the same as that of local vias and one-to-two
+orders of magnitude smaller than that of TSVs. This enables
+a much higher MIV density ( 108/mm2 at 14nm [74]), thus
+leaving much more space for logic. The accelerator tier is put
+at the bottom, on top of which is the memory controller tier.
+Above the memory controller tier lie the multiple RRAM
+tiers.
+Fig. 3 shows the organization of the accelerator tier. The
+control block handles the CNN conﬁguration sent from the
+CPU. It fetches the instruction stream and controls the rest of
+the accelerator to perform acceleration. The activations and
+ﬁlter weights are brought on-chip from the RRAM system
+by a direct memory access (DMA) controller. Activations
+and weights are stored in the activation buffer and weight
+buffer, respectively, in a compressed format. Data compres-
+sion relies on binary masks that are stored in a dedicated
+mask buffer. The compression scheme is discussed in Sec-
+tion 3.1. The compressed data and the associated masks are
+used in the PEs for CNN evaluation. The PEs are designed
+to operate in parallel to maximize overall throughput.
+Fig. 4 shows the main components of a PE. The com-
+pressed data are buffered by the activation FIFO and
+weight FIFO. Then, they enter the pre-compute sparsity
+module along with the binary masks. Multiple multiplier-
+CPU	
+DMA	
+controller	RRAM	
+system	
+Activation	
+buffer	
+Control	block	
+Weight	
+buffer	
+Mask	
+buffer	
+PE	 …	PE	
+Fig. 3. Accelerator organization
+MAC	lanes	 Pooling	module	
+Batch	
+normalization	
+module	
+Reshape	module	
+Activation	FIFO	
+Loss	module	
+Pre-compute	
+sparsity	module	 Scalar	module	
+Post-compute	
+sparsity	module	
+Weight	FIFO	
+Fig. 4. Internal components of a PE
+accumulator (MAC) lanes are used to compute convolutions
+or matrix-vector multiplications using zero-free activations
+and weights after they are preprocessed by the pre-compute
+sparsity module. The output results go through a post-
+compute sparsity module to maintain the zero-free format.
+Batch normalization operations [75] are used in modern
+CNNs to reduce the covariance shift. They are executed in
+the batch normalization module that supports both the for-
+ward pass and backward pass of batch normalization. Three
+pooling methods are supported by the pooling module:
+max pooling, min pooling, and mean pooling. The reshape
+module deals with matrix transpose and data reshaping.
+Element-wise arithmetic, such as element-wise add and
+subtract, is handled by the scalar module. Lastly, a dedicated
+loss module is used to process various loss functions, such
+as L1 loss, L2 loss, softmax, etc.
+
+=== PDF页 6 ===
+6
+14	0	76	0	0	42	0	86	0	0	0	57	0	0	3	0	
+1	0	1	0	0	1	0	1	0	0	0	1	0	0	1	0	
+14	76	42	86	57	3	
+Uncompressed	
+data	vector	
+Compressed	
+data	vector	
+Binary	mask	
+vector	
+Fig. 5. The binary mask scheme: An example
+3.1 Sparsity-aware acceleration
+Traditional accelerator designs can only process dense data
+and do not support sparse-encoded computation. They treat
+zero elements in the same manner as regular data and
+thus perform operations that have no impact on the CNN
+evaluation results. In this context, weight/activation spar-
+sity cannot be used to speed up computation and reduce
+the memory footprint. In order to utilize sparsity to skip
+ineffectual activations and weights, and reduce the memory
+footprint, SPRING uses a binary-mask scheme to encode
+the sparse data and performs computations directly in the
+encoded format.
+Compared to the regular dense format, SPRING com-
+presses data vectors by removing all the zero-elements. In
+order to retain the shape of the uncompressed data, an extra
+binary mask is used. The binary mask has the same shape
+as that of the uncompressed data where each binary bit in
+the mask is associated with one element in the original data
+vector. Fig. 5 shows an example of the binary-mask scheme
+that SPRING uses to compress activations and weights. The
+original uncompressed data vector has 16 elements, and
+if each element is represented using 16 bits, the total data
+length is 256 bits. With the binary scheme, only the six non-
+zero elements remain. The total length of the compressed
+data vector and the binary mask is 112 bits, which leads to
+a compression ratio of 2.3× for this example.
+We implement the binary mask scheme using a low
+overhead pre-compute sparsity module that preprocesses
+the sparse-encoded activations and weights and provides
+zero-free data to the MAC lanes. After output data traverse
+the MAC lanes, another post-compute sparsity module is
+used to remove all the zero-elements generated by the
+activation function before storing them back to on-chip
+memory. Fig. 6 shows the pre-compute sparsity module that
+takes the zero-free data vectors and binary mask vectors
+as inputs, and generates an output mask as well as zero-
+free activations/weights for the MAC lanes. The output
+binary mask indicates the common indexes of non-zero
+elements in both the activation and weight vectors. After
+being preprocessed by the pre-compute sparsity module, the
+“dangling” non-zero elements in the activation and weight
+data vectors are removed. The dangling non-zero activations
+refer to the non-zero elements in the activation data vector
+where their corresponding weights at the same index are
+zeros, and vice versa.
+Fig. 7(a) shows the mask generation process used by
+the pre-compute sparsity module. The output mask is the
+8
+3
+2
+4
+5
+1
+9
+7
+3
+9
+6
+5
+1
+2
+4
+8
+Pre-compute 
+sparsity module 
+3
+2
+7
+4
+1
+9
+5
+9
+5
+1
+2
+4
+8
+Activation mask 
+Activations 
+Weights 
+Output mask 
+Activations 
+Weights 
+Weight mask 
+1
+0
+1
+1
+0
+1
+0
+0
+0
+1
+1
+1
+0
+1
+0
+1
+0
+0
+1
+1
+0
+1
+0
+0
+Fig. 6. The pre-compute sparsity module
+AND of the activation and weight masks. The output mask,
+together with the activation and weight masks, is used by
+two more XOR gates for ﬁlter mask generation. Fig. 7(b)
+shows the dangling data ﬁltering process using the three
+masks obtained in the previous step. The sequential scan-
+ning and ﬁltering mechanism for one type of data used in
+the ﬁltering step is shown in Algorithm 1. The data vector,
+as well as the two mask vectors, is scanned in sequence.
+At each step, a 1 in the output mask implies a common
+non-zero index. Hence, the corresponding element in the
+data vector passes through the ﬁlter. On the other hand,
+if a 0 appears in the mask ﬁlter and the corresponding
+mask bit in the ﬁlter mask is 1, then a dangling non-zero
+element is detected in the data vector and is blocked by
+the ﬁlter. If both the output mask bit and ﬁlter mask bit
+are zeros, it means that the data elements at this index in
+both the activation and weight vectors are zeros and thus
+already skipped. After ﬁltering out the dangling elements
+in activations and weights, a zero-collapsing shifter is used
+to remove the zeros and keep the data vectors zero-free in a
+similar sequential scanning manner, as shown in Fig. 7(c).
+These zero-free activations and weights are then fed to
+the MAC lanes for computation. Since only zero-free data
+are used in the MAC lanes, ineffectual computations are
+completely skipped, thus improving throughput and saving
+energy.
+3.2 Reduced-precision processing using stochastic
+rounding
+SPRING processes CNNs using ﬁxed-point numbers with
+reduced precision. Every time a new result is generated
+by the CNN, it has to be ﬁrst rounded to the nearest
+discrete number, either in a ﬂoating-point representation or
+a ﬁxed-point representation. Since the gap between adjacent
+numbers in the ﬁxed-point representation is much larger
+than in the ﬂoating-point representation, the resulting quan-
+tization error in the former is much more pronounced. This
+prevents the ﬁxed-point representation from being used in
+error-sensitive CNN training. In order to utilize the faster
+
+=== PDF页 7 ===
+7
+(a) (b) (c) 
+Filter 
+032
+4
+519
+7
+090
+5
+124
+8
+Activations 
+Weights 
+832
+4
+519
+7
+Activations 
+396
+5
+124
+8
+Weights 
+Output mask 001
+1
+010
+0
+Activation filter mask 
+Weight filter mask 
+100
+0
+000
+0
+010
+0
+000
+1
+Zero-collapsing shifter 
+032
+4
+519
+7
+090
+5
+124
+8
+Activations 
+Weights 
+327
+4
+195
+95
+124
+8
+Activations 
+Weights 
+Activation mask 
+Output mask 
+Weight mask 
+Activation  filter mask 
+Weight  filter mask 
+101
+1
+010
+0
+011
+1
+010
+1
+001
+1
+010
+0
+100
+0
+000
+0
+010
+0
+000
+1
+Fig. 7. The submodules of the pre-compute sparsity module: (a) mask generation, (b) dangling-data ﬁlter, and (c) zero-collapsing shifter
+Algorithm 1 Sequential scanning and ﬁltering mechanism
+1: Inputs: in data, output mask, ﬁlter mask
+2: output: out data
+3: data pointer←0, mask pointer←0
+4: while mask pointer< mask length do
+5: if output mask[mask pointer] == 1 then
+6: out data[data pointer] = in data[data pointer]
+7: data pointer++
+8: else if ﬁlter mask[mask pointer] == 1 then
+9: out data[data pointer] = 0
+10: data pointer++
+11: mask pointer++
+and more energy-efﬁcient ﬁxed-point arithmetic units, we
+adopt the stochastic rounding method proposed in [45]. The
+traditional deterministic rounding scheme always rounds
+a real number to its nearest discrete number, as shown
+in Eq. 3. We follow the deﬁnitions used in [45], where ϵ
+denotes the smallest positive discrete number supported
+in the ﬁxed-point format and ⌊x⌋ is deﬁned as the largest
+integer multiple ofϵ less than or equal to x.
+Round(x) =
+
+
+
+⌊x⌋ if x< ⌊x⌋ + ϵ
+2
+⌊x⌋ +ϵ otherwise
+(3)
+In contrast, a real numberx is rounded to ⌊x⌋ and ⌊x⌋+ϵ
+stochastically in the stochastic rounding scheme, as shown
+in Eq. 4 [45]. It is shown in [45] that with the stochastic
+rounding scheme, the CNN weights can be trained to toler-
+ate the quantization noise without increasing the number of
+cycles required for convergence.
+Round(x) =
+
+
+
+⌊x⌋ withprobability ⌊x⌋ +ϵ −x
+ϵ
+⌊x⌋ +ϵ withprobability x − ⌊x⌋
+ϵ
+(4)
+The stochastic rounding scheme is embedded in the
+MAC lane, as shown in Fig. 8. Activations and weights
+are represented using ﬁxed-point numbers using IL+FL bits,
+Stochastic 
+rounding 
+Activation 
+function 
+Activations Weights 
+Fig. 8. The MAC lane
+where IL denotes the number of bits for the integer portion
+and FL denotes the number of bits for the fraction part.
+The zero-free activations and weights from the pre-compute
+sparsity module are subject to multiplications in the MAC
+lanes, where the products are represented with 2×IL integer
+bits and 2 ×FL fractional bits to prevent overﬂow. Accumu-
+lations over products are also performed using 2 ×(IL+FL)
+bits. Then, a stochastic rounding module is used to reduce
+the numerical precision before applying the activation func-
+tion or storing the result back to on-chip memory. We use
+a linear-feedback shift register to generate pseudo-random
+numbers for stochastic rounding.
+3.3 Monolithic 3D NVRAM interface
+SPRING uses a monolithic 3D NVRAM interface previously
+proposed in [69] and adapts it to its 3D architecture to
+provide the accelerator tier with signiﬁcant memory band-
+width. As shown in Fig. 2, SPRING uses two memory
+channels where each channel has its own memory controller
+to control the associated two RRAM ranks. An ultra-wide
+
+=== PDF页 8 ===
+8
+I/O	
+Bank	
+Subarray	 Row	buffer	
+Rank	
+Bank	
+Chip	
+MC	
+Write	bus	
+Read	bus	
+Rank	
+Chip	
+Memory	controller	
+Fig. 9. Read/write decoupled interconnects [70]
+memory bus (1KB wide) is used in each channel, since
+the interconnects between SPRING and memory controllers,
+and between memory controllers and RRAM ranks, are
+implemented using vertical MIVs. This on-chip memory
+bus not only reduces the access latency relative to the
+conventional off-chip memory bus, but also makes row-
+wide granular memory accesses possible to enable energy
+savings. In addition, the column decoder can be removed to
+reduce the access latency and power dissipation in this row-
+wide access granularity scheme. To reduce repeated accesses
+to the same row, especially the energy-consuming write
+accesses of RRAM, the row buffer is reused as the write
+buffer. A dirty bit is used to indicate if the corresponding
+row entry in the row buffer needs to be written back to
+the RRAM array when ﬂushed out. The read and write
+accesses are decoupled by adding another set of vertical
+interconnects, as shown in Fig. 9 [70]. Hence, the slower
+write access does not block the faster read access and
+thus a higher memory bandwidth is achieved. In addition,
+RRAM nonvolatility not only enables the elimination of
+bulky periodic refresh circuitry, but also allows the RRAM
+arrays to be powered down in the idle intervals to reduce
+leakage power. A rank-level adaptive power-down policy
+is used to maintain a balance between performance and
+energy saving: the power-down threshold for each RRAM
+rank is adapted to its idling pattern so that a rank is only
+powered down if it is expected to be idle for a long time.
+4 S IMULATION METHODOLOGY
+In this section, we present the simulation ﬂow for SPRING
+and the experimental setup.
+Fig. 10 shows the simulation ﬂow used to evaluate the
+proposed SPRING accelerator architecture. We implement
+components of SPRING at the register-transfer level (RTL)
+with SystemVerilog to estimate delay, power, and area. The
+RTL design is synthesized by Design Compiler [76] using a
+14nm FinFET technology library [77]. Floorplanning is done
+by Capo [78], an open-source ﬂoorplacer. On-chip buffers
+Design 
+Compiler 
+RTL 
+SystemVerilog 
+FinCACTI 
+Buffer 
+parameters 
+RRAM 
+parameters 
+NVMain NVSim 
+TensorFlow .pb 
+Cycle-accurate 
+accelerator simulator Power, latency, 
+area 
+Access energy, 
+latency, area 
+Access energy, 
+latency, area 
+CNN model 
+Power, energy, 
+latency, area 
+Capo 
+Fig. 10. Simulation ﬂow
+are modeled using FinCACTI [79], a cache modeling tool en-
+hanced from CACTI [80], to support deeply-scaled FinFETs
+at the 14nm technology node. The monolithic 3D RRAM
+system is modeled by NVSim [81], a circuit-level mem-
+ory simulator for emerging NVRAMs, and NVMain [82],
+an emerging NVRAM architecture simulator. The synthe-
+sized results, together with buffer and RRAM estimations,
+are then plugged into a customized cycle-accurate Python
+simulator. This accelerator simulator takes CNNs in the
+TensorFlow [83] Protocol Buffers format and estimates the
+computation latency, power dissipation, energy consump-
+tion, and area. SPRING treats the TensorFlow operations
+like complex instruction set computer instructions where
+each operation involves many low-level operations and the
+CNNs are mapped to SPRING using an analytical model
+similar to the one used in [84].
+We compare our design with the Nvidia GeForce GTX
+1080 Ti GPU, which uses the Pascal microarchitecture [4]
+in a 16nm technology node. The die size of GTX 1080 Ti
+
+=== PDF页 9 ===
+9
+0 
+10 
+20 
+30 
+40 
+50 
+60 
+GTX 
+1080 Ti 
+Spring 
+Normalized performance 
+SPRING	
+Fig. 11. Normalized training performance
+is 471mm2 and the base operating frequency is 1.48 GHz ,
+which can be boosted to 1.58 GHz . GTX 1080 Ti uses an 11
+GB GDDR5X memory with 484 GB/s memory bandwidth to
+provide 10.16 TFLOPS peak single-precision performance.
+We evaluate SPRING and GTX 1080 Ti on seven well-
+known CNNs: Inception-Resnet V2 [85], Inception V3 [86],
+MobileNet V2 [87], NASNet-mobile [88], PNASNet-mobile
+[89], Resnet-152 V2 [90], and VGG-19 [91]. We evaluate
+both the training and inference phases of these CNNs on
+the ImageNet dataset [92]. The sparsity of the CNNs are
+assumed to be 50%, as it is shown in [32] that the average
+sparsity level of widely used CNNs, such as AlexNet [31],
+VGG [91], and Inception [86], are over 50%. We use the
+default batch sizes deﬁned in the TensorFlow-Slim library
+[93]: 32 for training and 100 for inference.
+5 E XPERIMENTAL RESULTS
+In this section, we present experimental results for SPRING
+and compare them with those for GTX 1080 Ti.
+Table 1 shows the values of various design parameters
+used in SPRING. They are obtained through the accelerator
+design space exploration methodology proposed in [84]. It
+is shown in [45] that with 16 FL bits, training CNNs using
+the stochastic rounding scheme can converge in a similar
+amount of time with a negligible accuracy loss relative
+to when single-precision ﬂoating-point arithmetic is used.
+Hence, we use 4 IL bits and 16 FL bits in the ﬁxed-point
+representation. The convolution loop order refers to the
+execution order of the multiple for-loops in the CONV layer.
+SPRING executes convolutions by ﬁrst unrolling the for-
+loops across multiple inputs in the batch. Then, it unrolls the
+for-loops within the ﬁlter weights, followed by unrolling in
+the activation channel dimension. In the next step, it unrolls
+the for-loops with activation feature maps. Finally, it unrolls
+for-loops across the output channels.
+Fig. 11 and Fig. 12 show the normalized performance
+of SPRING and GTX 1080 Ti over the seven CNNs in
+the training and inference phases, respectively. All results
+are normalized to those of GTX 1080 Ti. In the training
+phase, SPRING achieves speedups ranging from 5.5 × to
+0 
+10 
+20 
+30 
+40 
+50 
+60 
+70 
+80 
+GTX 
+1080 Ti 
+Spring 
+Normalized performance 
+SPRING	
+Fig. 12. Normalized inference performance
+TABLE 1
+SPRING design parameters
+Accelerator parameters Values
+Clock rate 700 M Hz
+Number of PEs 64
+Number of MAC lanes per PE 72
+Number of multipliers per MAC lane 16
+Weight buffer size 24 MB
+Activation buffer size 12 MB
+Mask buffer size 4 MB
+Convolution loop order batch-weight-in channel-input-out channel
+IL bits 4
+FL bits 16
+Technology 14nm FinFET
+Area 151 mm2
+Monolithic 3D RRAM 8 GB, 2 channels, 2 ranks, 16 banks,
+1 KB bus,tBU RST=0.5 ns, 2.0GHz [71]
+53.1× with a geometric mean of 15.6 × on the seven CNNs.
+In the inference phase, SPRING is faster than GTX 1080
+Ti by 5.1 × to 67.9 × with a geometric mean of 15.5 ×. In
+both cases, SPRING has better performance speedups on
+relatively light-weight CNNs, i.e., MobileNet V2, NASNet-
+mobile, and PNASNet-mobile. This is because these light-
+weight CNNs do not require large volumes of activations
+and weights to be transferred between the external memory
+and on-chip buffers. Therefore, the memory bandwidth
+bottleneck is alleviated and the speedup from sparsity-
+aware computation becomes more noteworthy. On the other
+hand, on large CNNs, such as Inception-Resnet V2 and
+VGG-19, the sparsity-aware MAC lanes of SPRING idle and
+wait for data fetch from the RRAM system, lowering the
+performance speedup relative to GTX 1080 Ti.
+Fig. 13 and Fig. 14 show the normalized reciprocal of
+power of SPRING and GTX 1080 Ti in training and infer-
+ence, respectively. All results are normalized to those of GTX
+1080 Ti. On an average, SPRING reduces power dissipation
+by 4.2× and 4.5× for training and inference, respectively.
+Fig. 15 and Fig. 16 show the normalized energy efﬁciency
+of SPRING and GTX 1080 Ti for training and inference,
+respectively. All results are normalized to those of GTX
+1080 Ti. Compared to the GTX 1080 Ti, SPRING achieves
+an average of 66.0 × and 69.1 × energy efﬁciency improve-
+
+=== PDF页 10 ===
+10
+0 
+1 
+2 
+3 
+4 
+5 
+6 
+7 
+8 
+GTX 
+1080 Ti 
+Spring 
+Normalized reciprocal of power   
+SPRING	
+Fig. 13. Normalized reciprocal of power for training
+0 
+1 
+2 
+3 
+4 
+5 
+6 
+7 
+8 
+GTX 
+1080 Ti 
+Spring 
+Normalized reciprocal of power   
+SPRING	
+Fig. 14. Normalized reciprocal of power for inference
+ments in training and inference, respectively. This makes
+the GTX 1080 Ti columns invisible. We observe that, among
+the seven CNNs, SPRING achieves the best normalized
+energy efﬁciency on MobileNet V2, both in the training and
+inference phases. Since MobileNet V2 has a much smaller
+network size (97.6% parameter reduction compared to VGG-
+19 [87]), most of the network weights can be retained in
+on-chip buffers without accessing the external memory.
+Hence, SPRING can reduce energy consumption signiﬁ-
+cantly through our sparsity-aware acceleration scheme. On
+the other hand, energy reduction from sparsity-aware com-
+putation is offset by energy-consuming memory accesses on
+large CNNs, such as Inception-Resnet V2 and VGG-19. This
+is consistent with the results reported in [30] that show that
+over 80% of the total energy consumption is from memory
+access.
+6 D ISCUSSIONS AND LIMITATIONS
+In this section, we discuss the assumptions we made in this
+work and the limitations of the SPRING architecture.
+0 
+50 
+100 
+150 
+200 
+250 
+300 
+350 
+400 
+450 
+GTX 
+1080 Ti 
+Spring 
+Normalized energy efficiency 
+SPRING	
+Fig. 15. Normalized energy efﬁciency in training
+0 
+50 
+100 
+150 
+200 
+250 
+300 
+350 
+400 
+GTX 
+1080 Ti 
+Spring 
+Normalized energy efficiency 
+SPRING	
+Fig. 16. Normalized energy efﬁciency in inference
+The SPRING architecture is based on the assumption
+that the monolithic 3D stacking technology is emerging in
+the near future. One main disadvantage of monolithic 3D
+integration, compared to the TSV-based 3D stacking, is that
+the high-temperature process used for the top tiers may
+damage the interconnects on the tiers below. To prevent or
+minimize this damage, either low-temperature annealing is
+used for the top tiers or Copper is replaced with Tungsten as
+the interconnect material on the bottom tiers. However, low-
+temperature annealing may degrade device performance
+on the top tiers while the Tungsten interconnect is less
+competitive with the Copper counterpart in terms of perfor-
+mance on the bottom tiers. However, it is still not clear how
+the low thermal budget process on the top tiers correlates
+to the degree of top-tier device degradation for advanced
+technology nodes [94]. Some previous works assume the
+devices on the top tiers will be degraded to some extent
+and evaluate the overall chip performance based on this
+assumption [95], [96]. On the other hand, there are works
+suggesting that the degradation is negligible when certain
+monolithic 3D processes are used [97], [98]. For example, it
+
+=== PDF页 11 ===
+11
+is shown in [99] that using Tungsten for interconnects on the
+bottom tiers for interconnect-dominant circuits has a limited
+impact on overall performance and power consumption
+(less than 2% degradation in both performance and power
+consumption). Hence, we do not model the degradation
+from the monolithic 3D integration process in this work.
+The performance speedup, power reduction ratio, and
+energy efﬁciency improvement reported in Section 5 are ob-
+tained at the batch level. We use batch-level training results
+since the CNN training results are based on the assumption
+that with sufﬁcient precision bits, ﬁxed-point training using
+stochastic rounding scheme can lead to convergence with
+no worse number of cycles than the training process based
+on single-precision ﬂoating-point arithmetic, as suggested
+in [45], where 16 FL bits are used for ﬁxed-point training
+with stochastic rounding and the convergent epoch number
+is similar to that of single-precision ﬂoating-point training.
+A major limitation of the SPRING accelerator architec-
+ture is that the sequential scanning and ﬁltering mechanism
+shown in Algorithm 1 needs multiple cycles to ﬁlter out
+dangling non-zero elements and collapse the resulting zeros.
+This may incur a long latency in data preprocessing, which
+makes SPRING unsuitable for latency-sensitive edge infer-
+ence applications. However, since this sequential scanning
+and ﬁltering scheme is pipelined, the overall throughput is
+unaffected and therefore the total latency for one batch is
+independent of the sequential scanning steps used by the
+pre-compute sparsity module.
+Our binary mask encoding method is similar to the dual
+indexing encoding proposed in [100]. Although we both use
+a binary mask to point to the index of non-zero elements
+in the data vector, our binary mask encoding scheme has
+several advantages. First, the index masks are kept in binary
+form throughout the entire sparsity encoding and decoding
+process. Hence, the storage overhead of the binary mask
+is at most 5%, assuming 4 IL bits and 16 FL bits. The real
+storage overhead is much lower than this value since most
+of activations and weights are zeros. However, the binary
+masks are converted to decimal masks in [100] to serve as
+select signals of a MUX. This not only increases the storage
+overhead of the masks, but also increases the computation
+complexity of mask manipulation. Besides, their binary-to-
+decimal mask transfer process is sequential, which incurs a
+long processing latency that increases as the size of the mask
+vector increases.
+While preparing this article, we became aware of a
+very recent work that shares our motivations but adopts
+different approaches. Eager Pruning [101], an algorithm-
+architecture co-design method, speeds up DNN training by
+moving pruning to the training phase. It is observed in [101]
+that the ranking of weight magnitudes is relatively stable
+during the training process. Hence, insigniﬁcant weights
+can be identiﬁed and pruned in the early training stage.
+This reduced training computation is then transformed into
+speedup through a dedicated accelerator architecture. The
+sparse weights are distributed to multiple PEs using a
+Dynamically Reconﬁgurable Add and Collect Tree (DRACT)
+to support the dataﬂow of Eager Pruning. However, Eager
+Pruning only supports speedup from weight sparsity but
+lacks support for activation sparsity. The sparsity-aware
+acceleration scheme discussed in this article can be com-
+bined with the Eager Pruning dataﬂow through the help of
+DRACT for the full use of data sparsity (both activations
+and weights).
+7 C ONCLUSION
+In this article, we proposed a sparsity-aware reduced-
+precision CNN accelerator, named SPRING. A binary mask
+scheme is used to encode weight/activation sparsity. It is
+efﬁciently processed through a sequential scanning and ﬁl-
+tering mechanism. SPRING adopts the stochastic rounding
+algorithm to train CNNs using reduced-precision ﬁxed-
+point numerical representation. An efﬁcient monolithic 3D
+NVRAM interface is used to provide signiﬁcant mem-
+ory bandwidth for CNN evaluation. Compared to Nvidia
+GeForce GTX 1080 Ti, SPRING achieves 15.6 ×, 4.2 ×, and
+66.0× improvements in performance, power reduction, and
+energy efﬁciency, respectively, in the training phase, and
+15.5×, 4.5 ×, and 69.1 × improvements in performance,
+power reduction, and energy efﬁciency, respectively, in the
+inference phase.
+REFERENCES
+[1] Y. Chen, T. Luo, S. Liu, S. Zhang, L. He, J. Wang, L. Li, T. Chen,
+Z. Xu, N. Sun, and O. Temam, “DaDianNao: A machine-learning
+supercomputer,” in Proc. IEEE/ACM Int. Symp. Microarchitecture ,
+Dec. 2014, pp. 609–622.
+[2] S. Venkataramani, A. Ranjan, S. Banerjee, D. Das, S. Avancha,
+A. Jagannathan, A. Durg, D. Nagaraj, B. Kaul, P . Dubey, and
+A. Raghunathan, “Scaledeep: A scalable compute architecture
+for learning and evaluating deep networks,” in Proc. Int. Symp.
+Computer Architecture, June 2017, pp. 13–26.
+[3] C. Ying, S. Kumar, D. Chen, T. Wang, and Y. Cheng, “Image classi-
+ﬁcation at supercomputer scale,” arXiv preprint arXiv:1811.06992,
+Dec. 2018.
+[4] D. Foley and J. Danskin, “Ultra-performance Pascal GPU and
+NVLink interconnect,” IEEE Micro, vol. 37, no. 2, pp. 7–17, Mar.
+2017.
+[5] J. Choquette, O. Giroux, and D. Foley, “Volta: Performance and
+programmability,”IEEE Micro, vol. 38, no. 2, pp. 42–52, Mar. 2018.
+[6] Y. Li, J. Park, M. Alian, Y. Yuan, Z. Qu, P . Pan, R. Wang,
+A. Schwing, H. Esmaeilzadeh, and N. S. Kim, “A network-
+centric hardware/algorithm co-design to accelerate distributed
+training of deep neural networks,” in Proc. IEEE/ACM Int. Symp.
+Microarchitecture, Oct. 2018, pp. 175–188.
+[7] Y. Shen, M. Ferdman, and P . Milder, “Escher: A CNN accelerator
+with ﬂexible buffering to minimize off-chip transfer,” in Proc. Int.
+Symp. Field-Programmable Custom Computing Machines , Apr. 2017,
+pp. 93–100.
+[8] J. Yu, A. Lukefahr, D. Palframan, G. Dasika, R. Das, and
+S. Mahlke, “Scalpel: Customizing DNN pruning to the under-
+lying hardware parallelism,” in Proc. Int. Symp. Computer Archi-
+tecture, June 2017, pp. 548–560.
+[9] H. Sharma, J. Park, N. Suda, L. Lai, B. Chau, V . Chandra, and
+H. Esmaeilzadeh, “Bit fusion: Bit-level dynamically composable
+architecture for accelerating deep neural networks,” in Proc. Int.
+Symp. Computer Architecture, June 2018, pp. 764–775.
+[10] H. Kwon, A. Samajdar, and T. Krishna, “MAERI: Enabling ﬂexi-
+ble dataﬂow mapping over DNN accelerators via reconﬁgurable
+interconnects,” in Proc. Int. Conf. Architectural Support Program-
+ming Languages Operating Syst., Mar. 2018, pp. 461–475.
+[11] A. Putnam, A. M. Caulﬁeld, E. S. Chung, D. Chiou, K. Con-
+stantinides, J. Demme, H. Esmaeilzadeh, J. Fowers, G. P . Gopal,
+J. Gray, M. Haselman, S. Hauck, S. Heil, A. Hormati, J.-Y. Kim,
+S. Lanka, J. Larus, E. Peterson, S. Pope, A. Smith, J. Thong, P . Y.
+Xiao, and D. Burger, “A reconﬁgurable fabric for accelerating
+large-scale datacenter services,” in Proc. Int. Symp. Computer
+Architecuture, 2014, pp. 13–24.
+[12] J. Park and W. Sung, “FPGA based implementation of deep
+neural networks using on-chip memory only,” in Proc. IEEE Int.
+Conf. Acoustics, Speech, Signal Processing, Mar. 2016, pp. 1011–1015.
+
+=== PDF页 12 ===
+12
+[13] Y. Shen, M. Ferdman, and P . Milder, “Overcoming resource
+underutilization in spatial CNN accelerators,” in Proc. Int. Conf.
+Field Programmable Logic Applications, Aug. 2016, pp. 1–4.
+[14] J. Qiu, J. Wang, S. Yao, K. Guo, B. Li, E. Zhou, J. Yu, T. Tang,
+N. Xu, S. Song, Y. Wang, and H. Yang, “Going deeper with
+embedded FPGA platform for convolutional neural network,”
+in Proc. ACM/SIGDA Int. Symp. Field-Programmable Gate Arrays ,
+2016, pp. 26–35.
+[15] Z. Du, R. Fasthuber, T. Chen, P . Ienne, L. Li, T. Luo, X. Feng,
+Y. Chen, and O. Temam, “ShiDianNao: Shifting vision processing
+closer to the sensor,” in Proc. ACM/IEEE Int. Symp. Computer
+Architecture, June 2015, pp. 92–104.
+[16] S. Wang, D. Zhou, X. Han, and T. Yoshimura, “Chain-NN:
+An energy-efﬁcient 1D chain architecture for accelerating deep
+convolutional neural networks,” in Proc. Design, Automation Test
+Europe Conf. Exhibition, Mar. 2017, pp. 1032–1037.
+[17] C. Ding, S. Liao, Y. Wang, Z. Li, N. Liu, Y. Zhuo, C. Wang,
+X. Qian, Y. Bai, G. Yuan, X. Ma, Y. Zhang, J. Tang, Q. Qiu,
+X. Lin, and B. Yuan, “CirCNN: Accelerating and compressing
+deep neural networks using block-circulant weight matrices,” in
+Proc. IEEE/ACM Int. Symp. Microarchitecture , Oct. 2017, pp. 395–
+408.
+[18] M. Gao, J. Pu, X. Yang, M. Horowitz, and C. Kozyrakis, “TETRIS:
+Scalable and efﬁcient neural network acceleration with 3D mem-
+ory,” in Proc. Int. Conf. Architectural Support Programming Lan-
+guages Operating Syst., 2017, pp. 751–764.
+[19] N. P . Jouppi, C. Young, N. Patil, D. Patterson, G. Agrawal,
+R. Bajwa, S. Bates, S. Bhatia, N. Boden, A. Borchers, R. Boyle,
+P .-l. Cantin, C. Chao, C. Clark, J. Coriell, M. Daley, M. Dau,
+J. Dean, B. Gelb, T. V . Ghaemmaghami, R. Gottipati, W. Gulland,
+R. Hagmann, C. R. Ho, D. Hogberg, J. Hu, R. Hundt, D. Hurt,
+J. Ibarz, A. Jaffey, A. Jaworski, A. Kaplan, H. Khaitan, D. Kille-
+brew, A. Koch, N. Kumar, S. Lacy, J. Laudon, J. Law, D. Le,
+C. Leary, Z. Liu, K. Lucke, A. Lundin, G. MacKean, A. Maggiore,
+M. Mahony, K. Miller, R. Nagarajan, R. Narayanaswami, R. Ni,
+K. Nix, T. Norrie, M. Omernick, N. Penukonda, A. Phelps,
+J. Ross, M. Ross, A. Salek, E. Samadiani, C. Severn, G. Sizikov,
+M. Snelham, J. Souter, D. Steinberg, A. Swing, M. Tan, G. Thorson,
+B. Tian, H. Toma, E. Tuttle, V . Vasudevan, R. Walter, W. Wang,
+E. Wilcox, and D. H. Yoon, “In-datacenter performance analysis
+of a tensor processing unit,” in Proc. Int. Symp. Computer Architec-
+ture, June 2017, pp. 1–12.
+[20] M. Alwani, H. Chen, M. Ferdman, and P . Milder, “Fused-layer
+CNN accelerators,” in Proc. IEEE/ACM Int. Symp. Microarchitec-
+ture, Oct. 2016, pp. 1–12.
+[21] T. Xiang, Y. Feng, X. Ye, X. Tan, W. Li, Y. Zhu, M. Wu, H. Zhang,
+and D. Fan, “Accelerating CNN algorithm with ﬁne-grained
+dataﬂow architectures,” in Proc. IEEE Int. Conf. High Performance
+Computing Communications; IEEE Int. Conf. Smart City; IEEE Int.
+Conf. Data Science Syst., June 2018, pp. 243–251.
+[22] T. Chen, Z. Du, N. Sun, J. Wang, C. Wu, Y. Chen, and O. Temam,
+“DianNao: A small-footprint high-throughput accelerator for
+ubiquitous machine-learning,” in Proc. Int. Conf. Architectural
+Support Programming Languages Operating Syst. , Mar. 2014, pp.
+269–284.
+[23] W. Lu, G. Yan, J. Li, S. Gong, Y. Han, and X. Li, “Flexﬂow: A
+ﬂexible dataﬂow accelerator architecture for convolutional neural
+networks,” in Proc. IEEE Int. Symp. High Performance Computer
+Architecture, Feb. 2017, pp. 553–564.
+[24] Y. Chen, J. Emer, and V . Sze, “Eyeriss: A spatial architecture for
+energy-efﬁcient dataﬂow for convolutional neural networks,” in
+Proc. ACM/IEEE Int. Symp. Computer Architecture , June 2016, pp.
+367–379.
+[25] S. Han, X. Liu, H. Mao, J. Pu, A. Pedram, M. A. Horowitz, and
+W. J. Dally, “EIE: Efﬁcient inference engine on compressed deep
+neural network,” in Proc. Int. Symp. Computer Architecture , June
+2016, pp. 243–254.
+[26] J. Zhu, J. Jiang, X. Chen, and C. Tsui, “SparseNN: An energy-
+efﬁcient neural network accelerator exploiting input and output
+sparsity,” in Proc. Design, Automation Test Europe Conf. Exhibition ,
+Mar. 2018, pp. 241–244.
+[27] A. Parashar, M. Rhu, A. Mukkara, A. Puglielli, R. Venkatesan,
+B. Khailany, J. Emer, S. W. Keckler, and W. J. Dally, “SCNN:
+An accelerator for compressed-sparse convolutional neural net-
+works,” in Proc. ACM/IEEE Int. Symp. Computer Architecture, June
+2017, pp. 27–40.
+[28] K. Hegde, J. Yu, R. Agrawal, M. Yan, M. Pellauer, and C. W.
+Fletcher, “UCNN: Exploiting computational reuse in deep neural
+networks via weight repetition,” in Proc. Int. Symp. Computer
+Architecture, June 2018, pp. 674–687.
+[29] J. Albericio, P . Judd, T. Hetherington, T. Aamodt, N. E. Jerger,
+and A. Moshovos, “Cnvlutin: Ineffectual-neuron-free deep neural
+network computing,” in Proc. ACM/IEEE Int. Symp. Computer
+Architecture, June 2016, pp. 1–13.
+[30] S. Zhang, Z. Du, L. Zhang, H. Lan, S. Liu, L. Li, Q. Guo, T. Chen,
+and Y. Chen, “Cambricon-X: An accelerator for sparse neural
+networks,” in Proc. IEEE/ACM Int. Symp. Microarchitecture , Oct.
+2016, pp. 1–12.
+[31] A. Krizhevsky, I. Sutskever, and G. E. Hinton, “Imagenet classi-
+ﬁcation with deep convolutional neural networks,” in Proc. Int.
+Conf. Neural Information Processing Syst., Dec. 2012, pp. 1097–1105.
+[32] M. Rhu, M. O’Connor, N. Chatterjee, J. Pool, Y. Kwon, and
+S. W. Keckler, “Compressing DMA engine: Leveraging activation
+sparsity for training deep neural networks,” in Proc. IEEE Int.
+Symp. High Performance Computer Architecture , Feb. 2018, pp. 78–
+91.
+[33] HMC Consortium. (2014) Hybrid Mem-
+ory Cube speciﬁcation 2.1. [Online]. Avail-
+able: http://hybridmemorycube .org/ﬁles/SiteDownloads/
+HMC-30G-VSR HMCC Speciﬁcation Rev2.1 20151105.pdf
+[34] Samsung Newsroom. (2016) Samsung begins mass
+producing world’s fastest DRAM - based on newest High
+Bandwidth Memory (HBM) interface. [Online]. Available:
+https://www.samsung.com/semiconductor/insights/news-
+events/samsung-begins-mass-producing-worlds-fastest-dram-
+based-on-newest-high-bandwidth-memory-hbm/
+[35] M. Alian, S. W. Min, H. Asgharimoghaddam, A. Dhar, D. K.
+Wang, T. Roewer, A. McPadden, O. O’Halloran, D. Chen,
+J. Xiong, D. Kim, W. Hwu, and N. S. Kim, “Application-
+transparent near-memory processing architecture with memory
+channel network,” in Proc. IEEE/ACM Int. Symp. Microarchitecture,
+Oct. 2018, pp. 802–814.
+[36] H. Asghari-Moghaddam, Y. H. Son, J. H. Ahn, and N. S. Kim,
+“Chameleon: Versatile and practical near-DRAM acceleration
+architecture for large memory systems,” in Proc. IEEE/ACM Int.
+Symp. Microarchitecture, Oct. 2016, pp. 1–13.
+[37] P . Chi, S. Li, C. Xu, T. Zhang, J. Zhao, Y. Liu, Y. Wang, and Y. Xie,
+“PRIME: A novel processing-in-memory architecture for neural
+network computation in ReRAM-based main memory,” in Proc.
+Int. Symp. Computer Architecture, June 2016, pp. 27–39.
+[38] D. Kim, J. Kung, S. Chai, S. Yalamanchili, and S. Mukhopadhyay,
+“Neurocube: A programmable digital neuromorphic architecture
+with high-density 3D memory,” SIGARCH Computer Architecture
+News, vol. 44, no. 3, pp. 380–392, June 2016.
+[39] A. Shaﬁee, A. Nag, N. Muralimanohar, R. Balasubramonian,
+J. P . Strachan, M. Hu, R. S. Williams, and V . Srikumar, “ISAAC:
+A convolutional neural network accelerator with in-situ analog
+arithmetic in crossbars,” in Proc. Int. Symp. Computer Architecture,
+June 2016, pp. 14–26.
+[40] M. Cheng, L. Xia, Z. Zhu, Y. Cai, Y. Xie, Y. Wang, and H.
+Yang, “TIME: A training-in-memory architecture for memristor-
+based deep neural networks,” in Proc. ACM/EDAC/IEEE Design
+Automation Conf., June 2017, pp. 1–6.
+[41] S. Gupta, M. Imani, H. Kaur, and T. S. Rosing, “NNPIM: A pro-
+cessing in-memory architecture for neural network acceleration,”
+IEEE Trans. Computers, vol. 68, no. 9, pp. 1325–1337, Sep. 2019.
+[42] Y. Kwon, Y. Lee, and M. Rhu, “TensorDIMM: A practical near-
+memory processing architecture for embeddings and tensor op-
+erations in deep learning,” in Proc. IEEE/ACM Int. Symp. Microar-
+chitecture, Oct. 2019, pp. 740–753.
+[43] J. Park, M. Naumov, P . Basu, S. Deng, A. Kalaiah, D. Khu-
+dia, J. Law, P . Malani, A. Malevich, S. Nadathur et al. , “Deep
+learning inference in facebook data centers: Characterization,
+performance optimizations and hardware implications,” arXiv
+preprint arXiv:1811.09886, 2018.
+[44] M. Imani, S. Gupta, Y. Kim, and T. Rosing, “FloatPIM: In-
+memory acceleration of deep neural network training with high
+precision,” in Proc. Int. Symp. Computer Architecture , June 2019,
+pp. 802–815.
+[45] S. Gupta, A. Agrawal, K. Gopalakrishnan, and P . Narayanan,
+“Deep learning with limited numerical precision,” in Proc. Int.
+Conf. Machine Learning, July 2015, pp. 1737–1746.
+
+=== PDF页 13 ===
+13
+[46] Z. Lu, S. Rallapalli, K. Chan, and T. La Porta, “Modeling the re-
+source requirements of convolutional neural networks on mobile
+devices,” in Proc. ACM Int. Conf. Multimedia, 2017, pp. 1663–1671.
+[47] C. Zhang, G. Sun, Z. Fang, P . Zhou, P . Pan, and J. Cong, “Caffeine:
+Towards uniformed representation and acceleration for deep
+convolutional neural networks,” in Proc. IEEE/ACM Int. Conf.
+Computer-Aided Design, Nov. 2016, pp. 1–8.
+[48] S. Han, H. Mao, and W. J. Dally, “Deep compression: Compress-
+ing deep neural networks with pruning, trained quantization and
+Huffman coding,” arXiv preprint arXiv:1510.00149, 2015.
+[49] S. Han, J. Pool, J. Tran, and W. J. Dally, “Learning both weights
+and connections for efﬁcient neural networks,” in Proc. Int. Conf.
+Neural Information Processing Syst., 2015, pp. 1135–1143.
+[50] R. W. Vuduc, “Automatic performance tuning of sparse matrix
+kernels,” Ph.D. dissertation, University of California, Berkeley,
+2003.
+[51] C. Lee, Y. Shao, J.-F. Zhang, A. Parashar, J. Emer, S. Keckler, and
+Z. Zhang, “Stitch-X: An accelerator architecture for exploiting
+unstructured sparsity in deep neural networks,” in Proc. SysML
+Conference, 2018.
+[52] W. W. L. Fung, I. Sham, G. Yuan, and T. M. Aamodt, “Dynamic
+warp formation and scheduling for efﬁcient GPU control ﬂow,”
+in Proc. IEEE/ACM Int. Symp. Microarchitecture , Dec. 2007, pp.
+407–420.
+[53] W. W. L. Fung and T. M. Aamodt, “Thread block compaction
+for efﬁcient SIMT control ﬂow,” in Proc. IEEE Int. Symp. High
+Performance Computer Architecture, Feb. 2011, pp. 25–36.
+[54] V . Narasiman, M. Shebanow, C. J. Lee, R. Miftakhutdinov,
+O. Mutlu, and Y. N. Patt, “Improving GPU performance via large
+warps and two-level warp scheduling,” in Proc. IEEE/ACM Int.
+Symp. Microarchitecture, Dec. 2011, pp. 308–317.
+[55] Y. Lee, R. Krashinsky, V . Grover, S. W. Keckler, and K. Asanovi ´c,
+“Convergence and scalarization for data-parallel architectures,”
+in Proc. IEEE/ACM Int. Symp. Code Generation Optimization , Feb.
+2013, pp. 1–11.
+[56] X. Zhou, Z. Du, Q. Guo, S. Liu, C. Liu, C. Wang, X. Zhou,
+L. Li, T. Chen, and Y. Chen, “Cambricon-S: Addressing irreg-
+ularity in sparse neural networks through a cooperative soft-
+ware/hardware approach,” in Proc. IEEE/ACM Int. Symp. Mi-
+croarchitecture, Oct. 2018, pp. 15–28.
+[57] P . Judd, J. Albericio, T. Hetherington, T. M. Aamodt, and
+A. Moshovos, “Stripes: Bit-serial deep neural network comput-
+ing,” in Proc. IEEE/ACM Int. Symp. Microarchitecture , Oct. 2016,
+pp. 1–12.
+[58] J. Albericio, A. Delm ´as, P . Judd, S. Sharify, G. O’Leary, R. Genov,
+and A. Moshovos, “Bit-pragmatic deep neural network comput-
+ing,” in Proc. IEEE/ACM Int. Symp. Microarchitecture , Oct. 2017,
+pp. 382–394.
+[59] N. Strom, “Scalable distributed DNN training using commodity
+GPU cloud computing,” in Proc. Conf. Int. Speech Communication
+Association, Sep. 2015.
+[60] S.-X. Zou, C.-Y. Chen, J.-L. Wu, C.-N. Chou, C.-C. Tsao, K.-C.
+Tung, T.-W. Lin, C.-L. Sung, and E. Y. Chang, “Distributed train-
+ing large-scale deep architectures,” in Proc. Int. Conf. Advanced
+Data Mining Applications, Oct. 2017, pp. 18–32.
+[61] V . Campos, F. Sastre, M. Yag ¨ues, M. Bellver, X. Gir ´o-i Nieto, and
+J. Torres, “Distributed training strategies for a computer vision
+deep learning algorithm on a distributed GPU cluster,” Procedia
+Computer Science, vol. 108, pp. 315–324, May 2017.
+[62] X. Jia, S. Song, W. He, Y. Wang, H. Rong, F. Zhou, L. Xie,
+Z. Guo, Y. Yang, L. Yu, T. Chen, G. Hu, S. Shi, and X. Chu,
+“Highly scalable deep learning training system with mixed-
+precision: Training Imagenet in four minutes,” arXiv preprint
+arXiv:1807.11205, July 2018.
+[63] P . Micikevicius, S. Narang, J. Alben, G. Diamos, E. Elsen, D. Gar-
+cia, B. Ginsburg, M. Houston, O. Kuchaiev, G. Venkatesh, and
+H. Wu, “Mixed precision training,” in Proc. Int. Conf. Learning
+Representations, May 2018.
+[64] S. Hochreiter, “The vanishing gradient problem during learning
+recurrent neural nets and problem solutions,” Int. Journal Uncer-
+tainty, Fuzziness Knowledge-Based Syst. , vol. 6, no. 2, pp. 107–116,
+Apr. 1998.
+[65] D. Williamson, “Dynamically scaled ﬁxed point arithmetic,” in
+Proc. IEEE Paciﬁc Rim Conf. Communications, Computers Signal
+Processing, May 1991, pp. 315–318 vol.1.
+[66] M. Courbariaux, Y. Bengio, and J.-P . David, “Training deep neural
+networks with low precision multiplications,” in Proc. Int. Conf.
+Learning Representations, May 2015.
+[67] D. Das, N. Mellempudi, D. Mudigere, D. Kalamkar, S. Avancha,
+K. Banerjee, S. Sridharan, K. Vaidyanathan, B. Kaul, E. Geor-
+ganas, A. Heinecke, P . Dubey, J. Corbal, N. Shustrov, R. Dubtsov,
+E. Fomenko, and V . Pirogov, “Mixed precision training of convo-
+lutional neural networks using integer operations,” in Proc. Int.
+Conf. Learning Representations, May 2018.
+[68] AMD. (2015) High Bandwidth Memory. [Online]. Available:
+https://www.amd.com/en/technologies/hbm
+[69] Y. Yu and N. K. Jha, “Energy-efﬁcient monolithic three-
+dimensional on-chip memory architectures,” IEEE Trans. Nan-
+otechnology, vol. 17, no. 4, pp. 620–633, July 2018.
+[70] ——, “A monolithic 3D hybrid architecture for energy-efﬁcient
+computation,” IEEE Trans. Multi-Scale Computing Syst. , vol. 4,
+no. 4, pp. 533–547, Oct. 2018.
+[71] S. Sheu, P . Chiang, W. Lin, H. Lee, P . Chen, Y. Chen, T. Wu, F. T.
+Chen, K. Su, M. Kao, K. Cheng, and M. Tsai, “A 5ns fast write
+multi-level non-volatile 1 K bits RRAM memory with advance
+write scheme,” in Proc. Symp VLSI Circuits, June 2009, pp. 82–83.
+[72] Techinsights. (2013, May) Technology roadmap of DRAM
+for three major manufacturers: Samsung, SK-Hynix and
+Micron. [Online]. Available: https://www .techinsights.com/
+uploadedFiles/Public Website/Content - Primary/Marketing/
+2013/DRAM Roadmap/Report/TechInsights-DRAM-
+ROADMAP-052013-LONG-version .pdf
+[73] Crossbar. (2016) The crossbar RRAM advantage. [On-
+line]. Available: http://www .crossbar-inc.com/technology/
+rram-advantages/
+[74] P . Batude, B. Sklenard, C. Fenouillet-Beranger, B. Previtali,
+C. Tabone, O. Rozeau, O. Billoint, O. Turkyilmaz, H. Sarhan,
+S. Thuries, G. Cibrario, L. Brunet, F. Deprat, J. Michallet, F. Cler-
+midy, and M. Vinet, “3D sequential integration opportunities
+and technology optimization,” in Proc. IEEE Int. Interconnect
+Technology Conf., May 2014, pp. 373–376.
+[75] S. Ioffe and C. Szegedy, “Batch normalization: Accelerating deep
+network training by reducing internal covariate shift,” in Proc.
+Int. Conf. Machine Learning, July 2015, pp. 448–456.
+[76] Synopsys. (2018) Design Compiler. [Online].
+Available: https://www .synopsys.com/support/training/rtl-
+synthesis/design-compiler-rtl-synthesis .html
+[77] A. Guler and N. K. Jha, “Hybrid monolithic 3-D IC ﬂoorplanner,”
+IEEE Trans. Very Large Scale Integration Syst. , vol. 26, no. 10, pp.
+1868–1880, Oct. 2018.
+[78] J. A. Roy, D. A. Papa, S. N. Adya, H. H. Chan, A. N. Ng, J. F. Lu,
+and I. L. Markov, “Capo: Robust and scalable open-source min-
+cut ﬂoorplacer,” in Proc. Int. Symp. Physical design , Apr. 2005, pp.
+224–226.
+[79] A. Shafaei, Y. Wang, X. Lin, and M. Pedram, “FinCACTI: Ar-
+chitectural analysis and modeling of caches with deeply-scaled
+FinFET devices,” in Proc. IEEE Computer Society Annual Symp.
+VLSI, July 2014, pp. 290–295.
+[80] N. Muralimanohar, R. Balasubramonian, and N. P . Jouppi,
+“CACTI 6.0: A tool to model large caches,” HP Laboratories, pp.
+22–31, 2009.
+[81] X. Dong, C. Xu, Y. Xie, and N. P . Jouppi, “NVSim: A circuit-level
+performance, energy, and area model for emerging nonvolatile
+memory,” IEEE Trans. Comput.-Aided Design Integr. Circuits Syst. ,
+vol. 31, no. 7, pp. 994–1007, July 2012.
+[82] M. Poremba, T. Zhang, and Y. Xie, “NVMain 2.0: A user-friendly
+memory simulator to model (non-)volatile memory systems,”
+IEEE Comput. Archit. Lett., vol. 14, no. 2, pp. 140–143, July 2015.
+[83] M. Abadi, P . Barham, J. Chen, Z. Chen, A. Davis, J. Dean,
+M. Devin, S. Ghemawat, G. Irving, M. Isard, M. Kudlur, J. Lev-
+enberg, R. Monga, S. Moore, D. G. Murray, B. Steiner, P . Tucker,
+V . Vasudevan, P . Warden, M. Wicke, Y. Yu, and X. Zheng, “Ten-
+sorﬂow: A system for large-scale machine learning,” in Proc.
+USENIX Symp Operating Syst. Design Implementation , 2016, pp.
+265–283.
+[84] Y. Yu, Y. Li, S. Che, N. K. Jha, and W. Zhang, “Software-deﬁned
+design space exploration for an efﬁcient AI accelerator architec-
+ture,” arXiv preprint arXiv:1903.07676, 2019.
+[85] C. Szegedy, S. Ioffe, V . Vanhoucke, and A. A. Alemi, “Inception-
+v4, Inception-Resnet and the impact of residual connections on
+learning,” in Proc. AAAI Conf. Artiﬁcial Intelligence, Feb. 2017.
+[86] C. Szegedy, V . Vanhoucke, S. Ioffe, J. Shlens, and Z. Wojna,
+“Rethinking the Inception architecture for computer vision,” in
+
+=== PDF页 14 ===
+14
+Proc. IEEE Conf. Computer Vision Pattern Recognition , June 2016,
+pp. 2818–2826.
+[87] M. Sandler, A. Howard, M. Zhu, A. Zhmoginov, and L.-C. Chen,
+“MobileNetV2: Inverted residuals and linear bottlenecks,” in
+Proc. IEEE Conf. Computer Vision Pattern Recognition , June 2018,
+pp. 4510–4520.
+[88] B. Zoph, V . Vasudevan, J. Shlens, and Q. V . Le, “Learning transfer-
+able architectures for scalable image recognition,” in Proc. IEEE
+Conf. Computer Vision Pattern Recognition , June 2018, pp. 8697–
+8710.
+[89] C. Liu, B. Zoph, M. Neumann, J. Shlens, W. Hua, L.-J. Li, L. Fei-
+Fei, A. Yuille, J. Huang, and K. Murphy, “Progressive neural
+architecture search,” in Proc. European Conf. Computer Vision, Sep.
+2018, pp. 19–34.
+[90] K. He, X. Zhang, S. Ren, and J. Sun, “Identity mappings in deep
+residual networks,” in Proc. European Conf. Computer Vision , Oct.
+2016, pp. 630–645.
+[91] K. Simonyan and A. Zisserman, “Very deep convolutional
+networks for large-scale image recognition,” arXiv preprint
+arXiv:1409.1556, 2014.
+[92] O. Russakovsky, J. Deng, H. Su, J. Krause, S. Satheesh, S. Ma,
+Z. Huang, A. Karpathy, A. Khosla, M. Bernstein, A. C. Berg, and
+L. Fei-Fei, “ImageNet Large Scale Visual Recognition Challenge,”
+Int. Journal Computer Vision, vol. 115, no. 3, pp. 211–252, 2015.
+[93] N. Silberman and S. Guadarrama. (2016) Tensorﬂow-slim
+image classiﬁcation model library. [Online]. Available: https:
+//github.com/tensorﬂow/models/tree/master/research/slim
+[94] B. W. Ku, P . Debacker, D. Milojevic, P . Raghavan, D. Verkest,
+A. Thean, and S. K. Lim, “Physical design solutions to tackle
+FEOL/BEOL degradation in gate-level monolithic 3D ICs,” in
+Proc. ACM Int. Symp. Low Power Electron. Design , 2016, pp. 76–81.
+[95] S. K. Samal, D. Nayak, M. lchihashi, S. Banna, and S. K. Lim,
+“How to cope with slow transistors in the top-tier of monolithic
+3D ICs: Design studies and CAD solutions,” in Proc. ACM Int.
+Symp. Low Power Electron. Design, 2016, pp. 320–325.
+[96] S. Panth, K. Samadi, Y. Du, and S. K. Lim, “Power-performance
+study of block-level monolithic 3D-ICs considering inter-tier
+performance variations,” in Proc. ACM Annual Design Auto. Conf.,
+2014.
+[97] C. Liu and S. K. Lim, “Ultra-high density 3D SRAM cell designs
+for monolithic 3D integration,” in Proc. IEEE Int. Interconnect
+Technol. Conf., June 2012, pp. 1–3.
+[98] O. Thomas, M. Vinet, O. Rozeau, P . Batude, and A. Valentian,
+“Compact 6T SRAM cell with robust read/write stabilizing de-
+sign in 45nm monolithic 3D IC technology,” in Proc. IEEE Int.
+Conf. IC Design Technology, May 2009, pp. 195–198.
+[99] H. Sarhan, S. Thuries, O. Billoint, F. Deprat, A. A. D. Sousa,
+P . Batude, C. Fenouillet-Beranger, and F. Clermidy, “Intermediate
+BEOL process inﬂuence on power and performance for 3DVLSI,”
+in Proc. IEEE Int. 3D Syst. Integration Conf., Aug. 2015, pp. TS1.3.1–
+TS1.3.5.
+[100] C. Lin and B. Lai, “Supporting compressed-sparse activations
+and weights on SIMD-like accelerator for sparse convolutional
+neural networks,” in Proc. Asia South Paciﬁc Design Automation
+Conf., Jan. 2018, pp. 105–110.
+[101] J. Zhang, X. Chen, M. Song, and T. Li, “Eager Pruning: Algo-
+rithm and architecture support for fast training of deep neural
+networks,” in Proc. Int. Symp. Computer Architecture , June 2019,
+pp. 292–303.
+Ye Yu received the B.Eng. degree in Electronic
+and Computer Engineering from The Hong Kong
+University of Science and Technology, Hong
+Kong, China, in 2014, and the M.A. and Ph.D.
+degrees in Electrical Engineering from Princeton
+University, NJ, USA, in 2016 and 2019, respec-
+tively. He is currently a software engineer at Mi-
+crosoft.
+His current research interests include com-
+puter vision, machine learning, and deep learn-
+ing model compression and acceleration.
+Niraj K. Jha (S’85-M’85-SM’93-F’98) received
+his B.Tech. degree in Electronics and Electrical
+Communication Engineering from Indian Insti-
+tute of Technology, Kharagpur, in 1981 and Ph.D.
+degree in Electrical Engineering from University
+of Illinois at Urbana-Champaign, IL in 1985. He
+has been a faculty member of the Department
+of Electrical Engineering, Princeton University,
+since 1987. He is a Fellow of IEEE and ACM,
+and was given the Distinguished Alumnus Award
+by I.I.T., Kharagpur. He has also received the
+Princeton Graduate Mentoring Award.
+He has served as the Editor-in-Chief of IEEE Transactions on VLSI
+Systems and as an Associate Editor of several other journals. He has
+co-authored ﬁve books that are widely used. His research has won
+20 best paper awards or nominations. His research interests include
+smart healthcare, cybersecurity, machine learning, and monolithic 3D
+IC design. He has given several keynote speeches in the area of
+nanoelectronic design/test and smart healthcare.

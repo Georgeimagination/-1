@@ -1,0 +1,7 @@
+﻿SUBJECT-CONTRACT AUDIT: 4 issue(s); mode=audit.
+ - Fact subject contract mismatch: 数据/facts.csv:FACT-AWS-TRN2-TENSOR-CLOCK field=FIELD-PHY-CLOCK actual=component allowed=object
+ - Fact subject contract mismatch: 数据/facts.csv:FACT-AWS-TRN2-VECTOR-CLOCK field=FIELD-PHY-CLOCK actual=component allowed=object
+ - Fact subject contract mismatch: 数据/facts.csv:FACT-AWS-TRN2-SCALAR-CLOCK field=FIELD-PHY-CLOCK actual=component allowed=object
+ - Fact subject contract mismatch: 数据/facts.csv:FACT-AWS-TRN2-GPSIMD-CLOCK field=FIELD-PHY-CLOCK actual=component allowed=object
+PASS: 32-table research data model; 97920 checks executed; subject_contract_mode=audit.
+Registry: 324 columns, 488 enum values.

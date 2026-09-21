@@ -1,0 +1,2 @@
+PASS: 32-table research data model; 115461 checks executed; subject_contract_mode=gate.
+Registry: 324 columns, 488 enum values.

@@ -1,0 +1,2 @@
+﻿"topology_id","owner_object_id","canonical_label","review_status","notes"
+"TOPO-M2W2-AMD-HELIOS-SCALEUP","OBJ-AMD-HELIOS-72-MI455X","Helios UALoE multi-plane switched fabric with all-to-all GPU connectivity","draft","Normalized as switched_fabric from AMD multi-plane network wording. All-to-all describes reachability, not a physical complete graph; no single-hop or nonblocking claim is added."

@@ -1,0 +1,14 @@
+external_id,title,url,source_type,organization_or_authors,version_or_date,access_date,selected_role,primary_source,notes
+E01,ZeRO: Memory Optimizations Toward Training Trillion Parameter Models,https://arxiv.org/abs/1910.02054,论文,Microsoft Research作者团队,arXiv v3 2020-05-13,2026-08-14,训练状态与分布式内存,yes,外部核验资料；不加入固定19份语料
+E02,Mixed Precision Training,https://arxiv.org/abs/1710.03740,论文,NVIDIA与百度作者团队,arXiv v3 2018-02-15,2026-08-14,训练精度与主权重,yes,ICLR 2018论文入口
+E03,Efficient Memory Management for Large Language Model Serving with PagedAttention,https://arxiv.org/abs/2309.06180,论文,UC Berkeley等作者团队,arXiv v1 2023-09-12,2026-08-14,KV cache与碎片,yes,SOSP 2023论文
+E04,SARATHI: Efficient LLM Inference by Piggybacking Decodes with Chunked Prefills,https://arxiv.org/abs/2308.16369,论文,Microsoft Research等作者团队,arXiv v1 2023-08-31,2026-08-14,预填充解码与批处理,yes,外部核验阶段差异
+E05,DistServe: Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving,https://www.usenix.org/conference/osdi24/presentation/zhong-yinmin,论文官方页,北京大学与UCSD等作者团队,OSDI 2024,2026-08-14,分相服务与TTFT/TPOT,yes,USENIX开放论文页
+E06,MLPerf Training Benchmark,https://mlcommons.org/benchmarks/training/,官方基准说明,MLCommons,访问版 2026-08-14,2026-08-14,训练目标指标,yes,动态官方网页
+E07,MLPerf Inference Documentation,https://docs.mlcommons.org/inference/,官方基准说明,MLCommons,访问版 2026-08-14,2026-08-14,推理指标与服务约束,yes,动态官方文档
+E08,Efficient Large-Scale Language Model Training on GPU Clusters Using Megatron-LM,https://arxiv.org/abs/2104.04473,论文,NVIDIA与Stanford等作者团队,arXiv v5 2021-09-13,2026-08-14,训练并行与通信,yes,SC 2021论文
+E09,Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity,https://arxiv.org/abs/2101.03961,论文,Google Research作者团队,arXiv当前版,2026-08-14,MoE稀疏与通信,yes,MoE训练证据
+E10,DeepSpeed-MoE: Advancing Mixture-of-Experts Inference and Training,https://arxiv.org/abs/2201.05596,论文,Microsoft作者团队,arXiv当前版,2026-08-14,MoE训练与推理,yes,MoE双阶段证据
+E11,The Roofline Model: Visualizing and Optimizing Performance,https://amcr.lbl.gov/departments/computer-science-department/ppan/roofline-performance-model/,研究机构方法页,Lawrence Berkeley National Laboratory,访问版 2026-08-14,2026-08-14,算术强度与机器平衡,yes,方法页链接原始Roofline工作
+E12,SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models,https://arxiv.org/abs/2211.10438,论文,MIT与NVIDIA等作者团队,arXiv当前版,2026-08-14,推理低精度反例,yes,后训练量化证据
+E13,vAttention: Dynamic Memory Management for Serving LLMs without PagedAttention,https://arxiv.org/abs/2405.04437,论文,Microsoft Research等作者团队,arXiv当前版,2026-08-14,KV碎片与实现反例,yes,说明PagedAttention不是唯一方案

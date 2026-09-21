@@ -1,0 +1,6 @@
+"precision_path_id","component_id","canonical_label","operation_class","review_status","notes"
+"PPATH-R1-GA100-TENSOR-FP16-DENSE","COMP-R1-GA100-TENSOR","GA100 dense FP16 input with FP32 accumulation per-SM path","matrix","draft","Implementation-specific path used only for the published 1024 dense FP16/FP32 FMA per SM per clock. FMA is not doubled into FLOP."
+"PPATH-M2NA-AMPERE-TENSOR-INT8","COMP-M2NA-AMPERE-TENSOR","Ampere Tensor Core INT8 matrix path","matrix","draft","INT8 inputs with INT32 programmer-visible accumulation. INT4 and binary use separate precision paths. Modified lifecycle remains draft until formal merge review and hard gates."
+"PPATH-R1-GA100-AMPERE-TENSOR-INT4","COMP-M2NA-AMPERE-TENSOR","Ampere Tensor Core INT4 matrix path","matrix","draft","INT4 inputs with INT32 programmer-visible accumulation."
+"PPATH-R1-GA100-AMPERE-TENSOR-BINARY","COMP-M2NA-AMPERE-TENSOR","Ampere Tensor Core binary matrix path","matrix","draft","Binary inputs with INT32 programmer-visible accumulation."
+

@@ -1,0 +1,27 @@
+{
+    "status":  "PASS",
+    "formal_baseline_files":  32,
+    "formal_aggregate":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "formal_baseline_mismatches":  0,
+    "formal_validator_checks":  106160,
+    "subject_contract_mode":  "gate",
+    "formal_targets":  [
+                           {
+                               "target_path":  "资料卡/AMD/封装/AMD_Instinct_MI455X_模组资料卡.md",
+                               "exists":  false
+                           },
+                           {
+                               "target_path":  "最小参考资料库/快照/AMD/MI455X/2026-08-13/amd-instinct-mi455x-2026-08-13.html",
+                               "exists":  false
+                           },
+                           {
+                               "target_path":  "论文/AMD_Instinct/02_厂商产品资料/2026_AMD_Instinct_MI455X_GPU_Brochure.pdf",
+                               "exists":  false
+                           }
+                       ],
+    "formal_targets_created":  0,
+    "transaction_temp_or_lock_entries":  0,
+    "independent_temp_exists":  false,
+    "short_drive_mapping_entries":  0,
+    "formal_writes_performed":  0
+}

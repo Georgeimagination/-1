@@ -1,0 +1,21 @@
+HTTP/2 200 
+content-type: application/pdf
+content-length: 399355
+server: Apache
+last-modified: Wed, 20 Apr 2022 12:22:04 GMT
+etag: "617fb-5dd150a839300"
+accept-ranges: bytes
+content-security-policy: frame-ancestors 'self' *.awsapps.nvidia.com *.nvidia.com https://widget.stackla.com https://app-sj14.marketo.com https://www.youtube.com https://www.quadro-selector.com http://player.youku.com https://player.youku.com https://live.nvidia-china.com https://www.google.com *.nvidia.cn https://events.rainfocus.com https://www.twitch.tv https://store.nvidia.ru https://store.nvidia.in *.geforcenow.com https://salespro.hpe.com https://hpe.seismic.com https://cms.nvidia-docs-uat.lower.k3.m1.brightspot.cloud https://cms.nvidia-docs-qa3.lower.k3.m1.brightspot.cloud https://events.rainfocus.com https://docs.nvidia-docs-uat.lower.k3.m1.brightspot.cloud https://docs.nvidia-docs-qa3.lower.k3.m1.brightspot.cloud https://nvfile;
+serverid: prod-web03
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+access-control-allow-origin: *
+edge-cache-tag: /content/,/dam/en-zz/,/dam/en-zz/Solutions/,/dam/en-zz/Solutions/Data-Center/,/dam/en-zz/Solutions/Data-Center/a100/,damassets,damassets/staticassets
+date: Thu, 20 Aug 2026 21:03:53 GMT
+x-accept: */*
+nv-defunct-locale-redirection: executed
+ak_ec_type: VANITY_ERD_POLICY
+akamai-cache-status: Hit from child
+x-cdn-version: v439
+x-cdn: akam
+

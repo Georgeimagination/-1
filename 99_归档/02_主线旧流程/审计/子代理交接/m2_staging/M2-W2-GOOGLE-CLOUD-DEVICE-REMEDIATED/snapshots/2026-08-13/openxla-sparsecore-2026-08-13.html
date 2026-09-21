@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Web extract snapshot: https://openxla.org/xla/sparsecore</title></head><body>
+<h1>Web extract snapshot</h1>
+<dl><dt>Source URL</dt><dd><a href="https://openxla.org/xla/sparsecore">https://openxla.org/xla/sparsecore</a></dd><dt>Access date</dt><dd>2026-08-13</dd><dt>Capture method</dt><dd>Codex web open rendered-text extract using full-page and continuation requests; not an upstream byte-identical response body.</dd></dl>
+<pre>A deep dive into SparseCore for Large Embedding Models (LEM)  |  OpenXLA Project (https://openxla.org/xla/sparsecore)
+citeturn356view0 [wordlim: 200] Crawled: today; Content type: text/html; Source: open({"ref_id":"https://openxla.org/xla/sparsecore","lineno":null}); Total lines: 410
+--------------------------------------------------------------------------------
+A deep dive into SparseCore for Large Embedding Models (LEM)  |  OpenXLA Project (https://openxla.org/xla/sparsecore)
+citeturn356view1 [wordlim: 200] Crawled: today; Content type: text/html; Source: open({"ref_id":"https://openxla.org/xla/sparsecore","lineno":300}); Total lines: 410
+L148:     * Explanation: Analogous to `max_ids_per_table`, but this parameter specifies the maximum number of unique IDs for each logical table. This is a critical setting for appropriately sizing on-device buffers used in unique ID processing and subsequent vector operations.
+L149:     * Setting: Also commonly defined in a limits file or derived from `max_unique_ids_per_partition_per_sample`.
+L150:     * Default: `None`.
+L151:   * `allow_id_dropping: bool = False`
+L152:     * Explanation: This boolean flag controls ID dropping when the number of IDs encountered in the input data (observed limits) surpasses the limits set during compilation (for example, `max_ids_per_partition`).
+L153:       * If `True`: IDs that would cause the limits to be exceeded are silently dropped. Typically, IDs within a partition are processed in a sorted order, and any ID that would push the running count over the limit for its designated mini-batch is discarded. This allows the program to continue execution but may have an adverse impact on model accuracy.
+L154:       * If `False`: An error is triggered, and the process will likely terminate if observed limits go beyond compiled limits. This approach ensures all data is processed but requires limits to be configured more conservatively.
+L155:     * Default: `False` (causing an error on overflow rather than silent data dropping).
+L156:   * `initialize_tables_on_host: bool = True`
+L157:     * Explanation: This flag determines whether embedding tables are initialized on the host CPU before being subsequently transferred to the TPU's High Bandwidth Memory (HBM). Standard practice is for tables to be initialized on the host. Setting this to `True` follows this convention. If it were set to `False`, it would imply an on-device initialization mechanism, which could have different performance implications or specific initialization prerequisites.
+L158:   * `enable_fast_table_initialization: bool = False`
+L159:     * Explanation: Initializes the tables directly on the TPU. This can help reduce model startup times.
+L160: ## 5. Pipelining for performance
+L161: 
+L162: Pipelining is a performance optimization technique that enables the simultaneous execution of operations on the TensorCore (TC) and the SparseCore (SC). By overlapping these computations, overall throughput can be significantly improved.
+L163:   * Mechanism: In a standard training step that involves sparse embedding lookups (handled by SC) and dense layer computations (handled by TC), pipelining allows the SC to work on its part of step `i` (for example, forward or backward pass) while the TC is concurrently processing a different part of the same step `i`, or even parts of adjacent steps like `i-1` or `i+1`.
+L164:   * Impact on gradients: The SparseCore might operate on "stale" gradients. For instance, the gradients calculated during the backpropagation phase of step `i` might not be fully updated and visible to the SC until step `i+2`.
+L165:   * Performance vs. numerics trade-off: This overlapping execution can lead to substantial speedups, potentially up to a 2x improvement in device step time. However, the subtle changes in numerics (embedding_weights) resulting from the use of stale gradients might influence model convergence behavior or the final achieved accuracy. The acceptability of this trade-off is highly model-dependent and often requires empirical validation.
+L166:   * Control flag: Pipelining can be controlled by `tf_xla_disable_full_embedding_pipelining`. Setting this flag to `true` disables full pipelining (overlapping TensorCore and SparseCore computation), whereas setting it to `false` (or if the flag's semantics imply enabling when false) activates it.
+L167: ### Conceptual pipelining flow:
+L168: 
+L169:   * Without pipelining (simplified sequential flow):
+L170: 
+L171: `Loop: SC/F_i -&gt; TC/F_i -&gt; TC/B_i -&gt; SC/B_i`
+L172: 
+L173:   * With pipelining (simplified overlapped flow):
+L174: 
+L175:     `Time -&gt;
+L176:     Step i:   SC/F_i | TC/F_i | TC/B_i | SC/B_i
+L177:     Step i+1:          SC/F_i+1| TC/F_i+1| TC/B_i+1| SC/B_i+1
+L178:     `
+L179: Note: The actual pipelining stages implemented in the hardware and compiler can be more intricate, often involving pre-loops, main execution loops, and post-loops to manage data dependencies and ensure correctness.
+L180: ## 6. The role of XLA
+L181: 
+L182: XLA (Accelerated Linear Algebra) is the domain-specific compiler that translates high-level computational graphs, typically from frameworks like TensorFlow, into highly optimized machine code tailored for TPUs. This includes generating the instructions for operations destined for the SparseCore.
+L183: ### Key functions in the SparseCore context:
+L184:   * Compilation of sparse operations: XLA is responsible for compiling embedding lookup operations (such as the `SparseDenseMatmulOp`) and other sparse computations into low-level, executable SparseCore programs.
+L185:   * Integration of limits: It utilizes the configured operational limits (for example, `max_ids_per_partition`, `max_unique_ids_per_partition`, often provided via a limits file specified by flags like `xla_sparse_core_max_ids_file`) to statically determine the sizes of and allocate on-device memory buffers, particularly within the SPMEM.
+L186:   * Targeted optimizations: XLA performs a suite of optimizations specifically designed for the SparseCore architecture. These can include instruction scheduling, memory layout transformations, and fusion of operations to maximize efficiency.
+L187:   * Control using flags: Many aspects of SparseCore behavior, tuning parameters, and optimization strategies are exposed and controlled through XLA flags (for example, `xla_sparse_core_estimate_max_ids` for limit estimation, or `xla_sc_detect_nan` for debugging).
+L188: ### Open source status:
+L189: 
+L190: Currently Sparsecore Implementation is internal and served using `libtpu.so`.
+L191: 
+L192: ### Error reporting and diagnostics:
+L193: 
+L194: Compilation failures related to SparseCore configurations or resource constraints often manifest as `XLA:TPU` compile-time errors. These error messages can provide valuable insights into issues such as limits being set too high for the available SPMEM, or the use of unsupported configurations.
+L195: ## 7. How limits translate to tables on SparseCore
+L196: 
+L197: On SparseCore, "limits" are fundamental configuration parameters that primarily refer to two per-partition settings for each table that is sharded (distributed) across the available SparseCores:
+L198:   * `max_ids_per_partition`: This defines the maximum number of total IDs (including duplicates) that any single SparseCore is expected to send to, or process for, a specific partition of a given table within a single computational step.
+L199:   * `max_unique_ids_per_partition`: This defines the maximum number of unique IDs that any single SparseCore is expected to send to, or process for, a
+L200: ### Translation to physical table layout and processing:
+L201:   * Table sharding strategy: Embedding tables are typically "mod-sharded" across all SparseCores in the system. This means each SparseCore becomes responsible for a distinct subset of the vocabulary (rows) of each table. An ID `j` would generally be assigned to `SparseCore_k` based on a formula like `k = j % num_total_sparse_cores`.
+L202:   * Definition of a "partition": In this context, a "partition" refers to the specific segment of an embedding table for which a single SparseCore handles lookups.
+L203:   * SPMEM buffer allocation: These limits are used by the XLA compiler to statically size and allocate buffers within the on-device scratchpad memory (SPMEM). Buffers are dimensioned such that all necessary data related to the IDs for a given partition (up to the specified `max_ids` and `max_unique_ids` limits) can be loaded into SPMEM for processing.
+L204: This is particularly crucial for non-elementwise computations, such as reducing duplicate IDs within a partition (for example, , when creating a Compressed Sparse Row (CSR) representation), where the entire relevant dataset for that partition's IDs needs to be readily available in fast memory.
+L205:   * Compiled limits versus observed limits:
+L206:     * Observed limits: These are the actual number of IDs encountered for each partition during runtime, based on the input data being processed.
+L207:     * If observed limits exceed compiled limits, it can lead to ID dropping (if `allow_id_dropping` is enabled) or errors.
+L208:   * Calculating limits: The process of determining appropriate limits involves a careful analysis of the input data distribution. For any given table (let's call it `T1`, which might itself be part of a larger stacked table `T`):
+L209:     1. The input batch (for example, a 2D `SparseTensor` of shape `[BatchSize, MaxSequenceLength]`) is initially split across the available SparseCores. For instance, if a TensorCore is paired with 2 SparseCores, each SparseCore might receive a sub-batch of shape `[BatchSize/2, MaxSequenceLength]`.
+L210:     2. This sub-batch is then converted into the COO format, yielding `row_ids` and `col_ids`.
+L211:     3. Duplicate IDs within the same sample (i.e., entries with the same `row_id` and `col_id`) are removed.
+L212:     4. For each remaining unique `col_id` (within a sample), the target SparseCore responsible for this ID is determined using the mod-sharding rule: `target_sc_id = col_id % num_total_sparse_cores`.
+L213:     5. A count is maintained of the total number of IDs (`ids_per_sparse_core[target_sc_id]++`) and the number of unique IDs (`unique_ids_per_sparse_core[target_sc_id]++`, after ensuring uniqueness for that specific `target_sc_id`) that are destined for each `target_sc_id`.
+L214:     6. The `max_ids_per_partition` for table `T1` is then set to `max(ids_per_sparse_core_array)`.
+L215:     7. Similarly, the `max_unique_ids_per_partition` for table `T1` is set to `max(unique_ids_per_sparse_core_array)`.
+L216:     8. If table `T1` is a component of a stacked table, additional transformations like rotations or shifts might be applied to the ID distributions before summing statistics from all constituent tables. This helps in balancing the load across chips.
+L217: Setting these limits correctly is a balancing act: lower limits can potentially lead to higher performance (as less data needs to be processed per step and SPMEM pressure is reduced), but if set too low, they can result in excessive mini-batching or undesirable ID dropping.
+L218: ## 8. How each SparseCore communicates
+L219: 
+L220: SparseCore communication, particularly in the context of processing a list of IDs for embedding lookups, relies on several coordinated mechanisms:
+L221:   * Mod sharding and implicit routing:
+L222:     * Embedding tables are mod-sharded across all SparseCores in the system.
+L223:     * When the host provides a batch of input data (which is subsequently preprocessed into COO format, including `col_ids`), the `col_id` value is used to determine which SparseCore is responsible for that specific ID: `target_sc_id = col_id % num_total_sparse_cores`.
+L224:     * Each SparseCore effectively receives and processes only the subset of IDs that map to its assigned vocabulary partitions. The host preprocessing stage is crucial for preparing the data in such a way that each SparseCore can readily identify and operate on its relevant IDs.
+L225:   * Data distribution by host:
+L226:     * The host preprocessing logic partitions the overall input batch and distributes the pertinent portions of the `row_ids` and `col_ids` (along with any associated features or weights if applicable) either to memory (HBM) directly accessible by each SparseCore or to a shared HBM from which the SparseCores will fetch their required data.
+L227:   * Intra-SparseCore processing:
+L228:     * Once a SparseCore has received its designated set of IDs for a given table partition, it performs operations such as deduplication of these IDs and gathering the corresponding embedding vectors. These are primarily local computations executed within the SparseCore's own tiles and utilizing its local SPMEM.
+L229:   * Inter-SparseCore communication (All-to-All):
+L230:     * After the initial processing phase (like embedding lookups), an "all-to-all" communication pattern may be used to combine or redistribute results across SparseCores (for example, before feeding activations into a TensorCore layer that expects input corresponding to all original sample positions). This is vital for reconstructing the complete set of activations if the original input batch was distributed for parallel processing.
+L231:   * Communication with TensorCores:
+L232:     * SparseCores communicate with TensorCores to send embedding activations (during the forward pass) and to receive gradients (during the backward pass). This interaction is orchestrated by the XLA-compiled program and frequently involves HBM as an intermediary buffer. The pipelining strategy (discussed earlier) heavily influences the timing and synchronization of this SC-TC communication.
+L233: In essence, the initial "distribution" of IDs to the appropriate SparseCores is largely handled by the sharding scheme and the host preprocessing steps. Subsequent communication involves SparseCores operating on their local data, potentially followed by collective communication operations like all-to-all if data needs to be globally exchanged or reordered across SparseCores before further processing by the TensorCores.
+L234: ## 9. SparseCore memory management
+L235: 
+L236: Each SparseCore efficiently manages several distinct types of memory to perform its computations:
+L237:   * Scratchpad memory (SPMEM):
+L238:     * Nature: A relatively small, but very fast, local SRAM that is available exclusively to each SparseCore. It is important to note that SPMEM is not a cache; its usage is explicitly managed and orchestrated by the XLA compiler.
+L239:     * Purpose: SPMEM is used to "opportunistically stage data." This includes inputs, outputs, and intermediate results that are required for ongoing SC computations. Staging data in SPMEM significantly reduces the high latency typically associated with accessing HBM.
+L240:     * Sizing: As discussed in the section on "Limits," SPMEM buffers are statically sized at compile time. This sizing is based on parameters like `max_ids_per_partition` and `max_unique_ids_per_partition`. This static allocation ensures that for any given operation on a table partition (such as CSR reduction), all the necessary data for that partition's IDs (up to the defined limits) can fit into SPMEM.
+L241:     * Compiler optimizations: The XLA compiler incorporates sophisticated optimizations to determine precisely how much data, and which specific data elements, need to be staged in SPMEM to effectively hide HBM latency and maximize performance.
+L242:     * Dynamic allocation constraint: The SparseCore compiler does not currently support dynamic scratchpad allocation. This highlights the critical importance of static sizing through the careful configuration of limits.
+L243:   * High bandwidth memory (HBM):
+L244:     * Nature: A large, shared memory resource accessible by all SparseCores, TensorCores, and the host system. Primary embedding tables are stored in HBM.
+L245:     * Stack usage: SparseCore operations often require temporary storage in HBM for intermediate results that either do not fit into the limited SPMEM or need to be passed between larger stages of the processing pipeline. HBM stack usage during both forward and backward passes can be estimated as follows -
+L246:       * Forward Pass HBM Stack (single table) ≈ (2 * `feature_width` + 1) * `max_unique_nz_per_row` * `logical_replica_count` * 4 bytes
+L247:       * Backward Pass HBM Stack (single table) ≈ 3 * `feature_width` * `max_unique_nz_per_row` * `logical_replica_count` * 4 bytes
+L248:     * Heap usage: HBM also accommodates the heap, which is managed by the host. The heap stores data such as dense layer weights, constants used by the model, and prefetched input data. Heap usage tends to increase with the number of steps for which the host prefetches data (controlled by the `maximum_parallel_iterations` flag). While more prefetching can improve performance by overlapping host-to-device transfers with device computation, it also consumes more HBM.
+L249:     * Serialization for HBM optimization: The flag `xla_sc_num_serialized_tables_to_optimize_hbm` provides a mechanism to control how many tables' data is kept "live" in HBM stack memory at any given time. Increasing this number effectively serializes the processing for more tables, which can reduce peak HBM stack usage but may come at the cost of performance due to reduced parallelism.
+L250:   * Vector memory (VMEM):
+L251:     * VMEM is a local scratchpad memory used exclusively by the TC (TensorCore). While VMEM is not directly managed by the SparseCore, it is an integral part of the memory ecosystem with which the SC interacts, primarily through the TensorCore.
+L252: ### Overall memory management strategy:
+L253: The core memory management strategy for SparseCore revolves around using the small, fast SPMEM for the "hot" data that is actively being processed by a SparseCore tile, thereby minimizing accesses to the slower HBM. The configured limits are the primary mechanism for ensuring that SPMEM does not overflow. HBM is utilized for storing large embedding tables and temporary data that either exceeds SPMEM capacity or needs to be shared across different processing units or pipeline stages.
+L254: The XLA compiler is responsible for orchestrating all data movement and buffer allocation based on these architectural principles and the user-configured limits.
+L255: ## 10. Performance &amp; memory bottlenecks
+L256: 
+L257: Achieving optimal performance with SparseCore necessitates a clear understanding of potential bottlenecks and how to address them. These can arise on the host, within the SparseCore itself, or in its interaction with the TensorCores.
+L258: ### Common performance bottlenecks:
+L259:   * Host bottleneck:
+L260:     * Issue: The host CPU may fail to preprocess data and feed it to the TPU rapidly enough, leading to underutilization of SparseCores and TensorCores. This is a frequent performance limiter.
+L261:     * Mitigation: Monitor host CPU utilization and input pipeline metrics. Optimize host-side data loading and preprocessing routines (refer to COO conversion tips). Adjust the `maximum_parallel_iterations` flag to fine-tune data prefetching.
+L262:   * Suboptimal TC/SC synchronization (lack of pipelining):
+L263:     * Issue: If pipelining between the TensorCore and SparseCore is disabled or not operating efficiently, one unit may spend significant time waiting for the other, thereby reducing overall system throughput.
+L264:     * Mitigation: Ensure pipelining is enabled (for example, `tf_xla_disable_full_embedding_pipelining = false` or its equivalent).
+L265:   * Limit-induced bottlenecks:
+L266:     * Issue:
+L267:       * Limits too low: Can trigger excessive mini-batching (splitting input batches into numerous smaller sub-batches to meet the tight limits). While this maintains correctness, each mini-batch introduces some processing overhead, potentially slowing down the overall execution. If `allow_id_dropping` is true, overly low limits can also lead to ID dropping, which impacts model accuracy.
+L268:       * Limits too high (but still fit): While very high limits might prevent mini-batching, they could increase SPMEM pressure unnecessarily if the actual data characteristics rarely approach these peak values. They could also lead to larger HBM stack usage than strictly needed.
+L269:       * Compilation failures: If the configured limits require more SPMEM or HBM stack than the available physical memory, the compilation will fail.
+L270:     * Mitigation: Ensure limits are set correctly.
+L271:   * Data distribution skew:
+L272:     * Issue: If certain SparseCore partitions consistently receive a disproportionately larger number of IDs compared to others (indicating a poor ID distribution), those overloaded SparseCores will become performance bottlenecks.
+L273:     * Mitigation: ID shuffling during the mini-batching process can help alleviate this for stacked tables, especially those with "hot" user tables. Analyze ID distributions carefully to set appropriate and balanced per-table limits.
+L274:   * Table stacking issues:
+L275:     * Issue:
+L276:       * Too few tables stacked: May not be sufficient to effectively hide ICI latency or adequately reduce processing overheads.
+L277:       * Too many tables stacked: Could result in the creation of very large logical tables that become unwieldy to manage or might exceed available resource limits.
+L278:     * Mitigation:
+L279:       * Ensure optimal number of tables for stacking. A general guideline suggests a "sweet spot" of 5-100 tables for stacking.
+L280:   * Inefficient numerics/quantization:
+L281:     * Issue: Using full FP32 precision when lower precision formats like BF16 or quantized integers would suffice (and offer faster computation) can be a performance bottleneck.
+L282:     * Mitigation: Explore lower precision options. However, be aware that quantization itself has some overhead and might require careful tuning of quantization parameters to maintain model accuracy.
+L283:   * HBM bandwidth saturation:
+L284:     * Issue: Excessive data movement to and from HBM, potentially caused by very small feature widths (leading to high padding overhead), inefficient memory access patterns, or an extremely large number of lookups, can saturate the available HBM bandwidth.
+L285:     * Mitigation: Scaling the number of TPUs can help with HBM bandwidth saturation.
+L286: ### Common memory bottlenecks:
+L287:   * SPMEM overflow (compilation failure):
+L288:     * Issue: If `max_ids_per_partition` and `max_unique_ids_per_partition` are set too high, the XLA compiler may be unable to allocate sufficient SPMEM, resulting in compilation errors like: `"Fixed size allocations (...) do not fit in TileSpmem (...)"`. Additionally, if the term `(sample_count * feature_width) / kNumTiles` (where `kNumTiles` is the number of tiles per SC) is too large for staging gather operands within the tile SPMEM, errors such as `"Gather operand too large..."` can occur.
+L289:     * Mitigation: Reduce the batch size or increase the number of chips used for processing.
+L290:   * HBM stack overflow (runtime or compilation):
+L291:     * Issue: If the combination of `feature_width`, `max_unique_nz_per_row`, and `logical_replica_count` leads to HBM stack memory requirements that exceed the available HBM, this can cause Out-Of-Memory (OOM) errors either at runtime or during compilation.
+L292:     * Mitigation: Tune the `xla_sc_num_serialized_tables_to_optimize_hbm` flag to reduce HBM stack usage by serializing the processing of tables (this usually comes at a performance cost).
+L293:   * HBM heap exhaustion:
+L294:     * Issue: Primarily caused by very large dense layer weights, numerous constants stored in memory, or overly aggressive input prefetching (high `maximum_parallel_iterations`).
+L295:     * Mitigation: Monitor heap usage using tools like XProf Memory Viewer.
+L296:   * Padding overhead:
+L297:     * Issue: Embedding tables are padded to be 32B-aligned (equivalent to 8 floats) in the feature dimension. Consequently, small feature widths (for example, 1 float) incur significant padding overhead (for example, 7/8 of the allocated buffer space is padding), leading to wasted HBM. The vocabulary dimension of tables is also padded to be a multiple of the number of SparseCores in the system; however, this impact is usually negligible for tables with a sufficiently high vocabulary size.
+L298: ### General factors impacting performance and memory:
+L299: 
+L300:   * Topology: The number of chips available and their interconnection architecture.
+L301:   * Batch sized: Directly affects the `sample_count` per SparseCore, which in turn influences memory consumption and compute load.
+L302:   * Data formatting: Ensuring an efficient on-device data layout is crucial for optimal performance.
+L303: ## 11. Analyzing a SparseCore profile
+L304: 
+L305: Analyzing a performance profile is a key step in identifying bottlenecks and uncovering opportunities for optimization within your SparseCore workloads.
+L306:   1. Obtain a trace:
+L307:      * Utilize profiling tools, such as cite14†XProf†github.com , to capture a detailed execution trace while your model is training or running inference. This trace will provide a timeline of operations occurring on the host, the TensorCores, and the SparseCores.
+L308:   2. Examine the Trace Viewer (for example, in XProf or TensorBoard):
+L309:      * Host activity: Scrutinize the host's activity. Are there significant gaps in TPU activity? Such gaps might indicate that the host is a bottleneck, failing to feed data quickly enough. Analyze the performance of your input pipeline.
+L310:      * TensorCore (TC) and SparseCore (SC) activity:
+L311:        * Look at the execution timelines for both TC and SC. Are they operating in parallel, indicating effective pipelining? Or are there extended periods where one unit is idle, waiting for the other?
+L312:        * Identify the operations that consume the most time (longest-running operations) on both the SC and TC.
+L313:        * Visual trace outputs (often showing colored blocks representing different operations over time, like the `TPU:0 SparseCore 1 (pid 1005)`) are invaluable for visually identifying dominant operations and idle periods.
+L314:      * Step time analysis: Observe the overall step time and understand how it is distributed or broken down between host processing, SC computation, and TC computation.
+L315:   3. Memory analysis (XProf Memory Viewer):
+L316:      * Heap usage: Use tools like XProf's "Memory Viewer" tab to inspect HBM heap usage. This can help determine if large model weights, constants, or overly aggressive input prefetching are consuming an excessive amount of HBM. Enabling flags like `--vmodule=best_fit_allocator=1` might provide logs of peak heap usage.
+L317:      * Stack usage (indirect): While direct HBM stack profiling can be complex, if you encounter Out-Of-Memory errors and heap usage appears reasonable, HBM stack exhaustion (often due to overly large limits or feature widths) is a strong suspect. The formulas provided for HBM stack usage can help in estimating this.
+L318:   4. Look for specific patterns:
+L319:      * Mini-batching: If limits are frequently being exceeded, you might observe evidence of mini-batching in the trace (for example, a higher number of smaller SC operations than expected for the global batch size). This can often be inferred from logs or by observing the invocation counts of certain operations.
+L320:      * ID dropping: If ID dropping is enabled and occurring, system logs might provide indications of this. This would also be a clear sign that the configured limits are too restrictive for the input data.
+L321:      * Compilation times: Extended recompilation times, particularly if Feedback Directed Optimization (FDO) is enabled and frequently adjusting limits, can add significant overhead to the overall training time.
+L322:   5. Correlate with flags and configuration:
+L323:      * Relate the observed behavior in the profile back to your SparseCore configurations (settings in limits files, XLA flags). For example, if `xla_sc_num_serialized_tables_to_optimize_hbm` is set to a high value, you might expect slower SC performance but lower HBM stack consumption.
+L324:   6. Iterative process:
+L325:      * Profiling is often an iterative refinement process. Make a specific change (adjust a limit, enable or disable a feature), capture a new profile, and then compare it against the previous profile to see the impact of your modification.
+L326: ## 12. General debugging flags
+L327: 
+L328: Several flags can be enabled to assist in debugging issues related to SparseCore execution. It's important to note that enabling these checks often incurs a performance penalty and, therefore, they should typically be disabled for production runs.
+L329:   * ID checks (out-of-range):
+L330:     * Flag: `xla_sparse_core_enable_id_bound_check = true`
+L331:     * Purpose: Enables checks on the host system to detect if any embedding IDs in the input data fall outside the valid vocabulary range defined for a given embedding table. This helps catch issues related to incorrect or corrupted input data.
+L332:   * NaN checker:
+L333:     * Flag: `xla_sc_detect_nan = true`
+L334:     * Purpose: Enables the detection of NaN (Not a Number) values within floating-point data processed on the SparseCore. If a NaN is detected in the inputs or outputs of various compiler passes, this flag will cause an error to be raised. Such errors typically provide information about where the NaN was encountered.
+L335:   * Bounds checker (memory access):
+L336:     * Flag: `xla_sc_assert_level=bounds`
+L337:     * Purpose: This flag enables an ASAN (AddressSanitizer)-style tool that rewrites memory-accessing instructions (such as VMEM loads/stores and DMA operations) to include dynamic checks. These checks verify if the memory access is within the allocated bounds of the target memory region.
+L338:     * Behavior: If an out-of-bounds memory access is detected, the execution will fail.
+L339:     * Caution: It's possible for this checker to produce false positives, for example, due to complex strided access patterns that are not fully comprehended by the checker. This transformation is applied at a late stage in the backend compilation process.
+L340:   * Buffer checker (memory corruption):
+L341:     * Flags:
+L342:       * `xla_tpu_buffer_contents_sanitizer_config='cores_to_sanitize: [TC, SC_SCS, SC_TILE], sanitizer_mode: LOCAL_ONLY'`
+L343:       * `xla_tpu_verify_launch_id_across_cores=true`
+L344:     * Purpose: These flags help ensure that memory buffers are not being inadvertently corrupted or overwritten by unrelated operations. The Buffer Sanitizer checks the contents of buffers to verify that they are not changing unexpectedly.
+L345: ## 13. Quantization support
+L346: 
+L347: SparseCore's `SparseDenseMatmulOp` is designed to support operations on embedding tables using both 32-bit floating-point (FP32) and integer data types. While model training is typically performed using FP32 precision for embedding tables, post-training quantization (PTQ) can be applied. PTQ allows the use of lower-precision datatypes (like 8-bit integers) for inference, which can potentially lead to improved performance and a reduced memory footprint.
+L348: ### Simulated Quantization:
+L349: The `SparseDenseMatmulOp` can be configured to perform "simulated quantization." In this operational mode, embedding vectors are first quantized to a lower precision and then dequantized back to a higher precision (for example, FP32) before they are used in subsequent computations. This technique allows models to be trained while accounting for the effects of quantization noise. Training with simulated quantization can improve the accuracy of the final model when it is fully quantized for inference.
+L350: ### Configuration attributes for `SparseDenseMatmulOp` (for quantization):
+L351:   * `quantization_config_num_buckets = 256`
+L352:     * This attribute specifies the number of discrete buckets or levels into which a 32-bit floating-point number will be quantized. For example, when quantizing to 8-bit integers, one would typically specify 2^8 =256 buckets.
+L353:   * `quantization_config_low = -X.X`
+L354:     * This attribute defines the minimum floating-point value in the quantization range. Any input values below this specified minimum will be clipped to this minimum value during quantization.
+L355:   * `quantization_config_high = Y.Y`
+L356:     * This attribute defines the maximum floating-point value in the quantization range. Any input values above this specified maximum will be clipped to this maximum value during quantization.
+L357: ### Numerics and pipelining interaction:
+L358: 
+L359: The numerical behavior of the model can change depending on whether pipelining between the TensorCore and SparseCore is enabled. If pipelining is active, gradients processed by the SparseCore might be "stale" (from a previous iteration). This can interact with the quantization process and potentially affect model training dynamics or final accuracy.
+L360: ## 14. Upcoming features and recent improvements
+L361: 
+L362: The SparseCore ecosystem is subject to continuous development and enhancement.
+L363: ### Roadmap:
+L364:   * Sample-dimension mini-batching:
+L365:     * This is planned as a complementary feature to the existing vocabulary-dimension mini-batching capabilities.
+L366:     * It would allow for further partitioning of embedding inputs along the sample dimension. This would be achieved by introducing on-device loops that can filter and process lookups from a subset of samples at a time. Such a feature could be beneficial for managing very large per-sample ID counts or for improving load balancing across processing units.
+L367:   * Improved support for embedding with less than 8 integers per row (small feature widths):
+L368:     * The current design often uses significant padding for embedding feature widths that are less than 8 floats (which corresponds to 32 bytes). This padding can lead to wasted HBM and potentially underutilized compute resources. Future improvements aim to mitigate this inefficiency for tables with small feature dimensions.
+L369: ### Recent improvements:
+L370: 
+L371:   * Staging of gather operands in HBM:
+L372:     * This optimization helps to reduce pressure on the shared scratchpad memory (SPMEM) by allowing some gather operation inputs or outputs to be staged in the larger HBM.
+L373:   * Reduction in stack memory usage:
+L374:     * Enhancements have been implemented to reduce HBM stack memory consumption during SparseCore operations, ideally without negatively impacting overall performance or throughput.
+L375: These enhancements are focused on improving SparseCore's performance, memory efficiency, and operational flexibility for an even wider range of sparse workloads.
+L376: 
+L377: [Button: Send feedback ]
+L378: Except as otherwise noted, the content of this page is licensed under the cite15†Creative Commons Attribution 4.0 License†creativecommons.org , and code samples are licensed under the cite16†Apache 2.0 License†www.apache.org . For details, see the cite17†Google Developers Site Policies†developers.google.com . Java is a registered trademark of Oracle and/or its affiliates.
+L379: 
+L380: Last updated 2025-08-05 UTC.
+L381: 
+L382:   * ### Stay connected
+L383: 
+L384:     * cite18†Twitter†twitter.com L385:     * cite19†YouTube†www.youtube.com L386:   * cite20†Terms†policies.google.com L387:   * cite21†Privacy†policies.google.com L388: 
+L389:   * English
+L390:   * Deutsch
+L391:   * Español – América Latina
+L392:   * Français
+L393:   * Indonesia
+L394:   * Italiano
+L395:   * Polski
+L396:   * Português – Brasil
+L397:   * Tiếng Việt
+L398:   * Türkçe
+L399:   * Русский
+L400:   * עברית
+L401:   * العربيّة
+L402:   * فارسی
+L403:   * हिंदी
+L404:   * বাংলা
+L405:   * ภาษาไทย
+L406:   * 中文 – 简体
+L407:   * 中文 – 繁體
+L408:   * 日本語
+L409:   * 한국어
+</pre>
+</body></html>

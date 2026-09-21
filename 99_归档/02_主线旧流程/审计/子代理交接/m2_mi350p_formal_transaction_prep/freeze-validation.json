@@ -1,0 +1,105 @@
+{
+    "status":  "ready_for_independent_review",
+    "generated_at":  "2026-08-13",
+    "package_id":  "M2-W3-AMD-MI350P-FORMAL-TRANSACTION-V1",
+    "formal_execution_authorized":  false,
+    "independent_review_verdict":  "pending",
+    "independent_review_ready":  false,
+    "formal_baseline_aggregate":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "formal_validator_checks":  106160,
+    "formal_validator_mode":  "gate",
+    "formal_preflight_checks":  11290,
+    "static_contract_checks":  8811,
+    "signoff_rows":  274,
+    "structured_write_rows":  270,
+    "write_tables":  19,
+    "payload_targets":  4,
+    "payload_targets_absent":  4,
+    "no_write_guards":  3,
+    "candidate_validator_checks":  111390,
+    "candidate_aggregate":  "28923f7aa9dea488152f699e6879319d1fb96222fe72745754cf8ffd7b46518e",
+    "negative_gates":  {
+                           "status":  "passed",
+                           "count":  6,
+                           "formal_writes":  0
+                       },
+    "rehearsals":  {
+                       "status":  "passed",
+                       "scenarios":  3,
+                       "positive":  1,
+                       "rollback":  2,
+                       "formal_writes":  0
+                   },
+    "cleanup":  {
+                    "replacement_temp_files":  0,
+                    "lock_files":  0,
+                    "transaction_temp_directories":  0
+                },
+    "scripts":  {
+                    "count":  7,
+                    "parse_errors":  0,
+                    "files":  [
+                                  {
+                                      "script":  "Build-MI350PCandidateOracle.ps1",
+                                      "parse_errors":  0,
+                                      "sha256":  "4eefc581acbe7161c8901ec33ae4cecb7631c067fbce6190177e6ba1e1b3a465"
+                                  },
+                                  {
+                                      "script":  "Build-MI350PStaticContract.ps1",
+                                      "parse_errors":  0,
+                                      "sha256":  "cc606a1255ed033137cb93fef1ab4cbda1633c714e1d07c227290738f1e2bcde"
+                                  },
+                                  {
+                                      "script":  "Invoke-MI350PFormalTransaction.ps1",
+                                      "parse_errors":  0,
+                                      "sha256":  "2967a9d0a023268438ddb3bcc139910ce1404faceb3fae63f1a42a27eda2e6a9"
+                                  },
+                                  {
+                                      "script":  "Replay-MI350PAuthorizedRows.ps1",
+                                      "parse_errors":  0,
+                                      "sha256":  "e2a57afb8bd656699978160e2042eee2bbe6e6ccb0639c0c229e3d842a0deee7"
+                                  },
+                                  {
+                                      "script":  "Test-MI350PFormalTransactionPreflight.ps1",
+                                      "parse_errors":  0,
+                                      "sha256":  "6547bda349d55585ffd55fbd538fe910b9a950b67902febf876476ebd4a45dc4"
+                                  },
+                                  {
+                                      "script":  "Test-MI350PFormalTransactionRehearsal.ps1",
+                                      "parse_errors":  0,
+                                      "sha256":  "2e4e2662d16867472aa517914ba758db75cda9f288638a262039a5008b71a470"
+                                  },
+                                  {
+                                      "script":  "Test-MI350PNegativeGates.ps1",
+                                      "parse_errors":  0,
+                                      "sha256":  "f62a08bdf0ed5ce6858ac49a96195027fab7655dfbf467eb5334ee4559646ebb"
+                                  }
+                              ]
+                },
+    "input_bindings":  {
+                           "final_review_report_sha256":  "470d381d66e5cb7ccd7b3fc9aa88ede12ed1a995a6a1af6e03844630d9b43461",
+                           "signoff_sha256":  "74ac69c299f5ce817c03236ef97df4e13f08f2d6724bb1c0178376661be5dad1",
+                           "freeze_manifest_sha256":  "1cb279b56f4fbfc688ed2f798646a93baed02ffbd34a647ffecf4cb6672f0e01",
+                           "freeze_content_aggregate":  "152df43e8b64c2b78c54a41c6cf9bd7acfa4d3315fcf33d6128399b22f2f8825",
+                           "signed_formal_manifest_sha256":  "68773358da2fe590aaaecdcccdaf0e68d61176df35d4b759dad14b4ae1174e5c"
+                       },
+    "root_documents":  {
+                           "README.md":  {
+                                             "sha256":  "084240e9d29a0053bcf8b99e9df5b20d060009d62bfa36724ab1aacf0d0f1cde",
+                                             "bytes":  9430,
+                                             "access":  "read_only_checked_not_written_by_prep"
+                                         },
+                           "AGENTS.md":  {
+                                             "sha256":  "9d0e6d4a09fdcf645f8c57f44a8a805667103b4c9ef886f58734445d0eedb036",
+                                             "bytes":  19581,
+                                             "access":  "read_only_checked_not_written_by_prep"
+                                         }
+                       },
+    "operator_errors":  {
+                            "count":  10,
+                            "formal_impact":  0,
+                            "approval_or_sandbox_failures":  0
+                        },
+    "write_scope":  "审计/子代理交接/m2_mi350p_formal_transaction_prep/",
+    "formal_writes_performed":  0
+}

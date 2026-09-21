@@ -1,0 +1,1 @@
+M2-W2-AWS-PACKAGE-FACTS staging validation passed: 9289 checks; 32 headers, schema/enums/FKs, 57 facts, 69 assertions, 71 requirements, 5 conflicts, source gate, backlog, nine-domain completeness, cards and minimum-set audit all passed.

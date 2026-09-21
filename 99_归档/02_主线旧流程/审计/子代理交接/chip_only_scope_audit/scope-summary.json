@@ -1,0 +1,19 @@
+{
+    "snapshot_time":  "2026-08-13T20:57:00+08:00",
+    "object_total":  78,
+    "class_A_chip_mainline":  10,
+    "class_B_architecture_support":  29,
+    "class_C_exit_mainline":  39,
+    "retained_A_plus_B":  39,
+    "current_card_objects_by_completeness":  45,
+    "retained_card_objects_A_plus_B":  38,
+    "exited_card_objects_C":  7,
+    "formal_source_total":  93,
+    "formal_media_only_count":  0,
+    "source_mainline_or_mixed_count":  62,
+    "source_C_only_count":  12,
+    "source_no_assertion_count":  19,
+    "relation_total":  27,
+    "relation_retained_count":  8,
+    "relation_exited_count":  19
+}

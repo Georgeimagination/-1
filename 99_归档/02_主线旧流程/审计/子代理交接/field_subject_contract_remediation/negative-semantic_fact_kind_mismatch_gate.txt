@@ -1,0 +1,5 @@
+﻿FAIL: 4 validation error(s); 97920 checks executed; subject_contract_mode=gate.
+ - Fact subject contract mismatch: 数据/facts.csv:FACT-AWS-TRN2-TENSOR-CLOCK field=FIELD-PHY-CLOCK actual=component allowed=object
+ - Fact subject contract mismatch: 数据/facts.csv:FACT-AWS-TRN2-VECTOR-CLOCK field=FIELD-PHY-CLOCK actual=component allowed=object
+ - Fact subject contract mismatch: 数据/facts.csv:FACT-AWS-TRN2-SCALAR-CLOCK field=FIELD-PHY-CLOCK actual=component allowed=object
+ - Fact subject contract mismatch: 数据/facts.csv:FACT-AWS-TRN2-GPSIMD-CLOCK field=FIELD-PHY-CLOCK actual=component allowed=object

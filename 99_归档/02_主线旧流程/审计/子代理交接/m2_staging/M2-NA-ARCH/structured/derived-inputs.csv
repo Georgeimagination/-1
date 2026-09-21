@@ -1,0 +1,3 @@
+"derived_input_id","derived_fact_id","input_order","input_fact_id","input_role","review_status","notes"
+"DERIN-M2NA-CDNA4-MV-01","FACT-M2NA-CDNA4-DER-FP16-MATRIX-VECTOR","1","FACT-M2NA-CDNA4-MFP16-THR","numerator","draft","4096 FP16 FLOP/cycle/CU from the MI355X column in PDF p.8 Table 1."
+"DERIN-M2NA-CDNA4-MV-02","FACT-M2NA-CDNA4-DER-FP16-MATRIX-VECTOR","2","FACT-M2NA-CDNA4-VFP16-THR","denominator","draft","256 FP16 FLOP/cycle/CU."

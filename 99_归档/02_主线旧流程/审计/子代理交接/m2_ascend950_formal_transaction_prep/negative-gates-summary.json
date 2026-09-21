@@ -1,0 +1,8 @@
+{
+    "status":  "passed",
+    "gates":  6,
+    "formal_aggregate_before":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "formal_aggregate_after":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "formal_targets_absent":  true,
+    "formal_writes_performed":  0
+}

@@ -1,0 +1,8 @@
+Bundle transaction-prep author cannot independently authorize formal execution.
+At D:\Workspace\2026projects\调研-训练推理芯片调研-资料汇总\审计\子代理交接\m2_w3_bundle_formal_transaction_independent_review\run\scripts\I
+nvoke-BundleFormalTransaction.ps1:35 char:28
++     if (-not $Condition) { throw $Message }
++                            ~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Bundle transact...rmal execution.:String) [], RuntimeException
+    + FullyQualifiedErrorId : Bundle transaction-prep author cannot independently authorize formal execution.
+ 

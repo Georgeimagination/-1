@@ -1,0 +1,2111 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# ">
+<head>
+  <meta charset="utf-8" />
+<noscript><style>form.antibot * :not(.antibot-message) { display: none !important; }</style>
+</noscript><meta name="description" content="Advances in multicore processors and accelerators have opened the flood gates to greater exploration and application of machine learning techniques to a variety of applications. These advances, along with breakdowns of several trends including Moore&#039;s Law, have prompted an explosion of processors and accelerators that promise even greater computational and machine learning capabilities. These processors and accelerators are coming in many forms, from CPUs and GPUs to ASICs, FPGAs, and dataflow accelerators. This paper surveys the current state of these processors and accelerators that have been publicly announced with performance and power consumption numbers. The performance and power values are plotted on a scatter graph and a number of dimensions and observations from the trends on this plot are discussed and analyzed. For instance, there are interesting trends in the plot regarding power consumption, numerical precision, and inference versus training. We then select and benchmark two commercially-available low size, weight, and power (SWaP) accelerators as these processors are the most interesting for embedded and mobile machine learning inference applications that are most applicable to the DoD and other SWaP constrained users. We determine how they actually perform with real-world images and neural network models, compare those results to the reported performance and power consumption values and evaluate them against an Intel CPU that is used in some embedded applications." />
+<link rel="canonical" href="https://www.ll.mit.edu/r-d/publications/survey-and-benchmarking-machine-learning-accelerators" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Survey and benchmarking of machine learning accelerators" />
+<meta name="twitter:description" content="Advances in multicore processors and accelerators have opened the flood gates to greater exploration and application of machine learning techniques to a variety of applications. These advances, along with breakdowns of several trends including Moore&#039;s Law, have prompted an explosion of processors and accelerators that promise even greater computational and machine learning capabilities. These processors and accelerators are coming in many forms, from CPUs and GPUs to ASICs, FPGAs, and dataflow accelerators. This paper surveys the current state of these processors and accelerators that have been publicly announced with performance and power consumption numbers. The performance and power values are plotted on a scatter graph and a number of dimensions and observations from the trends on this plot are discussed and analyzed. For instance, there are interesting trends in the plot regarding power consumption, numerical precision, and inference versus training. We then select and benchmark two commercially-available low size, weight, and power (SWaP) accelerators as these processors are the most interesting for embedded and mobile machine learning inference applications that are most applicable to the DoD and other SWaP constrained users. We determine how they actually perform with real-world images and neural network models, compare those results to the reported performance and power consumption values and evaluate them against an Intel CPU that is used in some embedded applications." />
+<meta name="twitter:site" content="@mitll" />
+<meta name="twitter:site:id" content="252194566" />
+<meta name="twitter:creator:id" content="252194566" />
+<meta name="twitter:creator" content="@mitll" />
+<meta name="Generator" content="Drupal 10 (https://www.drupal.org)" />
+<meta name="MobileOptimized" content="width" />
+<meta name="HandheldFriendly" content="true" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="/core/misc/favicon.ico" type="image/vnd.microsoft.icon" />
+
+  <title>Survey and benchmarking of machine learning accelerators | MIT Lincoln Laboratory</title>
+  <link rel="apple-touch-icon" sizes="120x120" href="/themes/mitll_theme/assets/favicons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/themes/mitll_theme/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/themes/mitll_theme/assets/favicons/favicon-16x16.png">
+  <link rel="manifest" href="/themes/mitll_theme/assets/favicons/manifest.json">
+  <link rel="mask-icon" href="/themes/mitll_theme/assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="/themes/mitll_theme/assets/favicons/favicon.ico">
+  <meta name="msapplication-config" content="/themes/mitll_theme/assets/favicons/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" media="all" href="/sites/default/files/css/css_PuymMPgM_tqYZZMPZaKRU3d6Hvt25sMvET9a64-nn10.css?delta=0&amp;language=en&amp;theme=mitll_theme&amp;include=eJxFzlEKAyEMBNALiR6pxHW6WhKVRNvdnr6lsvRnGB4MzMZkdoZIBretLjCjHea2xk1jO0LCnSaPLyhC0tmJPT3oWFCbCnF5w0kZzLeRIQhCpbpOSrtSz3bN_uJn7TNysYzk7LQBWTeeBS8Lv_TS0mR8AMOGQEU" />
+<link rel="stylesheet" media="all" href="/sites/default/files/css/css_e7FV0ctkygXqWPbyl6K5AQfE_8KMqm2-yFG4vBKLMcw.css?delta=1&amp;language=en&amp;theme=mitll_theme&amp;include=eJxFzlEKAyEMBNALiR6pxHW6WhKVRNvdnr6lsvRnGB4MzMZkdoZIBretLjCjHea2xk1jO0LCnSaPLyhC0tmJPT3oWFCbCnF5w0kZzLeRIQhCpbpOSrtSz3bN_uJn7TNysYzk7LQBWTeeBS8Lv_TS0mR8AMOGQEU" />
+<link rel="stylesheet" media="all" href="//fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,600i|Roboto+Condensed:700|Cardo:700" />
+<link rel="stylesheet" media="all" href="/sites/default/files/css/css_vLM_IGBEeeEuS-rJCdWruPuWv2_Lnn9vOWzPHo5UePQ.css?delta=3&amp;language=en&amp;theme=mitll_theme&amp;include=eJxFzlEKAyEMBNALiR6pxHW6WhKVRNvdnr6lsvRnGB4MzMZkdoZIBretLjCjHea2xk1jO0LCnSaPLyhC0tmJPT3oWFCbCnF5w0kZzLeRIQhCpbpOSrtSz3bN_uJn7TNysYzk7LQBWTeeBS8Lv_TS0mR8AMOGQEU" />
+
+  <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","pathPrefix":"","currentPath":"node\/75971","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"en"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"ajaxPageState":{"libraries":"eJxdj0EOwyAMBD-E8JOQExygsgFhaJO-vmkjNU0vq9nZiz0zqm4woZKZDxZSxUBq5sKlTWUFTwsO7l_huKCHS9u3RpBLE-T0JBNKCUyuY4Cwx3-3eMP1KsWkxZNDptbhRCOpM7seSQgEUzY5OE4h9vdlP2wqNgwNa1TwbVRkexo7ch0TJ43kjW7aSY6f74keCp-0UvxgegFD42rH","theme":"mitll_theme","theme_token":null},"ajaxTrustedUrl":{"\/search":true},"gtag":{"tagId":"","consentMode":false,"otherIds":[],"events":[],"additionalConfigInfo":[]},"gtm":{"tagId":null,"settings":{"data_layer":"dataLayer","include_classes":false,"allowlist_classes":"","blocklist_classes":"","include_environment":false,"environment_id":"","environment_token":""},"tagIds":["GTM-5GH3LHPD"]},"colorbox":{"transition":"elastic","speed":350,"opacity":0.84999999999999998,"slideshow":false,"slideshowAuto":true,"slideshowSpeed":2500,"slideshowStart":"start slideshow","slideshowStop":"stop slideshow","current":"{current} of {total}","previous":"\u00ab Prev","next":"Next \u00bb","close":"Close","overlayClose":true,"returnFocus":true,"maxWidth":"100%","maxHeight":"75%","initialWidth":"300","initialHeight":"250","fixed":true,"scrolling":true,"mobiledetect":true,"mobiledevicewidth":"480px"},"field_group":{"html_element":{"mode":"full","context":"view","settings":{"label":"Info","classes":"alert__content","id":"","element":"div","show_label":false,"label_element":"h3","attributes":"","effect":"none","speed":"fast"}}},"user":{"uid":0,"permissionsHash":"1d136f02b0b8fc270164cf17be579b4b2d9060c8507bfa01c5d1b31d9b147e99"}}</script>
+<script src="/sites/default/files/js/js_rRIHVffoGajnr5WXH3ROHaZIMgOdS-rXEFgW2KCm7_k.js?scope=header&amp;delta=0&amp;language=en&amp;theme=mitll_theme&amp;include=eJxdiNEKgDAIAH9I8pPEmrOFJgyDfX49BLFejrvbwqKvMbBI5csStneQBRecCjRCTShZUR_8e-GDxzwdWi1CbNITPwVvaUa5iws6t_MGBNw0bA"></script>
+<script src="/modules/contrib/google_tag/js/gtag.js?tjmijx"></script>
+<script src="/modules/contrib/google_tag/js/gtm.js?tjmijx"></script>
+
+</head>
+<body  class="node-75971 path-node page-node-type-publication">
+<a href="#main-content" class="visually-hidden focusable skip-link">
+  Skip to main content
+</a>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5GH3LHPD"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas>
+    <div class="overlay"></div>
+<div class="layout-container">
+
+        <div class="region region-alert">
+    <div class="views-element-container block block-views block-views-blockalerts-block" id="block-mitll-theme-views-block-alerts-block">
+  
+    
+      <div><div class="view view-alerts view-id-alerts view-display-id-block js-view-dom-id-d892100d61b9eb5946934daf08546fbb9ac5963c674a279787879f45e6bf331e">
+  
+    
+      
+      <div class="view-content">
+          <div class="views-row"><div class="config-pages config-pages--type-alert config-pages--view-mode-full ds-1col clearfix">
+
+  
+
+  
+      <div class="field field--name-field-config-alert-para field--type-entity-reference-revisions field--label-hidden field__items">
+              <div class="field__item"><div class="alert paragraph paragraph--type-p-alert paragraph--view-mode-full ds-1col clearfix">
+
+  
+
+      
+      <div class="alert__title">MIT Lincoln Laboratory is open.</div>
+      
+  
+
+
+<div  class="alert__content">
+        
+      <div class="alert__caption"><p>MIT Lincoln Laboratory is open.&nbsp;</p>
+
+<p>&nbsp;</p></div>
+      
+  
+
+
+  </div>    
+            <button class="alert-close"><span class="visually-hidden">Close alert</span><span class="icon icon-x"></span></button>
+      
+  
+
+      <div  class="alert-display">
+        
+            Yes
+      
+  
+    </div>
+
+
+
+</div>
+
+</div>
+          </div>
+  
+
+</div>
+
+</div>
+
+    </div>
+  
+        </div></div>
+
+  </div>
+
+  </div>
+
+  
+  <header role="banner" class="header">
+    <div class="header__inner">
+      <a class="home-link" href="/">
+        <div class="logo logo--ll">
+          <img class="logo--desktop" src="/themes/mitll_theme/assets/logos/LL75logo-fullname-white.svg" alt="MIT Lincoln Laboratory">
+          <img class="logo--mobile" src="/themes/mitll_theme/assets/logos/mitll-logo.svg" alt="">
+        </div>
+        <div class="site-title">
+          <div class="site-title__modern">
+            MIT Lincoln<br />Laboratory
+          </div>
+        </div>
+      </a>
+      <div class="header__inner-right">
+        <div class="logo logo--mit">
+          <a href="http://mit.edu" target="_blank">    
+                <img loading="eager" srcset="/sites/default/files/styles/mit_logo/public/config/2023-12/mit_logo_2023.png?itok=IwR5fgAT 1x, /sites/default/files/styles/mit_logo_2x/public/config/2023-12/mit_logo_2023.png?h=8aa4f6f5&amp;itok=uPtW_Ctm 2x" width="78" height="49" src="/sites/default/files/styles/mit_logo/public/config/2023-12/mit_logo_2023.png?itok=IwR5fgAT" alt="MIT Logo" typeof="foaf:Image" />
+
+
+
+      
+  
+
+</a>
+        </div>
+        <div class="button--search">
+          <button class="toggle-search" role="search" aria-expanded="false">
+            <span class="visually-hidden">Toggle search form</span>
+          </button>
+        </div>
+        <div class="header search">
+            <div class="region region-header">
+    <div class="search-block-form block block-mitll block-mitll-search-form-block" data-drupal-selector="search-block-form" id="block-mitlincolnlaboratorysearchform">
+  
+      <h2>What Are You Searching For?</h2>
+    
+      <form action="/search" method="get" id="search-block-form" accept-charset="UTF-8">
+  <div class="js-form-item form-item js-form-type-search form-type-search js-form-item-keys form-item-keys form-no-label">
+      <label for="edit-keys" class="visually-hidden">Search</label>
+          <input title="Enter the terms you wish to search for." data-drupal-selector="edit-keys" type="search" id="edit-keys" name="keys" value="" size="15" maxlength="128" class="form-search" />
+
+        </div>
+<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions"><input data-drupal-selector="edit-submit" type="submit" id="edit-submit" value="Search" class="button js-form-submit form-submit" />
+</div>
+
+</form>
+
+  </div>
+
+  </div>
+
+        </div>
+        <div class="button--menu">
+          <button class="toggle-menu" role="navigation" aria-expanded="false" aria-label="Primary">
+            <span class="hamburger">
+              <span class="hamburger__line"></span>
+              <span class="hamburger__line"></span>
+              <span class="hamburger__line"></span>
+              <span class="hamburger__line"></span>
+            </span>
+            <span class="toggle-menu__title">Menu</span>
+            <span class="visually-hidden">Toggle main menu</span>
+          </button>
+        </div>
+      </div>
+        <div class="region region-primary-menu">
+    <nav aria-label="main" id="block-mainnavigation-3" class="block block-menu navigation menu--main">
+  <a class="home-link" href="/">
+    <div class="logo logo--ll">
+      <img class="logo--desktop" src="/themes/mitll_theme/assets/logos/LL75logo-fullname-white.svg" alt="Lincoln Laboratory Logo">
+      <img class="logo--mobile" src="/themes/mitll_theme/assets/logos/mitll-logo.svg" alt="Lincoln Laboratory Logo">
+    </div>
+    <div class="site-title">
+      <div class="site-title__modern">
+        MIT Lincoln<br />Laboratory
+      </div>
+    </div>
+  </a>
+    
+        
+    
+          <ul class="menu">
+    
+          
+      <li class="menu-item">
+                <a href="/ll-publications/2025-impact-report" data-drupal-link-system-path="node/97151">Our Impact</a>
+
+                          <ul class="menu"><li class="menu-item impact-latest"><div class="views-element-container"><div class="view view-impact-story-blocks view-id-impact_story_blocks view-display-id-block_main_menu js-view-dom-id-5bc9c73affac509d0cb0b1a9e39bc7f553e0ec764edac80308b70d5be4346578">
+  
+    
+      
+  
+        </div></div>
+</li></ul>
+        
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--expanded menu-item--active-trail">
+                <a href="/r-d" data-drupal-link-system-path="node/6">Research and Development</a>
+
+                
+                                                                  <button class="toggle-section-below">
+                <span class="visually-hidden">Toggle menu section</span>
+                <span class="icon icon--plus"></span>
+              </button>
+                      
+                        
+          <ul class="menu">
+    
+          
+      <li class="menu-item menu-item--collapsed">
+                <a href="/r-d/advanced-technology" data-drupal-link-system-path="node/51">Advanced Technology</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--collapsed">
+                <a href="/r-d/air-missile-and-maritime-defense-technology" data-drupal-link-system-path="node/60">Air, Missile, and Maritime Defense Technology</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--collapsed">
+                <a href="/r-d/air-traffic-control" data-drupal-link-system-path="node/61">Air Traffic Control</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--collapsed">
+                <a href="/r-d/biotechnology-and-human-systems" data-drupal-link-system-path="node/76671">Biotechnology and Human Systems</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--collapsed">
+                <a href="/r-d/communication-systems" data-drupal-link-system-path="node/62">Communication Systems</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--collapsed">
+                <a href="/r-d/cyber-security-and-information-sciences" data-drupal-link-system-path="node/63">Cyber Security and Information Sciences</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--collapsed">
+                <a href="/r-d/engineering" data-drupal-link-system-path="node/64">Engineering</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--collapsed">
+                <a href="/r-d/homeland-protection" data-drupal-link-system-path="node/56">Homeland Protection</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--collapsed">
+                <a href="/r-d/isr-systems-and-technology" data-drupal-link-system-path="node/66">ISR Systems and Technology</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--collapsed">
+                <a href="/r-d/space-systems-and-technology" data-drupal-link-system-path="node/67">Space Systems and Technology</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--collapsed">
+                <a href="/r-d/tactical-systems" data-drupal-link-system-path="node/68">Tactical Systems</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--collapsed">
+                <a href="/r-d/technology-office" data-drupal-link-system-path="node/50976">Technology Office</a>
+
+                
+              </li>
+
+            
+          
+      <li class="rnd-right menu-item">
+                <a href="/r-d/projects" data-drupal-link-system-path="r-d/projects">Projects</a>
+
+                
+              </li>
+
+            
+          
+      <li class="rnd-right menu-item menu-item--active-trail">
+                <a href="/r-d/publications" data-drupal-link-system-path="r-d/publications">Publications</a>
+
+                
+              </li>
+
+            
+          
+      <li class="rnd-right menu-item">
+                <a href="/r-d/datasets" data-drupal-link-system-path="r-d/datasets">Datasets</a>
+
+                
+              </li>
+
+            
+          
+      <li class="rnd-right menu-item">
+                <a href="/biographies" class="rnd-right" data-drupal-link-system-path="biographies">Staff Biographies</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-nolink-h menu-item">
+                <span>Key Initiatives</span>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/civil-space-systems-and-technology" data-drupal-link-system-path="node/92181">Civil Space Systems and Technology</a>
+
+                
+              </li>
+
+            
+    
+    </ul>
+
+        
+  
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--expanded">
+                <a href="/careers" data-drupal-link-system-path="node/7">Careers</a>
+
+                
+                                                                  <button class="toggle-section-below">
+                <span class="visually-hidden">Toggle menu section</span>
+                <span class="icon icon--plus"></span>
+              </button>
+                      
+                        
+          <ul class="menu">
+    
+          
+      <li class="menu-item menu-item--collapsed">
+                <a href="/careers/benefits" data-drupal-link-system-path="node/15">Benefits</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--collapsed">
+                <a href="/careers/people-and-culture" data-drupal-link-system-path="node/16">People and Culture</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/business-areas" data-drupal-link-system-path="node/89856">Business Areas</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--collapsed">
+                <a href="/careers/student-opportunities" data-drupal-link-system-path="node/13">Student Opportunities</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--collapsed">
+                <a href="/careers/military-programs" data-drupal-link-system-path="node/47761">Military Programs</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="https://careers.ll.mit.edu/search" class="cta" target="_blank">BROWSE ALL OPPORTUNITIES</a>
+
+                
+              </li>
+
+            
+    
+    </ul>
+
+        
+  
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--expanded">
+                <a href="/partner-us" data-drupal-link-system-path="node/8">Partner With Us</a>
+
+                
+                                                                  <button class="toggle-section-below">
+                <span class="visually-hidden">Toggle menu section</span>
+                <span class="icon icon--plus"></span>
+              </button>
+                      
+                        
+          <ul class="menu">
+    
+          
+      <li class="menu-item">
+                <a href="/partner-us/available-technologies" data-drupal-link-system-path="partner-us/available-technologies">Available Technologies</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--collapsed">
+                <a href="/partner-us/small-business-program" data-drupal-link-system-path="node/26">Small Business Program</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--collapsed">
+                <a href="/partner-us/working-lincoln-laboratory" data-drupal-link-system-path="node/89516">Working with Lincoln Laboratory</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/partner-us/government" data-drupal-link-system-path="node/47881">Government</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--collapsed">
+                <a href="/partner-us/academia-not-profits" data-drupal-link-system-path="node/50626">Academia &amp; Not-for-Profits</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--collapsed">
+                <a href="/partner-us/about-technology-transfer" data-drupal-link-system-path="node/89521">About Technology Transfer</a>
+
+                
+              </li>
+
+            
+    
+    </ul>
+
+        
+  
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--expanded">
+                <a href="/outreach" data-drupal-link-system-path="node/9">Outreach</a>
+
+                
+                                                                  <button class="toggle-section-below">
+                <span class="visually-hidden">Toggle menu section</span>
+                <span class="icon icon--plus"></span>
+              </button>
+                      
+                        
+          <ul class="menu">
+    
+          
+      <li class="menu-item">
+                <a href="/outreach?tag=All&amp;audience=All&amp;type=stem&amp;items_per_page=10" data-drupal-link-query="{&quot;audience&quot;:&quot;All&quot;,&quot;items_per_page&quot;:&quot;10&quot;,&quot;tag&quot;:&quot;All&quot;,&quot;type&quot;:&quot;stem&quot;}" data-drupal-link-system-path="node/9">STEM Programs</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/outreach?tag=All&amp;audience=All&amp;type=course&amp;items_per_page=10" data-drupal-link-query="{&quot;audience&quot;:&quot;All&quot;,&quot;items_per_page&quot;:&quot;10&quot;,&quot;tag&quot;:&quot;All&quot;,&quot;type&quot;:&quot;course&quot;}" data-drupal-link-system-path="node/9">Online STEM Courses</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/outreach?tag=All&amp;audience=All&amp;type=edres&amp;items_per_page=10" data-drupal-link-query="{&quot;audience&quot;:&quot;All&quot;,&quot;items_per_page&quot;:&quot;10&quot;,&quot;tag&quot;:&quot;All&quot;,&quot;type&quot;:&quot;edres&quot;}" data-drupal-link-system-path="node/9">Education Resources</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/outreach/community-giving" title="edited intro and body text" data-drupal-link-system-path="node/20">Community Giving</a>
+
+                
+              </li>
+
+            
+    
+    </ul>
+
+        
+  
+              </li>
+
+                    <li class="menu-item utilities">
+    
+          <ul class="menu">
+    
+          
+      <li class="CTA menu-item">
+                <a href="/about/visitor-information" class="cta" data-drupal-link-system-path="node/48361">Visitor Information</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--collapsed">
+                <a href="/about" data-drupal-link-system-path="node/171">About</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/news" data-drupal-link-system-path="news">News</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/newsletter" data-drupal-link-system-path="node/97501">Newsletter</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--collapsed">
+                <a href="/conferences-events?type=3096" data-drupal-link-query="{&quot;type&quot;:&quot;3096&quot;}" data-drupal-link-system-path="conferences-events">Conferences &amp; Events</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--collapsed">
+                <a href="/about/contact-us" class="cta" data-drupal-link-system-path="node/48346">Contact Us</a>
+
+                
+              </li>
+
+            
+    
+    </ul>
+
+        
+  
+
+</li>
+      
+    
+    </ul>
+
+                      <div >
+        
+            <div class="field field--name-field-config-soc field--type-entity-reference-revisions field--label-hidden field__items">
+<div class="field__item"><a class="field-group-link group-link" href="https://www.facebook.com/MIT-Lincoln-Laboratory-193719297312968/" target="_blank"><span class="visually-hidden">Visit us on facebook </span><span class="icon icon--facebook">.</span></a></div>
+
+<div class="field__item"><a class="field-group-link group-link" href="https://twitter.com/MITLL" target="_blank"><span class="visually-hidden">Visit us on twitter </span><span class="icon icon--twitter">.</span></a></div>
+
+<div class="field__item"><a class="field-group-link group-link" href="https://www.linkedin.com/company/mit-lincoln-laboratory/" target="_blank"><span class="visually-hidden">Visit us on linkedin </span><span class="icon icon--linkedin">.</span></a></div>
+
+<div class="field__item"><a class="field-group-link group-link" href="https://www.youtube.com/channel/UCEt4etCj34K9V5ZJipW4C_A/" target="_blank"><span class="visually-hidden">Visit us on youtube </span><span class="icon icon--youtube">.</span></a></div>
+
+<div class="field__item"><a class="field-group-link group-link" href="https://www.instagram.com/lincoln_laboratory/" target="_blank"><span class="visually-hidden">Visit us on instagram </span><span class="icon icon--instagram">.</span></a></div>
+
+<div class="field__item"><a class="field-group-link group-link" href="https://www.threads.net/@lincoln_laboratory" target="_blank"><span class="visually-hidden">Visit us on threads</span><span class="icon icon--threads">.</span></a></div>
+</div>
+
+      
+  
+    </div>
+
+
+    
+  
+
+
+  </nav>
+
+  </div>
+
+    </div>
+  </header>
+      <div class="region region-section-nav">
+                        <div class="section-nav">
+              <div class="region region-secondary-menu">
+      <nav role="navigation" aria-labelledby="block-mitll-theme-mainnavigation-2-menu" id="block-mitll-theme-mainnavigation-2" class="block block-menu navigation menu--main">
+                      <div class="section-nav__toggle">
+      <button class="section-nav__toggle-button">
+        R&amp;D
+        <span class="visually-hidden">Toggle section menu</span>
+      </button>
+    </div>
+    
+    <h2 class="visually-hidden" id="block-mitll-theme-mainnavigation-2-menu">Section navigation</h2>
+    
+
+              
+    
+          <ul class="menu">
+    
+          
+      <li class="menu-item menu-item--expanded menu-item--active-trail">
+                <a href="/r-d" data-drupal-link-system-path="node/6">Research and Development</a>
+
+                
+                                                              
+                        
+          <ul class="menu">
+    
+          
+      <li class="menu-item menu-item--expanded">
+                <a href="/r-d/advanced-technology" data-drupal-link-system-path="node/51">Advanced Technology</a>
+
+                
+                                                                  <button class="toggle-section-below">
+                <span class="visually-hidden">Toggle menu section</span>
+                <span class="icon icon--plus"></span>
+              </button>
+                      
+                        
+          <ul class="menu">
+    
+          
+      <li class="menu-item">
+                <a href="/r-d/advanced-technology/advanced-imager-technology" data-drupal-link-system-path="node/726">Advanced Imager Technology</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/advanced-technology/advanced-materials-and-microsystems" data-drupal-link-system-path="node/723">Advanced Materials and Microsystems</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/advanced-technology/laser-technology-and-applications" data-drupal-link-system-path="node/724">Laser Technology and Applications</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/advanced-technology/quantum-enabled-computation" data-drupal-link-system-path="node/727">Quantum-Enabled Computation</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/advanced-technology/integrated-rf-and-photonics" data-drupal-link-system-path="node/725">Integrated RF and Photonics</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/research-and-development/advanced-technology/advanced-technology-leadership" data-drupal-link-system-path="node/47951">Leadership</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--expanded">
+                <a href="/r-d/advanced-technology/microsystems-prototyping-foundry" data-drupal-link-system-path="node/79831">Microsystems Prototyping Foundry</a>
+
+                
+                                                                  <button class="toggle-section-below">
+                <span class="visually-hidden">Toggle menu section</span>
+                <span class="icon icon--plus"></span>
+              </button>
+                      
+                        
+          <ul class="menu">
+    
+          
+      <li class="menu-item">
+                <a href="/research-and-development/advanced-technology/microsystems-prototyping-foundry/advanced-imaging" data-drupal-link-system-path="node/84286">Advanced Imaging Technology</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/advanced-technology/microsystems-prototyping-foundry/design" data-drupal-link-system-path="node/79836">Design</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/advanced-technology/microsystems-prototyping-foundry/fabrication" data-drupal-link-system-path="node/79846">Fabrication</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/research-and-development/advanced-technology/microsystems-prototyping-foundry/fully-depleted" data-drupal-link-system-path="node/84326">Fully Depleted Silicon-on-Insulator CMOS</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/research-and-development/advanced-technology/microsystems-prototyping-foundry/gallium-nitride" data-drupal-link-system-path="node/84281">Gallium Nitride on Silicon</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/research-and-development/advanced-technology/microsystems-prototyping-foundry/integrated-photonics" data-drupal-link-system-path="node/84276">Integrated Photonics Platforms </a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/research-and-development/advanced-technology/microsystems-prototyping-foundry/low-temperature" data-drupal-link-system-path="node/84296">Low-Temperature Additive Manufacturing of Glass</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/research-and-development/advanced-technology/microsystems-prototyping-foundry/materials" data-drupal-link-system-path="node/79841">Materials</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/research-and-development/advanced-technology/microsystems-prototyping-foundry/microhydraulic" data-drupal-link-system-path="node/84291">Microhydraulic Actuator Development</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/research-and-development/advanced-technology/microsystems-prototyping-foundry/nanocomposite-inks-3d" data-drupal-link-system-path="node/84301">Nanocomposite Inks for 3D Printing RF Devices</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/research-and-development/advanced-technology/microsystems-prototyping-foundry/packaging-technology" data-drupal-link-system-path="node/84331">Packaging Technology</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/advanced-technology/microsystems-prototyping-foundry/packaging" data-drupal-link-system-path="node/79851">Packaging</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/research-and-development/advanced-technology/microsystems-prototyping-foundry/superconducting" data-drupal-link-system-path="node/84271">Superconducting Integrated Circuits</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/advanced-technology/microsystems-prototyping-foundry/test" data-drupal-link-system-path="node/79856">Test</a>
+
+                
+              </li>
+
+            
+    
+    </ul>
+
+        
+  
+              </li>
+
+            
+    
+    </ul>
+
+        
+  
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--expanded">
+                <a href="/r-d/air-missile-and-maritime-defense-technology" data-drupal-link-system-path="node/60">Air, Missile, and Maritime Defense Technology</a>
+
+                
+                                                                  <button class="toggle-section-below">
+                <span class="visually-hidden">Toggle menu section</span>
+                <span class="icon icon--plus"></span>
+              </button>
+                      
+                        
+          <ul class="menu">
+    
+          
+      <li class="menu-item">
+                <a href="/r-d/air-missile-and-maritime-defense-technology/advanced-concepts-and-technologies" data-drupal-link-system-path="node/733">Advanced Concepts and Technologies</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/air-missile-and-maritime-defense-technology/advanced-sensor-systems-and-test-beds" data-drupal-link-system-path="node/729">Advanced Sensor Systems and Test Beds</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/air-missile-and-maritime-defense-technology/advanced-undersea-systems-and-technology" data-drupal-link-system-path="node/731">Advanced Undersea Systems and Technology</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/air-missile-and-maritime-defense-technology/integrated-missile-defense-technology" data-drupal-link-system-path="node/730">Integrated Missile Defense Technology</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/air-missile-and-maritime-defense-technology/interceptor-and-sensor-technology" data-drupal-link-system-path="node/732">Interceptor and Sensor Technology</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/air-missile-and-maritime-defense-technology/systems-and-architectures" data-drupal-link-system-path="node/728">Systems and Architectures</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/research-and-development/air-missile-and-maritime-defense-technology/air-missile-and-maritime" data-drupal-link-system-path="node/47956">Leadership</a>
+
+                
+              </li>
+
+            
+    
+    </ul>
+
+        
+  
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--expanded">
+                <a href="/r-d/air-traffic-control" data-drupal-link-system-path="node/61">Air Traffic Control</a>
+
+                
+                                                                  <button class="toggle-section-below">
+                <span class="visually-hidden">Toggle menu section</span>
+                <span class="icon icon--plus"></span>
+              </button>
+                      
+                        
+          <ul class="menu">
+    
+          
+      <li class="menu-item">
+                <a href="/r-d/air-traffic-control/air-traffic-control-systems" data-drupal-link-system-path="node/773">Air Traffic Control and Weather Systems</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/air-traffic-control/surveillance-systems" data-drupal-link-system-path="node/772">Transportation Safety and Resilience</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/research-and-development/air-traffic-control/air-traffic-control-leadership" data-drupal-link-system-path="node/47961">Leadership</a>
+
+                
+              </li>
+
+            
+    
+    </ul>
+
+        
+  
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--expanded">
+                <a href="/r-d/biotechnology-and-human-systems" data-drupal-link-system-path="node/76671">Biotechnology and Human Systems</a>
+
+                
+                                                                  <button class="toggle-section-below">
+                <span class="visually-hidden">Toggle menu section</span>
+                <span class="icon icon--plus"></span>
+              </button>
+                      
+                        
+          <ul class="menu">
+    
+          
+      <li class="menu-item">
+                <a href="/r-d/biotechnology-and-human-systems/biological-and-chemical-technologies" data-drupal-link-system-path="node/70476">Biological and Chemical Technologies</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--expanded">
+                <a href="/r-d/biotechnology-and-human-systems/counter-weapons-mass-destruction-systems" data-drupal-link-system-path="node/752">Counter–Weapons of Mass Destruction Systems</a>
+
+                
+                                                                  <button class="toggle-section-below">
+                <span class="visually-hidden">Toggle menu section</span>
+                <span class="icon icon--plus"></span>
+              </button>
+                      
+                        
+          <ul class="menu">
+    
+          
+      <li class="menu-item">
+                <a href="/research-and-development/biotechnology-and-human-systems/counter-weapons-mass-destruction-systems" data-drupal-link-system-path="node/95986">Counter–Weapons of Mass Destruction Systems Leadership</a>
+
+                
+              </li>
+
+            
+    
+    </ul>
+
+        
+  
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/biotechnology-and-human-systems/human-resilience-technology" data-drupal-link-system-path="node/749">Human Resilience Technology</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--expanded">
+                <a href="/r-d/biotechnology-and-human-systems/human-health-and-performance-systems" data-drupal-link-system-path="node/753">Human Health and Performance Systems</a>
+
+                
+                                                                  <button class="toggle-section-below">
+                <span class="visually-hidden">Toggle menu section</span>
+                <span class="icon icon--plus"></span>
+              </button>
+                      
+                        
+          <ul class="menu">
+    
+          
+      <li class="menu-item">
+                <a href="/research-and-development/biotechnology-and-human-systems/human-health-and-performance-systems/human" data-drupal-link-system-path="node/81461">Human Health and Performance Systems Leadership</a>
+
+                
+              </li>
+
+            
+    
+    </ul>
+
+        
+  
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/research-and-development/biotechnology-and-human-systems/biotechnology-and-human-systems-leadership" data-drupal-link-system-path="node/76666">Leadership</a>
+
+                
+              </li>
+
+            
+    
+    </ul>
+
+        
+  
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--expanded">
+                <a href="/r-d/communication-systems" data-drupal-link-system-path="node/62">Communication Systems</a>
+
+                
+                                                                  <button class="toggle-section-below">
+                <span class="visually-hidden">Toggle menu section</span>
+                <span class="icon icon--plus"></span>
+              </button>
+                      
+                        
+          <ul class="menu">
+    
+          
+      <li class="menu-item">
+                <a href="/r-d/communication-systems/communication-networks-and-analysis" data-drupal-link-system-path="node/769">Communication Networks and Analysis</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/communication-systems/laser-communications" data-drupal-link-system-path="node/770">Laser Communications</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/communication-systems/optical-and-quantum-communications" data-drupal-link-system-path="node/771">Optical and Quantum Communications</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/communication-systems/strategic-and-long-range-communications" data-drupal-link-system-path="node/93881">Strategic and Long-Range Communications</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/communication-systems/tactical-edge-communications" data-drupal-link-system-path="node/767">Tactical Edge Communications</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/communication-systems/tactical-satellite-communications" data-drupal-link-system-path="node/768">Tactical Satellite Communications</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/research-and-development/communication-systems/communication-systems-leadership" data-drupal-link-system-path="node/47966">Leadership</a>
+
+                
+              </li>
+
+            
+    
+    </ul>
+
+        
+  
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--expanded">
+                <a href="/r-d/cyber-security-and-information-sciences" data-drupal-link-system-path="node/63">Cyber Security and Information Sciences</a>
+
+                
+                                                                  <button class="toggle-section-below">
+                <span class="visually-hidden">Toggle menu section</span>
+                <span class="icon icon--plus"></span>
+              </button>
+                      
+                        
+          <ul class="menu">
+    
+          
+      <li class="menu-item">
+                <a href="/r-d/cyber-security-and-information-sciences/artificial-intelligence-technology-and-systems" data-drupal-link-system-path="node/763">Artifical Intelligence Technology and Systems</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/cyber-security-and-information-sciences/cyber-physical-systems" data-drupal-link-system-path="node/762">Cyber-Physical Systems</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/cyber-security-and-information-sciences/cyber-operations-and-analysis-technology" data-drupal-link-system-path="node/765">Cyber Operations and Analysis Technology</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/cyber-security-and-information-sciences/cyber-system-assessments" data-drupal-link-system-path="node/766">Cyber System Assessments</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/cyber-security-and-information-sciences/lincoln-laboratory-supercomputing-center" data-drupal-link-system-path="node/48341">Lincoln Laboratory Supercomputing Center</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/cyber-security-and-information-sciences/secure-resilient-systems-and-technology" data-drupal-link-system-path="node/764">Secure Resilient Systems and Technology</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--expanded">
+                <a href="/research-and-development/cyber-security-and-information-sciences/cyber-grand-challenge" data-drupal-link-system-path="node/65736">Cyber Grand Challenge</a>
+
+                
+                                                                  <button class="toggle-section-below">
+                <span class="visually-hidden">Toggle menu section</span>
+                <span class="icon icon--plus"></span>
+              </button>
+                      
+                        
+          <ul class="menu">
+    
+          
+      <li class="menu-item">
+                <a href="/research-and-development/cyber-security-and-information-sciences/cyber-grand-challenge/final-event" data-drupal-link-system-path="node/65746">Final Event</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/research-and-development/cyber-security-and-information-sciences/cyber-grand-challenge/qualifying" data-drupal-link-system-path="node/65741">Qualifying Event</a>
+
+                
+              </li>
+
+            
+    
+    </ul>
+
+        
+  
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/research-and-development/cyber-security-and-information-sciences/pmatlab" data-drupal-link-system-path="node/51206">pMatlab</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/research-and-development/cyber-security-and-information-sciences/cyber-security-and-information" data-drupal-link-system-path="node/47971">Leadership</a>
+
+                
+              </li>
+
+            
+    
+    </ul>
+
+        
+  
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--expanded">
+                <a href="/r-d/engineering" data-drupal-link-system-path="node/64">Engineering</a>
+
+                
+                                                                  <button class="toggle-section-below">
+                <span class="visually-hidden">Toggle menu section</span>
+                <span class="icon icon--plus"></span>
+              </button>
+                      
+                        
+          <ul class="menu">
+    
+          
+      <li class="menu-item">
+                <a href="/r-d/engineering/software-and-electronics-engineering" data-drupal-link-system-path="node/759">Software and Electronics Engineering</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/engineering/fabrication-engineering" data-drupal-link-system-path="node/755">Fabrication Engineering</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/engineering/mechanical-engineering" data-drupal-link-system-path="node/754">Mechanical Engineering</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/engineering/optical-engineering" data-drupal-link-system-path="node/761">Optical Engineering</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/engineering/rapid-prototyping" data-drupal-link-system-path="node/760">Rapid Prototyping</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/engineering/structural-and-thermal-fluids-engineering" data-drupal-link-system-path="node/757">Structural and Thermal-Fluids Engineering</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/engineering/systems-engineering" data-drupal-link-system-path="node/758">Systems Engineering</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/research-and-development/engineering/engineering-leadership" data-drupal-link-system-path="node/47976">Leadership</a>
+
+                
+              </li>
+
+            
+    
+    </ul>
+
+        
+  
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--expanded">
+                <a href="/r-d/homeland-protection" data-drupal-link-system-path="node/56">Homeland Protection</a>
+
+                
+                                                                  <button class="toggle-section-below">
+                <span class="visually-hidden">Toggle menu section</span>
+                <span class="icon icon--plus"></span>
+              </button>
+                      
+                        
+          <ul class="menu">
+    
+          
+      <li class="menu-item">
+                <a href="/r-d/homeland-protection/artificial-intelligence-software-architectures-and-algorithms" data-drupal-link-system-path="node/744">Homeland Decision Support Systems</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/homeland-protection/energy-systems" data-drupal-link-system-path="node/756">Energy Systems</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/homeland-protection/homeland-protection-systems" data-drupal-link-system-path="node/751">Homeland Protection Systems</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/homeland-protection/homeland-sensors-and-analytics" data-drupal-link-system-path="node/750">Homeland Sensors and Analytics</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/research-and-development/homeland-protection/homeland-protection-leadership" data-drupal-link-system-path="node/47981">Leadership</a>
+
+                
+              </li>
+
+            
+    
+    </ul>
+
+        
+  
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--expanded">
+                <a href="/r-d/isr-systems-and-technology" data-drupal-link-system-path="node/66">ISR Systems and Technology</a>
+
+                
+                                                                  <button class="toggle-section-below">
+                <span class="visually-hidden">Toggle menu section</span>
+                <span class="icon icon--plus"></span>
+              </button>
+                      
+                        
+          <ul class="menu">
+    
+          
+      <li class="menu-item">
+                <a href="/r-d/isr-systems-and-technology/active-optical-systems" data-drupal-link-system-path="node/746">Active Optical Systems</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/isr-systems-and-technology/airborne-radar-systems-and-techniques" data-drupal-link-system-path="node/745">Airborne Radar Systems and Techniques</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/isr-systems-and-technology/embedded-and-ai-systems" data-drupal-link-system-path="node/743">Embedded and Open Systems</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/isr-systems-and-technology/isr-systems-and-architectures" data-drupal-link-system-path="node/742">ISR Systems and Architectures</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/research-and-development/isr-systems-and-technology/isr-systems-and-technology-leadership" data-drupal-link-system-path="node/47456">Leadership</a>
+
+                
+              </li>
+
+            
+    
+    </ul>
+
+        
+  
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--expanded">
+                <a href="/r-d/space-systems-and-technology" data-drupal-link-system-path="node/67">Space Systems and Technology</a>
+
+                
+                                                                  <button class="toggle-section-below">
+                <span class="visually-hidden">Toggle menu section</span>
+                <span class="icon icon--plus"></span>
+              </button>
+                      
+                        
+          <ul class="menu">
+    
+          
+      <li class="menu-item">
+                <a href="/r-d/space-systems-and-technology/advanced-capabilities-and-technologies" data-drupal-link-system-path="node/736">Advanced Capabilities and Technologies</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/space-systems-and-technology/advanced-sensors-and-techniques" data-drupal-link-system-path="node/737">Advanced Sensors and Techniques</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/space-systems-and-technology/applied-space-systems" data-drupal-link-system-path="node/740">Applied Space Systems</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/space-systems-and-technology/space-tactics-and-test" data-drupal-link-system-path="node/738">Space Tactics and Test</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/space-systems-and-technology/integrated-systems-and-concepts" data-drupal-link-system-path="node/741">Integrated Systems and Concepts</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/space-systems-and-technology/space-systems-analysis-and-test" data-drupal-link-system-path="node/739">Space Systems Analysis and Test</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/research-and-development/space-systems-and-technology/space-systems-and-technology-leadership" data-drupal-link-system-path="node/47986">Leadership</a>
+
+                
+              </li>
+
+            
+    
+    </ul>
+
+        
+  
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--expanded">
+                <a href="/r-d/tactical-systems" data-drupal-link-system-path="node/68">Tactical Systems</a>
+
+                
+                                                                  <button class="toggle-section-below">
+                <span class="visually-hidden">Toggle menu section</span>
+                <span class="icon icon--plus"></span>
+              </button>
+                      
+                        
+          <ul class="menu">
+    
+          
+      <li class="menu-item">
+                <a href="/r-d/tactical-systems/advanced-capabilities-and-systems" data-drupal-link-system-path="node/747">Advanced Capabilities and Systems</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/tactical-systems/tactical-defense-systems" data-drupal-link-system-path="node/734">Tactical Defense Systems</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/tactical-systems/systems-and-analysis" data-drupal-link-system-path="node/735">Systems and Analysis</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/research-and-development/tactical-systems/tactical-systems-leadership" data-drupal-link-system-path="node/47991">Leadership</a>
+
+                
+              </li>
+
+            
+    
+    </ul>
+
+        
+  
+              </li>
+
+            
+          
+      <li class="menu-item menu-item--expanded">
+                <a href="/r-d/technology-office" data-drupal-link-system-path="node/50976">Technology Office</a>
+
+                
+                                                                  <button class="toggle-section-below">
+                <span class="visually-hidden">Toggle menu section</span>
+                <span class="icon icon--plus"></span>
+              </button>
+                      
+                        
+          <ul class="menu">
+    
+          
+      <li class="menu-item">
+                <a href="/r-d/technology-office/mission-critical-technology" data-drupal-link-system-path="node/51001">Mission Critical Technology</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/research-and-development/technology-office/technology-office-challenges" data-drupal-link-system-path="node/77461">Technology Office Challenges</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/research-and-development/technology-office/technology-office-leadership" data-drupal-link-system-path="node/50321">Technology Office Leadership</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/technology-office/emerging-technology" data-drupal-link-system-path="node/51026">Emerging Technology</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/technology-office/innovation-and-collaboration" data-drupal-link-system-path="node/50986">Innovation and Collaboration</a>
+
+                
+              </li>
+
+            
+    
+    </ul>
+
+        
+  
+              </li>
+
+            
+          
+      <li class="rnd-right menu-item">
+                <a href="/r-d/projects" data-drupal-link-system-path="r-d/projects">Projects</a>
+
+                
+              </li>
+
+            
+          
+      <li class="rnd-right menu-item menu-item--active-trail">
+                <a href="/r-d/publications" data-drupal-link-system-path="r-d/publications">Publications</a>
+
+                
+              </li>
+
+            
+          
+      <li class="rnd-right menu-item">
+                <a href="/r-d/datasets" data-drupal-link-system-path="r-d/datasets">Datasets</a>
+
+                
+              </li>
+
+            
+          
+      <li class="rnd-right menu-item">
+                <a href="/biographies" class="rnd-right" data-drupal-link-system-path="biographies">Staff Biographies</a>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-nolink-h menu-item">
+                <span>Key Initiatives</span>
+
+                
+              </li>
+
+            
+          
+      <li class="menu-item">
+                <a href="/r-d/civil-space-systems-and-technology" data-drupal-link-system-path="node/92181">Civil Space Systems and Technology</a>
+
+                
+              </li>
+
+            
+    
+    </ul>
+
+        
+  
+              </li>
+
+            
+    
+    </ul>
+
+        
+  
+
+
+      </nav>
+
+  </div>
+
+          </div>
+                      <div class="region region-breadcrumb">
+    <div id="block-mitll-theme-breadcrumbs" class="block block-system block-system-breadcrumb-block">
+  
+    
+        <div class="breadcrumb">
+    <nav class="breadcrumb" role="navigation" aria-labelledby="system-breadcrumb">
+      <h2 id="system-breadcrumb" class="visually-hidden">Breadcrumb</h2>
+      <ol>
+                  <li>
+                          <a href="/">MIT Lincoln Laboratory</a>
+                      </li>
+                  <li>
+                          <a href="/r-d">R&amp;D</a>
+                      </li>
+                  <li>
+                          <a href="/r-d/publications">Publications</a>
+                      </li>
+              </ol>
+    </nav>
+  </div>
+
+  </div>
+
+  </div>
+
+    </div>
+  
+  
+  
+    <main role="main">
+    <a id="main-content" tabindex="-1"></a>
+    <div class="layout-content">
+        <div class="region region-content">
+    <div id="block-mitll-theme-content" class="block block-system block-system-main-block">
+  
+    
+      <div class="node node--type-publication node--view-mode-full page clearfix">
+
+
+<div class="page__inner">
+
+      <div class="page__header">
+            <div  class="hero hero--no-image">
+        
+      <div class="hero__title-wrapper"><h2 class="hero__page-title">
+  Survey and benchmarking of machine learning accelerators
+</h2>
+</div>
+      
+  
+    </div>
+
+<div class="hero--no-image pub-dateline">      <div  class="info__field">
+        
+            <div  class="publication-list__date info__value">
+                  September 24, 2019
+      
+      </div>
+  
+    </div>
+
+<span>&nbsp; |       <div  class="info__field">
+        
+            <div  class="publication-list__date info__value">
+                  Conference Paper
+      
+      </div>
+  
+    </div>
+</span></div>
+
+<div  class="field-region dataset-full__info info">
+          <div  class="info__field">
+            <div  class="info__label field-label-inline">Author:</div>
+  
+      <div class="info__value">
+      <div class="authors-more authors-more--multiple">
+                    <div class="authors-more__link">
+    <a href="/r-d/publications?author=5116">Albert I. Reuther</a>
+  </div>
+
+        <span class="authors-more__ellipsis">&hellip;</span>
+        <span class="authors-more__expand"><button>MORE</button></span>
+        <div class="authors-more__list">
+          <ul>
+                        <li>
+            <div class="authors-more__link">
+    <a href="/r-d/publications?author=1751">Peter W. Michaleas</a>
+  </div>
+
+        </li>
+                        <li>
+            <div class="authors-more__link">
+    <a href="/r-d/publications?author=13506">Michael S. Jones</a>
+  </div>
+
+        </li>
+                        <li>
+            <div class="authors-more__link">
+    <a href="/r-d/publications?author=1746">Vijay N. Gadepally</a>
+  </div>
+
+        </li>
+                        <li>
+            <div class="authors-more__link">
+    <a href="/r-d/publications?author=13511">Siddharth S. Samsi</a>
+  </div>
+
+        </li>
+                        <li>
+            <div class="authors-more__link">
+    <a href="/r-d/publications?author=1741">Jeremy Kepner</a>
+  </div>
+
+        </li>
+              </ul>
+    </div>
+      </div>
+
+</div>
+      
+  
+    </div>
+
+      <div  class="info__field">
+            <div  class="info__label field-label-inline">Published in:</div>
+  
+      <div class="info__value">IEEE High Performance Extreme Computing Conf., HPEC, 24-26 September 2019.</div>
+      
+  
+    </div>
+
+      <div  class="info__field">
+            <div  class="info__label field-label-inline">R&amp;D Area:</div>
+  
+            <ul  class="info__value info__value--list">
+            <li><a href="/r-d/cyber-security-and-information-sciences" hreflang="en">Cyber Security and Information Sciences</a></li>
+      
+      </ul>
+  
+    </div>
+
+      <div  class="info__field">
+            <div  class="info__label field-label-inline">R&amp;D Group:</div>
+  
+            <ul  class="info__value info__value--list">
+            <li><a href="/r-d/cyber-security-and-information-sciences/lincoln-laboratory-supercomputing-center" hreflang="en">Lincoln Laboratory Supercomputing Center</a></li>
+      
+      </ul>
+  
+    </div>
+
+
+  </div>
+    </div>
+  
+  
+      <div class="page__content">
+            <div  class="notext">
+        
+            
+  <a href="https://doi.org/10.1109/HPEC.2019.8916327" class="publication__link publication__external-link" target="_blank">Survey and benchmarking of machine learning accelerators<span class="icon icon--external-link"></span></a>
+
+      
+  
+    </div>
+
+
+  <div class="field field--name-field-pub-summary field--type-string-long field--label-above">
+    <div class="field__label">Summary</div>
+              <div class="field__item">Advances in multicore processors and accelerators have opened the flood gates to greater exploration and application of machine learning techniques to a variety of applications. These advances, along with breakdowns of several trends including Moore&#039;s Law, have prompted an explosion of processors and accelerators that promise even greater computational and machine learning capabilities. These processors and accelerators are coming in many forms, from CPUs and GPUs to ASICs, FPGAs, and dataflow accelerators. This paper surveys the current state of these processors and accelerators that have been publicly announced with performance and power consumption numbers. The performance and power values are plotted on a scatter graph and a number of dimensions and observations from the trends on this plot are discussed and analyzed. For instance, there are interesting trends in the plot regarding power consumption, numerical precision, and inference versus training. We then select and benchmark two commercially-available low size, weight, and power (SWaP) accelerators as these processors are the most interesting for embedded and mobile machine learning inference applications that are most applicable to the DoD and other SWaP constrained users. We determine how they actually perform with real-world images and neural network models, compare those results to the reported performance and power consumption values and evaluate them against an Intel CPU that is used in some embedded applications.<br />
+</div>
+          </div>
+
+    </div>
+  
+      <div class="page__footer">
+      <div class="pubs-keywords">      <div  class="info__field pubs-related">
+            <div  class="info__label field-label-inline">Keywords:</div>
+  
+            <div  class="pub-related-wrapper">
+            <div class="info__value">artificial intelligence (ai), accelerators</div>
+      
+      </div>
+  
+    </div>
+</div>
+    
+              <div class="tagged-as">
+    <div class="tagged-as__label">
+              Tagged As
+          </div>
+    <div class="tagged-as__tags">
+      <ul>
+                  <li>
+                          <a href="/r-d/publications?rdarea=63">Cyber Security and Information Sciences</a>
+                      </li>
+                  <li>
+                          <a href="/r-d/publications?rdgroup=48341">Lincoln Laboratory Supercomputing Center</a>
+                      </li>
+                  <li>
+                          <a href="/r-d/publications?tag=566">machine learning</a>
+                      </li>
+              </ul>
+    </div>
+  </div>
+
+      
+  
+
+
+    </div>
+  
+</div>
+
+</div>
+
+  </div>
+
+  </div>
+
+    </div>
+
+  </main>
+      <footer role="contentinfo">
+        <div class="region region-footer">
+    <div id="block-publicationcontactblock" class="block block-block-content block-block-contentf93d3a88-df84-40d1-a06c-94d1914137be">
+  
+    
+      
+            <div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item"><h4>Looking for more information?</h4>
+
+<p>For questions or additional details about this or other Lincoln Laboratory publications,<br />
+contact us at the link below.</p>
+
+<p><a class="cta--button" href="/cdn-cgi/l/email-protection#5e3232293b3c333f2d2a3b2c1e32327033372a703b3a2b">Contact Us</a></p>
+</div>
+      
+  </div>
+<div id="block-mitll-theme-footer" class="block block-block-content block-block-contente066fc2d-a9d8-4437-bfe3-d60d8def8fdc">
+  
+    
+  <div class="footer">
+    <div class="group-top">
+      <a href="/">
+        <div class="logo logo--ll">
+          <img src="/themes/mitll_theme/assets/logos/LL75logo-fullname-white.svg" alt="Lincoln Laboratory Logo">
+        </div>
+      </a>
+      <div class="social">
+              <div >
+        
+            <div class="field field--name-field-config-soc field--type-entity-reference-revisions field--label-hidden field__items">
+<div class="field__item"><a class="field-group-link group-link" href="https://www.facebook.com/MIT-Lincoln-Laboratory-193719297312968/" target="_blank"><span class="visually-hidden">Visit us on facebook </span><span class="icon icon--facebook">.</span></a></div>
+
+<div class="field__item"><a class="field-group-link group-link" href="https://twitter.com/MITLL" target="_blank"><span class="visually-hidden">Visit us on twitter </span><span class="icon icon--twitter">.</span></a></div>
+
+<div class="field__item"><a class="field-group-link group-link" href="https://www.linkedin.com/company/mit-lincoln-laboratory/" target="_blank"><span class="visually-hidden">Visit us on linkedin </span><span class="icon icon--linkedin">.</span></a></div>
+
+<div class="field__item"><a class="field-group-link group-link" href="https://www.youtube.com/channel/UCEt4etCj34K9V5ZJipW4C_A/" target="_blank"><span class="visually-hidden">Visit us on youtube </span><span class="icon icon--youtube">.</span></a></div>
+
+<div class="field__item"><a class="field-group-link group-link" href="https://www.instagram.com/lincoln_laboratory/" target="_blank"><span class="visually-hidden">Visit us on instagram </span><span class="icon icon--instagram">.</span></a></div>
+
+<div class="field__item"><a class="field-group-link group-link" href="https://www.threads.net/@lincoln_laboratory" target="_blank"><span class="visually-hidden">Visit us on threads</span><span class="icon icon--threads">.</span></a></div>
+</div>
+
+      
+  
+    </div>
+
+
+      </div>
+      <div class="site-title__address">    
+      <address>244 Wood Street, <span>Lexington, MA 02421-6426</span></address>
+      
+  
+
+</div>
+    </div>
+    <div class="group-bottom">
+      <div class="utility">
+              <nav  role="navigation" aria-labelledby="block-utility-menu">
+            <h2  class="visually-hidden field-label-above" id="block-utility-menu">Utility menu</h2>
+  
+            <ul  class="menu">
+            <li class="menu-item"><a href="/contact-us/status">Status</a></li>
+      <li class="menu-item"><a href="/about/visitor-information">Visit</a></li>
+      <li class="menu-item"><a href="/about/contact-us">Contact</a></li>
+      <li class="menu-item"><a href="/privacy-terms">Privacy &amp; Terms</a></li>
+      
+      </ul>
+  
+    </nav>
+
+
+      </div>
+      <div class="copyright">
+        &copy; 2026
+            
+            Lincoln Laboratory, <span>Massachusetts Institute of Technology</span>
+      
+  
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+
+      <button class="button button--btt"><span>Back to top</span></button>
+    </footer>
+  </div>
+  </div>
+
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/sites/default/files/js/js_6VDQ-I0DW1_ShV7HWR0x4aqaD5UBkVOREYhmY3eSz6Q.js?scope=footer&amp;delta=0&amp;language=en&amp;theme=mitll_theme&amp;include=eJxdiNEKgDAIAH9I8pPEmrOFJgyDfX49BLFejrvbwqKvMbBI5csStneQBRecCjRCTShZUR_8e-GDxzwdWi1CbNITPwVvaUa5iws6t_MGBNw0bA"></script>
+<script src="//unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script src="//unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="/sites/default/files/js/js_yCeAxT0MQxHat9UELjvdmbG6vXGkb6mhR19xNca-qA8.js?scope=footer&amp;delta=4&amp;language=en&amp;theme=mitll_theme&amp;include=eJxdiNEKgDAIAH9I8pPEmrOFJgyDfX49BLFejrvbwqKvMbBI5csStneQBRecCjRCTShZUR_8e-GDxzwdWi1CbNITPwVvaUa5iws6t_MGBNw0bA"></script>
+
+</body>
+
+</html>

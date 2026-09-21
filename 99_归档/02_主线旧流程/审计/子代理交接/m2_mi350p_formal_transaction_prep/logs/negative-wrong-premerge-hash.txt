@@ -1,0 +1,8 @@
+TargetRoot formal aggregate differs.
+At D:\Workspace\2026projects\调研-训练推理芯片调研-资料汇总\审计\子代理交接\m2_mi350p_formal_transaction_prep\scripts\Test-MI350PFormalTrans
+actionPreflight.ps1:30 char:87
++ ... ndition,[string]$Message); if(-not $Condition){throw $Message}; $scri ...
++                                                    ~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (TargetRoot formal aggregate differs.:String) [], RuntimeException
+    + FullyQualifiedErrorId : TargetRoot formal aggregate differs.
+ 

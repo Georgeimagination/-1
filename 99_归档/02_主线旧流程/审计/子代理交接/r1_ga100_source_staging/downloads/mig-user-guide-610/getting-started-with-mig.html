@@ -1,0 +1,1465 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Getting Started with MIG &#8212; NVIDIA Multi-Instance GPU User Guide</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=767de534" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+
+    <script rel="preload" src="_static/modal-table.js"></script>
+    <script src="_static/documentation_options.js?v=92534b85"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scrollspy-patch.js?v=edc4054a"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=65e89d2a"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting-started-with-mig';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '610';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            true;
+        </script>
+    <script src="_static/version-patch.js?v=3e13fdd2"></script>
+
+    <link rel="icon" href="_static/favicon.ico"/>
+
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Device Nodes and Capabilities" href="device-nodes-and-capabilities.html" />
+    <link rel="prev" title="Supported MIG Profiles" href="supported-mig-profiles.html" />
+
+ 
+<script src="//assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
+ 
+
+  </head>
+
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA Multi-Instance GPU User Guide - Home"/>
+    <img src="_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="NVIDIA Multi-Instance GPU User Guide - Home"/>
+  
+  
+    <p class="title logo__title">NVIDIA Multi-Instance GPU User Guide</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA Multi-Instance GPU User Guide - Home"/>
+    <img src="_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="NVIDIA Multi-Instance GPU User Guide - Home"/>
+  
+  
+    <p class="title logo__title">NVIDIA Multi-Instance GPU User Guide</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supported-gpus.html">Supported GPUs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supported-configurations.html">Supported Configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtualization.html">Virtualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment-considerations.html">Deployment Considerations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mig-device-names.html">MIG Device Names</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supported-mig-profiles.html">Supported MIG Profiles</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Getting Started with MIG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="device-nodes-and-capabilities.html">Device Nodes and Capabilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notices.html">Notices</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Getting Started with MIG</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="getting-started-with-mig">
+<span id="id1"></span><h1>Getting Started with MIG<a class="headerlink" href="#getting-started-with-mig" title="Link to this heading">#</a></h1>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<p>The following prerequisites and minimum software versions are recommended when using supported GPUs in MIG mode:</p>
+<ul>
+<li><p>MIG is supported only on GPUs and systems listed <a class="reference internal" href="supported-gpus.html#supported-gpus"><span class="std std-ref">here</span></a>.</p></li>
+<li><p>It is recommended to install the latest NVIDIA datacenter driver. The minimum versions are given in the below table:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>GPU</p></th>
+<th class="head"><p>CUDA Version</p></th>
+<th class="head"><p>NVIDIA Driver Version</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>A100 / A30</p></td>
+<td><p>CUDA 11</p></td>
+<td><p>R525 (&gt;= 525.53) or later</p></td>
+</tr>
+<tr class="row-odd"><td><p>H100 / H200</p></td>
+<td><p>CUDA 12</p></td>
+<td><p>R450 (&gt;= 450.80.02) or later</p></td>
+</tr>
+<tr class="row-even"><td><p>B200</p></td>
+<td><p>CUDA 12</p></td>
+<td><p>R570 (&gt;= 570.133.20) or later</p></td>
+</tr>
+<tr class="row-odd"><td><p>RTX PRO 6000 Blackwell
+(All editions)</p>
+<p>RTX PRO 5000 Blackwell</p>
+</td>
+<td><p>CUDA 12</p></td>
+<td><p>R575 (&gt;= 575.51.03) or later</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li><p>Linux operating system distributions supported by <a class="reference external" href="https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html">CUDA</a>.</p></li>
+<li><p>If running containers or using Kubernetes, then:</p>
+<ul class="simple">
+<li><p>NVIDIA Container Toolkit (nvidia-docker2): v2.5.0 or later</p></li>
+<li><p>NVIDIA K8s Device Plugin: v0.7.0 or later</p></li>
+<li><p>NVIDIA gpu-feature-discovery: v0.2.0 or later</p></li>
+</ul>
+</li>
+</ul>
+<p>MIG can be managed programmatically using NVIDIA Management Library (NVML) APIs or its command-line-interface, <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code>.
+Note that for brevity, some of the nvidia-smi output in the following examples may be cropped to showcase the relevant
+sections of interest.</p>
+<p>For more information on the MIG commands, see the <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code> man page or <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span> <span class="pre">mig</span> <span class="pre">--help</span></code>. For information
+on the MIG management APIs, see the NVML header (<code class="docutils literal notranslate"><span class="pre">nvml.h</span></code>) included in the CUDA Toolkit packages (<code class="docutils literal notranslate"><span class="pre">cuda-nvml-dev-*</span></code>;
+installed under <code class="docutils literal notranslate"><span class="pre">/usr/local/cuda/include/nvml.h</span></code>). For automated tooling support with configuring MIG, refer to the
+<a class="reference external" href="https://github.com/nvidia/mig-parted">NVIDIA MIG Partition Editor</a> (or <code class="docutils literal notranslate"><span class="pre">mig-parted</span></code>) tools.</p>
+<section id="additional-prerequisites-for-rtx-pro-blackwell-gpus">
+<h3>Additional Prerequisites for RTX PRO Blackwell GPUs<a class="headerlink" href="#additional-prerequisites-for-rtx-pro-blackwell-gpus" title="Link to this heading">#</a></h3>
+<p>When using RTX PRO 6000 Blackwell and RTX PRO 5000 Blackwell GPUs , the following additional requirements apply:</p>
+<p>Verify the GPU vBIOS version meets minimum versions listed in the following table.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>GPU</p></th>
+<th class="head"><p>Minimum vBIOS version</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>RTX PRO 5000 Blackwell</p></td>
+<td><p>98.02.73.00.00</p></td>
+</tr>
+<tr class="row-odd"><td><p>RTX PRO 6000 Blackwell Workstation Edition</p></td>
+<td><p>98.02.55.00.00</p></td>
+</tr>
+<tr class="row-even"><td><p>RTX PRO 6000 Blackwell Max-Q Workstation Edition</p></td>
+<td><p>98.02.6A.00.00</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>To check the current vBIOS version:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>nvidia-smi<span class="w"> </span>--query-gpu<span class="o">=</span>vbios_version<span class="w"> </span>--format<span class="o">=</span>csv
+</pre></div>
+</div>
+<p>If a vBIOS update is needed, contact your reseller or system provider for assistance.</p>
+<p>Display mode by default will be set to graphics, this must be set to compute before MIG can be enabled for Workstation Edition and Max-Q Workstation Edition GPUs. This is done using <a class="reference external" href="https://developer.nvidia.com/displaymodeselector">DisplayModeSelector</a> (&gt;=1.72.0).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>On single-card workstation configs where the RTX PRO 6000 GPU serves as the primary display adapter, setting display mode to compute will disable physical display output. Ensure SSH access is available before proceeding. For systems with multiple GPUs, ensure display mode changes are not applied to the primary display adapter to preserve physical display output.</p>
+</div>
+<p>To set display mode to compute:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>./DisplayModeSelector<span class="w"> </span>--gpumode<span class="o">=</span>compute<span class="w"> </span>--gpu<span class="o">=</span>&lt;GPU_ID&gt;
+</pre></div>
+</div>
+<p>To switch back to graphics mode:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>./DisplayModeSelector<span class="w"> </span>--gpumode<span class="o">=</span>graphics<span class="w"> </span>--gpu<span class="o">=</span>&lt;GPU_ID&gt;
+</pre></div>
+</div>
+</section>
+</section>
+<section id="enable-mig-mode">
+<h2>Enable MIG Mode<a class="headerlink" href="#enable-mig-mode" title="Link to this heading">#</a></h2>
+<p>By default, MIG mode is not enabled on the GPU. For example, running <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code> shows that MIG mode is disabled:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ nvidia-smi -i 0
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 450.80.02    Driver Version: 450.80.02    CUDA Version: 11.0     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  A100-SXM4-40GB      Off  | 00000000:36:00.0 Off |                    0 |
+| N/A   29C    P0    62W / 400W |      0MiB / 40537MiB |      6%      Default |
+|                               |                      |             Disabled |
++-------------------------------+----------------------+----------------------+
+</pre></div>
+</div>
+<p>MIG mode can be enabled on a per-GPU basis with the following command:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>nvidia-smi -i &lt;GPU IDs&gt; -mig 1
+</pre></div>
+</div>
+<p>The GPUs can be selected using comma separated GPU indexes, PCI Bus IDs or UUIDs. If no GPU ID is
+specified, then MIG mode is applied to all the GPUs on the system.</p>
+<p>When MIG is enabled on the GPU, depending on the GPU product, the driver will attempt to reset
+the GPU so that MIG mode can take effect.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo nvidia-smi -i 0 -mig 1
+Enabled MIG Mode for GPU 00000000:36:00.0
+All done.
+
+$ nvidia-smi -i 0 --query-gpu=pci.bus_id,mig.mode.current --format=csv
+pci.bus_id, mig.mode.current
+00000000:36:00.0, Enabled
+</pre></div>
+</div>
+<section id="gpu-reset-on-hopper-gpus">
+<h3>GPU Reset on Hopper+ GPUs<a class="headerlink" href="#gpu-reset-on-hopper-gpus" title="Link to this heading">#</a></h3>
+<p>Starting with the Hopper generation of GPUs, enabling MIG mode no longer requires a GPU reset to take
+effect (and thus the driver does not attempt to reset the GPU in the background).</p>
+<p>Note that MIG mode (<code class="docutils literal notranslate"><span class="pre">Disabled</span></code> or <code class="docutils literal notranslate"><span class="pre">Enabled</span></code> states) is only persistent as long as the driver is resident
+in the system (that is, the kernel modules are loaded). MIG mode is no longer persistent across system
+reboots (there is no longer a status bit stored in the GPU InfoROM).</p>
+<p>Thus, an unload and reload of the driver kernel modules will disable MIG mode.</p>
+</section>
+<section id="gpu-reset-on-nvidia-ampere-architecture-gpus">
+<h3>GPU Reset on NVIDIA Ampere Architecture GPUs<a class="headerlink" href="#gpu-reset-on-nvidia-ampere-architecture-gpus" title="Link to this heading">#</a></h3>
+<p>On NVIDIA Ampere architecture GPUs, when MIG mode is enabled, the driver will attempt to reset the GPU
+so that MIG mode can take effect.</p>
+<p>Note that MIG mode (<code class="docutils literal notranslate"><span class="pre">Disabled</span></code> or <code class="docutils literal notranslate"><span class="pre">Enabled</span></code> states) is persistent across system reboots (there is a status
+bit stored in the GPU InfoROM). Thus MIG mode has to be explicitly disabled to return the GPU to its
+default state.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are using MIG inside a VM with NVIDIA Ampere GPUs (A100 or A30) in passthrough, then you may
+need to reboot the VM to allow the GPU to be in MIG mode as in some cases, GPU reset is not allowed
+via the hypervisor for security reasons. This can be seen in the following example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo nvidia-smi -i 0 -mig 1
+Warning: MIG mode is in pending enable state for GPU 00000000:00:03.0:Not Supported
+Reboot the system or try nvidia-smi --gpu-reset to make MIG mode effective on GPU 00000000:00:03.0
+All done.
+
+$ sudo nvidia-smi --gpu-reset
+Resetting GPU 00000000:00:03.0 is not supported.
+</pre></div>
+</div>
+</div>
+</section>
+<section id="driver-clients">
+<h3>Driver Clients<a class="headerlink" href="#driver-clients" title="Link to this heading">#</a></h3>
+<p>In some cases, if you have agents on the system (for example, monitoring agents) that use the GPU, then
+you may not be able to initiate a GPU reset. For example, on DGX systems, you may encounter the following message:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo nvidia-smi -i 0 -mig 1
+Warning: MIG mode is in pending enable state for GPU 00000000:07:00.0:In use by another client
+00000000:07:00.0 is currently being used by one or more other processes (e.g. CUDA application or a monitoring application such as another instance of nvidia-smi). Please first kill all processes using the device and retry the command or reboot the system to make MIG mode effective.
+All done.
+</pre></div>
+</div>
+<p>In this specific DGX example, you would have to stop the <code class="docutils literal notranslate"><span class="pre">nvsm</span></code> and <code class="docutils literal notranslate"><span class="pre">dcgm</span></code> services, enable MIG mode on the
+desired GPU and then restore the monitoring services:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo systemctl stop nvsm
+
+$ sudo systemctl stop dcgm
+
+$ sudo nvidia-smi -i 0 -mig 1
+Enabled MIG Mode for GPU 00000000:07:00.0
+All done.
+</pre></div>
+</div>
+<p>The examples shown in the document use super-user privileges. As described in the <a class="reference internal" href="device-nodes-and-capabilities.html#dev-based-nvidia-capabilities"><span class="std std-ref">Device Nodes</span></a> section,
+granting read access to <code class="docutils literal notranslate"><span class="pre">mig/config</span></code> capabilities allows non-root users to manage instances once the GPU
+has been configured into MIG mode. The default file permissions on the <code class="docutils literal notranslate"><span class="pre">mig/config</span></code> file are as follows.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ ls -l /proc/driver/nvidia/capabilities/*
+/proc/driver/nvidia/capabilities/mig:
+total 0
+-r-------- 1 root root 0 May 24 16:10 config
+-r--r--r-- 1 root root 0 May 24 16:10 monitor
+</pre></div>
+</div>
+</section>
+</section>
+<section id="list-gpu-instance-profiles">
+<h2>List GPU Instance Profiles<a class="headerlink" href="#list-gpu-instance-profiles" title="Link to this heading">#</a></h2>
+<p>The NVIDIA driver provides a number of profiles that users can opt-in for when configuring the MIG feature in A100. The
+profiles are the sizes and capabilities of the GPU instances that can be created by the user. The driver also provides
+information about the placements, which indicate the type and number of instances that can be created.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ nvidia-smi mig -lgip
++-----------------------------------------------------------------------------+
+| GPU instance profiles:                                                      |
+| GPU   Name             ID    Instances   Memory     P2P    SM    DEC   ENC  |
+|                              Free/Total   GiB              CE    JPEG  OFA  |
+|=============================================================================|
+|   0  MIG 1g.5gb        19     7/7        4.75       No     14     0     0   |
+|                                                             1     0     0   |
++-----------------------------------------------------------------------------+
+|   0  MIG 1g.5gb+me     20     1/1        4.75       No     14     1     0   |
+|                                                             1     1     1   |
++-----------------------------------------------------------------------------+
+|   0  MIG 1g.10gb       15     4/4        9.62       No     14     1     0   |
+|                                                             1     0     0   |
++-----------------------------------------------------------------------------+
+|   0  MIG 2g.10gb       14     3/3        9.62       No     28     1     0   |
+|                                                             2     0     0   |
++-----------------------------------------------------------------------------+
+|   0  MIG 3g.20gb        9     2/2        19.50      No     42     2     0   |
+|                                                             3     0     0   |
++-----------------------------------------------------------------------------+
+|   0  MIG 4g.20gb        5     1/1        19.50      No     56     2     0   |
+|                                                             4     0     0   |
++-----------------------------------------------------------------------------+
+|   0  MIG 7g.40gb        0     1/1        39.25      No     98     5     0   |
+|                                                             7     1     1   |
++-----------------------------------------------------------------------------+
+</pre></div>
+</div>
+<p>List the possible placements available using the following command. The syntax of the placement is
+<code class="docutils literal notranslate"><span class="pre">{&lt;index&gt;}:&lt;GPU</span> <span class="pre">Slice</span> <span class="pre">Count&gt;</span></code> and shows the placement of the instances on the GPU. The placement
+index shown indicates how the profiles are mapped on the GPU as shown in the <a class="reference internal" href="mig-device-names.html#mig-device-names"><span class="std std-ref">supported profiles tables</span></a>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ nvidia-smi mig -lgipp
+GPU  0 Profile ID 19 Placements: {0,1,2,3,4,5,6}:1
+GPU  0 Profile ID 20 Placements: {0,1,2,3,4,5,6}:1
+GPU  0 Profile ID 15 Placements: {0,2,4,6}:2
+GPU  0 Profile ID 14 Placements: {0,2,4}:2
+GPU  0 Profile ID  9 Placements: {0,4}:4
+GPU  0 Profile ID  5 Placement : {0}:4
+GPU  0 Profile ID  0 Placement : {0}:8
+</pre></div>
+</div>
+<p>The command shows that the user can create two instances of type <code class="docutils literal notranslate"><span class="pre">3g.20gb</span></code> (profile ID 9) or seven
+instances of <code class="docutils literal notranslate"><span class="pre">1g.5gb</span></code> (profile ID 19).</p>
+</section>
+<section id="creating-gpu-instances">
+<h2>Creating GPU Instances<a class="headerlink" href="#creating-gpu-instances" title="Link to this heading">#</a></h2>
+<p>Before starting to use MIG, the user needs to create GPU instances using the <code class="docutils literal notranslate"><span class="pre">-cgi</span></code> option. One of
+three options can be used to specify the instance profiles to be created:</p>
+<ul class="simple">
+<li><p>Profile ID (e.g. 9, 14, 5)</p></li>
+<li><p>Short name of the profile (such as <code class="docutils literal notranslate"><span class="pre">3g.20gb</span></code>)</p></li>
+<li><p>Full profile name of the instance (such as <code class="docutils literal notranslate"><span class="pre">MIG</span> <span class="pre">3g.20gb</span></code>)</p></li>
+</ul>
+<p>Once the GPU instances are created, you need to create the corresponding Compute Instances (CI).
+By using the <code class="docutils literal notranslate"><span class="pre">-C</span></code> option, <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code> creates these instances.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Without creating GPU instances (and corresponding compute instances), CUDA workloads cannot be run on
+the GPU. In other words, simply enabling MIG mode on the GPU is not sufficient. Also note that, the
+created MIG devices are not persistent across system reboots. Thus, the user or system administrator
+needs to recreate the desired MIG configurations if the GPU or system is reset. For automated tooling
+support for this purpose, refer to the <a class="reference external" href="https://github.com/nvidia/mig-parted">NVIDIA MIG Partition Editor</a>
+(or <code class="docutils literal notranslate"><span class="pre">mig-parted</span></code>) tool, including creating a systemd service that could recreate the MIG geometry at system startup.</p>
+</div>
+<p>The following example shows how the user can create GPU instances (and corresponding compute instances).
+In this example, the user can create two GPU instances (of type <code class="docutils literal notranslate"><span class="pre">3g.20gb</span></code>), with each GPU instance having
+half of the available compute and memory capacity. In this example, we purposefully use profile ID and
+short profile name to showcase how either option can be used:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo nvidia-smi mig -cgi 9,3g.20gb -C
+Successfully created GPU instance ID  2 on GPU  0 using profile MIG 3g.20gb (ID  9)
+Successfully created compute instance ID  0 on GPU  0 GPU instance ID  2 using profile MIG 3g.20gb (ID  2)
+Successfully created GPU instance ID  1 on GPU  0 using profile MIG 3g.20gb (ID  9)
+Successfully created compute instance ID  0 on GPU  0 GPU instance ID  1 using profile MIG 3g.20gb (ID  2)
+</pre></div>
+</div>
+<p>Now list the available GPU instances:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo nvidia-smi mig -lgi
++----------------------------------------------------+
+| GPU instances:                                     |
+| GPU   Name          Profile  Instance   Placement  |
+|                       ID       ID       Start:Size |
+|====================================================|
+|   0  MIG 3g.20gb       9        1          4:4     |
++----------------------------------------------------+
+|   0  MIG 3g.20gb       9        2          0:4     |
++----------------------------------------------------+
+</pre></div>
+</div>
+<p>Now verify that the GIs and corresponding CIs are created:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ nvidia-smi
++-----------------------------------------------------------------------------+
+| MIG devices:                                                                |
++------------------+----------------------+-----------+-----------------------+
+| GPU  GI  CI  MIG |         Memory-Usage |        Vol|         Shared        |
+|      ID  ID  Dev |                      | SM     Unc| CE  ENC  DEC  OFA  JPG|
+|                  |                      |        ECC|                       |
+|==================+======================+===========+=======================|
+|  0    1   0   0  |     11MiB / 20224MiB | 42      0 |  3   0    2    0    0 |
++------------------+----------------------+-----------+-----------------------+
+|  0    2   0   1  |     11MiB / 20096MiB | 42      0 |  3   0    2    0    0 |
++------------------+----------------------+-----------+-----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+</pre></div>
+</div>
+<section id="instance-geometry">
+<h3>Instance Geometry<a class="headerlink" href="#instance-geometry" title="Link to this heading">#</a></h3>
+<p>As described in the section on <a class="reference internal" href="concepts.html#partitioning"><span class="std std-ref">Partitioning</span></a>, the NVIDIA driver APIs provide a number of
+available GPU Instance profiles that can be chosen by the user.</p>
+<p>If a mixed geometry of the profiles is specified by the user, then the NVIDIA driver chooses
+the placement of the various profiles. This can be seen in the following examples.</p>
+<p>Example 1: Creation of a 4-2-1 geometry. After the instances are created, the placement of
+the profiles can be observed:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo nvidia-smi mig -cgi 19,14,5
+Successfully created GPU instance ID 13 on GPU  0 using profile MIG 1g.5gb (ID 19)
+Successfully created GPU instance ID  5 on GPU  0 using profile MIG 2g.10gb (ID 14)
+Successfully created GPU instance ID  1 on GPU  0 using profile MIG 4g.20gb (ID  5)
+
+
+$ sudo nvidia-smi mig -lgi
++----------------------------------------------------+
+| GPU instances:                                     |
+| GPU   Name          Profile  Instance   Placement  |
+|                       ID       ID       Start:Size |
+|====================================================|
+|   0  MIG 1g.5gb       19       13          6:1     |
++----------------------------------------------------+
+|   0  MIG 2g.10gb      14        5          4:2     |
++----------------------------------------------------+
+|   0  MIG 4g.20gb       5        1          0:4     |
++----------------------------------------------------+
+</pre></div>
+</div>
+<p>Example 2: Creation of a 3-2-1-1 geometry.</p>
+<p>Note:  Due to a known issue with the APIs, the profile ID 9 or <code class="docutils literal notranslate"><span class="pre">3g.20gb</span></code> must be
+specified first in order. Not doing so, will result in the following error:</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo nvidia-smi mig -cgi 19,19,14,9
+Successfully created GPU instance ID 13 on GPU  0 using profile MIG 1g.5gb (ID 19)
+Successfully created GPU instance ID 11 on GPU  0 using profile MIG 1g.5gb (ID 19)
+Successfully created GPU instance ID  3 on GPU  0 using profile MIG 2g.10gb (ID 14)
+Unable to create a GPU instance on GPU  0 using profile 9: Insufficient Resources
+Failed to create GPU instances: Insufficient Resources
+</pre></div>
+</div>
+</div></blockquote>
+<p>Specify the correct order for the 3g.20gb profile. The remaining combinations of the profiles do not have this requirement.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo nvidia-smi mig -cgi 9,19,14,19
+Successfully created GPU instance ID  2 on GPU  0 using profile MIG 3g.20gb (ID  9)
+Successfully created GPU instance ID  7 on GPU  0 using profile MIG 1g.5gb (ID 19)
+Successfully created GPU instance ID  4 on GPU  0 using profile MIG 2g.10gb (ID 14)
+Successfully created GPU instance ID  8 on GPU  0 using profile MIG 1g.5gb (ID 19)
+
+
+$ sudo nvidia-smi mig -lgi
++----------------------------------------------------+
+| GPU instances:                                     |
+| GPU   Name          Profile  Instance   Placement  |
+|                       ID       ID       Start:Size |
+|====================================================|
+|   0  MIG 1g.5gb       19        7          0:1     |
++----------------------------------------------------+
+|   0  MIG 1g.5gb       19        8          1:1     |
++----------------------------------------------------+
+|   0  MIG 2g.10gb      14        4          2:2     |
++----------------------------------------------------+
+|   0  MIG 3g.20gb       9        2          4:4     |
++----------------------------------------------------+
+</pre></div>
+</div>
+<p>Example 3: Creation of a 2-1-1-1-1-1 geometry:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo nvidia-smi mig -cgi 14,19,19,19,19,19
+Successfully created GPU instance ID  5 on GPU  0 using profile MIG 2g.10gb (ID 14)
+Successfully created GPU instance ID 13 on GPU  0 using profile MIG 1g.5gb (ID 19)
+Successfully created GPU instance ID  7 on GPU  0 using profile MIG 1g.5gb (ID 19)
+Successfully created GPU instance ID  8 on GPU  0 using profile MIG 1g.5gb (ID 19)
+Successfully created GPU instance ID  9 on GPU  0 using profile MIG 1g.5gb (ID 19)
+Successfully created GPU instance ID 10 on GPU  0 using profile MIG 1g.5gb (ID 19)
+
+
+$ sudo nvidia-smi mig -lgi
++----------------------------------------------------+
+| GPU instances:                                     |
+| GPU   Name          Profile  Instance   Placement  |
+|                       ID       ID       Start:Size |
+|====================================================|
+|   0  MIG 1g.5gb       19        7          0:1     |
++----------------------------------------------------+
+|   0  MIG 1g.5gb       19        8          1:1     |
++----------------------------------------------------+
+|   0  MIG 1g.5gb       19        9          2:1     |
++----------------------------------------------------+
+|   0  MIG 1g.5gb       19       10          3:1     |
++----------------------------------------------------+
+|   0  MIG 1g.5gb       19       13          6:1     |
++----------------------------------------------------+
+|   0  MIG 2g.10gb      14        5          4:2     |
++----------------------------------------------------+
+</pre></div>
+</div>
+</section>
+</section>
+<section id="running-cuda-applications-on-bare-metal">
+<h2>Running CUDA Applications on Bare-Metal<a class="headerlink" href="#running-cuda-applications-on-bare-metal" title="Link to this heading">#</a></h2>
+<section id="gpu-instances">
+<h3>GPU Instances<a class="headerlink" href="#gpu-instances" title="Link to this heading">#</a></h3>
+<p>The following example shows how two CUDA applications can be run in parallel on two different GPU
+instances. In this example, the BlackScholes CUDA sample is run simultaneously on the two GIs created on the A100.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ nvidia-smi -L
+GPU 0: A100-SXM4-40GB (UUID: GPU-e86cb44c-6756-fd30-cd4a-1e6da3caf9b0)
+  MIG 3g.20gb Device 0: (UUID: MIG-c7384736-a75d-5afc-978f-d2f1294409fd)
+  MIG 3g.20gb Device 1: (UUID: MIG-a28ad590-3fda-56dd-84fc-0a0b96edc58d)
+
+
+$ CUDA_VISIBLE_DEVICES=MIG-c7384736-a75d-5afc-978f-d2f1294409fd ./BlackScholes &amp;
+$ CUDA_VISIBLE_DEVICES=MIG-a28ad590-3fda-56dd-84fc-0a0b96edc58d ./BlackScholes &amp;
+</pre></div>
+</div>
+<p>Now verify the two CUDA applications are running on two separate GPU instances:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ nvidia-smi
++-----------------------------------------------------------------------------+
+| MIG devices:                                                                |
++------------------+----------------------+-----------+-----------------------+
+| GPU  GI  CI  MIG |         Memory-Usage |        Vol|         Shared        |
+|      ID  ID  Dev |                      | SM     Unc| CE  ENC  DEC  OFA  JPG|
+|                  |                      |        ECC|                       |
+|==================+======================+===========+=======================|
+|  0    1   0   0  |    268MiB / 20224MiB | 42      0 |  3   0    2    0    0 |
++------------------+----------------------+-----------+-----------------------+
+|  0    2   0   1  |    268MiB / 20096MiB | 42      0 |  3   0    2    0    0 |
++------------------+----------------------+-----------+-----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|    0    1    0      58866      C   ./BlackScholes                    253MiB |
+|    0    2    0      58856      C   ./BlackScholes                    253MiB |
++-----------------------------------------------------------------------------+
+</pre></div>
+</div>
+</section>
+<section id="gpu-utilization-metrics">
+<h3>GPU Utilization Metrics<a class="headerlink" href="#gpu-utilization-metrics" title="Link to this heading">#</a></h3>
+<p>NVML (and <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code>) does not support attribution of utilization metrics to MIG devices. From the previous
+example, the utilization is displayed as <code class="docutils literal notranslate"><span class="pre">N/A</span></code> when running CUDA programs:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ nvidia-smi
+
++-----------------------------------------------------------------------------+
+| MIG devices:                                                                |
++------------------+----------------------+-----------+-----------------------+
+| GPU  GI  CI  MIG |         Memory-Usage |        Vol|         Shared        |
+|      ID  ID  Dev |           BAR1-Usage | SM     Unc| CE  ENC  DEC  OFA  JPG|
+|                  |                      |        ECC|                       |
+|==================+======================+===========+=======================|
+|  0    1   0   0  |    268MiB / 20096MiB | 42      0 |  3   0    2    0    0 |
+|                  |      4MiB / 32767MiB |           |                       |
++------------------+----------------------+-----------+-----------------------+
+|  0    2   0   1  |    268MiB / 20096MiB | 42      0 |  3   0    2    0    0 |
+|                  |      4MiB / 32767MiB |           |                       |
++------------------+----------------------+-----------+-----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|    0    1    0       6217      C   ...inux/release/BlackScholes      253MiB |
+|    0    2    0       6223      C   ...inux/release/BlackScholes      253MiB |
++-----------------------------------------------------------------------------+
+</pre></div>
+</div>
+<p>For monitoring MIG devices on MIG capable GPUs such as the A100, including attribution of GPU metrics
+(including utilization and other profiling metrics), it is recommended to use NVIDIA DCGM v2.0.13 or
+later. See the <a class="reference external" href="https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/feature-overview.html#profiling">Profiling Metrics</a>
+section in the DCGM User Guide for more details on getting started.</p>
+</section>
+<section id="compute-instances">
+<h3>Compute Instances<a class="headerlink" href="#compute-instances" title="Link to this heading">#</a></h3>
+<p>As explained earlier in this document, a further level of concurrency can be achieved by using Compute
+Instances (CIs). The following example shows how 3 CUDA processes (BlackScholes CUDA sample) can be run
+on the same GI.</p>
+<p>First, list the available CI profiles available using our prior configuration of creating 2 GIs on the A100.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo nvidia-smi mig -lcip -gi 1
++--------------------------------------------------------------------------------------+
+| Compute instance profiles:                                                           |
+| GPU     GPU       Name             Profile  Instances   Exclusive       Shared       |
+|       Instance                       ID     Free/Total     SM       DEC   ENC   OFA  |
+|         ID                                                          CE    JPEG       |
+|======================================================================================|
+|   0      1       MIG 1c.3g.20gb       0      0/3           14        2     0     0   |
+|                                                                      3     0         |
++--------------------------------------------------------------------------------------+
+|   0      1       MIG 2c.3g.20gb       1      0/1           28        2     0     0   |
+|                                                                      3     0         |
++--------------------------------------------------------------------------------------+
+|   0      1       MIG 3g.20gb          2*     0/1           42        2     0     0   |
+|                                                                      3     0         |
++--------------------------------------------------------------------------------------+
+</pre></div>
+</div>
+<p>Create 3 CIs, each of type 1c compute capacity (profile ID 0) on the first GI.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo nvidia-smi mig -cci 0,0,0 -gi 1
+Successfully created compute instance on GPU  0 GPU instance ID  1 using profile MIG 1c.3g.20gb (ID  0)
+Successfully created compute instance on GPU  0 GPU instance ID  1 using profile MIG 1c.3g.20gb (ID  0)
+Successfully created compute instance on GPU  0 GPU instance ID  1 using profile MIG 1c.3g.20gb (ID  0)
+</pre></div>
+</div>
+<p>Using <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code>, the following CIs are now created on GI 1:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo nvidia-smi mig -lci -gi 1
++-------------------------------------------------------+
+| Compute instances:                                    |
+| GPU     GPU       Name             Profile   Instance |
+|       Instance                       ID        ID     |
+|         ID                                            |
+|=======================================================|
+|   0      1       MIG 1c.3g.20gb       0         0     |
++-------------------------------------------------------+
+|   0      1       MIG 1c.3g.20gb       0         1     |
++-------------------------------------------------------+
+|   0      1       MIG 1c.3g.20gb       0         2     |
++-------------------------------------------------------+
+</pre></div>
+</div>
+<p>And the GIs and CIs created on the A100 are now enumerated by the driver:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ nvidia-smi
++-----------------------------------------------------------------------------+
+| MIG devices:                                                                |
++------------------+----------------------+-----------+-----------------------+
+| GPU  GI  CI  MIG |         Memory-Usage |        Vol|         Shared        |
+|      ID  ID  Dev |                      | SM     Unc| CE  ENC  DEC  OFA  JPG|
+|                  |                      |        ECC|                       |
+|==================+======================+===========+=======================|
+|  0    1   0   0  |     11MiB / 20224MiB | 14      0 |  3   0    2    0    0 |
++------------------+                      +-----------+-----------------------+
+|  0    1   1   1  |                      | 14      0 |  3   0    2    0    0 |
++------------------+                      +-----------+-----------------------+
+|  0    1   2   2  |                      | 14      0 |  3   0    2    0    0 |
++------------------+----------------------+-----------+-----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+</pre></div>
+</div>
+<p>Now, three BlackScholes applications can be created and run in parallel:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ CUDA_VISIBLE_DEVICES=MIG-c7384736-a75d-5afc-978f-d2f1294409fd ./BlackScholes &amp;
+$ CUDA_VISIBLE_DEVICES=MIG-c376546e-7559-5610-9721-124e8dbb1bc8 ./BlackScholes &amp;
+$ CUDA_VISIBLE_DEVICES=MIG-928edfb0-898f-53bd-bf24-c7e5d08a6852 ./BlackScholes &amp;
+</pre></div>
+</div>
+<p>And seen using nvidia-smi as running processes on the three CIs:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ nvidia-smi
++-----------------------------------------------------------------------------+
+| MIG devices:                                                                |
++------------------+----------------------+-----------+-----------------------+
+| GPU  GI  CI  MIG |         Memory-Usage |        Vol|         Shared        |
+|      ID  ID  Dev |                      | SM     Unc| CE  ENC  DEC  OFA  JPG|
+|                  |                      |        ECC|                       |
+|==================+======================+===========+=======================|
+|  0    1   0   0  |    476MiB / 20224MiB | 14      0 |  3   0    2    0    0 |
++------------------+                      +-----------+-----------------------+
+|  0    1   1   1  |                      | 14      0 |  3   0    2    0    0 |
++------------------+                      +-----------+-----------------------+
+|  0    1   2   2  |                      | 14      0 |  3   0    2    0    0 |
++------------------+----------------------+-----------+-----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|    0    1    0      59785      C   ./BlackScholes                    153MiB |
+|    0    1    1      59796      C   ./BlackScholes                    153MiB |
+|    0    1    2      59885      C   ./BlackScholes                    153MiB |
++-----------------------------------------------------------------------------+
+</pre></div>
+</div>
+</section>
+</section>
+<section id="destroying-gpu-instances">
+<h2>Destroying GPU Instances<a class="headerlink" href="#destroying-gpu-instances" title="Link to this heading">#</a></h2>
+<p>Once the GPU is in MIG mode, GIs and CIs can be configured dynamically. The following example
+shows how the CIs and GIs created in the previous examples can be destroyed.</p>
+<p>Note: If the intention is to destroy all the CIs and GIs, then this can be accomplished with the following commands:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo nvidia-smi mig -dci &amp;&amp; sudo nvidia-smi mig -dgi
+Successfully destroyed compute instance ID  0 from GPU  0 GPU instance ID  1
+Successfully destroyed compute instance ID  1 from GPU  0 GPU instance ID  1
+Successfully destroyed compute instance ID  2 from GPU  0 GPU instance ID  1
+Successfully destroyed GPU instance ID  1 from GPU  0
+Successfully destroyed GPU instance ID  2 from GPU  0
+</pre></div>
+</div>
+<p>In this example, we delete the specific CIs created under GI 1.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo nvidia-smi mig -dci -ci 0,1,2 -gi 1
+Successfully destroyed compute instance ID  0 from GPU  0 GPU instance ID  1
+Successfully destroyed compute instance ID  1 from GPU  0 GPU instance ID  1
+Successfully destroyed compute instance ID  2 from GPU  0 GPU instance ID  1
+</pre></div>
+</div>
+<p>It can be verified that the CI devices have now been torn down on the GPU:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ nvidia-smi
++-----------------------------------------------------------------------------+
+| MIG devices:                                                                |
++------------------+----------------------+-----------+-----------------------+
+| GPU  GI  CI  MIG |         Memory-Usage |        Vol|         Shared        |
+|      ID  ID  Dev |                      | SM     Unc| CE  ENC  DEC  OFA  JPG|
+|                  |                      |        ECC|                       |
+|==================+======================+===========+=======================|
+|  No MIG devices found                                                       |
++-----------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+</pre></div>
+</div>
+<p>Now the GIs have to be deleted:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo nvidia-smi mig -dgi
+Successfully destroyed GPU instance ID  1 from GPU  0
+Successfully destroyed GPU instance ID  2 from GPU  0
+</pre></div>
+</div>
+</section>
+<section id="monitoring-mig-devices">
+<h2>Monitoring MIG Devices<a class="headerlink" href="#monitoring-mig-devices" title="Link to this heading">#</a></h2>
+<p>For monitoring MIG devices on including attribution of GPU metrics (including utilization and other
+profiling metrics), it is recommended to use <a class="reference external" href="https://developer.nvidia.com/dcgm">NVIDIA DCGM</a> v3 or
+later. See the <a class="reference external" href="https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/feature-overview.html#profiling">Profiling Metrics</a>
+section in the DCGM User Guide for more details on getting started.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>On NVIDIA Ampere architecture GPUs (A100 or A30), NVML (and nvidia-smi) does not support attribution of utilization
+metrics to MIG devices. From the previous example, the utilization is displayed as N/A when running CUDA programs:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ nvidia-smi
+
++-----------------------------------------------------------------------------+
+| MIG devices:                                                                |
++------------------+----------------------+-----------+-----------------------+
+| GPU  GI  CI  MIG |         Memory-Usage |        Vol|         Shared        |
+|      ID  ID  Dev |           BAR1-Usage | SM     Unc| CE  ENC  DEC  OFA  JPG|
+|                  |                      |        ECC|                       |
+|==================+======================+===========+=======================|
+|  0    1   0   0  |    268MiB / 20096MiB | 42      0 |  3   0    2    0    0 |
+|                  |      4MiB / 32767MiB |           |                       |
++------------------+----------------------+-----------+-----------------------+
+|  0    2   0   1  |    268MiB / 20096MiB | 42      0 |  3   0    2    0    0 |
+|                  |      4MiB / 32767MiB |           |                       |
++------------------+----------------------+-----------+-----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|    0    1    0       6217      C   ...inux/release/BlackScholes      253MiB |
+|    0    2    0       6223      C   ...inux/release/BlackScholes      253MiB |
++-----------------------------------------------------------------------------+
+</pre></div>
+</div>
+</div>
+</section>
+<section id="mig-with-cuda-mps">
+<h2>MIG with CUDA MPS<a class="headerlink" href="#mig-with-cuda-mps" title="Link to this heading">#</a></h2>
+<p>As described in <a class="reference internal" href="concepts.html#cuda-concurrency"><span class="std std-ref">CUDA Concurrency Mechanisms</span></a>, <a class="reference external" href="https://docs.nvidia.com/deploy/mps/index.html">CUDA Multi-Process Service (MPS)</a>
+enables co-operative multi-process CUDA applications to be processed concurrently on the GPU. MPS and MIG can work together,
+potentially achieving even higher levels of utilization for certain workloads.</p>
+<p>Refer to the MPS documentation to understand the <a class="reference external" href="https://docs.nvidia.com/deploy/mps/index.html#provisioning-sequence">architecture and provisioning sequence</a> for MPS.</p>
+<p>In the following sections, we will walk through an example of running MPS on MIG devices.</p>
+<section id="workflow">
+<h3>Workflow<a class="headerlink" href="#workflow" title="Link to this heading">#</a></h3>
+<p>In summary, the workflow for running with MPS is as follows:</p>
+<ul class="simple">
+<li><p>Configure the desired MIG geometry on the GPU.</p></li>
+<li><p>Setup the <code class="docutils literal notranslate"><span class="pre">CUDA_MPS_PIPE_DIRECTORY</span></code> variable to point to unique directories so that the multiple MPS
+servers and clients can communicate with each other using named pipes and Unix domain sockets.</p></li>
+<li><p>Launch the application by specifying the MIG device using <code class="docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES</span></code>.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The MPS documentation recommends setting up <code class="docutils literal notranslate"><span class="pre">EXCLUSIVE_PROCESS</span></code> mode to ensure that a single MPS server is using
+the GPU. However, this mode is not supported when the GPU is in MIG mode as we use multiple MPS servers (one per
+MIG GPU instance).</p>
+</div>
+</section>
+<section id="configure-gpu-instances">
+<h3>Configure GPU Instances<a class="headerlink" href="#configure-gpu-instances" title="Link to this heading">#</a></h3>
+<p>Follow the steps outlined in the previous sections to configure the desired MIG geometry on the GPU. For this example, we configure the GPU into a 3g.40gb, 3g.40gb geometry:</p>
+<p>Create GPU and compute instances:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>nvidia-smi<span class="w"> </span>mig<span class="w"> </span>-cgi<span class="w"> </span><span class="m">9</span>,9<span class="w"> </span>-C
+<span class="go">Successfully created GPU instance ID  2 on GPU  0 using profile MIG 3g.40gb (ID  9)</span>
+<span class="go">Successfully created compute instance ID  0 on GPU  0 GPU instance ID  2 using profile MIG 3g.40gb (ID  2)</span>
+<span class="go">Successfully created GPU instance ID  1 on GPU  0 using profile MIG 3g.40gb (ID  9)</span>
+<span class="go">Successfully created compute instance ID  0 on GPU  0 GPU instance ID  1 using profile MIG 3g.40gb (ID  2)</span>
+</pre></div>
+</div>
+<p>Verify configuration:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>nvidia-smi
+
+<span class="go">+-----------------------------------------------------------------------------------------+</span>
+<span class="go">| NVIDIA-SMI 580.65.06              Driver Version: 580.65.06      CUDA Version: 13.0     |</span>
+<span class="go">+-----------------------------------------+------------------------+----------------------+</span>
+<span class="go">| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |</span>
+<span class="go">| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |</span>
+<span class="go">|                                         |                        |               MIG M. |</span>
+<span class="go">|=========================================+========================+======================|</span>
+<span class="go">|   0  NVIDIA H100 80GB HBM3          Off |   00000000:42:00.0 Off |                   On |</span>
+<span class="go">| N/A   30C    P0            141W /  700W |      87MiB /  81559MiB |     N/A      Default |</span>
+<span class="go">|                                         |                        |              Enabled |</span>
+<span class="go">+-----------------------------------------+------------------------+----------------------+</span>
+
+<span class="go">+-----------------------------------------------------------------------------------------+</span>
+<span class="go">| MIG devices:                                                                            |</span>
+<span class="go">+------------------+----------------------------------+-----------+-----------------------+</span>
+<span class="go">| GPU  GI  CI  MIG |              Shared Memory-Usage |        Vol|        Shared         |</span>
+<span class="go">|      ID  ID  Dev |                Shared BAR1-Usage | SM     Unc| CE ENC  DEC  OFA  JPG |</span>
+<span class="go">|                  |                                  |        ECC|                       |</span>
+<span class="go">|==================+==================================+===========+=======================|</span>
+<span class="go">|  0    1   0   0  |              44MiB / 40448MiB    | 60      0 |  3   0    3    0    3 |</span>
+<span class="go">|                  |               0MiB / 24740MiB    |           |                       |</span>
+<span class="go">+------------------+----------------------------------+-----------+-----------------------+</span>
+<span class="go">|  0    2   0   1  |              44MiB / 40448MiB    | 60      0 |  3   0    3    0    3 |</span>
+<span class="go">|                  |               0MiB / 24740MiB    |           |                       |</span>
+<span class="go">+------------------+----------------------------------+-----------+-----------------------+</span>
+</pre></div>
+</div>
+</section>
+<section id="set-up-the-mps-control-daemons">
+<h3>Set Up the MPS Control Daemons<a class="headerlink" href="#set-up-the-mps-control-daemons" title="Link to this heading">#</a></h3>
+<p>In this step, we start an MPS control daemon (with admin privileges) and ensure we use a different socket for each daemon:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>export CUDA_MPS_PIPE_DIRECTORY=/tmp/&lt;MIG_UUID&gt;
+mkdir -p $CUDA_MPS_PIPE_DIRECTORY
+
+CUDA_VISIBLE_DEVICES=&lt;MIG_UUID&gt; \
+CUDA_MPS_PIPE_DIRECTORY=/tmp/&lt;MIG_UUID&gt; \
+nvidia-cuda-mps-control -d
+</pre></div>
+</div>
+</section>
+<section id="launch-the-application">
+<h3>Launch the Application<a class="headerlink" href="#launch-the-application" title="Link to this heading">#</a></h3>
+<p>Now we can launch the application by specifying the desired MIG device using <code class="docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>CUDA_VISIBLE_DEVICES=&lt;MIG_UUID&gt; \
+   my-cuda-app
+</pre></div>
+</div>
+</section>
+<section id="a-complete-example">
+<h3>A Complete Example<a class="headerlink" href="#a-complete-example" title="Link to this heading">#</a></h3>
+<p>The following script runs the <strong>BlackScholes</strong> sample on the two MIG devices created on the GPU. It starts a separate MPS control daemon per MIG device and launches the workload on each device.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env bash</span>
+<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+
+<span class="c1"># GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-c08d91cb-e324-655c-71ba-7570956445bc)</span>
+<span class="c1">#   MIG 3g.40gb     Device  0: (UUID: MIG-405bbda1-6b05-535f-9702-f95e8cd170ce)</span>
+<span class="c1">#   MIG 3g.40gb     Device  1: (UUID: MIG-b0a55a70-b1b0-529f-af26-79ccdc267be0)</span>
+
+<span class="nv">MIG_DEVICES</span><span class="o">=(</span>
+<span class="w">   </span><span class="s2">&quot;MIG-405bbda1-6b05-535f-9702-f95e8cd170ce&quot;</span>
+<span class="w">   </span><span class="s2">&quot;MIG-b0a55a70-b1b0-529f-af26-79ccdc267be0&quot;</span>
+<span class="o">)</span>
+
+<span class="k">for</span><span class="w"> </span>mig_device<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">MIG_DEVICES</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="c1"># Set a unique pipe directory and start an MPS control daemon per MIG instance</span>
+<span class="w">  </span><span class="nb">export</span><span class="w"> </span><span class="nv">CUDA_MPS_PIPE_DIRECTORY</span><span class="o">=</span>/tmp/<span class="nv">$mig_device</span>
+<span class="w">  </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CUDA_MPS_PIPE_DIRECTORY</span><span class="s2">&quot;</span>
+<span class="w">  </span>sudo<span class="w"> </span><span class="nv">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="nv">$mig_device</span><span class="w"> </span><span class="se">\</span>
+<span class="w">       </span><span class="nv">CUDA_MPS_PIPE_DIRECTORY</span><span class="o">=</span>/tmp/<span class="nv">$mig_device</span><span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>nvidia-cuda-mps-control<span class="w"> </span>-d
+
+<span class="w">  </span><span class="c1"># Launch the job on the specific MIG device and point to the matching MPS server</span>
+<span class="w">  </span><span class="nv">CUDA_MPS_PIPE_DIRECTORY</span><span class="o">=</span>/tmp/<span class="nv">$mig_device</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="nv">$mig_device</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>./bin/BlackScholes<span class="w"> </span><span class="p">&amp;</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+<p>When the script is running, you should see two MPS servers and the corresponding CUDA programs as MPS clients using <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">+-----------------------------------------------------------------------------------------+</span>
+<span class="go">| Processes:                                                                              |</span>
+<span class="go">|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |</span>
+<span class="go">|        ID   ID                                                               Usage      |</span>
+<span class="go">|=========================================================================================|</span>
+<span class="go">|    0    1    0             3805    M+C   ./bin/BlackScholes                      326MiB |</span>
+<span class="go">|    0    1    0             3809      C   nvidia-cuda-mps-server                   60MiB |</span>
+<span class="go">|    0    2    0             3817    M+C   ./bin/BlackScholes                      326MiB |</span>
+<span class="go">|    0    2    0             3819      C   nvidia-cuda-mps-server                   60MiB |</span>
+<span class="go">+-----------------------------------------------------------------------------------------+</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="running-cuda-applications-as-containers">
+<h2>Running CUDA Applications as Containers<a class="headerlink" href="#running-cuda-applications-as-containers" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://github.com/NVIDIA/nvidia-container-toolkit">NVIDIA Container Toolkit</a> has been enhanced to provide support for MIG devices, allowing users to run GPU containers
+with runtimes such as Docker. This section provides an overview of running Docker containers on A100 with MIG.</p>
+<section id="install-docker">
+<h3>Install Docker<a class="headerlink" href="#install-docker" title="Link to this heading">#</a></h3>
+<p>Many Linux distributions may come with Docker-CE pre-installed. If not, use the Docker installation script to install Docker.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ curl https://get.docker.com | sh \
+    &amp;&amp; sudo systemctl start docker \
+    &amp;&amp; sudo systemctl enable docker
+</pre></div>
+</div>
+</section>
+<section id="install-nvidia-container-toolkit">
+<h3>Install NVIDIA Container Toolkit<a class="headerlink" href="#install-nvidia-container-toolkit" title="Link to this heading">#</a></h3>
+<p>Now install the <a class="reference external" href="https://github.com/NVIDIA/nvidia-container-toolkit">NVIDIA Container Toolkit</a> (previously known
+as nvidia-docker2).</p>
+<p>To get access to the <code class="docutils literal notranslate"><span class="pre">/dev</span> <span class="pre">nvidia</span></code> capabilities, it is recommended to use at least v2.5.0 of nvidia-docker2. Refer to
+the <a class="reference external" href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">Installation Guide</a> for more information.</p>
+<p>For brevity, the installation instructions provided here are for Ubuntu 18.04 LTS. Refer to the <a class="reference external" href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">NVIDIA Container Toolkit</a>
+page for instructions on other Linux distributions.</p>
+<p>Setup the repository and the GPG key:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
+      &amp;&amp; curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+      &amp;&amp; curl -s -L https://nvidia.github.io/libnvidia-container/$distribution/libnvidia-container.list | \
+            sed &#39;s#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g&#39; | \
+            sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+</pre></div>
+</div>
+<p>Install the NVIDIA Container Toolkit packages (and their dependencies):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install -y nvidia-docker2 \
+    &amp;&amp; sudo systemctl restart docker
+</pre></div>
+</div>
+</section>
+<section id="running-containers">
+<span id="id2"></span><h3>Running Containers<a class="headerlink" href="#running-containers" title="Link to this heading">#</a></h3>
+<p>To run containers on specific MIG devices – whether these are GIs or specific underlying CIs, then
+the <code class="docutils literal notranslate"><span class="pre">NVIDIA_VISIBLE_DEVICES</span></code> variable (or the <code class="docutils literal notranslate"><span class="pre">--gpus</span></code> option with Docker 19.03+) can be used.
+<code class="docutils literal notranslate"><span class="pre">NVIDIA_VISIBLE_DEVICES</span></code> supports the following formats to specify MIG devices:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MIG-&lt;GPU-UUID&gt;/&lt;GPU</span> <span class="pre">instance</span> <span class="pre">ID&gt;/&lt;compute</span> <span class="pre">instance</span> <span class="pre">ID&gt;</span></code> when using R450 and R460 drivers or <code class="docutils literal notranslate"><span class="pre">MIG-&lt;UUID&gt;</span></code> starting with R470 drivers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GPUDeviceIndex&gt;:&lt;MIGDeviceIndex&gt;</span></code></p></li>
+</ul>
+<p>If using Docker 19.03, the <code class="docutils literal notranslate"><span class="pre">--gpus</span></code> option can be used to specify MIG devices by using the following format: <code class="docutils literal notranslate"><span class="pre">&quot;device=MIG-device&quot;</span></code>,
+where MIG-device can follow either of the format specified above for <code class="docutils literal notranslate"><span class="pre">NVIDIA_VISIBLE_DEVICES</span></code>.</p>
+<p>The following example shows running <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code> from within a CUDA container using both formats. As can be seen
+in the example, only one MIG device as chosen is visible to the container when using either format.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo docker run --runtime=nvidia \
+    -e NVIDIA_VISIBLE_DEVICES=MIG-c7384736-a75d-5afc-978f-d2f1294409fd \
+    nvidia/cuda nvidia-smi
+
++-----------------------------------------------------------------------------+
+| MIG devices:                                                                |
++------------------+----------------------+-----------+-----------------------+
+| GPU  GI  CI  MIG |         Memory-Usage |        Vol|         Shared        |
+|      ID  ID  Dev |                      | SM     Unc| CE  ENC  DEC  OFA  JPG|
+|                  |                      |        ECC|                       |
+|==================+======================+===========+=======================|
+|  0    1   0   0  |     11MiB / 20224MiB | 42      0 |  3   0    2    0    0 |
++------------------+----------------------+-----------+-----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+
+
+# For Docker versions &lt; 19.03
+$ sudo docker run --runtime=nvidia \
+    -e NVIDIA_VISIBLE_DEVICES=&quot;0:0&quot; \
+    nvidia/cuda nvidia-smi -L
+GPU 0: A100-SXM4-40GB (UUID: GPU-e86cb44c-6756-fd30-cd4a-1e6da3caf9b0)
+  MIG 3g.20gb Device 0: (UUID: MIG-c7384736-a75d-5afc-978f-d2f1294409fd)
+
+
+# For Docker versions &gt;= 19.03
+$ sudo docker run --gpus &#39;&quot;device=0:0&quot;&#39; \
+    nvidia/cuda nvidia-smi -L
+GPU 0: A100-SXM4-40GB (UUID: GPU-e86cb44c-6756-fd30-cd4a-1e6da3caf9b0)
+  MIG 3g.20gb Device 0: (UUID: MIG-c7384736-a75d-5afc-978f-d2f1294409fd)
+</pre></div>
+</div>
+<p>A more complex example is to run a TensorFlow container to do a training run using GPUs on the MNIST dataset. This is shown below:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo docker run --gpus &#39;&quot;device=0:1&quot;&#39; \
+    nvcr.io/nvidia/pytorch:20.11-py3 \
+    /bin/bash -c &#39;cd /opt/pytorch/examples/upstream/mnist &amp;&amp; python main.py&#39;
+
+=============
+== PyTorch ==
+=============
+
+NVIDIA Release 20.11 (build 17345815)
+PyTorch Version 1.8.0a0+17f8c32
+
+Container image Copyright (c) 2020, NVIDIA CORPORATION.  All rights reserved.
+
+Copyright (c) 2014-2020 Facebook Inc.
+Copyright (c) 2011-2014 Idiap Research Institute (Ronan Collobert)
+Copyright (c) 2012-2014 Deepmind Technologies    (Koray Kavukcuoglu)
+Copyright (c) 2011-2012 NEC Laboratories America (Koray Kavukcuoglu)
+Copyright (c) 2011-2013 NYU                      (Clement Farabet)
+Copyright (c) 2006-2010 NEC Laboratories America (Ronan Collobert, Leon Bottou, Iain Melvin, Jason Weston)
+Copyright (c) 2006      Idiap Research Institute (Samy Bengio)
+Copyright (c) 2001-2004 Idiap Research Institute (Ronan Collobert, Samy Bengio, Johnny Mariethoz)
+Copyright (c) 2015      Google Inc.
+Copyright (c) 2015      Yangqing Jia
+Copyright (c) 2013-2016 The Caffe contributors
+All rights reserved.
+
+NVIDIA Deep Learning Profiler (dlprof) Copyright (c) 2020, NVIDIA CORPORATION.  All rights reserved.
+
+Various files include modifications (c) NVIDIA CORPORATION.  All rights reserved.
+NVIDIA modifications are covered by the license terms that apply to the underlying project or file.
+
+NOTE: Legacy NVIDIA Driver detected.  Compatibility mode ENABLED.
+
+9920512it [00:01, 7880654.53it/s]
+32768it [00:00, 129950.31it/s]
+1654784it [00:00, 2353765.88it/s]
+8192it [00:00, 41020.33it/s]
+/opt/conda/lib/python3.6/site-packages/torchvision/datasets/mnist.py:480: UserWarning: The given NumPy array is not writeable, and PyTorch does not support non-writeable tensors. This means you can write to the underlying (supposedly non-writeable) NumPy array using the tensor. You may want to copy the array to protect its data or make it writeable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at  ../torch/csrc/utils/tensor_numpy.cpp:141.)
+  return torch.from_numpy(parsed.astype(m[2], copy=False)).view(*s)
+Downloading http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz to ../data/MNIST/raw/train-images-idx3-ubyte.gz
+Extracting ../data/MNIST/raw/train-images-idx3-ubyte.gz to ../data/MNIST/raw
+Downloading http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz to ../data/MNIST/raw/train-labels-idx1-ubyte.gz
+Extracting ../data/MNIST/raw/train-labels-idx1-ubyte.gz to ../data/MNIST/raw
+Downloading http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz to ../data/MNIST/raw/t10k-images-idx3-ubyte.gz
+Extracting ../data/MNIST/raw/t10k-images-idx3-ubyte.gz to ../data/MNIST/raw
+Downloading http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz to ../data/MNIST/raw/t10k-labels-idx1-ubyte.gz
+Extracting ../data/MNIST/raw/t10k-labels-idx1-ubyte.gz to ../data/MNIST/raw
+Processing...
+Done!
+Train Epoch: 1 [0/60000 (0%)]   Loss: 2.320747
+Train Epoch: 1 [640/60000 (1%)] Loss: 1.278727
+</pre></div>
+</div>
+</section>
+</section>
+<section id="mig-with-kubernetes">
+<span id="id3"></span><h2>MIG with Kubernetes<a class="headerlink" href="#mig-with-kubernetes" title="Link to this heading">#</a></h2>
+<p>MIG support in Kubernetes is available starting with v0.7.0 of the
+<a class="reference external" href="https://github.com/NVIDIA/k8s-device-plugin">NVIDIA Device Plugin for Kubernetes</a>. Visit the
+<a class="reference external" href="https://docs.nvidia.com/datacenter/cloud-native/kubernetes/latest/index.html">documentation</a> on getting started with MIG and Kubernetes.</p>
+</section>
+<section id="mig-with-slurm">
+<h2>MIG with Slurm<a class="headerlink" href="#mig-with-slurm" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://slurm.schedmd.com/">Slurm</a> is a workload manager that is widely used at high performance computing centers such as government labs, universities.</p>
+<p>Starting with 21.08, Slurm supports the usage of MIG devices. Refer to the official <a class="reference external" href="https://slurm.schedmd.com/gres.html#MIG_Management">documentation</a> on getting started.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="supported-mig-profiles.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Supported MIG Profiles</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="device-nodes-and-capabilities.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Device Nodes and Capabilities</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-prerequisites-for-rtx-pro-blackwell-gpus">Additional Prerequisites for RTX PRO Blackwell GPUs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enable-mig-mode">Enable MIG Mode</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-reset-on-hopper-gpus">GPU Reset on Hopper+ GPUs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-reset-on-nvidia-ampere-architecture-gpus">GPU Reset on NVIDIA Ampere Architecture GPUs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#driver-clients">Driver Clients</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#list-gpu-instance-profiles">List GPU Instance Profiles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-gpu-instances">Creating GPU Instances</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instance-geometry">Instance Geometry</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-cuda-applications-on-bare-metal">Running CUDA Applications on Bare-Metal</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-instances">GPU Instances</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-utilization-metrics">GPU Utilization Metrics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-instances">Compute Instances</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#destroying-gpu-instances">Destroying GPU Instances</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monitoring-mig-devices">Monitoring MIG Devices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mig-with-cuda-mps">MIG with CUDA MPS</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-gpu-instances">Configure GPU Instances</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-the-mps-control-daemons">Set Up the MPS Control Daemons</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#launch-the-application">Launch the Application</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-complete-example">A Complete Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-cuda-applications-as-containers">Running CUDA Applications as Containers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-docker">Install Docker</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-nvidia-container-toolkit">Install NVIDIA Container Toolkit</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-containers">Running Containers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mig-with-kubernetes">MIG with Kubernetes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mig-with-slurm">MIG with Slurm</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+ 
+<script type="text/javascript">if (typeof _satellite !== "undefined"){_satellite.pageBottom();}</script>
+ 
+
+  </body>
+</html>

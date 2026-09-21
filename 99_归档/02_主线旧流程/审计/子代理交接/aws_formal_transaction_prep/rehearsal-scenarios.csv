@@ -1,0 +1,4 @@
+"scenario","exit_code","rollback","formal_result"
+"failure_after_3_table_replacements","1","passed","unchanged"
+"failure_after_20_tables_and_4_payloads","1","passed","unchanged"
+"positive_mirror","0","not_used","unchanged"

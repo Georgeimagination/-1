@@ -1,0 +1,19 @@
+{
+    "status":  "passed",
+    "generated_at":  "2026-08-13",
+    "dependencies_total":  8,
+    "upstream_dependencies_satisfied":  7,
+    "bundle_independent_review_dependency_status":  "pending_future_review",
+    "packages":  3,
+    "data_signoff_rows_total":  1072,
+    "mi455x_data_signoff_sha256":  "196863031761221d825309387c563553187b0ee23630002aeaeed57bbbd6084c",
+    "mi350p_data_signoff_sha256":  "74ac69c299f5ce817c03236ef97df4e13f08f2d6724bb1c0178376661be5dad1",
+    "ascend950_data_signoff_sha256":  "0f59aa2fd893473eb1002d44816e16ace6b204259ac94e802b5f00774ea0cbd5",
+    "mi455x_transaction_signoff_sha256":  "f4b27f7c64dde754431872720f270dbccbc975ee39db9487f3403e8c229049ea",
+    "mi350p_transaction_signoff_sha256":  "788beb80ca67c6dbf84a4ef949247bbe161240a028206151fbf0d7189104eaf3",
+    "ascend950_transaction_signoff_sha256":  "b40f064127a7ac2c5e8de9b4728501381974b661373e9cf5c2dd46954dde2394",
+    "upstream_bindings_sha256":  "ac52660a807e67da48479f14bf90e65d596c5727b8c9c49cdbce3baa4e819bdb",
+    "input_dependencies_sha256":  "fdb3a526979757196311489580852483786a7fe1c8e7fd65d6d1ec6ccb66c5e7",
+    "formal_baseline_aggregate":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "formal_writes_performed":  0
+}

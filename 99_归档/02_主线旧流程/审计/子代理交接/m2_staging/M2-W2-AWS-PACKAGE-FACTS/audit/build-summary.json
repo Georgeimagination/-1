@@ -1,0 +1,15 @@
+﻿{
+    "conflicts":  5,
+    "conflict_members":  10,
+    "requirements":  70,
+    "factual_requirements":  50,
+    "not_found_requirements":  20,
+    "search_results":  50,
+    "completeness":  36,
+    "endpoints":  11,
+    "endpoint_updates":  9,
+    "source_updates":  9,
+    "selection_members":  9,
+    "selected_roles":  15,
+    "reverse_removal_rows":  10
+}

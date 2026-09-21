@@ -1,0 +1,374 @@
+{
+  "version": "2026-09-17",
+  "scope": "Published specifications and explicit derived ratios; no benchmark measurements. Unknown is not zero.",
+  "cards": {
+    "a100": "NVIDIA/NVIDIA_A100_SXM4_80GB.md",
+    "h100s": "NVIDIA/NVIDIA_H100_SXM5_80GB.md",
+    "h100p": "NVIDIA/NVIDIA_H100_PCIe_80GB.md",
+    "l4": "NVIDIA/NVIDIA_L4_24GB.md",
+    "l40": "NVIDIA/NVIDIA_L40S_48GB.md",
+    "h100n": "NVIDIA/NVIDIA_H100_NVL_94GB.md",
+    "h200n": "NVIDIA/NVIDIA_H200_NVL_141GB.md",
+    "mi300": "AMD/MI300X.md",
+    "mi325": "AMD/MI325X.md",
+    "mi350p": "AMD/MI350P.md",
+    "mi350x": "AMD/MI350X.md",
+    "mi355": "AMD/MI355X.md",
+    "mi455": "AMD/MI455X.md",
+    "trn1": "AWS/AWS_Trainium1_one_chip_产品详解.md",
+    "inf2": "AWS/AWS_Inferentia2_one_chip_产品详解.md",
+    "trn2": "AWS/AWS_Trainium2_one_chip_产品详解.md",
+    "trn3": "AWS/AWS_Trainium3_one_chip_产品详解.md",
+    "t8t": "Google-TPU/Google_TPU_8t_one_chip_产品详解.md",
+    "t8i": "Google-TPU/Google_TPU_8i_one_chip_产品详解.md",
+    "v5e": "Google-TPU/Google_Cloud_TPU_v5e_one_chip_产品详解.md",
+    "v5p": "Google-TPU/Google_Cloud_TPU_v5p_one_chip_产品详解.md",
+    "v6e": "Google-TPU/Google_Cloud_TPU_v6e_one_chip_产品详解.md",
+    "950pr": "华为昇腾/华为_Ascend950PR.md",
+    "950dt": "华为昇腾/华为_Ascend950DT.md",
+    "910": "华为昇腾/华为_Ascend910.md",
+    "groq": "Groq/Groq_GroqChip_Processor_第一代.md"
+  },
+  "compute": {
+    "aws": {
+      "labels": [
+        "Tensor",
+        "Vector",
+        "Scalar"
+      ],
+      "Trainium1": [
+        23,
+        2.3,
+        2.9
+      ],
+      "Inferentia2": [
+        23,
+        2.3,
+        2.9
+      ],
+      "unit": "TFLOPS/core, FP32",
+      "source": "Trainium1 / Inferentia2 [2] NKI engine table and Tensor Engine; not per-chip advertised peak"
+    },
+    "amd": {
+      "labels": [
+        "CU count",
+        "Matrix cores",
+        "FP16 matrix",
+        "FP16 vector"
+      ],
+      "MI350P": [
+        128,
+        512,
+        1150,
+        72
+      ],
+      "MI350X": [
+        256,
+        1024,
+        2300,
+        144.2
+      ],
+      "source": "MI350P [1] GPU Specifications; MI350X [1] GPU Specifications, rounded product-page FP16 values; ratios derived"
+    }
+  },
+  "numeric": {
+    "labels": [
+      "FP16 / BF16",
+      "FP8 / MXFP8",
+      "FP4 / MXFP4"
+    ],
+    "rows": {
+      "H100 SXM": [
+        989.4,
+        1978.9,
+        null
+      ],
+      "MI350P": [
+        1150,
+        2300,
+        4600
+      ],
+      "Trainium3": [
+        671,
+        2517,
+        2517
+      ]
+    },
+    "source": "H100 SXM [1] Hopper whitepaper pp.39-40; MI350P [1] GPU Specifications; Trainium3 [1] Compute and [3] Tensor Engine. Dense/advertised paths, normalized by own FP16/BF16. H100 FP4 not established in current source."
+  },
+  "sparse": {
+    "labels": [
+      "A100",
+      "H100 SXM",
+      "MI350P"
+    ],
+    "dense": [
+      312,
+      989.4,
+      1150
+    ],
+    "sparse": [
+      624,
+      1978.9,
+      2300
+    ],
+    "source": "A100 [1] p.1; H100 SXM [1] pp.39-40; MI350P [1] GPU Specifications / [7] ISA 2:4 A-matrix constraints; FP16/BF16 peak only, not workload speedup"
+  },
+  "onchip": {
+    "aws": {
+      "labels": [
+        "Trainium1",
+        "Inferentia2",
+        "Trainium2",
+        "Trainium3"
+      ],
+      "SBUF": [
+        24,
+        24,
+        28,
+        32
+      ],
+      "PSUM": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "unit": "MiB/core",
+      "source": "Each article [2] NKI memory hierarchy / compute updates"
+    },
+    "tpu": {
+      "labels": [
+        "TPU 8t",
+        "TPU 8i"
+      ],
+      "Vmem": [
+        128,
+        384
+      ],
+      "unit": "MB/chip",
+      "source": "8t/8i [1] On-Chip SRAM (Vmem), management semantics undisclosed"
+    },
+    "amd": {
+      "labels": [
+        "MI350P",
+        "MI350X"
+      ],
+      "L2_total": [
+        16,
+        32
+      ],
+      "Infinity_Cache": [
+        128,
+        256
+      ],
+      "unit": "MB/GPU",
+      "source": "MI350P [2] p.2 and [4] pp.9-10; MI350X [3] pp.9-10. L2 totals derived: 4/8 XCD times 4MB; separate memories, not added"
+    }
+  },
+  "package": {
+    "labels": [
+      "H100 SXM",
+      "Ascend 910",
+      "MI300X",
+      "MI325X",
+      "MI350P",
+      "MI350X",
+      "MI355X",
+      "MI455X",
+      "950PR",
+      "950DT"
+    ],
+    "compute": [
+      1,
+      1,
+      8,
+      8,
+      4,
+      8,
+      8,
+      8,
+      2,
+      2
+    ],
+    "io": [
+      0,
+      1,
+      4,
+      4,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "fcd": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0
+    ],
+    "dram_modules": [
+      5,
+      4,
+      8,
+      8,
+      null,
+      8,
+      8,
+      12,
+      8,
+      4
+    ],
+    "source": "H100 [1] p.18; Ascend910 [1] pp.25,37; MI300X/325X CDNA3 Fig.2; MI350P [2] p.2; MI350X/355X CDNA4 Figs.1,2; MI455X [4] Figs.3,8; Ascend950 [1] PDF p.12 Fig.3-1. Dummy dies and DRAM layers excluded; no separate IO/FCD category in specified monolithic H100."
+  },
+  "interconnect": {
+    "nvidia": {
+      "labels": [
+        "A100",
+        "H100 PCIe",
+        "H100 SXM",
+        "H100 NVL",
+        "H200 NVL",
+        "B200",
+        "B300"
+      ],
+      "values": [
+        600,
+        600,
+        900,
+        600,
+        900,
+        1800,
+        1800
+      ],
+      "unit": "GB/s, bidirectional endpoint",
+      "source": "A100 [1] p.1; H100PCIe [2] Table6 (homepage900 conflict retained); H100SXM [2] p.2; H100NVL [1] Table6; H200NVL [1] Table4-1; B200 [2] p.8; B300 [3] Table2"
+    },
+    "amd": {
+      "labels": [
+        "MI300X",
+        "MI325X",
+        "MI350X",
+        "MI355X",
+        "MI455X"
+      ],
+      "values": [
+        896,
+        896,
+        1075.2,
+        1075.2,
+        3600
+      ],
+      "source": "MI300X [8] pp.1-2; MI325X [3] Specifications; MI350X/355X [3] p.13; MI455X [4] p.14. 7 GPU links for CDNA3/4; MI455X UALoE protocol differs."
+    },
+    "aws": {
+      "labels": [
+        "Trainium1",
+        "Inferentia2"
+      ],
+      "values": [
+        4,
+        2
+      ],
+      "unit": "NeuronLink-v2 groups/chip",
+      "source": "Both [2] device overview; counts not link bandwidth or network scale"
+    }
+  },
+  "power": {
+    "nvidia": {
+      "labels": [
+        "L4",
+        "L40S",
+        "H100 PCIe",
+        "H100 NVL",
+        "H200 NVL"
+      ],
+      "values": [
+        72,
+        350,
+        350,
+        400,
+        600
+      ],
+      "source": "Each product brief Board Specifications / power section; max board power, applicable cable/sense mode"
+    },
+    "amd": {
+      "labels": [
+        "MI300X",
+        "MI325X",
+        "MI350P",
+        "MI350X",
+        "MI355X"
+      ],
+      "values": [
+        750,
+        1000,
+        600,
+        1000,
+        1400
+      ],
+      "source": "Each [1] Board Specifications; peak/max TBP, MI350P also450W configurable"
+    },
+    "tpu": {
+      "labels": [
+        "v5e",
+        "v5p",
+        "v6e"
+      ],
+      "values": [
+        66,
+        331,
+        153
+      ],
+      "source": "v5e [6], v5p [7], v6e [8], Life Cycle paper Table1, fleet mean excludes host; no matched workload claim"
+    },
+    "groq": {
+      "labels": [
+        "Average*",
+        "TDP",
+        "Maximum"
+      ],
+      "values": [
+        185,
+        215,
+        300
+      ],
+      "source": "Groq [2] v1.7 p.2; average workload unspecified, not an error bar"
+    }
+  },
+  "balance": {
+    "labels": [
+      "FP4 peak*",
+      "HBM capacity",
+      "HBM bandwidth",
+      "On-chip Vmem"
+    ],
+    "TPU 8t": [
+      12.6,
+      216,
+      6528,
+      128
+    ],
+    "TPU 8i": [
+      10.1,
+      288,
+      8601,
+      384
+    ],
+    "units": [
+      "PFLOPS",
+      "GB",
+      "GB/s",
+      "MB"
+    ],
+    "source": "Both TPU8t/8i [1], TPU 8t and TPU 8i at a glance. Conditional on technical deep dive FP4 table; TPU8i launch graphic FP8 label conflicts; dense/sparse and accumulation conditions incomplete. Ratios describe listed resources only, not performance."
+  }
+}

@@ -1,0 +1,7 @@
+﻿run_date=2026-08-13
+exit_code=0
+CANDIDATE-VALIDATOR-BYTES: sha256=db0a62b32c6de8920056e1611bfab42dab0c0a78e46c9414f3e35f4e850f230d; bytes=23742; crlf=2; bare_lf=440; final_newline=False
+WARNING: technical preflight does not include an independent exact-accept signoff
+PASS: field-contract migration technical preflight; 22534 checks executed.
+Expected delta: schema +1 row; fields +1 column/120 values and 2 fact-contract cells; requirements 12 rows/32 cells; validator exact-byte replacement; facts/enums unchanged.
+This read-only result does not authorize migration without independent exact accept and byte-for-byte backup.

@@ -1,0 +1,504 @@
+模块概述 — 寒武纪人工智能计算库版本说明书 文档 (https://sdk.cambricon.com/static/independent/CNNL/1.23.2/releasenote/1.23.2/build/html/cnnl.html)
+citeturn19search0 [wordlim: 200] Crawled: 2.7 years ago; Cambricon CNNL v1.23.z  | x86_64  | MLU300 series，MLU500 series ... Cambricon CNNL v1.14.z  | x86_64  | MLU290，MLU370，MLU590 ...   * cnnlRNNBackwardData、cnnlRNNBackwardWeights、cnnlRNNForwardTraining算子新增支持通过cnnlSetRNNDescriptor_v2接口给cnnlRNNDescriptor_t设置大于0的 `proj_size` 参数值。 ...   * 修复了590硬件上，以下算子1.14.0版本的性能退回问题：cnnlExecFFT、cnnlFloorDivTrunc、cnnlReduce、cnnlAdvancedIndex、cnnlConvolutionBackwardData、cnnlDeconvolution、cnnlCastDataType、cnnlLrnGrad、cnnlCTCLoss、cnnlMatMul_v2、cnnlGru_v2、cnnlSoftplusForward。
+
+# 模块概述¶
+
+Cambricon CNNL（寒武纪人工智能计算库）是一个基于寒武纪MLU并针对深度人工智能网络的计算库。Cambricon CNNL 针对深度人工智能网络应用场景，提供了高度优化的常用算子，同时也为用户提供简洁、高效、通用、灵活并且可扩展的编程接口。
+
+Cambricon CNNL具有以下特点：
+
+>   * Cambricon CNNL基于BANG C语言（寒武纪针对MLU硬件开发的编程语言）实现算子开发。
+> 
+>   * Cambricon CNNL编译依赖寒武纪驱动应用程序接口CNDrv，寒武纪运行时库Cambricon CNRT、寒武纪编译器CNCC、寒武纪汇编器CNAS，运行依赖CNDrv、CNRT。
+> 
+>   * Cambricon CNNL头文件位于 `include` 目录下，Cambricon CNNL库位于 `lib64` 目录下，其中库文件分为动态链接库和静态链接库。
+> 
+>   * Cambricon CNNL提供两组软件包，分别支持远离零点四舍五入（Round half away from zero）和向上四舍五入（Round half up）这两种设备端数值修约模式，用于推理模型的适配。
+# 支持平台说明¶
+
+支持平台说明¶
+Cambricon CNNL 版本  | 支持的CPU架构  | 支持的MLU架构
+--- | --- | ---
+Cambricon CNNL v1.23.z  | x86_64  | MLU300 series，MLU500 series
+aarch64  | 1V
+Cambricon CNNL v1.22.z  | x86_64  | MLU300 series，MLU500 series
+aarch64  | 1V
+Cambricon CNNL v1.21.z  | x86_64  | MLU300 series，MLU500 series
+aarch64  | 1V
+Cambricon CNNL v1.20.z  | x86_64  | MLU300 series，MLU500 series
+aarch64  | CE3226，1V
+Cambricon CNNL v1.19.z  | x86_64  | MLU300 series，MLU500 series
+aarch64  | CE3226，1V
+Cambricon CNNL v1.18.z  | x86_64  | MLU370，MLU590
+aarch64  | CE3226，1V
+Cambricon CNNL v1.17.z  | x86_64  | MLU370，MLU590
+aarch64  | CE3226，1V
+Cambricon CNNL v1.16.z  | x86_64  | MLU370，MLU590
+aarch64  | CE3226，1V
+Cambricon CNNL v1.15.z  | x86_64  | MLU370，MLU590
+aarch64  | CE3226，1V
+Cambricon CNNL v1.14.z  | x86_64  | MLU290，MLU370，MLU590
+aarch64  | CE3226，MLU370
+Cambricon CNNL v1.13.z  | x86_64  | MLU290，MLU370
+aarch64  | CE3226，MLU370
+# v1.23.2¶
+
+## 新增接口或弃用¶
+
+  * 无。
+
+## 特性变更¶
+
+  * 算子cnnlBatchMatMulBCast_v2优化了在TensorStride为0时的broadcast场景内存占用过多情况。
+
+## 修复问题¶
+
+  * 修复了算子cnnlBiasAdd workspace逻辑错误导致的core dump问题。
+
+  * 修复了算子cnnlActivationForward逻辑错误导致的精度问题。
+
+  * 修复了算子cnnlBatchNormBackward_v2输入y和激活模式组合关系的防呆问题。
+
+## 已知遗留问题¶
+
+  * 在链接静态库libcnnl.a时，需要添加编译参数 `--whole-archive` （`-Wl,--whole-archive libcnnl.a -Wl,--no-whole-archive` ），否则cnnlMatMulInference、cnnlConvolutionBackwardData、cnnlQuantizeMatMul算子运行会报错。
+
+  * 算子cnnlConvolutionForward在conv3d模式下，非对称量化存在精度问题。
+
+  * 算子cnnlConvolutionForward在MLU590平台上depthwise模式下，支持的规模范围比之前版本小。
+
+  * 以下算子在MLU590上nan/inf 无法和竞品对齐：
+# v1.23.0¶
+
+## 新增接口或弃用¶
+
+  * 无。
+
+## 特性变更¶
+
+  * 算子cnnlCastDataType支持了CNNL_CAST_INT16_TO_BFLOAT16、CNNL_CAST_INT8_TO_BFLOAT16、CNNL_CAST_UINT8_TO_BFLOAT16、CNNL_CAST_INT64_TO_BFLOAT16、CNNL_CAST_BFLOAT16_TO_INT8、CNNL_CAST_BFLOAT16_TO_UINT8、CNNL_CAST_BFLOAT16_TO_INT16、CNNL_CAST_BFLOAT16_TO_INT32、CNNL_CAST_BFLOAT16_TO_INT64模式。
+
+  * 算子cnnlInterp在INTERP_BILINEAR模式下新增INTERP_COORDINATE_TRANSFORMATION_ALGO1算法支持。
+
+  * 以下算子在MLU500 series上支持Bfloat16数据类型：
+
+cnnlLogicOp、cnnlMatMulEx、cnnlBiasAddBackward、cnnlLinspace、cnnlGroupNormForward、cnnlRepeatInterleave、cnnlIndexAdd、cnnlActivationBackward、cnnlActivationForward所有模式、cnnlGroupNormBackward、cnnlConvolutionBackwardData。
+
+  * 以下算子支持了int64数据类型：
+
+cnnlLogicOp、cnnlArange、cnnlMasked、cnnlOpTensor、cnnlAdvancedIndex、cnnlTransform、cnnlReduce。
+
+  * 算子cnnlLogicOp在int64数据类型下，数值范围不能超过48bit。
+# v1.20.4¶
+
+## 新增接口或弃用¶
+
+  * 无。
+
+## 特性变更¶
+
+  * 无。
+
+## 修复问题¶
+
+  * 修复了cnnlAdvancedIndex在部分规模下存在的功能问题。
+
+  * 修复了cnnlScatter在部分规模下存在的功能问题。
+
+  * 修复了cnnlConvolutionBackwardData在某种特殊模式下存在的精度问题。
+
+## 已知遗留问题¶
+
+  * 在链接静态库libcnnl.a时，需要添加编译参数 `--whole-archive` （`-Wl,--whole-archive libcnnl.a -Wl,--no-whole-archive` ），否则cnnlMatMulInference、cnnlConvolutionBackwardData、cnnlQuantizeMatMul算子运行会报错。
+
+  * 算子cnnlConvolutionForward在conv3d模式下，非对称量化存在精度问题。
+
+  * 算子cnnlMatrixDiag、cnnlComplexAbs在输入存在NaN/Inf时存在精度问题。
+
+  * 算子cnnlConvolutionForward在MLU590平台上depthwise模式下，支持的规模范围比之前版本小。
+
+  * 以下算子在MLU590上nan/inf 无法和竞品对齐：
+
+cnnlActivationForward在cnnlActivationMode_t::CNNL_ACTIVATION_GELU和cnnlActivationMode_t::CNNL_ACTIVATION_TANH模式下、cnnlActivationBackward在cnnlActivationMode_t::CNNL_ACTIVATION_SILU、cnnlActivationMode_t::CNNL_ACTIVATION_LOGSIGMOID、cnnlActivationMode_t::CNNL_ACTIVATION_ELU_V2、cnnlActivationMode_t::CNNL_ACTIVATION_HARDSWISH、ActivationMode_t::CNNL_ACTIVATION_GELU模式下、cnnlAdaptivePoolingForward、cnnlCropAndResize、cnnlCTCLoss、cnnlCumprod、cnnlErf_v2、cnnlGridSampleBackward、cnnlKthValue、cnnlLrn、cnnlLSTMGatesForward、cnnlLSTMGatesBackward、cnnlMedian、cnnlTopKTensor_v3、cnnlBceWithLogits、cnnlPow、cnnlGru_v2、cnnlExecFFT、cnnlQR、cnnlBatchNormBackward_v2、cnnlNms_v2、cnnlLrnGrad、cnnlConvolutionForward、cnnlConvolutionForwardInference、cnnlFocalLossSigmoidForward、cnnlUnique_v2、cnnlBorderAlignForward、cnnlBorderAlignBackward、cnnlInverse、cnnlCummin、cnnlCummax、cnnlCropAndResizeBackwardImage、cnnlLog1p、cnnlPoolingForwardWithIndex、cnnlPoolingIndex、cnnlInstanceNormInference、cnnlDeconvolution、cnnlInterpBackward_v2、cnnlPoolingForward、cnnlPoolingBackward、cnnlMaskZero、cnnlRandGenerateMultinomial_v2、cnnlCustomizedActiveForward_v2、cnnlDeformRoiPoolBackward、cnnlDeformRoiPoolForward、cnnlRMSProp、cnnlSvd、cnnlRNNForwardInference、cnnlGroupNormForward_v2、cnnlLayerNormBackward_v2、cnnlBatchNormForwardTraining_v2、cnnlConvolutionBackwardData、cnnlDeconvolutionInference、cnnlHardtanhBackward、cnnlSoftsignGrad、cnnlUnpoolForward、cnnlUnpoolBackward、cnnlAdaptivePoolingBackward、cnnlApplyAdadelta、cnnlApplyAdaMax、cnnlCarafeBackward、cnnlClip_v2、cnnlFusedOpsExecute、cnnlInstanceNormForward、cnnlInstanceNormBackward、cnnlSparseSoftmaxCrossEntropyWithLogits、cnnlReduce在cnnlReduceOp_t::CNNL_REDUCE_MIN_LAST_INDEX和cnnlReduceOp_t::CNNL_REDUCE_MAX_LAST_INDEX模式下。
+
+  * 算子cnnlMatrixDiag、cnnlComplexAbs在输入存在NaN/Inf时存在精度问题。
+
+  * 算子cnnlConvolutionForward在MLU590平台上depthwise模式下，支持的规模范围比之前版本小。
+
+  * 算子cnnlBatchGatherV2在最低维度特别大，超出12000左右的时候存在功能问题。
+
+  * 以下算子在MLU590上nan/inf 无法和竞品对齐：
+
+cnnlActivationForward在cnnlActivationMode_t::CNNL_ACTIVATION_GELU和cnnlActivationMode_t::CNNL_ACTIVATION_TANH模式下、cnnlActivationBackward在cnnlActivationMode_t::CNNL_ACTIVATION_SILU、cnnlActivationMode_t::CNNL_ACTIVATION_LOGSIGMOID、cnnlActivationMode_t::CNNL_ACTIVATION_ELU_V2、cnnlActivationMode_t::CNNL_ACTIVATION_HARDSWISH、ActivationMode_t::CNNL_ACTIVATION_GELU模式下、cnnlAdaptivePoolingForward、cnnlCropAndResize、cnnlCTCLoss、cnnlCumprod、cnnlErf_v2、cnnlGridSampleBackward、cnnlKthValue、cnnlLrn、cnnlLSTMGatesForward、cnnlLSTMGatesBackward、cnnlMedian、cnnlTopKTensor_v3、cnnlBceWithLogits、cnnlPow、cnnlGru_v2、cnnlExecFFT、cnnlQR、cnnlBatchNormBackward_v2、cnnlNms_v2、cnnlLrnGrad、cnnlConvolutionForward、cnnlConvolutionForwardInference、cnnlFocalLossSigmoidForward、cnnlUnique_v2、cnnlBorderAlignForward、cnnlBorderAlignBackward、cnnlInverse、cnnlCummin、cnnlCummax、cnnlCropAndResizeBackwardImage、cnnlLog1p、cnnlPoolingForwardWithIndex、cnnlPoolingIndex、cnnlInstanceNormInference、cnnlDeconvolution、cnnlInterpBackward_v2、cnnlPoolingForward、cnnlPoolingBackward、cnnlMaskZero、cnnlRandGenerateMultinomial_v2、cnnlCustomizedActiveForward_v2、cnnlDeformRoiPoolBackward、cnnlDeformRoiPoolForward、cnnlRMSProp、cnnlSvd、cnnlRNNForwardInference、cnnlGroupNormForward_v2、cnnlLayerNormBackward_v2、cnnlBatchNormForwardTraining_v2、cnnlConvolutionBackwardData、cnnlDeconvolutionInference、cnnlHardtanhBackward、cnnlSoftsignGrad、cnnlUnpoolForward、cnnlUnpoolBackward、cnnlAdaptivePoolingBackward、cnnlApplyAdadelta、cnnlApplyAdaMax、cnnlCarafeBackward、cnnlClip_v2、cnnlFusedOpsExecute、cnnlInstanceNormForward、cnnlInstanceNormBackward、cnnlSparseSoftmaxCrossEntropyWithLogits、cnnlReduce在cnnlReduceOp_t::CNNL_REDUCE_MIN_LAST_INDEX和cnnlReduceOp_t::CNNL_REDUCE_MAX_LAST_INDEX模式下。
+
+  * cnnlBincount支持了weight tensor的输入。
+
+  * 裁剪工具解除了对CNPerf的版本依赖。
+
+  * cnnlTrigonFunctionMode_t::CNNL_TRIGON_TANH支持高精度模式。
+
+  * cnnlGather解除了 `"The shape of input tensor must be same as index tensor"` 的限制。
+
+  * cnnlScatter解除了 `"The shape of src (if it is a tensor) tensor must be same as index tensor"` 的限制。
+
+  * cnnlTopkTensor和cnnlTopkTensor_v2增加对MLU590的防呆，不能在MLU590上使用这两个接口。
+
+  * cnnlTopkTensor_v3修改对tensor size的防呆，增强了限制，之前对tensor num超过2GB num进行防呆，修改成tensor size超过 `min(INTMAX32, UINT32MAX/sizeof(dtype))` 进行防呆。
+
+  * cnnlApplyAdam和cnnlBceLossBackward修改防呆，增强了限制，之前对tensor num超过2GB num进行防呆，修改成tensor size超过2GB进行防呆。
+
+  * cnnlConvolutionForward在MLU590上新增对tensor num大于2GB的防呆。
+
+  * cnnlCTCLoss增加防呆 `max_input_length` 和 `max_label_length` 必须大于等于0，增加了对MLU590 以下平台不支持large tensor的防呆。
+
+  * cnnlReduce新增在 `cnnlReduceOp_t::CNNL_REDUCE_MAX_LAST_INDEX`、`cnnlReduceOp_t::CNNL_REDUCE_MIN_LAST_INDEX` 模式下超过2G num的防呆。
+
+  * cnnlAddN_v2和cnnlMulN增加了对MLU590以下平台不支持large tensor的防呆。
+
+  * cnnlLogicOp_t::CNNL_LOGIC_OP_NOT新增了不支持tensor和CPU scalar混合输入的防呆。
+
+
+  * 修复了算子cnnlBatchMatMulBCast误报防呆的问题
+
+## 已知遗留问题¶
+
+  * 在链接静态库libcnnl.a时，需要添加编译参数 `--whole-archive` （`-Wl,--whole-archive libcnnl.a -Wl,--no-whole-archive` ），否则cnnlMatMulInference、cnnlConvolutionBackwardData、cnnlQuantizeMatMul算子运行会报错。
+
+  * 算子cnnlMatrixDiag、cnnlComplexAbs在输入存在NaN/Inf时存在精度问题。
+
+  * 算子cnnlConvolutionForward在MLU590平台上depthwise模式下，支持的规模范围比之前版本小一些。
+
+# v1.19.0¶
+
+## 新增接口或弃用¶
+
+  * 新增算子：cnnlPolar、cnnlUniqueConsecutive
+
+## 特性变更¶
+
+  * 算子性能优化：cnnlCTCLoss、cnnlInterp、cnnlCumsum、cnnlMatmul、cnnlConcat、cnnlUnique、cnnlDCNForward、cnnlDCNBackwardData、cnnlScatter。
+
+  * 新增支持BFloat16数据类型的算子：cnnlCast、cnnlConcat、cnnlStridedSlice、cnnlEmbeddingForward、cnnlExpand、cnnlRandomNormal、cnnlFusedDropout、cnnlFill、cnnlMasked、cnnlIndexPut、cnnlPad、cnnlMatmul、cnnlDCNForward、cnnlDCNBackwardData、cnnlReduce、cnnlTransform、cnnlBatchMatMulBCast_v2、cnnlLayerNormForward、cnnlLayerNormBackward。
+
+  * 算子cnnlPow新增支持输入参数为CPU端标量。
+
+  * 算子cnnlCTCLoss新增支持large tensor功能。
+
+  * 算子cnnlSign新增支持复数类型输入。
+
+  * 新增硬件支持MLU570、MLU580。
+
+## 已修复问题¶
+
+  * 修复了算子cnnlUnique部分规模下core dump问题。
+
+  * 修复了算子cnnlConvolutionBackwardData在浮点输入且量化参数无效时的精度问题。
+
+  * 修复了算子cnnlActivationForward在GELU模式下与框架默认行为精度不一致的问题。
+
+  * 修复了算子cnnlNllLossForward在部分规模下core dump的问题。
+
+  * 修复了算子cnnlOpTensor在CE3226上部分规模计算错误的问题。
+
+  * 修复了算子cnnlComplexAbs输入为较大数值时计算错误的问题。
+
+  * 修复了cnnl裁剪工具裁剪失败的问题。
+
+## 已知遗留问题¶
+
+  * 在链接静态库libcnnl.a时，需要添加编译参数 `--whole-archive` （`-Wl,--whole-archive libcnnl.a -Wl,--no-whole-archive` ），否则cnnlMatMulInference、cnnlConvolutionBackwardData、cnnlQuantizeMatMul算子运行会报错。
+
+  * 算子cnnlConvolutionForward在conv3d模式下，非对称量化存在精度问题。
+
+  * 算子cnnlMatrixDiag、cnnlComplexAbs在输入存在NaN/Inf时存在精度问题。
+
+  * 算子cnnlConvolutionForward在MLU590平台上depthwise模式下，支持的规模范围比之前版本小。
+
+
+  * 算子cnnlConvolutionForward在MLU590平台上depthwise模式下，支持的规模范围比之前版本小一些。
+
+# v1.18.0¶
+
+## 新增接口或弃用¶
+
+  * 无。
+
+## 特性变更¶
+
+  * 算子性能优化：cnnlBatchMatmulBCast、cnnlIndexPut。
+
+  * 算子cnnlBatchGatherV2、cnnlTranspose、cnnlAxpby：在MLU590平台上支持tensor num大于2G的特性。
+
+  * 算子cnnlNllLossForward：解除了对 `target_value` 的规模限制、增加对 `index` 为 `-1` 的device侧防呆。
+
+## 已修复问题¶
+
+  * 修复了算子cnnlGatherNd内存泄漏的问题。
+
+  * 修复了算子cnnlPow、cnnlFloorMod计算NaN/Inf测例出错的问题。
+
+  * 修复了算子cnnlReduce在max和min模式下计算NaN/Inf测例出错的问题。
+
+  * 修复了算子cnnlTranspose、cnnlMatMulInference、cnnlConvolutionForward性能下降的问题。
+
+  * 修复了算子cnnlSelectV2在某些规模下计算错误的问题。
+
+  * 修复了算子cnnlOpTensor在非对称数据类型下计算错误的问题。
+
+  * 解除以下算子在MLU590上tensor维度乘积大于2G以及单维度大于2G的限制：cnnlGather、cnnlGatherNd、cnnlGrep、cnnlApplyProximalAdagrad、cnnlIsInf、cnnlAddcmul、cnnlRandomMultinomial、cnnlPow、cnnlAddcdiv。
+
+  * 以下算子新增支持1V平台功能：cnnlSpace2Batch、cnnlDCNForward、cnnlIndexAdd、cnnlThreshold。
+
+  * 对以下接口增加不支持MLU590平台的防呆检查与限制说明：cnnlBatchNormForwardTraining、cnnlBatchNormBackward、cnnlGroupNormForward、cnnlL2Loss、cnnlLayerNormBackward、cnnlTopKTensor、cnnlTopKTensor_v2、cnnlSyncBatchNormStats、cnnlSyncBatchnormBackwardReduce、cnnlMSELoss、cnnlFrozenBatchNormBackward。
+
+  * cnnlStrideBatchMatMul、cnnlBatchMatmulBCast_v2算子参数alpha、beta的计算精度与参数compute_type保持一致。
+
+  * cnnlNumTrue和cnnlWhere算子新增支持输入为uint8_t、int8、int16数据类型。
+
+  * cnnlGroupNormForward_v3算子新增可选saved_mean、saved_rstd输出。
+
+  * cnnlNms_v2算子新增支持confidence为half数据类型、且boxes为float数据类型的组合。
+# v1.16.1¶
+
+## 新增接口或弃用¶
+
+  * 无。
+
+## 特性变更¶
+
+  * 算子cnnlRoialignForward优化了部分规模下性能。
+
+  * 算子cnnlIndexPut在MLU370平台上优化了部分规模下的性能。
+
+  * 算子cnnlRnntLoss优化了部分规模下的性能。
+
+  * 算子cnnlGatherNd在MLU590平台上支持维度乘积大于2G的功能。
+
+## 已修复问题¶
+
+  * 修复了算子cnnlRandGenerateMultinomial在MLU590平台上维度乘积大于2G时的精度问题。
+
+  * 修复了算子cnnlUnsortedSegmentSum性能下降的问题。
+
+  * 修复了算子cnnlDiv在MLU300平台上性能下降的问题。
+
+  * 修复了算子cnnlBiasAddBackward_v2防呆报错问题。
+
+  * 修复了算子cnnlCopy精度异常问题。
+
+  * 修复了算子cnnlIndexPut在所有输入的shape都是1时的逻辑异常问题。
+
+  * 修复了算子cnnlAssignAdd和cnnlAssignSub在手册中对alpha和beta描述缺失的问题。
+
+  * 修复了算子cnnlRnntLoss当logit_lengths包含1时core dump的问题。
+
+  * cnnlDCNForward在NaN和Inf场景下core dump问题。
+
+  * cnnlPointsInBoxes运行大测例发生core dump。
+
+  * cnnlNlllossBackward在target包含负值时的core dump问题。
+
+# v1.15.0¶
+
+## 新增接口或弃用¶
+
+  * 新增cnnlAdaptivePoolingForward_v2接口，支持更完备的功能，可取代cnnlAdaptivePoolingForward接口, cnnlAdaptivePoolingForward接口后续版本将被弃用。
+
+## 特性变更¶
+
+  * 不再支持操作系统Kylin v10。
+
+  * 不再支持硬件MLU290。
+
+  * 新增硬件支持1V，部分算子支持在1V上运行并保证兼容性，如cnnlAddN、cnnlNms等。
+
+  * 新增算子cnnlLogAddExp、cnnlLogAddExp2、cnnlSlogDet、cnnlAngle。
+
+  * 新增以下算子支持large tensor：cnnlAbs、cnnlCast、cnnlCeil、cnnlRound、cnnlDiv、cnnlFilp、cnnlFloorMod、cnnlIsNan、cnnlLog1p、cnnlMaximum、cnnlminimum、cnnlOneHot、cnnlPrelu、cnnlSelect、cnnlcnnlSmoothL1LossForward、cnnlSquare、cnnlThresholdBackward、cnnlThreshold。
+
+  * 算子cnnlConvolutionForward 优化Co=128的情况。
+# v1.14.2¶
+
+## 新增接口或弃用¶
+
+  * 无。
+
+## 特性变更¶
+
+  * 部分规模有性能提升的算子：cnnlConvolutionBackwardFilter、cnnlConvolutionForward。
+
+  * cnnlBatchMatMulBCast_v2支持输入包含0-element。
+
+  * cnnlDCNBackwardData功能支持和mmcv框架一致。
+
+  * cnnlMatMulEx支持TF32模式。
+
+  * cnnlMatMulDescAttribute_t新增CNNL_MATMUL_CAST_MODE，允许用户显式指定量化模式。
+
+## 已修复问题¶
+
+  * 修复了cnnlIm2Col算子在MLU370上的bug。
+
+## 已知遗留问题¶
+
+  * 在链接静态库libcnnl.a时，需要添加编译参数–whole-archive（ `-Wl,--whole-archive libcnnl.a -Wl,--no-whole-archive` ），否则cnnlMatMulInference、cnnlConvolutionBackwardData、cnnlQuantizeMatMul算子运行会报错。
+
+  * cnnlSoftmaxForward_v2算子，当mode为CNNL_COMPUTATION_FAST时，部分规模下性能相比mode为CNNL_COMPUTATION_HIGH_PRECISION时差，将在后续版本进行优化。
+
+  * cnnlNormalize算子在输入数据类型为half情况下有精度较差问题。
+
+  * cnnlRandGenerateTruncatedNormal、cnnlRandGenerateMultinomial_v2、cnnlRandGenerateNormal在MLU590存在偶现的精度越界。
+
+  * cnnlLogicOp算子对NaN计算逻辑错误的问题。
+
+# v1.14.1¶
+
+## 新增接口或弃用¶
+
+  * 新增cnnlUnique_v2接口，支持更优的性能，可取代cnnlUnique接口, cnnlUnique接口后续版本将被弃用。
+
+## 特性变更¶
+
+  * 新增算子cnnlNanToNum。
+
+  * 部分规模有性能提升的算子：cnnlConvolutionBackwardFilter、cnnlInterp_v3、cnnlIndexPut、cnnlGatherNd、cnnlInterpBackward_v2、cnnlUnique_v2。
+
+  * cnnlStrideBatchMatMul新增输入支持lda、ldb、ldc。
+
+  * 在MLU590平台，以下算子扩大了对输入tensor大小的限制，在之前版本，以下算子要求输入输出tensor size总大小小于2G，当前没有这个限制: cnnlexpand。
+
+  * cnnlInterpBackward_v2增加防呆，当输入元素个数小于 \(2 ^{31} -1\) 报错。
+
+  * cnnlGridSampleForward支持CNNL_INTERP_NEAREST模式。
+
+  * cnnlGridSampleBackward支持CNNL_INTERP_NEAREST模式。
+
+## 已修复问题¶
+
+  * 修复了590硬件上，以下算子1.14.0版本的性能退回问题：cnnlExecFFT、cnnlFloorDivTrunc、cnnlReduce、cnnlAdvancedIndex、cnnlConvolutionBackwardData、cnnlDeconvolution、cnnlCastDataType、cnnlLrnGrad、cnnlCTCLoss、cnnlMatMul_v2、cnnlGru_v2、cnnlSoftplusForward。
+
+  * 修复了cnnlBatchMatmul算子在输入维度乘积大于 \(2 ^{31}\) 时出现计算错误的问题。
+
+## 已知遗留问题¶
+
+  * 在链接静态库libcnnl.a时，需要添加编译参数–whole-archive（ `-Wl,--whole-archive libcnnl.a -Wl,--no-whole-archive` ），否则cnnlMatMulInference、cnnlConvolutionBackwardData、cnnlQuantizeMatMul算子运行会报错。
+
+  * cnnlSoftmaxForward_v2算子，当mode为CNNL_COMPUTATION_FAST时，部分规模下性能相比mode为CNNL_COMPUTATION_HIGH_PRECISION时差，将在后续版本进行优化。
+
+  * cnnlNormalize算子在输入数据类型为half情况下有精度较差问题。
+
+  * cnnlIm2Col算子在370上存在已知bug。
+
+  * cnnlRandGenerateTruncatedNormal、cnnlRandGenerateMultinomial_v2、cnnlRandGenerateNormal在590存在偶现的精度越界。
+
+  * cnnlLogicOp算子对NaN计算逻辑错误的问题。
+
+# v1.14.0¶
+
+## 新增接口或弃用¶
+
+  * 新增cnnlEmbeddingBag_v2接口，支持更完备的功能，可取代cnnlEmbeddingBag接口, cnnlEmbeddingBag接口后续版本将被弃用。
+
+## 特性变更¶
+
+  * 新增硬件支持MLU590。
+
+  * 新增算子cnnlCdistForward、cnnlCdistackward。cnnlEmbeddingBagBackward。
+
+  * 部分规模有性能提升的算子：cnnlBatchMatMulBCast、cnnlSelectV2、cnnlMatMul_v2、cnnlConvolutionBackwardDatacnnlScatter、cnnlAdvancedIndex、cnnlConvolutionBackward、cnnlInstanceNormInference、cnnlDeconvolution、cnnlTranpose_v2、cnnlLayerNormBackward_v2、cnnlBatchNormForwardTraining_v2、cnnlScatterRefi、cnnlCycleOp、cnnlConvolutionForward、cnnlMatMulEx、cnnlGather、cnnlSoftmaxForward_v2、cnnlConvolutionBackwardFilter、cnnlOpTensor、cnnlIndexPut、cnnlSoftplusForward、cnnlSoftmaxBackward、cnnlGru_v2、cnnlLayerNormForward、cnnlGridSampleForward、cnnlPrelu、cnnlShuffleChannel。
+
+  * cnnlBitCompute_v2的cnnlBitComputeOp_t 新增CNNL_BLEFT_SHIFT_OP_V2和CNNL_BRIGHT_SHIFT_OP_V2，和pytorch1.9的模式对齐。
+
+  * cnnlBatchMatMulBCast_v2 新增输入支持alpha!=1.0或者和beta!=0.0的情况。
+
+  * 在MLU590平台，以下算子扩大了对输入tensor大小的限制，在之前版本，以下算子要求输入输出tensor size总大小小于2G，当前没有这个限制: cnnlBatchNormForwardTraining_v2、cnnlBatchNormForwardInference、cnnlBatchNormBackward_v2、cnnlScatterRef、cnnlApplyAdaGrad。
+## 已知遗留问题¶
+
+  * CNNL在MLU590平台相比于CNNLv1.13.2存在性能回退。
+
+  * 在链接静态库libcnnl.a时，需要添加编译参数–whole-archive（ `-Wl,--whole-archive libcnnl.a -Wl,--no-whole-archive` ），否则cnnlMatMulInference、cnnlConvolutionBackwardData、cnnlQuantizeMatMul算子运行会报错。
+
+  * cnnlSoftmaxForward_v2算子，当mode为CNNL_COMPUTATION_FAST时，部分规模下性能相比mode为CNNL_COMPUTATION_HIGH_PRECISION时差，将在后续版本进行优化。
+
+  * cnnlBatchMatmul算子在输入维度乘积大于 \(2 ^{31}\) 时出现计算错误的问题。
+
+  * cnnlNormalize算子在输入数据类型为half情况下有精度较差问题。
+
+  * cnnlIm2Col算子在370上存在已知bug。
+
+  * cnnlRandGenerateTruncatedNormal、cnnlRandGenerateMultinomial_v2、cnnlRandGenerateNormal在590存在偶现的精度越界。
+
+  * cnnlLogicOp算子对NaN计算逻辑错误的问题。
+
+
+  * cnnlTri算子支持多维输入。
+
+  * cnnlGatherNd算子支持bool数据类型输入。
+
+  * cnnlPad支持负数Pad，支持INT32、INT16、INT8、BOOL数据类型。
+
+  * cnnlDeconvolution算子输入输出张量支持定点数据类型。
+
+  * cnnlTranspose在bert网络的部分cases性能提升40%~90%，mobileNet网络部分cases，性能提升70%~90%。
+
+  * cnnlTranspose针对大规模四维以上规模进行优化，部分场景下性能提升70%左右。
+
+  * 优化了cnnlConvolutionForward算子在部分规模下的性能。
+
+  * 优化了cnnlConvolutionBackwardData算子在部分规模下的性能。
+
+  * 优化了cnnlMatmul算子在部分规模下的性能，在bert网络场景下部分规模性能提升10%以上。
+
+  * 优化了cnnlDynamicStitch算子Host侧性能，host端性能提升约200%。
+
+  * 优化了cnnlSplit算子性能，在MaskRCNN场景下部分规模性能优化了100倍左右。
+
+  * cnnlPad针对四维Tensor对前三维都补pad的情况下进行了性能优化。
+
+  * cnnlReduce算子中仅仅CNNL_REDUCE_ADD、CNNL_REDUCE_AVG模式支持用户通过设置reduce_desc->tensor_type的数据类型来选择高精度或高性能模式，相比较1.2.x版本高性能模式精度有一定下降。cnnlReduce算子其他模式不支持该功能。
+
+  * 新增下列算子接口供用户选择高精度或高性能模式：
+
+    * cnnlSoftmaxCrossEntropyWithLogits_v2
+
+    * cnnlArange_v2
+
+    * cnnlSetActivationDescriptor_v2
+
+    * cnnlDiv_v2
+
+    * cnnlDivNoNan_v2
+
+    * cnnlFloorDiv_v2
+
+    * cnnlPowR_v2
+
+    * cnnlPowN_v2
+
+    * cnnlExp_v2
+
+    * cnnlLog_v2
+
+    * cnnlSin_v2
+
+    * cnnlCos_v2
+
+    * cnnlSqrt_v2
+
+    * cnnlRsqrt_v2
+
+    * cnnlErf_v2
+
+## 已修复问题¶
+
+无。
+
+## 已知遗留问题¶
+
+  * CNNL该版本x86发布包不支持在MLU220 M.2设备上运行。
+
+  * CNNL该版本aarch64发布包下的samples/cnnl/build.sh不支持交叉编译。
+
+  * CNNL该版本的.a发布件将在后续版本删除，不建议用户使用。
+
+

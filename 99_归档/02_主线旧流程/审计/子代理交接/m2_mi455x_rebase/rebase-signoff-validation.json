@@ -1,0 +1,32 @@
+{
+    "checked_at":  "2026-08-13",
+    "status":  "passed",
+    "signoff_path":  "审计/子代理交接/m2_mi455x_rebase/m2_mi455x_rebase_signoff.csv",
+    "signoff_sha256":  "196863031761221d825309387c563553187b0ee23630002aeaeed57bbbd6084c",
+    "signoff_bytes":  209683,
+    "signoff_rows":  245,
+    "signoff_columns":  25,
+    "unique_signoff_row_ids":  245,
+    "structured_rows":  242,
+    "unique_structured_target_keys":  242,
+    "artifact_rows":  3,
+    "pk_conflicts":  0,
+    "aws_pk_intersections":  0,
+    "target_guard_failures":  0,
+    "aws_target_intersections":  0,
+    "audited_cells":  6125,
+    "changed_cells":  1225,
+    "baseline_rebind_cells":  980,
+    "reviewer_change_cells":  245,
+    "unexpected_change_cells":  0,
+    "formal_baseline_aggregate":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "temporary_merge_validator_checks":  111040,
+    "fresh_merge_status":  "passed",
+    "formal_static_after":  true,
+    "temporary_root_removed":  true,
+    "verdict":  "accept",
+    "reviewer":  "m2_mi455x_rebase",
+    "errors":  [
+
+               ]
+}

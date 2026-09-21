@@ -1,0 +1,20 @@
+source_family_id,source_family,versions_or_snapshots_in_this_staging,endpoint_ids,candidate_role,ingestion_boundary,notes
+SFAM-R1GA100-NVIDIA-TECHNICAL-BLOG,NVIDIA Technical Blog,2020-05-14,R1GA100-WEB-001,selected_candidate,staging_only,One dated mutable HTML observation.
+SFAM-R1GA100-NVIDIA-NEWSROOM-A100-LAUNCH,NVIDIA Newsroom A100 launch,2020-05-14 HTML and PDF mirror,R1GA100-WEB-002;R1GA100-WEB-003,selected_candidate,staging_only,HTML and PDF are paired endpoints for one publication family.
+SFAM-R1GA100-NVIDIA-A100-PCIE-PRODUCT-BRIEF,NVIDIA A100 PCIe Product Brief,PB-10137-001_v03 and PB-10577-001_v03,R1GA100-WEB-004;R1GA100-WEB-005,lead_candidate,staging_only,Payloads retained to verify internal versions; not a preselected source family.
+SFAM-R1GA100-NVIDIA-MIG-USER-GUIDE,NVIDIA MIG User Guide,latest HTML and current supported-GPUs snapshot and Release r580 PDF,R1GA100-WEB-006;R1GA100-WEB-007;R1GA100-WEB-008,selected_candidate,staging_only,Three endpoints are one guide family and do not create independent corroboration.
+SFAM-R1GA100-NVIDIA-VGPU-LIFECYCLE,NVIDIA vGPU software lifecycle,2026-08-03 title and Aug 4 2026 footer,R1GA100-WEB-009,selected_candidate,staging_only,Mutable status page captured as raw HTML.
+SFAM-R1GA100-NVIDIA-AI-ENTERPRISE-INFRA-8-2,NVIDIA AI Enterprise Infra 8.2 support matrix,Infra 8.2,R1GA100-WEB-010,selected_candidate,staging_only,Version named in body while path retains latest.
+SFAM-R1GA100-NVIDIA-AI-ENTERPRISE-VGPU,NVIDIA AI Enterprise Infra vGPU docs,Infra 8.2 feature pages,R1GA100-WEB-011;R1GA100-WEB-012;R1GA100-WEB-013;R1GA100-WEB-014;R1GA100-WEB-015,selected_candidate,staging_only,Feature pages and A100 types page have distinct obligations but belong to one family.
+SFAM-R1GA100-NVIDIA-VGPU-USER-GUIDE,NVIDIA Virtual GPU Software User Guide,Release 20.0-20.2; Jul 31 2026,R1GA100-WEB-016,selected_candidate,staging_only,Fixed PDF with cover release and 360 pages.
+SFAM-R1GA100-NVIDIA-PYTORCH-CONTAINER,NVIDIA PyTorch Container Release Notes,20.06 and 20.07,R1GA100-WEB-017;R1GA100-WEB-018,selected_candidate,staging_only,Two release slices are revisions in one family and not independent corroboration.
+SFAM-R1GA100-NVIDIA-TENSORFLOW-CONTAINER,NVIDIA TensorFlow Container Release Notes,20.06 and 20.07,R1GA100-WEB-019;R1GA100-WEB-020,selected_candidate,staging_only,Two release slices are revisions in one family and not independent corroboration.
+SFAM-R1GA100-NVIDIA-CUDA-RELEASE-NOTES,NVIDIA CUDA Toolkit Release Notes,CUDA 11.0 GA,R1GA100-WEB-021,selected_candidate,staging_only,Archive HTML stores component table and CC8.0 reachability.
+SFAM-R1GA100-NVIDIA-NCCL-RELEASE-NOTES,NVIDIA NCCL Release Notes,2.7.6,R1GA100-WEB-022,selected_candidate,staging_only,Versioned archived HTML.
+SFAM-R1GA100-NVIDIA-CUDNN-RELEASE-NOTES,NVIDIA cuDNN Release Notes,8.x history in cuDNN 8.6.0 archive,R1GA100-WEB-023,selected_candidate,staging_only,Archive release and historical entry must remain distinguished during formal source-version modelling.
+SFAM-R1GA100-NVIDIA-CUSPARSELT-GUIDE,NVIDIA cuSPARSELt Guide,0.0.1,R1GA100-WEB-024,selected_candidate,staging_only,CUDA archive URL and document title together identify the retained version.
+SFAM-R1GA100-NVIDIA-TENSORRT-RELEASE-NOTES,NVIDIA TensorRT Release Notes,8.6.1 archive including 7.1.3 history,R1GA100-WEB-025,selected_candidate,staging_only,Redirected final host is recorded in snapshot manifest.
+SFAM-R1GA100-NVIDIA-TENSORRT-SUPPORT-MATRIX,NVIDIA TensorRT Support Matrix,8.6.1,R1GA100-WEB-026,selected_candidate,staging_only,Separate work family from release notes and Developer Guide.
+SFAM-R1GA100-NVIDIA-TENSORRT-DEVELOPER-GUIDE,NVIDIA TensorRT Developer Guide,8.6.1,R1GA100-WEB-027,selected_candidate,staging_only,Separate work family from release notes and Support Matrix.
+SFAM-R1GA100-REJECTED-DGX-PRICE,NVIDIA DGX A100 launch,2020-05-14,R1GA100-REJECT-001,rejected_candidate,not_captured,No payload by design.
+SFAM-R1GA100-REJECTED-FORUM-EOL,NVIDIA Developer Forum,2023,R1GA100-REJECT-002,rejected_candidate,not_captured,No payload by design.

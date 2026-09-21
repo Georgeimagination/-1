@@ -1,0 +1,2 @@
+"selection_run_id","scope_kind","scope_id","cutoff_date","algorithm_version","created_date","reviewer","status","review_status","notes"
+"SELRUN-M1-PILOTS-20260812","custom","M1-H100-TRAINIUM2-MLU590","2026-08-12","reverse-removal-v1","2026-08-12","root","superseded","reviewed","Trainium2 S10 历史扩写、S06 主体错挂与 EFA 字段语义在 2026-08-13 修复后，本运行被 SELRUN-M1-PILOTS-TRN2-CORRECTED-20260813 取代；保留为历史审计记录。"

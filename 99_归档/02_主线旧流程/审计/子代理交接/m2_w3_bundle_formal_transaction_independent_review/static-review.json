@@ -1,0 +1,23 @@
+{
+    "status":  "passed",
+    "generated_at":  "2026-08-13",
+    "checks":  6025,
+    "prep_manifest_sha256":  "efdb763a24c0e97fd483735bba5d68dd01f0768553f963988436efa933ebbaba",
+    "prep_package_aggregate":  "958e1b5106b6c42ae116fe643b3b8ec63a190cc20951654380d86c45a2ad332f",
+    "prep_manifest_rows":  75,
+    "prep_files_read":  77,
+    "authorized_pk_rows":  1057,
+    "payload_files":  15,
+    "affected_tables":  20,
+    "guard_rows":  11,
+    "formal_preaggregate":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "candidate_postaggregate":  "5f62191bfc737535802cd6e0524b1fdf7a742ca36300db11b5a9233d4540052a",
+    "candidate_validator_checks":  125619,
+    "upstream_data_signoffs":  3,
+    "upstream_transaction_signoffs":  3,
+    "prep_journals_verified":  3,
+    "prep_negative_gates_verified":  12,
+    "formal_payload_targets_present":  0,
+    "formal_temp_lock_artifacts":  0,
+    "formal_writes_performed":  0
+}

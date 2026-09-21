@@ -1,0 +1,7 @@
+﻿"component_id","owner_object_id","parent_component_id","component_domain","component_type","canonical_label","review_status","notes"
+"COMP-M2W3-HUAWEI-ASC950-DIE-AI-PEAK","OBJ-HUAWEI-ASCEND-950-DIE","","compute","other_fixed_function","Ascend 950 vendor-labeled low-precision compute path","draft","Exact object scope; no card or system aggregate."
+"COMP-M2W3-HUAWEI-ASC950-DIE-VECTOR","OBJ-HUAWEI-ASCEND-950-DIE","","compute","vector","Ascend 950 vector path","draft","Exact object scope; no card or system aggregate."
+"COMP-M2W3-HUAWEI-ASC950-DIE-MEMACCESS","OBJ-HUAWEI-ASCEND-950-DIE","","data_movement","load_store","Ascend 950 memory access path","draft","Exact object scope; no card or system aggregate."
+"COMP-M2W3-HUAWEI-ASC950PR-VENDOR-PEAK","OBJ-HUAWEI-ASCEND-950PR","","compute","other_fixed_function","Ascend 950PR unresolved maximum path","draft","Exact object scope; no card or system aggregate."
+"COMP-M2W3-HUAWEI-ASC950PR-HIBL1","OBJ-HUAWEI-ASCEND-950PR","","memory","memory_level","Ascend 950PR HiBL 1.0 HBM","draft","Exact object scope; no card or system aggregate."
+"COMP-M2W3-HUAWEI-ASC950DT-HIZQ2","OBJ-HUAWEI-ASCEND-950DT","","memory","memory_level","Ascend 950DT HiZQ 2.0 HBM","draft","Exact object scope; no card or system aggregate."

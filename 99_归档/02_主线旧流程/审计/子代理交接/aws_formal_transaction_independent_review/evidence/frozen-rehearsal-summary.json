@@ -1,0 +1,13 @@
+{
+    "status":  "PASS",
+    "checks":  352,
+    "scenarios":  3,
+    "positive_authorized_writes":  477,
+    "positive_no_write_guards":  9,
+    "positive_validator_checks":  106160,
+    "rollback_table_failure":  "passed",
+    "rollback_payload_failure":  "passed",
+    "formal_tables_unchanged":  32,
+    "formal_payload_targets_created":  0,
+    "temporary_root_removed":  true
+}

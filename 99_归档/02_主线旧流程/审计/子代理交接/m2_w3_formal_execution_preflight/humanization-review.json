@@ -1,0 +1,27 @@
+{
+    "status":  "passed",
+    "generated_at":  "2026-08-13",
+    "document":  "report.md",
+    "scene":  "docs",
+    "tier":  "Tier 3 or below",
+    "rewrite_level":  "minimal",
+    "scope":  "structural",
+    "report_humanizer":  {
+                             "exit_code":  1,
+                             "findings":  4,
+                             "disposition":  "protected exact local project paths in the authorized-but-not-executed formal command; no prose change"
+                         },
+    "shuorenhua":  {
+                       "protected_spans_checked":  true,
+                       "numbers_hashes_paths_commands_and_statuses_preserved":  true,
+                       "headings_checked":  true,
+                       "first_paragraphs_checked":  true,
+                       "transitions_checked":  true,
+                       "ending_checked":  true,
+                       "template_prose_remaining":  false,
+                       "fidelity_issues":  0,
+                       "manual_changes_required":  0
+                   },
+    "remaining_risk":  "No human style sample was supplied. The document remains deliberately formal and operational; exact commands, hashes, paths, authorization scope, readiness state, and failure classes are protected.",
+    "document_state":  "accept_ready_for_formal_execution_true_after_explicit_authorization"
+}

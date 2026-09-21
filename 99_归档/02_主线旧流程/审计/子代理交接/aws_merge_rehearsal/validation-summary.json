@@ -1,0 +1,20 @@
+{
+    "status":  "PASS",
+    "rehearsal_checks":  370,
+    "merge_checks":  25451,
+    "authorized_writes":  478,
+    "no_write_guards":  8,
+    "old_signoff_sha_rejection_exit":  1,
+    "negative_existing_target_exit":  1,
+    "positive_current_rebase_exit":  0,
+    "formal_validator_exit":  0,
+    "formal_validator_checks":  101311,
+    "current_post_google_aggregate":  "97ebb17a2518e3a43b18a382dcfc879c1f5e2b08118a6149c8fa984e65017453",
+    "signed_pre_google_aggregate":  "0b4c6106bde7e2a62b1ffd6a0df7246ded62177d941c7fb9303a2cbac62f92bf",
+    "google_changed_tables":  3,
+    "google_changed_primary_keys":  8,
+    "aws_google_write_set_conflicts":  0,
+    "resign_candidate_rows":  486,
+    "current_formal_tables_unchanged":  32,
+    "temporary_root_removed":  true
+}

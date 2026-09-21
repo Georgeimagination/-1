@@ -1,0 +1,7 @@
+"capability_id","owner_object_id","component_id","capability_type","canonical_label","review_status","notes"
+"CAP-NVIDIA-H100-TMA","OBJ-NVIDIA-H100-SXM5-80GB","COMP-NVIDIA-H100-TMA","other","Tensor Memory Accelerator","draft","Asynchronous 1D-5D tensor movement; not attention-specific and not evidence of general Top-K or MoE routing."
+"CAP-NVIDIA-H100-DSM","OBJ-NVIDIA-H100-SXM5-80GB","","other","Distributed Shared Memory","draft","Thread blocks in a cluster can load, store and perform atomics on distributed shared memory."
+"CAP-NVIDIA-H100-DPX","OBJ-NVIDIA-H100-SXM5-80GB","","other","DPX fused instructions","draft","Dynamic-programming fused instructions; vendor material does not expose a separately countable DPX core."
+"CAP-NVIDIA-H100-TRANSFORMER-ENGINE","OBJ-NVIDIA-H100-SXM5-80GB","COMP-NVIDIA-H100-TENSOR-CORE","quantize","Transformer Engine","draft","Software plus custom Hopper Tensor Core technology chooses FP8 or 16-bit computation and applies scaling/recasting."
+"CAP-NVIDIA-H100-MOE-ROUTING","OBJ-NVIDIA-H100-SXM5-80GB","","moe_route","Dedicated MoE routing","draft","No dedicated module was found in the selected first-party sources; absence is tracked as not_found rather than false."
+"CAP-NVIDIA-H100-TOPK","OBJ-NVIDIA-H100-SXM5-80GB","","top_k","General Top-K acceleration","draft","No general dedicated Top-K module was found in the selected first-party sources; TMA reductions and DPX are not substitutes."

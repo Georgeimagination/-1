@@ -1,0 +1,736 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Concepts &#8212; NVIDIA Multi-Instance GPU User Guide</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=767de534" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+
+    <script rel="preload" src="_static/modal-table.js"></script>
+    <script src="_static/documentation_options.js?v=92534b85"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scrollspy-patch.js?v=edc4054a"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=65e89d2a"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'concepts';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '610';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            true;
+        </script>
+    <script src="_static/version-patch.js?v=3e13fdd2"></script>
+
+    <link rel="icon" href="_static/favicon.ico"/>
+
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Deployment Considerations" href="deployment-considerations.html" />
+    <link rel="prev" title="Virtualization" href="virtualization.html" />
+
+ 
+<script src="//assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
+ 
+
+  </head>
+
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA Multi-Instance GPU User Guide - Home"/>
+    <img src="_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="NVIDIA Multi-Instance GPU User Guide - Home"/>
+  
+  
+    <p class="title logo__title">NVIDIA Multi-Instance GPU User Guide</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA Multi-Instance GPU User Guide - Home"/>
+    <img src="_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="NVIDIA Multi-Instance GPU User Guide - Home"/>
+  
+  
+    <p class="title logo__title">NVIDIA Multi-Instance GPU User Guide</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supported-gpus.html">Supported GPUs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supported-configurations.html">Supported Configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtualization.html">Virtualization</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment-considerations.html">Deployment Considerations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mig-device-names.html">MIG Device Names</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supported-mig-profiles.html">Supported MIG Profiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started-with-mig.html">Getting Started with MIG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="device-nodes-and-capabilities.html">Device Nodes and Capabilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notices.html">Notices</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Concepts</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="concepts">
+<h1>Concepts<a class="headerlink" href="#concepts" title="Link to this heading">#</a></h1>
+<section id="terminology">
+<h2>Terminology<a class="headerlink" href="#terminology" title="Link to this heading">#</a></h2>
+<p>This section introduces some terminology used to describe the concepts behind MIG.</p>
+<p><strong>Streaming Multiprocessor</strong></p>
+<p>A streaming multiprocessor (SM) executes compute instructions on the GPU.</p>
+<p><strong>GPU Context</strong></p>
+<p>A GPU context is analogous to a CPU process. It encapsulates all the resources necessary to execute operations on the GPU,
+including a distinct address space, memory allocations, etc. A GPU context has the following properties:</p>
+<ul class="simple">
+<li><p>Fault isolation</p></li>
+<li><p>Individually scheduled</p></li>
+<li><p>Distinct address space</p></li>
+</ul>
+<p><strong>GPU Engine</strong></p>
+<p>A GPU engine is what executes work on the GPU. The most commonly used engine is the Compute/Graphics engine that executes
+the compute instructions. Other engines include the copy engine (CE) that is responsible for performing DMAs, NVDEC for
+video decoding, NVENC for encoding, etc. Each engine can be scheduled independently and execute work for different GPU contexts.</p>
+<p><strong>GPU Memory Slice</strong></p>
+<p>A GPU memory slice is the smallest fraction of the GPU’s memory, including the corresponding memory controllers and cache.
+A GPU memory slice is roughly one eighth of the total GPU memory resources, including both capacity and bandwidth.</p>
+<p><strong>GPU SM Slice</strong></p>
+<p>A GPU SM slice is the smallest fraction of the SMs on the GPU. A GPU SM slice is roughly one seventh of the total number
+of SMs available in the GPU when configured in MIG mode.</p>
+<p><strong>GPU Slice</strong></p>
+<p>A GPU slice is the smallest fraction of the GPU that combines a single GPU memory slice and a single GPU SM slice.</p>
+<p><strong>GPU Instance</strong></p>
+<p>A GPU Instance (GI) is a combination of GPU slices and GPU engines (DMAs, NVDECs, and so on). Anything within a GPU instance
+always shares all the GPU memory slices and other GPU engines, but it’s SM slices can be further subdivided into compute
+instances (CI). A GPU instance provides memory QoS. Each GPU slice includes dedicated GPU memory resources which limit
+both the available capacity and bandwidth, and provide memory QoS. Each GPU memory slice gets 1/8 of the total GPU memory
+resources and each GPU SM slice gets 1/7 of the total number of SMs.</p>
+<p><strong>Compute Instance</strong></p>
+<p>A GPU instance can be subdivided into multiple compute instances. A Compute Instance (CI) contains a subset of the parent
+GPU instance’s SM slices and other GPU engines (DMAs, NVDECs, etc.). The CIs share memory and engines.</p>
+</section>
+<section id="partitioning">
+<span id="id1"></span><h2>Partitioning<a class="headerlink" href="#partitioning" title="Link to this heading">#</a></h2>
+<p>Using the concepts introduced above, this section provides an overview of how the user can create various partitions on
+the GPU. For illustration purposes, the document will use the A100-40GB as an example, but the process is similar for
+other GPUs that support MIG.</p>
+<p><strong>GPU Instance</strong></p>
+<p>Partitioning of the GPU happens using memory slices, so the A100-40GB GPU can be thought of having 8x5GB memory slices
+and 7 SM slices as shown in the diagram below.</p>
+<figure class="align-center" id="mig-partitioning-ex1">
+<a class="reference internal image-reference" href="_images/mig-partitioning-ex1.png"><img alt="Available Slices on A100" src="_images/mig-partitioning-ex1.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Figure 2 </span><span class="caption-text">Available Slices on A100</span><a class="headerlink" href="#mig-partitioning-ex1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>As explained above, then to create a GPU Instance (GI) requires combining some number of memory slices with some number of
+compute slices. In the diagram below, a 5GB memory slice is combined with 1 compute slice to create a <code class="docutils literal notranslate"><span class="pre">1g.5gb</span></code> GI profile:</p>
+<figure class="align-center" id="mig-partitioning-ex2">
+<a class="reference internal image-reference" href="_images/mig-partitioning-ex2.png"><img alt="Combining 5GB Memory and One Compute Slice" src="_images/mig-partitioning-ex2.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Figure 3 </span><span class="caption-text">Combining 5GB Memory and One Compute Slice</span><a class="headerlink" href="#mig-partitioning-ex2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Similarly, 4x5GB memory slices can be combined with 4x1 compute slices to create the <code class="docutils literal notranslate"><span class="pre">4g.5gb</span></code> GI profile:</p>
+<figure class="align-center" id="mig-partitioning-ex3">
+<a class="reference internal image-reference" href="_images/mig-partitioning-ex3.png"><img alt="Combining 4x5GB Memory and 4x1 Compute Slices" src="_images/mig-partitioning-ex3.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Figure 4 </span><span class="caption-text">Combining 4x5GB Memory and 4x1 Compute Slices</span><a class="headerlink" href="#mig-partitioning-ex3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p><strong>Compute Instance</strong></p>
+<p>The compute slices of a GPU Instance can be further subdivided into multiple Compute Instances (CI), with the CIs
+sharing the engines and memory of the parent GI, but each CI has dedicated SM resources.</p>
+<p>Using the same <code class="docutils literal notranslate"><span class="pre">4g.20gb</span></code> example above, a CI may be created to consume only the first compute slice as shown below:</p>
+<figure class="align-center" id="mig-partitioning-ex4">
+<a class="reference internal image-reference" href="_images/mig-partitioning-ex4.png"><img alt="Combining Memory and First Compute Slice" src="_images/mig-partitioning-ex4.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Figure 5 </span><span class="caption-text">Combining Memory and First Compute Slice</span><a class="headerlink" href="#mig-partitioning-ex4" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In this case, four different CIs can be created by choosing any of the compute slices. Two compute slices can also
+be combined together to create a <code class="docutils literal notranslate"><span class="pre">2c.4g.20gb</span></code> profile:</p>
+<figure class="align-center" id="mig-partitioning-ex5">
+<a class="reference internal image-reference" href="_images/mig-partitioning-ex5.png"><img alt="Combining Memory and Two Compute Slices" src="_images/mig-partitioning-ex5.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Figure 6 </span><span class="caption-text">Combining Memory and Two Compute Slices</span><a class="headerlink" href="#mig-partitioning-ex5" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In this example, 3 compute slices can also be combined to create a <code class="docutils literal notranslate"><span class="pre">3c.4g.20gb</span></code> profile or all 4 can be combined to
+create a <code class="docutils literal notranslate"><span class="pre">4c.4g.20gb</span></code> profile. When all 4 compute slices are combined, the profile is simply referred to as the <code class="docutils literal notranslate"><span class="pre">4g.20gb</span></code> profile.</p>
+<p>Refer to the sections on the <a class="reference internal" href="mig-device-names.html#mig-device-names"><span class="std std-ref">canonical naming scheme</span></a> and the <a class="reference internal" href="mig-device-names.html#cuda-device-enumeration"><span class="std std-ref">CUDA device terminology</span></a>.</p>
+<p><strong>Profile Placement</strong></p>
+<p>The number of slices that a GI can be created with is not arbitrary. The NVIDIA driver APIs provide a number of
+“GPU Instance Profiles” and users can create GIs by specifying one of these profiles.</p>
+<p>On a given GPU, multiple GIs can be created from a mix and match of these profiles, so long as enough slices are
+available to satisfy the request.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The table below shows the profile names on the A100-SXM4-40GB product. For A100-SXM4-80GB, the profile names will
+change according to the memory proportion - for example, <code class="docutils literal notranslate"><span class="pre">1g.10gb</span></code>, <code class="docutils literal notranslate"><span class="pre">2g.20gb</span></code>, <code class="docutils literal notranslate"><span class="pre">3g.40gb</span></code>, <code class="docutils literal notranslate"><span class="pre">4g.40gb</span></code>, <code class="docutils literal notranslate"><span class="pre">7g.80gb</span></code> respectively.</p>
+</div>
+<p>For a list of all supported combinations of profiles on MIG-enabled GPUs, refer to the section on <a class="reference internal" href="mig-device-names.html#mig-device-names"><span class="std std-ref">supported profiles</span></a>.</p>
+<div class="pst-scrollable-table-container"><table class="table-no-stripes table" id="id2">
+<caption><span class="caption-number">Table 2 </span><span class="caption-text">GPU Instance Profiles on A100</span><a class="headerlink" href="#id2" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Profile Name</p></th>
+<th class="head"><p>Fraction of Memory</p></th>
+<th class="head"><p>Fraction of SMs</p></th>
+<th class="head"><p>Hardware Units</p></th>
+<th class="head"><p>L2 Cache Size</p></th>
+<th class="head"><p>Copy Engines</p></th>
+<th class="head"><p>Number of Instances Available</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MIG 1g.5gb</p></td>
+<td><p>1/8</p></td>
+<td><p>1/7</p></td>
+<td><p>0 NVDECs /0 JPEG /0 OFA</p></td>
+<td><p>1/8</p></td>
+<td><p>1</p></td>
+<td><p>7</p></td>
+</tr>
+<tr class="row-odd"><td><p>MIG 1g.5gb+me</p></td>
+<td><p>1/8</p></td>
+<td><p>1/7</p></td>
+<td><p>1 NVDEC /1 JPEG /1 OFA</p></td>
+<td><p>1/8</p></td>
+<td><p>1</p></td>
+<td><p>1 (A single 1g profile can include media extensions)</p></td>
+</tr>
+<tr class="row-even"><td><p>MIG 1g.10gb</p></td>
+<td><p>1/8</p></td>
+<td><p>1/7</p></td>
+<td><p>1 NVDECs /0 JPEG /0 OFA</p></td>
+<td><p>1/8</p></td>
+<td><p>1</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-odd"><td><p>MIG 2g.10gb</p></td>
+<td><p>2/8</p></td>
+<td><p>2/7</p></td>
+<td><p>1 NVDECs /0 JPEG /0 OFA</p></td>
+<td><p>2/8</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-even"><td><p>MIG 3g.20gb</p></td>
+<td><p>4/8</p></td>
+<td><p>3/7</p></td>
+<td><p>2 NVDECs /0 JPEG /0 OFA</p></td>
+<td><p>4/8</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>MIG 4g.20gb</p></td>
+<td><p>4/8</p></td>
+<td><p>4/7</p></td>
+<td><p>2 NVDECs /0 JPEG /0 OFA</p></td>
+<td><p>4/8</p></td>
+<td><p>4</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>MIG 7g.40gb</p></td>
+<td><p>Full</p></td>
+<td><p>7/7</p></td>
+<td><p>5 NVDECs /1 JPEG /1 OFA</p></td>
+<td><p>Full</p></td>
+<td><p>7</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The diagram below shows a pictorial representation of how to build all valid combinations of GPU instances.</p>
+<figure class="align-center" id="mig-partitioning-ex6">
+<a class="reference internal image-reference" href="_images/mig-partitioning-ex6.png"><img alt="MIG Profiles on A100" src="_images/mig-partitioning-ex6.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Figure 7 </span><span class="caption-text">MIG Profiles on A100</span><a class="headerlink" href="#mig-partitioning-ex6" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In this diagram, a valid combination can be built by starting with an instance profile on the left and combining it
+with other instance profiles as you move to the right, such that no two profiles overlap vertically. For a list of all
+supported combinations and placements of profiles on A100 and A30, refer to the section on <a class="reference internal" href="mig-device-names.html#mig-device-names"><span class="std std-ref">supported profiles</span></a>.</p>
+<p>Note that prior to NVIDIA driver release R510, the combination of a (4 memory, 4 compute) and a (4 memory, 3 compute)
+profile was not supported. This restriction no longer applies on newer drivers.</p>
+<figure class="align-center" id="mig-partitioning-ex7">
+<a class="reference internal image-reference" href="_images/mig-partitioning-ex7.png"><img alt="Profile Placements on A100" src="_images/mig-partitioning-ex7.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Figure 8 </span><span class="caption-text">Profile Placements on A100</span><a class="headerlink" href="#mig-partitioning-ex7" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Note that the diagram represents the physical layout of where the GPU Instances will exist once they are instantiated
+on the GPU. As GPU Instances are created and destroyed at different locations, fragmentation can occur, and the physical
+position of one GPU Instance will play a role in which other GPU Instances can be instantiated next to it.</p>
+</section>
+<section id="cuda-concurrency-mechanisms">
+<span id="cuda-concurrency"></span><h2>CUDA Concurrency Mechanisms<a class="headerlink" href="#cuda-concurrency-mechanisms" title="Link to this heading">#</a></h2>
+<p>MIG has been designed to be largely transparent to CUDA applications - so that the CUDA programming model remains unchanged
+to minimize programming effort. CUDA already exposes multiple technologies for running work in parallel on the GPU and
+it is worthwhile showcasing how these technologies compare to MIG. Note that streams and MPS are part of the CUDA programming
+model and thus work when used with GPU Instances.</p>
+<p>CUDA Streams are a CUDA Programming model feature where, in a CUDA application, different work can be submitted to independent
+queues and be processed independently by the GPU. CUDA streams can only be used within a single process and don’t offer much
+isolation - the address space is shared, the SMs are shared, the GPU memory bandwidth, caches and capacity are shared. And
+lastly any errors affect all the streams and the whole process.</p>
+<p>MPS is the CUDA Multi-Process service. It allows co-operative multi process applications to share compute resources on the
+GPU. It’s commonly used by MPI jobs that cooperate, but it has also been used for sharing the GPU resources among unrelated
+applications, while accepting the challenges that such a solution brings. MPS currently does not offer error isolation between
+clients and while streaming multiprocessors used by each MPS client can be optionally limited to a percentage of all SMs,
+the scheduling hardware is still shared. Memory bandwidth, caches and capacity are all shared between MPS clients.</p>
+<p>Lastly, MIG is the new form of concurrency offered by NVIDIA GPUs while addressing some of the limitations with the other
+CUDA technologies for running parallel work.</p>
+<div class="pst-scrollable-table-container"><table class="table-no-stripes table" id="id3">
+<caption><span class="caption-number">Table 3 </span><span class="caption-text">CUDA Concurrency Mechanisms</span><a class="headerlink" href="#id3" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>Streams</p></th>
+<th class="head"><p>MPS</p></th>
+<th class="head"><p>MIG</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Partition Type</p></td>
+<td><p>Single Process</p></td>
+<td><p>Logical</p></td>
+<td><p>Physical</p></td>
+</tr>
+<tr class="row-odd"><td><p>Max Partitions</p></td>
+<td><p>Unlimited</p></td>
+<td><p>48</p></td>
+<td><p>7</p></td>
+</tr>
+<tr class="row-even"><td><p>SM Performance Isolation</p></td>
+<td><p>No</p></td>
+<td><p>Yes (by percentage, not partitioning)</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Memory Protection</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Memory Bandwidth QoS</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Error Isolation</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Cross-Partition Interop</p></td>
+<td><p>Always</p></td>
+<td><p>IPC</p></td>
+<td><p>Limited IPC</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reconfigure</p></td>
+<td><p>Dynamic</p></td>
+<td><p>Process Launch</p></td>
+<td><p>When Idle</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="virtualization.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Virtualization</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="deployment-considerations.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Deployment Considerations</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#terminology">Terminology</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partitioning">Partitioning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cuda-concurrency-mechanisms">CUDA Concurrency Mechanisms</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+ 
+<script type="text/javascript">if (typeof _satellite !== "undefined"){_satellite.pageBottom();}</script>
+ 
+
+  </body>
+</html>

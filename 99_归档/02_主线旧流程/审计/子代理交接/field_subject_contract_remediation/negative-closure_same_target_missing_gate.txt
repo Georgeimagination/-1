@@ -1,0 +1,2 @@
+﻿FAIL: 1 validation error(s); 97920 checks executed; subject_contract_mode=gate.
+ - Requirement lacks same-target same-field fact: 数据/field-requirements.csv:REQ-AWS-TRN2-0175 status=value_available field=FIELD-DER-COMPUTE-BW-SPEC target_kind=precision_path

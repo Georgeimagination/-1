@@ -1,0 +1,2 @@
+"endpoint_id","source_id","endpoint_type","url","local_path","sha256","page_count","mime_type","access_date","http_status","snapshot_date","is_preferred_endpoint","accessibility_status","review_status","notes"
+"END-AWS-TRN2-S07-SNAPSHOT","SRC-AWS-TRN2-S07","web_snapshot","","最小参考资料库/快照/AWS/Trainium2/2026-08-12/S07_ec2_trn2_product_2026-08-12.html","4c315ad5c342d10e1e0a6a8a5ab59b87be94e9fc19911f6ac122964317aa32cf","","text/html","2026-08-12","","2026-08-12","false","accessible","draft","保留 2026-08-12 原始快照；2026-08-13 语义等价快照登记后改为非首选入口"

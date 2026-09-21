@@ -1,0 +1,3 @@
+"selection_run_id","scope_kind","scope_id","cutoff_date","algorithm_version","created_date","reviewer","status","review_status","notes"
+"SELRUN-M1-PILOTS-TRN2-CORRECTED-20260813","custom","M1-H100-TRAINIUM2-MLU590","2026-08-13","reverse-removal-v1","2026-08-13","m2_trn2_correction","draft","draft","重跑 M1 三张试填卡最小来源集。Trainium2 贡献按修复后断言计算：S06=49、S07=9、S10=2；其余 H100 与 MLU590 成员继承原运行并复核主键。"
+"SELRUN-M2W2-TRN2INST-CORRECTED-20260813","custom","M2-W2-TRN2-INSTANCE-CORRECTED","2026-08-13","reverse-removal-v1","2026-08-13","m2_trn2_correction","draft","draft","对三实例 41 条映射事实中的 39 条可采纳事实重跑：S06=32、S07=5、S09=1、S10=1。S15 两条声明是 rejected_unreliable 审计链，不计入最小集覆盖分母。"

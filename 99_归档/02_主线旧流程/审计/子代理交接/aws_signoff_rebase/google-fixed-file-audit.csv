@@ -1,0 +1,6 @@
+﻿"path","expected_bytes","actual_bytes","expected_sha256","actual_sha256","check_status"
+"最小参考资料库/快照/Google/TPU/2026-08-13/google-cloud-tpu-machines-2026-08-13.html","27322","27322","b87a1b00c38354659efc4fb0073b4dd205ce807e37cfc01252be6bf5820c96b8","b87a1b00c38354659efc4fb0073b4dd205ce807e37cfc01252be6bf5820c96b8","passed"
+"最小参考资料库/快照/Google/TPU/2026-08-13/google-cloud-tpu-architecture-2026-08-13.html","20515","20515","ddf8f0a880db456b5edc190a6ec2feb63b06c016e86d8583072cd70eaed93841","ddf8f0a880db456b5edc190a6ec2feb63b06c016e86d8583072cd70eaed93841","passed"
+"最小参考资料库/快照/Google/TPU/2026-08-13/google-cloud-tpu-v5e-2026-08-13.html","13076","13076","7bb0a40383503f76c43e728d8868c7f17f1e715a6d0e200f90428471ce646b47","7bb0a40383503f76c43e728d8868c7f17f1e715a6d0e200f90428471ce646b47","passed"
+"最小参考资料库/快照/Google/TPU/2026-08-13/google-cloud-tpu-v5p-2026-08-13.html","15574","15574","c4207909253ef1c0d96298396c080fd2349bdb92a8048c717d582d9bcc2e6c5c","c4207909253ef1c0d96298396c080fd2349bdb92a8048c717d582d9bcc2e6c5c","passed"
+"最小参考资料库/快照/Google/TPU/2026-08-13/google-cloud-tpu-v6e-2026-08-13.html","11999","11999","65c35ff3c661e7e4cb0c08d382aacc713592d49107d0d1c1c29a27bd58332dc2","65c35ff3c661e7e4cb0c08d382aacc713592d49107d0d1c1c29a27bd58332dc2","passed"

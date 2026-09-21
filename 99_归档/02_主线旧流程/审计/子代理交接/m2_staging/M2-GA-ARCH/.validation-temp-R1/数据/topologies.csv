@@ -1,0 +1,5 @@
+﻿"topology_id","owner_object_id","canonical_label","review_status","notes"
+"TOPO-AWS-TRN2-48XL-TORUS","OBJ-AWS-TRN2-48XLARGE","4x4 two-dimensional torus","draft","16 个 Trainium2 芯片"
+"TOPO-AWS-TRN2U-48XL-TORUS","OBJ-AWS-TRN2U-48XLARGE","4x4 two-dimensional torus","draft","16 个 Trainium2 芯片"
+"TOPO-AWS-TRN2-ULTRA64-TORUS-RING","OBJ-AWS-TRN2-ULTRASERVER-64","four 4x4 torus groups with same-coordinate inter-instance rings","draft","4 个 trn2u.48xlarge、64 个芯片"
+"TOPO-NVG3-HIGH-RADIX","OBJ-NVIDIA-GROQ3-ARCH","Groq 3 high-radix point-to-point C2C fabric","needs_resolution","厂商原文为 high-radix point-to-point C2C fabric；现有 topology_type 枚举不能无损表达，因此不生成枚举事实，分类问题由 REQ-NVG3-TOPOLOGY-CLASS 保留"

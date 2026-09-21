@@ -1,0 +1,17 @@
+﻿{
+    "verdict":  "accept",
+    "formal_baseline_validator_checks":  93378,
+    "positive_audit":  "passed",
+    "positive_explicit_gate":  "passed",
+    "positive_default_gate":  "passed",
+    "positive_checks_each":  97920,
+    "negative_tests":  6,
+    "negative_tests_passed":  6,
+    "audit_syntax_negative_exit_code":  1,
+    "candidate_csv_utf8_no_bom":  true,
+    "candidate_csv_crlf_only":  true,
+    "candidate_csv_final_crlf":  true,
+    "formal_target_hash_changes_during_isolation":  0,
+    "temporary_roots_pending_cleanup":  0,
+    "temporary_roots_cleaned":  true
+}

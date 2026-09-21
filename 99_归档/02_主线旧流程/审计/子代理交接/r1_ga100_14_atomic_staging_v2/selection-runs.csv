@@ -1,0 +1,2 @@
+"selection_run_id","scope_kind","scope_id","cutoff_date","algorithm_version","created_date","reviewer","status","review_status","notes"
+"SELRUN-GA100-DIE-20260821-V2","object","OBJ-NVIDIA-GA100-DIE","2026-08-21","reverse-removal-v2-staging","2026-08-21","r1_ga100_atomic_staging_v2","draft","draft","Rerun after v2 fact, requirement, assertion, and source-role closure. Seven sources remain: ISSCC is now required for LR-PHY and conflict evidence; PTX 7.0 and 7.2 remain one family with different version-specific duties."

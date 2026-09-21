@@ -1,0 +1,3 @@
+"source_family_id","canonical_title","family_kind","publisher_or_organization","persistent_work_id","review_status","notes"
+"SFAM-M2W3-AMD-MI455X-PRODUCT","AMD Instinct MI455X product page","dynamic_page_history","AMD","https://www.amd.com/en/products/accelerators/instinct/mi400/mi455x.html","draft","Dedicated MI455X page; this package fixes the 2026-08-13 representation."
+"SFAM-M2W3-AMD-MI455X-BROCHURE","AMD Instinct MI455X GPU brochure","document_revision_series","AMD","amd-instinct-mi455x-brochure-PID-5158303","draft","Fixed product brochure family; package uses LE-93204-00 07/26."

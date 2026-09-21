@@ -1,0 +1,20 @@
+﻿{
+    "verdict":  "accept",
+    "rebase_signoff_sha256":  "9429d80f0ba649724ed1276523df8ecfcf269e6e748b15a6cbe4dd11013b42c0",
+    "formal_pre_replay_aggregate":  "97ebb17a2518e3a43b18a382dcfc879c1f5e2b08118a6149c8fa984e65017453",
+    "formal_post_replay_aggregate":  "97ebb17a2518e3a43b18a382dcfc879c1f5e2b08118a6149c8fa984e65017453",
+    "formal_table_hash_changes":  0,
+    "immutable_input_hash_changes":  0,
+    "signoff_rows_preflighted":  486,
+    "lifecycle_rows_executed":  457,
+    "exact_cell_writes_executed":  1,
+    "semantic_signoffs_executed":  5,
+    "exact_file_or_card_copies_executed":  15,
+    "no_write_guards_verified":  8,
+    "total_authorized_writes_executed":  478,
+    "isolated_validator_exit_code":  0,
+    "isolated_validator_checks":  101311,
+    "isolated_validator_output":  "审计/子代理交接/aws_signoff_rebase/isolated-validator-output.txt",
+    "isolated_merged_aggregate":  "32c2fa9a40d1f98e9243c722a637079033d881fe4efcd1e9506d91f1234373a7",
+    "temp_root_cleaned":  true
+}

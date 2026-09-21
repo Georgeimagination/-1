@@ -1,0 +1,30 @@
+HTTP/2 301 
+server: AkamaiGHost
+content-length: 0
+location: https://archive.docs.nvidia.com/tensorrt/tensorrt-861/support-matrix/index.html
+date: Thu, 20 Aug 2026 21:04:21 GMT
+x-accept: */*
+set-cookie: c_code=HK; Domain=nvidia.com; Path=/; Secure
+expires: 0
+pragma: no-cache
+cache-control: no-store, no-cache, must-revalidate, max-age=0
+content-security-policy: img-src https://* data:;  style-src-elem 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com/ https://cdnjs.cloudflare.com/ https://cdn.jsdelivr.net/ https://cdn.jsdelivr.net/npm/swagger-ui-dist@latest/ https://unpkg.com/ https://stackpath.bootstrapcdn.com/ https://use.fontawesome.com/ https://fontawesome.com https://docscontent.nvidia.com/ https://nvcms.nvidia.com/ https://docs.nvidia.com/ https://www.nvidia.com/ https://hotjar.com/ https://d4j85rjepgcta.cloudfront.net https://copilot-netguru.nvidia.com/;  script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' https://ajax.googleapis.com/ https://cdnjs.cloudflare.com/ https://cdn.jsdelivr.net/ https://unpkg.com https://fast.wistia.com/ https://js.hcaptcha.com/ https://cdnapisec.kaltura.com/ https://static.hotjar.com/ https://script.hotjar.com/ https://t.contentsquare.net/ https://assets.adobedtm.com/ https://images.nvidia.com/ https://docscontent.nvidia.com/ https://cdn.bizible.com/ https://api-prod.nvidia.com/ https://www.googletagmanager.com/ https://googleads.g.doubleclick.net/ https://tbyb.rivaspeech.com/ https://d4j85rjepgcta.cloudfront.net https://cdn.cookieLaw.org https://copilot-netguru.nvidia.com/ https://nvidia.tt.omtrdc.net/rest/v1/delivery https://www.nvidia.com/ https://static.reo.dev/;
+akamai-cache-status: Redirect from child
+
+HTTP/2 200 
+content-type: text/html; charset=utf-8
+last-modified: Sat, 23 May 2026 21:01:27 GMT
+server: AmazonS3
+x-amz-server-side-encryption: AES256
+x-amz-version-id: LEVSEj3Jli_al8kJSkwsli7kbyEqwClj
+etag: W/"e32ea2c87fa23912b2c806c68fd5582c"
+x-amz-cf-pop: MCI50-P1
+x-amz-cf-id: 8MZPS4Fo6qg4pfwbbNaYCVbXskNKmptJI37kxFsHHaY313K4DBnjHQ==
+x-nv-aws-origin: CloudFront
+date: Thu, 20 Aug 2026 21:04:21 GMT
+expires: 0
+pragma: no-cache
+cache-control: no-store, no-cache, must-revalidate, max-age=0
+content-security-policy: img-src https://* data:; style-src-elem 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com/ https://cdnjs.cloudflare.com/ https://cdn.jsdelivr.net/ https://cdn.jsdelivr.net/npm/swagger-ui-dist@latest/ https://unpkg.com/ https://stackpath.bootstrapcdn.com/ https://use.fontawesome.com/ https://fontawesome.com https://docscontent.nvidia.com/ https://nvcms.nvidia.com/ https://docs.nvidia.com/ https://www.nvidia.com/ https://hotjar.com/ https://d4j85rjepgcta.cloudfront.net https://copilot-netguru.nvidia.com/; script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' https://ajax.googleapis.com/ https://cdnjs.cloudflare.com/ https://cdn.jsdelivr.net/ https://unpkg.com https://fast.wistia.com/ https://js.hcaptcha.com/ https://cdnapisec.kaltura.com/ https://static.hotjar.com/ https://script.hotjar.com/ https://t.contentsquare.net/ https://assets.adobedtm.com/ https://images.nvidia.com/ https://docscontent.nvidia.com/ https://cdn.bizible.com/ https://api-prod.nvidia.com/ https://www.googletagmanager.com/ https://googleads.g.doubleclick.net/ https://tbyb.rivaspeech.com/ https://d4j85rjepgcta.cloudfront.net https://cdn.cookieLaw.org https://copilot-netguru.nvidia.com/ https://nvidia.tt.omtrdc.net/rest/v1/delivery https://www.nvidia.com/;
+akamai-cache-status: Hit from child
+

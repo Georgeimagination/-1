@@ -1,0 +1,19 @@
+{
+    "status":  "passed",
+    "document":  "report.md",
+    "scene":  "docs",
+    "tier":  "no_material_ai_tells",
+    "rewrite_level":  "minimal",
+    "scope":  "in_place_fact_preserving_review",
+    "report_humanizer_exit_code":  0,
+    "report_humanizer_result":  "No machine-detectable AI tells found",
+    "manual_heading_review":  "passed",
+    "manual_first_paragraph_review":  "passed",
+    "manual_transition_and_ending_review":  "passed",
+    "protected_spans_checked":  "all counts, hashes, paths, dates, statuses, attribution, script names and authorization scope retained",
+    "shuorenhua_pass1_fidelity":  "passed",
+    "shuorenhua_pass2_residual_audit":  "passed",
+    "edits_after_scan":  0,
+    "remaining_risk":  "No external human-authored sample was supplied; the report keeps the project audit register and avoids stylistic rewriting of technical evidence.",
+    "report_sha256":  "357de53354aa4e96392e7ca1ad0f3336028c0127672725f34febbb6c893a7198"
+}

@@ -1,0 +1,32 @@
+{
+    "status":  "passed",
+    "generated_at":  "2026-08-13",
+    "formal_baseline":  {
+                            "tables":  32,
+                            "aggregate":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+                            "manifest_sha256":  "c8c424fa21838248cca020b6c5feefd9c05287adec8c077474f0f36cff834f5f"
+                        },
+    "authorized_write_set":  {
+                                 "rows":  1057,
+                                 "tables":  20,
+                                 "sha256":  "0e1ad812779656e1e9f325317f87f0bb7de8edaa161475a421aa251b4058feb1"
+                             },
+    "payloads":  {
+                     "rows":  15,
+                     "cross_package_path_intersection":  0,
+                     "sha256":  "0adc897a424712c254979c0cca9f2fef2624ca3779d1a1fa82e9436a9981cc0d"
+                 },
+    "no_write_guards":  {
+                            "rows":  11,
+                            "tables":  2,
+                            "cross_package_pk_intersection":  0,
+                            "sha256":  "327b884efc6e0c3bc43539d03e0e27a269c3c8d16696967a3635e906cf9ce604"
+                        },
+    "cross_package_lifecycle_pk_intersection":  0,
+    "shared_csv_containers":  19,
+    "shared_csv_pk_overlap":  0,
+    "candidate_validator_checks":  125619,
+    "candidate_aggregate":  "5f62191bfc737535802cd6e0524b1fdf7a742ca36300db11b5a9233d4540052a",
+    "strict_preflight_checks":  9656,
+    "formal_writes_performed":  0
+}

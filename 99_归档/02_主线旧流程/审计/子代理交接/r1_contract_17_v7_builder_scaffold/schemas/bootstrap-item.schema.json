@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:contract-v7:bootstrap-item",
+  "title": "Contract v7 bootstrap item",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "input_role",
+    "source_path",
+    "logical_target_path",
+    "preimage_state",
+    "raw_sha256",
+    "canonical_domain_tag",
+    "canonical_sha256"
+  ],
+  "properties": {
+    "input_role": {"type": "string", "minLength": 1},
+    "source_path": {"type": "string", "minLength": 1},
+    "logical_target_path": {"type": "string", "minLength": 1},
+    "preimage_state": {"enum": ["present", "absent"]},
+    "raw_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "canonical_domain_tag": {"type": ["string", "null"], "minLength": 1},
+    "canonical_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"}
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "canonical_domain_tag": {"type": "string", "minLength": 1},
+        "canonical_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    {
+      "properties": {
+        "canonical_domain_tag": {"const": null},
+        "canonical_sha256": {"const": null}
+      }
+    }
+  ]
+}

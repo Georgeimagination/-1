@@ -1,0 +1,2 @@
+"link_id","owner_object_id","endpoint_a_id","endpoint_b_id","link_level","canonical_label","review_status","notes"
+"LINK-AWS-TRN2-ULTRA64-EFAV3","OBJ-AWS-TRN2-ULTRASERVER-64","OBJ-AWS-TRN2-ULTRASERVER-64","","datacenter_scale_out","Trn2 UltraServer EFAv3","draft","UltraServer 系统级 EFAv3 scale-out 网络；S07 直接给出 12.8 Tbps 系统聚合带宽"

@@ -1,0 +1,7 @@
+"memory_level_id","parent_memory_level_id","level_class","canonical_label","review_status","notes"
+"CMP-M2W2-AWS-INF1-DRAM","","ddr","Inferentia device DRAM","draft","来源原称 device DRAM。"
+"CMP-M2W2-AWS-TRN1-HBM","","hbm","Trainium device HBM","needs_resolution","容量已固定，带宽单位标签冲突。"
+"CMP-M2W2-AWS-INF2-HBM","","hbm","Inferentia2 device HBM","needs_resolution","容量已固定，带宽单位标签冲突。"
+"CMP-M2W2-AWS-TRN3-HBM","","hbm","Trainium3 HBM3e","needs_resolution","容量与带宽各有未解决冲突。"
+"CMP-M2W2-AWS-TRN3-SBUF","CMP-M2W2-AWS-TRN3-HBM","local_scratchpad","NCv4 SBUF","draft","每 NCv4 32 MiB。"
+"CMP-M2W2-AWS-TRN3-PSUM","CMP-M2W2-AWS-TRN3-SBUF","accumulator_store","NCv4 PSUM","draft","每 NCv4 2 MiB。"

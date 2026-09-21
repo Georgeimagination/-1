@@ -1,0 +1,8 @@
+{
+    "status":  "passed",
+    "exit_code":  1,
+    "expected":  "formal root denied before result, candidate, backup, or target writes",
+    "message_match":  true,
+    "formal_targets_absent":  true,
+    "formal_target_count":  4
+}

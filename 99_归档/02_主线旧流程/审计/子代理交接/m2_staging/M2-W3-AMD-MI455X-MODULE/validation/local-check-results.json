@@ -1,0 +1,117 @@
+{
+    "checked_at":  "2026-08-13",
+    "structured_files":  24,
+    "headers_matching":  24,
+    "header_failures":  [
+
+                        ],
+    "primary_key_failures":  [
+
+                             ],
+    "formal_id_collision_failures":  [
+
+                                     ],
+    "facts":  39,
+    "direct_facts":  39,
+    "derived_facts":  0,
+    "assertions":  53,
+    "direct_facts_without_assertion":  0,
+    "fact_xor_failures":  [
+
+                          ],
+    "assertion_xor_failures":  [
+
+                               ],
+    "assertion_locator_failures":  [
+
+                                   ],
+    "evidence_state_failures":  [
+
+                                ],
+    "requirements":  44,
+    "value_available_requirements":  36,
+    "not_found_requirements":  8,
+    "not_found_without_search":  [
+
+                                 ],
+    "search_logs":  8,
+    "search_results":  32,
+    "search_result_count_failures":  [
+
+                                     ],
+    "status_chain_failures":  [
+
+                              ],
+    "components":  5,
+    "memory_levels":  2,
+    "links":  3,
+    "precision_paths":  12,
+    "special_capabilities":  0,
+    "topologies":  0,
+    "conditions":  9,
+    "derived_metrics":  0,
+    "derived_inputs":  0,
+    "removed_structured_id_references":  0,
+    "precision_note_failures":  [
+
+                                ],
+    "condition_dense_failures":  [
+
+                                 ],
+    "exact_html_locator_failures":  [
+
+                                    ],
+    "confidence_rationales_checked":  15,
+    "confidence_rationale_failures":  [
+
+                                      ],
+    "fact_subject_contract_failures":  [
+
+                                       ],
+    "requirement_target_contract_failures":  [
+
+                                             ],
+    "new_sources":  2,
+    "new_endpoints":  4,
+    "endpoint_hash_failures":  [
+
+                               ],
+    "preferred_endpoint_failures":  [
+
+                                    ],
+    "selection_runs":  1,
+    "selection_members":  4,
+    "selection_failures":  [
+
+                           ],
+    "card_completeness_rows":  9,
+    "card_completeness_failures":  [
+
+                                   ],
+    "card_fact_refs":  39,
+    "card_missing_facts":  [
+
+                           ],
+    "card_unknown_fact_refs":  [
+
+                               ],
+    "card_non_value_requirement_refs":  8,
+    "card_missing_non_value_requirements":  [
+
+                                            ],
+    "card_unknown_requirement_refs":  [
+
+                                      ],
+    "card_removed_id_references":  0,
+    "formal_baseline_validator_checks":  97920,
+    "temporary_merge_validator_checks":  102752,
+    "temporary_merge_validator_status":  "passed",
+    "formal_csv_manifest_count":  32,
+    "formal_csv_hash_changes":  [
+
+                                ],
+    "formal_csv_aggregate_sha256":  "6aa1bd6373b9d07b383a25c1355609cc6076ee8e491048d68d9c4ba445c0d165",
+    "formal_pdf_count":  111,
+    "tmp_exists":  false,
+    "validation_mirror_exists":  false
+}

@@ -1,0 +1,3 @@
+﻿SUBJECT-CONTRACT AUDIT: 0 issue(s); mode=audit.
+PASS: 32-table research data model; 97920 checks executed; subject_contract_mode=audit.
+Registry: 324 columns, 488 enum values.

@@ -1,0 +1,20 @@
+{
+    "status":  "passed",
+    "gates":  12,
+    "fail_closed":  12,
+    "required_id_set_complete":  true,
+    "per_package_missing_signoff_gates":  3,
+    "per_package_wrong_hash_gates":  3,
+    "formal_aggregate_before":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "formal_aggregate_after":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+    "formal_targets_absent":  true,
+    "formal_writes_performed":  0,
+    "first_attempt_status":  "failed_test_expectation_only",
+    "first_attempt_observed_pending_gate":  "Bundle transaction-review date differs.",
+    "fixture_adjustment":  "review-copy only: reviewer set to prep author and review_date set to 2026-08-13 so the frozen expected cannot-independently-authorize pattern is reachable",
+    "fixture_original_sha256":  "22b977ff189ca0b81a1f939b02208ccba43fc2805a325d56fa3a9b1bc3f88ab1",
+    "fixture_used_sha256":  "7052cba9d84e57bc4b7a4ee2b91ede3ea1c3a7c1d0fd6eeb10ac162566406e61",
+    "run_template_restored_sha256":  "22b977ff189ca0b81a1f939b02208ccba43fc2805a325d56fa3a9b1bc3f88ab1",
+    "negative_gates_csv_sha256":  "d2315f2d7c290d35719f2e56b7d20a0d84e68da56586c99361ec25a9c661c896",
+    "rerun_console_sha256":  "bbd1acc8c660efc12f8b07924f3457330a9b7aabcbb759116623157622dbc1c8"
+}

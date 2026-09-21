@@ -1,0 +1,4 @@
+algorithm=sha256_utf8_lf
+row_format=relative_path|sha256|bytes
+in_aggregate_rows=20
+package_aggregate_sha256=115319f5d187598f18525a05b0d27f8822283278daca29681ac8820858454f0c

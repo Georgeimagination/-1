@@ -1,0 +1,2 @@
+﻿"coverage_id","covered_source_id","covering_source_id","coverage_scope","equivalence_status","rationale","reviewed_by","review_date","review_status","notes"
+"COV-M2W2-TRN2INST-S15-NOT-EQUIVALENT","SRC-AWS-TRN2-S15","SRC-AWS-TRN2-S06","selected_fact_set","not_equivalent","S15 的 512 GiB 与 8,192 GiB 候选不能由 S06 取代为同一原始断言；它们只作被拒绝冲突证据，不进入本包最小入选集","m2_wave2_queue_audit","2026-08-13","draft","不声称全文或来源版本等价"

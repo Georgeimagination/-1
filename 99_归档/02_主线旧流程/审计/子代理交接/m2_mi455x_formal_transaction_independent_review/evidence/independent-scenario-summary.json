@@ -1,0 +1,14 @@
+{
+    "status":  "PASS",
+    "scenarios":  3,
+    "passed":  3,
+    "positive_authorized_writes":  242,
+    "write_tables":  19,
+    "no_write_guards":  3,
+    "new_files":  3,
+    "candidate_validator_checks":  111040,
+    "candidate_aggregate":  "0d94c60e136fab58941ad8d1f6b5b55a4d2013a370c9a1dc938bd8005fa57bca",
+    "rollback_3_tables":  "passed",
+    "rollback_2_payloads":  "passed",
+    "formal_writes_performed":  0
+}

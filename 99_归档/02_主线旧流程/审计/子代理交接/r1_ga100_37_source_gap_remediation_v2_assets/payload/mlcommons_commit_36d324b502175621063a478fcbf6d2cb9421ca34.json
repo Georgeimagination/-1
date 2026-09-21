@@ -1,0 +1,40 @@
+{
+  "sha": "36d324b502175621063a478fcbf6d2cb9421ca34",
+  "node_id": "C_kwDOHPwhudoAKDM2ZDMyNGI1MDIxNzU2MjEwNjNhNDc4ZmNiZjZkMmNiOTQyMWNhMzQ",
+  "url": "https://api.github.com/repos/mlcommons/inference_results_v2.0/git/commits/36d324b502175621063a478fcbf6d2cb9421ca34",
+  "html_url": "https://github.com/mlcommons/inference_results_v2.0/commit/36d324b502175621063a478fcbf6d2cb9421ca34",
+  "author": {
+    "name": "Ethan Self",
+    "email": "ethans@mlcommons.org",
+    "date": "2025-07-24T20:50:20Z"
+  },
+  "committer": {
+    "name": "GitHub",
+    "email": "noreply@github.com",
+    "date": "2025-07-24T20:50:20Z"
+  },
+  "tree": {
+    "sha": "c3d2a5adfda50a1cde7ebec7896fe0ab6ceea526",
+    "url": "https://api.github.com/repos/mlcommons/inference_results_v2.0/git/trees/c3d2a5adfda50a1cde7ebec7896fe0ab6ceea526"
+  },
+  "message": "Merge pull request #22 from mlcommons/Add_PR_Checklist\n\nAdd pr checklist",
+  "parents": [
+    {
+      "sha": "12685b10b826ea79cf23f7cc75656d6ddbc6fe73",
+      "url": "https://api.github.com/repos/mlcommons/inference_results_v2.0/git/commits/12685b10b826ea79cf23f7cc75656d6ddbc6fe73",
+      "html_url": "https://github.com/mlcommons/inference_results_v2.0/commit/12685b10b826ea79cf23f7cc75656d6ddbc6fe73"
+    },
+    {
+      "sha": "c54b491e99880eda89f6f4714593731cfc49000a",
+      "url": "https://api.github.com/repos/mlcommons/inference_results_v2.0/git/commits/c54b491e99880eda89f6f4714593731cfc49000a",
+      "html_url": "https://github.com/mlcommons/inference_results_v2.0/commit/c54b491e99880eda89f6f4714593731cfc49000a"
+    }
+  ],
+  "verification": {
+    "verified": true,
+    "reason": "valid",
+    "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJogpyMCRC1aQ7uu5UhlAAAKSMQAIJ9cVyh14SCeHcqrZPWw2iS\nJgfvd6/xUOYD+z58RbSN9OY6y9DtffrpsnU0QDKDEnIerDqy2y0OTkBT7O/9+Uh2\nbJty2SPBsjSmWXiLJsgYckQBIjbkXckZdJg/mhdTFPbXyYr/ozmlKMgwqCB9IX1M\ng7nOYEfaS4yhb/V0qpqEOy1KH9td5kb/P09BN9tAQH7V21BmBlPQ1b9BIm3riAS6\nONZhLFkDweBu55tpCF1BEvE9U5KWM8hqfPpu7HvF9DAbm6tIvFmLSWqoB9v+x5nz\nH5pz4tK0NcHZ+jw11VmAFIw2AAoaDPc6Q7Z0zbdVuwhMLymDmokQdTco3ni2LDJE\nE3/KfHxk+LoIPMpXvwTu+SBUK1Uu4qjhEHfgHbH8FLqjkNAyIsO4vm9TD34BrZo2\nUB9P80TwVUY6QFrNLxxpLPwqEqWCJvMWKt9GTCGtkm5IgVqTE0KYQOmvGYccuQgt\nVtbcUlhu9C8hsJ8qENLalBPO/v7c1X/ZMc0vZgnkKPf3JA/4i0wms0KQVOTtTPaQ\n+GcSA5eyI909Bxr5zhMKmbFWF28wdvAXmIKsMYeAFobRpCEB/fvEqBIWyFyS+cVI\ns9oBHoo/HCJT0wgJyhgtVz4g+vLZi+0K2RG5FO1vl/K4FmP8QavvxNItrJq4Dhp/\ndj84MLO8RMZXRWrhjTCq\n=XOP8\n-----END PGP SIGNATURE-----\n",
+    "payload": "tree c3d2a5adfda50a1cde7ebec7896fe0ab6ceea526\nparent 12685b10b826ea79cf23f7cc75656d6ddbc6fe73\nparent c54b491e99880eda89f6f4714593731cfc49000a\nauthor Ethan Self <ethans@mlcommons.org> 1753390220 -0500\ncommitter GitHub <noreply@github.com> 1753390220 -0500\n\nMerge pull request #22 from mlcommons/Add_PR_Checklist\n\nAdd pr checklist",
+    "verified_at": "2025-07-24T20:50:20Z"
+  }
+}

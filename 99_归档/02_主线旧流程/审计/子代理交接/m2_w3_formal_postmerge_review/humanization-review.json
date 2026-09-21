@@ -1,0 +1,24 @@
+{
+    "document_type":  "engineering_audit_report",
+    "scene":  "docs",
+    "tier":  "Tier 1 local findings only",
+    "rewrite_level":  "minimal",
+    "scope":  "in-place",
+    "machine_scan":  "passed",
+    "manual_fidelity_review":  "passed",
+    "protected_spans_checked":  [
+                                    "numbers",
+                                    "dates",
+                                    "units",
+                                    "IDs",
+                                    "hashes",
+                                    "paths",
+                                    "statuses",
+                                    "responsibility"
+                                ],
+    "manual_ai_tells_found":  [
+
+                              ],
+    "remaining_risk":  "No obvious AI phrasing remains. Scope interpretation and authorization wording are stated as explicit audit judgments, not rewritten as facts.",
+    "shuorenhua_result":  "passed"
+}

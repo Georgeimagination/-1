@@ -1,0 +1,8 @@
+Transaction signoff expected hash binding differs: ASCEND950
+At D:\Workspace\2026projects\调研-训练推理芯片调研-资料汇总\审计\子代理交接\m2_w3_bundle_formal_transaction_prep\scripts\Test-BundleFormalTr
+ansactionPreflight.ps1:27 char:33
++ function Fail([string]$Message){throw $Message}
++                                 ~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Transaction sig...fers: ASCEND950:String) [], RuntimeException
+    + FullyQualifiedErrorId : Transaction signoff expected hash binding differs: ASCEND950
+ 

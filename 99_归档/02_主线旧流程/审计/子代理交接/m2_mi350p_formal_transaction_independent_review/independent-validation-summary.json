@@ -1,0 +1,83 @@
+{
+    "status":  "passed",
+    "verdict":  "accept",
+    "ready_for_formal_execution":  true,
+    "reviewer":  "m2_mi350p_formal_transaction_independent_review",
+    "review_date":  "2026-08-13",
+    "checks":  261,
+    "package":  {
+                    "manifest_sha256":  "c21612350bae17288e365d26f95b5f669426ba99fd33cefce746644986cb3c98",
+                    "manifest_rows":  67,
+                    "aggregate_sha256":  "e7138b42baee6b2d138cb5d8f31593c4f6c62319fa16688e866b840d2e419949",
+                    "member_failures":  0
+                },
+    "signed_scope":  {
+                         "signoff_rows":  274,
+                         "lifecycle_pk_writes":  270,
+                         "payloads":  4,
+                         "write_tables":  19,
+                         "no_write_guards":  3,
+                         "absent_file_targets":  4
+                     },
+    "baseline":  {
+                     "formal_32_table_aggregate":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+                     "validator_checks":  106160,
+                     "preflight_checks":  11290,
+                     "formal_hard_deny":  "passed"
+                 },
+    "rehearsals":  {
+                       "positive":  {
+                                        "status":  "passed",
+                                        "journal_rows":  48,
+                                        "tables":  19,
+                                        "payloads":  4,
+                                        "candidate_validator_checks":  111390,
+                                        "candidate_aggregate":  "28923f7aa9dea488152f699e6879319d1fb96222fe72745754cf8ffd7b46518e"
+                                    },
+                       "rollback_after_3_tables":  {
+                                                       "status":  "passed",
+                                                       "journal_rows":  14,
+                                                       "tables_committed":  3,
+                                                       "tables_rolled_back":  3,
+                                                       "reverse_order":  true,
+                                                       "aggregate_after":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10"
+                                                   },
+                       "rollback_after_2_payloads":  {
+                                                         "status":  "passed",
+                                                         "journal_rows":  86,
+                                                         "tables_committed":  19,
+                                                         "tables_rolled_back":  19,
+                                                         "payloads_committed":  2,
+                                                         "payloads_rolled_back":  2,
+                                                         "reverse_order":  true,
+                                                         "aggregate_after":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10"
+                                                     }
+                   },
+    "negative_gates":  {
+                           "status":  "passed",
+                           "count":  6,
+                           "formal_writes":  0
+                       },
+    "cleanup":  {
+                    "formal_targets_present":  0,
+                    "isolated_targets_present":  0,
+                    "temp_directories":  0,
+                    "lock_files":  0,
+                    "mapped_drive_present":  false
+                },
+    "input_bindings":  {
+                           "final_review_report_sha256":  "470d381d66e5cb7ccd7b3fc9aa88ede12ed1a995a6a1af6e03844630d9b43461",
+                           "mi350p_signoff_sha256":  "74ac69c299f5ce817c03236ef97df4e13f08f2d6724bb1c0178376661be5dad1",
+                           "freeze_manifest_sha256":  "1cb279b56f4fbfc688ed2f798646a93baed02ffbd34a647ffecf4cb6672f0e01",
+                           "candidate_posthash_manifest_sha256":  "49e57afa591d265717ca1bc08bb59d4efd86c81f6a571b4715f22226907b0074",
+                           "transaction_script_sha256":  "2967a9d0a023268438ddb3bcc139910ce1404faceb3fae63f1a42a27eda2e6a9",
+                           "preflight_script_sha256":  "6547bda349d55585ffd55fbd538fe910b9a950b67902febf876476ebd4a45dc4",
+                           "rehearsal_script_sha256":  "2e4e2662d16867472aa517914ba758db75cda9f288638a262039a5008b71a470"
+                       },
+    "operator_errors":  {
+                            "count":  12,
+                            "formal_impact":  0,
+                            "approval_or_sandbox_failures":  0
+                        },
+    "formal_writes_performed":  0
+}

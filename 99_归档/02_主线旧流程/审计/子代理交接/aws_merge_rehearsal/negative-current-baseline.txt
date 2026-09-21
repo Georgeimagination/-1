@@ -1,0 +1,1 @@
+{"status":"PASS","checks":25451,"authorized_writes":478,"no_write_guards":8,"signed_baseline_aggregate":"97ebb17a2518e3a43b18a382dcfc879c1f5e2b08118a6149c8fa984e65017453","objects":78,"object_relations":27,"facts":678,"fact_assertions":680,"field_requirements":863,"cards":40,"selection_runs":8,"selection_members":96}

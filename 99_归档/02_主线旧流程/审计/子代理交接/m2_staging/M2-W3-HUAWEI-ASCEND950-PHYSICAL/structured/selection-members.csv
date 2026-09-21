@@ -1,0 +1,4 @@
+﻿"selection_member_id","selection_run_id","source_id","selected_role","mandatory_reason","review_status","notes"
+"SELMEM-M2W3-HUAWEI-H2","SELRUN-M2W3-HUAWEI-ASC950-PHYSICAL-20260813","SRC-M2W3-HUAWEI-H2-ASC950-KEYNOTE-20250918","core_spec","Removal loses shared die/common labels, package split, DT specs/status.","draft","Independent review pending."
+"SELMEM-M2W3-HUAWEI-H6","SELRUN-M2W3-HUAWEI-ASC950-PHYSICAL-20260813","SRC-M2W3-HUAWEI-H6-PROCESSOR-20260813","core_spec","Removal loses current PR exact specs and route audit.","draft","Independent review pending."
+"SELMEM-M2W3-HUAWEI-H12","SELRUN-M2W3-HUAWEI-ASC950-PHYSICAL-20260813","SRC-M2W3-HUAWEI-H12-ATLAS350-LAUNCH-20260320","status_version_evidence","Removal loses dated PR embedded commercial update.","draft","Independent review pending."

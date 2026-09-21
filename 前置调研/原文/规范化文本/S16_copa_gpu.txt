@@ -1,0 +1,1680 @@
+# S16 规范化文本
+
+题名：GPU Domain Specialization via Composable On-Package Architecture
+固定版本：arXiv 2104.02188v1；TACO DOI 10.1145/3484505入口HTTP 403
+原始网址：https://research.nvidia.com/index.php/publication/2021-04_gpu-domain-specialization-composable-package-architecture
+全文网址：https://arxiv.org/pdf/2104.02188v1
+
+
+## 本地原文：原文/网页快照/S16_nvidia_copa_metadata.html
+
+# 页面标题：GPU Domain Specialization via Composable On-Package Architecture | Research
+- All Research Labs
+- Spatial Intelligence
+- Applied Research
+- Autonomous Vehicles
+- Deep Imagination
+- New and Featured
+- AI Art Gallery
+- NGC Demos
+- AI & Machine Learning
+- 3D Deep Learning
+- Computer Vision
+- Robotics
+- All Areas
+- Academic Collaborations
+- Government Collaborations
+- Graduate Fellowship
+- Internships
+- Research Openings
+- Research Scientists
+- Meet the Team
+- Publications
+- GPU Domain Specialization via Composable On-Package Architecture
+# GPU Domain Specialization via Composable On-Package Architecture
+As GPUs scale their low precision matrix math throughput to boost deep learning (DL) performance, they upset the balance between math throughput and memory system capabilities. We demonstrate that converged GPU design trying to address diverging architectural requirements between FP32 (or larger) based HPC and FP16 (or smaller) based DL workloads results in sub-optimal configuration for either of the application domains. We argue that a Composable On-PAckage GPU (COPAGPU) architecture to provide domain-specialized GPU products is the most practical solution to these diverging requirements. A COPA-GPU leverages multi-chip-module disaggregation to support maximal design reuse, along with memory system specialization per application domain. We show how a COPA-GPU enables DL-specialized products by modular augmentation of the baseline GPU architecture with up to 4x higher off-die bandwidth, 32x larger on-package cache, 2.3x higher DRAM bandwidth and capacity, while conveniently supporting scaled-down HPC-oriented designs. This work explores the microarchitectural design necessary to enable composable GPUs and evaluates the benefits composability can provide to HPC, DL training, and DL inference. We show that when compared to a converged GPU design, a DL-optimized COPA-GPU featuring a combination of 16x larger cache capacity and 1.6x higher DRAM bandwidth scales per-GPU training and inference performance by 31% and 35% respectively and reduces the number of GPU instances by 50% in scale-out training scenarios.
+## Authors
+## Publication Date
+## Published in
+## Research Area
+
+## 本地原文：原文/PDF/S16_copa_gpu.pdf
+
+
+=== PDF页 1 ===
+GPU Domain Specialization via Composable
+On-Package Architecture
+Yaosheng Fu, Evgeny Bolotin, Niladrish Chatterjee, David Nellans, Stephen W. Keckler
+NVIDIA
+Abstract—As GPUs scale their low precision matrix math
+throughput to boost deep learning (DL) performance, they upset
+the balance between math throughput and memory system
+capabilities. We demonstrate that converged GPU design trying
+to address diverging architectural requirements between FP32 (or
+larger) based HPC and FP16 (or smaller) based DL workloads
+results in sub-optimal conﬁguration for either of the application
+domains. We argue that a Composable On-PAckage GPU (COPA-
+GPU) architecture to provide domain-specialized GPU products
+is the most practical solution to these diverging requirements. A
+COPA-GPU leverages multi-chip-module disaggregation to sup-
+port maximal design reuse, along with memory system specializa-
+tion per application domain. We show how a COPA-GPU enables
+DL-specialized products by modular augmentation of the baseline
+GPU architecture with up to 4 × higher off-die bandwidth,
+32× larger on-package cache, 2.3 × higher DRAM bandwidth
+and capacity, while conveniently supporting scaled-down HPC-
+oriented designs. This work explores the microarchitectural
+design necessary to enable composable GPUs and evaluates the
+beneﬁts composability can provide to HPC, DL training, and DL
+inference. We show that when compared to a converged GPU
+design, a DL-optimized COPA-GPU featuring a combination of
+16× larger cache capacity and 1.6 × higher DRAM bandwidth
+scales per-GPU training and inference performance by 31% and
+35% respectively and reduces the number of GPU instances by
+50% in scale-out training scenarios.
+I. I NTRODUCTION
+Deep learning (DL) has revolutionized computer vision,
+natural language processing, speech recognition, and recom-
+mendation systems [6], [17], [23], [24] and reshaped the auto-
+motive, robotics, e-commerce, and healthcare industries [20],
+[67], [68], [70]. GPUs have become the de facto platform
+of choice for DL applications due to their relative ease of
+programming, rich set of optimized software libraries, and
+good balance between compute and off-chip memory band-
+width [61]. GPU acceleration can reduce the training time of
+DL applications from months to minutes [52]. However, GPU
+architectures must keep evolving to satisfy the unprecedented
+expansion in DL computing demand, fueled by both the
+growing complexity of model and dataset sizes [36].
+GPU vendors have long enjoyed the beneﬁts of shrinking
+process technologies that increased transistor density, while
+also manufacturing ever larger dies [53], [56], [58], [59],
+[61]. Thanks to technology scaling, architects have had ample
+resources to add domain-specialized hardware to computer
+graphics-oriented GPUs, resulting in today’s converged GPU
+design that serves multiple application domains. To cater to
+High Performance Computing (HPC), GPUs added costly high
+GPU
+HBM HBMHBMHBM
+Other I/O
+Other I/O
+HBMHBM
+HBMHBMHBM HBMHBMHBM
+MC + HBM I/O Other I/O
+Other I/O
+GPU 
+Module
+HBM HBMHBMHBM HBMHBM
+MC + HBM I/O
+HBMHBMHBM HBMHBMHBM
+MC + HBM I/O
+Other I/O
+Other I/O
+GPU 
+Module
+HBM HBMHBMHBM HBMHBM
+MC + HBM I/O
+HBMHBMHBM HBMHBMHBM
+MC + HBM I/O
+Other I/O
+Other I/O
+GPU 
+Module
+HBM HBMHBMHBM HBMHBM
+Very 
+Large 
+Cache
++ 
+MC
+HBM HBMHBMHBM
+Very 
+Large 
+Cache
++ 
+MC
+HBMHBMHBMHBM
+HBMHBMHBMHBM HBMHBMHBMHBM
+HBMHBMHBMHBM HBMHBMHBMHBM
+MC + HBM I/O
+ (a) Converged GPU today
+)HPC and DL(
+Design-reuse
+(b) Domain-specialized 
+COPA-GPU for HPC
+(c) Domain-specialized 
+COPA-GPU for DL
+Fig. 1: (a) A converged monolithic GPU for HPC and DL. (b)
+An HPC-specialized COPA-GPU with similar capabilities to
+converged GPU. (c) A DL-specialized COPA-GPU featuring a
+large capacity, high-bandwidth on-package cache, and scaled
+DRAM resources.
+precision arithmetic (FP64) units, advanced error detection
+and correction hardware, high bandwidth memories (HBM),
+and fast I/O such as NVIDIA’s NVLINK [5], [57], [59],
+[61]. Similarly, specialized hardware such as NVIDIA Tensor
+Cores and AMD Matrix Cores were added for DL, while RT
+Cores were added to accelerate next generation ray tracing
+capabilities [5], [59]–[61].
+The recent dramatic improvement in low precision math
+throughput on GPUs is driven by research work showing
+the feasibility of high accuracy DL training and inference
+while utilizing lower precision arithmetic [27], [40], [49].
+For example, NVIDIA’s V100 GPU introduced DL Tensor
+Cores improving FP16 throughput by 6 × in one GPU gen-
+eration [59]. NVIDIA’s Turing GPU family went even further,
+integrating INT4/8 support into the Tensor Cores [60]. Most
+recently, NVIDIA’s A100 GPU increased the FP16 throughput
+by an additional 2.5 × over V100 [61].
+This work demonstrates that converged GPU designs are
+on track to become “over-designed“ in terms of memory
+bandwidth to compute throughput for FP32/FP64-based ap-
+plications while also severely “under-designed“ due to the
+1
+arXiv:2104.02188v1  [cs.AR]  5 Apr 2021
+
+=== PDF页 2 ===
+rapid scaling in low precision math capabilities utilized by next
+generation DL-networks. Moreover, the slowdown in transistor
+scaling along with reticle limitations in silicon lithography are
+restricting transistor and die area growth, making it ever harder
+to deliver competitive performance in multiple application
+domains via a single converged GPU design. Future off-chip
+bandwidth scaling is also at risk as the die edge scales sub-
+linearly with increasing die size, limiting the off-chip DRAM
+and I/O bandwidth available to individual dies [7].
+The growing importance of DL domain speciﬁc accelera-
+tion in the datacenter is demonstrated by a proliferation of
+accelerators targeted exclusively at DL algorithms [22], [31],
+[34], [42]. We believe that the combination of technology
+trends and an ultra-competitive DL landscape has created an
+inﬂection point at which GPU manufacturers must embrace
+more domain-specialized GPU designs to continue providing
+competitive performance, while also maximizing design reuse
+and minimizing non-recurring engineering (NRE) costs.
+In this work we examine historical trends and project future
+ratios, that show a strong divergence between high and low
+precision math throughput on GPUs. We show that this gap
+makes it difﬁcult to design a memory system that efﬁciently
+supports both HPC and DL use cases. Thus, we propose
+a Composable On-PAckage GPU (COPA-GPU) architecture
+as a practical solution for building a new class of domain-
+optimized GPUs. Leveraging multi-chip module (MCM) inte-
+gration [7], [11], [25], [35], [50], [54] along with emerging
+circuit technology innovations [25], [43], [47], we propose
+to replace the single converged GPU that serves both HPC
+and DL domains with composable, semi-specialized designs
+as shown in Figures 1(b) and (c).
+A COPA-GPU that is specialized for HPC (similar to Fig-
+ure 1(b)) uses the baseline GPU module (GPM) and a memory
+system modules providing similar or scaled down capabilities
+as in the converged GPU today. Augmenting the memory
+system modules with a very large on-package cache, accessible
+at high on-package bandwidth and additional off-chip DRAM
+resources (Figure 1(c)) results in a substantially different
+COPA-GPU design point that is well suited for bandwidth-
+hungry DL workloads. This level of specialization is not free,
+as it requires both intelligent architectural disaggregation of
+the GPU memory system and employing emerging circuit and
+packaging techniques. This work aims to shed light on the
+architectural choices available to designers when building and
+specializing composable GPU designs.
+We make the following contributions:
+• We examine historical GPU trends and perform a de-
+tailed performance analysis of diverging HPC and DL
+benchmarks. We show that due to the converged nature
+of GPUs and future DL scaling requirements, the GPU’s
+memory bandwidth will become the primary performance
+bottleneck for GPU based DL training and inference,
+while being under-utilized for most HPC applications.
+• We propose the development of domain-specialized com-
+posable GPU architectures. COPA-GPUs provide high
+levels of GPU design reuse across the HPC and DL
+TABLE I: GPU and DL accelerator compute and memory
+system trends, including a forward-looking GPU projection
+(GPU-N). We report the attributes of Cerebras as 1/84 tiles in
+a wafer to provide area-similar comparisons.
+GPU FP32 FP16 L2 - DRAM BW
+Architecture [TFLOPS] [TFLOPS] [MB] [GB/s]
+NVIDIA P100 11 21 4 - 732
+NVIDIA V100 16 125 6 - 900
+NVIDIA A100 20 312 40 - 1,555
+GPU-N 24 779 60 - 2,687
+On-chip On-chip
+DL FP32 FP16 memory memory BW DRAM BW
+Accelerator [TFLOPS] [TFLOPS] [MB] [TB/s] [GB/s]
+Graphcore IPU 31 125 304 45 N/A
+Graphcore IPUv2 - 250 900 180 N/A
+Cerebras WSE - - 214 107 N/A
+Groq TSP - 250 220 80 N/A
+Google TPUv2 5 46 37 - 700
+Google TPUv3 14 123 37 - 900
+domains, while enabling speciﬁcally optimized products
+for each domain. We describe both the architectural
+modiﬁcations, as well as the landscape of technologies,
+needed to enable COPA-GPUs.
+• We evaluate the performance potential of COPA-GPU
+in the context of DL training and inference and show
+that very large cache capacity can dramatically improve
+DL-inference, but both cache and DRAM improvements
+(available only through COPA designs) are necessary to
+signiﬁcantly improve DL-training.
+• Finally, we propose a speciﬁc COPA-GPU design boost-
+ing per-GPU training and inference performance by up
+to 31% and 35% respectively, while also signiﬁcantly re-
+ducing the cost of scale-out GPU training in datacenters.
+II. M OTIVATION AND BACKGROUND
+The commercial importance of deep learning is undeniable
+and numerous companies are now designing targeted DL train-
+ing and inference accelerators, such as Google’s TPU [33],
+[34], Graphcore’s IPU [18], Cerebras’ WSE [42], and Groq’s
+TSP [22]. These application-speciﬁc architectures need not
+maintain a legacy of high performance in other domains, al-
+lowing them to make heavily specialized architectural choices
+compared to GPU architectures that currently serve multiple
+domains. To better understand the divergence of GPU and DL
+accelerator design trends we examined recent GPU scaling
+trends, projected a plausible future GPU conﬁguration, and
+now compare it to several dedicated DL accelerators.
+A. DL Architecture Trends and Projections
+Table I summarizes several key compute and memory
+system characteristics across the three most recent generations
+of NVIDIA Tesla GPUs targeting both HPC and DL domains.
+We then forward-project the hardware capabilities of a hypo-
+thetical next-GPU conﬁguration (GPU-N) using evolutionary
+scaling. We calculate the compute and memory bandwidth of
+GPU-N by linearly extrapolating these parameters from V100
+to A100 [59], [61]. We calculate the GPU-N L2 capacity
+using the lower scaling rate of 1.5 × from P100 [58] to V100
+(instead of 6.7 × from V100 to A100) since GPU-N is highly
+2
+
+=== PDF页 3 ===
+0%
+20%
+40%
+60%
+80%
+100%
+large-batch small-batch large-batch small-batch
+MLPerf Training (average) MLPerf Inference (average)
+Execution Time Breakdown
+Math SM utilization Mem others DRAM BW
+Fig. 2: GPU-N performance bottleneck analysis using the
+MLPerf DL training and inference suites, for both large-batch
+and small-batch settings.
+unlikely to be able to ﬁt hundreds of MB of SRAM on a single
+GPU die. Note that we are not trying to accurately project the
+exact conﬁguration of a future GPU, but rather demonstrate
+the effect of expected scaling rates on compute and memory
+bandwidths. Table I makes it clear that while the memory
+bandwidth to FP32 throughput ratios have generally increased
+across GPU generations (from 67 × in P100 to 112 × in GPU-
+N), the memory bandwidth to FP16 ratio has diminished to
+only 3.4 × in GPU-N.
+In addition to several GPU generations, Table I provides
+attributes of several DL accelerators. The Graphcore, Cerebras,
+and Groq products all feature very large on-chip SRAMs
+as main memory, while Google TPUs use off-chip DRAM
+(HBM). In contrast to GPUs and TPUs, DL accelerators with
+DRAM-less memory system can provide substantially higher
+memory bandwidth to FP16 ratios reaching 720 × and 320 ×
+in IPUv2 and TSP respectively, albeit providing much lower
+total memory capacity.
+B. Diverging DRAM Bandwidth Requirements
+To understand the diverging DRAM bandwidth require-
+ments of future GPUs, Figure 2 presents a simulation perfor-
+mance bottleneck analysis of the DL workloads from MLPerf
+suite (details described later in Section IV-A) for both small-
+and large-batch scenarios on GPU-N. To correctly identify the
+source of performance inefﬁciency, we breakdown the total
+execution time to individual sets of hardware components,
+where each bar segment represents the performance overhead
+introduced by that component during execution. For example,
+the blue ”DRAM BW” bars show the performance overhead
+attributed to non-ideal DRAM bandwidth, when compared to
+inﬁnite DRAM bandwidth. Similarly, the orange bars represent
+the performance penalty caused by all other components in
+the memory subsystem being non-ideal in terms of bandwidth
+and latency. The gray bars represent the performance penalty
+caused by dynamic SM under-utilization (idle SMs) versus an
+ideal GPU with 100% SM utilization, reﬂecting inefﬁciencies
+such as imperfect work scheduling or lack of sufﬁcient paral-
+lelism (sometimes only in phases) within the workload itself.
+Speedup
+0
+0.2
+0.4
+0.6
+0.8
+1
+1.2
+1.4
+1.6
+1.8
+2 0.5x BW 0.75x BW Infinite BW
+HPC Applications
+Fig. 3: Performance speedup of various DRAM bandwidth for
+HPC applications on a GPU-N conﬁguration.
+Finally, the green bars show the relative execution time spent
+in Math units, which should be 100% utilized in the ideal case.
+Figure 2 shows that indeed DRAM bandwidth is the primary
+performance limiter (excluding Math) for DL training in GPU-
+N, contributing 28% of the total execution time on average
+across large- and small-batch cases. DRAM bandwidth is also
+the main performance bottleneck for large-batch DL inference
+contributing 30% of total execution time. However, at small
+batch size SM under-utilization accounts for 41% of total exe-
+cution time and serves as the primary performance bottleneck
+rather than DRAM bandwidth. This is because MLPerf small-
+batch inference does not expose enough parallelism to ﬁll an
+entire GPU that was designed for the datacenter. Moreover,
+due to small-batch inference’s relatively small memory foot-
+prints, the majority of each workload’s data can be buffered
+on-chip to avoid DRAM bandwidth to become the bottleneck.
+We also simulate the converged GPU-N conﬁguration across
+varying DRAM bandwidth settings using 130 HPC bench-
+marks from differing sources including the CORAL [45]
+and CORAL-2 [46] benchmarks, Amber18 benchmarks [4],
+FUN3D [55], SPECFEM3D Cartesian [3], GROMACS [1],
+Laghos [44], and RELION [2]. As shown in Figure 3, in
+stark contrast to DL applications, most HPC applications
+are quite insensitive to changes in DRAM bandwidth. When
+DRAM bandwidth is increased to inﬁnite, a geometric mean
+speedup of only 5% is achieved. When DRAM bandwidth
+is decreased, 0.75 ×BW and 0.5 ×BW result in 4% and 14%
+slowdown, respectively. This implies that future increases in
+DRAM bandwidth will go largely underutilized by most HPC
+applications if converged GPU designs targeting both DL and
+HPC domains remain the de facto standard.
+C. Very Large Caches for DL-optimized GPUs
+Because the memory bandwidth demands of DL applica-
+tions are likely to exceed what evolutionary DRAM scaling
+can provide, GPU designers must pursue alternative methods
+to meet aggressive bandwidth targets. Historically, the GPU’s
+LLC has remained relatively small because HPC workloads
+have good spatial locality and the majority of the off-chip
+bandwidth ﬁltering potential can be captured within last level
+caches that are measured in tens of megabytes. In DL work-
+loads data locality spans multiple temporal and spatial scales,
+requiring much larger capacities.
+3
+
+=== PDF页 4 ===
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1.0
+large-batch small-batch large-batch small-batch
+MLPerf Training (geomean) MLPerf Inference (geomean)
+Normalized DRAM Traffic
+120MB 240MB 480MB 960MB 1920MB 3840MB
+Fig. 4: DRAM trafﬁc reduction versus LLC capacity, normal-
+ized to the baseline GPU-N conﬁguration with 60MB of LLC.
+To understand how much LLC capacity GPU-N would need
+to effectively shield the GPU’s DRAM system, we examine
+the off-chip DRAM trafﬁc reduction achieved when sweeping
+GPU-N’s LLC capacity from 60MB to 4GB. Figure 4 shows
+that doubling the LLC capacity to 120MB provides up to 53%
+reduction in off-chip DRAM trafﬁc in DL training. Further
+growth to 960MB reduces off-chip BW demand by 82% (5 ×
+reduction). We will later show that DRAM trafﬁc reduction
+from larger caches correlates well with improved training
+performance. Compared to DL training, large LLC capacities
+are even more beneﬁcial for DL inference because they enable
+a larger portion of the workload’s weights and activations to
+be cached on-chip. For example, in large-batch inference, a
+960MB LLC achieves a 16 × DRAM trafﬁc reduction, while
+a 240MB LLC is sufﬁcient to capture all available data reuse
+data on-chip for small-batch inference because of its smaller
+memory footprint.
+Because modern GPUs are already area limited [7], im-
+plementing hundreds of additional megabytes of on-die LLC
+without severely sacriﬁcing other functionalities is not fea-
+sible. Even if it could be done, such an architecture would
+be out of balance for optimal HPC performance. Because
+of the different sensitivities to off-chip GPU bandwidth and
+on-GPU cache capacities between HPC and DL workloads,
+we now explore the potential beneﬁts of a composable GPU
+architecture that can satisfy the unique demands of each
+domain while maximizing design-reuse through a modular on-
+package design.
+III. C OMPOSABLE GPU A RCHITECTURE
+A COPA-GPU architecture has two primary goals: (i) to
+largely preserve the existing GPU architecture to minimize
+design effort and maximize reuse, and (ii) to provide ﬂexi-
+bility in specializing the GPU memory system for diverging
+requirements across application domains. Speciﬁcally, we aim
+to improve the GPU’s memory system with substantially more
+cache and memory bandwidth than is required for domains
+such as HPC, to unlock deep learning performance on GPUs.
+To achieve this range of GPU system capabilities, we leverage
+on-package multi-chip-module integration to couple a GPU-
+core die with different memory system dies, each having dif-
+ferent allocations of on-package cache and memory resources.
+(a) Monolithic GPU
+MC
+SM
+L1
+SM
+L1
+SM
+L1
+GPU NOC
+HBMHBMHBMHBM HBMHBMHBMHBMHBMHBM HBMHBM
+L2 L2
+MC
+10s TB/s
+1s TB/s
+(III)
+GPM + MSM (L3+MC)
+SM
+L1
+SM
+L1
+SM
+L1
+GPU NOC
+L2 L2
+L3 L3
+HBMHBMHBMHBM HBMHBMHBMHBMHBMHBM HBMHBM
+MC MC
+(I)
+GPM + MSM (L2+MC)
+SM
+L1
+SM
+L1
+SM
+L1
+GPU NOC
+L2 L2
+HBMHBMHBMHBM HBMHBMHBMHBMHBMHBM HBMHBM
+MC MC
+(II)
+GPM + MSM (NOC+L2+MC)
+SM
+L1
+SM
+L1
+SM
+L1
+GPU NOC
+L2 L2
+HBMHBMHBMHBM HBMHBMHBMHBMHBMHBM HBMHBM
+MC MC
+(b) GPU On-Package Disaggregation for COPA-GPU
+MSM
+GPM
+MSM
+GPM
+MSM
+GPM
+Fig. 5: GPU MCM disaggregation options for practical and
+composable domain specialization.
+A. Practical GPU Disaggregation With COPA-GPU
+We propose to disaggregate today’s monolithic GPU into
+a basic GPU Module (GPM) on-package that is reused
+without modiﬁcations across domain-specialized COPA-GPU
+instances and a domain-specialized Memory System Module
+(MSMs) tailored for the speciﬁcs of each application domain.
+The main challenge with on-package disaggregation for GPUs
+is striking the right balance between the degree of composabil-
+ity and the practicality of effectively shifting the burden of
+high bandwidth intra-GPU communication from the on-chip
+to on-package wires.
+Figure 5(a) depicts a generic monolithic GPU architecture,
+with streaming multiprocessors (SMs) and corresponding L1
+caches connected to a distributed L2 cache via the GPU
+network on chip (NoC). L2 cache slices are attached to
+Memory Controllers (MCs) driving the off-chip DRAM mem-
+ory interface. While contemporary off-chip DRAM interfaces
+provide a few TB/s of memory bandwidth (2.7 GB/s in GPU-
+N), the on-chip interconnects of a modern GPU are designed
+to transport many tens of TB/s of on-chip bandwidth between
+the SMs and the on-chip memory hierarchy.
+The three possible GPU disaggregation options are shown
+in Figure 5(b). Option (I) denoted by GPM+MSM(L2+MC)
+features a GPM containing SMs, L1s, and the GPU NoC, while
+the MSM includes the L2 cache and the memory controllers.
+This design can provide more effective die area and die edge
+than single reticle-limited die to support bigger L2 cache and
+higher DRAM bandwidth when needed. Option (II) denoted
+by GPM+MSM(NoC+L2+MC) is similar to (I), but shifts the
+GPU NoC from the GPM onto the MSM. However, options
+(I) and (II) are impractical as they both require many tens
+of TB/s of NoC trafﬁc to instead traverse on-package wires,
+which Section III-E later shows is not realizable using current
+or known proposed technologies.
+Thus, we choose option (III) denoted by
+GPM+MSM(L3+MC) for exploring a practical COPA-
+GPU design as it relies on existing L2 cache bandwidth
+ﬁltering within the GPM to achieve feasible levels of off-
+GPM inter-die bandwidth. Additionally, propose to add an
+additional layer of L3 cache between the L2 cache and MC,
+and to have both the L3 cache and the MC implemented
+on the MSM. Such composable design re-organization can
+4
+
+=== PDF页 5 ===
+Interposer
+Package (I/O and  power)
+Interposer
+Package (I/O and  power)
+Interposer
+Package
+HBM IO HBM IOMCMC
+L2L2
+GPM
+(b) 
+3D COPA-GPU w/ L3
+Side-view
+(a)
+• Converged GPU today 
+• 3D COPA-GPU w/o L3 
+(c) 
+2.5D COPA-GPU w/o L3
+(d) 
+2.5D COPA-GPU  w/ L3 
+and more DRAM(optional)
+MC
+L2
+HBM
+GPM
+Top-view
+PackagePackagePackage
+MSM
+GPM
+MC
+Package
+Longer and slower HBM I/O MC
+HBM
+HBM
+MC
+HBM
+MC
+HBM
+MC
+HBM
+MC
+HBM
+MC
+HBM
+MC
+HBM
+MC
+HBM
+MC
+HBM
+MC
+HBM
+MC
+HBM
+MC
+Package (I/O and  power)
+Interposer
+GPM HBMLL LL MCMCHBM
+GPM
+HBM L3 HBMGPMHBM HBM GPM HBMLLLHBM
+HBM HBM
+MC MCL
+MSM
+MSMMSM
+Package (I/O and  power)
+MC L3 L3
+Shorter 3D-UHB links Longer and slower HBM I/O Shorter 2.5D-UHB links
+MC
+MC
+MC
+MC MC
+MC
+HBM
+MCMC
+HBM HBM
+MC
+HBM
+HBM
+MC
+HBM
+MC
+HBM
+MC
+HBM
+MC
+HBM
+MC
+HBM
+MC
+HBM
+MC
+MSM MSM
+MC
+Link
+MC
+Shorter 2.5D-UHB links
+GPM’s MCs are disabled
+Link
+Link
+Link
+Link
+Link
+Link
+Link
+MSM(L3)
+MSM(L3)
+GPM
+MC
+Package
+MC
+HBM HBM
+MC
+HBM
+MCMC
+HBM HBM
+MC
+HBM
+Fig. 6: COPA-GPU architectural options spanning 2.5D and 3D integration domains.
+provide more than 4 × higher post-L2 bandwidth using
+previously proposed package integration technologies.
+B. COPA-GPU Architectures and Packaging
+The architectural domain customization in our proposed
+COPA-GPU is achieved through integration of a GPM with
+a dedicated domain-optimized MSM using 2.5D or 3D on-
+package integration, that could leverage either planar or verti-
+cal die stacking approaches. We consider COPA-GPU architec-
+tural options spanning both integration strategies while taking
+into account the unique interdependency between architectural
+and package technology choices, distilling the advantages and
+disadvantages of each approach.
+Figure 6(a) shows a high-level top and side view of a
+modern GPU architecture, including a maximum-sized GPU
+die with the L2 cache and memory controllers on-die and
+HBM sites attached via 2.5D on-silicon interposer integration.
+The same diagram shown in Figure 6(a) also describes the
+basic COPA-GPU GPM, pre-equipped to be 3D integrated
+with an MSM die to provide a 3D DL-optimized COPA-GPU
+variant.
+Figure 6(b) illustrates a 3D organization of a DL-optimized
+COPA-GPU where the GPM die from Figure 6(a) is integrated
+with an MSM carrying additional L3 cache. The MSM is
+vertically attached via a 3D ultra-high bandwidth (3D-UHB)
+link using high-density intra-die bonding, with up to 14.7
+TB/s of bandwidth, further detailed in Section III-E. The
+MSM is positioned between the GPU and silicon interposer,
+and provides all the essential connectivity between the GPM
+and the silicon interposer via through silicon vias (TSVs), as
+shown in Figure 6(b:side-view). The composable nature of a
+3D COPA-GPU allows for designs both with (for DL) and
+without (for HPC) additional L3. The primary disadvantage
+of a 3D COPA-GPU organization is that it cannot provide any
+additional die edge to improve DRAM scaling.
+Figure 6(c) shows a basic 2.5D COPA-GPU integrating a
+GPM with up to two MSM modules in a 2.5D organization
+targeting HPC. The design of a 2.5D COPA-GPU retains most
+of its original functionality on the base GPM but ofﬂoads the
+memory controllers (MC) and HBM I/O to new (small) in-
+package MSMs. A 2.5D COPA-GPU has the advantage that
+ofﬂoading of GPM area allocated to MC and HBM I/O frees
+up die area for the implementation of UHB links and additional
+compute resources in the baseline COPA-GPU.
+Figure 6(d) augments the 2.5D COPA-GPU in Figure 6(c)
+with a large L3 cache and additional DRAM stacks, subject to
+package area limitations. The same GPM die is reused between
+Figure 6(c) and (d) and this 2.5D DL-optimized organization
+has several advantages compared to a 3D organization. First,
+it can provide up to 2 × more L3 capacity than the 3D
+organization. Second, the additional MSM geometry increases
+the total available die-edge of the design. This die-edge can
+provide up to 1.7 × or 2.3 × higher HBM BW and larger
+capacity, via 10 total HBM sites, or 14 total HBM sites using
+maximally sized MSMs (not shown).
+C. COPA-GPU Microarchitectures
+Figure 7 presents the microarchitecture of the proposed
+memory systems for both the 3D and 2.5D COPA-GPU
+designs. Figures 7(a) and (b) outline the main components of a
+3D COPA-GPU with and without an extended L3 MSM. The
+most signiﬁcant difference between current GPU architectures
+and the 3D COPA-GPU is the addition of a new switching
+component that steers requests from the L2 to the on-chip
+memory controller or to the UHB links, depending on whether
+the MSM is present in-package.
+If the MSM is not present (Figure 7(a)), the switch is
+conﬁgured to steer the memory requests directly from the L2
+to its local MC, similarly to today’s GPUs. If the MSM is
+present, (Figure 7(b)), the switch is reconﬁgured to steer post-
+L2 trafﬁc to the L3 via the UHB link. This design requires
+5
+
+=== PDF页 6 ===
+(b) 3D COPA-GPU w/ L3
+(DL-Optimized)
+MC MC
+SM
+L1
+SM
+L1
+SM
+L1
+GPU NOC
+L3 L3
+HBMHBMHBMHBM HBMHBMHBMHBMHBMHBM HBMHBM
+MC MC
+SM
+L1
+SM
+L1
+SM
+L1
+GPU NOC
+HBMHBMHBMHBM HBMHBMHBMHBMHBMHBM HBMHBM
+MC MC
+(d) 2.5D COPA-GPU w/ L3
+(DL-Optimized)
+L2 L2
+L3 L3
+(a) 3D COPA-GPU w/o L3
+(HPC-Optimized)
+MC MC
+SM
+L1
+SM
+L1
+SM
+L1
+GPU NOC
+HBMHBMHBMHBM HBMHBMHBMHBMHBMHBM HBMHBM
+L2 L2
+SM
+L1
+SM
+L1
+SM
+L1
+GPU NOC
+HBMHBMHBMHBM HBMHBMHBMHBMHBMHBM HBMHBM
+MC
+(c) 2.5D COPA-GPU w/o L3
+(HPC-Optimized)
+L2
+MC
+L2L2 L2
+SwitchSwitchSwitchSwitch SwitchSwitchSwitchSwitch
+Fig. 7: L3 cache microarchitecture in COPA-GPU designs.
+the MSM to implement its own MC that connects to HBM
+I/O, with silicon area overheads stemming from adding the
+UHB link, the TSV-based I/O, and power delivery between
+GPM and the silicon interposer dies. In the 2.5D COPA-GPU
+designs without and with additional L3 capacity on the MSM
+(Figures 7(c) and (d)), the GPM is completely stripped of
+its original MC and HBM I/O, and post-L2 trafﬁc is always
+routed to the MSM modules over on-package UHB links.
+Both the 2.5D COPA-GPU conﬁgurations consist of the same
+GPM, but are equipped with different versions of the MSM
+to serve different application classes (i.e. with or without L3
+and additional HBM sites).
+In both designs, the L3 cache is architecturally implemented
+as yet another level of memory-side cache that (when present)
+backs the existing L2. It is neither inclusive nor exclusive, nor
+does it require coherence with the L2 because the L2 already
+serves as the point of coherence in GPU systems. Lines present
+in the L2 always supercede lines in the L3 from the GPU’s
+perspective and are written back to the L3 upon eviction from
+the L2. No requests are routed to the L3 without ﬁrst being
+serviced at the L2.
+D. Costs and Beneﬁts of the COPA-GPU
+The major drawback of a 2.5D COPA-GPU organization
+is that it increases the package size. Whereas the 3D COPA
+organization has minimal impact on package complexity (same
+top view), but the base GPM must account for the imple-
+mentation of the distributed on-die UHB link bonding used
+for vertical inter-die communication (Section III-E) and the
+TSVs overheads used for traversing through the MSM die. We
+estimate that in the 3D case, the cost of providing as much as
+14.7 TB/s bandwidth of UHB I/O will consume less than 4%
+of silicon surface and metal layers for inter-die communication
+bonding. The majority of the active area and lower-level metals
+under the 3D bonding can likely be reused for other logic in
+the GPM. In 2.5D designs, the maximally sized links results
+in approximately 6% area overheads assuming a 20Gbps
+signaling rate. Section III-E provides further details on these
+assumptions.
+Even though the COPA-GPU approach introduces 4%-6%
+area overhead due to new MCM communication interfaces,
+this area (and thus cost overhead) will be more than offset
+by the savings in the HPC oriented variants by not carrying
+TABLE II: Bandwidth and energy characteristics assumptions
+for 2.5D and 3D ultra-high bandwidth (UHB) in this work.
+Technology BW Density Max Bisection BW Energy/bit
+2.5D 256GB/s/mm 14.7TB 0.3 pJ/b
+3D 512GB/s/mm2 >14.7TB 0.05 pJ/b
+forward the unnecessary and expensive DL-oriented memory
+subsystem. Moreover, we believe that in the future even non-
+composable GPU designs will turn to MCM organizations due
+to looming reticle limitations, effectively introducing similar
+MCM link overheads into all GPU designs.
+Adding new communication interfaces that memory system
+requests must traverse comes with an additional energy tax.
+We estimate that the 2.5D organized UHB-link consumes less
+than 9 Watts, assuming peak 100% bandwidth utilization at
+0.3pJ/b with a 25% wire toggle-rate. The 3D link consumes
+less than 2 watts, due to its more efﬁcient link technology and
+overall shorter communication distances (Section III-E).
+A large L3 reduces the number of DRAM accesses, more
+than offsetting the additional cost of the UHB link traversal
+and L3 accesses. Figure 4 shows that the 960MB and 1.9GB
+L3 conﬁgurations reduce overall DRAM trafﬁc by up to 94%
+and 98%, respectively. We estimate that fetching a cache
+line from an SRAM-based COPA-GPU L3 into the GPM
+will consume approximately 4 × less energy than accessing
+HBM memories. These estimates fully account for the energy
+associated with traveling to an SRAM sub-array on a MSM-
+die and back, as well as the energy consumed by the SRAM
+sub-array [8], [10], [37], [72]. Consequently, we estimate that
+either COPA-GPU design (utilizing a 960MB L3 cache) will
+reduce the total HBM-related GPU energy consumption by up
+to 3.4×. While left for future exploration, the cost of the MSM
+caching modules could be reduced by implementing them in
+older and less expensive processes.
+E. COPA-GPU Enabling Technologies
+The feasibility of COPA-GPUs depends on several technolo-
+gies reaching maturity for industrial implementation.
+Cache Technology Projections: Large caches can be real-
+ized through high density Embedded DRAM (eDRAM) [9] or
+SRAM technologies [12], [21]. IBM recently implemented a
+960MB cache on a 696mm 2 die using a 14nm eDRAM tech-
+nology [9]. Graphcore’s recently announced second-generation
+IPU [18] integrates 900MB of SRAM along with thousands
+of cores on a single 823 mm 2 die using TSMC’s 7nm process.
+Cache density is dictated by combination of the bitcell area,
+control overheads, and the bandwidth requirements. Because
+the COPA-GPU’s L3 is designed to provide lower bandwidth
+than L2, we estimate that a future reticle limited 826 mm 2
+MSM die (the same die size as an NVIDIA A100 GPU [61]),
+can provide up to 2GB of L3 cache. Though, the remainder
+of this work assumes a conservative projection of a 960MB
+L3 on an 826mm 2 die, which implies a maximum of 960MB
+L3 in a 3D COPA-GPU with single MSM die and 1920MB
+L3 in a 2.5D COPA-GPU with two MSM dies.
+6
+
+=== PDF页 7 ===
+TABLE III: MLPerf training and inference benchmarks.
+Small-batch Large-batch
+Benchmark Type Per-GPU Memory Per-GPU Memory
+batch size footprint batch size footprint
+resnet training 12 989MB 128 6GB
+ssd training 4 559MB 128 7.9GB
+maskrcnn training 1 2.1GB 6 9.9GB
+minigo training 128 105MB 2,048 1.5GB
+gnmt training 32 3GB 256 8.3GB
+transformer training 640 4.5GB 5120 7.9GB
+ncf training 65,526 657MB 1,048,576 4.5GB
+resnet inference 1 49MB 232 1.1GB
+mobilenet inference 1 16MB 704 2GB
+ssd-small inference 1 24MB 288 2GB
+ssd-large inference 1 136MB 6 562MB
+gnmt inference 1 300MB 128 961MB
+High Bandwidth 2.5D and 3D Interconnects: High-speed
+links that enable 2.5D integration are rapidly maturing [16],
+[19], [43], [71]. Chen et al. [16] recently demonstrated 20Gbps
+signaling rates across a 2.5mm silicon interposer layer at
+0.3pJ/b, resulting in a ∼200GB/s/mm bandwidth density per
+layer, which can be further increased at shorter distances.
+This work assumes a 2.5D COPA-GPU UHB link with a
+bandwidth density of 256GB/s/mm, thus the dedicated edges
+of the 826mm 2 GPM module can provide up to 14.7TB/s of
+off-GPM bandwidth as described in Figure 6(d). While this
+bandwidth to the MSM far exceeds the actual L3 bandwidth
+requirement, it provides headroom for future increases in off-
+die communication.
+3D integration is also maturing [13], [26], [28], [30], [74].
+For example, TSMC’s System on Integrated Chips (SoIC)
+is expected to provide ultra-dense 3D interconnects [13],
+[26] with greater than 1 TB/s/mm 2 of inter-die bandwidth,
+assuming a 1 Gbps signaling rate. We conservatively assume
+3D-UHB links with 512GB/s/mm 2 of bandwidth density at
+0.05 pJ/b. Achieving the assumed 14.7TB/s of data bandwidth
+for a 2.5D COPA-GPU would require 28.7mm 2 (less than
+4%) of silicon area for the inter-die communication bonding.
+Table II summarizes the UHB link characteristics for both
+2.5D and 3D scenarios.
+IV. E VALUATION
+We now present our simulation methodology, examine the
+performance sensitivity of the baseline COPA-GPU architec-
+ture to DRAM bandwidth and on-package LLC capacity, and
+evaluate several speciﬁc DL-specialized COPA-GPU conﬁgu-
+rations in both training and inference scenarios.
+A. Methodology
+To provide performance projections for DL workloads, we
+perform our studies using unmodiﬁed workloads from the
+MLPerf training and inference benchmark suites [48], [65]
+for one end-to-end iteration of the workloads, rather than
+using disjoint and isolated GPU kernel calls. This approach
+allows us to characterize the overall throughput and capture a
+new important class of inter-kernel data reuse that will drive
+future memory system design on GPUs. MLPerf is the de
+TABLE IV: Detailed GPU conﬁgurations.
+Conﬁguration NVIDIA V100 NVIDIA A100 GPU-N
+SMs 80 108 134
+GPU frequency (GHz) 1.4 1.4 1.4
+FP32 (TFLOPS) 15.7 19.5 24.2
+FP16 (TFLOPS) 125 312 779
+L2 cache (MB) 6 40 60
+DRAM BW (GB/s) 900 1,555 2,687
+DRAM Capacity (GB) 16 40 100
+facto standard for DL benchmarking and is maintained by
+major DL chip vendors including NVIDIA, Google, and Intel.
+Table III shows the seven MLPerf training benchmarks and
+the ﬁve inference benchmarks used, taken from NVIDIA’s
+publicly available MLPerf training v0.6 and MLPerf inference
+v0.5 submissions [51], [52]. These codes are highly optimized
+for NVIDIA GPUs by exploiting high-throughput Tensor
+Cores [59] and have demonstrated performance scalability
+from a single to thousands of GPUs.
+To build a complete picture of future deep learning scenar-
+ios, we run all our DL benchmarks in two different conﬁgura-
+tions. For DL training, we use a large per-GPU batch size to
+characterize a single-GPU training situation and a small per-
+GPU batch size to represent a large-scale training system. For
+DL inference, we use a large per-GPU batch size to represent
+a datacenter processing inference task with large numbers of
+concurrent queries and a small per-GPU batch size for an
+edge-device scenario with real-time processing requirements.
+Although small-batch inference workloads do not commonly
+run on the large datacenter-grade GPUs we evaluate in this
+paper, we include them in our studies for completeness as
+future GPU designs could also be scaled down (in aggregate)
+to build niche-speciﬁc GPU products in traditional or COPA-
+GPU form.
+The batch sizes we choose for each scenario are taken from
+NVIDIA’s MLPerf submissions and are shown in Table III.
+For our evaluations, we execute each application on a single
+NVIDIA Tesla V100 and collect a GPU execution trace from
+a full end-to-end iteration. We focus on the per-GPU workload
+analysis and omit the all-reduce synchronization overheads
+when projecting performance for large-scale DL training. All-
+reduce performance largely depends on the implementation
+of the inter-GPU network, which is beyond the scope of this
+work but is also receiving attention within the architecture
+community [39], [41].
+We simulate these workloads using a trace based, partially
+execution driven, architectural-level GPU simulator using
+methodology similar to that of NVIDIA’s NV ArchSim [73] and
+AccelSim [38]. Our simulator provides very fast simulation
+of deterministic portions of an application without sacriﬁcing
+simulation accuracy or correctness during non-deterministic
+application phases. Our simulator has been correlated to
+NVIDIA Tesla V100 GPU using hundreds of HPC and ML/DL
+workloads and achieves a 0.986 Pearson correlation to real
+hardware.
+Our analysis focuses on the projected GPU-N conﬁguration
+7
+
+=== PDF页 8 ===
+0.0
+0.5
+1.0
+1.5
+2.0
+lb sb lb sb lb sb lb sb lb sb lb sb lb sb lb sb
+resnet ssd maskrcnn minigo gnmt transformer ncf geomean
+Speedup
+(a) Training
+0.0
+0.5
+1.0
+1.5
+2.0
+lb sb lb sb lb sb lb sb lb sb lb sb
+resnet mobilenet ssd-small ssd-large gnmt geomean
+Speedup
+0.5x BW 1.5x BW 2x BW 3x BW infinite BW
+(b) Inference
+Fig. 8: Performance of a basic COPA-GPU with varying DRAM bandwidth for large-batch ( lb) and small-batch ( sb) settings,
+normalized to the baseline GPU-N performance.
+described in Table IV. GPU-N’s SM count growth beyond
+NVIDIA A100’s is proportional to the projected FP32 through-
+put (from Table I) with a constant SM frequency. GPU-N’s
+DRAM capacity is projected based on a linear extrapolation
+similar to the projections done for the DRAM bandwidth.
+B. DL Performance Sensitivity to DRAM Bandwidth
+We perform a detailed sweep of the DRAM bandwidth
+settings for the basic COPA-GPU design without L3 (similar
+to GPU-N) from half of its nominal bandwidth (1.3TB/s) up
+through inﬁnite bandwidth. Figure 8 summarizes the overall
+performance normalized to the 2.7TB/s baseline. Workload
+performance scales steadily with growing DRAM bandwidth
+up to a 3 ×BW (8.1TB/s) setting in most of the training
+and inference scenarios, with diminishing returns beyond this
+point. Small-batch inference applications are less sensitive to
+DRAM bandwidth due to their relatively small footprint (more
+details in Section IV-C), while the remaining DL training and
+inference workloads show that even a relatively modest 1.5 ×
+increase in DRAM bandwidth from 2.7TB/s to 4TB/s would
+lead to notable speedups of up to 18% for training and 21%
+for inference.
+From these results we conclude that modern GPUs are
+on track to be severely DRAM bandwidth limited and that
+additional raw DRAM bandwidth is the most powerful tool
+for scaling DL performance. However, because evolutionary
+improvement in HBM memory frequency and pin density is
+unlikely to provide a substantially higher bandwidth scaling
+ratio than our aggressively projected 1.7 × (for GPU-N), we
+explore the potential of a very large and high bandwidth on-
+package cache to close this gap in future COPA-GPUs.
+C. DL Performance Sensitivity to Cache Capacity
+To understand the impact of large caches on DRAM band-
+width reduction in future GPUs, we sweep the LLC (L2) cache
+capacity of the basic COPA-GPU without L3 from 60MB
+to 3,840MB to characterize the performance potential of the
+larger on-package caches. A perfect L2 where all requests
+hit in the L2 caches serves as the upper bound on perfor-
+mance. Figure 9 shows the performance of these different L2
+conﬁgurations, normalized to the 60MB baseline. Increasing
+the L2 capacity results in performance gain equivalent to
+large increases in DRAM bandwidth, primarily because of
+the signiﬁcant off-chip DRAM trafﬁc reduction, as shown in
+Figure 4.
+For DL training, 480MB of L2 performs slightly worse
+than a 1.5 × increase in DRAM bandwidth and 960MB of
+L2 performs slightly worse than a 2 × increase in DRAM
+bandwidth (comparing to Figure 8). Yet larger L2 caches
+continue to incrementally improve the performance, but even
+a 3,840MB L2 still results in an 8% and 13% performance
+gap in large-batch and small-batch DL training workloads
+when compared to a perfect L2. Because DL inference ap-
+plications generally have smaller memory footprint sizes than
+DL training, performance saturates once all workload data can
+be cached. The saturation points are 1,920MB and 240MB
+for large- and for small-batch inference respectively, which
+correspond to their memory footprints listed in Table III.
+We conclude that a substantially larger LLC is an attractive
+solution for scaling DL performance within a COPA-GPU,
+however closing the performance gap to a perfect L2 would
+require 4GB of on-package cache, which is impractical even
+under aggressive technology projections. As a result, to maxi-
+mize DL performance COPA-GPUs must not just utilize a very
+large L3 cache, but combine a large L3 and higher DRAM
+bandwidth made available with additional MSM-die edge in a
+2.5D COPA-GPU design.
+8
+
+=== PDF页 9 ===
+0.0
+0.5
+1.0
+1.5
+2.0
+lb sb lb sb lb sb lb sb lb sb lb sb lb sb lb sb
+resnet ssd maskrcnn minigo gnmt transformer ncf geomean
+Speedup
+(a) Training
+0.0
+0.5
+1.0
+1.5
+2.0
+lb sb lb sb lb sb lb sb lb sb lb sb
+resnet mobilenet ssd-small ssd-large gnmt geomean
+Speedup
+120MB 240MB 480MB 960MB 1920MB 3840MB Perfect L2
+(b) Inference
+Fig. 9: Performance of a basic COPA-GPU with varying LLC capacities for both large-batch ( lb) and small-batch ( sb) settings,
+normalized to the baseline GPU-N performance.
+TABLE V: COPA-GPU architectural parameters.
+Architecture LLC capacity DRAM BW DRAM capacity
+conﬁguration (MB) (TB/s) (GB)
+GPU-N 60 2.7 100
+HBM+L3 960 2.7 100
+HBML+L3 960 4.5 167
+HBM+L3L 1920 2.7 100
+HBML+L3L 1920 4.5 167
+HBMLL+L3L 1920 6.3 233
+Perfect L2 inﬁnite inﬁnite inﬁnite
+D. DL Performance Scaling with COPA-GPU
+Table V summarizes the DL-optimized COPA-GPU con-
+ﬁgurations that are enabled by architectural choices outlined
+in Section III. The HBM+L3 design provides 960MB of L3
+cache through either 3D stacking with a single maximum sized
+MSM die, or 2.5D stacking with two MSM dies, each set to
+half of the maximum die size. The option with more HBM
+resources, denoted by an HBML in the HBML+L3, applies
+only to 2.5D, by exploiting the extra MSM die edge area to
+provide a 1.7 × higher HBM bandwidth and a larger HBM
+capacity (10 HBM sites in total). With two maximally-sized
+MSM dies in 2.5D stacking scenario, the L3 cache capacity
+and the additional DRAM bandwidth can be scaled to up to
+1,920MB and 2.3 × of the baseline DRAM bandwidth (via
+14 HBM sites) respectively. As a result, we consider three
+additional COPA-GPU conﬁgurations with 1,920MB of L3
+cache and varying HBM resources: HBM+L3L, HBML+L3L
+and HBMLL+L3L, with 2.7TB/s, 4.5TB/s and 6.3TB/s of
+DRAM bandwidth, respectively.
+Before moving to overall results, we ﬁrst analyze the UHB
+on-package link bandwidth requirements by sweeping the
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+1.4
+lb sb lb sb
+MLPerf Training (geomean) MLPerf Inference (geomean)
+Speedup 
+0.5x RD + 0.5x WR BW 1x RD + 1x WR BW 1.5x RD + 1.5x WR BW
+2x RD + 2x WR BW 4x RD + 4x WR BW infinite BW
+Fig. 10: Performance of a HBM+L3 COPA-GPU with varying
+UHB link bandwidth to the L3 cache, normalized to the
+baseline GPU-N performance.
+unidirectional L3 bandwidth in the HBM+L3 conﬁguration
+with half of its baseline DRAM bandwidth (0.5×RD+0.5×WR
+which sums to 2.7TB/s) up through inﬁnite bandwidth. Fig-
+ure 10 summarizes the geometric mean speedup of the MLPerf
+applications (training and inference), normalized to the base-
+line GPU-N (without L3). The performance increases substan-
+tially when the L3 bandwidth grows from 0.5 ×RD+0.5×WR
+to 2×RD+2×WR, with diminishing returns beyond that point.
+Overall, the UHB bandwidth conﬁgurations of 2 ×RD+2×WR
+(total 10.8TB/s) comes within 3% and 6% of the unlimited
+bandwidth settings for training and inference respectively. This
+bandwidth is well within the capabilities of next generation
+2.5/3D interconnect technologies assumed in our designs.
+We also evaluate the effect of the UHB link latency by
+varying the total round-trip latency between the L2 and L3
+caches from 0.25 × to 1 × of the DRAM access latency. Our
+experiments (not shown) indicate that COPA-GPU architecture
+is not sensitive to L3 latency, as performance changes by less
+9
+
+=== PDF页 10 ===
+0.0
+0.5
+1.0
+1.5
+2.0
+lb sb lb sb lb sb lb sb lb sb lb sb lb sb lb sb
+resnet ssd maskrcnn minigo gnmt transformer ncf geomean
+Speedup
+(a) Training
+0.0
+0.5
+1.0
+1.5
+2.0
+2.5
+lb sb lb sb lb sb lb sb lb sb lb sb
+resnet mobilenet ssd-small ssd-large gnmt geomean
+Speedup
+HBM+L3 HBML+L3 HBM+L3L HBML+L3L HBMLL+L3L Perfect L2
+(b) Inference
+Fig. 11: Performance of DL-optimized COPA-GPUs with varying designs, normalized to the baseline GPU-N performance.
+Large-batch and small-batch cases are denoted by lb and sb.
+than 2% across this latency range. As a result, we set the UHB
+link bandwidth to be 2 ×RD+2×WR, for a total of 10.8TB/s
+and the round-trip latency between L2 and L3 (UHB link
+latency plus L3 access latency) to be half of the DRAM access
+latency for all the COPA-GPU conﬁgurations with L3 that are
+listed in Table V.
+Figure 11 summarizes the MLPerf training and inference
+performance of the COPA-GPU designs from Table V in
+large batch ( lb) and small batch ( sb) settings. Unsurpris-
+ingly, larger cache capacity and higher memory bandwidth
+universally improve both large-batch and small-batch training
+performance. For example, the additional cache capacity in
+HBM+L3 improves large-batch and small-batch performance
+by 21% and 18% respectively, making it an attractive 3D
+COPA-GPU design. Further, the additional HBM bandwidth
+provided by the HBML+L3 conﬁguration achieves an overall
+31% and 27% speedup, making it an attractive 2.5D COPA-
+GPU design choice. HBM+L3L doubles L3 capacity instead of
+scaling DRAM bandwidth and results in lower speedups than
+HBML+L3 (by 4%) at both large- and small-batch scenarios,
+indicating that increasing L3 capacity alone is not the best
+solution to scaling training. Finally, ambitious DRAM options
+such as HBML+L3L and HBMLL+L3L result in marginal
+performance gains (4%) when compared to HBML+L3 and
+do not justify its additional cost.
+For large-batch inference, the large L3 capacity in HBM+L3
+improves the performance by 29% and HBM+L3L can reach
+speedup as high as 40%. With 1,920MB of L3, further
+increases in HBM bandwidth is not beneﬁcial because most
+of the DRAM trafﬁc has already been ﬁltered out by the
+large L3 cache. In fact, though not shown, we ﬁnd that
+DRAM bandwidth could be even reduced by 50% without
+affecting the performance. For small-batch inference, because
+the performance saturation point is at 240MB of LLC, the
+performance improvement via the combination of L3 and
+HBM is just 9%.
+Overall, we conclude that HBML+L3, which combines a
+substantially larger L3 cache (960MB) and moderately higher
+DRAM bandwidth (4.5 TB/s), is likely the most optimal
+COPA-GPU design that will perform well for both DL training
+(with 31% gain at large-batch and 27% gain at small-batch)
+and inference (with 35% gain at large-batch and 8% gain
+at small-batch) without adding signiﬁcant unnecessary cost
+through overprovisioning of memory resources. Inference is
+more sensitive to cache capacity and less sensitive to DRAM
+bandwidth than DL training, and trading off additional HBM
+resources for increased LLC capacity could be a plausible
+strategy if designing a COPA-GPU specialized for just DL
+inference.
+A large COPA-GPU enabled L3 reduces the total DRAM-
+related per-GPU energy consumption by up to 3.4 ×, as shown
+in Section III-C. However, the improved DL-optimized COPA-
+GPU utilization may lead to increased total design power that
+may not be entirely mitigated by the power reduction within
+the memory system. To mitigate growing thermal density,
+we expect future high-end GPU systems will rely on liquid
+cooling technologies to enable increased thermal envelopes
+compared to those possible today [15], [62].
+E. COPA-GPU Training Cost Efﬁciency at Scale
+At scale, multi-GPU training performance is eventually
+limited by decreasing per-GPU compute efﬁciency and grow-
+ing system-level synchronization overheads. To understand
+the scale-out efﬁciency of DL-optimized COPA-GPUs, we
+10
+
+=== PDF页 11 ===
+0.0
+0.5
+1.0
+1.5
+2.0
+2.5Speedup
+HBML+L3 2x GPUs 4x GPUs
+Fig. 12: Performance of DL-optimized HBML+L3 COPA-
+GPUs versus additional data parallelism via 2 ×GPU-Ns and
+4×GPU-Ns, normalized to the baseline GPU-N performance.
+compare the performance of an HBML+L3 COPA-GPU based
+system with 2× and 4× larger systems comprising the baseline
+GPU-Ns. We ﬁx the global batch size across all conﬁgurations
+to maintain the same statistical efﬁciency [63]. Consequently,
+the per-GPU batch size drops to one half and one quarter for
+the baseline GPU-N conﬁgurations. We do not extrapolate the
+additional overheads of distributed gradient synchronization
+at larger scales, and thus our analysis favors the 2 × and 4 ×
+GPU-N conﬁgurations.
+Figure 12 shows that doubling and quadrupling the number
+of baseline GPU-N instances (2 × GPU-Ns and 4 × GPU-Ns)
+results in mean 29% and 43% performance gains respectively
+for our training workloads. We ﬁnd that a DL-optimized
+HBML+L3 COPA-GPU conﬁguration (with 27% performance
+gain) provides similar levels of performance to 2 × GPU-Ns,
+yet should cost signiﬁcantly less than buying and hosting 2 ×
+larger installations of traditional GPU-Ns. When compared to
+GPU-N, even though HBML+L3 doubles the area by adding
+close to 826mm 2 of silicon, it is dominated by regular SRAM
+cache arrays that are expected to achieve high manufacturing
+yields due to built-in redundancy and error recovery. Moreover,
+this aggregate area is split into two smaller dies, resulting
+in substantially lower cost per mm 2. HBML+L3 integrates
+1.6× more HBM memory, resulting in total aggregate cost
+lower than 2 × of GPU-N. Thus, DL-optimized COPA-GPUs
+will provide substantially better cost-performance at scale,
+saving on not just overall GPU cost but additional system-
+level collateral such as datacenter ﬂoorspace, CPUs, network
+switches, and other peripheral devices.
+V. R ELATED WORK
+Leveraging high capacity and high bandwidth on-chip
+and on-wafer caches, or scratch memories, to store DL
+weights and activations has been well explored for DL train-
+ing/inference architectures. DaDianNao [14] was designed
+with 36MB of on-chip eDRAM to cache model weights.
+Google’s TPUv1 [34] allocated 28MB of on-chip memory
+mostly for caching activations, while TPUv2 and TPUv3 [33]
+increased it to 37MB. Recent DL accelerators such as Graph-
+core’s IPU [18], Groq’s TSP [22], Alibaba’s HanGuang [32],
+and Cerebras’s WSE [42] replaced off-chip memory with
+hundreds of MBs of high-bandwidth on-chip SRAM to satisfy
+increasing memory bandwidth requirements. Unlike domain
+speciﬁc accelerators that are highly tuned for DL workloads,
+COPA-GPUs provide high levels of GPU design reuse across
+application domains, while also enabling memory-system spe-
+cialization for individual domains.
+Multi-chip module (MCM) packaging has been extensively
+studied and deployed to integrate heterogeneous and homoge-
+neous chips within a package, aiding the scaling of compute
+and memory bandwidths for a wide variety of legacy GPU
+and CPU applications. Prior work [7], [8], [50] has focused
+on developing MCM-GPU architectures to strong scale GPU
+performance beyond the limitations of a single monolithic
+die by leveraging on-package and on-board integration tech-
+nologies. In a follow-on work [66], [75], the authors extend
+MCM-GPU architectures with advanced caching and HW/SW
+cache-coherency protocols to overcome NUMA limitations.
+MCM-3D-NoC [64] tackled the interconnect scalability issues
+of MCM integration over active interposers. In the CPU space,
+recent AMD CPU architectures [11], [54] leverage multi-
+module on-board integration to provide scalable and modular
+CPU architectures. Finally, Kannan et al. [35] proposed to
+disaggregate large monolithic CPU designs into smaller chips
+for cost reduction. In [69], the authors propose and quantify the
+costs and beneﬁts of using MCMs with ﬁne-grained domain
+speciﬁc chiplets for DL inference.
+General purpose CPU SoCs have already leveraged MCM
+designs with very large on-package eDRAM caches. Intel
+improved its mobile CPU performance by combining a CPU
+SoC and 128MB of on-package eDRAM organized as a
+victim cache [29] and IBM scaled up its Gen-Z mainframe
+performance with 960MB of L4 eDRAM cache [9]. While a
+COPA-GPU leverages the previously proposed concepts of on-
+package integration and large caches, our work is (1) the ﬁrst
+to identify and solve the diverging architectural requirements
+between FP32 (or larger) based HPC and FP16 (or smaller)
+based DL workloads in GPUs and (2) the ﬁrst to develop
+the reusable GPU architecture concept, enabling cost-effective
+GPU domain-specialization for HPC and deep learning.
+VI. C ONCLUSION
+In this work, we demonstrate that diverging architectural re-
+quirements between the HPC and DL application domains put
+converged GPU designs on a trajectory to become signiﬁcantly
+under-provisioned for DL and over-provisioned for HPC. We
+propose a new composable GPU architecture that leverages
+emerging circuit and packaging technologies to provide spe-
+cialization, while maintaining substantial compatibility across
+product lines. We demonstrate that COPA-GPU architectures
+can enable selective deployment of on-package cache and
+off-chip DRAM resources, allowing manufacturers to easily
+tailor designs to individual domains. Our analysis shows
+that DL-optimized COPA-GPUs will provide impressive per-
+GPU training and inference performance improvements, while
+still efﬁciently supporting scaled-down HPC-targeted designs.
+DL-optimized COPA-GPUs will also result in reduced cost
+datacenter cost by minimizing the number of GPUs required
+11
+
+=== PDF页 12 ===
+to achieve scale-out training performance targets, making
+COPA-GPU an attractive paradigm for increasing individual
+and aggregate GPU performance without over-optimizing the
+product for any speciﬁc domain.
+REFERENCES
+[1] “GROMACS.” [Online]. Available: http://www.gromacs.org/
+[2] “RELION.” [Online]. Available: https://github.com/3dem/relion
+[3] “SPECFEM3D Cartesian.” [Online]. Available: https://geodynamics.
+org/cig/software/specfem3d/
+[4] “The Amber18 Benchmarks,” 2018. [Online]. Available: http://ambermd.
+org/
+[5] “AMD INSTINCT™ MI100 ACCELERATOR,” 2020. [On-
+line]. Available: https://www.amd.com/system/ﬁles/documents/instinct-
+mi100-brochure.pdf
+[6] D. Amodei, S. Ananthanarayanan, R. Anubhai, J. Bai, E. Battenberg,
+C. Case, J. Casper, B. Catanzaro, Q. Cheng, G. Chen, J. Chen, J. Chen,
+Z. Chen, M. Chrzanowski, A. Coates, G. Diamos, K. Ding, N. Du,
+E. Elsen, J. Engel, W. Fang, L. Fan, C. Fougner, L. Gao, C. Gong,
+A. Hannun, T. Han, L. Johannes, B. Jiang, C. Ju, B. Jun, P. LeGresley,
+L. Lin, J. Liu, Y . Liu, W. Li, X. Li, D. Ma, S. Narang, A. Ng, S. Ozair,
+Y . Peng, R. Prenger, S. Qian, Z. Quan, J. Raiman, V . Rao, S. Satheesh,
+D. Seetapun, S. Sengupta, K. Srinet, A. Sriram, H. Tang, L. Tang,
+C. Wang, J. Wang, K. Wang, Y . Wang, Z. Wang, Z. Wang, S. Wu,
+L. Wei, B. Xiao, W. Xie, Y . Xie, D. Yogatama, B. Yuan, J. Zhan, and
+Z. Zhu, “Deep Speech 2 : End-to-End Speech Recognition in English
+and Mandarin,” in ProInternational Conference on Machine Learning
+(ICML), 2016.
+[7] A. Arunkumar, E. Bolotin, B. Cho, U. Milic, E. Ebrahimi, O. Villa,
+A. Jaleel, C.-J. Wu, and D. Nellans, “MCM-GPU: Multi-Chip-Module
+GPUs for Continued Performance Scalability,” in International Sympo-
+sium on Computer Architecture (ISCA) , 2017.
+[8] A. Arunkumar, E. Bolotin, D. Nellans, and C.-J. Wu, “Understanding the
+Future of Energy Efﬁciency in Multi-Module GPUs,” in International
+Symposium on High-Performance Computer Architecture (HPCA), 2019.
+[9] C. Berry, B. Bell, A. Jatkowski, J. Surprise, J. Isakson, O. Geva, B. De-
+skin, M. Cichanowski, D. Hamid, C. Cavitt, G. Fredeman, A. Saporito,
+A. Mishra, A. Buyuktosunoglu, T. Webel, P. Lobo, P. Parashurama,
+R. Bertran, D. Chidambarrao, D. Wolpert, and B. Bruen, “IBM z15: A
+12-Core 5.2GHz Microprocessor,” in International Solid-State Circuits
+Conference (ISSCC), 2020.
+[10] E. Bolotin, D. Nellans, O. Villa, M. O’Connor, A. Ramirez, and
+S. Keckler, “Designing Efﬁcient Heterogeneous Memory Architectures,”
+IEEE Micro, vol. 35, no. 4, 2015.
+[11] T. Burd, N. Beck, S. White, M. Paraschou, N. Kalyanasundharam,
+G. Donley, A. Smith, L. Hewitt, and S. Naffziger, “‘Zeppelin’: An
+SoC for Multichip Architectures,” IEEE Journal of Solid-State Circuits ,
+vol. 54, no. 1, January 2019.
+[12] J. Chang, Y . Chen, G. Chan, H. Cheng, P. Wang, Y . Lin, H. Fujiwara,
+R. Lee, H. Liao, P. Wang, G. Yeap, and Q. Li, “A 5nm 135Mb
+SRAM in EUV and High-Mobility-Channel FinFET Technology with
+Metal Coupling and Charge-Sharing Write-Assist Circuitry Schemes
+for High-Density and Low-VMIN Applications,” in International Solid-
+State Circuits Conference (ISSCC) , 2020.
+[13] M. Chen, F. Chen, W. Chiou, and D. C. H. Yu, “System on Integrated
+Chips (SoIC) for 3D Heterogeneous Integration,” in Electronic Compo-
+nents and Technology Conference (ECTC) , 2019.
+[14] Y . Chen, T. Luo, S. Liu, S. Zhang, L. He, J. Wang, L. Li, T. Chen,
+Z. Xu, N. Sun, and O. Temam, “DaDianNao: A Machine-Learning
+Supercomputer,” in International Symposium on Microarchitecture (MI-
+CRO), 2014.
+[15] “Google Brings Liquid Cooling to Data Centers
+to Cool Latest AI Chips,” 2018. [Online]. Avail-
+able: https://www.datacenterknowledge.com/google-alphabet/google-
+brings-liquid-cooling-data-centers-cool-latest-ai-chips
+[16] B. Dehlaghi, N. Wary, and T. Carusone, “Ultra-Short-Reach Intercon-
+nects for Die-to-Die Links: Global Bandwidth Demands in Microcosm,”
+IEEE Solid-State Circuits Magazine , vol. 11, no. 2, 2019.
+[17] J. Devlin, M.-W. Chang, K. Lee, and K. Toutanova, “BERT: Pre-training
+of Deep Bidirectional Transformers for Language Understanding,” in
+arXiv preprint arXiv:1810.04805 , 2018.
+[18] “Graphcore IPU,” 2020. [Online]. Available: https://www.graphcore.ai/
+products/ipu
+[19] D. Greenhill, R. Ho, D. Lewis, H. Schmit, K. Chan, S. Atsatt, D. How,
+P. McElheny, K. Duwel, J. Schulz, D. Faulkner, G. Iyer, G. Chen,
+H. Phoon, H. Lim, W.-Y . Koay, and T. Garibay, “A 14nm 1GHz FPGA
+with 2.5D Transceiver Integration,” in International Solid-State Circuits
+Conference (ISSCC), 2017.
+[20] S. Gu, E. Holly, T. Lillicrap, and S. Levine, “Deep Reinforcement Learn-
+ing for Robotic Manipulation with Asynchronous Off-Policy Updates,”
+in International Conference on Robotics and Automation (ICRA) , 2017.
+[21] Z. Guo, D. Kim, S. Nalam, J. Wiedemer, X. Wang, and E. Karl, “A
+23.6-Mb/mm2 SRAM in 10-nm FinFET Technology With Pulsed-pMOS
+TVC and Stepped-WL for Low-V oltage Applications,” in International
+Solid-State Circuits Conference (ISSCC) , 2018.
+[22] L. Gwennap, “Groq Rocks Neural Networks,” in Microprocessor Report
+by the Linley Group , 2020.
+[23] K. He, X. Zhang, S. Ren, and J. Sun, “Deep Residual Learning for
+Image Recognition,” in Conference on Computer Vision and Pattern
+Recognition (CVPR), June 2016.
+[24] X. He, L. Liao, H. Zhang, L. Nie, X. Hu, and T.-S. Chua, “Neural
+Collaborative Filtering,” in International World Wide Web Conference
+(WWW), 2017.
+[25] S. Y . Hou, W. C. Chen, C. Hu, C. Chiu, K. C. Ting, T. S. Lin, W. H.
+Wei, W. C. Chiou, V . J. C. Lin, V . C. Y . Chang, C. T. Wang, C. H. Wu,
+and D. Yu, “Wafer-Level Integration of an Advanced Logic-Memory
+System Through the Second-Generation CoWoS Technology,” IEEE
+Transactions on Electron Devices , vol. 64, no. 10, 2017.
+[26] C. Hu, M. Chen, W. Chiou, and D. Yu, “3D Multi-chip Integration with
+System on Integrated Chips (SoIC),” in Symposium on VLSI Technology,
+2019.
+[27] I. Hubara, M. Courbariaux, D. Soudry, R. El-Yaniv, and Y . Bengio,
+“Binarized Neural Networks,” in Advances in Neural Information Pro-
+cessing Systems 29 , 2016.
+[28] D. Ingerly, K. Enamul, W. Gomes, D. Jones, K. Kolluru, A. Kandas, G.-
+S. Kim, H. Ma, D. Pantuso, C. Petersburg, M. Phen-givoni, A. Pillai,
+A. Sairam, P. Shekhar, P. Sinha, P. Stover, A. Telang, Z. Zell, and
+R. Criss, “Foveros: 3D Integration and the use of Face-to-Face Chip
+Stacking for Logic Devices,” in IEEE International Electron Devices
+Meeting (IEDM), 2019.
+[29] “14 nm Technology Announcement,” 2015. [Online]. Avail-
+able: https://www.intel.com/content/dam/www/public/us/en/documents/
+presentation/advancing-moores-law-in-2014-presentation.pdf
+[30] “Lakeﬁeld: Hybrid cores in 3D Package,” 2019. [Online].
+Available: https://www.hotchips.org/hc31/HC31 2.10 LKF HC 2019
+Final v7.pdf
+[31] Z. Jia, B. Tillman, M. Maggioni, and D. P. Scarpazza, “Dissecting the
+Graphcore IPU Architecture via Microbenchmarking,” in arXiv preprint
+arXiv:1912.03413, 2019.
+[32] Y . Jiao, L. Han, R. Jin, Y .-J. Su, C. Ho, L. Yin, Y . Li, L. Chen,
+Z. Chen, L. Liu, Z. He, Y . Yan, J. He, J. Mao, X. Zai, X. Wu,
+Y . Zhou, M. Gu, G. Zhu, R. Zhong, W. Lee, P. Chen, Y . Chen, W. Li,
+D. Xiao, Q. Yan, M. Zhuang, J. Chen, Y . Tian, Y . Lin, W. Wu, H. Li,
+and Z. Dou, “A 12nm Programmable Convolution-Efﬁcient Neural-
+Processing-Unit Chip Achieving 825TOPS,” in International Solid-State
+Circuits Conference (ISSCC) , 2020.
+[33] N. P. Jouppi, D. H. Yoon, G. Kurian, S. Li, N. Patil, J. Laudon, C. Young,
+and D. Patterson, “A Domain-Speciﬁc Supercomputer for Training Deep
+Neural Networks,” Communications of the ACM , vol. 63, no. 7, 2020.
+[34] N. P. Jouppi, C. Young, N. Patil, D. Patterson, G. Agrawal, R. Bajwa,
+S. Bates, S. Bhatia, N. Boden, A. Borchers, R. Boyle, P.-l. Cantin,
+C. Chao, C. Clark, J. Coriell, M. Daley, M. Dau, J. Dean, B. Gelb,
+T. V . Ghaemmaghami, R. Gottipati, W. Gulland, R. Hagmann, C. R.
+Ho, D. Hogberg, J. Hu, R. Hundt, D. Hurt, J. Ibarz, A. Jaffey,
+A. Jaworski, A. Kaplan, H. Khaitan, D. Killebrew, A. Koch, N. Kumar,
+S. Lacy, J. Laudon, J. Law, D. Le, C. Leary, Z. Liu, K. Lucke,
+A. Lundin, G. MacKean, A. Maggiore, M. Mahony, K. Miller, R. Na-
+garajan, R. Narayanaswami, R. Ni, K. Nix, T. Norrie, M. Omernick,
+N. Penukonda, A. Phelps, J. Ross, M. Ross, A. Salek, E. Samadiani,
+C. Severn, G. Sizikov, M. Snelham, J. Souter, D. Steinberg, A. Swing,
+M. Tan, G. Thorson, B. Tian, H. Toma, E. Tuttle, V . Vasudevan,
+R. Walter, W. Wang, E. Wilcox, and D. H. Yoon, “In-Datacenter
+Performance Analysis of a Tensor Processing Unit,” in International
+Symposium on Computer Architecture (ISCA) , 2017.
+12
+
+=== PDF页 13 ===
+[35] A. Kannan, N. Enright Jerger, and G. Loh, “Enabling Interposer-based
+Disintegration of Multi-core Processors,” in International Symposium on
+Networks-on-Chip (NOCS), 2015.
+[36] J. Kaplan, S. McCandlish, T. Henighan, T. B. Brown, B. Chess, R. Child,
+S. Gray, A. Radford, J. Wu, and D. Amodei, “Scaling Laws for Neural
+Language Models,” in arXiv preprint arXiv:2001.08361 , 2020.
+[37] S. Keckler, W. Dally, B. Khailany, M. Garland, and D. Glasco, “GPUs
+and the Future of Parallel Computing,” IEEE Micro, vol. 31, no. 5, 2011.
+[38] M. Khairy, Z. Shen, T. M. Aamodt, and T. G. Rogers, “Accel-sim:
+An extensible simulation framework for validated gpu modeling,” in
+International Symposium on Computer Architecture (ISCA) , 2020.
+[39] B. Klenk, N. Jiang, G. Thorson, and L. Dennison, “An In-Network Ar-
+chitecture for Accelerating Shared-Memory Multiprocessor Collectives,”
+in International Symposium on Computer Architecture (ISCA) , 2020.
+[40] F. Li, B. Zhang, and B. Liu, “Ternary Weight Networks,” in
+arXiv:1605.04711, 2016.
+[41] Y . Li, I.-J. Liu, Y . Yuan, D. Chen, A. Schwing, and J. Huang, “Accel-
+erating distributed reinforcement learning with in-switch computing,” in
+International Symposium on Computer Architecture (ISCA) , 2019.
+[42] S. Lie, “Wafer Scale Deep Learning,” in HotChips-31, 2019.
+[43] M.-S. Lin, T.-C. Huang, C.-C. Tsai, K.-H. Tam, C.-H. Hsieh, T. Chen,
+W.-H. Huang, J. Hu, Y .-C. Chen, S. Goel, C.-M. Fu, S. Rusu, C.-C.
+Li, S.-Y . Yang, M. Wong, S.-C. Yang, and F. Lee, “A 7nm 4GHz Arm-
+core-based CoWoS Chiplet Design for High Performance Computing,”
+in Symposium on VLSI Circuits , 2019.
+[44] “Laghos.” [Online]. Available: https://computing.llnl.gov/projects/co-
+design/laghos
+[45] “The CORAL Benchmarks,” 2014. [Online]. Available: https://asc.llnl.
+gov/CORAL-benchmarks/
+[46] “The CORAL2 Benchmarks,” 2017. [Online]. Available: https:
+//asc.llnl.gov/coral-2-benchmarks
+[47] G. H. Loh, N. E. Jerger, A. Kannan, and Y . Eckert, “Interconnect-
+Memory Challenges for Multi-Chip, Silicon Interposer Systems,” in
+International Symposium on Memory Systems , 2015.
+[48] P. Mattson, C. Cheng, G. Diamos, C. Coleman, P. Micikevicius,
+D. Patterson, H. Tang, G.-Y . Wei, P. Bailis, V . Bittorf, D. Brooks,
+D. Chen, D. Dutta, U. Gupta, K. Hazelwood, A. Hock, X. Huang,
+D. Kang, D. Kanter, N. Kumar, J. Liao, D. Narayanan, T. Oguntebi,
+G. Pekhimenko, L. Pentecost, V . Janapa Reddi, T. Robie, T. St John, C.-
+J. Wu, L. Xu, C. Young, and M. Zaharia, “MLPerf Training Benchmark,”
+in Machine Learning and Systems (MLSys) , 2020.
+[49] P. Micikevicius, S. Narang, J. Alben, G. Diamos, E. Elsen, D. Garcia,
+B. Ginsburg, M. Houston, O. Kuchaiev, G. Venkatesh, and H. Wu,
+“Mixed Precision Training,” in International Conference on Learning
+Representations (ICLR), 2018.
+[50] U. Milic, O. Villa, E. Bolotin, A. Arunkumar, E. Ebrahimi, A. Jaleel,
+A. Ramirez, and D. Nellans, “Beyond the Socket: NUMA-aware GPUs,”
+in International Symposium on Microarchitecture (MICRO) , 2017.
+[51] “MLPerf Inference Results v0.5,” 2019. [Online]. Available: https:
+//mlperf.org/inference-results/
+[52] “MLPerf Training Results v0.6,” 2019. [Online]. Available: https:
+//mlperf.org/training-results-0-6/
+[53] G. E. Moore, “Cramming More Components onto Integrated Circuits,”
+Electronics, 1965.
+[54] S. Naffziger, K. Lepak, M. Paraschou, and M. Subramony, “AMD
+Chiplet Architecture for High-Performance Server and Desktop Prod-
+ucts,” in International Solid-State Circuits Conference (ISSCC) , 2020.
+[55] “FUN3D.” [Online]. Available: https://fun3d.larc.nasa.gov/
+[56] “NVIDIA Kepler GK110 Architecture,” 2012. [On-
+line]. Available: https://www.nvidia.com/content/PDF/kepler/NVIDIA-
+Kepler-GK110-Architecture-Whitepaper.pdf
+[57] “NVIDIA NVLink,” 2016. [Online]. Available: ”https://www.nvidia.
+com/en-us/data-center/nvlink/”
+[58] “NVIDIA Tesla P100 Architecture,” 2016. [Online]. Avail-
+able: https://images.nvidia.com/content/pdf/tesla/whitepaper/pascal-
+architecture-whitepaper.pdff
+[59] “NVIDIA Tesla V100 Architecture,” 2017. [Online].
+Available: http://images.nvidia.com/content/volta-architecture/pdf/volta-
+architecture-whitepaper.pdf
+[60] “NVIDIA Turing GPU Architecture,” 2019. [Online].
+Available: https://www.nvidia.com/content/dam/en-zz/Solutions/design-
+visualization/technologies/turing-architecture/NVIDIA-Turing-
+Architecture-Whitepaper.pdf
+[61] “NVIDIA A100 Tensor Core GPU Architecture,” 2020. [Online].
+Available: https://www.nvidia.com/content/dam/en-zz/Solutions/Data-
+Center/nvidia-ampere-architecture-whitepaper.pdf
+[62] “Open Speciﬁcation for a Liquid Cooled Server Rack - Progress
+Update,” 2018. [Online]. Available: https://datacenters.lbl.gov/sites/
+default/ﬁles/OpenSpeciﬁcation.pdf
+[63] S. Pal, E. Ebrahimi, A. Zulﬁqar, Y . Fu, V . Zhang, S. Migacz, D. Nellans,
+and P. Gupta, “Optimizing Multi-GPU Parallelization Strategies for Deep
+Learning Training,” IEEE Micro, vol. 39, no. 5, 2019.
+[64] V . Pano, R. Kuttappa, and B. Taskin, “3D NoCs with Active Interposer
+for Multi-Die Systems,” in International Symposium on Networks-on-
+Chip (NOCS), 2019.
+[65] V . J. Reddi, C. Cheng, D. Kanter, P. Mattson, G. Schmuelling, C. Wu,
+B. Anderson, M. Breughe, M. Charlebois, W. Chou, R. Chukka, C. Cole-
+man, S. Davis, P. Deng, G. Diamos, J. Duke, D. Fick, J. S. Gardner,
+I. Hubara, S. Idgunji, T. B. Jablin, J. Jiao, T. S. John, P. Kanwar, D. Lee,
+J. Liao, A. Lokhmotov, F. Massa, P. Meng, P. Micikevicius, C. Osborne,
+G. Pekhimenko, A. T. R. Rajan, D. Sequeira, A. Sirasao, F. Sun, H. Tang,
+M. Thomson, F. Wei, E. Wu, L. Xu, K. Yamada, B. Yu, G. Yuan,
+A. Zhong, P. Zhang, and Y . Zhou, “MLPerf Inference Benchmark,” in
+International Symposium on Computer Architecture (ISCA) , 2020.
+[66] X. Ren, D. Lustig, E. Bolotin, A. Jaleel, O. Villa, and D. Nellans, “HMG:
+Extending Cache Coherence Protocols Across Modern Hierarchical
+Multi-GPU Systems,” in International Symposium on High-Performance
+Computer Architecture (HPCA), 2020.
+[67] O. Ronneberger, P. Fischer, and T. Brox, “U-Net: Convolutional Net-
+works for Biomedical Image Segmentation,” in arXiv:1505.04597, 2015.
+[68] A. Sallab, M. Abdou, E. Perot, and S. Yogamani, “Deep Reinforcement
+Learning framework for Autonomous Driving,” Electronic Imaging ,
+2017.
+[69] Y . S. Shao, J. Clemons, R. Venkatesan, B. Zimmer, M. Fojtik, N. Jiang,
+B. Keller, A. Klinefelter, N. Pinckney, P. Raina, S. G. Tell, Y . Zhang,
+W. J. Dally, J. Emer, C. T. Gray, B. Khailany, and S. W. Keckler,
+“Simba: Scaling Deep-Learning Inference with Multi-Chip-Module-
+Based Architecture,” in International Symposium on Microarchitecture
+(MICRO), 2019.
+[70] Y . Sun, Y . Chen, X. Wang, and X. Tang, “Deep Learning Face Represen-
+tation by Joint Identiﬁcation-Veriﬁcation,” in International Conference
+on Neural Information Processing Systems , 2014.
+[71] W. J. Turner, J. W. Poulton, J. M. Wilson, X. Chen, S. G. Tell, M. Fojtik,
+T. H. Greer, B. Zimmer, S. Song, N. Nedovic, S. S. Kudva, S. R.
+Sudhakaran, R. Bashirullah, W. Zhao, W. J. Dally, and C. T. Gray,
+“Ground-Referenced Signaling for Intra-Chip and Short-Reach Chip-to-
+Chip Interconnects,” in IEEE Custom Integrated Circuits Conference
+(CICC), 2018.
+[72] V . Vashishtha, M. Vangala, P. Sharma, and L. T. Clark, “Robust 7-nm
+SRAM Design on a Predictive PDK,” in International Symposium on
+Circuits and Systems (ISCAS) , 2017.
+[73] O. Villa, D. Lustig, Z. Yan, E. Bolotin, Y . Fu, N. Chatterjee, N. Jiang, and
+D. Nellans, “Need for speed: Experiences building a trustworthy system-
+level gpu simulator,” in International Symposium on High-Performance
+Computer Architecture (HPCA), 2021.
+[74] P. Vivet, E. Guthmuller, Y . Thonnart, G. Pillonnet, G. Moritz, I. Miro-
+Panad`es, C. Fuguet, J. Durupt, C. Bernard, D. Varreau, J. Pontes,
+S. Thuries, D. Coriat, M. Harrand, D. Dutoit, D. Lattard, L. Arnaud,
+J. Charbonnier, P. Coudrain, A. Garnier, F. Berger, A. Gueugnot,
+A. Greiner, Q. Meunier, A. Farcy, A. Arriordaz, S. Cheramy, and
+F. Clermidy, “A 220 GOPS 96 Core Processor with 6 Chiplets 3D-
+Stacked on an Active Interposer Offering 0.6ns/mm Latency, 3Tb/s/mm2
+Inter-Chiplet Interconnects and 156mW/mm2 at 82%-Peak-Efﬁciency
+DC DC Converters,” in International Solid-State Circuits Conference
+(ISSCC), 2020.
+[75] V . Young, A. Jaleel, E. Bolotin, E. Ebrahimi, D. Nellans, and O. Villa,
+“Combining HW/SW Mechanisms to Improve NUMA Performance of
+Multi-GPU Systems,” in International Symposium on Microarchitecture
+(MICRO), 2018.
+13

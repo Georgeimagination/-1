@@ -1,0 +1,8 @@
+{
+    "status":  "FAIL_ROLLED_BACK",
+    "error":  "INJECTED_TEST_FAILURE_AFTER_3_REPLACEMENTS",
+    "rollback_succeeded":  true,
+    "tables_restored":  3,
+    "payloads_removed":  0,
+    "formal_baseline_aggregate":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10"
+}

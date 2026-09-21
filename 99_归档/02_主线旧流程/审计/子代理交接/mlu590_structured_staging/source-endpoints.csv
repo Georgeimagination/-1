@@ -1,0 +1,2 @@
+"endpoint_id","source_id","endpoint_type","url","local_path","sha256","page_count","mime_type","access_date","http_status","snapshot_date","is_preferred_endpoint","accessibility_status","review_status","notes"
+"END-CAMBRICON-MLU-OPS-COMMIT-67B3707F-REPO","SRC-CAMBRICON-MLU-OPS-COMMIT-67B3707F","repository","https://github.com/Cambricon/mlu-ops/tree/67b3707f9ce55718490534955903a007ae86f517","","","","text/html","2026-08-12","200","2026-08-07","true","accessible","reviewed","Commit resolved with git fetch. Exact file locators are retained in assertions."

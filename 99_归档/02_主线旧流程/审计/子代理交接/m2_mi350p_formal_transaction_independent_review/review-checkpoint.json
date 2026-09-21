@@ -1,0 +1,38 @@
+{
+    "status":  "in_progress",
+    "reviewer":  "m2_mi350p_formal_transaction_independent_review",
+    "write_scope":  "审计/子代理交接/m2_mi350p_formal_transaction_independent_review/",
+    "generated_at":  "2026-08-13",
+    "prep":  {
+                 "manifest_sha256":  "c21612350bae17288e365d26f95b5f669426ba99fd33cefce746644986cb3c98",
+                 "manifest_rows":  67,
+                 "manifest_member_failures":  0,
+                 "unlisted_files_excluding_manifest":  0,
+                 "missing_listed_files":  0,
+                 "aggregate":  "e7138b42baee6b2d138cb5d8f31593c4f6c62319fa16688e866b840d2e419949"
+             },
+    "formal":  {
+                   "table_rows":  32,
+                   "member_failures":  0,
+                   "aggregate":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10"
+               },
+    "signed_data":  {
+                        "signoff_sha256":  "74ac69c299f5ce817c03236ef97df4e13f08f2d6724bb1c0178376661be5dad1",
+                        "signoff_rows":  274,
+                        "lifecycle_pk_writes":  270,
+                        "file_payloads":  4,
+                        "authorized_write_rows":  270,
+                        "write_tables":  19,
+                        "guards":  3,
+                        "new_file_targets":  4,
+                        "absent_targets":  4
+                    },
+    "expected":  {
+                     "prep_manifest_sha256":  "c21612350bae17288e365d26f95b5f669426ba99fd33cefce746644986cb3c98",
+                     "prep_aggregate":  "e7138b42baee6b2d138cb5d8f31593c4f6c62319fa16688e866b840d2e419949",
+                     "formal_aggregate":  "f1520907d54e406e7d82f591e3799f07f569218aff0c321ac3b836b6c649da10",
+                     "candidate_aggregate":  "28923f7aa9dea488152f699e6879319d1fb96222fe72745754cf8ffd7b46518e",
+                     "candidate_validator_checks":  111390
+                 },
+    "formal_writes_performed":  0
+}

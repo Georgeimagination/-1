@@ -1,0 +1,2 @@
+"selection_run_id","scope_kind","scope_id","cutoff_date","algorithm_version","created_date","reviewer","status","review_status","notes"
+"SELRUN-M2W3-AMD-MI455X-20260813","object","OBJ-AMD-MI455X","2026-08-13","reverse-removal-v1+adversarial-3pass","2026-08-13","m2_w3_mi455x_module","draft","draft","Rerun against the remediated 39-direct-fact set after restoring announced and deleting all four derived chains. Four sources survive reverse removal; final independent review remains pending."

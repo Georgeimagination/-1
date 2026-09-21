@@ -1,0 +1,568 @@
+# S11 规范化文本
+
+题名：Challenges and Research Directions for Large Language Model Inference Hardware
+固定版本：arXiv 2601.05047v3
+原始网址：https://arxiv.org/abs/2601.05047
+全文网址：https://arxiv.org/pdf/2601.05047v3
+
+
+## 本地原文：原文/网页快照/S11_arxiv_metadata.html
+
+# 页面标题：[2601.05047] Challenges and Research Directions for Large Language Model Inference Hardware
+# Computer Science > Hardware Architecture
+# Title: Challenges and Research Directions for Large Language Model Inference Hardware
+Comments: | Accepted for publication by IEEE Computer, 2026
+Subjects: | Hardware Architecture (cs.AR) ; Artificial Intelligence (cs.AI); Machine Learning (cs.LG)
+Cite as: | arXiv:2601.05047 [cs.AR]
+(or 
+ arXiv:2601.05047v3 [cs.AR] for this version)
+https://doi.org/10.48550/arXiv.2601.05047 
+ 
+ Focus to learn more 
+ 
+ 
+ 
+ arXiv-issued DOI via DataCite
+Related DOI : | https://doi.org/10.1109/MC.2026.3652916 
+
+ 
+ 
+ 
+ Focus to learn more 
+ 
+ 
+ 
+ 
+ DOI(s) linking to related resources
+## Submission history
+## Access Paper:
+- View PDF
+### Current browse context:
+### References & Citations
+- NASA ADS
+- Google Scholar
+- Semantic Scholar
+## BibTeX formatted citation
+### Bookmark
+# Bibliographic and Citation Tools
+# Code, Data and Media Associated with this Article
+# Demos
+# Recommenders and Search Tools
+- Author
+- Venue
+- Institution
+- Topic
+# arXivLabs: experimental projects with community collaborators
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+Have an idea for a project that will add value for arXiv's community? Learn more about arXivLabs .
+
+## 本地原文：原文/PDF/S11_llm_inference_hardware_v3.pdf
+
+
+=== PDF页 1 ===
+Challenges and Research Directions 
+ for Large Language Model Inference Hardware 
+ Xiaoyu Ma and David Patterson, Google 
+ We highlight four promising research opportunities to improve  Large Language Model  inference for datacenter 
+ AI:  High Bandwidth Flash  for 10X memory capacity with  HBM-like bandwidth; Processing-Near-Memory and 
+ 3D memory-logic stacking for high memory bandwidth; and low-latency interconnect to speedup 
+ communication. We also review their applicability for mobile devices. 
+ INTRODUCTION 
+ When one author started his career in 1976, ~40% of the papers at computer architecture conferences were 
+ from industry. Their share fell below 4% at the 2025 International Symposium on Compute Architecture, 
+ suggesting a near disconnect between research and practice. To help restore their historic bond, we propose 
+ research directions that, if pursued, address some of the biggest hardware challenges that the AI industry 
+ faces. 
+ Large language model (LLM) inference is a crisis.  Rapidly improving hardware enables AI advances. 
+ Projections of inference chip annual sales are 4X-6X over the next 5-8 years.  1  While training demonstrates 
+ remarkable AI breakthroughs, the cost of inference determines economic viability. Companies find it costly to 
+ serve state-of-the-art models as usage of these models dramatically increases.  2,3 
+ New trends make inference harder.  Recent advances  in LLMs require more resources for inference: 
+ ●  Mixture of Experts (MoE)  . Rather than a single dense  feedforward block, MoE uses tens to hundreds 
+ of experts—256 for DeepSeekv3— invoked selectively. This sparsity allows model size to grow 
+ significantly for higher quality, despite a modest increase in training cost. While helping training, MoE 
+ exacerbates inference by expanding memory and communication. 
+ ●  Reasoning models  . Reasoning is a think-before-act  technique to improve quality. An extra “thinking” 
+ step generates a long sequence of “thoughts” before the final answer, similar to people solving a 
+ problem step-by-step. Thinking greatly increases generation latency, and the long sequence of thought 
+ tokens strains memory. 
+ ●  Multimodal  . LLMs have evolved from text to image,  audio, and video generation. Larger data types 
+ demand more than text generation. 
+ ●  Long context.  A context window refers to the amount  of information the LLM model can look at when 
+ generating an answer. Longer context helps quality, but increases compute and memory demands. 
+ ●  Retrieval-Augmented Generation (RAG  ). RAG accesses  a user-specific knowledge database to 
+ obtain relevant information as extra context to improve LLM results, increasing resource demands. 
+ ●  Diffusion.  In contrast to the autoregressive method  that generates tokens sequentially, the novel 
+ diffusion method generates all tokens (e.g., an entire image) in one step and then iteratively denoises 
+ the image to reach desired quality. Unlike above, diffusion only increases compute demands. 
+ The growing market and challenges of LLM inference suggest a great opportunity and need for innovation! 
+ 1
+
+=== PDF页 2 ===
+CURRENT LLM INFERENCE HARDWARE AND ITS INEFFICIENCIES 
+ We first review LLM inference basics and its primary bottlenecks on mainstream AI architectures, focusing on 
+ LLMs in the datacenter. LLMs on mobile devices have different restrictions and thus different options (e.g., 
+ HBM is infeasible). 
+ LLMs, whose heart is Transformer, have two inference phases with very different characteristics:  Prefill  and 
+ Decode  (Figure 1). Prefill is similar to training  by processing all tokens of the input sequence simultaneously, 
+ so it is inherently parallel and often compute bound. In contrast, Decode is inherently sequential, as each step 
+ generates one output token (“autoregressive”), making it memory bound. The  Key Value  (  KV) Cache  connects 
+ the two phases, with its size proportional to the input+output sequence length. Although together in Figure 1, 
+ Prefill and Decode are not tightly coupled, and often run on different servers. Disaggregated inference allows 
+ software optimizations like batching to make Decode be less memory bound. A survey for efficient LLM 
+ inference reviews many software optimizations.  4 
+ Figure 1. The key processes of inference for the Transformer model that is the foundation of LLMs. 
+ GPUs and Google’s Tensor Processing Units (TPUs) are popular datacenter accelerators for both training and 
+ inference. Historically, inference versions were scaled-down from training systems, such as with fewer chips or 
+ a smaller chip with less memory or performance. Thus far, no GPU/TPU was designed solely for LLM 
+ inference. Because Prefill is similar to training whereas Decode differs significantly, two challenges make 
+ GPUs/TPUs inefficient for Decode. 
+ Decode Challenge #1: Memory 
+ The autoregressive Decode makes inference inherently memory bound, with new software trends heightening 
+ this challenge. In contrast, the hardware trends go in a completely different direction. 
+ AI processors face a Memory Wall.  Current datacenter  GPUs/TPUs rely on  High Bandwidth Memory  (  HBM  ), 
+ and connect several HBM stacks to a single monolithic accelerator application specific integrated circuit (ASIC) 
+ (see Figure 2 and Table 1). Nevertheless, memory bandwidth improves more slowly than compute 
+ floating-point operations per second (FLOPS). For example, NVIDIA GPU 64-bit FLOPS rose by 80X from 
+ 2012 to 2022, but bandwidth grew only 17X. This gap will continue expanding. 
+ 2
+
+=== PDF页 3 ===
+Figure 2. (a) High Bandwidth Memory (HBM) package top view, (b) HBM side view  . 
+ HBM  HBM2  HBM2E  HBM3  HBM3E  HBM4 
+ Year Introduced  2013  2016  2019  2022  2023  2026 
+ Max pin bandwidth (gigabit/sec)  1.0  2.4  3.6  6.4  9.8  8 
+ Number of pins  1024  1024  1024  1024  1024  2048 
+ Stack BW (gigabyte/sec)  128  307  461  819  1254  2048 
+ Max Number of dies/Stack  4  8  12  12  16  16 
+ Max Capacity per die (gibibyte)  1  1  2  2  3  4 
+ Max Stack Capacity (gibibyte)  4  8  24  24  48  64 
+ NVIDIA GPU Generation  Volta V100  Ampere A100  Hopper H100  Blackwell B100  Rubin R100 
+ HBM stacks/GPU  4  5  5  8  8 
+ Table 1. Key features of six generations of HBM. 
+ HBM is increasingly expensive.  Looking at one HBM  stack, the normalized price of capacity ($/GB) and 
+ bandwidth ($/GBps)  increases  over time. Figure 3(a)  shows both grew 1.35x higher from 2023-2025.  5  This  rise 
+ is because manufacturing and packaging difficulties increase with dies per HBM stack and Dynamic RAM 
+ (DRAM)  density growth. In contrast, Figure 3(b) shows the equivalent costs for standard Double Data Rate 
+ (DDR4) DRAM  decrease  over time. From 2022-2025, capacity  cost shrank to 0.54x and bandwidth cost to 
+ 0.45x. While prices of all memory and storage devices surged in 2026 due to unexpected demand, we believe 
+ long term that the diverging pricing trends of HBM and DRAM will hold. 
+ DRAM density growth is decelerating.  For an individual  DRAM die, scaling is also worrisome. Fourfold 
+ growth from 8-gigabit DRAM dies that debuted in 2014 will take over 10 years. Fourfold gains occurred every 
+ 3-6 years previously. 
+ SRAM-only solutions are insufficient  . Cerebras and  Groq tried using full reticle chips filled with SRAM to 
+ avoid DRAM and HBM challenges. (Cerebras even used wafer scale integration.) While plausible when the 
+ companies were founded a decade ago, LLMs soon overwhelmed on-chip SRAM capacity. Both had to later 
+ retrofit external DRAM. 
+ 3
+
+=== PDF页 4 ===
+(a) HBM increasing $/GB capacity and $/GBps bandwidth. 
+ (b) DDR decreasing $/GB capacity and $/GBps bandwidth (Source: see Appendix) 
+ Figure 3. Cost per capacity and Bandwidth over time with trendlines for HBM (a) vs DDR (b). 
+ Decode Challenge #2: End-to-End Latency 
+ User-facing implies low latency.  Unlike training that  takes weeks, inference is tied to real-time requests, 
+ needing a response in seconds or less. Low latency is critical for user-facing inference. (Batch or offline 
+ inference does not have a low latency requirement.) Depending on the application, latency is measured as 
+ time-to-completion  of all output tokens or  time-to-first-token  .  Both have challenges: 
+ ●  Time-to-completion challenge  . Decode produces one  token at a time, so the longer the output, the 
+ longer the latency. Long output sequences stretch latency, but long input sequences are also slower 
+ 4
+
+=== PDF页 5 ===
+because accessing the KV Cache during Decode and Prefill takes more time. Each Decode iteration 
+ has high memory access latency because it is memory bound. 
+ ●  Time-to-first-token challenge.  Long input sequences  and RAG increase the amount of work before 
+ generation and hence the time-to-first-token. Reasoning models also increase this latency as they 
+ generate many “thought” tokens before the first user-visible token. 
+ Interconnect latency outweighs bandwidth.  Before LLMs,  in datacenter inference usually ran on one chip, 
+ while training needed a supercomputer. The supercomputer interconnect understandably aimed much more at 
+ bandwidth than latency. LLM inference changes the game: 
+ ●  Because of big weights, LLM inference now needs a multi-chip system, with software sharding that 
+ implies frequent communication. MoE and long sequence models further increase the system size to 
+ accommodate larger memory capacity requirements. 
+ ●  Unlike training, the size of network messages is often small, given the small batch size of Decode. 
+ Latency trumps bandwidth for frequent, small messages in a big network. 
+ Table 2 summarizes the main challenges of Decode inference. Only Diffusion needs increased 
+ compute—relatively easy to deliver—as it is fundamentally unlike Transformer Decode. Thus, we focus on 
+ promising directions for improving memory and interconnect latency but not compute. The last four rows are 
+ research opportunities to fulfill these needs, covered next. 
+ LLM Decode features & trends 
+ + Promising research opportunities 
+ Memory 
+ capacity 
+ Memory 
+ bandwidth 
+ Interconnect 
+ latency  Compute 
+ Drivers of hardware 
+ improvements 
+ Conventional Transformer Decode  ✔   ✔  
+ MoE  ✔   ✔   ✔  
+ Reasoning models  ✔   ✔   ? 
+ Multimodal  ✔   ✔   ? 
+ Long-context  ✔   ✔   ? 
+ RAG  ✔   ✔   ? 
+ Diffusion  ✔  
+ Where promising 
+ directions can help 
+ ①  High Bandwidth Flash  ✔   ⇧  
+ ②  Near Memory Compute  ✔   ⇧  
+ ③  3D Compute-Logic Stacking  ✔   ⇧  
+ ④  Low-Latency Interconnect  ✔  
+ Table 2. Summary of primary hardware bottlenecks for LLM inference and research directions to 
+ address them.  “ ✔ ” means primary bottlenecks. In the  top section of the table (hardware improvement drivers), 
+ “?” means a derived interconnect bottleneck for the drivers. For example, if reasoning models require a larger 
+ system to fulfill the memory requirements, it puts pressure on interconnect latency by increasing the hop count. 
+ Likewise, if an improvement on memory capacity or bandwidth allows inference of the same model with fewer 
+ accelerator chips, it would help lower interconnect latency. For the bottom section (promising directions), “ ⇧ ” 
+ means a promising direction that helps with interconnect latency by shrinking the size of the overall system, 
+ thereby reducing the hop count. 
+ 5
+
+=== PDF页 6 ===
+FOUR RESEARCH OPPORTUNITIES TO RE-THINK LLM INFERENCE 
+ HARDWARE 
+ Performance/cost metrics measure the efficiency of AI systems. Modern metrics—which emphasize realistic 
+ performance normalized,  Total Cost of Ownership (TCO)  ,  average power consumption, and  carbon dioxide 
+ equivalent emissions  (  CO  2  e  )—offer new targets for  designing systems:  6 
+ ●  Performance must be meaningful  . For LLM Decode inference,  high FLOPS on a giant die does not 
+ necessarily mean high performance. Instead, we need to scale memory bandwidth and capacity 
+ efficiently, and optimize interconnect speed. 
+ ●  Performance must be delivered within datacenter capacity  ,  often constrained by power, space, and 
+ CO  2  e budgets. 
+ ●  Power and CO  2  e are first-order optimization targets  .  Power affects TCO and datacenter capacity. 
+ Power and energy cleanliness determine operational CO  2  e. Manufacturing yield and life cycle set 
+ embodied CO  2  e. 
+ Next, we describe four promising research directions to address the Decode challenges (bottom of Table 2). 
+ Although described independently, they are synergistic; an architecture can usefully combine many of them. All 
+ improve performance/TCO, performance/CO  2  e, and performance/power. 
+ Figure 4. (a) High Bandwidth Flash (HBF) and (b) 3D Compute-logic Stacking 
+ ①  High Bandwidth Flash for 10X capacity 
+ High Bandwidth Flash  (  HBF  ) combines HBM bandwidth  with flash capacity by stacking flash dies like HBM 
+ (Figure 4 (a)).  7  HBF delivers 10X memory capacity  per node to reduce system size to save power, TCO, CO2e, 
+ and network overhead. Table 3 compares HBF to HBM and DDR and low power DDR (LPDDR) DRAM. The 
+ weaknesses of alternatives are bandwidth for DDR5, capacity for HBM, and write limits and high read latency 
+ for HBF. Another HBF benefit is sustainable capacity scaling; flash capacity continues to double every three 
+ years while, as mentioned above, DRAM growth decelerates. 
+ Two well-known flash memory restrictions must be addressed: 
+ ●  Limited write endurance  . Write/erase cycles can wear-out  flash. Therefore, HBF must hold 
+ infrequently-updated data, such as weights at inference time or slow-changing context. 
+ ●  Page-based reads with high latency  . Flash reads are  at page granularity (10s KBs) with a latency 
+ substantially worse than DRAM (microseconds). Small reads reduce effective bandwidth. 
+ These issues mean HBF cannot replace all HBM; a system still needs normal DRAM for data unsuitable for 
+ HBF. 
+ 6
+
+=== PDF页 7 ===
+Capacity 
+ (GB) 
+ Bandwidth 
+ (GB/s) 
+ Power 
+ (Watt) 
+ GBps 
+ per Watt 
+ GB 
+ per Watt 
+ Read 
+ latency (ns) 
+ Bytes 
+ per read 
+ Write 
+ endurance 
+ 1 HBF stack  512  1638 (read)  <80  >20.5  >6.4  1,000s  4096  low 
+ 1 HBM4-6400 stack  48  1638  40  41  1  10-100  32  high 
+ 1 DDR5-6400-64GB module  64  51  12  4  5  10-100  64  high 
+ 1 LPDDR5-6400-16GB module  16  51  3  17  5  10-100  64  high 
+ 1 Flash card  4096  4 (read)  50  0.1  82  10,000s  4096  low 
+ Table 3. A ballpark comparison of HBF, HBM, DDR, LPDDR, and flash. 
+ The addition of HBF enables exciting capabilities for LLM inference: 
+ ●  10X weight memory  . Weights are frozen during inference,  so HBF ’s 10X capacity could host many 
+ more weights—such as giant MoEs—to enable much bigger models than affordable today. 
+ ●  10X context memory.  Limited write endurance makes  HBF infeasible for KV Cache data updated for 
+ every query or generation token. However, it works for a slow-changing context. For example: 
+ ○  A web corpus, used by LLM search, that stores billions of Internet documents. 
+ ○  A code database, used by AI coding, that stores billions of lines of code. 
+ ○  A paper corpus, used by AI tutoring, that tracks millions of research papers. 
+ ●  Smaller inference system  . Memory capacity determines  the minimum hardware to hold a model. HBF 
+ downsizes the system, helping communication, reliability, and resource allocation. 
+ ●  Greater resource capacity.  HBF would reduce dependency  on HBM-only architectures and alleviate 
+ the global shortage of mainstream memory devices. 
+ HBF opens new research questions: 
+ ●  How can software deal with limited write endurance and page-based, high-latency reads? 
+ ●  What should be the ratio of traditional memory to HBF in a system? 
+ ●  Can we reduce the constraints of HBF technology itself? 
+ ●  How should HBF be configured for mobile devices versus for datacenters? 
+ ②  Processing-Near-Memory for high bandwidth 
+ Processing-in-Memory (PIM),  conceived several decades  ago  8  , obtains high bandwidth by augmenting 
+ memory dies with small, low-power processors attached to memory banks. While PIM offers extraordinary 
+ bandwidth, key challenges are software sharding and memory-logic coupling. The former limits the number of 
+ software kernels that can run well on PIM. The latter hurts power and area efficiency of compute logic. In 
+ contrast,  Processing-Near-Memory (PNM) is  a technique  that places memory and logic nearby but still uses 
+ separate dies. One version of PNM is 3D compute-logic stacking (see ③ ). 
+ Unfortunately, some recent papers blur the distinction between PIM and PNM. They use PIM as a general term 
+ whether or not the compute logic is placed directly into the memory die. We go here with a simple but sharp 
+ distinction: PIM refers to designs where the processor and memory are in the same die and PNM means they 
+ are on nearby but separate dies. This distinction makes PIM and PNM unambiguous. 
+ Hardware advantages are irrelevant if it’s too hard for software to use, which is our experience for PIM and 
+ datacenter LLMs. Table 4 lists why PNM is better than PIM for LLM inference, despite weaknesses in 
+ bandwidth and power. Specifically, PIM requires software to shard memory structures of LLMs into many small 
+ 7
+
+=== PDF页 8 ===
+pieces that rarely interact to fit into 32-64MB memory banks; shards in PNM can be 1000x larger, making it 
+ much easier to partition LLMs with a low communication overhead. It is also unclear if the compute can be 
+ sufficient in PIM given the very limited budget for power and thermal of a DRAM technology process node. 
+ Processing-in-Memory (PIM)  Processing-Near-Memory (PNM)  Winner 
+ Examples 
+ Samsung HBM-PIM  9 
+ SK Hynix GDDR-PIM  10 
+ UPMEM logic die on DIMM  11 
+ Compute on HBM base die  12,13 
+ AMD DRAM-logic 3D stacking  14 
+ Marvell Structera CXL-PNM  15 
+ — 
+ Data movement power  Very low (on-chip)  Low (off-chip but nearby)  PIM 
+ Bandwidth (per Watt)  Very high (5X-10X of standard)  High (2X-5X of standard)  PIM 
+ Memory-logic coupling  Memory and logic on one die  Memory and logic on separate dies  PNM 
+ Logic PPA (performance, 
+ power, area) 
+ Slower and higher-power logic if in a 
+ DRAM process 
+ Logic in a logic process helps 
+ performance, power, and area.  PNM 
+ Memory density  Worse since shared with logic  Not affected  PNM 
+ Commodity memory 
+ pricing (per GB) 
+ No. Lower volume, fewer suppliers, 
+ lower density vs memory w/o logic  Yes. Not affected  PNM 
+ Power/Thermal budget  Logic has tight power and thermal 
+ budget on a memory die 
+ Logic is less constrained by power and 
+ thermal limits  PNM 
+ Software sharding  Bank parallelism needs sharding 
+ workloads to banks (e.g., 32–64 MB) 
+ Less restrictive on sharding (e.g., 16–32 
+ GB). No need to shard to memory banks  PNM 
+ Table 4. PIM versus PNM for datacenter LLM inference. 
+ While PNM is better than PIM for datacenter LLMs, the comparison is not as clear for mobile devices. Mobile 
+ devices are more energy-constrained and run LLMs with many fewer weights, shorter context, smaller data 
+ types, and smaller batch sizes due to a single user. These differences simplify sharding, reduce the compute 
+ and thermal need, making PIM weaknesses less problematic and so plausibly viable for mobile devices. 
+ ③  3D memory-logic stacking for high bandwidth 
+ Unlike 2D hardware, where memory IOs reside on the shoreline, 3D stacking (see Figure 4(b)) instead uses 
+ vertical  through silicon vias  (  TSVs  ) to get a wide-and-dense  memory interface for high bandwidth at low power. 
+ 3D memory-logic stacking has two versions: 
+ 1.  Compute-on-HBM-base-die  reuses HBM designs by inserting  the compute logic into the HBM base 
+ die.  12,13  Because the memory interface is unchanged,  bandwidth is the same as HBM, while power is 
+ 2–3X lower because of the shortened data path. 
+ 2.  Custom 3D  solutions enable bandwidth and bandwidth-per-watt  higher than reusing HBM through 
+ using a wider-and-denser memory interface and more advanced packaging technologies. 
+ Despite better bandwidth and power, 3D stacking faces challenges: 
+ 1.  Thermal.  Cooling a 3D design is harder than 2D as  there is less surface area. One solution is to limit 
+ FLOPS of the compute logic by running at a low clock speed and voltage, as LLM Decode inference 
+ already has low arithmetic intensity. 
+ 8
+
+=== PDF页 9 ===
+2.  Memory-logic coupling.  An industry standard may be required for the memory interface of 3D 
+ compute-logic stacking. 
+ 3D stacking opens new research questions: 
+ ●  The ratio of memory bandwidth to capacity or compute FLOPS is significantly different from existing 
+ systems. How can software adapt to it? 
+ ●  Imagine a system with many memory types. How do we map LLMs efficiently? 
+ ●  How to communicate with other memory-logic stacks and the main AI processor (if necessary)? 
+ ●  What are tradeoffs in bandwidth, power, thermal, and reliability for various design choices, e.g., 
+ compute die placed on top vs bottom, the memory die count per stack, …? 
+ ●  How do these opportunities change for mobile devices versus datacenter LLM accelerators? 
+ ④  Low-latency interconnect 
+ Techniques ① – ③  help latency as well as throughput: higher memory bandwidth reduces latency of every 
+ Decode iteration and higher memory capacity per accelerator chip reduces system size, saving communication 
+ overhead. Another promising latency direction for datacenters is to rethink the network latency-bandwidth 
+ tradeoff since inference is more sensitive to interconnect latency. For example: 
+ ●  High-connectivity topology.  Topologies with high connectivity—such  as tree, dragonfly, and 
+ high-dimensional tori—require fewer hops, reducing latency. These topologies may diminish bandwidth 
+ but improve latency. 
+ ●  Processing-in-network.  Communication collectives used  by LLMs—broadcast, all-reduce, MoE 
+ dispatch and collect—are well suited for in-network acceleration to improve both bandwidth and latency, 
+ e.g.,  a tree topology with in-network aggregation enables both low-latency and high-throughput 
+ all-reduce. 
+ ●  AI chip optimization.  The latency focus influences  chip design with several possible optimizations: 
+ ○  Storing small arriving packets directly into on-chip SRAM instead of off-chip DRAM; 
+ ○  Placing the compute engine close to the network interface to reduce transportation time. 
+ ●  Reliability.  Codesigning reliability and interconnect  can help both: 
+ ○  A local standby spare reduces system failures and the latency and throughput consequences of 
+ migrating the failed job to a new healthy node somewhere when there are no standby spares. 
+ ○  If perfect communication is unnecessary for LLM inference, one can reduce latency yet deliver 
+ satisfactory quality results by using fake data or a prior result when message timeout expires, 
+ rather than waiting for straggler messages to arrive. 
+ RELATED WORK 
+ High Bandwidth Flash.  SanDisk first proposed HBF,  an HBM-like architecture for flash to overcome its 
+ bandwidth limit.  7  (SK Hynix later joined its development.)  Microsoft researchers proposed a new class of 
+ memory that focuses on read performance and high density instead of write performance and retention time for 
+ AI inference.  16  While not specifically mentioned,  HBF is a concrete example of the proposed new AI memory. 
+ Another research paper proposed integrating flash into mobile processors for on-device LLM inference 
+ enhanced with an LPDDR interface for the low bandwidth need of Prefill and Processing-Near-Flash for the 
+ high bandwidth need of Decode.  17 
+ Processing-Near-Memory.  3D compute-logic stacking  has gained increasing attention as a technique for 
+ bandwidth higher than HBM, such as compute-on-HBM-base-die proposals  12,13  and an AMD concept  14  . In the 
+ non-3D space, Samsung AXDIMM  9  and Marvell Structera-A  15  attach processors to commercial DDR DRAM. 
+ The former integrated compute logic in the DIMM buffer chip. The latter leveraged the CXL interface for 
+ 9
+
+=== PDF页 10 ===
+improved programmability and ease of system integration. (A survey paper provides more examples of 
+ PNM/PIM.  18  ) Many papers discuss using PIM/PNM in mobile  devices, not the main focus of this paper. 
+ Low-latency interconnect.  Numerous papers describe  low hop count network topologies including trees, 
+ dragonfly, and high-dimensional Tori. (This magazine’s 20 reference limit prevents citation.) Examples of 
+ commercial processing-in-network are NVIDIA NVLink and Infiniband switches that support in-switch reduction, 
+ and multicast acceleration through SHARP (Scalable Hierarchical Aggregation and Reduction Protocol).  19 
+ Similar capabilities for AI workloads appeared recently in Ethernet switches.  20 
+ Software Innovations.  Besides this paper’s focus on  hardware innovations, there is a rich space of 
+ software-hardware codesign for algorithmic and software innovations to improve LLM inference. For example, 
+ a root cause is the autoregressive nature of Transformer Decode. A new algorithm that avoided autoregressive 
+ generation—such as Diffusion for image generation—could dramatically simplify AI inference hardware. 
+ CONCLUSION 
+ The increasing importance and difficulty of inference for LLMs—which desperately need lower cost and 
+ latency—is an attractive research target. Autoregressive Decode is already a major challenge for memory and 
+ interconnect latency, which is exacerbated by MoE, reasoning, multimodal data, RAG, and long input/output 
+ sequences. 
+ The computer architecture community has made great contributions on challenges when a realistic simulator 
+ was available, as it has previously for branch prediction and cache design. Since primary bottlenecks of LLM 
+ inference are memory and latency, a roofline-based performance simulator could be useful to provide 
+ first-order estimates in many scenarios. Additionally, such a framework should track memory capacity, explore 
+ various sharding techniques that are critical to performance, and use modern performance/cost metrics. We 
+ hope academic researchers will respond to this opportunity to accelerate AI research. 
+ The current AI hardware philosophy—full-reticle die with high FLOPS, many HBM stacks, and bandwidth- 
+ optimized interconnect—is a mismatch to LLM Decode inference. While many researchers explore compute for 
+ datacenters, we recommend instead improving memory and network along four directions: HBF, PNM, 3D 
+ stacking, and low latency interconnect. Moreover, novel performance/cost metrics that focus on datacenter 
+ capacity, system power, and carbon footprint offer new opportunities versus conventional measures. 
+ Constrained versions of HBF, PNM, PIM, and 3D stacking also might work well for mobile device LLMs. 
+ Such advances would unlock collaborative work towards important and urgent innovations that the world needs 
+ for delivering affordable AI inference. 
+ ACKNOWLEDGMENTS 
+ We thank Martin Abadi, Jeff Dean, Norm Jouppi, Amin Vahdat, and Cliff Young for their comments that 
+ improved the paper. 
+ REFERENCES 
+ 1.  Verified Market Reports,  AI Inference Chip Market  Insights  , 2025, 
+ https://www.verifiedmarketreports.com/product/ai-inference-chip-market/ 
+ 2.  Field, H.,  OpenAI sees roughly $5 billion loss this  year on $3.7 billion in revenue  , 2024, CNBC. 
+ 10
+
+=== PDF页 11 ===
+3.  Tangermann, V.,  Microsoft Is Losing a Staggering Amount of Money on AI  , 2024. 
+ 4.  Zhou, Z., et al.,  A survey on efficient inference  for large language models  , 2024, arXiv:2404.14294. 
+ 5.  Lee, P. and Yang, J., Global Semiconductors, Citi Research, 2024. 
+ 6.  Vahdat, A., Ma, X. and Patterson, D.,  New Computer  Evaluation Metrics for a Changing World  , 2024, 
+ CACM  . 
+ 7.  Shilov, A.,  SanDisk's new High Bandwidth Flash memory  ,  2025, Tom's Hardware. 
+ 8.  Kozyrakis, C., et al.,  Scalable processors in the  billion-transistor era: IRAM  , 1997,  Computer  . 
+ 9.  Kim, J., et al.,  Aquabolt-XL: Samsung HBM2-PIM  , 2021,  Hot Chips. 
+ 10.  Kwon, Y., et al.,  System architecture and software  stack for GDDR6-AiM  , 2022, Hot Chips. 
+ 11.  Gómez-Luna J., et al.,  Benchmarking a new paradigm:  An experimental analysis of a real 
+ processing-in-memory architecture  , 2021, arXiv:2105.03814. 
+ 12.  Yun, S., et al.,  Duplex: A Device for Large Language  Models with Mixture of Experts, Grouped Query 
+ Attention, and Continuous Batching  , 2024, MICRO. 
+ 13.  Park, N., et al.,  High-throughput Near-memory Processing  on CNNs with 3D HBM-like Memory  , 2021, 
+ TODAES. 
+ 14.  Su, L. and Naffziger, S.,  Innovation For the Next  Decade of Compute Efficiency  , 2023, ISSCC. 
+ 15.  Marvell,  Structera™ A 2504 Memory-Expansion Controller  ,  2024. 
+ 16.  Legtchenko, S., et al.,  Managed-Retention Memory:  A New Class of Memory for the AI Era  , 2025, 
+ arXiv:2501.09605. 
+ 17.  Sun, W., et al.,  Lincoln: Real-Time 50~100B LLM Inference  on Consumer Devices with 
+ LPDDR-Interfaced, Compute-Enabled Flash Memory  , 2025,  HPCA. 
+ 18.  Oliveira, G.,  Tutorial on Memory-Centric Computing:  Processing-Near-Memory  , 2024, MICRO, 
+ https://events.safari.ethz.ch/micro24-memorycentric-tutorial/doku.php. 
+ 19.  Schultz, S.,  Advancing Performance with NVIDIA SHARP In-Network Computing  , 2024. 
+ 20.  Yang, M., et al.,  Using Trio: Juniper networks' programmable  chipset-for emerging in-network 
+ applications  , 2022. SIGCOMM. 
+ AUTHORS 
+ XIAOYU MA is a Senior Staff Engineer at Google DeepMind, Mountain View, California, 94043. His research 
+ interests include domain-specific computer architectures. Ma received a Ph.D in Electrical and Computer 
+ Engineering from The University of Texas at Austin. Contact him at  xiaoyuma@google.com  . 
+ DAVID PATTERSON is a Distinguished Engineer at Google DeepMind, Mountain View, California, 94043; 
+ Board Chair of Laude Institute; and a Pardee professor emeritus at University of California, Berkeley. His 
+ research interests include domain-specific computer architectures, AI’s environmental impact, and helping 
+ shape AI for the public good. Patterson received a Ph.D in Computer Science from University of California, Los 
+ Angeles. Contact him at  pattrsn@cs.berkeley.edu  . 
+ 11
+
+=== PDF页 12 ===
+APPENDIX: DDR DRAM PRICE 1957-2024 
+ See subsequent pages attached. This data is from  https://jcmit.net/memoryprice  ,  collected by John C. 
+ McCallum. This web site is no longer available. McCallum's last posting was that he was getting older and 
+ needed to pass this data collection on to the next generation. 
+ 12
+
+=== PDF页 13 ===
+Appendix for "Challenges and Research Directions for Large Language Model Inference Hardware" found in IEEE Computer. This data is from  , collected by John C. McCallum. This web site is nolonger available. McCallum's last posting was that he was gettnig older and needed to pass this data colleciton on to the next generation.Memory Price History C:/My Documents/Research/Memprice/memory.xls copyright 2002, John C. McCallumX Y Date Ref: Page Company Size Cost Speed Memory Type JDR Chip Pricesdate $/Gbyte KByte US $ nsec Size US$Kbit1957 $411,041,792,000 1957 Phister 366 366C.C.C. 0.00098 392 10000Flip-Flop transistor1959 $67,947,724,800 1959 Phister 366 366E.E.Co. 0.00098 64.8 10000Flip-Flop - vacuum tube1960 $5,242,880,000 1960 Phister 367 367IBM 0.00098 5 11500Core memory for IBM 14011965 $2,642,411,520 1965 Phister 367 367IBM 0.00098 2.52 2000Core Memory for IBM 360/301970 $734,003,200 1970 Phister 367 367IBM 0.00098 0.7 770Core Memory for IBM 370/1351973 $399,360,000 1973Jan PDP8/e User Price List DEC 12 4680 Core memory 8Kwords x 12 bit1974 $314,572,800 1974 Phister 367 367IBM 0.00098 0.3 800IC Memory for IBM 370/1251975 $421,888,000 1975Jan Radio-Electronics MITS 0.25 103 1000Altair 8800 256 Byte Static Board1975.08 $180,224,000 1975Feb MITS 1 176 Altair 1K Static Board1975.25 $67,584,000 1975Apr MITS 4 264 Altair 4K DRAM Board1975.75 $49,920,000 1975Oct MITS 4 195 Altair 4K Static (2102) RAM Board1976 $40,704,000 1976Jan MITS 4 159 Altair 4K Static (2102) RAM Board1976.17 $48,960,000 1976Mar MITS 16 765 Altair 16K Static RAM Board1976.42 $23,040,000 1976Jun SD Sales 4 90 SD Sales 4K Static Board1976.58 $32,000,000 1976Aug 8 250 8K Static RAM Board1977.08 $36,800,000 1977Feb TDL 16 575 S-100 16K1978.17 $28,000,000 1978Mar 64 1750 S-100 64K1978.25 $29,440,000 1978Apr 16 4601978.33 $19,200,000 1978May 16 3001978.5 $24,000,000 1978Jul Extensis 64 15001978.58 $16,000,000 1978Aug 8 1251978.75 $15,200,000 1978Oct 32 4751979 $10,528,000 1979Jan 124 32 3291979.75 $6,704,000 1979Oct 64 419 S-100, SD Sales/Jade 64K Kit1980 $6,480,000 1980Jan 121 64 4051981 $8,800,000 1981Jan 141 64 5501981.58 $4,479,200 1981Aug Jade 64 279.951982 $3,520,000 1982Jan 135 256 8801982.17 $4,464,000 1982Mar Microsystems 64 2791982.67 $1,980,000 1982Sep BYTE 256 4951983 $2,396,000 1983Jan 153 256 5991983.67 $1,980,000 1983Sep BYTE 256 4951984 $1,378,667 1984Jan BYTE 64 384 5171984.58 $1,330,667 1984Aug BYTE 467 384 499 IBM PC Board, 384K, $199+6*50 256 791985 $880,000 1985Jan BYTE 470Do Kay 512 440 IBM 512K $199.95+8*29.971985.33 $720,000 1985May BYTE 507Do Kay 512 360 IBM 512K $199.95+8*19.98 8.951985.42 $550,000 1985Jun BYTE 505Do Kay 512 275 IBM 512K $149+8*15.75 5.951985.5 $420,000 1985Jul BYTE 435Fortron 512 210 IBM 512K $119+7*13 5.951985.58 $349,500 1985Aug BYTE 418Jade 2048 699 2MB J-RAM-2 A&T $699 256 3.951985.67 $299,500 1985Sep BYTE 444Jade 2048 599 2MB J-RAM-2 A&T $599 256 2.951985.83 $299,500 1985Nov BYTE Jade 2048 599 2MB J-RAM-2 A&T $599 256 2.951985.92 $299,500 1985Dec BYTE Jade 2048 599 2MB J-RAM-2 A&T $599 256 2.951986 $299,500 1986Jan BYTE Jade 2048 599 2MB J-RAM-2 A&T $599 256 2.951986.08 $299,500 1986Feb BYTE Jade 2048 599 2MB J-RAM-2 A&T $599 256 2.951986.17 $299,500 1986Mar BYTE Jade 2048 599 2MB J-RAM-2 A&T $599 256 2.951986.25 $299,500 1986Apr BYTE Jade 2048 599 2MB J-RAM-2 A&T $599 256 2.951986.33 $189,500 1986May BYTE JDR 3072 568.5 JDR AT Multifuntion $199.95+49.95+318.60 256 2.951986.42 $189,500 1986Jun BYTE JDR 3072 568.5 JDR AT Multifuntion $199.95+49.95+318.60 256 2.951986.5 $189,500 1986Jul BYTE JDR 3072 568.5 JDR AT Multifuntion $199.95+49.95+318.60 256 2.951986.58 $189,500 1986Aug BYTE JDR 3072 568.5 JDR AT Multifuntion $199.95+49.95+318.60 256 2.951986.67 $189,500 1986Sep BYTE JDR 3072 568.5 JDR AT Multifuntion $199.95+49.95+318.60 256 2.951986.75 $189,500 1986Oct BYTE JDR 3072 568.5 JDR AT Multifuntion $199.95+49.95+318.60 256 2.951986.92 $189,500 1986Dec BYTE JDR 3072 568.5 JDR AT Multifuntion $199.95+49.95+318.60 256 2.951987 $176,167 1987Jan BYTE 477JDR 3072 528.5 JDR AT Multifuntion $139.95+49.95+3*36*2.95 256 2.951987.08 $176,167 1987Feb BYTE JDR 3072 528.5 JDR AT Multifuntion $139.95+49.95+3*36*2.95 256 2.95
+Interface Age SD Sales - JaInterface AgeInterface Age
+Interface Age
+California DInterface Age California D
+Advanced Comp
+https://jcmit.net/memoryprice
+
+=== PDF页 14 ===
+1987.17 $157,000 1987Mar BYTE 383Pine 3072 471 Pine 3MB Multifunction $147+108*3 256 2.951987.25 $153,675 1987Apr BYTE JDR 4096 614.7 JDR MCT-ATRAM 4MB $149.95+39.95+4*36*2.95 256 2.951987.33 $153,675 1987May BYTE JDR 4096 614.7 JDR MCT-ATRAM 4MB $149.95+39.95+4*36*2.95 256 2.951987.42 $153,675 1987Jun BYTE JDR 4096 614.7 JDR MCT-ATRAM 4MB $149.95+39.95+4*36*2.95 256 2.951987.5 $153,675 1987Jul BYTE JDR 4096 614.7 JDR MCT-ATRAM 4MB $149.95+39.95+4*36*2.95 256 2.951987.58 $153,675 1987Aug BYTE JDR 4096 614.7 JDR MCT-ATRAM 4MB $149.95+39.95+4*36*2.95 256 2.951987.67 $162,823 1987Sep BYTE JDR 3072 488.47 JDR MCT-ATMF 3MB Multifunction 256 2.951987.75 $133,000 1987Oct BYTE 322 3072 399 AST Advantage AT w/3MB 256 2.951987.83 $162,823 1987Nov BYTE JDR 3072 488.47 JDR MCT-ATMF 3MB Multifunction 256 2.951987.92 $162,823 1987Dec BYTE JDR 3072 488.47 JDR MCT-ATMF 3MB Multifunction 256 2.951988 $162,823 1988Jan BYTE JDR 3072 488.47 JDR MCT-ATMF 3MB Multifunction 256 2.951988.08 $182,273 1988Feb BYTE JDR 3072 546.82 JDR MCT-ATMF 3MB Multifunc $169.90+3*36*3.49 256 3.491988.17 $198,833 1988Mar BYTE JDR 3072 596.5 JDR MCT-ATMF 3MB Multifunc $169.90+426.60 256 3.951988.33 $198,833 1988May BYTE JDR 3072 596.5 JDR MCT-ATMF 3MB Multifunc $169.90+426.60 256 3.951988.42 $198,833 1988Jun BYTE JDR 3072 596.5 JDR MCT-ATMF 3MB Multifunc $169.90+426.60 256 3.951988.5 $504,833 1988Jul BYTE JDR 3072 1514.5 JDR MCT-ATMF 3MB Multifunc $169.90+3*36*12.45 256 12.451988.58 $504,833 1988Aug BYTE JDR 3072 1514.5 JDR MCT-ATMF 3MB Multifunc $169.90+3*36*12.45 256 12.451988.67 $504,833 1988Sep BYTE JDR 3072 1514.5 JDR MCT-ATMF 3MB Multifunc $169.90+3*36*12.45 256 12.451988.75 $504,833 1988Oct BYTE JDR 3072 1514.5 JDR MCT-ATMF 3MB Multifunc $169.90+3*36*12.45 256 12.451988.83 $504,833 1988Nov BYTE JDR 3072 1514.5 JDR MCT-ATMF 3MB Multifunc $169.90+3*36*12.45 256 12.451988.92 $504,833 1988Dec BYTE JDR 3072 1514.5 JDR MCT-ATMF 3MB Multifunc $169.90+3*36*12.45 256 12.451989 $504,833 1989Jan BYTE JDR 3072 1514.5 JDR MCT-ATMF 3MB Multifunc $169.90+3*36*12.45 256 12.451989.08 $504,833 1989Feb BYTE JDR 3072 1514.5 JDR MCT-ATMF 3MB Multifunc $169.90+3*36*12.45 256 12.451989.17 $504,833 1989Mar BYTE JDR 3072 1514.5 JDR MCT-ATMF 3MB Multifunc $169.90+3*36*12.45 256 12.451989.25 $504,833 1989Apr BYTE JDR 3072 1514.5 JDR MCT-ATMF 3MB Multifunc $169.90+3*36*12.45 256 12.451989.42 $344,273 1989Jun BYTE JDR 3072 1032.82 JDR MCT-ATMF 3MB Multifunc $169.90+3*36*7.99 1024 24.951989.5 $197,250 1989Jul BYTE 316Unitex 4096 789 Unitex RAMII-EMS - 4MB $249+36*15.00 1024 19.951989.58 $188,250 1989Aug BYTE 302Unitex 4096 753 Everex RAM II 4M-EMS $249+36*14. 1024 19.951989.67 $188,250 1989Sep BYTE Unitex 4096 753 Everex RAM II 4M-EMS $249+36*14. 1024 13.951989.75 $127,875 1989Oct BYTE 340Unitex 8192 1023 Bocaram AT 8MB - $159+72*12 1024 13.951989.83 $116,900 1989Nov BYTE Unitex 10240 1169 Everex RAM 10,000 10MB $179+90*11. 1024 13.951989.92 $113,125 1989Dec BYTE Unitex 8192 905 Bocaram AT 8MB - $149+72*10.50 1024 11.951990 $106,375 1990Jan BYTE Unitex 8192 851 Bocaram AT 8MB - $149+72*9.75 1024 11.951990.17 $98,250 1990Mar BYTE Unitex 8192 786 Bocaram AT 8MB - $149+72*8.50 1024 11.951990.33 $98,250 1990May BYTE Unitex 8192 786 Bocaram AT 8MB - $149+72*8.50 1024 11.951990.42 $89,500 1990Jun BYTE Unitex 8192 716 Bocaram AT 8MB - $140+72*8.00 1024 11.951990.5 $82,750 1990Jul BYTE Unitex 8192 662 Bocaram AT 8MB - $140+72*7.25 1024 11.951990.58 $81,125 1990Aug BYTE Nevada 8192 649 Bocaram AT Plus 8MB - $649 1024 11.951990.67 $71,500 1990Sep BYTE 488 8192 572 Bocaram AT Plus 8MB - $140+72*6.00 1024 11.951990.75 $59,000 1990Oct BYTE 343IC Express 1024 59 801Mx9-80 SIMM @ $59 1024 11.951990.83 $51,000 1990Nov BYTE 453IC Express 1024 51 801Mx9-80 SIMM @ $51 1024 11.951990.92 $45,500 1990Dec BYTE 388IC Express 1024 45.5 801Mx9-80 SIMM @ $45.50 1024 7.951991 $44,500 1991Jan BYTE 393IC Express 1024 44.5 801Mx9-80 SIMM @ $44.50 1024 7.951991.08 $44,500 1991Feb BYTE 335IC Express 1024 44.5 801Mx9-80 SIMM @ $44.50 1024 7.951991.17 $45,000 1991Mar BYTE 374 1024 45 1001Mx9-100 SIMM @ $45 1024 7.951991.25 $45,000 1991Apr BYTE 373 1024 45 1001Mx9-100 SIMM @ $45 1024 7.951991.33 $45,000 1991May BYTE 356 1024 45 1001Mx9-100 SIMM @ $45 1024 7.951991.42 $43,750 1991Jun BYTE 398IC Express 4096 175 804Mx9-80 SIMM @ $175 1024 6.891991.5 $43,750 1991Jul BYTE 333IC Express 4096 175 804Mx9-80 SIMM @ $175 1024 6.891991.58 $41,250 1991Aug BYTE 321IC Express 4096 165 804Mx9-80 SIMM @ $165 1024 6.891991.67 $46,250 1991Sep BYTE 375 4096 185 804Mx9-80 SIMM @ $185 1024 6.951991.75 $45,000 1991Oct BYTE 306 4096 180 804Mx9-80 SIMM @ $180 1024 6.951991.83 $39,750 1991Nov BYTE 401Nevada 4096 159 804Mx9-80 SIMM @ $159 1024 5.491991.92 $39,750 1991Dec BYTE 316Nevada 4096 159 804Mx9-80 SIMM @ $159 1024 5.491992 $36,250 1992Jan BYTE 380 4096 145 804Mx9-80 SIMM @ $145 1024 5.491992.08 $36,250 1992Feb BYTE 316 4096 145 804Mx9-80 SIMM @ $145 1024 5.491992.17 $36,250 1992Mar BYTE 332 4096 145 804Mx9-80 SIMM @ $145 36864 179.951992.25 $34,750 1992Apr BYTE 318Sii Micros 4096 139 4Mx9-?? SIMM @ $139 36864 179.951992.33 $30,000 1992May BYTE 342 4096 120 804Mx9-80 SIMM @ $120 36864 179.951992.42 $32,500 1992Jun BYTE 406AmRam 4096 130 804Mx9-80 SIMM @ $130 36864 179.951992.5 $33,500 1992Jul BYTE 351AmRam 4096 134 804Mx9-80 SIMM @ $134 36864 179.95
+Advanced Comp
+AMT InternatAMT InternatAMT Internat
+MicroprocessoMicroprocesso
+AMT InternatAMT InternatAMT Internat
+AMT Internat
+
+=== PDF页 15 ===
+1992.58 $31,000 1992Aug BYTE 324Worldwide 4096 124 704Mx9-70 SIMM @ $124 9216 39.951992.67 $27,500 1992Sep BYTE 350 4096 110 804Mx9-80 SIMM @ $110 9216 39.951992.75 $26,250 1992Oct BYTE 321 4096 105 804Mx9-80 SIMM @ $105 36864 149.951992.83 $26,250 1992Nov BYTE 346 4096 105 804Mx9-80 SIMM @ $105 36864 149.951992.92 $26,250 1992Dec BYTE 302 4096 105 804Mx9-80 SIMM @ $105 36864 149.951993 $33,063 1993Jan BYTE 307Cititronics 16384 529 4Mx36-?? SIMM @ $526 36864 149.951993.08 $27,500 1993Feb BYTE 269 4096 110 704Mx9-70 SIMM @ $110 36864 149.951993.17 $27,500 1993Mar BYTE 239 4096 110 704Mx9-70 SIMM @ $110 36864 149.951993.25 $27,500 1993Apr BYTE 245 4096 110 704Mx9-70 SIMM @ $110 36864 149.951993.33 $27,500 1993May BYTE 263 4096 110 704Mx9-70 SIMM @ $110 36864 149.951993.42 $30,000 1993Jun BYTE 249 1024 30 1001Mx9-100 SIMM @ $30 36864 149.951993.5 $30,000 1993Jul BYTE 266 1024 30 1001Mx9-100 SIMM @ $30 36864 149.951993.58 $30,000 1993Aug BYTE 245 1024 30 1001Mx9-100 SIMM @ $30 36864 149.951993.67 $30,000 1993Sep BYTE 267 1024 30 1001Mx9-100 SIMM @ $30 36864 149.951993.75 $36,000 1993Oct BYTE 260LA Trade 4096 144 804Mx9-80 SIMM @ $144 36864 159.951993.83 $39,750 1993Nov BYTE 360 4096 159 704Mx9-70 SIMM @ $159 36864 159.951993.92 $35,750 1993Dec BYTE 280 4096 143 704Mx3x3-70 SIMM @ $143 36864 159.951994 $35,750 1994Jan BYTE 290 4096 143 704Mx3x3-70 SIMM @ $143 36864 159.951994.08 $35,750 1994Feb BYTE 250 4096 143 704Mx3x3-70 SIMM @ $143 36864 159.951994.17 $36,000 1994Mar BYTE 251Nevada 4096 144 804Mx9-80 SIMM @ $144 36864 159.951994.25 $37,250 1994Apr BYTE 270La Trade 4096 149 804Mx9-80 SIMM @ $149 36864 154.951994.33 $37,250 1994May BYTE 238La Trade 4096 149 804Mx9-80 SIMM @ $149 36864 154.951994.42 $37,250 1994Jun BYTE 320La Trade 4096 149 804Mx9-80 SIMM @ $149 36864 169.951994.5 $38,500 1994Jul BYTE 239Nevada 4096 154 804Mx9-80 SIMM @ $154 36864 169.951994.58 $37,000 1994Aug BYTE 226Nevada 1024 37 1001Mx9-100 SIMM @ $37 36864 169.951994.67 $34,000 1994Sep BYTE 244 4096 136 704Mx9-70 SIMM @ $136 36864 169.951994.75 $33,500 1994Oct BYTE 259 4096 134 704Mx9-70 SIMM @ $134 36864 159.951994.83 $32,250 1994Nov BYTE 324 4096 129 704Mx9-70 SIMM @ $129 36864 159.951994.92 $32,250 1994Dec BYTE 264 4096 129 704Mx9-70 SIMM @ $129 36864 159.951995 $32,250 1995Jan BYTE 256Nevada 4096 129 804Mx9-80 SIMM @ $129 36864 159.951995.08 $32,000 1995Feb BYTE 202 4096 128 704Mx9-70 SIMM @ $129 36864 159.951995.17 $32,000 1995Mar BYTE 212 4096 128 704Mx9-70 SIMM @ $129 36864 159.951995.25 $31,188 1995Apr BYTE 254 16384 499 704Mx36-70 SIMM [72 pin] @ $499 9216 37.951995.33 $31,188 1995May BYTE 222 16384 499 704Mx36-70 SIMM [72 pin] @ $499 9216 37.951995.42 $31,125 1995Jun BYTE 286 16384 498 704Mx36-70 SIMM [72 pin] @ $498 36864 135.291995.5 $31,188 1995Jul BYTE 213 16384 499 704Mx36-70 SIMM [72 pin] @ $499 147456 6191995.58 $30,563 1995Aug BYTE 190 16384 489 704Mx36-70 SIMM [72 pin] @ $489 147456 6191995.67 $33,063 1995Sep BYTE 306Future Micro 16384 529 704Mx36-70 SIMM [72 pin] @ $529 147456 6191995.75 $33,063 1995Oct BYTE 214Future Micro 16384 529 704Mx36-70 SIMM [72 pin] @ $529 294912 11991995.83 $30,875 1995Nov BYTE 286 16384 494 704Mx36-70 SIMM [72 pin] @ $494 294912 11991995.92 $30,875 1995Dec BYTE 244 16384 494 704Mx36-70 SIMM [72 pin] @ $494 147456 6991996 $29,875 1996Jan BYTE 186 16384 478 704Mx36-70 SIMM [72 pin] @ $478 147456 6891996.08 $28,750 1996Feb BYTE 217Worldwide 16384 460 704Mx36-70 SIMM [72 pin] @ $460 147456 6891996.17 $26,125 1996Mar BYTE 170 8192 209 702Mx36-70 SIMM [72 pin] @ $209 36864 133.951996.25 $24,688 1996Apr BYTE 196Worldwide 16384 395 704Mx36-70 SIMM [72 pin] @ $395 36864 129.951996.33 $17,188 1996May BYTE 195Worldwide 32768 550 608Mx36-60 SIMM [72 pin] @ $550 no JDR ads anymore1996.42 $14,875 1996Jun BYTE 186 8192 119 702Mx36-70 SIMM [72 pin] @ $119 Byte appears to be1996.5 $11,250 1996Jul BYTE 180Worldwide 16384 180 604Mx32-60 SIMM [72 pin] @ $180 going downhill in1996.58 $9,063 1996Aug BYTE 164Worldwide 16384 145 604Mx36-60 SIMM [72 pin] @ $145 subscriptions, etc.1996.67 $8,438 1996Sep BYTE 192Worldwide 16384 135 604Mx36-60 SIMM [72 pin] @ $1351996.75 $8,000 1996Oct BYTE 181 16384 128 704Mx36-70 SIMM [72 pin] @ $1281996.83 $5,250 1996Nov BYTE 210 8192 42 702Mx32-70 SIMM [72 pin] @ $421996.92 $5,250 1996Dec BYTE 177 8192 42 702Mx32-70 SIMM [72 pin] @ $421997 $4,625 1997Jan BYTE 153 8192 37 602Mx32-60 SIMM EDO [72 pin] @ $371997.08 $3,625 1997Feb BYTE 169 8192 29 602Mx32-60 SIMM EDO [72 pin] @ $291997.17 $3,000 1997Mar BYTE 167 8192 24 602Mx32-60 SIMM EDO [72 pin] @ $241997.25 $3,000 1997Apr BYTE 166 8192 24 602Mx32-60 SIMM EDO [72 pin] @ $241997.33 $3,000 1997May BYTE 147 8192 24 602Mx32-60 SIMM EDO [72 pin] @ $241997.42 $3,688 1997Jun BYTE 163 16384 59 604Mx32-60 SIMM EDO [72 pin] @ $591997.5 $4,000 1997Jul Pcmag 401Miami Int'l 8192 32 702Mx32-? SIMM EDO [72 pin] @ $32 last Byte1997.58 $4,125 1997Aug Pcmag 416 8192 33 702Mx32-? SIMM FPM [72 pin] @ $33
+AMT InternatAMT InternatAMT InternatAMT Internat
+Memory SuperMemory SuperMemory SuperMemory SuperAMT InternatAMT InternatAMT InternatAMT Internat
+First Source West Coast MWest Coast MWest Coast M
+Pacific CoastPacific CoastPacific CoastPacific Coast
+First Source First Source Pacific CoastPacific CoastFirst Source Pacific CoastPacific Coast
+First Source First Source First Source 
+First Source 
+First Source 
+First Source First Source First Source First Source Memory On-LinMemory On-LinMemory On-LinMemory On-LinMemory On-Lin
+Bason Memory
+
+=== PDF页 16 ===
+1997.67 $3,625 1997 Sep23Pcmag 306Miami Int'l 16384 58 ???1997.75 $3,406 1997 Oct21Pcmag 339Miami Int'l 32768 109 ???1997.83 $3,250 1997 Nov18Pcmag 315LA Trade 32768 104 8Mx32-? SIMM EDO [72 pin] @ $1041997.92 $2,156 1997 Dec16Pcmag 329 32768 69 8Mx32-? SIMM EDO [72 pin] @ $691998 $2,156 1998 Jan20Pcmag 277 32768 69 8Mx32-? SIMM EDO [72 pin] @ $691998.08 $906 1998 Feb24Pcmag 261 32768 29 8Mx32-? SIMM EDO [72 pin] @ $291998.17 $969 1998 Mar10Pcmag 302 32768 31 8Mx32-? SIMM EDO [72 pin] @ $311998.25 $1,219 1998 Apr21Pcmag 258 32768 39 8Mx32-? SIMM EDO [72 pin] @ $391998.33 $1,188 1998 May26Pcmag 294 32768 38 8Mx32-? SIMM EDO [72 pin] @ $381998.42 $969 1998 Jun30Pcmag 296 32768 31 8Mx32-? SIMM EDO [72 pin] @ $311998.58 $1,031 1998Aug Pcmag 388 32768 33 4Mx64-? DIMM SDRAM @ $331998.67 $969 1998 Sep22Pcmag 279 32768 31 8Mx32-? SIMM EDO [72 pin] @ $311998.75 $1,156 1998 Oct20Pcmag 293 32768 37 8Mx32-? SIMM EDO [72 pin] @ $371998.83 $844 1998 Nov17Pcmag 286 32768 27 8Mx32-? SIMM FPM [72 pin] @ $271998.92 $844 1998 Dec1Pcmag 390 32768 27 8Mx32-? SIMM FPM [72 pin] @ $271999.08 $1,438 1999 Feb9Pcmag 263 32768 46 8Mx32-? SIMM FPM [72 pin] @ $461999.13 $844 1999 Feb23Pcmag 226 32768 27 8Mx32-? SIMM FPM [72 pin] @ $271999.17 $1,250 1999 Mar23Pcmag 261 65536 79.99 64 MB DIMM PC-100 @ $79.991999.25 $1,250 1999 Apr20Pcmag 277 65536 79.99 64 MB DIMM PC-100 @ $79.991999.33 $859 1999 May25Pcmag 273 65536 54.99 64 MB DIMM PC-100 @ $54.991999.5 $781 1999Jul99 Pcmag 323 131072 99.99 128 MB DIMM PC-100 @ $99.991999.67 $868 1999 Sep21Pcmag 222 131072 111.14 128 MB DIMM PC-100 @ $111.141999.75 $1,039 1999 Oct19Pcmag 219 65536 66.49 64 MB DIMM PC-100 @ $66.491999.83 $1,336 1999 Nov16Pcmag 247 131072 170.99 128 MB DIMM PC-100 @ $170.991999.92 $2,348 1999 Dec1Pcmag 287 131072 300.59 128 MB DIMM PC-100 @ $300.592000 $1,561 2000 Jan18Pcmag 14 65536 99.89 64 MB DIMM PC-100 @ $99.892000.08 $1,476 2000 Feb18Pcmag 18 65536 94.49 64 MB DIMM PC-100 @ $94.492000.17 $1,078 2000 Mar21Pcmag 214 65536 69 64 MB DIMM PC-100 @ $692000.25 $844 2000 Apr18Pcmag 16 65536 53.99 64 MB DIMM PC-100 @ $53.992000.33 $695 2000 May9Pcmag 254 131072 89 128 MB DIMM PC-100 @ $892000.42 $900 2000 Jun27Pcmag 18 65536 57.59 64 MB DIMM PC-100 @ $57.592000.5 $773 2000Jul Pcmag 228 131072 99 128 MB DIMM PC-133 @ $992000.58 $844 2000Aug Pcmag 18 65536 53.99 64 MB DIMM PC-100 @ $53.992000.67 $1,069 2000 Sep1Pcmag 18 65536 68.39 64 MB DIMM PC-133 @ $68.39 only advert for RAM2000.75 $1,125 2000 Oct3Pcmag 18 65536 71.99 64 MB DIMM PC-133 @ $71.99 only advert for RAM2000.83 $1,125 2000 Nov7Pcmag 18 65536 71.99 64 MB DIMM PC-133 @ $71.99 only advert for RAM2000.92 $900 2000 Dec5Pcmag 19 65536 57.59 64 MB DIMM PC-133 @ $57.59 discount for web purchase2001 $745 2001 Jan2Pcmag 19 65536 47.69 64 MB DIMM PC-133 @ $47.69 discount for web purchase2001.08 $464 2001 Feb6Pcmag 90 131072 59.39 128 MB DIMM PC-133 @ $59.39 discount for web purchase2001.17 $464 2001 Mar6Pcmag 99 131072 59.39 128 MB DIMM PC-133 @ $59.39 discount for web purchase2001.25 $383 2001 Apr3Pcmag 178 131072 49 128 MB DIMM PC-133 @ $492001.33 $387 2001 May8Pcmag 85 131072 49.49 128 MB DIMM PC-100 @ $49.49 discount for web purchase2001.42 $305 2001 Jun12Pcmag 207 131072 39 128 MB DIMM PC-133 @ $392001.5 $352 2001Jul Pcmag 143 262144 89.99 256 MB DDR PC2100 @ $89.99 discount for web purchase2001.5 $270 2001Jul Pcmag 196 262144 69 256 MB DIMM PC-133 @ $692001.58 $191 2001Aug Pcmag 169 262144 49 256 MB DIMM PC-133 @ $492001.67 $191 2001 Sep4Pcmag 215 262144 49 256 MB DIMM PC-133 @ $492001.75 $169 2001 Oct16Pcmag 60 131072 21.59 128 MB DIMM PC-133 @ $21.59 discount for web purchase2001.77 $148 2001 Oct30Pcmag 161 131072 18.89 128 MB DIMM PC-133 @ $18.89 discount for web purchase2002.08 $134 2002 Feb12Pcmag 47 262144 34.19 256 MB DIMM PC-133 @ $34.192002.08 $207 2002 Feb12Pcmag 47 262144 53.09 256 MB DDR PC2100 @ $53.092002.25 $193 2002 Apr9Pcmag 133 524288 99 512 MB DIMM PC-133 @ $992002.33 $193 2002 May7Pcmag 132 524288 99 512 MB DIMM PC-133 @ $992002.42 $330 2002 Jun30Pcmag 68 131072 42.29 128 MB DIMM PC-133 @ $42.292002.58 $193 2002 Aug02Pcmag 49 262144 49.49 256 MB DIMM PC-133 @ $49.492002.75 $193 2002 Oct1Pcmag 115 262144 49.49 256 MB DIMM PC-133 @ $49.492003.17 $176 2003 Mar25Pcmag 95 262144 45 256 MB DIMM DDR-2100 @ $452003.25 $76 2003 Apr22Pcmag 133 524288 39 512 MB DIMM PC-133 @ $392003.33 $126 2003 May27Pcmag 95 524288 64.5 512 MB DIMM DDR-2700 @ $64.502003.42 $115 2003 Jun17Pcmag 137 524288 59 512 MB DIMM PC-133 @ $592003.5 $133 2003July Pcmag 101 262144 33.99 256 MB DIMM DDR-2100 @ $33.99
+Computer AmerComputer AmerComputer AmerComputer AmerComputer AmerComputer AmerComputer AmerComputer ServComputer ServComputer ServDiscount MemoDiscount MemoMemory LiquidDiscount MemoTiger System
+Crucial TechnCrucial Techn
+Crucial Techn
+Crucial Techn
+Crucial TechnCrucial TechnCrucial TechnCrucial TechnCrucial TechnCrucial TechnCrucial TechnCrucial Techn
+Crucial Techn
+Crucial Techn
+Crucial TechnCrucial TechnCrucial TechnCrucial Techn
+Crucial TechnCrucial TechnCrucial Techn
+Crucial Techn
+NewEgg.com
+NewEgg.com
+TigerDirect.cTigerDirect.cTigerDirect.cwww.crucial.cwww.crucial.cwww.crucial.cwww.crucial.c
+StarSurplus.c
+StarSurplus.c
+StarSurplus.c
+StarSurplus.c
+StarSurplus.c
+iMemoryMall.cStarSurplus.cStarSurplus.c
+StarSurplus.cStarSurplus.c
+StarSurplus.c
+HardDrive.com
+
+=== PDF页 17 ===
+2003.58 $129 2003 Aug19Pcmag 54 524288 65.99 512 MB DIMM SDRAM @ $65.99 DDR at $72.992003.67 $143 2003 Sep16Pcmag 64 524288 72.99 512 MB DIMM SDRAM @ $72.99 DDR at $86.992003.75 $148 2003 Oct1Pcmag 54 524288 75.99 512 MB DIMM SDRAM @ $75.99 DDR at $86.992003.83 $160 2003 Nov25Pcmag 82 524288 81.99 512 MB DIMM PC-133 @ $81.99 DDR at $85.992003.99 $166 2003 Dec30Pcmag 37 524288 84.99 512 MB DIMM PC-133 @ $84.99 DDR at $85.992004 $174 2004Jan Pcmag 143 524288 89 512 MB DIMM DDR-3200 @ $892004.08 $148 2004 Feb17Pcmag 78 524288 76 512 MB DIMM DDR-3200 @ $76 GEIL2004.17 $146 2004 Mar16Pcmag 115 524288 75 512 MB DIMM DDR-3200 @ $75 GEIL2004.33 $156 2004 May4Pcmag 19 524288 80 512 MB DIMM DDR-3200 @ $76 GEIL2004.42 $203 2004 Jun8Pcmag 19 524288 104 512 MB DIMM DDR-3200 @ $104 GEIL2004.5 $176 2004July Pcmag 19 524288 90 512 MB DIMM DDR-3200 @ $90 Kingston2005.25 $185 2005 Apr12Pcmag 24 1048576 189 2x512 MB DIMM DDR-3200 @ $90 Mushkin2005.42 $149 2005 Jun7Pcmag 20 1048576 153 1 GB DIMM DDR PC-3200Pro @ $153 Corsair2005.83 $116 2005 Nov8Pcmag 67 1048576 119 1 GB DIMM DDR2-533 @ $1192005.92 $185 2005 Dec6Pcmag 139 1048576 189 2x512 MB DIMM DDR-4800 @ $1892006.17 $112 2006 Mar21Pcmag 66 2097152 229.81 2x1 GB DIMM DDR-500 PC4000 @ $229.81 OCZ Gold2006.33 $73 2006 May25Web 2097152 148.99 2x1 GB DIMM DDR2-667 @ $148.99 free shipping OCZ Gold2006.5 $82 2006 Jul23Web 1048576 83.99 1GB DIMM DDR2-667 @$83.99 Kingston2006.67 $73 2006 Sep1Web 2097152 149.99 OCZ Gold2006.75 $88 2006 Oct5Web 2097152 179.98 PQi2006.83 $98 2006 Nov25Web 2097152 199.99 2x1 GB DIMM DDR2-800 @ $199.99 + free shipping G. Skill2006.99 $92 2006 Dec21Web 1048576 93.98 1GB DIMM DDR-400 @$88.99 + 4.99 shipping Wintec2007 $82 2007 Jan28Web 1048576 83.98 1GB DIMM DDR-400 @$78.99 + 4.99 shipping PQi2007.08 $78 2007 Feb28Web 1048576 79.98 1GB DIMM DDR2-800 @ $74.99 + $4.99 shipping Patriot2007.17 $66 2007 Mar15Web 2097152 134.98 2x1 GB DIMM DDR2-667 @ $129.99 + 4.99 shipping Wintec2007.33 $46 2007 May7Web 2097152 94.995-5-5-18 2x1 GB DIMM DDR2-800 @ $94.99 + free shipping A-Data2007.5 $39 2007 July9Web 2097152 78.98cas 5 2x1 GB DIMM DDR2-667 @ $73.99 + 4.99 shipping Super Talent2007.67 $35 2007Sept30 Web 2097152 71.98cas 5 2x1 GB DIMM DDR2-800 @ $66.99 + 4.99 shipping Mushkin2007.75 $32 2007 Oct16Web 2097152 65.985-5-5-18 2x1 GB DIMM DDR2-800 @ $60.99 + 4.99 shipping A-Data2007.83 $24 2007 Nov10Web 2097152 49.98 2x1 GB DIMM DDR2-667 @ $44.99 + 4.99 shipping Kingston2007.92 $24 2007 Dec05Web 2097152 49.955-5-5-15 2x1 GB DIMM DDR2-800 @ $49.95 + free shipping G.Skill2008 $23 2008 Jan18Web 4194304 94.995-5-5-15 2x2 GB DIMM DDR2-800 @ $94.99 + free shipping G.Skill2008.08 $22 2008 Feb20Web 2097152 44.995-5-5-15 2x1 GB DIMM DDR2-800 @ $44.99 + free shipping G.Skill2008.33 $22 2008 May18Web 2097152 44.995-5-5-15 2x1 GB DIMM DDR2-800 @ $44.99 + free shipping G.Skill2008.5 $21 2008 Jul07Web 4194304 84.985-5-5-18 2x2 GB DIMM DDR2-800 @ $77.99 + 5.99 shipping A-Data2008.58 $18 2008 Aug21Web 2097152 35.99 2x1 GB DIMM DDR2-667 @ $35.99 + free shipping Crucial2008.67 $15 2008 Sep25Web 2097152 29.99cas 5 2x1 GB DIMM DDR2-667 @ $29.99 + free shipping Crucial2008.83 $11 2008 Nov14Web 4194304 44.995-5-5-15 2x2 GB DIMM DDR2-800 @ $49.99 + free shipping G.Skill2008.92 $10 2008 Dec14Web 4194304 39.995-5-5-15 2x2 GB DIMM DDR2-800 @ $39.99 + free shipping G.Skill2009 $10 2009 Jan19Web 4194304 39.995-5-5-15 2x2 GB DIMM DDR2-800 @ $39.99 + free shipping G.Skill2009.08 $11 2009 Feb14Web 2097152 21.99cas 6 2x1 GB DIMM DDR2-800 @ $21.99 + free shipping Kingston2009.25 $10 2009 Apr03Web 4194304 42.995-5-5-15 2x2 GB DIMM DDR2-800 @ $42.99 + free shipping G.Skill2009.42 $11 2009 Jun03Web 4194304 46.995-5-5-18 2x2 GB DIMM DDR2-800 @ $46.99 + free shipping Corsair2009.5 $11 2009 Jul02Web 4194304 44.995-5-5-18 2x2 GB DIMM DDR2-800 @ $44.99 + free shipping Corsair2009.58 $13 2009 Aug20Web 4194304 51.995-5-5-15 2x2 GB DIMM DDR2-800 @ $51.99 + free shipping G.Skill2009.75 $18 2009 Oct07Web 4194304 74.995-5-5-15 2x2 GB DIMM DDR2-1066 @ $74.99 + free shipping Patriot2009.92 $21 2009 Dec12Web 2097152 41.99 1x2 GB DIMM DDR2-800 @ $41.99 + free shipping Crucial2010 $19 2010 Jan15Web 4194304 77.995-5-5-15 2x2 GB DIMM DDR2-800 @ $77.99 + free shipping Wintec2010.08 $20 2010 Feb11Web 4194304 82.78cas 5 2x2 GB DIMM DDR2-667 @ $79.99 + 2.99 shipping Patriot2010.17 $20 2010 Mar10Web 2097152 39.99cas 5 2x1 GB DIMM DDR2-800 @ $39.99 + free shipping Wintec2010.33 $24 2010 May09Web 4194304 98.98cas 5 2x2 GB DIMM DDR2-800 @ $92.99 + 5.99 shipping PQi2010.5 $21 2010 Jul25Web 4194304 85.989-9-9-20 2x2 GB DIMM DDR3-1333 @ $84.99 + 0.99 shipping2010.58 $22 2010 Aug26Web 4194304 89.999-9-9-24 2x2 GB DIMM DDR3-1333 @ $89.99 + free shipping Patriot2010.75 $17 2010 Oct07Web 4194304 69.997-7-7-20 2x2 GB DIMM DDR3-1066 @ $69.99 + free shipping OCZ Gold2010.83 $15 2010 Nov16Web 4194304 59.999-9-9-24 2x2 GB DIMM DDR3-1333 @ $59.99 + free shipping Mushkin2010.92 $12 2010 Dec10Web 8388608 99.999-9-9-24 2x4 GB DIMM DDR3-1333 @ $99.99 + free shipping Mushkin2011 $10 2011 Jan21Web 4194304 40.98cas 9 2x2 GB DIMM DDR3-1333 @ $40.98 + free shipping A-Data2011.08 $10 2011 Feb12Web 4194304 41.99cas 9 1x4 GB DIMM DDR3-1333 @ $41.99 + free shipping Kingston2011.33 $10 2011 May06Web 8388608 81.999-9-9-24 2x4 GB DIMM DDR3-1333 @ $81.99 + free shipping GEIL2011.42 $9 2011 Jun22Web 8388608 69.99cas 9 2x4 GB DIMM DDR3-1333 @ $69.99 + free shipping Kingston2011.67 $5 2011 Sep02Web 4194304 21.99cas 9 1x4 GB DIMM DDR3-1333 @ $21.99 + free shipping Crucial
+Crucial TechnCrucial TechnCrucial TechnCrucial TechnCrucial Techn
+2x1 GB DIMM DDR2-667 @ $179.99-$30 rebate + 4.99 2x1 GB DIMM DDR2-667 @ $214.99-$40 rebate + 4.99 
+NewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.com
+
+=== PDF页 18 ===
+2011.75 $5 2011 Oct17Web 8388608 41.99cas 9 2x4 GB DIMM DDR3-1333 @ $41.99 + free shipping PNY Optima2012 $5 2012 Jan12Web 8388608 39.999-9-9-24 2x4 GB DIMM DDR3-1600 @ $39.99 + free shipping Corsair2012.08 $5 2012 Feb13Web 8388608 39.99cas 9 2x4 GB DIMM DDR3-1600 @ $39.99 + free shipping Kingston2012.25 $5 2012 Apr08Web 8388608 40.999-9-9-24 2x4 GB DIMM DDR3-1333 @ $40.99 + free shipping Patriot2012.33 $5 2012 May24Web 8388608 39.999-9-9-24 2x4 GB DIMM DDR3-1333 @ $39.99 + free shipping Team Elite2012.58 $5 2012 Aug20Web 1.70E+07 77.99cas 9 2x8 GB DIMM DDR3-1333 @ $77.99 + free shipping Kingston2012.67 $4 2012 Sep21Web 1.70E+07 64.7910-10-10-282x8 GB DIMM DDR3-1600 @ $64.79 + free shipping GEIL EVO Corsa2012.83 $4 2012 Nov17Web 8388608 29.99cas 9 2x4 GB DIMM DDR3-1333 @ $29.99 + free shipping Crucial Ballistix2013 $4 2013 Jan17Web 8388608 34.999-9-9-24 2x4 GB DIMM DDR3-1600 @ $34.99 + free shipping Wintec One2013.08 $5 2013 Feb23Web 1.70E+07 88.999-9-9-28 2x8 GB DIMM DDR3-1600 @ $88.99 + free shipping GEIL EVO Corsa2013.33 $7 2013 May18Web 1.70E+07 109.999-10-9-28 2x8 GB DIMM DDR3-1866 @ $109.99 + free shippingGEIL2013.42 $6 2013 Jun30Web 8388608 49.99cas 9 2x4 GB DIMM DDR3-1333 @ $49.99 + free shipping2013.58 $7 2013 Aug09Web 8388608 59.99 9-9-20092x4 GB DIMM DDR3-1333 @ $59.99 + free shipping WINTEC value2013.67 $6 2013 Sep07Web 8388608 52.99cas 10 1x8 GB DIMM DDR3-1600 @ $52.99 + free shipping Crucial2013.75 $8 2013 Oct16Web 1.70E+07 133.9910-11-10-302x8 GB DIMM DDR3-1866 @ $133.99 + free shippingPatriot Intel ExMLE2013.83 $9 2013 Nov10Web 8388608 69.99cas 9 1x8 GB DIMM DDR3-1600 @ $69.99 + free shipping Crucial Ballistix Sport2013.92 $8 2013 Dec23Web 1.70E+07 129.99cas 11 2x8 GB DIMM DDR3-1600 @ $129.99 + free shippingSilicon Power2014.08 $10 2014 Feb08Web 4194304 38.99cas 10 1x4 GB DIMM DDR3-1600 @ $38.99 + free shipping Patriot Viper 32014.17 $8 2014 Mar13Web 8388608 64.99cas 9 2x4 GB DIMM DDR3-1600 @ $64.99 + free shipping HyperX XMP2014.25 $7 2014 Apr10Web 4194304 29.9911-11-11-281x4 GB DIMM DDR3-1600 @ $29.99 + free shipping Team2014.42 $8 2014 Jun19Web 8388608 64.999-9-9-24 2x4 GB DIMM DDR3-1333 @ $64.99 + free shipping Team Elite2014.58 $9 2014 Aug02Web 8388608 69.999-9-9-24 2x4 GB DIMM DDR3-1600 @ $69.99 + free shipping Team Vulcan2014.67 $9 2014 Sep13Web 8388608 69.999-9-9-24 2x4 GB DIMM DDR3-1600 @ $69.99 + free shipping Team Vulcan2014.83 $9 2014 Nov11Web 4194304 34.9911-11-11-301x4 GB DIMM DDR3-1600 @ $34.99 + free shipping Pareema2015 $8 2015 Jan22Web 8388608 63.99cas 10 1x8 GB DIMM DDR3-1866 @ $63.99 + free shipping Hypexx Fury2015.08 $7 2015 Feb15Web 8388608 59.99cas 11 2x4 GB DIMM DDR3-1600 @ $59.99 + free shipping Crucial2015.25 $6 2015 Apr11Web 8388608 49.9911-11-11-282x4 GB DIMM DDR3-1600 @ $49.99 + free shipping Avexir2015.33 $6 2015 May15Web 1.70E+07 91.999-9-9-24 2x8 GB DIMM DDR3-1600 @ $91.99 + free shipping Team Vulcan2015.5 $5 2015 Jul10Web 8388608 39.9911-11-11-281x8 GB DIMM DDR3-1600 @ $39.99 + free shipping Team Elite2015.58 $5 2015 Aug23Web 1.70E+07 73.999-9-9-24 2x8 GB DIMM DDR3L-1600 @ $73.99 + free shippingMushkin Enhanced ECO22015.67 $4 2015 Sep22Web 8388608 34.999-9-9-24 2x4 GB DIMM DDR3-1333 @ $34.99 + free shipping Team Elite2015.75 $4 2015 Oct24Web 1.70E+07 68.999-9-9-24 2x8 GB DIMM DDR3-1600 @ $68.99 + free shipping Team Dark2015.83 $4 2015 Nov21Web 1.70E+07 62.999-9-9-24 2x8 GB DIMM DDR3-1600 @ $62.99 + free shipping V-Color OC2015.92 $4 2015 Dec18Web 1.70E+07 59.9910-10-10-272x8 GB DIMM DDR3-1600 @ $59.99 + free shipping Team Vulcan2016.08 $4 2016 Feb14Web 1.70E+07 58.999-9-9-24 2x8 GB DIMM DDR3L-1600 @ $58.99 + free shippingMushkin Ehanced Essentials2016.25 $3 2016 Apr11Web 1.70E+07 49.999-9-9-24 2x8 GB DIMM DDR3L-1600 @ $49.99 + free shippingMushkin Ehanced Essentials2016.33 $3 2016 May18Web 1.70E+07 48.9915-15-15-352x8 GB DIMM DDR4-2133 @ $48.99 + free shipping Team Elite Plus2016.42 $3 2016 Jun20Web 1.70E+07 44.9910-11-10-302x8 GB DIMM DDR3-1866 @ $44.99 + free shipping V-Color OC Series2016.5 $3 2016 Jul22Web 1.70E+07 49.999-9-9-24 2x8 GB DIMM DDR3-1600 @ $49.99 + free shipping Team Vulcan2016.58 $4 2016 Aug22Web 1.70E+07 57.999-9-9-24 2x8 GB DIMM DDR3-1600 @ $57.99 + free shipping Team Vulcan2016.75 $4 2016 Oct15Web 3.40E+07 114.9915-15-15-352x16 GB DIMM DDR4-2133 @ $114.99 + free shippingG. Skill Aegis2016.83 $4 2016 Nov15Web 1.70E+07 67.9915-15-15-362x8 GB DIMM DDR4-2133 @ $67.99 + free shipping GEIL EVO Potenza2016.92 $5 2016 Dec21Web 1.70E+07 74.9916-16-16-362x8 GB DIMM DDR4-3000 @ $74.99 + free shipping Team Dark2017 $5 2017 Jan15Web 1.70E+07 79.9916-18-18-382x8 GB DIMM DDR4-3000 @ $79.99 + free shipping Team Vulcan2017.17 $5 2017 Mar12Web 1.70E+07 89.9911-11-11-272x8 GB DIMM DDR3-2133 @ $89.99 + free shipping Ballistic Elite2017.33 $6 2017 May05Web 3.40E+07 185.9915-15-15-362x16 GB DIMM DDR4-2133 @ $185.99 + free shippingGEIL Forza2017.42 $5 2017 Jun22Web 1.70E+07 89.999-9-9-24 2x8 GB DIMM DDR3-1600 @ $89.99 + free shipping Team Dark2017.5 $6 2017 Jul22Web 1.70E+07 95.999-9-9-24 2x8 GB DIMM DDR3-1600 @ $95.99 + free shipping Adata XPG V1.02017.67 $6 2017 Sep19Web 8388608 49.999-9-9-24 2x4 GB DIMM DDR3-1600 @ $49.99 + free shipping Team Vulcan2017.75 $7 2017 Oct27Web 1.70E+07 109.99 2x8 GB DIMM DDR3-1600 @ $109.99 + free shippingTeam Elite Plus2017.92 $7 2017 Dec12Web 1.70E+07 115.99 2x8 GB DIMM DDR3-1600 @ $115.99 + free shippingSilicon Power2018.08 $7 2018 Feb14Web 1.70E+07 108.99 2x8 GB DIMM DDR3-1600 @ $108.99 + free shippingSilicon Power2018.17 $7 2018 Mar23Web 1.70E+07 113.99 2x8 GB DIMM DDR3-1600 @ $113.99 + free shippingTeam Dark2018.33 $7 2018 May11Web 1.70E+07 111.98 2x8 GB DIMM DDR3-1600 @ $110.99 + $0.99 shippingTeam Dark2018.42 $6 2018 Jun19Web 1.70E+07 104.9911-11-11-282x8 GB DIMM DDR3-1600 @ $104.99 + free shippingAdata XPG V1.02018.5 $7 2018 Jul08Web 1.70E+07 110.989-9-9-24 2x8 GB DIMM DDR3-1600 @ $109.99 + $0.99 shippingTeam Vulcan2018.58 $6 2018 Aug24Web 1.70E+07 100.98 2x8 GB DIMM DDR3-1600 @ $99.99 + $0.99 shippingTeam Dark2018.67 $5 2018 Sep20Web 1.70E+07 89.9911-11-11-282x8 GB DIMM DDR3-1600 @ $89.99 + free shipping G.Skill2018.83 $5 2018 Nov11Web 1.70E+07 82.9911-11-11-282x8 GB DIMM DDR3L-1600 @ $82.99 + free shippingMushkin Enhanced Essentials2018.92 $5 2018 Dec16Web 8388608 37.99 1x8 GB DIMM DDR3-1333 @ $37.99 + free shipping G.Skill Value Series2019 $4 2019 Jan17Web 1.70E+07 69.9911-11-11-282x8 GB DIMM DDR3L-1600 @ $69.99 + free shippingMushkin Enhanced Essentials
+NewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.com
+
+=== PDF页 19 ===
+2019.08 $4 2019 Feb11Web 1.70E+07 69.9911-11-11-282x8 GB DIMM DDR3L-1600 @ $69.99 + free shippingMushkin Enhanced Essentials2019.17 $4 2019 Mar17Web 1.70E+07 68.9911-11-11-282x8 GB DIMM DDR3L-1600 @ $68.99 + free shippingMushkin Enhanced Essentials2019.25 $4 2019 Apr21Web 1.70E+07 60.9811-11-11-282x8 GB DIMM DDR3-1600 @ $59.99 + $0.99 shippingG.Skill Value$3$3$3$3$3$3$3$3$3$3.17$3.58$3.58$3.58$3.28$2.97$2.76$2.87$2.76$2.97$3.07$3.48$4.10$3.58$3.99$3.79$3.28$3.07$2.66$2.87$2.97$3.17$3.17$2.76$2.66$2.36$2.25$2.25$2.15$2.15$2.05$1.84$1.84$1.54$1.46$1.43$1.45$1.40$1.31$1.61$1.72$1.57$1.66$3.12
+NewEgg.comNewEgg.comNewEgg.com2019.33 2019 20-MayWeb 8388608 27.99CL 11 1x 8GB DIMM DDR3-1600 @ $27.99 + free shipping Patriot Signature Line2019.42 2019 19-JunWeb 8388608 25.9917-17-17-39 1x 8GB DIMM DDR4-2400 @ $25.99 + free shipping OLOy2019.5 2019 18-JulWeb 16777216 44.9917-17-17-39 2x 8GB DIMM DDR4-2400 @ $44.99 + free shipping OLOy2019.58 2019 17-AugWeb 16777216 44.9917-17-17-39 2x 8GB DIMM DDR4-2400 @ $44.99 + free shipping OLOy2019.67 2019 16-SepWeb 16777216 53.9916-18-18-35 2x 8GB DIMM DDR4-2666 @ $53.99 + free shipping OLOy2019.75 2019 18-OctWeb 33554432 99.9919-19-19-43 2x 16GB DIMM DDR4-2666 @ $99.99 + free shipping G. Skill Aegis2019.83 2019 14-NovWeb 33554432 94.9916-18-18-36 2x 16GB DIMM DDR4-3000 @ $94.99 + free shipping Geil EVO Potenza2019.92 2019 17-DecWeb 33554432 92.9916-18-18-38 2x 16GB DIMM DDR4-3000 @ $92.99 + free shipping OLOy2020 2020 20-JanWeb 16777216 47.9917-17-17-39 2x 8GB DIMM DDR4-2400 @ $47.99 + free shipping OLOy2020.08 2020 17-FebWeb 33554432 99.9917-17-17-39 2x 16GB DIMM DDR4-2400 @ $99.99 + free shipping OLOy2020.17 2020 23-MarWeb 33554432 114.9917-17-17-39 2x 16GB DIMM DDR4-2400 @ $114.99 + free shipping OLOy2020.25 2020 23-AprWeb 16777216 57.9916-18-18-36 1x 16GB DIMM DDR4-3000 @ $57.99 + free shipping OLOy2020.33 2020 23-MayWeb 33554432 114.9919-19-19-43 2x 16GB DIMM DDR4-2666 @ $114.99 + free shipping G. Skill2020.42 2020 21-JunWeb 33554432 104.9915-15-15-39 2x 16GB DIMM DDR4-2400 @ $104.99 + free shipping G. Skill X series2020.5 2020 18-JulWeb 33554432 94.9919-19-19-43 2x 16GB DIMM DDR4-2666 @ $94.99 + free shipping G. Skill Aegis2020.58 2020 19-AugWeb 33554432 89.9922-22-22-52 1x 32GB DIMM DDR4-3200 @ $89.99 + free shipping Team Elite2020.67 2020 20-SepWeb 33554432 91.9916-18-18-36 2x 16GB DIMM DDR4-2666 @ $91.99 + free shipping OLOy2020.75 2020 17-OctWeb 33554432 89.9916-18-18-36 2x 16GB DIMM DDR4-3000 @ $89.99 + free shipping GEIL Evo Potenza2020.83 2020 19-NovWeb 33554432 94.9920-22-22-46 2x 16GB DIMM DDR4-3200 @ $94.99 + free shipping Team T-Force2020.92 2020 21-DecWeb 33554432 97.9916-18-18-38 2x 16GB DIMM DDR4-3000 @ $97.99 + free shipping OLOy2021.08 2021 14-FebWeb 33554432 109.9916-18-18-38 2x 16GB DIMM DDR4-3000 @ $109.99 + free shipping G.Skill Aegis2021.25 2021 17-AprWeb 67108864 259.9919-19-19-43 2x 32GB DIMM DDR4-2666 @ $259.99 + free shipping G.Skill Value Series2021.33 2021 17-MayWeb 67108864 229.9919-19-19-43 2x 32GB DIMM DDR4-2666 @ $229.99 + free shipping G.Skill Value Series2021.5 2021 11-JulWeb 8388608 31.99cas 11 1x 8GB DIMM DDR3-1600 @ $31.99 + free shipping Patriot Signature Line2021.58 2021 16-AugWeb 33554432 119.9915-15-15-36 2x 16GB DIMM DDR4-2133 @ $119.99 + free shipping G.Skill Ripjaws V2021.67 2021 18-SepWeb 16777216 51.9919-19-19-43 1x 16GB DIMM DDR4-2666 @ $51.99 + free shipping G.Skill Aegis2021.75 2021 20-OctWeb 16777216 48.9917-17-17-39 1x 16GB DIMM DDR4-2400 @ $48.99 + free shipping G.Skill Aegis2021.92 2021 15-DecWeb 33554432 84.9919-19-19-43 2x 16GB DIMM DDR4-2666 @ $84.99 + free shipping G.Skill Aegis2022 2022 19-JanWeb 33554432 92.9919-19-19-43 2x 16GB DIMM DDR4-2666 @ $92.99 + free shipping G.Skill Aegis2022.08 2022 17-FebWeb 33554432 93.9919-19-19-43 2x 16GB DIMM DDR4-2666 @ $93.99 + free shipping G.Skill Aegis2022.17 2022 18-MarWeb 33554432 99.9916-20-20-40 2x 16GB DIMM DDR4-3200 @ $99.99 + free shipping Team T-Force Vulcan TUF G.A.2022.25 2022 23-AprWeb 16777216 50.9817-17-17-39 1x 16GB DIMM DDR4-2400 @ $49.99 + $0.99 shipping G.Skill Aegis2022.33 2022 15-MayWeb 33554432 87.99cas 22 1x 32GB SO-DIMM DDR4-3200 @ $87.99 + free shipping G.Skill Ripjaws2022.42 2022 18-JunWeb 33554432 84.97cas 22 2x 16GB SO-DIMM DDR4-3200 @ $84.97 + free shipping Silicon Power2022.58 2022 20-AugWeb 33554432 74.99cas 22 1x 32GB SO-DIMM DDR4-3200 @ $74.99 + free shipping OLOy2022.67 2022 16-SepWeb 33554432 72.99cas 19 1x 32GB SO-DIMM DDR4-2666 @ $72.99 + free shipping Silicon Power2022.75 2022 18-OctWeb 33554432 72.99cas 19 2x 16GB SO-DIMM DDR4-2666 @ $72.99 + free shipping Silicon Power2022.83 2022 5-NovWeb 33554432 69.99cas 19 1x 32GB SO-DIMM DDR4-2666 @ $69.99 + free shipping Silicon Power2022.92 2022 18-DecWeb 33554432 68.9917-17-17-39 2x 16GB DIMM DDR4-2400 @ $68.99 + free shipping G.Skill Aegis2023 2023 18-JanWeb 33554432 63.98cas 19 1x 32GB SO-DIMM DDR4-2666 @ $61.99 + $1.99 shipping G.Skill Ripjaws2023.08 2023 18-FebWeb 67108864 114.99cas 22 2x 32GB SO-DIMM DDR4-3200 @ $114.99 + free shipping Mushkin Enhanced Essentials2023.17 2023 18-MarWeb 67108864 114.9922-22-22-52 2x 32GB SO-DIMM DDR4-3200 @ $114.99 + free shipping Mushkin Enhanced Essentials2023.33 2023 6-MayWeb 67108864 97.99cas 22 2x 32GB SO-DIMM DDR4-3200 @ $97.99 + free shipping Team Elite2023.42 2023 17-JunWeb 67108864 93.9919-19-19-43 2x 32GB DIMM DDR4-2666 @ $93.99 + free shipping Mushkin Enhanced Essentials2023.5 2023 18-JulWeb 33554432 45.99 2x 16GB SO-DIMM DDR4-3200 @ $45.99 + free shipping Team T-Create Classic2023.67 2023 19-SepWeb 67108864 92.9916-19-19-38 2x 32GB DIMM DDR4-3200 @ $92.99 + free shipping Mushkin Enhanced Redline Stiletto2023.75 2023 20-OctWeb 67108864 89.9922-22-22-52 2x 32GB SO-DIMM DDR4-3200 @ $89.99 + free shipping Team T-Create Classic2023.83 2023 16-NovWeb 33554432 41.9916-17-17-36 2x 16GB SO-DIMM DDR4-2666 @ $41.99 + free shipping Mushkin Enhanced Redline14-Jan21-Feb21-Mar16-May28-Jul15-Apr
+NewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.com2024.00 2024 Web 67108864 102.9922-22-22-52 2x32 GB SO-DIMM DDR4-3200 @102.99 + free shipping Team Elite2024.08 2024 Web 67108864 109.9922-22-22-52 2x32 GB SO-DIMM DDR4-3200 @109.99 + free shipping Mushkin Enhanced Essentials2024.17 2024 Web 67108864 99.9916-18-18-35 2x32 GB DIMM DDR4-2666 @99.99 + free shipping Corsair Vengence LPX2024.33 2024 Web 33554432 52.9922-22-22-52 2x16 GB DIMM DDR4-3200 @ $52.99 + free shipping Team Elite2024.33 2024 Web 33554432 99.9920-26-26-46 2x32 GB DIMM DDR4-3600 @99.99 + free shipping Patriot Viper Elite2024.33 $1.57 2025 Web 33554432 49.9915-20-20 kingston furryKingston FURY Beast 32GB DDR4 3200MHz DIMM Memory Mod
+NewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.comNewEgg.com

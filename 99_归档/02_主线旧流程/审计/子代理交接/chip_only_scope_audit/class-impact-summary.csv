@@ -1,0 +1,4 @@
+﻿"scope_class","object_count","component_count","link_count","precision_path_count","capability_count","topology_count","unique_fact_footprint_count","unique_assertion_footprint_count","unique_requirement_footprint_count","card_completeness_row_count","card_object_count","distinct_asserted_source_count","selection_run_touch_count","selection_member_touch_count","relation_touch_count","overlap_note"
+"A","10","47","7","37","0","0","201","207","315","81","9","23","6","44","14","跨类关系事实、共享来源和组合 selection run 会同时计入相关类别；三个类别的影响计数不可直接相加为全库总数。"
+"B","29","190","23","81","89","1","378","379","545","261","29","52","9","72","14","跨类关系事实、共享来源和组合 selection run 会同时计入相关类别；三个类别的影响计数不可直接相加为全库总数。"
+"C","39","33","15","53","6","4","223","250","205","63","7","17","7","28","19","跨类关系事实、共享来源和组合 selection run 会同时计入相关类别；三个类别的影响计数不可直接相加为全库总数。"

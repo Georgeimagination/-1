@@ -1,0 +1,364 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <meta name="search_title" content="">
+ </head>
+ <body>
+  <a name="ZH-CN_TOPIC_0000002505469387"></a><a name="ZH-CN_TOPIC_0000002505469387"></a>
+  <h1 class="topictitle1">眼图测试</h1>
+  <div id="body0000001829755388">
+   <p id="ZH-CN_TOPIC_0000002505469387__p4210855204517">Ascend DMI支持眼图测试，用户使用该功能对网络进行测试，查询当前信号质量。</p>
+   <p id="ZH-CN_TOPIC_0000002505469387__p174773541912">本功能主要用于查询信号质量的具体数据。判断当前端口信号质量是否正常，请执行SignalQuality诊断。详细说明请参考<a href="toolboxug_0159.html">眼图诊断</a>章节。</p>
+   <div class="section" id="ZH-CN_TOPIC_0000002505469387__section3894141133712">
+    <h4 class="sectiontitle">测试项功能</h4>
+    <p id="ZH-CN_TOPIC_0000002505469387__p1289418119378">查询NPU上的PCIe、HCCS和RoCE通信端口的信号质量。</p>
+   </div>
+   <div class="section" id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_section117876436219">
+    <h4 class="sectiontitle">测试项特定参数查询</h4>
+    <p id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_p14343111410392">用户可任选以下指令之一查看信号质量查询命令的可用参数。</p>
+    <p id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_p15759160134710"><strong id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_b975900174718">ascend-dmi </strong><strong id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_b1875950144715">--sq -h</strong></p>
+    <p id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_p12601102115397"><strong id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_b1460162173916">ascend-dmi </strong><strong id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_b2601621173920">--sq --help</strong></p>
+    <p id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_p214102355114">各参数解释如<a href="#ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_table19759114415513">表1</a>所示，表格内仅展示测试项特定参数，其余公共参数请参见<a href="toolboxug_0213.html">公共参数说明</a>。</p>
+    <div class="tablenoborder">
+     <a name="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_table19759114415513"></a><a name="zh-cn_topic_0000001136053148_table19759114415513"></a>
+     <table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_table19759114415513" frame="border" border="1" rules="all">
+      <caption>
+       <b>表1 </b>参数说明
+      </caption>
+      <thead align="left">
+       <tr id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_row7759944135115">
+        <th align="left" class="cellrowborder" valign="top" width="28.88%" id="mcps1.3.4.6.2.4.1.1">
+         <p id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_p5605958205115">参数</p></th>
+        <th align="left" class="cellrowborder" valign="top" width="46.12%" id="mcps1.3.4.6.2.4.1.2">
+         <p id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_p1260512585517">说明</p></th>
+        <th align="left" class="cellrowborder" valign="top" width="25%" id="mcps1.3.4.6.2.4.1.3">
+         <p id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_p460545812510">是否必填</p></th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_row1275920448516">
+        <td class="cellrowborder" valign="top" width="28.88%" headers="mcps1.3.4.6.2.4.1.1 ">
+         <p id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_p1560520588515">[-sq, --sq, --signal-quality]</p></td>
+        <td class="cellrowborder" valign="top" width="46.12%" headers="mcps1.3.4.6.2.4.1.2 ">
+         <p id="ZH-CN_TOPIC_0000002505469387__p11131301518">查询NPU上的PCIe、HCCS和RoCE通信端口；CPU上的HCCS通信端口的信号质量。</p></td>
+        <td class="cellrowborder" valign="top" width="25%" headers="mcps1.3.4.6.2.4.1.3 ">
+         <p id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_p860575811513">是</p></td>
+       </tr>
+       <tr id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_row51261948223">
+        <td class="cellrowborder" valign="top" width="28.88%" headers="mcps1.3.4.6.2.4.1.1 ">
+         <p id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_p28760318155">[-d, --device]</p></td>
+        <td class="cellrowborder" valign="top" width="46.12%" headers="mcps1.3.4.6.2.4.1.2 ">
+         <p id="ZH-CN_TOPIC_0000002505469387__p320182711532">指定查询NPU或CPU的Device ID。指定多个芯片时，使用英文逗号进行分隔。不指定该参数时，默认查询该设备上所有的NPU/CPU。</p>
+         <ul id="ZH-CN_TOPIC_0000002505469387__ul118911421162210">
+          <li id="ZH-CN_TOPIC_0000002505469387__li1889142112220">若当前设备为<span id="ZH-CN_TOPIC_0000002505469387__ph151431757142112"><term id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001519959665_term57208119917">
+             Atlas A2 训练系列产品
+            </term></span>、<span id="ZH-CN_TOPIC_0000002505469387__ph382710211428"><term id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001519959665_term1675812427138">
+             Atlas 800I A2 推理产品
+            </term></span>、<span id="ZH-CN_TOPIC_0000002505469387__ph56342369338">A200I A2 Box 异构组件</span>，指定HCCS类型时，需要指定两张device；若使用<span id="ZH-CN_TOPIC_0000002505469387__ph729163615417">Atlas 200T A2 Box16 异构子框</span>指定HCCS类型时，前8P或后8P至少指定两张device。</li>
+          <li id="ZH-CN_TOPIC_0000002505469387__li14482936192119">若当前设备为<span id="ZH-CN_TOPIC_0000002505469387__ph19291750172118">Atlas 300I Duo 推理卡</span>，当type参数指定了pcie，该参数不能指定从芯片。</li>
+         </ul></td>
+        <td class="cellrowborder" valign="top" width="25%" headers="mcps1.3.4.6.2.4.1.3 ">
+         <p id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_p1487653171517">否</p></td>
+       </tr>
+       <tr id="ZH-CN_TOPIC_0000002505469387__row75481528413">
+        <td class="cellrowborder" valign="top" width="28.88%" headers="mcps1.3.4.6.2.4.1.1 ">
+         <p id="ZH-CN_TOPIC_0000002505469387__p95483523419">[-t, --type]</p></td>
+        <td class="cellrowborder" valign="top" width="46.12%" headers="mcps1.3.4.6.2.4.1.2 ">
+         <p id="ZH-CN_TOPIC_0000002505469387__p2918236111915">指定通信端口的类型。当前支持PCIe、HCCS和RoCE三种类型，指定多个通信端口的类型时，使用英文逗号进行分隔。</p>
+         <ul id="ZH-CN_TOPIC_0000002505469387__ul2557114013243">
+          <li id="ZH-CN_TOPIC_0000002505469387__li067951915462"><span id="ZH-CN_TOPIC_0000002505469387__ph1727154119224">Atlas 800T A2 训练服务器</span>、<span id="ZH-CN_TOPIC_0000002505469387__ph87271341192217">Atlas 900 A2 PoD 集群基础单元</span>、<span id="ZH-CN_TOPIC_0000002505469387__ph15876131218013">Atlas 900 A2 PoDc 集群基础单元</span>、<span id="ZH-CN_TOPIC_0000002505469387__ph197271441122219">Atlas 200T A2 Box16 异构子框</span>、<span id="ZH-CN_TOPIC_0000002505469387__ph313817549316">Atlas 800I A2 推理服务器</span>、<span id="ZH-CN_TOPIC_0000002505469387__ph621064814421">A200I A2 Box 异构组件</span>、<span id="ZH-CN_TOPIC_0000002505469387__ph126247155413">A200T A3 Box8 超节点服务器</span>默认查询PCIe和RoCE的信号质量。</li>
+          <li id="ZH-CN_TOPIC_0000002505469387__li1955714014249"><span id="ZH-CN_TOPIC_0000002505469387__ph12174764117">Atlas 800I A3 超节点服务器</span>、<span id="ZH-CN_TOPIC_0000002505469387__ph1559110212190">Atlas 9000 A3 SuperPoD 集群算力系统</span>、<span id="ZH-CN_TOPIC_0000002505469387__ph077885871817">Atlas 900 A3 SuperPoD 超节点</span>默认查询RoCE的信号质量。</li>
+          <li id="ZH-CN_TOPIC_0000002505469387__li83162222257"><span id="ZH-CN_TOPIC_0000002505469387__ph1237212324257">Atlas 300I Duo 推理卡</span>服务器场景下，主芯片仅支持PCIe和HCCS，从芯片仅支持HCCS。默认查询PCIe的信号质量。</li>
+          <li id="ZH-CN_TOPIC_0000002505469387__li1055481172715"><span id="ZH-CN_TOPIC_0000002505469387__ph3584173095810">Atlas 800I A2 推理服务器（32GB PCIe款）</span>不支持查询HCCS的信号质量。</li>
+          <li id="ZH-CN_TOPIC_0000002505469387__li392585511106"><span id="ZH-CN_TOPIC_0000002505469387__ph205393214315">Atlas 300I A2 推理卡</span>仅支持查询PCIe的信号质量。</li>
+         </ul>
+         <p id="ZH-CN_TOPIC_0000002505469387__p49261650195611">取值说明如下：</p>
+         <ul id="ZH-CN_TOPIC_0000002505469387__ul83610663315">
+          <li id="ZH-CN_TOPIC_0000002505469387__li736561335">pcie
+           <p id="ZH-CN_TOPIC_0000002505469387__p21227242591"><a name="ZH-CN_TOPIC_0000002505469387__li736561335"></a><a name="li736561335"></a>PCIe链路是NPU到CPU之间进行通信的链路，PCIe信号质量是指NPU侧连接PCIe链路的macro口四眼图的数值。</p></li>
+          <li id="ZH-CN_TOPIC_0000002505469387__li171619179339">hccs
+           <p id="ZH-CN_TOPIC_0000002505469387__p173701448183818"><a name="ZH-CN_TOPIC_0000002505469387__li171619179339"></a><a name="li171619179339"></a>HCCS链路是多张NPU之间互联的链路。HCCS信号质量是指NPU侧连接HCCS链路的macro口的信噪比和半眼高的数值。</p></li>
+          <li id="ZH-CN_TOPIC_0000002505469387__li2063092116336">roce
+           <p id="ZH-CN_TOPIC_0000002505469387__p1078219378584"><a name="ZH-CN_TOPIC_0000002505469387__li2063092116336"></a><a name="li2063092116336"></a>RoCE链路是NPU侧对外进行集群通信的链路。RoCE信号质量是指NPU侧连接RoCE链路的macro口的信噪比和半眼高的数值。</p></li>
+         </ul></td>
+        <td class="cellrowborder" valign="top" width="25%" headers="mcps1.3.4.6.2.4.1.3 ">
+         <p id="ZH-CN_TOPIC_0000002505469387__p195481552549">否</p></td>
+       </tr>
+       <tr id="ZH-CN_TOPIC_0000002505469387__row6124334162115">
+        <td class="cellrowborder" valign="top" width="28.88%" headers="mcps1.3.4.6.2.4.1.1 ">
+         <p id="ZH-CN_TOPIC_0000002505469387__p111257342210">[-m, --module]</p></td>
+        <td class="cellrowborder" valign="top" width="46.12%" headers="mcps1.3.4.6.2.4.1.2 ">
+         <p id="ZH-CN_TOPIC_0000002505469387__p14125143492120">支持查询CPU、NPU眼图。不指定该参数时，默认查询NPU眼图。该参数暂仅支持在<span id="ZH-CN_TOPIC_0000002505469387__ph18411121792018"><term id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001519959665_term26764913715">
+            Atlas A3 训练系列产品
+           </term></span>、<span id="ZH-CN_TOPIC_0000002505469387__ph791742714211"><term id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001519959665_term176419491615">
+            Atlas A3 推理系列产品
+           </term></span>中使用。</p></td>
+        <td class="cellrowborder" valign="top" width="25%" headers="mcps1.3.4.6.2.4.1.3 ">
+         <p id="ZH-CN_TOPIC_0000002505469387__p912523442112">否</p></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+   </div>
+   <div class="section" id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_section961617138538">
+    <h4 class="sectiontitle">使用实例</h4>
+    <p id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_p184161640131015">使用实例中命令的回显在推理服务器与训练服务器上类似，截图取自训练服务器。</p>
+    <ul id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_ul073422143712">
+     <li id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_li1273417212373">以查看Device 0和Device 1的PCIe、HCCS和RoCE信号质量为例。
+      <p id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_p2447233175315"><a name="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_li1273417212373"></a><a name="zh-cn_topic_0000001136053148_li1273417212373"></a><strong id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_b3447173315532">ascend-dmi </strong><strong id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_b9447113345317">--sq -t hccs,pcie,roce -d 0,1</strong></p>
+      <p id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_p344793318535">若返回如<a href="#ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_fig211732125414">图1</a>所示信息，表示工具运行正常。</p>
+      <div class="fignone" id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_fig211732125414">
+       <a name="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_fig211732125414"></a><a name="zh-cn_topic_0000001136053148_fig211732125414"></a><span class="figcap"><b>图1 </b>设备信号质量检测示例</span>
+       <p id="ZH-CN_TOPIC_0000002505469387__p475202954218"><span><img id="ZH-CN_TOPIC_0000002505469387__image1122993633612" src="figure/zh-cn_image_0000002485856260.png" width="497.42" height="629.1964" title="点击放大" class="imgResize"></span></p>
+      </div></li>
+     <li id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_li20175131014816">以指定输出格式为json为例。
+      <p id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_p191511754194813"><a name="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_li20175131014816"></a><a name="zh-cn_topic_0000001136053148_li20175131014816"></a><strong id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_b040015398497">ascend-dmi --signal-quality -t roce -d 0 --fmt json</strong></p>
+      <div class="p" id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_p17537193498">
+       若返回如<a href="#ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_fig1125293182213">图2</a>所示信息，表示工具运行正常。
+       <div class="fignone" id="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_fig1125293182213">
+        <a name="ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_fig1125293182213"></a><a name="zh-cn_topic_0000001136053148_fig1125293182213"></a><span class="figcap"><b>图2 </b>设备信号质量检测json输出示例</span>
+        <br><span><img id="ZH-CN_TOPIC_0000002505469387__image95161038153310" src="figure/zh-cn_image_0000002486016222.png" width="497.42" height="520.9078000000001" title="点击放大" class="imgResize"></span>
+       </div>
+      </div>
+      <p id="ZH-CN_TOPIC_0000002505469387__p167621626171718">以<a href="#ZH-CN_TOPIC_0000002505469387__zh-cn_topic_0000001136053148_fig211732125414">图1 设备信号质量检测示例</a>为例，上述回显参数介绍如下表所示：</p>
+      <div class="tablenoborder">
+       <table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000002505469387__table1313761641912" frame="border" border="1" rules="all">
+        <caption>
+         <b>表2 </b>HCCS信号质量回显参数说明
+        </caption>
+        <thead align="left">
+         <tr id="ZH-CN_TOPIC_0000002505469387__row11372016181917">
+          <th align="left" class="cellrowborder" valign="top" width="22.13%" id="mcps1.3.5.3.2.4.2.3.1.1">
+           <p id="ZH-CN_TOPIC_0000002505469387__p113731615193">参数</p></th>
+          <th align="left" class="cellrowborder" valign="top" width="77.86999999999999%" id="mcps1.3.5.3.2.4.2.3.1.2">
+           <p id="ZH-CN_TOPIC_0000002505469387__p1313731671912">说明</p></th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr id="ZH-CN_TOPIC_0000002505469387__row413731614197">
+          <td class="cellrowborder" valign="top" width="22.13%" headers="mcps1.3.5.3.2.4.2.3.1.1 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p1713791651920">type</p></td>
+          <td class="cellrowborder" valign="top" width="77.86999999999999%" headers="mcps1.3.5.3.2.4.2.3.1.2 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p1161364916239">指定通信端口的类型。</p></td>
+         </tr>
+         <tr id="ZH-CN_TOPIC_0000002505469387__row954118549582">
+          <td class="cellrowborder" valign="top" width="22.13%" headers="mcps1.3.5.3.2.4.2.3.1.1 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p1716015404477">device</p></td>
+          <td class="cellrowborder" valign="top" width="77.86999999999999%" headers="mcps1.3.5.3.2.4.2.3.1.2 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p854110548584">NPU的逻辑ID。</p></td>
+         </tr>
+         <tr id="ZH-CN_TOPIC_0000002505469387__row12408124221718">
+          <td class="cellrowborder" valign="top" width="22.13%" headers="mcps1.3.5.3.2.4.2.3.1.1 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p79181543161713">M*（macro port）</p></td>
+          <td class="cellrowborder" valign="top" width="77.86999999999999%" headers="mcps1.3.5.3.2.4.2.3.1.2 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p99189437174">表示macro端口，例如M0、M1分别表示macro的0号、1号端口。</p></td>
+         </tr>
+         <tr id="ZH-CN_TOPIC_0000002505469387__row1890563620227">
+          <td class="cellrowborder" valign="top" width="22.13%" headers="mcps1.3.5.3.2.4.2.3.1.1 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p1390643672212">L*（LANE）</p></td>
+          <td class="cellrowborder" valign="top" width="77.86999999999999%" headers="mcps1.3.5.3.2.4.2.3.1.2 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p49061136192214">表示HCCS链路中的第几条lane，例如L0、L1分别表示第0条和第1条lane。</p></td>
+         </tr>
+         <tr id="ZH-CN_TOPIC_0000002505469387__row2137201671917">
+          <td class="cellrowborder" valign="top" width="22.13%" headers="mcps1.3.5.3.2.4.2.3.1.1 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p1513861610199">S（SNR）</p></td>
+          <td class="cellrowborder" valign="top" width="77.86999999999999%" headers="mcps1.3.5.3.2.4.2.3.1.2 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p7138161610191">表示lane的信噪比。</p></td>
+         </tr>
+         <tr id="ZH-CN_TOPIC_0000002505469387__row14254633183011">
+          <td class="cellrowborder" valign="top" width="22.13%" headers="mcps1.3.5.3.2.4.2.3.1.1 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p5254433193018">H（HEH）</p></td>
+          <td class="cellrowborder" valign="top" width="77.86999999999999%" headers="mcps1.3.5.3.2.4.2.3.1.2 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p125453315307">表示lane的半眼高。</p></td>
+         </tr>
+         <tr id="ZH-CN_TOPIC_0000002505469387__row93231959132519">
+          <td class="cellrowborder" valign="top" width="22.13%" headers="mcps1.3.5.3.2.4.2.3.1.1 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p97094932615">B/T/L/R</p></td>
+          <td class="cellrowborder" valign="top" width="77.86999999999999%" headers="mcps1.3.5.3.2.4.2.3.1.2 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p87102097262">分别表示四眼图bottom、top、left和right四个位置的值。</p></td>
+         </tr>
+         <tr id="ZH-CN_TOPIC_0000002505469387__row1761418208228">
+          <td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.5.3.2.4.2.3.1.1 mcps1.3.5.3.2.4.2.3.1.2 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p45370527183">数据说明：</p>
+           <ul id="ZH-CN_TOPIC_0000002505469387__ul17629114834110">
+            <li id="ZH-CN_TOPIC_0000002505469387__li1762984818410">在HCCS信号质量回显中，当SNR≥400000且HEH≥350，即表示当前LANE信号质量正常。</li>
+            <li id="ZH-CN_TOPIC_0000002505469387__li1779735114419">若SNR和HEH数值不在以上范围内，即表示HCCS信号质量异常。请检查macro连接口是否发生松动，链路是否有脏污。</li>
+            <li id="ZH-CN_TOPIC_0000002505469387__li17198285491">若SNR和HEH的数值为0，说明测试的HCCS链路中指定的Device之间未建链。</li>
+            <li id="ZH-CN_TOPIC_0000002505469387__li1755546321">使用<span id="ZH-CN_TOPIC_0000002505469387__ph5514279334">Atlas 300I Duo 推理卡</span>查询NPU的HCCS信号质量；或使用<span id="ZH-CN_TOPIC_0000002505469387__ph188654112302">Atlas 900 A3 SuperPoD 超节点</span>、<span id="ZH-CN_TOPIC_0000002505469387__ph115781846143619">Atlas 800I A3 超节点服务器</span>、<span id="ZH-CN_TOPIC_0000002505469387__ph1857817460368">Atlas 9000 A3 SuperPoD 集群算力系统</span>查询CPU的HCCS信号质量回显时，只会展示type、device、M*（macro port）、L*（LANE）、B/T/L/R回显参数，且B/T/L/R中B（bottom）≤-30、T(top)≥30、L(left)≤-5、R(right)≥5。</li>
+           </ul></td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+      <div class="tablenoborder">
+       <table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000002505469387__table547211288194" frame="border" border="1" rules="all">
+        <caption>
+         <b>表3 </b>PCIe信号质量回显参数说明
+        </caption>
+        <thead align="left">
+         <tr id="ZH-CN_TOPIC_0000002505469387__row447352861920">
+          <th align="left" class="cellrowborder" valign="top" width="21.98%" id="mcps1.3.5.3.2.5.2.3.1.1">
+           <p id="ZH-CN_TOPIC_0000002505469387__p14732280199">参数</p></th>
+          <th align="left" class="cellrowborder" valign="top" width="78.02%" id="mcps1.3.5.3.2.5.2.3.1.2">
+           <p id="ZH-CN_TOPIC_0000002505469387__p447372817192">说明</p></th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr id="ZH-CN_TOPIC_0000002505469387__row04732280196">
+          <td class="cellrowborder" valign="top" width="21.98%" headers="mcps1.3.5.3.2.5.2.3.1.1 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p5429161563319">type</p></td>
+          <td class="cellrowborder" valign="top" width="78.02%" headers="mcps1.3.5.3.2.5.2.3.1.2 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p9429111523316">指定通信端口的类型。</p></td>
+         </tr>
+         <tr id="ZH-CN_TOPIC_0000002505469387__row124741728131915">
+          <td class="cellrowborder" valign="top" width="21.98%" headers="mcps1.3.5.3.2.5.2.3.1.1 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p1047432814192">device</p></td>
+          <td class="cellrowborder" valign="top" width="78.02%" headers="mcps1.3.5.3.2.5.2.3.1.2 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p747452821912">表示NPU的逻辑ID。</p></td>
+         </tr>
+         <tr id="ZH-CN_TOPIC_0000002505469387__row16474132841915">
+          <td class="cellrowborder" valign="top" width="21.98%" headers="mcps1.3.5.3.2.5.2.3.1.1 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p0474122812196">M*（macro port）</p></td>
+          <td class="cellrowborder" valign="top" width="78.02%" headers="mcps1.3.5.3.2.5.2.3.1.2 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p15474928111916">表示macro端口，例如M9、M10分别表示macro的9号、10号端口。</p></td>
+         </tr>
+         <tr id="ZH-CN_TOPIC_0000002505469387__row1777017479220">
+          <td class="cellrowborder" valign="top" width="21.98%" headers="mcps1.3.5.3.2.5.2.3.1.1 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p1077194710213">L*（LANE）</p></td>
+          <td class="cellrowborder" valign="top" width="78.02%" headers="mcps1.3.5.3.2.5.2.3.1.2 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p18925714832">表示PCIe链路中的第几条lane，例如L0、L1分别表示第0条和第1条lane。</p></td>
+         </tr>
+         <tr id="ZH-CN_TOPIC_0000002505469387__row14474102818197">
+          <td class="cellrowborder" valign="top" width="21.98%" headers="mcps1.3.5.3.2.5.2.3.1.1 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p18474132815195">B/T/L/R</p></td>
+          <td class="cellrowborder" valign="top" width="78.02%" headers="mcps1.3.5.3.2.5.2.3.1.2 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p347472817190">分别表示四眼图bottom、top、left和right四个位置的值。</p></td>
+         </tr>
+         <tr id="ZH-CN_TOPIC_0000002505469387__row1637263210228">
+          <td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.5.3.2.5.2.3.1.1 mcps1.3.5.3.2.5.2.3.1.2 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p18117162226">数据说明：</p>
+           <ul id="ZH-CN_TOPIC_0000002505469387__ul1358115612411">
+            <li id="ZH-CN_TOPIC_0000002505469387__li55855618416">在PCIe信号质量回显中，当四眼图B(bottom)≤-17、T(top)≥17、L(left)≤-3、R(right)≥3（须同时满足），即表示当前LANE信号质量正常。</li>
+            <li id="ZH-CN_TOPIC_0000002505469387__li1945420174220">若四眼图数值不在以上范围内，即表示PCIe信号质量异常。请检查macro连接口是否发生松动，链路是否有脏污。</li>
+            <li id="ZH-CN_TOPIC_0000002505469387__li4257631205413">在<span id="ZH-CN_TOPIC_0000002505469387__ph1037019381540">Atlas 300I Duo 推理卡</span>场景下，B/T/L/R的范围为B(bottom)≤-30、T(top)≥30、L(left)≤-5、R(right)≥5。</li>
+           </ul></td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+      <div class="tablenoborder">
+       <table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000002505469387__table13893611192" frame="border" border="1" rules="all">
+        <caption>
+         <b>表4 </b>RoCE信号质量回显参数说明
+        </caption>
+        <thead align="left">
+         <tr id="ZH-CN_TOPIC_0000002505469387__row153883631913">
+          <th align="left" class="cellrowborder" valign="top" width="22.48%" id="mcps1.3.5.3.2.6.2.3.1.1">
+           <p id="ZH-CN_TOPIC_0000002505469387__p1738173631911">参数</p></th>
+          <th align="left" class="cellrowborder" valign="top" width="77.52%" id="mcps1.3.5.3.2.6.2.3.1.2">
+           <p id="ZH-CN_TOPIC_0000002505469387__p438536101915">说明</p></th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr id="ZH-CN_TOPIC_0000002505469387__row238133616199">
+          <td class="cellrowborder" valign="top" width="22.48%" headers="mcps1.3.5.3.2.6.2.3.1.1 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p7762131734510">type</p></td>
+          <td class="cellrowborder" valign="top" width="77.52%" headers="mcps1.3.5.3.2.6.2.3.1.2 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p20762161774513">指定通信端口的类型。</p></td>
+         </tr>
+         <tr id="ZH-CN_TOPIC_0000002505469387__row939036151913">
+          <td class="cellrowborder" valign="top" width="22.48%" headers="mcps1.3.5.3.2.6.2.3.1.1 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p1739113611199">device</p></td>
+          <td class="cellrowborder" valign="top" width="77.52%" headers="mcps1.3.5.3.2.6.2.3.1.2 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p5398366196">表示NPU的逻辑ID。</p></td>
+         </tr>
+         <tr id="ZH-CN_TOPIC_0000002505469387__row6392363197">
+          <td class="cellrowborder" valign="top" width="22.48%" headers="mcps1.3.5.3.2.6.2.3.1.1 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p139193621915">M*（macro port）</p></td>
+          <td class="cellrowborder" valign="top" width="77.52%" headers="mcps1.3.5.3.2.6.2.3.1.2 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p53953661912">表示macro端口，例如M0分别表示macro端口0。</p></td>
+         </tr>
+         <tr id="ZH-CN_TOPIC_0000002505469387__row239936141912">
+          <td class="cellrowborder" valign="top" width="22.48%" headers="mcps1.3.5.3.2.6.2.3.1.1 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p839143611197">S（SNR）</p></td>
+          <td class="cellrowborder" valign="top" width="77.52%" headers="mcps1.3.5.3.2.6.2.3.1.2 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p7401636111914">表示lane的信噪比。</p></td>
+         </tr>
+         <tr id="ZH-CN_TOPIC_0000002505469387__row5315125210456">
+          <td class="cellrowborder" valign="top" width="22.48%" headers="mcps1.3.5.3.2.6.2.3.1.1 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p1731575244515">H（HEH）</p></td>
+          <td class="cellrowborder" valign="top" width="77.52%" headers="mcps1.3.5.3.2.6.2.3.1.2 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p1671135611488">表示lane的半眼高。</p></td>
+         </tr>
+         <tr id="ZH-CN_TOPIC_0000002505469387__row27814101956">
+          <td class="cellrowborder" valign="top" width="22.48%" headers="mcps1.3.5.3.2.6.2.3.1.1 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p1266811181052">L*（LANE）</p></td>
+          <td class="cellrowborder" valign="top" width="77.52%" headers="mcps1.3.5.3.2.6.2.3.1.2 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p46689182051">表示RoCE链路中的第几条lane，例如L0、L1分别表示第0条和第1条lane。</p></td>
+         </tr>
+         <tr id="ZH-CN_TOPIC_0000002505469387__row11477152802514">
+          <td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.5.3.2.6.2.3.1.1 mcps1.3.5.3.2.6.2.3.1.2 ">
+           <p id="ZH-CN_TOPIC_0000002505469387__p0122103192411">数据说明：</p>
+           <ul id="ZH-CN_TOPIC_0000002505469387__ul5249143623816">
+            <li id="ZH-CN_TOPIC_0000002505469387__li654916317427">在RoCE信号质量回显中：
+             <ul id="ZH-CN_TOPIC_0000002505469387__ul2680131818396">
+              <li id="ZH-CN_TOPIC_0000002505469387__li17681318183918">环境为100G光模块时，SNR≥260000且HEH≥350，表示当前LANE信号质量正常。</li>
+              <li id="ZH-CN_TOPIC_0000002505469387__li32384126414">环境为200G光模块时，SNR≥400000且HEH≥350，表示当前LANE信号质量正常。</li>
+             </ul></li>
+           </ul>
+           <ul id="ZH-CN_TOPIC_0000002505469387__ul14548930423">
+            <li id="ZH-CN_TOPIC_0000002505469387__li4952145104212">若SNR和HEH数值不在以上范围内，即表示RoCE信号质量异常。请检查macro连接口是否发生松动，链路是否有脏污。</li>
+            <li id="ZH-CN_TOPIC_0000002505469387__li0430201310527">若SNR和HEH的数值为0，说明测试的RoCE链路中指定的Device之间未建链。</li>
+           </ul></td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+      <div class="p" id="ZH-CN_TOPIC_0000002505469387__p8946733312">
+       图3 SNR和HEH数值为0时的回显示例
+       <pre class="screen" id="ZH-CN_TOPIC_0000002505469387__screen8365202114339">[root@*****<font style="font-size:8pt" face="Courier New">~</font>]#  <strong id="ZH-CN_TOPIC_0000002505469387__b857315671518">ascend</strong>-dmi --sq -t roce
+type: roce
+Prompt message: M*: macro port, L*: lane, S: SNR, H: HEH
+100G Optical Normal range: S(SNR) &gt;= 260000 and H(HEH) &gt;= 350
+200G Optical Normal range: S(SNR) &gt;= 400000 and H(HEH) &gt;= 350
+----------------------------------------------------------------------------------------------
+    device                  signal-to-noise ratio
+----------------------------------------------------------------------------------------------
+     0                       M0:    L0: S:0      H:0         L1: S:0      H:0
+                                    L2: S:0      H:0         L3: S:0      H:0
+----------------------------------------------------------------------------------------------
+     1                       M0:    L0: S:0      H:0         L1: S:0      H:0
+                                    L2: S:0      H:0         L3: S:0      H:0
+----------------------------------------------------------------------------------------------
+     2                       M0:    L0: S:0      H:0         L1: S:0      H:0
+                                    L2: S:0      H:0         L3: S:0      H:0
+----------------------------------------------------------------------------------------------
+     3                       M0:    L0: S:0      H:0         L1: S:0      H:0
+                                    L2: S:0      H:0         L3: S:0      H:0
+----------------------------------------------------------------------------------------------
+     4                       M0:    L0: S:0      H:0         L1: S:0      H:0
+                                    L2: S:0      H:0         L3: S:0      H:0
+----------------------------------------------------------------------------------------------
+     5                       M0:    L0: S:0      H:0         L1: S:0      H:0
+                                    L2: S:0      H:0         L3: S:0      H:0
+----------------------------------------------------------------------------------------------
+     6                       M0:    L0: S:0      H:0         L1: S:0      H:0
+                                    L2: S:0      H:0         L3: S:0      H:0
+----------------------------------------------------------------------------------------------
+     7                       M0:    L0: S:0      H:0         L1: S:0      H:0
+                                    L2: S:0      H:0         L3: S:0      H:0
+----------------------------------------------------------------------------------------------</pre>
+      </div></li>
+    </ul>
+   </div>
+  </div>
+  <div>
+   <div class="familylinks">
+    <div class="parentlink">
+     <strong>父主题：</strong> <a href="toolboxug_0188.html">性能测试</a>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
