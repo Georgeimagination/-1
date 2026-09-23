@@ -1,0 +1,3911 @@
+{
+  "updated": "2026-09-20",
+  "scope": "现有36个SKU或官方单芯片配置；第一层全产品比较。用于图表，不替代产品详解和原始资料。",
+  "units": {
+    "capacity": "decimal GB",
+    "dram_bandwidth": "decimal TB/s",
+    "compute16": "TFLOP/s; do not sum matrix/vector/scalar",
+    "endpoint": "GB/s TX+RX when explicit",
+    "power": "W with measurement boundary"
+  },
+  "classification": "官方当前资料覆盖用途，不代表排他性或由规格推断的分类。",
+  "products": [
+    {
+      "id": "a100_sxm4",
+      "card": "NVIDIA/NVIDIA_A100_SXM4_80GB.md",
+      "label": "A100 SXM4 80GB",
+      "vendor": "NVIDIA",
+      "position": {
+        "group": "both",
+        "text": "官方覆盖训练、推理与 HPC。",
+        "source": "[1, pp.1-2]; [2, pp.14-20]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "yes",
+          "detail": "普通 FP64 与 FP64 Tensor 路径。",
+          "source": "[2, pp.23-29,36]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "普通 CUDA 算术路径；不把 TF32 记作 FP32 矩阵乘法。",
+          "source": "[2, pp.23-29,36]"
+        },
+        "TF32": {
+          "state": "yes",
+          "detail": "Tensor 路径，FP32 累加；数据仍用 32-bit 容器。",
+          "source": "[2, pp.23-29,36]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "Tensor 路径，FP32 累加。",
+          "source": "[2, pp.23-29,36]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "Tensor 路径，支持混合精度累加。",
+          "source": "[2, pp.23-29,36]"
+        },
+        "FP8": {
+          "state": "unknown",
+          "detail": "所引资料未确认该格式的硬件运算路径；不据此认定不支持。",
+          "source": ""
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所引资料未确认该格式的硬件运算路径；不据此认定不支持。",
+          "source": ""
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "Tensor 路径，INT32 累加。",
+          "source": "[2, pp.23-29,36]"
+        },
+        "INT4": {
+          "state": "yes",
+          "detail": "Tensor 路径，INT32 累加。",
+          "source": "[2, pp.23-29,36]"
+        }
+      },
+      "compute16": {
+        "value_tflops": 312,
+        "format": "FP16/BF16",
+        "scope": "matrix",
+        "basis": "dense",
+        "source": "[1, p.1]; [2, pp.15,36]",
+        "note": "稠密 Tensor 峰值；结构化稀疏另为 624 TFLOPS，不纳入此值。"
+      },
+      "memory": {
+        "kind": "HBM2e",
+        "capacity_gb": 80,
+        "bandwidth_tb_s": 2.039,
+        "alternatives": [],
+        "note": "2039 GB/s，单 GPU。",
+        "source": "[1, p.1]; [2, pp.19,36]"
+      },
+      "organization": {
+        "onchip": "每 SM 寄存器 + 192 KB L1/shared 共享容量，shared 上限 164 KB；GPU 共享 40 MB L2。",
+        "main_memory": "同封装 HBM2e。",
+        "sharing": "L1 为硬件 cache，shared 为显式工作存储；L2 分区组织但保持全 GPU cache coherence。",
+        "source": "[2, pp.21-22,30-37]"
+      },
+      "endpoint": {
+        "protocol": "NVLink 3",
+        "bidir_gb_s": 600,
+        "source": "[1, p.1]; [2, pp.52-54]",
+        "note": "12 条，每条每方向 25 GB/s；单 GPU 收发合计。PCIe Gen4 x16 为另一主机路径。",
+        "state": "known"
+      },
+      "power": {
+        "max_w": 400,
+        "scope": "module_max",
+        "range_or_other": "定制 HGX A100-80GB CTS 版本最高 500 W，非标准配置。",
+        "note": "TDP 或额定板级上限，非工作负载实测功耗。",
+        "source": "[1, p.1, notes 2-3]"
+      },
+      "deployment": {
+        "form": "SXM4 模组",
+        "cooling": "由服务器方案提供冷却；CTS 为另条件。",
+        "source": "[1, p.1, notes 2-3]"
+      },
+      "order": 1,
+      "short_label": "A100",
+      "ratio_status": "已配对；矩阵 dense 或明确换算"
+    },
+    {
+      "id": "h100_sxm5",
+      "card": "NVIDIA/NVIDIA_H100_SXM5_80GB.md",
+      "label": "H100 SXM5 80GB",
+      "vendor": "NVIDIA",
+      "position": {
+        "group": "both",
+        "text": "官方覆盖数据中心训练、推理与 HPC。",
+        "source": "[1, pp.15-18]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "yes",
+          "detail": "普通 FP64 和 FP64 Tensor 路径。",
+          "source": "[1, pp.22-24,39-46]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "普通 CUDA 算术路径。",
+          "source": "[1, pp.22-24,39-46]"
+        },
+        "TF32": {
+          "state": "yes",
+          "detail": "Tensor 路径，FP32 累加。",
+          "source": "[1, pp.22-24,39-46]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "Tensor 路径，FP32 累加。",
+          "source": "[1, pp.22-24,39-46]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "Tensor 路径，可用 FP16 或 FP32 累加。",
+          "source": "[1, pp.22-24,39-46]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "E4M3/E5M2，原生 wgmma Tensor 路径，可用 FP16 或 FP32 累加；不是所有 FP8 指令入口都采用原生路径。",
+          "source": "[1, pp.22-24,39-46]"
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所引资料未确认该格式的硬件运算路径；不据此认定不支持。",
+          "source": ""
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "INT8 Tensor 运算路径；整数峰值与浮点峰值分开。",
+          "source": "[1, pp.22-24,39-46]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所引资料未确认该格式的硬件运算路径；不据此认定不支持。",
+          "source": ""
+        }
+      },
+      "compute16": {
+        "value_tflops": 989.4,
+        "format": "FP16/BF16",
+        "scope": "matrix",
+        "basis": "dense",
+        "source": "[1, pp.20,39-40, Table 3]",
+        "note": "白皮书直接列出的 dense；低精度 Tensor 峰值条件为 1830 MHz。"
+      },
+      "memory": {
+        "kind": "HBM3",
+        "capacity_gb": 80,
+        "bandwidth_tb_s": 3.35,
+        "alternatives": [
+          {
+            "capacity_gb": 80,
+            "bandwidth_tb_s": 3.352,
+            "source": "[1, pp.38-40]",
+            "note": "白皮书细化值，非持续吞吐区间。"
+          }
+        ],
+        "note": "数据手册 3.35 TB/s；白皮书 3352 GB/s 为显示精度差异。",
+        "source": "[2, p.2]; [1, pp.18,36-40]"
+      },
+      "organization": {
+        "onchip": "每 SM 256 KB 寄存器、256 KB L1/shared 共享容量；shared 上限 228 KB；50 MB 共享 L2。",
+        "main_memory": "同封装 HBM3。",
+        "sharing": "L1 为硬件 cache，shared 为显式工作存储；GPU 共享 L2；cluster 内可跨 SM 访问 shared。",
+        "source": "[1, pp.21,27,29-37,40-41]"
+      },
+      "endpoint": {
+        "protocol": "NVLink 4",
+        "bidir_gb_s": 900,
+        "source": "[1, pp.47,49-50]; [2, p.2]",
+        "note": "18 条，每条每方向 25 GB/s；模组外 NVSwitch/SHARP 不计入单 GPU。",
+        "state": "known"
+      },
+      "power": {
+        "max_w": 700,
+        "scope": "module_max",
+        "range_or_other": "最高 700 W，可配置。",
+        "note": "TDP 或额定板级上限，非工作负载实测功耗。",
+        "source": "[2, p.2]"
+      },
+      "deployment": {
+        "form": "SXM5 模组",
+        "cooling": "具体风冷/液冷由服务器方案决定，所引资料未给统一固定形式。",
+        "source": "[1, pp.15-18]; [2, p.2]"
+      },
+      "order": 2,
+      "short_label": "H100 SXM",
+      "ratio_status": "已配对；矩阵 dense 或明确换算"
+    },
+    {
+      "id": "h100_pcie",
+      "card": "NVIDIA/NVIDIA_H100_PCIe_80GB.md",
+      "label": "H100 PCIe 80GB",
+      "vendor": "NVIDIA",
+      "position": {
+        "group": "both",
+        "text": "产品简报覆盖 model training、inference 与部署流程。",
+        "source": "[2, p.15, NVIDIA AI Enterprise Software Suite]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "yes",
+          "detail": "普通 FP64 和 FP64 Tensor 路径。",
+          "source": "[1, pp.22-24,39-46]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "普通 CUDA 算术路径。",
+          "source": "[1, pp.22-24,39-46]"
+        },
+        "TF32": {
+          "state": "yes",
+          "detail": "Tensor 路径，FP32 累加。",
+          "source": "[1, pp.22-24,39-46]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "Tensor 路径，FP32 累加。",
+          "source": "[1, pp.22-24,39-46]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "Tensor 路径，可用 FP16 或 FP32 累加。",
+          "source": "[1, pp.22-24,39-46]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "E4M3/E5M2，原生 wgmma Tensor 路径，可用 FP16 或 FP32 累加；不是所有 FP8 指令入口都采用原生路径。",
+          "source": "[1, pp.22-24,39-46]"
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所引资料未确认该格式的硬件运算路径；不据此认定不支持。",
+          "source": ""
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "INT8 Tensor 运算路径；整数峰值与浮点峰值分开。",
+          "source": "[1, pp.22-24,39-46]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所引资料未确认该格式的硬件运算路径；不据此认定不支持。",
+          "source": ""
+        }
+      },
+      "compute16": {
+        "value_tflops": 756,
+        "format": "FP16/BF16",
+        "scope": "matrix",
+        "basis": "dense",
+        "source": "[1, pp.20,39-40, Table 3]",
+        "note": "低精度 Tensor 峰值条件为 1620 MHz；不使用普通 FP32 的 1755 MHz 反推。"
+      },
+      "memory": {
+        "kind": "HBM2e",
+        "capacity_gb": 80,
+        "bandwidth_tb_s": 2,
+        "alternatives": [
+          {
+            "capacity_gb": 80,
+            "bandwidth_tb_s": 2.039,
+            "source": "[1, pp.38-40]",
+            "note": "旧未定版，不作当前规格。"
+          }
+        ],
+        "note": "采用产品简报 2000 GB/s；白皮书旧 2039 GB/s 明确未定版，不进入配比。",
+        "source": "[2, p.4, Tables 2-3]; [1, pp.18,36-40]"
+      },
+      "organization": {
+        "onchip": "每 SM 256 KB 寄存器、256 KB L1/shared 共享容量；shared 上限 228 KB；50 MB 共享 L2。",
+        "main_memory": "同封装 HBM2e。",
+        "sharing": "L1 为硬件 cache，shared 为显式工作存储；GPU 共享 L2；cluster 内可跨 SM 访问 shared。",
+        "source": "[1, pp.21,27,29-37,40-41]"
+      },
+      "endpoint": {
+        "protocol": "NVLink 4 bridge",
+        "bidir_gb_s": 600,
+        "source": "[2, pp.1,8-9, Table 6]; [1, p.15]",
+        "note": "采用三桥两卡连接专章和架构白皮书的 600 GB/s 双向；同产品简报首页 900 GB/s 与之冲突，不静默抹去。",
+        "state": "conflict"
+      },
+      "power": {
+        "max_w": 350,
+        "scope": "board_max",
+        "range_or_other": "350 W 需 450/600 W 线缆模式；300 W 线缆模式最大 310 W，最低 200 W。",
+        "note": "TDP 或额定板级上限，非工作负载实测功耗。",
+        "source": "[2, pp.1,3,7-8,11-12]"
+      },
+      "deployment": {
+        "form": "全高全长双槽 PCIe 卡，10.5 英寸",
+        "cooling": "被动散热器，依靠服务器气流。",
+        "source": "[2, pp.1,3,7-8,11-12]"
+      },
+      "order": 3,
+      "short_label": "H100 PCIe",
+      "ratio_status": "已配对；矩阵 dense 或明确换算"
+    },
+    {
+      "id": "h100_nvl",
+      "card": "NVIDIA/NVIDIA_H100_NVL_94GB.md",
+      "label": "H100 NVL 94GB",
+      "vendor": "NVIDIA",
+      "position": {
+        "group": "inference",
+        "text": "产品简报明确针对 LLM inference 优化；也覆盖通用 AI/HPC，但不据此推定训练定位。",
+        "source": "[1, p.1, Overview]; [4, opening]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "yes",
+          "detail": "普通 FP64 和 FP64 Tensor 路径。",
+          "source": "[3, pp.22-24,39-46]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "普通 CUDA 算术路径。",
+          "source": "[3, pp.22-24,39-46]"
+        },
+        "TF32": {
+          "state": "yes",
+          "detail": "Tensor 路径，FP32 累加。",
+          "source": "[3, pp.22-24,39-46]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "Tensor 路径，FP32 累加。",
+          "source": "[3, pp.22-24,39-46]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "Tensor 路径，可用 FP16 或 FP32 累加。",
+          "source": "[3, pp.22-24,39-46]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "E4M3/E5M2，原生 wgmma Tensor 路径，可用 FP16 或 FP32 累加；不是所有 FP8 指令入口都采用原生路径。",
+          "source": "[3, pp.22-24,39-46]"
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所引资料未确认该格式的硬件运算路径；不据此认定不支持。",
+          "source": ""
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "INT8 Tensor 运算路径；整数峰值与浮点峰值分开。",
+          "source": "[3, pp.22-24,39-46]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所引资料未确认该格式的硬件运算路径；不据此认定不支持。",
+          "source": ""
+        }
+      },
+      "compute16": {
+        "value_tflops": 835.5,
+        "format": "FP16/BF16",
+        "scope": "matrix",
+        "basis": "derived_dense",
+        "source": "[2, p.2, Technical Specifications and note]; 稀疏倍数 [3, pp.11,21]; FP16/BF16 2:4 规则 [28, §9.7.17.6.1]",
+        "note": "1671 稀疏 TFLOPS ÷ 2 得 835.5，为统一比较的推导值；不是该数据手册直接公布的 dense，原始显示值含舍入。"
+      },
+      "memory": {
+        "kind": "HBM3",
+        "capacity_gb": 94,
+        "bandwidth_tb_s": 3.938,
+        "alternatives": [
+          {
+            "capacity_gb": 94,
+            "bandwidth_tb_s": 3.9,
+            "source": "[2, p.2]",
+            "note": "数据手册约写。"
+          }
+        ],
+        "note": "单卡 94 GB；188 GB 是两卡相加。产品简报 3938 GB/s，数据手册 3.9 TB/s 约写。",
+        "source": "[1, p.4, Table 2]; [2, p.2]"
+      },
+      "organization": {
+        "onchip": "每 SM 256 KB 寄存器、256 KB L1/shared 共享容量；shared 上限 228 KB；L2 存在，本型号实际容量未确认。",
+        "main_memory": "同封装 HBM3。",
+        "sharing": "L1 为硬件 cache，shared 为显式工作存储；GPU 共享 L2；cluster 内可跨 SM 访问 shared。",
+        "source": "[3, pp.21,27,29-37,40-41]"
+      },
+      "endpoint": {
+        "protocol": "NVLink 4 bridge",
+        "bidir_gb_s": 600,
+        "source": "[1, pp.1,9-10]",
+        "note": "两张相邻卡安装全部三块 bridge 时的收发合计；不表示自动形成 188 GB 统一缓存一致内存池。",
+        "state": "known"
+      },
+      "power": {
+        "max_w": 400,
+        "scope": "board_max",
+        "range_or_other": "450/600 W 线缆模式默认/最大 400 W、最低 200 W；300 W 模式最大 310 W。",
+        "note": "TDP 或额定板级上限，非工作负载实测功耗。",
+        "source": "[1, pp.3,6,12-15]; [2, p.2]"
+      },
+      "deployment": {
+        "form": "全高全长双槽 PCIe 卡，10.5 英寸",
+        "cooling": "双向被动散热器，依靠服务器气流。",
+        "source": "[1, pp.1,3,6,12-15]"
+      },
+      "order": 4,
+      "short_label": "H100 NVL",
+      "ratio_status": "已配对；矩阵 dense 或明确换算"
+    },
+    {
+      "id": "l4",
+      "card": "NVIDIA/NVIDIA_L4_24GB.md",
+      "label": "L4 24GB",
+      "vendor": "NVIDIA",
+      "position": {
+        "group": "inference",
+        "text": "官方定位 AI 推理、视频与图形工作负载。",
+        "source": "[1, pp.1-3]; [2, pp.39-40]; [4, L4]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "yes",
+          "detail": "普通 CUDA 算术支持，每 SM 每周期仅 2 个结果；未列 FP64 Tensor 路径。",
+          "source": "[20, §5.4.1, Table 4, compute capability 8.9]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "普通 CUDA 算术路径。",
+          "source": "[20, §5.4.1, Table 4, compute capability 8.9]"
+        },
+        "TF32": {
+          "state": "yes",
+          "detail": "Tensor 路径。",
+          "source": "[2, pp.24,27,30]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "Tensor 路径，FP32 累加。",
+          "source": "[2, pp.24,27,30]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "Tensor 路径，支持 FP16/FP32 累加；产品峰值未逐累加模式拆列。",
+          "source": "[2, pp.24,27,30]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "E4M3/E5M2 Tensor 路径，支持 FP16/FP32 累加。",
+          "source": "[2, pp.24,27,30]"
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所引资料未确认该格式的硬件运算路径；不据此认定不支持。",
+          "source": ""
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "INT8 Tensor 运算路径。",
+          "source": "[2, pp.24,27,30]"
+        },
+        "INT4": {
+          "state": "yes",
+          "detail": "INT4 Tensor 运算路径；支持状态不代表峰值没有来源疑点。",
+          "source": "[2, pp.24,27,30]"
+        }
+      },
+      "compute16": {
+        "value_tflops": 121,
+        "format": "FP16/BF16",
+        "scope": "matrix",
+        "basis": "dense",
+        "source": "[2, p.40, Table 5]",
+        "note": "产品表直接列 dense 121；原表未逐累加模式拆列，不能宣称所有 FP16 累加模式都具有同一速率。"
+      },
+      "memory": {
+        "kind": "GDDR6",
+        "capacity_gb": 24,
+        "bandwidth_tb_s": 0.3,
+        "alternatives": [],
+        "note": "板上 GDDR6，300 GB/s。",
+        "source": "[2, p.40]; [1, p.3]"
+      },
+      "organization": {
+        "onchip": "每 SM 256 KB 寄存器、128 KB L1/shared 共享容量；shared 上限 100 KB；GPU 共享 49152 KB L2。",
+        "main_memory": "板上 GDDR6。",
+        "sharing": "L1 为硬件 cache；shared 显式管理；L2 为 GPU 共享缓存。",
+        "source": "[2, pp.8-12,40]; [22, §§1.4.1.1,1.4.2.2]"
+      },
+      "endpoint": {
+        "protocol": "PCIe Gen4 x16",
+        "bidir_gb_s": null,
+        "source": "[1, pp.2,6-7]; [3, Product Specifications]",
+        "note": "产品页 64 GB/s headline 未明确方向，不补作双向值；当前资料未确认专用 GPU 间互联。",
+        "state": "unknown"
+      },
+      "power": {
+        "max_w": 72,
+        "scope": "board_max",
+        "range_or_other": "默认/最大 72 W，最低 40 W。",
+        "note": "TDP 或额定板级上限，非工作负载实测功耗。",
+        "source": "[1, pp.1-3,5,7-8]"
+      },
+      "deployment": {
+        "form": "单槽低矮型 PCIe 卡，2.71×6.67 英寸",
+        "cooling": "双向被动散热器，依靠服务器气流。",
+        "source": "[1, pp.1-3,5,7-8]"
+      },
+      "order": 5,
+      "short_label": "L4",
+      "ratio_status": "已配对；矩阵 dense 或明确换算"
+    },
+    {
+      "id": "l40s",
+      "card": "NVIDIA/NVIDIA_L40S_48GB.md",
+      "label": "L40S 48GB",
+      "vendor": "NVIDIA",
+      "position": {
+        "group": "both",
+        "text": "产品页明确覆盖 LLM training and inference，并支持图形和视频。",
+        "source": "[2, Workloads → LLM Training and Inference]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "yes",
+          "detail": "普通 CUDA 算术支持，每 SM 每周期仅 2 个结果；未列 FP64 Tensor 路径。",
+          "source": "[20, §5.4.1, Table 4, compute capability 8.9]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "普通 CUDA 算术路径。",
+          "source": "[20, §5.4.1, Table 4, compute capability 8.9]"
+        },
+        "TF32": {
+          "state": "yes",
+          "detail": "Tensor 路径。",
+          "source": "[3, pp.24,27,30]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "Tensor 路径，FP32 累加。",
+          "source": "[3, pp.24,27,30]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "Tensor 路径，支持 FP16/FP32 累加；产品峰值未逐累加模式拆列。",
+          "source": "[3, pp.24,27,30]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "E4M3/E5M2 Tensor 路径，支持 FP16/FP32 累加。",
+          "source": "[3, pp.24,27,30]"
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所引资料未确认该格式的硬件运算路径；不据此认定不支持。",
+          "source": ""
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "INT8 Tensor 运算路径。",
+          "source": "[3, pp.24,27,30]"
+        },
+        "INT4": {
+          "state": "yes",
+          "detail": "INT4 Tensor 运算路径；支持状态不代表峰值没有来源疑点。",
+          "source": "[3, pp.24,27,30]"
+        }
+      },
+      "compute16": {
+        "value_tflops": null,
+        "format": "FP16/BF16",
+        "scope": "matrix",
+        "basis": "excluded",
+        "source": "[2, GPU Specifications and note]",
+        "note": "原表 dense 362.05 TFLOPS 与 sparse 733 TFLOPS 不满足两倍关系；保留原值，未自行校正，不进入无歧义 16 位主图。",
+        "alternatives": [
+          {
+            "value_tflops": 362.05,
+            "basis": "source_dense",
+            "source": "[2, GPU Specifications and note]",
+            "note": "原表明确 dense 值。"
+          },
+          {
+            "value_tflops": 366.5,
+            "basis": "derived_from_sparse",
+            "source": "[2, GPU Specifications and note]; Ada 稀疏/稠密成对规格 [3, p.30, Table 2]",
+            "note": "按 2 倍结构化稀疏关系计算 733÷2 的条件候选；与原表 dense 不一致，只作敏感性展示，非已确认修正值。"
+          }
+        ],
+        "raw_sparse_tflops": 733,
+        "raw_dense_tflops": 362.05
+      },
+      "memory": {
+        "kind": "GDDR6",
+        "capacity_gb": 48,
+        "bandwidth_tb_s": 0.864,
+        "alternatives": [],
+        "note": "板上 GDDR6，864 GB/s。",
+        "source": "[1, pp.3-4, Tables 2-3]"
+      },
+      "organization": {
+        "onchip": "每 SM 256 KB 寄存器、128 KB L1/shared 共享容量；shared 上限 100 KB；L2 存在但本型号容量未公开。",
+        "main_memory": "板上 GDDR6。",
+        "sharing": "L1 为硬件 cache；shared 显式管理；L2 GPU 共享；不借用 L40 或完整 AD102 的容量。",
+        "source": "[3, pp.8,12,37]; [22, §§1.4.1.1,1.4.2.2]"
+      },
+      "endpoint": {
+        "protocol": "PCIe Gen4 x16",
+        "bidir_gb_s": 64,
+        "source": "[1, pp.2,6-7]; [2, Interconnect Interface; NVLink Support]",
+        "note": "这是主机接口的收发合计；官方明确不支持 NVLink，不能与 NVLink 数据点混成同一类专用 scale-up 链路。",
+        "state": "known"
+      },
+      "power": {
+        "max_w": 350,
+        "scope": "board_max",
+        "range_or_other": "默认/最大 350 W；供电 sense 条件不足时不能启动。",
+        "note": "TDP 或额定板级上限，非工作负载实测功耗。",
+        "source": "[1, pp.1-2,5,10-13]; [2, GPU Specifications]"
+      },
+      "deployment": {
+        "form": "全高全长双槽 PCIe 卡，4.4×10.5 英寸",
+        "cooling": "双向被动散热器，依靠服务器气流。",
+        "source": "[1, pp.1-2,5,10-13]"
+      },
+      "order": 6,
+      "short_label": "L40S",
+      "ratio_status": "16 位峰值有冲突"
+    },
+    {
+      "id": "h200_sxm5",
+      "card": "NVIDIA/NVIDIA_H200_SXM5_141GB.md",
+      "label": "H200 SXM5 141GB",
+      "vendor": "NVIDIA",
+      "position": {
+        "group": "both",
+        "text": "H200 官方发布稿将 HGX H200 用途明确为大型 LLM training and inference；不把此用途描述当作系统性能的单 GPU 数字。",
+        "source": "[5, NVIDIA H200 Form Factors]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "yes",
+          "detail": "普通 FP64 和 FP64 Tensor 路径。",
+          "source": "[3, pp.22-24,39-46]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "普通 CUDA 算术路径。",
+          "source": "[3, pp.22-24,39-46]"
+        },
+        "TF32": {
+          "state": "yes",
+          "detail": "Tensor 路径，FP32 累加。",
+          "source": "[3, pp.22-24,39-46]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "Tensor 路径，FP32 累加。",
+          "source": "[3, pp.22-24,39-46]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "Tensor 路径，可用 FP16 或 FP32 累加。",
+          "source": "[3, pp.22-24,39-46]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "E4M3/E5M2，原生 wgmma Tensor 路径，可用 FP16 或 FP32 累加；不是所有 FP8 指令入口都采用原生路径。",
+          "source": "[3, pp.22-24,39-46]"
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所引资料未确认该格式的硬件运算路径；不据此认定不支持。",
+          "source": ""
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "INT8 Tensor 运算路径；整数峰值与浮点峰值分开。",
+          "source": "[3, pp.22-24,39-46]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所引资料未确认该格式的硬件运算路径；不据此认定不支持。",
+          "source": ""
+        }
+      },
+      "compute16": {
+        "value_tflops": 989.5,
+        "format": "FP16/BF16",
+        "scope": "matrix",
+        "basis": "derived_dense",
+        "source": "[1, p.4, Technical Specifications, notes 1-2]; 稀疏倍数 [3, pp.11,21]; FP16/BF16 2:4 [28, §9.7.17.6.1]",
+        "note": "1979 稀疏 TFLOPS ÷ 2；推导值，非原文单列 dense。数据手册仍注 preliminary specifications。"
+      },
+      "memory": {
+        "kind": "HBM3e",
+        "capacity_gb": 141,
+        "bandwidth_tb_s": 4.8,
+        "alternatives": [],
+        "note": "单 GPU。",
+        "source": "[1, pp.1,4]; [2, p.4]"
+      },
+      "organization": {
+        "onchip": "每 SM 256 KB 寄存器、256 KB L1/shared 共享容量；shared 上限 228 KB；本型号 50 MB 共享 L2 [2, p.4]。",
+        "main_memory": "同封装 HBM3e。",
+        "sharing": "L1 为硬件 cache，shared 为显式工作存储；GPU 共享 L2；cluster 内可跨 SM 访问 shared。",
+        "source": "本型号 50 MB L2 [2, p.4]; Hopper 局部存储与共享机制 [3, pp.21,27,29-37,40-41]"
+      },
+      "endpoint": {
+        "protocol": "NVLink 4",
+        "bidir_gb_s": 900,
+        "source": "[2, p.4]; [1, p.4]",
+        "note": "单 GPU 双向端点；外部 NVSwitch 和 SHARP 不计入模组。",
+        "state": "known"
+      },
+      "power": {
+        "max_w": 700,
+        "scope": "module_max",
+        "range_or_other": "最高 700 W，可配置；原表 preliminary。",
+        "note": "TDP 或额定板级上限，非工作负载实测功耗。",
+        "source": "[1, p.4]"
+      },
+      "deployment": {
+        "form": "SXM5 模组",
+        "cooling": "由服务器方案决定风冷或液冷。",
+        "source": "[1, p.4]; [2, p.4]"
+      },
+      "order": 7,
+      "short_label": "H200 SXM",
+      "ratio_status": "已配对；矩阵 dense 或明确换算"
+    },
+    {
+      "id": "h200_nvl",
+      "card": "NVIDIA/NVIDIA_H200_NVL_141GB.md",
+      "label": "H200 NVL 141GB",
+      "vendor": "NVIDIA",
+      "position": {
+        "group": "both",
+        "text": "产品简报突出 LLM 推理；官方 NVL 发布文章还明确支持 fine-tuning（训练中的模型微调）。",
+        "source": "[1, p.1, Overview]; [4, opening paragraphs: fine-tune LLMs / inference and fine-tuning]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "yes",
+          "detail": "普通 FP64 和 FP64 Tensor 路径。",
+          "source": "[2, pp.22-24,39-46]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "普通 CUDA 算术路径。",
+          "source": "[2, pp.22-24,39-46]"
+        },
+        "TF32": {
+          "state": "yes",
+          "detail": "Tensor 路径，FP32 累加。",
+          "source": "[2, pp.22-24,39-46]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "Tensor 路径，FP32 累加。",
+          "source": "[2, pp.22-24,39-46]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "Tensor 路径，可用 FP16 或 FP32 累加。",
+          "source": "[2, pp.22-24,39-46]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "E4M3/E5M2，原生 wgmma Tensor 路径，可用 FP16 或 FP32 累加；不是所有 FP8 指令入口都采用原生路径。",
+          "source": "[2, pp.22-24,39-46]"
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所引资料未确认该格式的硬件运算路径；不据此认定不支持。",
+          "source": ""
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "INT8 Tensor 运算路径；整数峰值与浮点峰值分开。",
+          "source": "[2, pp.22-24,39-46]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所引资料未确认该格式的硬件运算路径；不据此认定不支持。",
+          "source": ""
+        }
+      },
+      "compute16": {
+        "value_tflops": 835.5,
+        "format": "FP16/BF16",
+        "scope": "matrix",
+        "basis": "derived_dense",
+        "source": "[3, GPU specifications, note 2]; 稀疏倍数 [2, pp.11,21]; FP16/BF16 2:4 [28, §9.7.17.6.1]",
+        "note": "1671 稀疏 TFLOPS ÷ 2；推导值，非原文单列 dense。原页仍注 preliminary specifications。"
+      },
+      "memory": {
+        "kind": "HBM3e",
+        "capacity_gb": 141,
+        "bandwidth_tb_s": 4.813,
+        "alternatives": [
+          {
+            "capacity_gb": 141,
+            "bandwidth_tb_s": 4.8,
+            "source": "[3, GPU specifications]",
+            "note": "产品页约写。"
+          }
+        ],
+        "note": "单卡；4813 GB/s 产品简报，4.8 TB/s 产品页约写。",
+        "source": "[1, p.4, Table 2-2]; [3, GPU specifications]"
+      },
+      "organization": {
+        "onchip": "每 SM 256 KB 寄存器、256 KB L1/shared 共享容量；shared 上限 228 KB；L2 存在，本型号实际容量未确认。",
+        "main_memory": "同封装 HBM3e。",
+        "sharing": "L1 为硬件 cache，shared 为显式工作存储；GPU 共享 L2；cluster 内可跨 SM 访问 shared。",
+        "source": "[2, pp.21,27,29-37,40-41]"
+      },
+      "endpoint": {
+        "protocol": "NVLink 4 bridge",
+        "bidir_gb_s": 900,
+        "source": "[1, pp.1,9, Table 4-1]",
+        "note": "18 条 link，单 GPU 双向合计；支持两卡或四卡相邻连接组。",
+        "state": "known"
+      },
+      "power": {
+        "max_w": 600,
+        "scope": "board_max",
+        "range_or_other": "默认/最大 600 W、最低 200 W；另有 350 W power compliance limit。",
+        "note": "TDP 或额定板级上限，非工作负载实测功耗。",
+        "source": "[1, pp.3-8]"
+      },
+      "deployment": {
+        "form": "全高全长双槽 PCIe 卡，10.5 英寸",
+        "cooling": "双向被动散热器，依靠服务器气流。",
+        "source": "[1, pp.3-8]"
+      },
+      "order": 8,
+      "short_label": "H200 NVL",
+      "ratio_status": "已配对；矩阵 dense 或明确换算"
+    },
+    {
+      "id": "b200_sxm6",
+      "card": "NVIDIA/NVIDIA_B200_SXM6_180GB.md",
+      "label": "B200 SXM6 180GB",
+      "vendor": "NVIDIA",
+      "position": {
+        "group": "both",
+        "text": "Blackwell 产品官方覆盖 LLM 训练与实时推理；B200 属该产品组合。",
+        "source": "[4, opening and Six Transformative Technologies / Blackwell product portfolio]; [1, p.9, Second-Generation Transformer Engine]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "yes",
+          "detail": "原表写 FP64/FP64 Tensor Core，未拆分普通与矩阵速率，但确认该数值格式执行支持。",
+          "source": "[1, p.8]; [2, pp.8-9,25-26]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "普通 FP32 算术路径。",
+          "source": "[1, p.8]; [2, pp.8-9,25-26]"
+        },
+        "TF32": {
+          "state": "yes",
+          "detail": "Tensor 路径。",
+          "source": "[1, p.8]; [2, pp.8-9,25-26]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "Tensor 路径；输入位宽不等于累加位宽。",
+          "source": "[1, p.8]; [2, pp.8-9,25-26]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "Tensor 路径；输入位宽不等于累加位宽。",
+          "source": "[1, p.8]; [2, pp.8-9,25-26]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "Tensor 路径，第二代 Transformer Engine；具体指令与缩放格式需区分。",
+          "source": "[1, p.8]; [2, pp.8-9,25-26]"
+        },
+        "FP4": {
+          "state": "yes",
+          "detail": "NVFP4 Tensor 路径；每 16 值的 block scale 及张量级 scale 另占空间。",
+          "source": "[1, p.8]; [2, pp.8-9,25-26]"
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "INT8 Tensor 路径。",
+          "source": "[1, p.8]; [2, pp.8-9,25-26]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所引资料未确认该格式的硬件运算路径；不据此认定不支持。",
+          "source": ""
+        }
+      },
+      "compute16": {
+        "value_tflops": 2250,
+        "format": "FP16/BF16",
+        "scope": "matrix",
+        "basis": "derived_dense",
+        "source": "[1, p.8, Individual Blackwell GPU Specifications, note 2]",
+        "note": "同一 180 GB/7.7 TB/s 配置原表 sparse 4.5 PFLOPS，脚注明确 dense 为一半，因此 2250 TFLOPS。另一技术简报 2.2 PFLOPS 与最高 192 GB 条件分列保留，不混入目标 SKU。",
+        "alternatives": [
+          {
+            "value_tflops": 2200,
+            "basis": "source_dense_other_spec_context",
+            "source": "[2, pp.25-26, Table 3]",
+            "note": "技术简报 HGX B200 行显示 dense 2.2 PFLOPS，同表容量最高 192 GB；主图采用 180 GB 数据手册同表折算。"
+          }
+        ]
+      },
+      "memory": {
+        "kind": "HBM3e",
+        "capacity_gb": 180,
+        "bandwidth_tb_s": 7.7,
+        "alternatives": [
+          {
+            "capacity_gb": null,
+            "bandwidth_tb_s": 8,
+            "source": "[7, Table 1]",
+            "note": "最高 8 TB/s 的参考架构表达。"
+          },
+          {
+            "capacity_gb": 192,
+            "bandwidth_tb_s": null,
+            "source": "[2, pp.25-26, Table 3]",
+            "note": "up to 192 GB，不作为已确认 192 GB SKU；不能与带宽任意组合。"
+          }
+        ],
+        "note": "目标 SKU 180 GB + 7.7 TB/s；不拼接其他来源上限。",
+        "source": "[1, p.8]"
+      },
+      "organization": {
+        "onchip": "每 SM 寄存器、256 KB L1/shared 共享容量及 TMEM；L2 存在，B200 实际总容量未确认。",
+        "main_memory": "同封装 HBM3e。",
+        "sharing": "两个计算裸片以 NV-HBI 形成一个 coherent GPU；L2 分布在裸片内，跨裸片仍有访问局部性；TMEM 非通用共享 SRAM。",
+        "source": "[2, pp.7-10]; [3, §§1.4.1.1,1.4.2]; [8, MLOPart device capabilities and characteristics; Peer access]; [9, §9.7.18.1]"
+      },
+      "endpoint": {
+        "protocol": "NVLink 5",
+        "bidir_gb_s": 1800,
+        "source": "[2, pp.7-10]; [3, §1.4.3]",
+        "note": "18 条，每条每方向 50 GB/s；单 GPU 收发合计。封装内 NV-HBI 10 TB/s 方向未明，不纳入本端点。",
+        "state": "known"
+      },
+      "power": {
+        "max_w": 1000,
+        "scope": "module_max",
+        "range_or_other": "最高可配置 1000 W，180 GB 配置同表。",
+        "note": "TDP 或额定板级上限，非工作负载实测功耗。",
+        "source": "[1, p.8]"
+      },
+      "deployment": {
+        "form": "SXM6 模组",
+        "cooling": "风冷/液冷随整机配置，非统一固定形式。",
+        "source": "[1, pp.8-9]; [6, p.7]"
+      },
+      "order": 9,
+      "short_label": "B200",
+      "ratio_status": "已配对；矩阵 dense 或明确换算"
+    },
+    {
+      "id": "b300_sxm6",
+      "card": "NVIDIA/NVIDIA_B300_SXM6_288GB.md",
+      "label": "B300 SXM6 288GB",
+      "vendor": "NVIDIA",
+      "position": {
+        "group": "both",
+        "text": "Blackwell Ultra 官方覆盖 pre-training、post-training 和低 batch 推理；B300 为 Ultra 的 SXM 产品。",
+        "source": "[2, Streaming multiprocessors; AI factory system architecture]; [3, Table 1]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "yes",
+          "detail": "B300 参考规格确认 FP64，原表未拆分普通/矩阵；288 GB 对应吞吐未确认。",
+          "source": "[1, pp.25-26, Table 3]; [2, Streaming multiprocessors; Ultra-charged NVFP4 performance]; [28, §9.7.18.10]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "普通 FP32 执行路径；288 GB 对应峰值未确认。",
+          "source": "[1, pp.25-26, Table 3]; [2, Streaming multiprocessors; Ultra-charged NVFP4 performance]; [28, §9.7.18.10]"
+        },
+        "TF32": {
+          "state": "yes",
+          "detail": "Blackwell Ultra Tensor 执行路径；不把 270 GB 行吞吐绑定 288 GB。",
+          "source": "[1, pp.25-26, Table 3]; [2, Streaming multiprocessors; Ultra-charged NVFP4 performance]; [28, §9.7.18.10]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "Blackwell Ultra Tensor 执行路径；288 GB 对应峰值未确认。",
+          "source": "[1, pp.25-26, Table 3]; [2, Streaming multiprocessors; Ultra-charged NVFP4 performance]; [28, §9.7.18.10]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "Blackwell Ultra Tensor 执行路径；288 GB 对应峰值未确认。",
+          "source": "[1, pp.25-26, Table 3]; [2, Streaming multiprocessors; Ultra-charged NVFP4 performance]; [28, §9.7.18.10]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "Blackwell Ultra Tensor 执行路径；288 GB 对应峰值未确认。",
+          "source": "[1, pp.25-26, Table 3]; [2, Streaming multiprocessors; Ultra-charged NVFP4 performance]; [28, §9.7.18.10]"
+        },
+        "FP4": {
+          "state": "yes",
+          "detail": "NVFP4 执行路径；带两级缩放，FP4 sparse 不能无条件套用 2 倍关系。",
+          "source": "[1, pp.25-26, Table 3]; [2, Streaming multiprocessors; Ultra-charged NVFP4 performance]; [28, §9.7.18.10]"
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "参考规格确认 INT8 执行；技术简报与数据手册吞吐显示值不同，288 GB 配置吞吐未绑定。",
+          "source": "[1, pp.25-26, Table 3]; [2, Streaming multiprocessors; Ultra-charged NVFP4 performance]; [28, §9.7.18.10]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所引资料未确认该格式的硬件运算路径；不据此认定不支持。",
+          "source": ""
+        }
+      },
+      "compute16": {
+        "value_tflops": null,
+        "format": "FP16/BF16",
+        "scope": "matrix",
+        "basis": "excluded",
+        "source": "[1, pp.25-26]; [3, Table 1]; [10, HGX B300 specifications]",
+        "note": "FP16/BF16 dense 2.2、sparse 4.5 PFLOPS 与 270 GB/7.7 TB/s/1100 W 同表；无法对应本研究 288 GB 配置，不计算 288 GB 的存算比。"
+      },
+      "memory": {
+        "kind": "HBM3e",
+        "capacity_gb": 288,
+        "bandwidth_tb_s": 8,
+        "alternatives": [
+          {
+            "capacity_gb": 270,
+            "bandwidth_tb_s": 7.7,
+            "source": "[1, pp.25-26]; [10, HGX B300 specifications]",
+            "note": "另一配置组合，未与 288 GB 建立对应，不能交叉拼值。"
+          }
+        ],
+        "note": "288 GB 与最高 8 TB/s 是目标来源组合；8 为 up to；270 GB/7.7 TB/s 是另一组来源条件，未解释成容量扣减。",
+        "source": "[3, Table 1]; [6, per-GPU VRAM tables]"
+      },
+      "organization": {
+        "onchip": "每 SM 256 KB 寄存器、256 KB L1/shared、256 KB TMEM 各自独立；两个裸片内 L2 存在但产品总容量未知。",
+        "main_memory": "同封装 HBM3e；stack 数原文内部冲突。",
+        "sharing": "双裸片 NV-HBI 构成单一 coherent GPU；两个 L2 保持一致性；每 SM TMEM 不按未确认 SM 数求全片和。",
+        "source": "[2, Dual-reticle design; Figure 2; Memory; update note]"
+      },
+      "endpoint": {
+        "protocol": "NVLink 5",
+        "bidir_gb_s": 1800,
+        "source": "[2, Interconnect]; [3, Table 2]",
+        "note": "18 条 link，单 GPU 收发合计 1.8 TB/s；另有 PCIe Gen6 x16 双向 256 GB/s。",
+        "state": "known"
+      },
+      "power": {
+        "max_w": null,
+        "scope": "unknown",
+        "range_or_other": "270 GB 表为 1100 W；通用 Ultra 文章最高 1400 W。",
+        "note": "两种功率均未确认对应本研究 288 GB SKU，不用于功率或能效配比。",
+        "source": "[1, pp.25-26]; [2, Table 2]; [6, Verified GPUs]"
+      },
+      "deployment": {
+        "form": "SXM，支持文档名为 NVIDIA-B300-SXM6-AC",
+        "cooling": "资料带 AC 名称；具体气流、散热器和供电随整机，288 GB 配置仍有对应缺口。",
+        "source": "[6, Verified GPUs]; [3, NVIDIA HGX B300 Baseboard]"
+      },
+      "order": 10,
+      "short_label": "B300",
+      "ratio_status": "容量与算力未配对"
+    },
+    {
+      "id": "mi300x",
+      "card": "AMD/MI300X.md",
+      "label": "MI300X",
+      "vendor": "AMD",
+      "position": {
+        "group": "both",
+        "text": "AI training、inference 和高性能计算。",
+        "source": "[8, p.1, 产品简介]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "yes",
+          "detail": "Matrix 和 Vector 均有运算路径；两者峰值分别列出，不相加。",
+          "source": "[8, p.1, AI / HPC Peak Theoretical Performance]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "Matrix 和 Vector 均有运算路径；两者峰值分别列出，不相加。",
+          "source": "[8, p.1, AI / HPC Peak Theoretical Performance]"
+        },
+        "TF32": {
+          "state": "yes",
+          "detail": "存在 TF32/XF32 矩阵路径；FP32 输入乘法尾数缩至 10 bits。TF32 峰值在白皮书 Table 1 与规格表间有差异，但支持本身明确。",
+          "source": "[8, p.1, AI / HPC Peak Theoretical Performance]; [3, Table 28, pp.42-43]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "矩阵运算支持，选定 MFMA 的 C/D 为 FP32；FP16 另有 Vector 路径。",
+          "source": "[8, p.1, AI / HPC Peak Theoretical Performance]; [3, §12.10, pp.267-272]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "矩阵运算支持，选定 MFMA 的 C/D 为 FP32；FP16 另有 Vector 路径。",
+          "source": "[8, p.1, AI / HPC Peak Theoretical Performance]; [3, §12.10, pp.267-272]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "FP8/BF8 Matrix，E4M3/E5M2 FNUZ 变体；选定指令以 FP32 C/D 累加。",
+          "source": "[9, Data type support / FP8 variant change]; [3, §12.10, pp.267-272,277-279]"
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[8, p.1, AI / HPC Peak Theoretical Performance]"
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "INT8 Matrix，选定 MFMA 的 C/D 为 INT32。",
+          "source": "[8, p.1, AI / HPC Peak Theoretical Performance]; [3, §12.10, pp.277-279]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[8, p.1, AI / HPC Peak Theoretical Performance]"
+        }
+      },
+      "compute16": {
+        "value_tflops": 1307.4,
+        "format": "FP16 / BF16",
+        "scope": "matrix",
+        "basis": "dense",
+        "source": "[8, p.1, AI / HPC Peak Theoretical Performance]",
+        "note": "单 GPU dense 峰值；不加 Vector，不采用结构化稀疏的 2614.9 TFLOPS。"
+      },
+      "memory": {
+        "kind": "HBM3",
+        "capacity_gb": 192,
+        "bandwidth_tb_s": 5.3,
+        "alternatives": [],
+        "note": "单 GPU 标称容量与峰值带宽；不含 Infinity Cache 带宽。",
+        "source": "[2, p.11]; [8, p.1, Specifications]"
+      },
+      "organization": {
+        "onchip": "每 CU 的寄存器、32KB L1 vector cache 与 64KB 软件管理 LDS；每 XCD 4MB L2；IOD 上有 256MB Infinity Cache。",
+        "main_memory": "8 个 HBM3 stack，经 4 个 IOD 访问。",
+        "sharing": "LDS 服务 workgroup；L2 在各 XCD 内共享，不是一个统一 32MB L2；Infinity Cache 位于内存侧，跨 XCD 由 snoop filter 协调一致性。",
+        "source": "[2, pp.9-11]; [3, §2.2.1, p.6]"
+      },
+      "endpoint": {
+        "protocol": "Infinity Fabric scale-up",
+        "bidir_gb_s": 896,
+        "source": "[8, pp.1-2, Specifications / Coherent Shared Memory]; [2, pp.15-17]",
+        "note": "7×128GB/s，按每条双向合计规格求和。产品页另列 8 links；采用数据手册 7 条 GPU 互联加独立 PCIe 主机口配置，不含主机带宽。",
+        "state": "known"
+      },
+      "power": {
+        "max_w": 750,
+        "scope": "module_max",
+        "range_or_other": "Maximum TBP 750W",
+        "note": "OAM 模组总板级功耗上限，不是实测功耗或计算裸片 TDP。",
+        "source": "[8, p.1, Specifications]; [1, Board Specifications]"
+      },
+      "deployment": {
+        "form": "OAM 加速器模组，54V UBB 供电。",
+        "cooling": "被动散热；需服务器提供冷却，未给持续峰值的完整环境条件。",
+        "source": "[1, Requirements / Board Specifications]"
+      },
+      "order": 11,
+      "short_label": "MI300X",
+      "ratio_status": "已配对；矩阵 dense 或明确换算"
+    },
+    {
+      "id": "mi325x",
+      "card": "AMD/MI325X.md",
+      "label": "MI325X",
+      "vendor": "AMD",
+      "position": {
+        "group": "both",
+        "text": "AI training、inference 和高性能计算。",
+        "source": "[3, p.1, 产品简介]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "yes",
+          "detail": "Matrix 和 Vector 均有运算路径；两者峰值分别列出，不相加。",
+          "source": "[3, p.1, AI / HPC Peak Theoretical Performance]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "Matrix 和 Vector 均有运算路径；两者峰值分别列出，不相加。",
+          "source": "[3, p.1, AI / HPC Peak Theoretical Performance]"
+        },
+        "TF32": {
+          "state": "yes",
+          "detail": "存在 TF32/XF32 矩阵路径；FP32 输入乘法尾数缩至 10 bits。TF32 峰值在白皮书 Table 1 与规格表间有差异，但支持本身明确。",
+          "source": "[3, p.1, AI / HPC Peak Theoretical Performance]; [5, Table 28, pp.42-43]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "矩阵运算支持，选定 MFMA 的 C/D 为 FP32；FP16 另有 Vector 路径。",
+          "source": "[3, p.1, AI / HPC Peak Theoretical Performance]; [5, §12.10, pp.267-272]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "矩阵运算支持，选定 MFMA 的 C/D 为 FP32；FP16 另有 Vector 路径。",
+          "source": "[3, p.1, AI / HPC Peak Theoretical Performance]; [5, §12.10, pp.267-272]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "FP8/BF8 Matrix，E4M3/E5M2 FNUZ 变体；选定指令以 FP32 C/D 累加。",
+          "source": "[8, Data type support / FP8 variant change]; [5, §12.10, pp.267-272,277-279]"
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[3, p.1, AI / HPC Peak Theoretical Performance]"
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "INT8 Matrix，选定 MFMA 的 C/D 为 INT32。",
+          "source": "[3, p.1, AI / HPC Peak Theoretical Performance]; [5, §12.10, pp.277-279]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[3, p.1, AI / HPC Peak Theoretical Performance]"
+        }
+      },
+      "compute16": {
+        "value_tflops": 1307.4,
+        "format": "FP16 / BF16",
+        "scope": "matrix",
+        "basis": "dense",
+        "source": "[3, p.1, AI / HPC Peak Theoretical Performance]",
+        "note": "单 GPU dense 峰值；不加 Vector，不采用结构化稀疏的 2614.9 TFLOPS。"
+      },
+      "memory": {
+        "kind": "HBM3E",
+        "capacity_gb": 256,
+        "bandwidth_tb_s": 6,
+        "alternatives": [],
+        "note": "单 GPU 标称容量与峰值带宽；不含 Infinity Cache 带宽。正式 MI325X 为 256GB，早期预告的 288GB 不计入。",
+        "source": "[2, p.11]; [3, p.1, Specifications]"
+      },
+      "organization": {
+        "onchip": "每 CU 的寄存器、32KB L1 vector cache 与 64KB 软件管理 LDS；每 XCD 4MB L2；IOD 上有 256MB Infinity Cache。",
+        "main_memory": "8 个 HBM3E stack，经 4 个 IOD 访问。",
+        "sharing": "LDS 服务 workgroup；L2 在各 XCD 内共享，不是一个统一 32MB L2；Infinity Cache 位于内存侧，跨 XCD 由 snoop filter 协调一致性。",
+        "source": "[2, pp.9-11]; [5, §2.2.1, p.6]"
+      },
+      "endpoint": {
+        "protocol": "Infinity Fabric scale-up",
+        "bidir_gb_s": 896,
+        "source": "[3, pp.1-2, Specifications / Coherent Shared Memory]; [2, pp.15-17]",
+        "note": "7×128GB/s，按每条双向合计规格求和。产品页另列 8 links；采用数据手册 7 条 GPU 互联加独立 PCIe 主机口配置，不含主机带宽。",
+        "state": "known"
+      },
+      "power": {
+        "max_w": 1000,
+        "scope": "module_max",
+        "range_or_other": "Maximum TBP 1000W",
+        "note": "OAM 模组总板级功耗上限，不是实测功耗或计算裸片 TDP。",
+        "source": "[3, p.1, Specifications]; [1, Board Specifications]"
+      },
+      "deployment": {
+        "form": "OAM 加速器模组，54V UBB 供电。",
+        "cooling": "被动散热；需服务器提供冷却，未给持续峰值的完整环境条件。",
+        "source": "[1, Requirements / Board Specifications]"
+      },
+      "order": 12,
+      "short_label": "MI325X",
+      "ratio_status": "已配对；矩阵 dense 或明确换算"
+    },
+    {
+      "id": "mi350p",
+      "card": "AMD/MI350P.md",
+      "label": "MI350P",
+      "vendor": "AMD",
+      "position": {
+        "group": "inference",
+        "text": "面向企业 AI inference、agentic AI 与 RAG。",
+        "source": "[1, opening]; [3, Performance That Drops into Your Existing Racks]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "yes",
+          "detail": "Matrix 和 Vector 均有运算路径，峰值不相加。",
+          "source": "[1, GPU Specifications]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "Matrix 和 Vector 均有运算路径，峰值不相加。",
+          "source": "[1, GPU Specifications]"
+        },
+        "TF32": {
+          "state": "no",
+          "detail": "CDNA 4 移除原生 TF32 物理路径；通过 BF16 软件模拟的功能不记为原生支持。",
+          "source": "[4, pp.8-9]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "矩阵运算支持，选定 MFMA 使用 FP32 C/D 累加；FP16 另有 Vector 路径。",
+          "source": "[1, GPU Specifications]; [7, §12.10, pp.278-283,286-288]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "矩阵运算支持，选定 MFMA 使用 FP32 C/D 累加；FP16 另有 Vector 路径。",
+          "source": "[1, GPU Specifications]; [7, §12.10, pp.278-283,286-288]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "原生 OCP FP8 E4M3/E5M2 与 MXFP8；microscaling 路径含共享 scale，不能与 FNUZ 编码混用。",
+          "source": "[4, pp.7-8]; [7, §7.1.5, pp.50-51]"
+        },
+        "FP4": {
+          "state": "yes",
+          "detail": "原生 MXFP4 E2M1；scaled MFMA 使用 E8M0 共享 scale，不是 INT4。",
+          "source": "[4, pp.7-8]; [7, §7.1.5, pp.50-51]"
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "原生 INT8 Matrix，选定 MFMA 的 C/D 为 INT32。",
+          "source": "[1, GPU Specifications]; [7, §12.10, pp.286-288]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[2, p.1, AI / HPC Peak Theoretical Performance]; [4, pp.7-8]"
+        }
+      },
+      "compute16": {
+        "value_tflops": 1150,
+        "format": "FP16 / BF16",
+        "scope": "matrix",
+        "basis": "dense",
+        "source": "[1, GPU Specifications]",
+        "note": "单 GPU dense Matrix 峰值，不加 Vector 或结构化稀疏倍增。产品页采用 1150；2026-05 brochure 将同组数字标为 estimated，且未注明对应 450W 还是 600W。"
+      },
+      "memory": {
+        "kind": "HBM3E",
+        "capacity_gb": 144,
+        "bandwidth_tb_s": 4,
+        "alternatives": [],
+        "note": "单 GPU 配置；stack 数未公开。",
+        "source": "[1, GPU Memory]; [2, p.1, Specifications]"
+      },
+      "organization": {
+        "onchip": "每 CU 的寄存器、32KB L1 vector cache 与 160KB 软件管理 LDS；每 XCD 4MB L2；内存侧 Infinity Cache 为 128MB。",
+        "main_memory": "4 个 XCD 经 1 个 IOD 连接 144GB HBM3E，stack 数未公开。",
+        "sharing": "L2 在各 XCD 内共享；Infinity Cache 位于内存侧。该型号资料未完整展开内存分区组织。",
+        "source": "[4, pp.9-13]; [2, pp.1-2]; [7, §2.2.1, p.6]"
+      },
+      "endpoint": {
+        "protocol": "专用 scale-up 未确认；已公开 PCIe 5.0 ×16",
+        "bidir_gb_s": null,
+        "source": "[2, p.1, Specifications]",
+        "note": "资料仅列 PCIe 128GB/s，未说明方向；不能据此填写双向 scale-up 端点，未公开不等于没有。",
+        "state": "unknown"
+      },
+      "power": {
+        "max_w": 600,
+        "scope": "board_max",
+        "range_or_other": "600W，可配置到 450W",
+        "note": "未注明峰值算力对应哪个功耗点。",
+        "source": "[1, Board Specifications]; [2, p.1, Specifications]"
+      },
+      "deployment": {
+        "form": "双槽、全高全长 PCIe CEM 卡，267mm，12V-2x6 辅助供电。",
+        "cooling": "被动散热，部署在提供气流的风冷服务器中。",
+        "source": "[1, Requirements / Dimensions / Board Specifications]; [2, p.1]; [3, Performance That Drops into Your Existing Racks]"
+      },
+      "order": 13,
+      "short_label": "MI350P",
+      "ratio_status": "已配对；矩阵 dense 或明确换算"
+    },
+    {
+      "id": "mi350x",
+      "card": "AMD/MI350X.md",
+      "label": "MI350X",
+      "vendor": "AMD",
+      "position": {
+        "group": "both",
+        "text": "AI training、inference 和高性能计算。",
+        "source": "[2, p.1, 产品简介]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "yes",
+          "detail": "Matrix 和 Vector 均有运算路径，峰值不相加。",
+          "source": "[1, GPU Specifications]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "Matrix 和 Vector 均有运算路径，峰值不相加。",
+          "source": "[1, GPU Specifications]"
+        },
+        "TF32": {
+          "state": "no",
+          "detail": "CDNA 4 移除原生 TF32 物理路径；通过 BF16 软件模拟的功能不记为原生支持。",
+          "source": "[3, pp.8-9]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "矩阵运算支持，选定 MFMA 使用 FP32 C/D 累加；FP16 另有 Vector 路径。",
+          "source": "[1, GPU Specifications]; [6, §12.10, pp.278-283,286-288]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "矩阵运算支持，选定 MFMA 使用 FP32 C/D 累加；FP16 另有 Vector 路径。",
+          "source": "[1, GPU Specifications]; [6, §12.10, pp.278-283,286-288]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "原生 OCP FP8 E4M3/E5M2 与 MXFP8；microscaling 路径含共享 scale，不能与 FNUZ 编码混用。",
+          "source": "[3, pp.7-8]; [6, §7.1.5, pp.50-51]"
+        },
+        "FP4": {
+          "state": "yes",
+          "detail": "原生 MXFP4 E2M1；scaled MFMA 使用 E8M0 共享 scale，不是 INT4。",
+          "source": "[3, pp.7-8]; [6, §7.1.5, pp.50-51]"
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "原生 INT8 Matrix，选定 MFMA 的 C/D 为 INT32。",
+          "source": "[1, GPU Specifications]; [6, §12.10, pp.286-288]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[2, p.1, AI / HPC Peak Theoretical Performance]; [3, pp.7-8]"
+        }
+      },
+      "compute16": {
+        "value_tflops": 2300,
+        "format": "FP16 / BF16",
+        "scope": "matrix",
+        "basis": "dense",
+        "source": "[1, GPU Specifications]",
+        "note": "单 GPU dense Matrix 峰值，不加 Vector 或结构化稀疏倍增。采用产品页 2.3 PFLOPS 舍入值；brochure 写 2.3096，按白皮书资源复算 2.3068672，保留来源算术不一致，不当厂商勘误。"
+      },
+      "memory": {
+        "kind": "HBM3E",
+        "capacity_gb": 288,
+        "bandwidth_tb_s": 8,
+        "alternatives": [],
+        "note": "8×36GB HBM3E，单 GPU；容量与带宽属于相同型号。",
+        "source": "[1, GPU Memory]; [2, p.1, Specifications]"
+      },
+      "organization": {
+        "onchip": "每 CU 的寄存器、32KB L1 vector cache 与 160KB 软件管理 LDS；每 XCD 4MB L2；内存侧 Infinity Cache 为 256MB。",
+        "main_memory": "8 个 XCD、2 个 IOD、8 个 HBM3E stack；每 IOD 连接 4 个 stack。",
+        "sharing": "L2 在各 XCD 内共享；Infinity Cache 位于内存侧。支持 NPS1 跨两 IOD 交织、NPS2 两个 144GB 内存池；不将所有局部容量当统一共享 cache。",
+        "source": "[3, pp.9-13]; [2, pp.1-2]; [6, §2.2.1, p.6]"
+      },
+      "endpoint": {
+        "protocol": "Infinity Fabric scale-up",
+        "bidir_gb_s": 1075.2,
+        "source": "[2, p.1, Specifications]; [3, p.13]",
+        "note": "7×153.6GB/s，每条为双向合计；排除独立主机口。产品页取整 153GB/s，brochure p.2 另写 160GB/s，采用规格表与白皮书共同值。",
+        "state": "known"
+      },
+      "power": {
+        "max_w": 1000,
+        "scope": "module_max",
+        "range_or_other": "Maximum TBP 1000W",
+        "note": "OAM 模组总板级功耗上限；不是实测能耗。",
+        "source": "[1, Requirements / Board Specifications]; [2, p.1]"
+      },
+      "deployment": {
+        "form": "OAM 加速器模组，54V UBB 供电。",
+        "cooling": "被动散热；白皮书将其放在兼容 UBB 2.0 的风冷系统路线。",
+        "source": "[1, Requirements / Board Specifications]; [3, p.3, Table 2]"
+      },
+      "order": 14,
+      "short_label": "MI350X",
+      "ratio_status": "已配对；矩阵 dense 或明确换算"
+    },
+    {
+      "id": "mi355x",
+      "card": "AMD/MI355X.md",
+      "label": "MI355X",
+      "vendor": "AMD",
+      "position": {
+        "group": "both",
+        "text": "AI training、inference 和高性能计算。",
+        "source": "[2, p.1, 产品简介]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "yes",
+          "detail": "Matrix 和 Vector 均有运算路径，峰值不相加。",
+          "source": "[2, p.1, AI / HPC Peak Theoretical Performance]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "Matrix 和 Vector 均有运算路径，峰值不相加。",
+          "source": "[2, p.1, AI / HPC Peak Theoretical Performance]"
+        },
+        "TF32": {
+          "state": "no",
+          "detail": "CDNA 4 移除原生 TF32 物理路径；通过 BF16 软件模拟的功能不记为原生支持。",
+          "source": "[3, pp.8-9]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "矩阵运算支持，选定 MFMA 使用 FP32 C/D 累加；FP16 另有 Vector 路径。",
+          "source": "[2, p.1, AI / HPC Peak Theoretical Performance]; [6, §12.10, pp.278-283,286-288]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "矩阵运算支持，选定 MFMA 使用 FP32 C/D 累加；FP16 另有 Vector 路径。",
+          "source": "[2, p.1, AI / HPC Peak Theoretical Performance]; [6, §12.10, pp.278-283,286-288]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "原生 OCP FP8 E4M3/E5M2 与 MXFP8；microscaling 路径含共享 scale，不能与 FNUZ 编码混用。",
+          "source": "[3, pp.7-8]; [6, §7.1.5, pp.50-51]"
+        },
+        "FP4": {
+          "state": "yes",
+          "detail": "原生 MXFP4 E2M1；scaled MFMA 使用 E8M0 共享 scale，不是 INT4。",
+          "source": "[3, pp.7-8]; [6, §7.1.5, pp.50-51]"
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "原生 INT8 Matrix，选定 MFMA 的 C/D 为 INT32。",
+          "source": "[2, p.1, AI / HPC Peak Theoretical Performance]; [6, §12.10, pp.286-288]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[2, p.1, AI / HPC Peak Theoretical Performance]; [3, pp.7-8]"
+        }
+      },
+      "compute16": {
+        "value_tflops": 2516.6,
+        "format": "FP16 / BF16",
+        "scope": "matrix",
+        "basis": "dense",
+        "source": "[2, p.1, AI / HPC Peak Theoretical Performance]",
+        "note": "单 GPU dense Matrix 峰值，不加 Vector 或结构化稀疏倍增。"
+      },
+      "memory": {
+        "kind": "HBM3E",
+        "capacity_gb": 288,
+        "bandwidth_tb_s": 8,
+        "alternatives": [],
+        "note": "8×36GB HBM3E，单 GPU；容量与带宽属于相同型号。",
+        "source": "[1, GPU Memory]; [2, p.1, Specifications]"
+      },
+      "organization": {
+        "onchip": "每 CU 的寄存器、32KB L1 vector cache 与 160KB 软件管理 LDS；每 XCD 4MB L2；内存侧 Infinity Cache 为 256MB。",
+        "main_memory": "8 个 XCD、2 个 IOD、8 个 HBM3E stack；每 IOD 连接 4 个 stack。",
+        "sharing": "L2 在各 XCD 内共享；Infinity Cache 位于内存侧。支持 NPS1 跨两 IOD 交织、NPS2 两个 144GB 内存池；不将所有局部容量当统一共享 cache。",
+        "source": "[3, pp.9-13]; [2, pp.1-2]; [6, §2.2.1, p.6]"
+      },
+      "endpoint": {
+        "protocol": "Infinity Fabric scale-up",
+        "bidir_gb_s": 1075.2,
+        "source": "[2, p.1, Specifications]; [3, p.13]",
+        "note": "7×153.6GB/s，每条为双向合计；排除独立主机口。产品页取整 153GB/s，brochure p.2 另写 160GB/s，采用规格表与白皮书共同值。",
+        "state": "known"
+      },
+      "power": {
+        "max_w": 1400,
+        "scope": "module_max",
+        "range_or_other": "Maximum TBP 1400W",
+        "note": "OAM 模组总板级功耗上限；不是实测能耗。",
+        "source": "[1, Requirements / Board Specifications]; [2, p.1]"
+      },
+      "deployment": {
+        "form": "OAM 加速器模组，54V UBB 供电。",
+        "cooling": "产品页 Passive & Active，白皮书 Passive/Liquid；支持直接液冷高密度部署，不限定所有模组只用一种实现。",
+        "source": "[1, Requirements / Board Specifications]; [3, p.3, Table 2]"
+      },
+      "order": 15,
+      "short_label": "MI355X",
+      "ratio_status": "已配对；矩阵 dense 或明确换算"
+    },
+    {
+      "id": "mi455x",
+      "card": "AMD/MI455X.md",
+      "label": "MI455X",
+      "vendor": "AMD",
+      "position": {
+        "group": "both",
+        "text": "面向 Helios 机架系统的 AI training、inference 和 fine-tuning。",
+        "source": "[1, opening]; [2, pp.1-2]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "yes",
+          "detail": "Matrix 和 Vector 均有产品峰值；不能相加。",
+          "source": "[2, p.1, AI Peak Theoretical Performance]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "Matrix 和 Vector 均有产品峰值；不能相加。",
+          "source": "[2, p.1, AI Peak Theoretical Performance]"
+        },
+        "TF32": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[2, p.1, AI Peak Theoretical Performance]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "WMMA 16×16×32；C/D 可为 FP32、BF16 或 C=FP32/D=BF16；Vector 新增原生 BF16。",
+          "source": "[9, Table 43, p.95]; [4, pp.6-7]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "WMMA 16×16×32，C/D 可以同为 FP32 或同为 FP16；另有 Vector 路径。",
+          "source": "[9, Table 43, p.95]; [2, p.1]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "OCP FP8、MXFP8；普通 FP8 WMMA 支持 FP32 或 FP16 C/D；带 scale 的路径使用 FP32 C/D。",
+          "source": "[2, p.1]; [9, Table 43, pp.95-96]"
+        },
+        "FP4": {
+          "state": "yes",
+          "detail": "原生 OCP MXFP4；带 scale 的 FP4 WMMA 支持 FP32 C/D，分组与 scale 编码见 ISA。",
+          "source": "[2, p.1]; [9, Table 43, p.96; §7.12.6, pp.103-105]"
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "原生 INT8/UINT8 WMMA，signed INT32 C/D。",
+          "source": "[9, Table 43, pp.95-96]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[2, p.1, AI Peak Theoretical Performance]"
+        }
+      },
+      "compute16": {
+        "value_tflops": 5033,
+        "format": "FP16 / BF16",
+        "scope": "matrix",
+        "basis": "dense",
+        "source": "[2, p.1, AI Peak Theoretical Performance]",
+        "note": "单 GPU dense Matrix；不采用 10066 TFLOPS 稀疏值，不叠加 Vector。"
+      },
+      "memory": {
+        "kind": "HBM4",
+        "capacity_gb": 432,
+        "bandwidth_tb_s": 23.3,
+        "alternatives": [
+          {
+            "bandwidth_tb_s": 19.6,
+            "source": "[8, Compute Tray / Rackscale Highlights]",
+            "note": "Helios 托盘页面另值；保留来源冲突，不当连续区间，也不替代 23.3TB/s。"
+          }
+        ],
+        "note": "采用单 GPU 专用资料和白皮书；不含 54TB/s 全局 L2 带宽。",
+        "source": "[4, pp.9-10]; [2, p.1]; [1, GPU Memory]"
+      },
+      "organization": {
+        "onchip": "每 WGP 384KB LDS/vector cache 共享本地 SRAM，公开配置 320KB LDS + 64KB vector cache；全局 L2 在 2 个 FCD 上共 192MB。",
+        "main_memory": "12 个 HBM4 stack，共 432GB，经 FCD 内存接口服务 8 个 XCD。",
+        "sharing": "LDS 为 workgroup 显式工作存储；全局 L2 由两个 FCD 服务计算侧。计算分区与 NPS1/NPS2 内存模式分开，不合计重复的本地 SRAM 视图。",
+        "source": "[4, pp.8-11, Figure 5 / Figure 7]; [3, Fabric and Cache Die]"
+      },
+      "endpoint": {
+        "protocol": "UALoE scale-up",
+        "bidir_gb_s": 3600,
+        "source": "[4, pp.4,12; p.22, Networking]",
+        "note": "36 links，每 link 2×200Gbit/s lane；每 link 每方向 400Gbit/s。3.6TB/s 为单 GPU 双向合计，不含 CPU-GPU 256GB/s 与外部 NIC scale-out。",
+        "state": "known"
+      },
+      "power": {
+        "max_w": null,
+        "scope": "unknown",
+        "range_or_other": "未找到单 EAM TBP/TDP",
+        "note": "不把 72 GPU 机架功耗下放到单 GPU。",
+        "source": "[1, Board Specifications]; [2, p.1, Specifications]"
+      },
+      "deployment": {
+        "form": "单 GPU / EAM（Enhanced Accelerator Module）；四 GPU 托盘、72 GPU 机架属于上层。",
+        "cooling": "直接液冷；未给单模组液流工况。",
+        "source": "[1, Board Specifications]; [2, pp.1-2]; [4, pp.16-18]"
+      },
+      "order": 16,
+      "short_label": "MI455X",
+      "ratio_status": "已配对；矩阵 dense 或明确换算"
+    },
+    {
+      "id": "tpu_v4",
+      "card": "Google-TPU/Google_Cloud_TPU_v4_one_chip_产品详解.md",
+      "label": "TPU v4",
+      "vendor": "Google-TPU",
+      "position": {
+        "group": "training",
+        "text": "官方架构论文以大规模训练为主要定位；此标签不表示不能用于推理。",
+        "source": "[1, pp.2,5–7]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, p.2 and Table4]; [2, System architecture]; [21, TPU_V4 branch]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "VPU/向量路径支持FP32运算；不等同于同吞吐的原生FP32矩阵乘法。",
+          "source": "[1, p.2]; [20, Lower precision matrix multiplication tends to be faster / VPU operations]"
+        },
+        "TF32": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, p.2 and Table4]; [2, System architecture]; [21, TPU_V4 branch]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "MXU接收BF16并用FP32累加。",
+          "source": "[1, p.2]; [6, TPU chip]"
+        },
+        "FP16": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, p.2 and Table4]; [2, System architecture]; [21, TPU_V4 branch]"
+        },
+        "FP8": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, p.2 and Table4]; [2, System architecture]; [21, TPU_V4 branch]"
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, p.2 and Table4]; [2, System architecture]; [21, TPU_V4 branch]"
+        },
+        "INT8": {
+          "state": "conditional",
+          "detail": "Cloud规格列INT8；JAX的v4原生matmul仅明确FP32/BF16左输入与INT8右输入组合，完整整数累加语义不足。",
+          "source": "[2, System architecture]; [21, is_matmul_supported / TPU_V4 branch]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, p.2 and Table4]; [2, System architecture]; [21, TPU_V4 branch]"
+        }
+      },
+      "compute16": {
+        "value_tflops": 275.2512,
+        "format": "BF16",
+        "scope": "matrix",
+        "basis": "derived_dense",
+        "source": "[1, p.2 and Table4]; [7, p.4, MXU]",
+        "note": "按2核×4个128×128 MXU×2 FLOP/乘加×1.05 GHz计算；不含稀疏倍增。官方产品/论文峰值为275 TFLOPS；275.2512是阵列条件推导而非新增实测。"
+      },
+      "power": {
+        "max_w": null,
+        "scope": "unknown",
+        "range_or_other": "论文：idle 90 W；生产应用min/mean/max为121/170/192 W。",
+        "note": "均为实测运行功耗；192 W不是TDP或额定最大功率。Cloud将90/170/192简写min/mean/max，与论文定义分开。",
+        "source": "[1, p.7, Table4]; [2, System architecture]"
+      },
+      "deployment": {
+        "form": "单ASIC+4 HBM封装；4个封装/PCB，主机PCIe Gen3 x16",
+        "cooling": "液冷",
+        "source": "[1, pp.2–3, Figure2]; [2, Other]"
+      },
+      "memory": {
+        "kind": "HBM2",
+        "capacity_gb": 34.359738368,
+        "bandwidth_tb_s": 1.2,
+        "alternatives": [],
+        "note": "32 GiB按2^30字节转换为十进制GB；带宽1200 GB/s；完整单封装，不含host DRAM。",
+        "source": "[1, p.7, Table4 and Figure2]; [2, Other memory system differences]"
+      },
+      "organization": {
+        "onchip": "每TC 16 MiB VMEM及1 MiB SMEM；两TC共享128 MiB CMEM；四个SC各2.5 MiB SpMEM。",
+        "main_memory": "4个HBM2 stack，统一HBM地址空间。",
+        "sharing": "VMEM是核局部显式工作存储，CMEM共享且以load/store访问；不能合并叫L2。",
+        "source": "[1, pp.2,5–7]; [2, TensorCores and Other memory system differences]; [21, TPU_V4 branch]"
+      },
+      "endpoint": {
+        "protocol": "ICI",
+        "bidir_gb_s": 600,
+        "source": "[2, Other]; [7, Table1 and p.7 footnote4]",
+        "note": "6条链路×50 GB/s/方向×2；端点物理收发合计，非应用持续带宽。",
+        "state": "known"
+      },
+      "order": 17,
+      "short_label": "TPU v4",
+      "ratio_status": "已配对；矩阵 dense 或明确换算"
+    },
+    {
+      "id": "tpu_v5e",
+      "card": "Google-TPU/Google_Cloud_TPU_v5e_one_chip_产品详解.md",
+      "label": "TPU v5e",
+      "vendor": "Google-TPU",
+      "position": {
+        "group": "both",
+        "text": "官方明确面向训练与推理。",
+        "source": "[4, opening]; [1, System architecture]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, System architecture]; [2, TPU chip]; [21, TPU_V5E branch and is_matmul_supported]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "VPU运算采用FP32；FP32矩阵输入需另选精度策略，默认可舍入到BF16。",
+          "source": "[20, Lower precision matrix multiplication tends to be faster / VPU operations]; [22, Precision control]"
+        },
+        "TF32": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, System architecture]; [2, TPU chip]; [21, TPU_V5E branch and is_matmul_supported]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "MXU BF16矩阵计算，FP32累加。",
+          "source": "[2, How a TPU works and TPU chip]; [1, System architecture]"
+        },
+        "FP16": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, System architecture]; [2, TPU chip]; [21, TPU_V5E branch and is_matmul_supported]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "JAX原生matmul类型检查接受E5M2和E4M3B11FNUZ；本型号未给FP8峰值。",
+          "source": "[21, is_matmul_supported / TPU_V5E branch]"
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, System architecture]; [2, TPU chip]; [21, TPU_V5E branch and is_matmul_supported]"
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "Cloud给INT8矩阵峰值393 TOPS；JAX允许INT8/UINT8同类输入，开发模型394 TOPS。",
+          "source": "[1, System architecture]; [21, TPU_V5E branch and is_matmul_supported]"
+        },
+        "INT4": {
+          "state": "yes",
+          "detail": "JAX允许INT4/UINT4矩阵输入，开发模型为788 TOPS；不是FP4。",
+          "source": "[21, TPU_V5E branch and is_matmul_supported]"
+        }
+      },
+      "compute16": {
+        "value_tflops": 197,
+        "format": "BF16",
+        "scope": "matrix",
+        "basis": "condition_unspecified",
+        "source": "[1, System architecture]",
+        "note": "官方矩阵峰值197 TFLOPS；产品表未给完整稠密/稀疏与计数约定。开发教程按4×128×128×2×约1.5 GHz为196.608，近似时钟不能升格保证值。[20, What Is a TPU?]"
+      },
+      "power": {
+        "max_w": null,
+        "scope": "unknown",
+        "range_or_other": "生产fleet平均66 W/TPU，不含host。",
+        "note": "fleet平均值不是TDP、最大功率或同负载下的能效测试值。",
+        "source": "[6, p.2, Table1]"
+      },
+      "deployment": {
+        "form": "单芯片Cloud配置，多个TPU组成tray/Pod",
+        "cooling": "散热器+主动强制风冷",
+        "source": "[1, System architecture and VM types]; [6, p.12, Appendix B.1–B.2]"
+      },
+      "memory": {
+        "kind": "HBM2E",
+        "capacity_gb": 16,
+        "bandwidth_tb_s": 0.8589934592,
+        "alternatives": [
+          {
+            "capacity_gb": 17.179869184,
+            "bandwidth_tb_s": 0.819,
+            "note": "论文16 GiB HBM2E+819 GB/s，与Cloud单位/数值存在来源差异。",
+            "source": "[6, p.2, Table1]"
+          }
+        ],
+        "note": "主值采用Cloud同一来源的16 GB+800 GiB/s，后者转换为十进制TB/s；不能混配论文容量/带宽。",
+        "source": "[1, System architecture]; [6, p.2, Table1]"
+      },
+      "organization": {
+        "onchip": "单TC含128 MiB VMEM、1 MiB SMEM。",
+        "main_memory": "本地HBM2E，stack数未公开。",
+        "sharing": "VMEM由程序/编译器显式管理；软件接口未暴露SparseCore配置不能证明物理相关逻辑不存在。",
+        "source": "[20, What Is a TPU?]; [21, TPU_V5E branch]; [22, BlockSpecs and grid iteration]"
+      },
+      "endpoint": {
+        "protocol": "ICI",
+        "bidir_gb_s": 400,
+        "source": "[1, System architecture]",
+        "note": "4端口，官方直接给双向聚合400 GB/s；不使用开发教程45 GB/s/方向的性能估算替换。",
+        "state": "known"
+      },
+      "order": 18,
+      "short_label": "TPU v5e",
+      "ratio_status": "已配对；计算口径带条件"
+    },
+    {
+      "id": "tpu_v5p",
+      "card": "Google-TPU/Google_Cloud_TPU_v5p_one_chip_产品详解.md",
+      "label": "TPU v5p",
+      "vendor": "Google-TPU",
+      "position": {
+        "group": "both",
+        "text": "主要面向大规模训练，官方也明确支持serving。",
+        "source": "[1, System architecture]; [4, Inside Cloud TPU v5p; Leveraging Google’s deep experience to help power the future of AI]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, System architecture]; [2, Table1]; [21, TPU_V5P branch and is_matmul_supported]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "普通向量ALU执行FP32；矩阵FP32输入不自动等同完整FP32乘法。",
+          "source": "[20, Appendix A / VPU]; [22, Precision control]"
+        },
+        "TF32": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, System architecture]; [2, Table1]; [21, TPU_V5P branch and is_matmul_supported]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "MXU BF16输入、FP32累加。",
+          "source": "[1, System architecture]; [2, pp.3–4, Figure2]"
+        },
+        "FP16": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, System architecture]; [2, Table1]; [21, TPU_V5P branch and is_matmul_supported]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "Cloud标FP8、论文标BF8，均有矩阵峰值；不推定所有FP8变体。",
+          "source": "[1, System architecture]; [2, Table1]"
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, System architecture]; [2, Table1]; [21, TPU_V5P branch and is_matmul_supported]"
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "JAX/scaling book列全芯片918 TOPS；有INT8/UINT8原生matmul输入检查。",
+          "source": "[20, TPU specs]; [21, TPU_V5P branch and is_matmul_supported]"
+        },
+        "INT4": {
+          "state": "yes",
+          "detail": "JAX每核心920 TOPS，两个核心合计1840；允许INT4/UINT4矩阵输入。",
+          "source": "[21, TPU_V5P branch and is_matmul_supported]"
+        }
+      },
+      "compute16": {
+        "value_tflops": 459,
+        "format": "BF16",
+        "scope": "matrix",
+        "basis": "condition_unspecified",
+        "source": "[1, System architecture]; [2, Table1]",
+        "note": "官方矩阵峰值459 TFLOPS；没有明示结构化稀疏倍增。约1.75 GHz阵列模型给458.752，但近似开发时钟不当产品保证频率。[20, Appendix A and TPU specs]"
+      },
+      "power": {
+        "max_w": null,
+        "scope": "unknown",
+        "range_or_other": "生产fleet平均331 W/TPU，不含host。",
+        "note": "TDP与额定最大功率未公开；不能把fleet平均值与其他产品TDP排行。",
+        "source": "[7, p.2, Table1]"
+      },
+      "deployment": {
+        "form": "单TPU封装，6个HBM stack；每host连接4 TPU",
+        "cooling": "液冷",
+        "source": "[2, pp.2,6, Figure3]; [1, Configurations]"
+      },
+      "memory": {
+        "kind": "HBM2E",
+        "capacity_gb": 102.00547328,
+        "bandwidth_tb_s": 2.765,
+        "alternatives": [
+          {
+            "capacity_gb": 103.079215104,
+            "bandwidth_tb_s": 2.765,
+            "note": "论文96 GiB+2765 GB/s，1 GiB差额未解释。",
+            "source": "[2, Table1 and Figure3]"
+          }
+        ],
+        "note": "主值95 GiB来自Cloud，转换十进制GB；六个HBM2E stack。",
+        "source": "[1, System architecture]; [2, Table1 and Figure3]"
+      },
+      "organization": {
+        "onchip": "每TC 64 MiB VMEM、1 MiB SMEM；每SC 16 tile×512 KiB局部VMEM。",
+        "main_memory": "6个HBM2E stack，本地95/96 GiB。",
+        "sharing": "两TC各有软件管理工作集；SC tile局部VMEM与共享SPMEM分开，不能视作统一L2。",
+        "source": "[2, pp.2,4–6, Table1 and Figures2–3]; [21, TPU_V5P branch]; [23, Hardware overview]"
+      },
+      "endpoint": {
+        "protocol": "ICI",
+        "bidir_gb_s": 1200,
+        "source": "[1, System architecture]; [2, p.7, footnote4]",
+        "note": "6条链路×100 GB/s/方向×2。远程ICI DMA为push/write；端点带宽不代表任意collective持续带宽。",
+        "state": "known"
+      },
+      "order": 19,
+      "short_label": "TPU v5p",
+      "ratio_status": "已配对；计算口径带条件"
+    },
+    {
+      "id": "tpu_v6e",
+      "card": "Google-TPU/Google_Cloud_TPU_v6e_one_chip_产品详解.md",
+      "label": "TPU v6e",
+      "vendor": "Google-TPU",
+      "position": {
+        "group": "both",
+        "text": "Trillium官方面向训练和推理。",
+        "source": "[1, System architecture]; [5, opening]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, System architecture]; [2, TPU architecture specifications]; [21, TPU_V6E branch and is_matmul_supported]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "VPU采用FP32；SparseCore tile有8元素F32 SIMD路径。",
+          "source": "[20, Lower precision matrix multiplication tends to be faster / VPU operations]; [4, Specifications at a glance]"
+        },
+        "TF32": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, System architecture]; [2, TPU architecture specifications]; [21, TPU_V6E branch and is_matmul_supported]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "MXU BF16输入、FP32累加；SparseCore SIMD也支持BF16。",
+          "source": "[3, TPU chip]; [4, Specifications at a glance]"
+        },
+        "FP16": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, System architecture]; [2, TPU architecture specifications]; [21, TPU_V6E branch and is_matmul_supported]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "产品页列918 TFLOPS；JAX明确E5M2/E4M3B11FNUZ输入组合。",
+          "source": "[2, TPU architecture specifications]; [21, is_matmul_supported / TPU_V6E branch]"
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, System architecture]; [2, TPU architecture specifications]; [21, TPU_V6E branch and is_matmul_supported]"
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "Cloud列INT8矩阵峰值1836 TOPS；JAX允许INT8/UINT8。",
+          "source": "[1, System architecture]; [21, is_matmul_supported / TPU_V6E branch]"
+        },
+        "INT4": {
+          "state": "yes",
+          "detail": "JAX列INT4 3680 TOPS并允许INT4/UINT4矩阵输入。",
+          "source": "[21, is_matmul_supported / TPU_V6E branch]"
+        }
+      },
+      "compute16": {
+        "value_tflops": 918,
+        "format": "BF16",
+        "scope": "matrix",
+        "basis": "condition_unspecified",
+        "source": "[1, System architecture]",
+        "note": "官方未给完整稠密/稀疏及计数条件；JAX模型920 TFLOPS另记，不用开发模型替换产品值。[21, TPU_V6E branch]"
+      },
+      "power": {
+        "max_w": null,
+        "scope": "unknown",
+        "range_or_other": "生产fleet平均153 W/TPU，不含host。",
+        "note": "不是TDP或最大功率；资料未充分公开本型号散热方案。",
+        "source": "[8, p.2, Table1]"
+      },
+      "deployment": {
+        "form": "单芯片Cloud配置；可组成2D torus slice",
+        "cooling": "所查本型号资料未明确",
+        "source": "[1, Supported configurations, VM types and System architecture]; [8, p.2, Table1]"
+      },
+      "memory": {
+        "kind": "HBM",
+        "capacity_gb": 32,
+        "bandwidth_tb_s": 1.638,
+        "alternatives": [
+          {
+            "capacity_gb": 34.359738368,
+            "bandwidth_tb_s": 1.64,
+            "note": "论文32 GiB+1640 GB/s；机器规格页也用32 GiB。",
+            "source": "[8, p.2, Table1]; [2, TPU architecture specifications]"
+          }
+        ],
+        "note": "主值采用v6e专页32 GB+1638 GB/s；HBM代际与stack数未明确。",
+        "source": "[1, System architecture]"
+      },
+      "organization": {
+        "onchip": "单TC 128 MiB VMEM、1 MiB SMEM；两SC各16 tile×256 KiB VMEM，另有共享SPMEM。",
+        "main_memory": "HBM可供TC、SC与host系统访问。",
+        "sharing": "TC/SC各有局部显式scratchpad，不将不同作用域容量合为L2。",
+        "source": "[4, High bandwidth memory, Memory hierarchy and Overall memory management strategy]; [21, TPU_V6E branch]"
+      },
+      "endpoint": {
+        "protocol": "ICI",
+        "bidir_gb_s": 800,
+        "source": "[1, System architecture]",
+        "note": "4端口，单芯片双向聚合800 GB/s。",
+        "state": "known"
+      },
+      "order": 20,
+      "short_label": "TPU v6e",
+      "ratio_status": "已配对；计算口径带条件"
+    },
+    {
+      "id": "tpu7x",
+      "card": "Google-TPU/Google_Cloud_TPU7x_one_chip_产品详解.md",
+      "label": "TPU7x / Ironwood",
+      "vendor": "Google-TPU",
+      "position": {
+        "group": "both",
+        "text": "Ironwood官方面向reasoning模型训练与serving。",
+        "source": "[4, p.2]; [1, Dual-chiplet architecture and Programming model]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, System architecture]; [5, Table1 and pp.3–6]; [21, TPU_7X branch and is_matmul_supported]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "VPU/向量路径采用FP32；矩阵FP32输入另有精度策略。",
+          "source": "[20, Lower precision matrix multiplication tends to be faster / VPU operations]; [22, Precision control]"
+        },
+        "TF32": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, System architecture]; [5, Table1 and pp.3–6]; [21, TPU_7X branch and is_matmul_supported]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "完整封装2个TC，BF16矩阵乘法使用FP32累加。",
+          "source": "[5, pp.3–6]; [1, System architecture]"
+        },
+        "FP16": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, System architecture]; [5, Table1 and pp.3–6]; [21, TPU_7X branch and is_matmul_supported]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "支持E4M3FN/E5M2矩阵输入；Cloud给完整封装FP8峰值4614 TFLOPS。",
+          "source": "[1, System architecture]; [21, is_matmul_supported / TPU_7X branch]"
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, System architecture]; [5, Table1 and pp.3–6]; [21, TPU_7X branch and is_matmul_supported]"
+        },
+        "INT8": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, System architecture]; [5, Table1 and pp.3–6]; [21, TPU_7X branch and is_matmul_supported]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, System architecture]; [5, Table1 and pp.3–6]; [21, TPU_7X branch and is_matmul_supported]"
+        }
+      },
+      "compute16": {
+        "value_tflops": 2307,
+        "format": "BF16",
+        "scope": "matrix",
+        "basis": "condition_unspecified",
+        "source": "[1, System architecture]; [5, Table1]",
+        "note": "两TC完整封装官方峰值；未给完整稀疏/计数条件。不能把两个软件device再各自使用整封装2307。JAX合计2310为另一近似模型。"
+      },
+      "power": {
+        "max_w": null,
+        "scope": "unknown",
+        "range_or_other": "未公开可采用的单芯片TDP/模组或板卡最大功率。",
+        "note": "绝对功耗、TDP和频率未公开；相对能效不能换算瓦数。",
+        "source": "[4, pp.2,14,22]; [5, Table1]"
+      },
+      "deployment": {
+        "form": "2 compute chiplet+1 SerDes chiplet+8 HBM3E；4 TPU/tray；PCIe Gen5 x16",
+        "cooling": "cold-plate液冷",
+        "source": "[4, pp.14–15,22]"
+      },
+      "memory": {
+        "kind": "HBM3E",
+        "capacity_gb": 206.158430208,
+        "bandwidth_tb_s": 7.38,
+        "alternatives": [
+          {
+            "capacity_gb": 192,
+            "bandwidth_tb_s": null,
+            "note": "同页叙述写192 GB/每chiplet96 GB，单位不一致，不视作第二SKU。",
+            "source": "[1, Dual-chiplet architecture]"
+          },
+          {
+            "capacity_gb": 206.158430208,
+            "bandwidth_tb_s": 7.3,
+            "note": "固定论文192 GiB+7300 GB/s。",
+            "source": "[5, Table1]"
+          }
+        ],
+        "note": "主值按Cloud规格表192 GiB+7380 GB/s，均为单封装两chiplet合计；每chiplet拥有独立HBM空间。",
+        "source": "[1, System architecture, Dual-chiplet architecture and Programming model]; [4, p.15]"
+      },
+      "organization": {
+        "onchip": "两个TC各64 MiB VMEM和1 MiB SMEM；四个物理SC另有tile局部工作存储。",
+        "main_memory": "两个compute chiplet各连接4个HBM3E stack。",
+        "sharing": "软件暴露为两个device；跨chiplet需collective显式移动，非统一MegaCore内存或透明cache。",
+        "source": "[1, Dual-chiplet architecture and Programming model]; [3, Scoped VMEM tuning]; [4, pp.14–15]; [21, TPU_7X branch]"
+      },
+      "endpoint": {
+        "protocol": "ICI",
+        "bidir_gb_s": 1200,
+        "source": "[4, pp.15,22]; [5, Table1 and p.7 footnote4]",
+        "note": "6条ICI×100 GB/s/方向×2；D2D速率相对描述不能加入ICI端点。",
+        "state": "known"
+      },
+      "order": 21,
+      "short_label": "TPU7x",
+      "ratio_status": "已配对；计算口径带条件"
+    },
+    {
+      "id": "tpu8t",
+      "card": "Google-TPU/Google_TPU_8t_one_chip_产品详解.md",
+      "label": "TPU 8t",
+      "vendor": "Google-TPU",
+      "position": {
+        "group": "training",
+        "text": "官方以pretraining为主要定位。",
+        "source": "[1, TPU 8t: The pre-training powerhouse]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, Native FP4 and Peak FP4 PFLOPs]; [21, TPU_8T branch and is_matmul_supported]"
+        },
+        "FP32": {
+          "state": "conditional",
+          "detail": "JAX原生matmul接受FP32操作数，但输入类型不保证全FP32乘法，需保留Pallas精度策略。",
+          "source": "[21, is_matmul_supported / TPU_8T branch]; [22, Precision control]"
+        },
+        "TF32": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, Native FP4 and Peak FP4 PFLOPs]; [21, TPU_8T branch and is_matmul_supported]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "JAX原生matmul类型检查与硬件描述明确BF16；其静态性能参数不作为同条件产品规格。",
+          "source": "[21, TPU_8T branch and is_matmul_supported]"
+        },
+        "FP16": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, Native FP4 and Peak FP4 PFLOPs]; [21, TPU_8T branch and is_matmul_supported]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "JAX原生matmul支持指定E4M3FN/E5M2输入组合。",
+          "source": "[21, TPU_8T branch and is_matmul_supported]"
+        },
+        "FP4": {
+          "state": "yes",
+          "detail": "官方明确原生FP4矩阵路径，完整缩放、累加和舍入语义未公开。",
+          "source": "[1, Native FP4 and Peak FP4 PFLOPs]"
+        },
+        "INT8": {
+          "state": "conditional",
+          "detail": "JAX本型号int8_ops_per_second非零，但原生输入检查暂未覆盖INT8并留TODO；执行条件未完整确认。",
+          "source": "[21, TPU_8T branch and is_matmul_supported]"
+        },
+        "INT4": {
+          "state": "conditional",
+          "detail": "JAX矩阵输入允许部分INT4右操作数；并非任意左右INT4组合，也不是FP4。",
+          "source": "[21, TPU_8T branch and is_matmul_supported]"
+        }
+      },
+      "compute16": {
+        "value_tflops": null,
+        "format": "BF16",
+        "scope": "matrix",
+        "basis": "excluded",
+        "source": "[21, TPU_8T branch]; [1, Peak FP4 PFLOPs]",
+        "note": "JAX静态开发模型列996.1 TFLOPS BF16，未附工作频率、输入形状及与产品发布一致的条件。保留候选，不进入产品16位峰值/配比图；不能由12.6 PFLOPS FP4倒推BF16。"
+      },
+      "power": {
+        "max_w": null,
+        "scope": "unknown",
+        "range_or_other": "未公开可采用的单芯片TDP/模组或板卡最大功率。",
+        "note": "工艺、频率、绝对功耗与散热规格未在所查资料公开。",
+        "source": "[1, TPU 8t: The pre-training powerhouse; Figures1–3]"
+      },
+      "deployment": {
+        "form": "logic chiplet+独立ICI/SerDes chiplet+6 HBM3E；PCIe Gen5 x16",
+        "cooling": "未公开型号级散热规格",
+        "source": "[1, Figure1; TPU 8t: The pre-training powerhouse]"
+      },
+      "memory": {
+        "kind": "HBM3E",
+        "capacity_gb": 216,
+        "bandwidth_tb_s": 6.528,
+        "alternatives": [],
+        "note": "6×12-hi HBM3E，技术文章原文GB不作GiB转换。JAX另有231e9 B与6.4 TB/s开发模型，不作为相同SKU规格替换。",
+        "source": "[1, Figure1; TPU 8t and TPU 8i at a glance; HBM Capacity and HBM Bandwidth]"
+      },
+      "organization": {
+        "onchip": "单TC VMEM技术文章128 MB、JAX128 MiB；SMEM1 MiB；两SC各有tile局部存储。",
+        "main_memory": "6个HBM3E stack，经Memory and DMA Interconnect连接计算逻辑。",
+        "sharing": "VMEM按程序/编译器显式安排；MB/MiB不能静默互换，也不能改名L2。",
+        "source": "[1, Figure1 and On-Chip SRAM (Vmem)]; [21, TPU_8T branch]; [22, BlockSpecs and grid iteration]"
+      },
+      "endpoint": {
+        "protocol": "ICI",
+        "bidir_gb_s": 2400,
+        "source": "[2, TPU 8t规格图]",
+        "note": "官方每芯片双向19.2 Tb/s÷8=2400 GB/s；不从6×224G SerDes octals自行重算。",
+        "state": "known"
+      },
+      "order": 22,
+      "short_label": "TPU 8t",
+      "ratio_status": "硬件 16 位峰值未定"
+    },
+    {
+      "id": "tpu8i",
+      "card": "Google-TPU/Google_TPU_8i_one_chip_产品详解.md",
+      "label": "TPU 8i",
+      "vendor": "Google-TPU",
+      "position": {
+        "group": "both",
+        "text": "官方面向post-training、sampling和serving；不能因8i名称或decode重点归为仅推理。",
+        "source": "[1, TPU 8i: The sampling and serving specialist; The Collectives Acceleration Engine]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, Peak FP4 PFLOPs]; [21, TPU_8I branch and is_matmul_supported]"
+        },
+        "FP32": {
+          "state": "conditional",
+          "detail": "JAX原生matmul接受FP32操作数；默认FP32输入可使用较低精度矩阵路径，需另选精度策略。",
+          "source": "[21, is_matmul_supported / TPU_8I branch]; [22, Precision control]"
+        },
+        "TF32": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, Peak FP4 PFLOPs]; [21, TPU_8I branch and is_matmul_supported]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "JAX明确BF16矩阵输入与开发性能参数；不作同条件产品峰值。",
+          "source": "[21, TPU_8I branch and is_matmul_supported]"
+        },
+        "FP16": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, Peak FP4 PFLOPs]; [21, TPU_8I branch and is_matmul_supported]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "JAX明确E4M3FN/E5M2矩阵输入。官方发布图FP8标签与技术文章FP4峰值标签冲突，不能用同一个峰值填两种格式。",
+          "source": "[21, TPU_8I branch and is_matmul_supported]; [1, Peak FP4 PFLOPs]; [4, TPU 8i发布规格图]"
+        },
+        "FP4": {
+          "state": "yes",
+          "detail": "技术文章直接给FP4矩阵峰值10.1 PFLOPS；发布图另用FP8标签，具体峰值口径仍冲突。",
+          "source": "[1, Peak FP4 PFLOPs]; [4, TPU 8i发布规格图]"
+        },
+        "INT8": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, Peak FP4 PFLOPs]; [21, TPU_8I branch and is_matmul_supported]"
+        },
+        "INT4": {
+          "state": "conditional",
+          "detail": "JAX允许部分INT4/UINT4右操作数组合；不能推定任意整数矩阵输入模式。",
+          "source": "[21, TPU_8I branch and is_matmul_supported]"
+        }
+      },
+      "compute16": {
+        "value_tflops": null,
+        "format": "BF16",
+        "scope": "matrix",
+        "basis": "excluded",
+        "source": "[21, TPU_8I branch]; [1, Peak FP4 PFLOPs]",
+        "note": "JAX列550.5 TFLOPS/TC，两核合计1101 TFLOPS；仅静态开发模型，缺同条件产品规格，不进入16位峰值/配比图。不从FP4或有标签冲突的Pod值倒推。"
+      },
+      "power": {
+        "max_w": null,
+        "scope": "unknown",
+        "range_or_other": "未公开可采用的单芯片TDP/模组或板卡最大功率。",
+        "note": "芯片绝对功耗、TDP与散热规格未公开。",
+        "source": "[1, Figure4; Boardfly ICI topology]"
+      },
+      "deployment": {
+        "form": "两个logic/on-core die+ICI/CAE chiplet+8 HBM3E；PCIe Gen5 x16",
+        "cooling": "未公开型号级散热规格",
+        "source": "[1, Figure4 and Boardfly ICI topology]"
+      },
+      "memory": {
+        "kind": "HBM3E",
+        "capacity_gb": 288,
+        "bandwidth_tb_s": 8.601,
+        "alternatives": [],
+        "note": "8×12-hi HBM3E，全chip原文288 GB；JAX309e9 B+8.6 TB/s是开发模型，不静默替换为产品容量。",
+        "source": "[1, Figure4; HBM Capacity and HBM Bandwidth]"
+      },
+      "organization": {
+        "onchip": "每TC VMEM开发配置192 MiB、全chip384 MiB；技术文另列384 MB；每TC SMEM1 MiB。",
+        "main_memory": "两个logic die各接4个HBM3E stack，另有ICI/CAE chiplet。",
+        "sharing": "两套局部VMEM；跨核共享/一致性未充分披露，不能认作单一共享L2。软件SparseCore接口与物理CAE映射未知。",
+        "source": "[1, Figure4; On-Chip SRAM (Vmem); The Collectives Acceleration Engine]; [21, TPU_8I branch]"
+      },
+      "endpoint": {
+        "protocol": "ICI",
+        "bidir_gb_s": 2400,
+        "source": "[2, TPU 8i规格图]",
+        "note": "官方每芯片双向19.2 Tb/s÷8=2400 GB/s；不由6×200G SerDes octals反推。",
+        "state": "known"
+      },
+      "order": 23,
+      "short_label": "TPU 8i",
+      "ratio_status": "硬件 16 位峰值未定"
+    },
+    {
+      "id": "inferentia1",
+      "card": "AWS/AWS_Inferentia1_one_chip_产品详解.md",
+      "label": "Inferentia1",
+      "vendor": "AWS",
+      "position": {
+        "group": "inference",
+        "text": "官方面向云端机器学习推理，经Inf1实例使用。",
+        "source": "[1, Inferentia Architecture]; [2, Optimized for high throughput and low latency]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, Compute]; [4, TensorEngine, VectorEngine and ScalarEngine]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "VectorEngine与ScalarEngine支持FP32；TensorEngine的FP32输出不当作原生FP32乘法。",
+          "source": "[4, VectorEngine and ScalarEngine]"
+        },
+        "TF32": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, Compute]; [4, TensorEngine, VectorEngine and ScalarEngine]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "TensorEngine输入BF16/FP16，输出FP32；Vector/Scalar也支持这两种格式。",
+          "source": "[4, TensorEngine, VectorEngine and ScalarEngine]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "TensorEngine输入BF16/FP16，输出FP32；Vector/Scalar也支持这两种格式。",
+          "source": "[4, TensorEngine, VectorEngine and ScalarEngine]"
+        },
+        "FP8": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, Compute]; [4, TensorEngine, VectorEngine and ScalarEngine]"
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, Compute]; [4, TensorEngine, VectorEngine and ScalarEngine]"
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "TensorEngine支持INT8输入、INT32输出，芯片峰值128 TOPS。",
+          "source": "[1, Compute]; [4, TensorEngine]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, Compute]; [4, TensorEngine, VectorEngine and ScalarEngine]"
+        }
+      },
+      "compute16": {
+        "value_tflops": 64,
+        "format": "FP16/BF16",
+        "scope": "matrix",
+        "basis": "condition_unspecified",
+        "source": "[1, Compute]; [4, TensorEngine]",
+        "note": "4核×16 TFLOPS与芯片64一致，但公开资料未充分说明结构化稀疏/乘加计数与频率；不得加稀疏倍数。"
+      },
+      "power": {
+        "max_w": null,
+        "scope": "unknown",
+        "range_or_other": "未公开可采用的单芯片TDP/模组或板卡最大功率。",
+        "note": "不由实例能效或相对宣传换算绝对瓦数。",
+        "source": "[3, Product details]; [7, Inf1 Architecture table]"
+      },
+      "deployment": {
+        "form": "官方单芯片配置，Inf1有1/4/16芯片实例；旧官方图为Host PCIe Gen4，lane数未明",
+        "cooling": "未公开芯片级散热规格",
+        "source": "[7, Inf1 Architecture table]; [8, Inferentia architecture diagram]"
+      },
+      "memory": {
+        "kind": "DDR4",
+        "capacity_gb": 8.589934592,
+        "bandwidth_tb_s": 0.0536870912,
+        "alternatives": [
+          {
+            "capacity_gb": 8,
+            "bandwidth_tb_s": null,
+            "note": "产品页8 GB DDR4，未同处给带宽；不能推定两个容量档位。",
+            "source": "[2, Optimized for high throughput and low latency]"
+          }
+        ],
+        "note": "采用芯片架构页8 GiB+50 GiB/s，同源配对后换算十进制GB/TB/s。",
+        "source": "[1, Device Memory]; [2, Optimized for high throughput and low latency]"
+      },
+      "organization": {
+        "onchip": "4个NCv1各有软件管理SRAM，SBUF/PSUM容量未明确。",
+        "main_memory": "外部DDR4，颗数及封装关系未公开。",
+        "sharing": "SBUF显式预取/分配；NeuronCore Pipeline可跨核驻留参数，但不能反推精确SRAM容量。",
+        "source": "[4, opening]; [9, State Buffer and Partial Sum Buffer]; [10, NeuronCore Pipeline]"
+      },
+      "endpoint": {
+        "protocol": "NeuronLink-v1",
+        "bidir_gb_s": null,
+        "source": "[7, Inf1 Architecture table]; [1, NeuronLink]",
+        "note": "原文32 GiB/s/chip，方向/端口数未明，不能翻倍或填入双向聚合轴；单芯片实例互联栏N/A。",
+        "state": "unknown"
+      },
+      "order": 24,
+      "short_label": "Inf1",
+      "ratio_status": "已配对；计算口径带条件"
+    },
+    {
+      "id": "inferentia2",
+      "card": "AWS/AWS_Inferentia2_one_chip_产品详解.md",
+      "label": "Inferentia2",
+      "vendor": "AWS",
+      "position": {
+        "group": "inference",
+        "text": "官方面向生成式AI等推理负载，经Inf2使用。",
+        "source": "[1, chip table]; [5, opening]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, Compute]; [2, Tensor Engine: Data Types]; [3, TensorEngine]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "TensorEngine接受FP32输入并FP32累加；Vector/Scalar内部也使用FP32。",
+          "source": "[2, Tensor Engine: Data Types and Near-memory accumulation in PSUM]; [3, VectorEngine]"
+        },
+        "TF32": {
+          "state": "yes",
+          "detail": "TensorEngine接受该格式矩阵输入，FP32累加；两核均为NeuronCore-v2。",
+          "source": "[2, Tensor Engine: Data Types and Near-memory accumulation in PSUM]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "TensorEngine接受该格式矩阵输入，FP32累加；两核均为NeuronCore-v2。",
+          "source": "[2, Tensor Engine: Data Types and Near-memory accumulation in PSUM]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "TensorEngine接受该格式矩阵输入，FP32累加；两核均为NeuronCore-v2。",
+          "source": "[2, Tensor Engine: Data Types and Near-memory accumulation in PSUM]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "cFP8矩阵输入；不推定其等同于所有标准FP8编码。",
+          "source": "[2, Tensor Engine: Data Types]; [3, TensorEngine and rounding]"
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, Compute]; [2, Tensor Engine: Data Types]; [3, TensorEngine]"
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "芯片表INT8 380 TOPS，核心概览明确INT8输入、INT32输出。",
+          "source": "[1, Compute]; [3, TensorEngine]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, Compute]; [2, Tensor Engine: Data Types]; [3, TensorEngine]"
+        }
+      },
+      "compute16": {
+        "value_tflops": 184,
+        "format": "BF16/FP16",
+        "scope": "matrix",
+        "basis": "derived_dense",
+        "source": "[2, device overview, Tensor Engine: Data Types and engine width/frequency table]",
+        "note": "2个NCv2×每核92 TFLOPS纯Tensor峰值=184。普通矩阵阵列口径，不含结构化稀疏倍数；每核原报数已取整。芯片架构页另列190 TFLOPS，来源范围/计数差异未解释，不能相互校正。[1, Compute]"
+      },
+      "power": {
+        "max_w": null,
+        "scope": "unknown",
+        "range_or_other": "未公开可采用的单芯片TDP/模组或板卡最大功率。",
+        "note": "不由实例能效或相对宣传换算绝对瓦数。",
+        "source": "[1, chip architecture]; [2, device diagram]"
+      },
+      "deployment": {
+        "form": "官方单芯片配置，经Inf2实例；主机PCIe代际和lane数未公开",
+        "cooling": "未公开芯片级散热规格",
+        "source": "[2, device diagram]; [4, Inf2 Architecture]"
+      },
+      "memory": {
+        "kind": "HBM",
+        "capacity_gb": 34.359738368,
+        "bandwidth_tb_s": 0.88046829568,
+        "alternatives": [
+          {
+            "capacity_gb": 34.359738368,
+            "bandwidth_tb_s": 0.82,
+            "note": "NKI同源32 GiB+820 GB/s，与芯片页单位差异保留；不含1 TB/s DMA。",
+            "source": "[2, device overview]"
+          },
+          {
+            "capacity_gb": 32,
+            "bandwidth_tb_s": null,
+            "note": "产品页32 GB仅容量，不任意配对技术页带宽。",
+            "source": "[5, Product details / high-bandwidth accelerator memory]"
+          }
+        ],
+        "note": "技术页同源32 GiB+820 GiB/s，转换十进制单位；HBM代际未公开。",
+        "source": "[1, Device Memory]"
+      },
+      "organization": {
+        "onchip": "每NCv2局部24 MiB SBUF+2 MiB PSUM；GpSimd另有处理器局部TCM。",
+        "main_memory": "两HBM stack，32 GiB设备内存。",
+        "sharing": "两核各有软件管理SBUF/PSUM；显式DMA搬运。不能把两核容量相加叫统一L2。",
+        "source": "[2, device overview, memory hierarchy and GpSimd Engine: Memory Hierarchy]"
+      },
+      "endpoint": {
+        "protocol": "NeuronLink-v2",
+        "bidir_gb_s": null,
+        "source": "[2, device overview]; [4, Inf2 Architecture]; [5, NeuronLink interconnect]",
+        "note": "2组链路；Inf2系统表192 GiB/s/chip，产品页192 GB/s；方向与对象关系未明，不填双向聚合。",
+        "state": "unknown"
+      },
+      "order": 25,
+      "short_label": "Inf2",
+      "ratio_status": "已配对；矩阵 dense 或明确换算"
+    },
+    {
+      "id": "trainium1",
+      "card": "AWS/AWS_Trainium1_one_chip_产品详解.md",
+      "label": "Trainium1",
+      "vendor": "AWS",
+      "position": {
+        "group": "both",
+        "text": "产品主要面向训练；官方Neuron文档另列Trn1推理性能与Inference on Inf2/Trn1/Trn2入口。",
+        "source": "[5, Product details]; [1, Neuron导航“Trn1/Trn1n Inference Performance”和“Inference on Inf2/Trn1/Trn2”]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, Compute]; [2, Tensor Engine: Data Types]; [3, TensorEngine]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "TensorEngine接受FP32输入并FP32累加；Vector/Scalar内部也使用FP32。",
+          "source": "[2, Tensor Engine: Data Types and Near-memory accumulation in PSUM]; [3, VectorEngine]"
+        },
+        "TF32": {
+          "state": "yes",
+          "detail": "TensorEngine接受该格式矩阵输入，FP32累加；两核均为NeuronCore-v2。",
+          "source": "[2, Tensor Engine: Data Types and Near-memory accumulation in PSUM]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "TensorEngine接受该格式矩阵输入，FP32累加；两核均为NeuronCore-v2。",
+          "source": "[2, Tensor Engine: Data Types and Near-memory accumulation in PSUM]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "TensorEngine接受该格式矩阵输入，FP32累加；两核均为NeuronCore-v2。",
+          "source": "[2, Tensor Engine: Data Types and Near-memory accumulation in PSUM]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "cFP8矩阵输入；不推定其等同于所有标准FP8编码。",
+          "source": "[2, Tensor Engine: Data Types]; [3, TensorEngine and rounding]"
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, Compute]; [2, Tensor Engine: Data Types]; [3, TensorEngine]"
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "芯片表INT8 380 TOPS，核心概览明确INT8输入、INT32输出。",
+          "source": "[1, Compute]; [3, TensorEngine]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, Compute]; [2, Tensor Engine: Data Types]; [3, TensorEngine]"
+        }
+      },
+      "compute16": {
+        "value_tflops": 184,
+        "format": "BF16/FP16",
+        "scope": "matrix",
+        "basis": "derived_dense",
+        "source": "[2, device overview, Tensor Engine: Data Types and engine width/frequency table]",
+        "note": "2个NCv2×每核92 TFLOPS纯Tensor峰值=184。普通矩阵阵列口径，不含结构化稀疏倍数；每核原报数已取整。芯片架构页另列190 TFLOPS，来源范围/计数差异未解释，不能相互校正。[1, Compute]"
+      },
+      "power": {
+        "max_w": null,
+        "scope": "unknown",
+        "range_or_other": "未公开可采用的单芯片TDP/模组或板卡最大功率。",
+        "note": "不由实例能效或相对宣传换算绝对瓦数。",
+        "source": "[1, chip architecture]; [2, device diagram]"
+      },
+      "deployment": {
+        "form": "官方单芯片配置，经Trn1/Trn1n实例；主机PCIe代际和lane数未公开",
+        "cooling": "未公开芯片级散热规格",
+        "source": "[2, device diagram]; [4, Trn1/Trn1n Architecture]"
+      },
+      "memory": {
+        "kind": "HBM",
+        "capacity_gb": 34.359738368,
+        "bandwidth_tb_s": 0.88046829568,
+        "alternatives": [
+          {
+            "capacity_gb": 34.359738368,
+            "bandwidth_tb_s": 0.82,
+            "note": "NKI同源32 GiB+820 GB/s，与芯片页单位差异保留；不含1 TB/s DMA。",
+            "source": "[2, device overview]"
+          },
+          {
+            "capacity_gb": 32,
+            "bandwidth_tb_s": null,
+            "note": "产品页32 GB仅容量，不任意配对技术页带宽。",
+            "source": "[5, Product details / high-bandwidth accelerator memory]"
+          }
+        ],
+        "note": "技术页同源32 GiB+820 GiB/s，转换十进制单位；HBM代际未公开。",
+        "source": "[1, Device Memory]"
+      },
+      "organization": {
+        "onchip": "每NCv2局部24 MiB SBUF+2 MiB PSUM；GpSimd另有处理器局部TCM。",
+        "main_memory": "两HBM stack，32 GiB设备内存。",
+        "sharing": "两核各有软件管理SBUF/PSUM；显式DMA搬运。不能把两核容量相加叫统一L2。",
+        "source": "[2, device overview, memory hierarchy and GpSimd Engine: Memory Hierarchy]"
+      },
+      "endpoint": {
+        "protocol": "NeuronLink-v2",
+        "bidir_gb_s": null,
+        "source": "[2, device overview]; [8, Interconnect comparison table]; [5, NeuronLink interconnect]",
+        "note": "4组链路；跨代芯片表384 GB/s/chip，Trn1产品页最高768 GB/s/实例；方向与计数对应不明，不能认作一单一双。",
+        "state": "unknown"
+      },
+      "order": 26,
+      "short_label": "Trn1",
+      "ratio_status": "已配对；矩阵 dense 或明确换算"
+    },
+    {
+      "id": "trainium2",
+      "card": "AWS/AWS_Trainium2_one_chip_产品详解.md",
+      "label": "Trainium2",
+      "vendor": "AWS",
+      "position": {
+        "group": "both",
+        "text": "官方明确训练和推理，产品页Benefits同时列出两类任务。",
+        "source": "[1, Trainium2 chip components and Compute]; [5, Benefits: Maximize training and inference performance for Generative AI models]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[2, Tensor Engine and Vector Engine]; [3, Tensor Engine]; [8, Data types]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "TensorEngine支持矩阵输入与FP32累加；TF32/FP32两输入组合另有限制。",
+          "source": "[8, Data types]; [2, Tensor Engine]"
+        },
+        "TF32": {
+          "state": "yes",
+          "detail": "TensorEngine支持矩阵输入与FP32累加；TF32/FP32两输入组合另有限制。",
+          "source": "[8, Data types]; [2, Tensor Engine]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "TensorEngine支持矩阵输入与FP32累加；TF32/FP32两输入组合另有限制。",
+          "source": "[8, Data types]; [2, Tensor Engine]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "TensorEngine支持矩阵输入与FP32累加；TF32/FP32两输入组合另有限制。",
+          "source": "[8, Data types]; [2, Tensor Engine]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "E4/E5支持double FP8，E3吞吐与BF16/FP16相同；double FP8不能与sparse matmul合用。",
+          "source": "[2, Double FP8 Matmul Performance]; [3, Tensor Engine]"
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[2, Tensor Engine and Vector Engine]; [3, Tensor Engine]; [8, Data types]"
+        },
+        "INT8": {
+          "state": "conditional",
+          "detail": "Vector/Scalar接受INT8数据，但内部算术用FP32；不能据此给原生INT8矩阵峰值。",
+          "source": "[2, Vector Engine]; [3, Scalar engine]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[2, Tensor Engine and Vector Engine]; [3, Tensor Engine]; [8, Data types]"
+        }
+      },
+      "compute16": {
+        "value_tflops": 632,
+        "format": "BF16/FP16",
+        "scope": "matrix",
+        "basis": "derived_dense",
+        "source": "[2, Trainium2 Device Diagram, Table11 and Tensor Engine]",
+        "note": "8个NCv3×每核79 dense TFLOPS=632纯Tensor名义合计；每核原报已取整。芯片页advertised peak667另存，不能当作纯Tensor值的校正；稀疏2563不进入本分母。[1, Compute]"
+      },
+      "power": {
+        "max_w": null,
+        "scope": "unknown",
+        "range_or_other": "未公开可采用的单芯片TDP/模组或板卡最大功率。",
+        "note": "不由实例能效或相对宣传换算绝对瓦数。",
+        "source": "[4, Trn2 Architecture]; [5, Product details]"
+      },
+      "deployment": {
+        "form": "官方单芯片配置；有1芯片实例、16芯片实例与64芯片UltraServer",
+        "cooling": "未公开芯片级散热规格",
+        "source": "[11, Hardware specifications, trn2.3xlarge]; [4, Trn2 Architecture]"
+      },
+      "memory": {
+        "kind": "HBM3",
+        "capacity_gb": 103.079215104,
+        "bandwidth_tb_s": 2.9,
+        "alternatives": [
+          {
+            "capacity_gb": 103.079215104,
+            "bandwidth_tb_s": 3,
+            "note": "NKI文字96 GiB+3 TB/s。",
+            "source": "[2, Trainium2 Device Diagram and Data Movement Updates]"
+          },
+          {
+            "capacity_gb": 96,
+            "bandwidth_tb_s": 3,
+            "note": "同页图示4×24 GB；属于单位标签差异，不能当另一实物SKU。",
+            "source": "[2, Trainium2 Device Diagram]"
+          }
+        ],
+        "note": "主值取芯片页96 GiB+2.9 TB/s；HBM3由Trn2产品页确认。",
+        "source": "[1, Memory]; [5, Benefits: Maximize training and inference performance for Generative AI models]"
+      },
+      "organization": {
+        "onchip": "8个NCv3各28 MiB SBUF+2 MiB PSUM。",
+        "main_memory": "4 HBM bank；文档写96 GiB，也有4×24 GB标签。",
+        "sharing": "局部SRAM显式管理；每两个物理核共享一个HBM bank；LNC配置改变软件作用域，不把8核SRAM变为一致共享cache。",
+        "source": "[2, NeuronCore-v3 Compute Engine Updates]; [10, Logical NeuronCores and Logical NeuronCore configurations]"
+      },
+      "endpoint": {
+        "protocol": "NeuronLink-v3",
+        "bidir_gb_s": null,
+        "source": "[1, Interconnect]; [4, Trn2 UltraServer and Trn2 instance specifications]",
+        "note": "芯片聚合1.28 TB/s；系统表分1024 GB/s/chip实例内与256 GB/s/chip跨实例，方向未明，不自动双向。",
+        "state": "unknown"
+      },
+      "order": 27,
+      "short_label": "Trn2",
+      "ratio_status": "已配对；矩阵 dense 或明确换算"
+    },
+    {
+      "id": "trainium3",
+      "card": "AWS/AWS_Trainium3_one_chip_产品详解.md",
+      "label": "Trainium3",
+      "vendor": "AWS",
+      "position": {
+        "group": "both",
+        "text": "官方第三代训练芯片，同时面向推理。",
+        "source": "[1, Compute and Memory]; [5, Why Amazon EC2 Trn3 UltraServers?]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[2, Tensor Engine, Vector Engine and Scalar Engine]; [3, Tensor Engine]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "TensorEngine支持相应矩阵输入，内部FP32累加；部分模式可BF16写回PSUM。",
+          "source": "[2, Tensor Engine and BF16 Matmul Results in PSUM]; [3, Tensor Engine]"
+        },
+        "TF32": {
+          "state": "yes",
+          "detail": "TensorEngine支持相应矩阵输入，内部FP32累加；部分模式可BF16写回PSUM。",
+          "source": "[2, Tensor Engine and BF16 Matmul Results in PSUM]; [3, Tensor Engine]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "TensorEngine支持相应矩阵输入，内部FP32累加；部分模式可BF16写回PSUM。",
+          "source": "[2, Tensor Engine and BF16 Matmul Results in PSUM]; [3, Tensor Engine]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "TensorEngine支持相应矩阵输入，内部FP32累加；部分模式可BF16写回PSUM。",
+          "source": "[2, Tensor Engine and BF16 Matmul Results in PSUM]; [3, Tensor Engine]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "支持32元素一组的MXFP8矩阵输入；应携带microscaling条件。",
+          "source": "[2, Quad-MXFP8/MXFP4 Matmul Performance]; [3, Tensor Engine]"
+        },
+        "FP4": {
+          "state": "conditional",
+          "detail": "支持MXFP4 matmul输入，但先通过可编程映射转成MXFP8再进入TensorEngine；未证实原生FP4乘法阵列，吞吐不再翻倍。",
+          "source": "[3, Tensor Engine]; [2, Quad-MXFP8/MXFP4 Matmul Performance]"
+        },
+        "INT8": {
+          "state": "conditional",
+          "detail": "Vector/Scalar接受INT8数据并用FP32算术；不等同于公开原生INT8矩阵吞吐。",
+          "source": "[2, Vector Engine and Scalar Engine]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[2, Tensor Engine, Vector Engine and Scalar Engine]; [3, Tensor Engine]"
+        }
+      },
+      "compute16": {
+        "value_tflops": 632,
+        "format": "BF16/FP16",
+        "scope": "matrix",
+        "basis": "derived_dense",
+        "source": "[2, device overview, Table11 and Tensor Engine]",
+        "note": "8个NCv4×每核79 TFLOPS=632纯Tensor名义合计，非稀疏；每核原报已取整。芯片页另列671 dense TFLOPS，范围/计数差异未解释；2517 sparse与MX值均不作16位dense分母。[1, Compute]"
+      },
+      "power": {
+        "max_w": null,
+        "scope": "unknown",
+        "range_or_other": "未公开可采用的单芯片TDP/模组或板卡最大功率。",
+        "note": "不由实例能效或相对宣传换算绝对瓦数。",
+        "source": "[6, opening]; [4, opening]; [5, opening]"
+      },
+      "deployment": {
+        "form": "官方单芯片配置；交付围绕Trn3 UltraServer（64或144芯片系统），不等于存在单芯片实例",
+        "cooling": "未公开芯片级散热规格",
+        "source": "[4, Trn3 Gen1 UltraServer and Trn3 Gen2 UltraServer]; [5, opening]"
+      },
+      "memory": {
+        "kind": "HBM3e",
+        "capacity_gb": 154.618822656,
+        "bandwidth_tb_s": 4.9,
+        "alternatives": [
+          {
+            "capacity_gb": 154.618822656,
+            "bandwidth_tb_s": 4.7,
+            "note": "NKI144 GiB+4.7 TB/s，不能自行称有效带宽。",
+            "source": "[2, device overview]"
+          },
+          {
+            "capacity_gb": 144,
+            "bandwidth_tb_s": 4.9,
+            "note": "GA文章144 GB HBM3e+4.9 TB/s。",
+            "source": "[6, each-chip paragraph]"
+          }
+        ],
+        "note": "主值芯片架构页144 GiB+4.9 TB/s；四HBM stack。各来源同规格对象的单位/带宽差异未解释。",
+        "source": "[1, Device memory]; [6, each-chip paragraph]"
+      },
+      "organization": {
+        "onchip": "8个NCv4各32 MiB SBUF+2 MiB PSUM；支持间接访问/近存累加。",
+        "main_memory": "四HBM3e stack；总容量144 GiB/GB存在来源差异。",
+        "sharing": "每核局部显式工作存储；更大SBUF不等同共享L2；芯片物理die/chiplet拆分未公开。",
+        "source": "[2, device overview, NeuronCore-v4 Compute Engine Updates, Data Movement and DMA updates]"
+      },
+      "endpoint": {
+        "protocol": "NeuronLink-v4",
+        "bidir_gb_s": null,
+        "source": "[1, NeuronLink]; [4, Trn3 Gen1/Gen2 UltraServer specifications and Intra-server/Inter-server/Inter-rack connectivity]; [5, Why Amazon EC2 Trn3 UltraServers?]",
+        "note": "芯片页2.56 TB/s/device、系统表2048 GiB/s/device、营销约2 TB/s/chip，方向/部署条件不明。Gen2分层有已知双向256/320/128 GB/s，但不可合成去校正整芯片表。",
+        "state": "conflict"
+      },
+      "order": 28,
+      "short_label": "Trn3",
+      "ratio_status": "已配对；矩阵 dense 或明确换算"
+    },
+    {
+      "id": "ascend310",
+      "card": "华为昇腾/华为_Ascend310.md",
+      "label": "Ascend 310",
+      "vendor": "华为昇腾",
+      "position": {
+        "group": "inference",
+        "text": "终端与边缘推理 SoC。",
+        "source": "[1, pp.24,33]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, pp.9-10,33]; [2, pp.3-4]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "Vector 支持 FP32 运算；不能把 FP32→FP16 转换或 Cube 的 FP32 目的格式当成原生 FP32 矩阵路径。",
+          "source": "[1, pp.9-10]; [2, pp.3-4]"
+        },
+        "TF32": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, pp.9-10,33]; [2, pp.3-4]"
+        },
+        "BF16": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, pp.9-10,33]; [2, pp.3-4]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "Cube FP16 源输入，程序员可见目的格式为 FP32；Vector 也支持 FP16，未完整披露累加与舍入行为。",
+          "source": "[1, pp.9-10,33]; [2, pp.3-4]"
+        },
+        "FP8": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, pp.9-10,33]; [2, pp.3-4]"
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, pp.9-10,33]; [2, pp.3-4]"
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "Cube/Vector 支持 INT8，整芯片官方 INT8 峰值；未披露结构化稀疏倍率。",
+          "source": "[1, pp.9-10,33]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, pp.9-10,33]; [2, pp.3-4]"
+        }
+      },
+      "compute16": {
+        "value_tflops": 8,
+        "format": "FP16",
+        "scope": "chip",
+        "basis": "condition_unspecified",
+        "source": "[1, p.33]",
+        "note": "官方单芯片峰值；未注明稀疏条件与完整 MAC 计数规则，不直接混入已确认 dense 的主比较。"
+      },
+      "memory": {
+        "kind": "LPDDR4X",
+        "capacity_gb": null,
+        "bandwidth_tb_s": null,
+        "alternatives": [],
+        "note": "2×64-bit LPDDR4X 控制器；官方示意为外接 LPDDR4。固定芯片的实际 DRAM 容量、速率和带宽未给定，不借用 Atlas 模组；片内约 42GB/s 实测与 LLC 96GB/s/core 都不能代替 DRAM。",
+        "source": "[1, p.24]"
+      },
+      "organization": {
+        "onchip": "AI Core 内显式管理 L1、L0A/L0B/L0C、Unified Buffer；SoC 另有 8MB on-chip buffer 和 3MB LLC。",
+        "main_memory": "两路 LPDDR4X 控制器外接内存，容量与带宽由板级配置决定且本产品资料未给定。",
+        "sharing": "核内工作缓冲与 SoC 共享 buffer、LLC 分开；不把 8MB buffer 改名为 L2。",
+        "source": "[1, pp.9,24]; [2, pp.3-4]"
+      },
+      "endpoint": {
+        "protocol": "专用 scale-up 未确认；PCIe 3.0 ×1—×4、GbE",
+        "bidir_gb_s": null,
+        "source": "[1, p.24]",
+        "note": "公开 SoC 框图没有可引用的多 AI 芯片专用 scale-up 端点带宽；不能按接口名称补值。",
+        "state": "unknown"
+      },
+      "power": {
+        "max_w": null,
+        "scope": "unknown",
+        "range_or_other": "Hot Chips 产品规格 8W",
+        "note": "原文未明确为最大板卡功耗或 rated TDP；保留 8W 原报值，不纳入板卡功耗排名。",
+        "source": "[1, p.33]"
+      },
+      "deployment": {
+        "form": "边缘/终端 SoC 芯片；具体模组另有配置。",
+        "cooling": "所用芯片架构资料未给定产品级冷却方案。",
+        "source": "[1, pp.24,33]"
+      },
+      "order": 29,
+      "short_label": "Ascend 310",
+      "ratio_status": "主存配置未固定"
+    },
+    {
+      "id": "ascend910",
+      "card": "华为昇腾/华为_Ascend910.md",
+      "label": "Ascend 910",
+      "vendor": "华为昇腾",
+      "position": {
+        "group": "training",
+        "text": "原始 Ascend 910，官方定位 AI 训练；不合并后续 910B/910C。",
+        "source": "[1, pp.25,37]; [6, opening]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, pp.9-10,33]; [2, pp.3-4]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "Vector 支持 FP32 运算；不能把 FP32→FP16 转换或 Cube 的 FP32 目的格式当成原生 FP32 矩阵路径。",
+          "source": "[1, pp.9-10]; [2, pp.3-4]"
+        },
+        "TF32": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, pp.9-10,33]; [2, pp.3-4]"
+        },
+        "BF16": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, pp.9-10,33]; [2, pp.3-4]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "Cube FP16 源输入，程序员可见目的格式为 FP32；Vector 也支持 FP16，未完整披露累加与舍入行为。",
+          "source": "[1, pp.9-10,33]; [2, pp.3-4]"
+        },
+        "FP8": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, pp.9-10,33]; [2, pp.3-4]"
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, pp.9-10,33]; [2, pp.3-4]"
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "Cube/Vector 支持 INT8，整芯片官方 INT8 峰值；未披露结构化稀疏倍率。",
+          "source": "[1, pp.9-10,33]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, pp.9-10,33]; [2, pp.3-4]"
+        }
+      },
+      "compute16": {
+        "value_tflops": 256,
+        "format": "FP16",
+        "scope": "matrix",
+        "basis": "condition_unspecified",
+        "source": "[1, p.33]",
+        "note": "官方单芯片峰值；未注明稀疏条件与完整 MAC 计数规则，不直接混入已确认 dense 的主比较。"
+      },
+      "memory": {
+        "kind": "HBM2",
+        "capacity_gb": 32,
+        "bandwidth_tb_s": 1.2,
+        "alternatives": [],
+        "note": "1.2TB/s 为芯片架构带宽；32GB 仅官方 ModelZoo 的 Ascend 910 32GB×8 环境证据，并非统一封装容量保证。外接 DDR4 DIMM 容量与带宽未计入。",
+        "source": "[1, p.25]; [2, pp.6-7]; [10, Before You Start: Test Notes]"
+      },
+      "organization": {
+        "onchip": "每 AI Core 显式管理 L1、L0A/L0B/L0C 与 Unified Buffer；共享 AI 存储在 Hot Chips 标 32MB on-chip buffer，HPCA 讨论 AI LLC/L2。",
+        "main_memory": "封装内 4 个 HBM2 stack；另有外接 DDR4 DIMM 接口，后者容量未给定。",
+        "sharing": "每核本地缓冲与 SoC 共享 AI 存储、CPU cache 分属不同层级；NoC 连接计算与存储。",
+        "source": "[1, pp.9,25]; [2, pp.6-7]"
+      },
+      "endpoint": {
+        "protocol": "HCCS",
+        "bidir_gb_s": null,
+        "source": "[2, PDF p.8 / proceedings p.796]",
+        "note": "八芯片服务器四芯片组内 HCCS 的 30GB/s 未明确单链路/单芯片/整组及方向，不能填单芯片双向端点。",
+        "state": "unknown"
+      },
+      "power": {
+        "max_w": 300,
+        "scope": "chip_tdp",
+        "range_or_other": "HPCA rated TDP 300W；正式发布最大功耗 310W；Hot Chips 早期计划 350W",
+        "note": "300W 仅作为单芯片额定 TDP，不能与板卡 TBP 混用；310W 为发布最大功耗，非同名 TDP。",
+        "source": "[2, PDF pp.7,10, §3.1.2 / Table 7]; [6, Ascend 910: More computing power]; [1, p.33]"
+      },
+      "deployment": {
+        "form": "原始 Ascend 910 多裸片封装，计算 die + I/O die + 4 个 HBM stack。",
+        "cooling": "所用芯片级资料未给完整的单封装冷却工况。",
+        "source": "[1, pp.25,37]; [2, pp.6-7]"
+      },
+      "order": 30,
+      "short_label": "Ascend 910",
+      "ratio_status": "已配对；计算口径带条件"
+    },
+    {
+      "id": "atlas300ia2_32",
+      "card": "华为昇腾/华为_Atlas300I_A2_32GB.md",
+      "label": "Atlas 300I A2 32GB",
+      "vendor": "华为昇腾",
+      "position": {
+        "group": "inference",
+        "text": "服务器 PCIe 推理卡；指南明确用途为推理，覆盖生成式模型、推荐、搜索与内容审核。",
+        "source": "[1, 概述]; [2, 应用场景]; [5, 产品简介“概述”]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, 技术规格]; [2, 产品规格]; [5, 表3-1]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "产品彩页明确 FP32 75TFLOPS；没有拆分矩阵/向量路径或累加规则。",
+          "source": "[2, 产品规格]"
+        },
+        "TF32": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, 技术规格]; [2, 产品规格]; [5, 表3-1]"
+        },
+        "BF16": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, 技术规格]; [2, 产品规格]; [5, 表3-1]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "用户指南列单卡 FP16 280TFLOPS 理论峰值；矩阵/向量路径、累加、dense/sparse 未注明。",
+          "source": "[5, 表3-1及脚注a]"
+        },
+        "FP8": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, 技术规格]; [2, 产品规格]; [5, 表3-1]"
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, 技术规格]; [2, 产品规格]; [5, 表3-1]"
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "产品页和彩页列单卡 INT8 560TOPS；路径与 dense/sparse 条件未注明。",
+          "source": "[1, 技术规格]; [2, 产品规格]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, 技术规格]; [2, 产品规格]; [5, 表3-1]"
+        }
+      },
+      "compute16": {
+        "value_tflops": 280,
+        "format": "FP16",
+        "scope": "chip",
+        "basis": "condition_unspecified",
+        "source": "[5, 表3-1及脚注a]; [2, 产品规格]",
+        "note": "单卡一颗 910 AI 处理器；未说明 dense/sparse、矩阵/向量分解与累加，采用厂商峰值单列，不自行认定 dense。"
+      },
+      "memory": {
+        "kind": "HBM（代际未公开）",
+        "capacity_gb": 32,
+        "bandwidth_tb_s": 0.8,
+        "alternatives": [],
+        "note": "型号专属固定内存配置，支持 ECC；不借用其他 910 子型号的 HBM stack 或位宽。",
+        "source": "[5, 表3-1]"
+      },
+      "organization": {
+        "onchip": "用户指南确认处理器有 Cache；层级、容量、带宽和本地缓冲组织未展开。",
+        "main_memory": "单卡 32GB HBM，0.8TB/s；代际、stack 数和封装位置未公开。",
+        "sharing": "卡内一颗 910 AI 处理器，集成 20 AI Core 和 8 TaiShan Core；不从原始 910 或其他子型号迁移 cache 细节。",
+        "source": "[5, 图1-2、表3-1]"
+      },
+      "endpoint": {
+        "protocol": "专用 scale-up 未确认；PCIe 5.0 ×16",
+        "bidir_gb_s": null,
+        "source": "[5, 图1-2、表3-1]; [3, 眼图测试参数]",
+        "note": "没有本卡专属 HCCS/RoCE 规格；仅 PCIe 代际与 lane 数不能替代双向实测端点吞吐。",
+        "state": "unknown"
+      },
+      "power": {
+        "max_w": 350,
+        "scope": "board_max",
+        "range_or_other": "300W / 350W 两档",
+        "note": "按 12V HPWR S4 感知线选择最大功耗；没有连接 S1—S4 时默认最大 300W。不表示实际负载常态耗电。",
+        "source": "[5, 表3-1、电源管理]"
+      },
+      "deployment": {
+        "form": "双槽、全高全长 PCIe 卡，266.7×39.04×111.15mm。",
+        "cooling": "被动风冷，服务器供气；指南已给 300W/350W 分档风量与压降要求。",
+        "source": "[5, 表3-1、散热要求表3-3/表3-4]"
+      },
+      "order": 31,
+      "short_label": "Atlas 32GB",
+      "ratio_status": "已配对；计算口径带条件"
+    },
+    {
+      "id": "atlas300ia2_64",
+      "card": "华为昇腾/华为_Atlas300I_A2_64GB.md",
+      "label": "Atlas 300I A2 64GB",
+      "vendor": "华为昇腾",
+      "position": {
+        "group": "inference",
+        "text": "服务器 PCIe 推理卡；指南明确用途为推理，覆盖生成式模型、推荐、搜索与内容审核。",
+        "source": "[1, 概述]; [2, 应用场景]; [5, 产品简介“概述”]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, 技术规格]; [2, 产品规格]; [5, 表3-1]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "产品彩页明确 FP32 75TFLOPS；没有拆分矩阵/向量路径或累加规则。",
+          "source": "[2, 产品规格]"
+        },
+        "TF32": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, 技术规格]; [2, 产品规格]; [5, 表3-1]"
+        },
+        "BF16": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, 技术规格]; [2, 产品规格]; [5, 表3-1]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "用户指南列单卡 FP16 280TFLOPS 理论峰值；矩阵/向量路径、累加、dense/sparse 未注明。",
+          "source": "[5, 表3-1及脚注a]"
+        },
+        "FP8": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, 技术规格]; [2, 产品规格]; [5, 表3-1]"
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, 技术规格]; [2, 产品规格]; [5, 表3-1]"
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "产品页和彩页列单卡 INT8 560TOPS；路径与 dense/sparse 条件未注明。",
+          "source": "[1, 技术规格]; [2, 产品规格]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, 技术规格]; [2, 产品规格]; [5, 表3-1]"
+        }
+      },
+      "compute16": {
+        "value_tflops": 280,
+        "format": "FP16",
+        "scope": "chip",
+        "basis": "condition_unspecified",
+        "source": "[5, 表3-1及脚注a]; [2, 产品规格]",
+        "note": "单卡一颗 910 AI 处理器；未说明 dense/sparse、矩阵/向量分解与累加，采用厂商峰值单列，不自行认定 dense。"
+      },
+      "memory": {
+        "kind": "HBM（代际未公开）",
+        "capacity_gb": 64,
+        "bandwidth_tb_s": 1.6,
+        "alternatives": [],
+        "note": "型号专属固定内存配置，支持 ECC；不借用其他 910 子型号的 HBM stack 或位宽。",
+        "source": "[5, 表3-1]"
+      },
+      "organization": {
+        "onchip": "用户指南确认处理器有 Cache；层级、容量、带宽和本地缓冲组织未展开。",
+        "main_memory": "单卡 64GB HBM，1.6TB/s；代际、stack 数和封装位置未公开。",
+        "sharing": "卡内一颗 910 AI 处理器，集成 20 AI Core 和 8 TaiShan Core；不从原始 910 或其他子型号迁移 cache 细节。",
+        "source": "[5, 图1-2、表3-1]"
+      },
+      "endpoint": {
+        "protocol": "专用 scale-up 未确认；PCIe 5.0 ×16",
+        "bidir_gb_s": null,
+        "source": "[5, 图1-2、表3-1]; [3, 眼图测试参数]",
+        "note": "没有本卡专属 HCCS/RoCE 规格；仅 PCIe 代际与 lane 数不能替代双向实测端点吞吐。",
+        "state": "unknown"
+      },
+      "power": {
+        "max_w": 350,
+        "scope": "board_max",
+        "range_or_other": "300W / 350W 两档",
+        "note": "按 12V HPWR S4 感知线选择最大功耗；没有连接 S1—S4 时默认最大 300W。不表示实际负载常态耗电。",
+        "source": "[5, 表3-1、电源管理]"
+      },
+      "deployment": {
+        "form": "双槽、全高全长 PCIe 卡，266.7×39.04×111.15mm。",
+        "cooling": "被动风冷，服务器供气；指南已给 300W/350W 分档风量与压降要求。",
+        "source": "[5, 表3-1、散热要求表3-3/表3-4]"
+      },
+      "order": 32,
+      "short_label": "Atlas 64GB",
+      "ratio_status": "已配对；计算口径带条件"
+    },
+    {
+      "id": "ascend950pr",
+      "card": "华为昇腾/华为_Ascend950PR.md",
+      "label": "Ascend 950PR",
+      "vendor": "华为昇腾",
+      "position": {
+        "group": "inference",
+        "text": "推荐、大模型 prefill 和多模态推理。",
+        "source": "[1, PDF p.10 / 正文 p.6]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "Vector FP32 运算；不把 Cube 输出 FP32 或输出转换当作原生 FP32 Cube。",
+          "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]"
+        },
+        "TF32": {
+          "state": "yes",
+          "detail": "Cube 有该输入格式与分项峰值；BF16/FP16 另有 Vector 路径。未逐格式给出完整累加、舍入与稀疏条件。",
+          "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]; [1, PDF p.17 / 正文 p.13, §4.1.1]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "Cube 有该输入格式与分项峰值；BF16/FP16 另有 Vector 路径。未逐格式给出完整累加、舍入与稀疏条件。",
+          "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]; [1, PDF p.17 / 正文 p.13, §4.1.1]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "Cube 有该输入格式与分项峰值；BF16/FP16 另有 Vector 路径。未逐格式给出完整累加、舍入与稀疏条件。",
+          "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]; [1, PDF p.17 / 正文 p.13, §4.1.1]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "Cube 支持 FP8 E4M3/E5M2、MXFP8 与 HiF8；数值语义不同，均需保留格式名称。",
+          "source": "[1, PDF pp.17-20 / 正文 pp.13-16, 图4-3/图4-4/表4-1]"
+        },
+        "FP4": {
+          "state": "yes",
+          "detail": "Cube 原生 MXFP4，E2M1 数据与共享 8-bit scale；不是 INT4。",
+          "source": "[1, PDF pp.13-14,18-20 / 正文 pp.9-10,14-16, 表3-1/表4-1]"
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "Cube 和 Vector 均有 INT8 运算峰值；不能将两条路径相加为 Matrix 算力。",
+          "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]"
+        }
+      },
+      "compute16": {
+        "value_tflops": null,
+        "format": "FP16 / BF16",
+        "scope": "matrix",
+        "basis": "excluded",
+        "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]",
+        "note": "Cube 432 / 378TFLOPS（32 / 28 Cube）；Vector 54 / 47TFLOPS；Cube+Vector 486 / 425TFLOPS。计算、CPU、内存与 L2 档位没有完整料号映射，不拼成唯一 SKU，不进入存算比散点。"
+      },
+      "memory": {
+        "kind": "HiBL 1.0 HBM",
+        "capacity_gb": 128,
+        "bandwidth_tb_s": 1.6,
+        "alternatives": [
+          {
+            "capacity_gb": 112,
+            "bandwidth_tb_s": null,
+            "source": "[1, PDF p.14 / 正文 p.10, 表3-1]",
+            "note": "公开容量档位，未给完整料号映射。"
+          },
+          {
+            "capacity_gb": null,
+            "bandwidth_tb_s": 1.4,
+            "source": "[1, PDF p.14 / 正文 p.10, 表3-1]",
+            "note": "公开带宽档位，不自行与112GB配对。"
+          }
+        ],
+        "note": "主推页并列“最大配备128GB、1.6TB/s”，只用于内存图；计算档位未配对，不能据此组成存算比。",
+        "source": "[3, 产品概述]; [1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]; [2, Ascend 950PR]"
+      },
+      "organization": {
+        "onchip": "AI Core 显式管理 L1、L0A/L0B/L0C 与 Unified Buffer；SIMT 可在 UB 中分配 shared memory / data cache；另有全局 L2 和 CPU 独立 cache。",
+        "main_memory": "8 个 HiBL1.0 DRAM 模块同封装，不计作逻辑裸片内 SRAM。",
+        "sharing": "两块 AI Die 统一内存访问；全局 L2 跨 die 硬件一致但仍有局部亲和性；不假定远端设备全部 cache 一致。",
+        "source": "[1, PDF pp.12,17,24-27 / 正文 pp.8,13,20-23, 图4-1、表4-2、§4.3.2]"
+      },
+      "endpoint": {
+        "protocol": "Unified Bus 2.0",
+        "bidir_gb_s": 2016,
+        "source": "[1, PDF pp.13,15 / 正文 pp.9,11, 表3-1]",
+        "note": "18×4 端口、72×112Gbps HiLink lane 的双向原始速率；PCIe 占4个 UB 端口、UBoE占2个，不能将各复用协议最大值相加。",
+        "state": "known"
+      },
+      "power": {
+        "max_w": null,
+        "scope": "unknown",
+        "range_or_other": "未公开单芯片功耗",
+        "note": "未从超节点或服务器配置反推。",
+        "source": "[1, 表3-1及产品规格]"
+      },
+      "deployment": {
+        "form": "单芯片多裸片封装；上层 Atlas350 标卡与超节点服务器。",
+        "cooling": "单封装冷却要求未公开；上层产品形态不能直接下放到此芯片条目。",
+        "source": "[1, PDF p.12 / 正文 p.8]; [2, Ascend 950PR]; [4, 新品发布]"
+      },
+      "order": 33,
+      "short_label": "950PR",
+      "ratio_status": "计算与内存档位未配对"
+    },
+    {
+      "id": "ascend950dt",
+      "card": "华为昇腾/华为_Ascend950DT.md",
+      "label": "Ascend 950DT",
+      "vendor": "华为昇腾",
+      "position": {
+        "group": "both",
+        "text": "大模型预训练、后训练及推理，覆盖 prefill 和 decode。",
+        "source": "[1, PDF p.10 / 正文 p.6]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "Vector FP32 运算；不把 Cube 输出 FP32 或输出转换当作原生 FP32 Cube。",
+          "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]"
+        },
+        "TF32": {
+          "state": "yes",
+          "detail": "Cube 有该输入格式与分项峰值；BF16/FP16 另有 Vector 路径。未逐格式给出完整累加、舍入与稀疏条件。",
+          "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]; [1, PDF p.17 / 正文 p.13, §4.1.1]"
+        },
+        "BF16": {
+          "state": "yes",
+          "detail": "Cube 有该输入格式与分项峰值；BF16/FP16 另有 Vector 路径。未逐格式给出完整累加、舍入与稀疏条件。",
+          "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]; [1, PDF p.17 / 正文 p.13, §4.1.1]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "Cube 有该输入格式与分项峰值；BF16/FP16 另有 Vector 路径。未逐格式给出完整累加、舍入与稀疏条件。",
+          "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]; [1, PDF p.17 / 正文 p.13, §4.1.1]"
+        },
+        "FP8": {
+          "state": "yes",
+          "detail": "Cube 支持 FP8 E4M3/E5M2、MXFP8 与 HiF8；数值语义不同，均需保留格式名称。",
+          "source": "[1, PDF pp.17-20 / 正文 pp.13-16, 图4-3/图4-4/表4-1]"
+        },
+        "FP4": {
+          "state": "yes",
+          "detail": "Cube 原生 MXFP4，E2M1 数据与共享 8-bit scale；不是 INT4。",
+          "source": "[1, PDF pp.13-14,18-20 / 正文 pp.9-10,14-16, 表3-1/表4-1]"
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "Cube 和 Vector 均有 INT8 运算峰值；不能将两条路径相加为 Matrix 算力。",
+          "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+          "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]"
+        }
+      },
+      "compute16": {
+        "value_tflops": null,
+        "format": "FP16 / BF16",
+        "scope": "matrix",
+        "basis": "excluded",
+        "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]",
+        "note": "Cube 486 / 432 / 378TFLOPS（36 / 32 / 28 Cube）；Vector 60 / 54 / 47TFLOPS；Cube+Vector 547 / 486 / 425TFLOPS。计算、CPU、内存与 L2 档位没有完整料号映射，不拼成唯一 SKU，不进入存算比散点。"
+      },
+      "memory": {
+        "kind": "HiZQ 2.0 HBM",
+        "capacity_gb": 144,
+        "bandwidth_tb_s": 4,
+        "alternatives": [
+          {
+            "capacity_gb": 96,
+            "bandwidth_tb_s": null,
+            "source": "[1, PDF p.14 / 正文 p.10, 表3-1]; [4, Product Features and Specifications]",
+            "note": "96GB为白皮书档位及 Atlas650E 每 NPU 配置；与计算档位无完整映射。"
+          }
+        ],
+        "note": "官方路线图明确给出144GB与4TB/s；只用于内存图，不把最高算力配入此组合。",
+        "source": "[2, Ascend 950DT]; [1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]"
+      },
+      "organization": {
+        "onchip": "AI Core 显式管理 L1、L0A/L0B/L0C 与 Unified Buffer；SIMT 可在 UB 中分配 shared memory / data cache；另有全局 L2 和 CPU 独立 cache。",
+        "main_memory": "4 个 HiZQ2.0 DRAM 模块同封装，不计作逻辑裸片内 SRAM。",
+        "sharing": "两块 AI Die 统一内存访问；全局 L2 跨 die 硬件一致但仍有局部亲和性；不假定远端设备全部 cache 一致。",
+        "source": "[1, PDF pp.12,17,24-27 / 正文 pp.8,13,20-23, 图4-1、表4-2、§4.3.2]"
+      },
+      "endpoint": {
+        "protocol": "Unified Bus 2.0",
+        "bidir_gb_s": 2016,
+        "source": "[1, PDF pp.13,15 / 正文 pp.9,11, 表3-1]",
+        "note": "18×4 端口、72×112Gbps HiLink lane 的双向原始速率；PCIe 占4个 UB 端口、UBoE占2个，不能将各复用协议最大值相加。",
+        "state": "known"
+      },
+      "power": {
+        "max_w": null,
+        "scope": "unknown",
+        "range_or_other": "未公开单芯片功耗",
+        "note": "未从超节点或服务器配置反推。",
+        "source": "[1, 表3-1及产品规格]"
+      },
+      "deployment": {
+        "form": "单芯片多裸片封装；上层 Atlas650E/850E/950 系统。",
+        "cooling": "单封装冷却要求未公开；上层产品形态不能直接下放到此芯片条目。",
+        "source": "[1, PDF p.12 / 正文 p.8]; [4, Product Features and Specifications]; [5, Atlas 850E]"
+      },
+      "order": 34,
+      "short_label": "950DT",
+      "ratio_status": "计算与内存档位未配对"
+    },
+    {
+      "id": "groq_gen1",
+      "card": "Groq/Groq_GroqChip_Processor_第一代.md",
+      "label": "GroqChip Gen1",
+      "vendor": "Groq",
+      "position": {
+        "group": "inference",
+        "text": "官方LPU定位AI inference；本文为first-generation GroqChip。",
+        "source": "[3, Overview / Groq LPU AI Inference Technology and Software First]; [2, p.1]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, pp.8–10, §III-C/D and §IV-D]; [2, p.2, Numerics]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "VXM支持32-bit浮点算术；MXM的FP32字段不足以证明FP32×FP32原生乘法。",
+          "source": "[1, p.8, §III-C]; [2, p.2, Numerics]"
+        },
+        "TF32": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, pp.8–10, §III-C/D and §IV-D]; [2, p.2, Numerics]"
+        },
+        "BF16": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, pp.8–10, §III-C/D and §IV-D]; [2, p.2, Numerics]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "MXM FP16输入、FP32累加；VXM也列FP16。",
+          "source": "[1, p.9, §III-D; p.10, §IV-D]; [2, p.2, Numerics]"
+        },
+        "FP8": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, pp.8–10, §III-C/D and §IV-D]; [2, p.2, Numerics]"
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, pp.8–10, §III-C/D and §IV-D]; [2, p.2, Numerics]"
+        },
+        "INT8": {
+          "state": "yes",
+          "detail": "MXM INT8输入、INT32累加。",
+          "source": "[1, p.8, §III-D; p.10, §IV-D]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[1, pp.8–10, §III-C/D and §IV-D]; [2, p.2, Numerics]"
+        }
+      },
+      "compute16": {
+        "value_tflops": 188,
+        "format": "FP16",
+        "scope": "matrix",
+        "basis": "condition_unspecified",
+        "source": "[2, p.2, Performance]; [1, p.12, §VI–VII]",
+        "note": "产品简报900 MHz下最高188 TFLOPS FP16；论文明确未用pruning/sparsity，但产品逐指令计数口径不足，不用1 GHz论文值重算900 MHz产品。"
+      },
+      "power": {
+        "max_w": 215,
+        "scope": "chip_tdp",
+        "range_or_other": "芯片最大300 W；TDP215 W；平均185 W。",
+        "note": "max_w字段在此按scope表示芯片TDP额定值，不是实际最大功率；300 W maximum与215 W TDP必须分别保留。平均值未给负载/统计条件。",
+        "source": "[2, p.2, Power]"
+      },
+      "deployment": {
+        "form": "处理器规格；论文提到PCIe CEM卡，后续简报提到GroqRack形态；不可借入GroqCard板卡参数",
+        "cooling": "未公开处理器独立散热方案",
+        "source": "[1, p.12, §VII]; [2, p.2, Availability and I/O]; [4, p.2, Availability]"
+      },
+      "memory": {
+        "kind": "none",
+        "capacity_gb": null,
+        "bandwidth_tb_s": null,
+        "alternatives": [],
+        "note": "无外部DRAM；片上220 MiB/230 MB SRAM与80 TB/s不能填入外部DRAM图。null是不适用，不是0。",
+        "source": "[1, pp.3–6, Figs.2–5]; [2, p.2, Memory]"
+      },
+      "organization": {
+        "onchip": "88个MEM切片合计220 MiB；产品标230 MB，编译器管理；全片stream registers传递结果。",
+        "main_memory": "主数据空间使用片内SRAM，无外部HBM/GDDR/DDR。",
+        "sharing": "MEM分片但全局可寻址；bank与放置距离显式影响排程，不按透明cache命中工作。",
+        "source": "[1, pp.5–6, §II-B; p.8, §III-B; pp.9–10, §IV-A]; [2, p.2, Memory]"
+      },
+      "endpoint": {
+        "protocol": "RealScale C2C",
+        "bidir_gb_s": 480,
+        "source": "[1, p.5, §II的带宽公式]; [2, p.2, Chip Scaling]",
+        "note": "16条×4 lane×30 Gbit/s，原报双向3.84 Tb/s=480 GB/s；原始引脚线速，未扣协议开销，不能当有效载荷吞吐。",
+        "state": "known"
+      },
+      "order": 35,
+      "short_label": "GroqChip",
+      "ratio_status": "外部 DRAM 不适用"
+    },
+    {
+      "id": "mlu590",
+      "card": "寒武纪/寒武纪_思元590_MLU590.md",
+      "label": "MLU590",
+      "vendor": "寒武纪",
+      "position": {
+        "group": "training",
+        "text": "厂商2022年新闻称云端智能训练芯片，MLUarch05；不以软件支持范围反推独立销售状态。",
+        "source": "[1, 正文“在演讲的最后”及下一段]"
+      },
+      "formats": {
+        "FP64": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[2, §3.1–3.2, Tables3.1–3.3]; [6, 型号592算子分支]; [7, executor.cpp, lines972–1024]"
+        },
+        "FP32": {
+          "state": "yes",
+          "detail": "MLU590对应__BANG_ARCH__>=592分支用__bang_div处理float/half输入输出，位于NRAM。",
+          "source": "[6, div_union1.mlu, lines84–124]"
+        },
+        "TF32": {
+          "state": "conditional",
+          "detail": "固定版官方测试框架对MLU590的isPlatformSupportTf32返回真，并有FP32允许TF32的模式开关；不是峰值定值或完整数值语义。",
+          "source": "[7, executor.cpp, lines972–1024; executor.h, lines109–110; core/mlu_env.cpp, lines28–32]"
+        },
+        "BF16": {
+          "state": "conditional",
+          "detail": "型号代码允许BF16 abs数据，但复用half模板；MLU500系列库发布说明列BF16 matmul/卷积范围。能确认指定软件运算支持，不能确认独立原生BF16算术链。",
+          "source": "[6, abs.cpp, lines54–63; abs_block.mlu, lines124–139]; [3, v1.23.0“特性变更”]"
+        },
+        "FP16": {
+          "state": "yes",
+          "detail": "MLU590对应__BANG_ARCH__>=592分支用__bang_div处理float/half输入输出，位于NRAM。",
+          "source": "[6, div_union1.mlu, lines84–124]"
+        },
+        "FP8": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[2, §3.1–3.2, Tables3.1–3.3]; [6, 型号592算子分支]; [7, executor.cpp, lines972–1024]"
+        },
+        "FP4": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[2, §3.1–3.2, Tables3.1–3.3]; [6, 型号592算子分支]; [7, executor.cpp, lines972–1024]"
+        },
+        "INT8": {
+          "state": "unknown",
+          "detail": "固定测试源码有MLU590专用INT8张量效率分支，但峰值常量为0占位且不能证明完整硬件运算路径。",
+          "source": "[7, executor.h, lines69–110; executor.cpp, lines1027–1157]"
+        },
+        "INT4": {
+          "state": "unknown",
+          "detail": "所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+          "source": "已查范围：[2, §3.1–3.2, Tables3.1–3.3]; [6, 型号592算子分支]; [7, executor.cpp, lines972–1024]"
+        }
+      },
+      "compute16": {
+        "value_tflops": null,
+        "format": "BF16/FP16",
+        "scope": "matrix",
+        "basis": "excluded",
+        "source": "[7, executor.h, lines69–110; executor.cpp, lines948–969,1027–1157]",
+        "note": "MLU590专用张量吞吐常量在固定源码里为零占位；不能把0写成硬件峰值，也不能用WFU标签反推算力。"
+      },
+      "power": {
+        "max_w": null,
+        "scope": "unknown",
+        "range_or_other": "未公开可采用的单芯片TDP/模组或板卡最大功率。",
+        "note": "不由实例能效或相对宣传换算绝对瓦数。",
+        "source": "[1, 新品介绍]; [2, §3.1, Table3.1]"
+      },
+      "deployment": {
+        "form": "Chip Level MLU590；H8/M9是Board Level名称，板上芯片数/内存配置不能由名称推断",
+        "cooling": "未公开型号级散热规格",
+        "source": "[2, §3.1, Table3.1]; [1, 新品介绍]"
+      },
+      "memory": {
+        "kind": "unknown",
+        "capacity_gb": null,
+        "bandwidth_tb_s": null,
+        "alternatives": [],
+        "note": "外部DRAM类型、容量和绝对带宽未确认；GDRAM是软件地址空间名，不等于GDDR/HBM型号。",
+        "source": "[1, 正文“据介绍”]; [2, §3.1, Table3.1]; [5, core/context.cpp, lines229–238,279–280]"
+      },
+      "organization": {
+        "onchip": "每core NRAM512 KiB、WRAM512 KiB；每cluster SRAM2 MiB，显式拷贝使用；另见cache查询/LLC测试接口。",
+        "main_memory": "GDRAM全局DRAM空间；物理类型/容量/带宽未知。",
+        "sharing": "核局部NRAM/WRAM与cluster共享SRAM分开；全芯片核数未知，不能求片上总量。48 MiB是LLC测试区，不是已确认L2容量。",
+        "source": "[4, lines123–127]; [5, core/context.cpp, lines204–219,239–249; kernels/kernel.h, lines36–80]; [7, executor.cpp, lines1521–1536]"
+      },
+      "endpoint": {
+        "protocol": "未确认型号级端点",
+        "bidir_gb_s": null,
+        "source": "[2, §3.4.3–3.4.4]; [1, 新品介绍]",
+        "note": "有多卡软件协同和PCIe升级描述，但型号级协议、链路数、带宽与方向均未定。",
+        "state": "unknown"
+      },
+      "order": 36,
+      "short_label": "MLU590",
+      "ratio_status": "主存 / 峰值未确认"
+    }
+  ],
+  "review_notes": [
+    "本摘录以当前 10 篇 NVIDIA 产品详解为基础；引用编号属于各自产品详解，不能跨卡共用同号。",
+    "本轮直接查过的原始资料：H100/H200 NVL 产品简报、H100 PCIe 产品简报、H200 数据手册、Blackwell 数据手册、H100 架构白皮书；本地网页快照 L40S 产品页、H200 产品页、H200/H200 NVL 发布稿、Blackwell 发布稿、Blackwell Ultra 技术文章。其他事实沿用详解中已定位的摘录，本轮未重核全部原始页。另直接查看 Ada 架构白皮书 p.30 的精度/累加条件表及稀疏配对值。",
+    "16 位图可用 A100 312、H100 SXM 989.4、H100 PCIe 756、L4 121；H100 NVL 835.5、H200 SXM 989.5、H200 NVL 835.5 与 B200 2250 是显式稀疏倍率或同表脚注推导，须图例区分。L40S 与 B300 288GB 主图排除但仍列于覆盖范围。",
+    "H200 原文 INT8 单位写 TFLOPS；执行格式支持与单位无歧义的整数吞吐分开，本摘录没有把错单位自动修成 TOPS。",
+    "L4/L40S FP64 为普通 CUDA 算术支持，不表示具有高速 FP64 Tensor 通路。FP16/BF16 相同位宽不表示相同数值范围、舍入或累加语义，矩阵散点是规格资源比较，非精度等价实验。",
+    "L40S 16 位原表 dense 362.05 与 sparse 733 冲突，不改写为 366.5；该折半数只保留为条件敏感性候选。",
+    "H100 PCIe 的 NVLink 600/900 原文冲突需保留；L40S 64 GB/s 为 PCIe 主机端点，必须与专用 NVLink 分组；L4 方向未明不填。",
+    "B300 的 288 GB/最高 8 TB/s 与 270 GB/7.7 TB/s 不能跨配置拼算力或功耗；B200 180 GB 数据手册直接匹配 4.5 PFLOPS sparse 与 dense 半值脚注。",
+    "H200 NVL 官方明确 fine-tuning 与推理，归 both 并说明推理侧重；不因为 NVL 产品名或低功率自行归纯推理。",
+    "没有公开确认某格式不等于不支持，因此未知用 unknown；本摘录没有用零代表未公开、不适用或配置冲突。",
+    "本摘录覆盖12篇当前产品详解，没有改动产品详解、资料卡或原始资料，没有联网扩展。reference编号全部对应各自card文末编号。",
+    "格式矩阵的yes表示芯片AI执行路径可进行该精度运算；累加/转换/存储支持不单独计入。FP4包含明确的MXFP4但在detail保留scale；TF32原生路径明确被CDNA4移除记no，软件模拟写在detail。未提及采用unknown，不采用推断的no。",
+    "直接复核了AMD六款数据手册/brochure的性能规格页；MI300X另核第2页双向互联说明；CDNA4白皮书TF32、153.6GB/s段；CDNA5白皮书UALoE端点方向段与产品规格表。其余架构细节使用已引用的当前详解，不声称重新通读全部ISA。",
+    "直接复核了Ascend950白皮书PDF pp.10-15（定位、产品层级与表3-1），官方950PR产品页“最大配备128GB、1.6TB/s”与2025路线图950DT 144GB+4TB/s；这些只支持内存组合，不支持计算档位与内存组合配对。",
+    "直接复核了Atlas用户指南2026-06-01基本规格表3-1和电源管理本地快照，确认32GB/800GB/s、64GB/1.6TB/s、FP16 280TFLOPS、300/350W选择规则；不使用旧“原文未取得”状态。",
+    "Ascend310/910运算峰值及Atlas峰值未明确dense/sparse条件，compute16保留官方数但标condition_unspecified，应与确认dense子集分开。Ascend950多档位compute16排除。",
+    "Ascend910容量来自官方ModelZoo具体测试环境，带宽来自芯片架构论文，容量图应带证据层级标记；其300W是芯片rated TDP，不能与AMD OAM TBP和PCIe卡最大功耗混为同一功率边界。Ascend310仅8W原报值，未假定为最大功耗或TDP。",
+    "MI350X dense16采用产品页舍入2300TFLOPS，brochure2309.6及资源复算2306.8672的差异在note保存；MI455X采用专用资料23.3TB/s，Helios页19.6TB/s作为离散来源差异，不画连续区间。",
+    "端点值均为设备对设备scale-up的收发合计，且保留协议和复用条件；UALoE 3600GB/s、UnifiedBus2016GB/s有明确双向原文。PCIe-only、HCCS方向或统计边界不明的产品为unknown，不填0。",
+    "交付范围：14个产品，id/card/label/vendor沿用memory36.json。source中的参考编号均属于对应产品详解，不是此JSON的全局编号。",
+    "精度矩阵表示已确认执行路径可接受的数值格式，不声称同位宽原生乘法器。conditional用于输入进入硬件计算前有映射/精度策略、软件限定组合或证据层级须注明；单纯存储和独立格式转换不作为yes。",
+    "所有容量与带宽数值字段为十进制GB/TB/s。GiB与GB来源冲突按同源组合保留alternatives，不能任意交叉配对或把离散来源差异画连续区间。",
+    "TPU8t/8i的JAX BF16静态模型996.1/1101 TFLOPS仅保留候选，compute16明确excluded，不进入产品16位配比图。",
+    "AWS纯Tensor分母按已披露每核峰值乘物理核数：NCv2两核184，NCv3/NCv4八核632 TFLOPS。芯片190/667/671广告峰值另留原值，不与纯Tensor值相互校正；79/92已为来源取整。NCv2普通矩阵峰值未明写dense标签，主会话若要求原文必须出现dense，可将其basis降为condition_unspecified。",
+    "TPUv4有明确阵列、频率和每乘加计两操作的条件推导；v5e/v5p/v6e/7x的官方矩阵值保留condition_unspecified，不从没有完整条件的型号表宣称严格相同dense测量。",
+    "TPU fleet平均功耗与v4生产实测峰值全部不填max_w。Groq max_w=215仅按scope=chip_tdp表示TDP；实际maximum为300 W另存，绝不能改名TDP。AWS与MLU590绝对功耗未知。",
+    "NeuronLink-v1/v2/v3整芯片数字方向不明；v4还存在来源/部署差异，均不能入明确双向端点轴。Trn3 Gen2分层双向256/320/128也不能相加校正2048 GiB/s/device。Groq480为原始引脚速率，须独立标记与有效负载区别。",
+    "定位按明确官方用途记录：TPU v5p包含serving，TPU8i包含post-training，Trainium2/3同时训练推理。Trainium1的both来自官方产品训练定位与已保存Neuron页面明确Trn1推理文档入口，详解正文只强调训练；主文如仅采用产品正文定位，需保留这一支持范围差别。",
+    "已通读14篇产品详解；未改原文，未联网补研。额外已读原文：Google/JAX/2026-09-17/jax-info-source.py中is_matmul_supported及v4/v5e/v5p/v6e/7x/8t/8i分支；scaling-book-tpus.md的VPU FP32说明。",
+    "额外已读AWS原文：PackageImplementations/2026-08-13/A05-trainium-inferentia2-nki-v2.29.1-2026-08-13.html；Trainium2/2026-08-12/S02_trainium2_nki_architecture_v2.29.1.html；PackageImplementations/2026-08-13/A07-trainium3-nki-v2.31.0-2026-08-13.html的Tensor/Vector/Scalar/Compute Engine Specifications段；产品详解补充/2026-09-17/trn1-chip.html正文与导航、trn1-product.html用途段、trn1-system.html导航。",
+    "额外已读Groq原文：网页快照/Groq/GroqChip/2026-09-17/lpu-explained.html的Overview与first-generation说明。其他论文/PDF数字本轮沿用已引用产品详解，不宣称重新全文核验原始PDF。",
+    "两次非证据阻塞已修复：一次目录名拼写错误属于操作错误；一次本地bs4缺失属于工具/运行环境依赖缺失，已使用标准库HTMLParser读取，不降低摘录结果质量。"
+  ]
+}

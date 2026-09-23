@@ -2,7 +2,7 @@
 
 > 模板版本：1.3（芯片架构事实口径）  
 > 卡片状态：已完成  
-> 资料截止日：2026-09-16
+> 资料截止日：2026-09-23
 
 本卡以一块 AMD Instinct MI350X 288GB OAM（OCP Accelerator Module）为正式比较对象。该模组采用 8 个 XCD（Accelerated Compute Die）和 2 个 IOD（I/O Die），有 256 个使能 CU。8-OAM MI350X Platform 的 2.3TB HBM、64TB/s 聚合 HBM 带宽和平台聚合算力不下放到单 OAM。
 
@@ -42,10 +42,17 @@
 | 数值格式 | OCP-FP8 支持 E5M2/E4M3；MXFP6 支持 E3M2/E2M3，MXFP4 为 E2M1 | MX 格式通常以 32 个元素共享 scale；TF32 物理路径在 CDNA 4 移除，改由 BF16 软件模拟 | `[3, pp.7-8]` |
 | 程序员可见累加 | 低精度 dense MFMA 的选定指令以 FP32 C/D 累加；INT8 MFMA 以 INT32 C/D 累加 | ISA 语义不能解释为物理 accumulator 位宽 | `[6, pp.285-288]` |
 | 结构化稀疏 | OCP-FP8、FP16、BF16、INT8 有 structured sparsity 峰值；sparse MFMA 的 A 矩阵沿 K 轴每 4 个元素含 2 个零，第三输入提供 sparse index | sparse 峰值为对应基础值 2 倍；index 带宽、选择电路与功耗未公开 | `[1, GPU Specifications]` `[6, pp.294 and 307-308]` |
-| LDS | 每 CU 160KB，read throughput 256B/clock，并支持从 L1 直接装入 LDS | software-managed local storage，不是 cache | `[3, p.9]` |
+| LDS | 每 CU 160KB，64 个 bank，每 bank 为 640×4B；含 32 个整数 atomic 单元；读吞吐 256B/clock，可从 L1 直接装入 | 工作组显式管理的 local storage；按 1,280B 连续块分配并按 1,280B 对齐，不能把容量当作统一 cache | `[3, p.9]` `[6, §§2.2.1,3.6.5, 印刷 pp.6,13（PDF pp.14,21）]` |
 | L1/L2 | 每 CU 32KB、64-way L1，128B line；每 XCD 共享 4MB、16-way fully coherent L2 | L2 有 16 个并行 channel；每 channel 每 cycle 读 128B、写 64B | `[2, p.2 Multi-Chip Architecture]` `[3, p.9]` |
+| L2 管理与通道 | 每 XCD 有 16 个 L2 channel，各 channel 每 cycle 读 128B、写 64B；writeback/write-allocate，XCD 内 fully coherent | CDNA 4 可缓存来自 DRAM 的 non-coherent 数据，并在脏行写回后保留副本；一致性与可见性仍须遵守地址和程序语义，不能推广成整机透明一致性 | `[3, p.9]` |
 | 媒体单元 | 4 组 HEVC/H.265、AVC/H.264、VP9 或 AV1 decoder；40 个 JPEG/MJPEG core，每组 10 个 | 需要兼容 media player；brochure p.2 的自然语言措辞含混，主值取 p.1 规格表 | `[2, p.1 Decoders and Virtualization]` |
 | 专用 AI 单元缺口 | 未找到专用 attention、MoE routing、top-k、sampling 或 KV Cache 管理物理模块 | 相关 workload 由通用 Matrix/Vector/Scalar 路径和软件完成 | `[2, pp.1-2]` `[3, pp.5-9]` |
+
+### 3.1 矩阵吞吐与输入格式条件
+
+CDNA 4 的 dense 矩阵执行能力按每 CU 每周期计，FP16/BF16 为 4,096 FLOP，OCP-FP8 为 8,192 FLOP。Vector FP16/FP32 为 256 FLOP、FP64 为 128 FLOP；Matrix FP32 为 256 FLOP、FP64 为 128 FLOP。它们是独立路径的上限，不相加为一种精度的峰值。白皮书 Table 1 的 MXFP4/MXFP6 行原印为 16,834 FLOP/CU/clock，与全芯片峰值算术不符，保留疑点，不自行修正官方值。[3, Table 1, p.8]
+
+MFMA（Matrix Fused Multiply-Add，矩阵融合乘加）的 F8F6F4 指令允许 A、B 独立选 FP8、FP6 或 FP4。16×16×128 变体在 A/B 都使用 FP4 或 FP6 时为 16 cycles，任一输入使用 FP8 时为 32 cycles；32×32×64 变体分别为 32 与 64 cycles。结果 C/D 使用 FP32，scaled 变体的共享 scale 为 E8M0。因而仅将权重换成 FP4、另一侧仍为 FP8，不能套用最快的 FP4×FP4 指令周期；这些周期也不包括完整 kernel 的搬运与同步时间。[6, Table 28; §§7.1.5,7.1.5.1, 印刷 pp.43,50-51（PDF pp.51,58-59）]
 
 ## 4. Die、chiplet 与 package
 
@@ -57,8 +64,11 @@
 | HBM 组成 | 8 个 12-Hi HBM3E stack，合计 288GB | 每个 IOD 连接 4 个 stack；未用总容量反推逐 stack 可寻址容量 | `[3, pp.2 and 10-11]` |
 | 晶体管与工艺 | 185 billion transistors；TSMC 3nm / 6nm FinFET | 产品页没有按 chiplet 拆晶体管数 | `[1, GPU Specifications]` |
 | Infinity Cache | 256MB、16-way memory-side cache，连接 8 个 HBM stack | 每 stack 对应 16 个 64B channel 与 2MB banked data array | `[1, GPU Memory]` `[3, pp.10-11]` |
-| 封装内互联 | Infinity Fabric 连接 XCD、IOD、cache、HBM 与外部端点；双 IOD 直连比 CDNA 3 对应路径约快 14% | 相对值是架构说明，不是单独的持续 payload 带宽 | `[3, pp.10-11]` |
+| 封装内互联 | 双 IOD 直接连接；Figure 5 标出 Infinity Fabric Advanced Package 的 5.5TB/s bisection bandwidth | 属于封装内剖分带宽，不能与 HBM 或外部 P2P 带宽互换；正文约快 14% 的脚注 MI350-051 限定 MI355X 对 MI300X 的峰值理论 IOD 剖分带宽，不能作为 MI350X 的独立定值 | `[3, Figure 5, pp.10-11; p.21, MI350-051]` |
 | RAS 与分区 | Full-chip ECC、page retirement、page avoidance、SR-IOV；计算分区最多 8 个；架构白皮书给 NPS1/NPS2 内存 NUMA 模式 | brochure 的 Memory Partitions 栏另写 1 or 4，与架构说明不一致；计算分区和内存分区不能等同 | `[1, GPU Memory and Additional Features]` `[2, p.1 Decoders and Virtualization]` `[3, pp.12-13 Figure 6]` |
+| 计算分区与内存局部性 | Figure 6 给出 SPX+NPS1 的 8 XCD/288GB 单实例，DPX+NPS2 的每实例 4 XCD/144GB，QPX+NPS2 的 2 XCD/72GB，CPX+NPS2 的 1 XCD/36GB | SPX、DPX、QPX、CPX 分别为单、双、四、八计算分区；NPS1 跨两 IOD 交织，NPS2 将内存分成每 IOD 144GB 的两个池。实例容量与 NUMA 池容量处于不同层次，八实例不等于八个 NPS 域 | `[3, pp.11-13, Figure 6]` |
+
+白皮书将 NPS1 的用途表述为便于应用移植和适合访问较均匀的负载；在 NPS2 所示的本地分区配置中，内存访问留在对应 IOD 与 XCD 组内，减少跨 IOD Infinity Fabric 流量。其延迟、带宽和功耗改善是厂商机制说明，未给本型号逐场景的绝对测量值。该机制同时服务大任务与多个小任务，不能只据分区能力把芯片定位成推理专用。[3, pp.11-13]
 
 ## 5. SKU 配置
 

@@ -2,7 +2,7 @@
 
 > 模板版本：1.3（芯片架构事实口径）  
 > 卡片状态：已完成  
-> 资料截止日：2026-09-16
+> 资料截止日：2026-09-23
 
 本卡采用一颗AWS Trainium3 chip/NeuronDevice作为正式比较对象。AWS直接公开了每芯片规格，但当前交付形态是64-chip或144-chip Trn3 UltraServer，未找到单芯片Trn3实例。因此本卡是厂商直接per-chip口径，不是可单独申请的Cloud SKU，也不是将UltraServer总量除以芯片数所得。
 
@@ -16,7 +16,7 @@
 | 对象形态 | 一颗3nm Cloud AI accelerator chip/package | 3nm由AWS直接公布；单裸片、chiplet与物理package构造未公开 | `[6, opening]` `[2, device overview]` |
 | 架构代际 | 8个NeuronCore-v4（NCv4） | 每个NCv4含Tensor、Vector、Scalar和GPSIMD引擎 | `[1, opening]` `[2, NeuronCore-v4 Compute Engine Updates]` |
 | 发布与可用状态 | 2024-12-03首次公布；2025-12-02 Trn3 UltraServer GA；当前产品页仍在提供 | 2024为unveil，不写成Preview或GA；2025 GA对象是UltraServer交付形态 | `[7, page date and opening]` `[6, page date and opening]` `[5, opening]` |
-| 厂商定位 | 面向frontier-scale model的training与inference/serving | 当前产品页明确覆盖两类用途 | `[5, Why Amazon EC2 Trn3 UltraServers? and Benefits]` |
+| 厂商定位 | 面向frontier-scale model的training与inference/serving，按训推兼顾记录 | 2024预告曾称AI training chip，但同段也涉及实时部署；2025 GA正文和当前产品页均明确共同面向training与serving，不据名称判定偏训练 | `[7, Trainium3 chips—designed for the high-performance needs of the next frontier of generative AI workloads]` `[6, opening and training and serving paragraph]` `[5, Why Amazon EC2 Trn3 UltraServers? and Benefits]` |
 | 目标 workload | agentic、reasoning、video generation、long-context和MoE | 产品定位，不把模型参数量、token/s或相对性能写成芯片属性 | `[5, opening and Features]` |
 | 产品目标 | 以MX低精度、HBM3e和全互连scale-up fabric提高训练与serving效率 | 芯片能力与NeuronSwitch/UltraCluster分层记录 | `[5, Features]` |
 
@@ -48,6 +48,20 @@
 | 结构化稀疏 | 支持4:16、4:12、4:8、2:8、2:4、1:4和1:2模式 | 未公开metadata编码、带宽、在线剪枝或独立sparse core | `[3, Tensor Engine]` |
 | 局部存储 | 每NCv4有32MiB software-managed SBUF和2MiB PSUM | SBUF/PSUM是core-local SRAM，不是芯片统一共享cache | `[2, NeuronCore-v4 Compute Engine Updates]` |
 | 数据搬运与特殊路径 | 主DMA负责显式搬运；NCv4增加SBUF/PSUM间接访问、SBUF read-add-write和可与matmul重叠的background transpose | 是通用memory/compute机制，不写成attention或MoE专用单元 | `[2, Data Movement and DMA updates, SBUF near-memory accumulation, Background Transpose]` |
+
+### 3.1 NCv4 新增的数据布局、结果保存与搬运机制
+
+| 机制 | 原文规定的作用与条件 | 编程或量化边界 | 来源 |
+|---|---|---|---|
+| MX输入布局 | contraction维最大512，拆为128个SBUF partition与最内层free维连续四个元素，使用x4 packed datatype；每32个数据共享一个8-bit scale | 与NCv3把额外K维放在最外层free维的double FP8布局不同；一次MX matmul需stationary/moving各自的数据与scale共四份输入，流量不能省略scale | `[2, Quad-MXFP8/MXFP4 Matmul Performance]` |
+| BF16 PSUM近存累加 | 旧BF16 PSUM值先升成FP32，与TensorEngine的FP32输出相加，再按RNE或stochastic rounding降为BF16写回 | PSUM物理容量仍为2MiB；位宽减半可容纳更多元素，但分块间反复降精度与一直保留FP32部分和的数值路径不同 | `[2, BF16 Matmul Results in PSUM]` |
+| Background transpose | TensorEngine可使一次transpose与另一次matmul或transpose并行；由硬件自动触发，程序无需显式启用 | 原文只称长transpose链接近双倍性能或与较大matmul重叠，不能推成所有matmul吞吐翻倍 | `[2, Background Transpose]` |
+| QuantizeMX | Vector将SBUF中的FP16/BF16量化为MXFP8 data与scale；每partition每周期处理四个元素 | 源和目标都在SBUF，源布局必须已经符合目标布局；指令本身不完成任意布局重排 | `[2, MX data-type Quantization]` |
+| Fast exponential | Vector上的exponential吞吐为Scalar activation(exp)的四倍，可融合exp前减行最大值与exp后求和 | 官方将该模式联系到长上下文self-attention的softmax；四倍属于指定指令对照，不能写成attention端到端四倍 | `[2, Fast Exponential Evaluation]` |
+| XORWOW随机数状态 | Vector每compute lane每周期产生四个32-bit伪随机数；128个lane各追踪四个状态，每状态含六个uint32，可保存到SBUF/PSUM再恢复 | 支持训练随机序列复现；不是新增独立计算核 | `[2, XORWOW-based PRNG]` |
+| SBUF/PSUM间接访问 | 四类compute engine均可按单独offset tensor在free维gather/scatter，在一次指令内访问不规则位置 | v2.31.0明确该机制当时尚无nki.isa API，不能据硬件描述认为该版本kernel已可调用 | `[2, SBUF/PSUM indirect access and Note]` |
+| SBUF Read-Add-Write | DMA把A送到SBUF邻近加法单元，对SBUF内B执行B+=A；A可来自可寻址HBM/SBUF，单次transfer中A、B同为BF16或同为FP32；吞吐与普通DMA copy到SBUF相同 | 指南对照此前DMA collective compute engine路径约50%的copy吞吐；v2.31.0仍无nki.isa API，不把相对吞吐提升当作实测算子收益 | `[2, SBUF Read-Add-Write and Note]` |
+| DMA Traffic Shaping | 四类服务等级可配置不同DMA操作的带宽分配与优先级，用于跨核通信与计算重叠时控制争用 | 调度机制不增加HBM物理带宽；v2.31.0明确当时无nki.isa API | `[2, DMA Traffic Shaping and Note]` |
 
 ## 4. Die、chiplet 与 package
 
@@ -99,7 +113,7 @@ Trn3 系统文档新增按芯片列出的 Gen6 x8 互联：intra-server 4 组、
 | 项目 | 状态 | 已检查范围或冲突来源 | 当前处理 |
 |---|---|---|---|
 | one-chip产品配置 | 未公开 | 当前产品页与Trn3系统架构只列64/144-chip UltraServer | 采用厂商direct per-chip规格；明确不是可申请的一芯片实例 |
-| 芯片与每核Tensor峰值 | 官方直接值存在小幅口径差 | chip页为2,517/671/183；NKI每核为315/79/20，乘8不能完全复现chip headline | 芯片字段采用direct per-chip值，每核值只在Core层记录 |
+| 芯片与每核Tensor峰值 | 官方直接值存在小幅口径差 | chip页为2,517/671/183；NKI每核为315/79/20，乘8为2,520/632/160TFLOPS，不能完全复现chip headline | 纯Tensor比较采用按八核相乘的名义合计，并注明每核已取整；advertised peak单列，计数范围未解释，不将差额分配给其他引擎 |
 | HBM容量单位 | 一手资料单位不同 | 架构/NKI页144GiB；GA/产品页144GB | 原单位并列，不静默换算 |
 | HBM带宽 | 一手资料数值不同 | 高层架构与GA页4.9TB/s；NKI device overview 4.7TB/s | 并列保留，不猜测为额定/有效或版本变化 |
 | CC-Core数量 | 一手资料数值不同 | 高层架构页16个；NKI device overview 20个 | 不填写唯一数量，只确认CC-Core存在 |

@@ -28,12 +28,12 @@ plt.rcParams.update({'font.family':['Arial', cjk], 'font.size':11, 'axes.labelsi
     'pdf.fonttype':42, 'ps.fonttype':42, 'svg.fonttype':'none', 'axes.unicode_minus':False,
     'axes.spines.top':False, 'axes.spines.right':False, 'axes.axisbelow':True})
 COL = {'training':'#B64945', 'inference':'#218378', 'both':'#387991', 'unclear':'#77838C'}
-POS = {'training':'训练定位', 'inference':'推理定位', 'both':'训推均有资料', 'unclear':'定位未明确'}
+POS = {'training':'偏训练', 'inference':'偏推理', 'both':'训推兼顾', 'unclear':'定位未明确'}
 MARK = {'training':'^', 'inference':'v', 'both':'o', 'unclear':'s'}
 GRAY='#64737B'; INK='#243A44'
 FIGS=[]
 
-def color(r): return COL[r['position']['group']]
+def color(r): return COL[r['orientation']['group']]
 def label(r): return f"{r['order']:02d}  {r['label']}"
 def save(fig, name):
     for ext in ['svg','pdf','png']:
@@ -52,7 +52,7 @@ def row_axis(ax, rows=M):
     for tick,r in zip(ax.get_yticklabels(),rows):tick.set_color(color(r))
 def pos_legend(fig, extra=None):
     handles=[Line2D([],[],marker=MARK[k],color='none',markerfacecolor=v,markeredgecolor=v,
-        markersize=7,label=POS[k]) for k,v in COL.items() if any(r['position']['group']==k for r in M)]
+        markersize=7,label=POS[k]) for k,v in COL.items() if any(r['orientation']['group']==k for r in M)]
     fig.legend(handles=handles+(extra or []),loc='lower center',ncol=3,frameon=False,bbox_to_anchor=(.53,.008))
 def evidence_link(artist,r):
     url='#panorama-'+r['id']
@@ -94,7 +94,7 @@ title(ax,'16 位公开计算峰值：保留路径和推导条件','TFLOP/s · �
 for i,r in enumerate(M):
     c=r['compute16'];v=c.get('value_tflops')
     if numeric(v) and c['basis']!='excluded':
-        a=ax.scatter(v,i,s=42,marker=MARK[r['position']['group']],facecolor=color(r) if strict(r) else 'white',edgecolor=color(r),linewidth=1.1,zorder=4);evidence_link(a,r)
+        a=ax.scatter(v,i,s=42,marker=MARK[r['orientation']['group']],facecolor=color(r) if strict(r) else 'white',edgecolor=color(r),linewidth=1.1,zorder=4);evidence_link(a,r)
         tag=' · 推导' if c['basis']=='derived_dense' else (' · 条件项' if not strict(r) else '')
         ax.annotate(f"{v:.5g} · {c['format']}{tag}",(v,i),xytext=(8,0),textcoords='offset points',va='center',fontsize=8.7)
     else:ax.text(.015,i,r.get('ratio_status','峰值未确定'),transform=ax.get_yaxis_transform(),va='center',fontsize=9,color=GRAY)
@@ -109,7 +109,7 @@ for ax,field,ttl,lim in zip(aa,['capacity_gb','bandwidth_tb_s'],['外部 DRAM �
     for i,r in enumerate(M):
         val=r['memory'].get(field)
         if numeric(val):
-            a=ax.scatter(val,i,s=39,marker=MARK[r['position']['group']],color=color(r),edgecolor='white',linewidth=.4,zorder=3);evidence_link(a,r)
+            a=ax.scatter(val,i,s=39,marker=MARK[r['orientation']['group']],color=color(r),edgecolor='white',linewidth=.4,zorder=3);evidence_link(a,r)
             ax.annotate(f'{val:.4g}',(val,i),xytext=(7,0),textcoords='offset points',va='center',fontsize=9,color=INK)
         else:ax.text(.025,i,'不适用：片上主存' if r['id']=='groq_gen1' else '未确认',transform=ax.get_yaxis_transform(),va='center',fontsize=9,color=GRAY)
 aa[1].tick_params(labelleft=False);pos_legend(f)
@@ -157,11 +157,11 @@ def scatter_plot(name, yfield, ylabel, ratio_levels, ratio_unit):
         # expose both symbols; separate labels retain both source links.
         count=coords.count(xy);rank=coords[:k].count(xy)
         size=150 if count>1 and rank==0 else (31 if count>1 else 65)
-        a=ax.scatter(*xy,s=size,marker=MARK[r['position']['group']],facecolor=color(r) if strict(r) else 'white',edgecolor=color(r),linewidth=1.2,zorder=4+rank);evidence_link(a,r)
+        a=ax.scatter(*xy,s=size,marker=MARK[r['orientation']['group']],facecolor=color(r) if strict(r) else 'white',edgecolor=color(r),linewidth=1.2,zorder=4+rank);evidence_link(a,r)
     scatter_labels(ax,Q,coords)
     pos_legend(f,[Line2D([],[],marker='o',color='none',markerfacecolor='white',markeredgecolor=GRAY,label='空心：路径或稠密条件未完全对齐')])
     f.text(.1,.145,'实心：明确的矩阵 dense 值或有依据的换算；空心保留整芯片值或条件未展开的厂商值。',fontsize=10,color=GRAY)
-    f.text(.1,.116,'重合点用嵌套符号表示，坐标未作偏移。颜色表示资料覆盖用途，累加精度尚未统一。',fontsize=10,color=GRAY)
+    f.text(.1,.116,'重合点用嵌套符号表示，坐标未作偏移。颜色表示主要设计取向，累加精度尚未统一。',fontsize=10,color=GRAY)
     save(f,name)
 
 scatter_plot('全景03_带宽与算力','bandwidth_tb_s','DRAM 带宽（TB/s）',[.001,.01,.1],'byte/FLOP')
@@ -178,7 +178,7 @@ for ax,mode in zip(aa,['bandwidth','capacity']):
     for i,r in enumerate(M):
         if compatible(r):
             v=r['memory']['bandwidth_tb_s' if mode=='bandwidth' else 'capacity_gb']/r['compute16']['value_tflops']
-            a=ax.scatter(v,i,s=38,marker=MARK[r['position']['group']],facecolor=color(r) if strict(r) else 'white',edgecolor=color(r),linewidth=1);evidence_link(a,r)
+            a=ax.scatter(v,i,s=38,marker=MARK[r['orientation']['group']],facecolor=color(r) if strict(r) else 'white',edgecolor=color(r),linewidth=1);evidence_link(a,r)
             ax.annotate(f'{v:.3g}',(v,i),xytext=(7,0),textcoords='offset points',va='center',fontsize=9)
         else:ax.text(.015,i,r.get('ratio_status','未配对'),transform=ax.get_yaxis_transform(),va='center',fontsize=8.5,color=GRAY)
 aa[1].tick_params(labelleft=False);pos_legend(f);save(f,'全景05_存算配比')
@@ -192,7 +192,7 @@ title(ax,'单设备专用互联端点','GB/s，TX + RX · 对数坐标')
 for i,r in enumerate(M):
     e=r['endpoint']
     if r in J:
-        a=ax.scatter(e['bidir_gb_s'],i,s=42,color=color(r),marker=MARK[r['position']['group']],zorder=4);evidence_link(a,r)
+        a=ax.scatter(e['bidir_gb_s'],i,s=42,color=color(r),marker=MARK[r['orientation']['group']],zorder=4);evidence_link(a,r)
         ax.annotate(f"{e['bidir_gb_s']:g}",(e['bidir_gb_s'],i),xytext=(8,0),textcoords='offset points',va='center',fontsize=9)
     else:
         s='主机 PCIe 单列' if e['protocol'].lower().startswith('pcie') else {'none':'未配置该类端点','conflict':'冲突 / 条件未对齐','unknown':'方向或数值未确认'}.get(e['state'],'不进入此图')
@@ -205,7 +205,7 @@ for i,r in enumerate(M):
     c=r['compute16']
     if r in J and numeric(c.get('value_tflops')) and c['basis']!='excluded':
         v=r['endpoint']['bidir_gb_s']/c['value_tflops']/1000
-        a=ax.scatter(v,i,s=40,marker=MARK[r['position']['group']],facecolor=color(r) if strict(r) else 'white',edgecolor=color(r),linewidth=1);evidence_link(a,r)
+        a=ax.scatter(v,i,s=40,marker=MARK[r['orientation']['group']],facecolor=color(r) if strict(r) else 'white',edgecolor=color(r),linewidth=1);evidence_link(a,r)
         ax.annotate(f'{v:.3g}',(v,i),xytext=(7,0),textcoords='offset points',va='center',fontsize=9)
     else:ax.text(.015,i,'未配对',transform=ax.get_yaxis_transform(),va='center',fontsize=8.5,color=GRAY)
 pos_legend(f);save(f,'全景06_设备互联')
@@ -218,19 +218,24 @@ for ax,scope,ttl in zip(aa,['board_max','module_max','chip_tdp'],['板卡上限'
     title(ax,ttl,'W');ax.set_xlim(0,1600);ax.grid(axis='x',color='#DAE3E7',lw=.6)
     ax.set_yticks(range(len(rows)),[r.get('short_label',r['label']) for r in rows]);ax.set_ylim(len(rows)-.4,-.8);ax.tick_params(axis='y',length=0,labelsize=9)
     for i,r in enumerate(rows):
-        v=r['power']['max_w'];a=ax.scatter(v,i,s=45,color=color(r),marker=MARK[r['position']['group']]);evidence_link(a,r)
+        v=r['power']['max_w'];a=ax.scatter(v,i,s=45,color=color(r),marker=MARK[r['orientation']['group']]);evidence_link(a,r)
         ax.annotate(f'{v:g}',(v,i),xytext=(7,0),textcoords='offset points',va='center',fontsize=9)
 f.suptitle('供电与散热预算按统计边界分别读取',fontsize=14,x=.16,ha='left')
 f.text(.16,.07,'仅列明确数值。机群平均功率、工作负载实测和边界不明的值留在证据表，不与功率上限混用。',fontsize=9,color=GRAY)
 pos_legend(f)
 save(f,'全景07_功率边界')
 
+from comparison_analysis import draw_extra, draw_family, analyze
+FIGS.extend(draw_extra(D,O))
+FIGS.extend(draw_family(D,O,R/'family-comparison-data.json'))
+
 stats={'products':len(M),'paired16':len(Q),'strict_matrix_dense':sum(strict(r) for r in Q),
        'conditional_pairs':sum(not strict(r) for r in Q),'dram_capacity':sum(numeric(r['memory'].get('capacity_gb')) for r in M),
        'dram_bandwidth':sum(numeric(r['memory'].get('bandwidth_tb_s')) for r in M),
-       'endpoint_known':len(J),'power_plotted':len(P),'positions':{k:sum(r['position']['group']==k for r in M) for k in COL},
+       'endpoint_known':len(J),'power_plotted':len(P),'positions':{k:sum(r['orientation']['group']==k for r in M) for k in COL},
        'paired_ids':[r['id'] for r in Q], 'strict_ids':[r['id'] for r in Q if strict(r)],
-       'figures':FIGS}
+       'figures':FIGS, 'analysis':analyze(D),
+       'low_precision':{fmt:sum(bool(r.get('low_precision',{}).get(fmt)) for r in M) for fmt in ('FP8','FP4')}}
 (R/'panorama-stats.json').write_text(json.dumps(stats,ensure_ascii=False,indent=2))
 (R/'figures.json').write_text(json.dumps(FIGS,ensure_ascii=False,indent=2))
 print(json.dumps(stats,ensure_ascii=False,indent=2))

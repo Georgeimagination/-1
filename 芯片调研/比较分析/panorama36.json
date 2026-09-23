@@ -1,6 +1,6 @@
 {
-  "updated": "2026-09-20",
-  "scope": "现有36个SKU或官方单芯片配置；第一层全产品比较。用于图表，不替代产品详解和原始资料。",
+  "updated": "2026-09-23",
+  "scope": "现有36个SKU或官方单芯片配置；两层比较共用选值。用于图表，不替代产品详解、资料卡和原始资料。",
   "units": {
     "capacity": "decimal GB",
     "dram_bandwidth": "decimal TB/s",
@@ -8,7 +8,16 @@
     "endpoint": "GB/s TX+RX when explicit",
     "power": "W with measurement boundary"
   },
-  "classification": "官方当前资料覆盖用途，不代表排他性或由规格推断的分类。",
+  "classification": {
+    "color": "orientation.group：主要设计取向，由官方目标确定。position 保留原有官方支持用途。",
+    "categories": {
+      "training": "偏训练",
+      "inference": "偏推理",
+      "both": "训推兼顾",
+      "unclear": "未明确"
+    },
+    "note": "不按指标值分类；有另一用途的执行支持不自动改变主要目标。分类仍须用对应产品原文解释。"
+  },
   "products": [
     {
       "id": "a100_sxm4",
@@ -110,7 +119,21 @@
       },
       "order": 1,
       "short_label": "A100",
-      "ratio_status": "已配对；矩阵 dense 或明确换算"
+      "ratio_status": "已配对；矩阵 dense 或明确换算",
+      "orientation": {
+        "group": "both",
+        "text": "官方覆盖训练、推理与 HPC。",
+        "source": "[1, pp.1-2]; [2, pp.14-20]"
+      },
+      "low_precision": {},
+      "supplements": {
+        "sparse_state": "yes",
+        "sparse_text": "2:4结构化稀疏；低精度Tensor条件峰值约2倍，需压缩值与位置metadata。",
+        "sparse_source": "[2, pp.27-29]",
+        "host_text": "PCIe Gen4 x16；每方向约31.5GB/s，数据手册约64GB/s双向；理论接口值。",
+        "host_source": "[1, p.1]; [2, pp.52-54]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "h100_sxm5",
@@ -186,10 +209,10 @@
             "capacity_gb": 80,
             "bandwidth_tb_s": 3.352,
             "source": "[1, pp.38-40]",
-            "note": "白皮书细化值，非持续吞吐区间。"
+            "note": "白皮书历史表值；该行注明 H100 带宽尚未 finalized，不作当前定版精确值。"
           }
         ],
-        "note": "数据手册 3.35 TB/s；白皮书 3352 GB/s 为显示精度差异。",
+        "note": "当前数据手册单 GPU 3.35 TB/s；白皮书 3352 GB/s 同行标 Not Finalized，仅保留为历史表值。",
         "source": "[2, p.2]; [1, pp.18,36-40]"
       },
       "organization": {
@@ -219,7 +242,32 @@
       },
       "order": 2,
       "short_label": "H100 SXM",
-      "ratio_status": "已配对；矩阵 dense 或明确换算"
+      "ratio_status": "已配对；矩阵 dense 或明确换算",
+      "orientation": {
+        "group": "both",
+        "text": "官方覆盖数据中心训练、推理与 HPC。",
+        "source": "[1, pp.15-18]"
+      },
+      "low_precision": {
+        "FP8": {
+          "value_tflops": 1978.9,
+          "format": "FP8 E4M3/E5M2",
+          "scope": "matrix",
+          "basis": "dense",
+          "source": "[1, pp.20,39-40, Table 3]",
+          "note": "白皮书分别列出 FP16 与 FP32 累加，dense 峰值相同；保留原表精度及频率条件。",
+          "article_line": 25,
+          "eligible_main": true
+        }
+      },
+      "supplements": {
+        "sparse_state": "yes",
+        "sparse_text": "FP16/BF16、FP8/INT8 wgmma.sp为2:4；TF32为1:2，均保留一半元素；普通dense指令不自动跳零。",
+        "sparse_source": "[28, §9.7.17.6.1, Sparse matrix storage]",
+        "host_text": "PCIe Gen5 x16；64GB/s每方向，128GB/s收发合计。",
+        "host_source": "[1, pp.47,49-50]; [2, p.2]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "h100_pcie",
@@ -328,7 +376,33 @@
       },
       "order": 3,
       "short_label": "H100 PCIe",
-      "ratio_status": "已配对；矩阵 dense 或明确换算"
+      "ratio_status": "已配对；矩阵 dense 或明确换算",
+      "orientation": {
+        "group": "both",
+        "text": "标准机架多用途；白皮书特别列出 1 至 2 GPU 推理及部分 HPC，产品简报的软件方案也覆盖训练。本报告归为兼顾，并检查偏推理分类。",
+        "source": "[1, p.15, H100 PCIe Gen 5 GPU]; [2, p.15, NVIDIA AI Enterprise Software Suite]",
+        "alternative_group": "inference"
+      },
+      "low_precision": {
+        "FP8": {
+          "value_tflops": 1513,
+          "format": "FP8 E4M3/E5M2",
+          "scope": "matrix",
+          "basis": "dense",
+          "source": "[1, pp.20,39-40, Table 3]",
+          "note": "1620 MHz低精度Tensor峰值；不使用普通FP32的1755 MHz。",
+          "article_line": 23,
+          "eligible_main": true
+        }
+      },
+      "supplements": {
+        "sparse_state": "yes",
+        "sparse_text": "FP16/BF16、FP8/INT8 wgmma.sp为2:4；TF32为1:2，均保留一半元素；普通dense指令不自动跳零。",
+        "sparse_source": "[28, §9.7.17.6.1, Sparse matrix storage]",
+        "host_text": "PCIe Gen5 x16；64GB/s每方向，128GB/s收发合计；支持降为Gen5 x8或Gen4 x16。",
+        "host_source": "[2, pp.4,8-10]; [1, pp.49-50]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "h100_nvl",
@@ -437,7 +511,32 @@
       },
       "order": 4,
       "short_label": "H100 NVL",
-      "ratio_status": "已配对；矩阵 dense 或明确换算"
+      "ratio_status": "已配对；矩阵 dense 或明确换算",
+      "orientation": {
+        "group": "inference",
+        "text": "产品简报明确针对 LLM inference 优化；也覆盖通用 AI/HPC，但不据此推定训练定位。",
+        "source": "[1, p.1, Overview]; [4, opening]"
+      },
+      "low_precision": {
+        "FP8": {
+          "value_tflops": 1670.5,
+          "format": "FP8 E4M3/E5M2",
+          "scope": "matrix",
+          "basis": "derived_dense",
+          "source": "[2, p.2, Technical Specifications and note]; [3, pp.11,21]; [28, §9.7.17.6.1]",
+          "note": "3341 sparse / 2；推导值含原数舍入；单张94GB卡。",
+          "article_line": 25,
+          "eligible_main": true
+        }
+      },
+      "supplements": {
+        "sparse_state": "yes",
+        "sparse_text": "FP16/BF16、FP8/INT8 wgmma.sp为2:4；TF32为1:2，均保留一半元素；普通dense指令不自动跳零。",
+        "sparse_source": "[28, §9.7.17.6.1, Sparse matrix storage]",
+        "host_text": "PCIe Gen5 x16；64GB/s每方向，128GB/s收发合计；支持降为Gen5 x8或Gen4 x16。",
+        "host_source": "[1, pp.3,7,9-10]; [3, pp.49-50]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "l4",
@@ -445,9 +544,9 @@
       "label": "L4 24GB",
       "vendor": "NVIDIA",
       "position": {
-        "group": "inference",
-        "text": "官方定位 AI 推理、视频与图形工作负载。",
-        "source": "[1, pp.1-3]; [2, pp.39-40]; [4, L4]"
+        "group": "both",
+        "text": "产品简报同时列出 training and inference；主要设计目标仍是低功耗推理、视频与图形。",
+        "source": "[1, p.1, Overview]; [2, pp.39-40]"
       },
       "formats": {
         "FP64": {
@@ -539,7 +638,32 @@
       },
       "order": 5,
       "short_label": "L4",
-      "ratio_status": "已配对；矩阵 dense 或明确换算"
+      "ratio_status": "已配对；矩阵 dense 或明确换算",
+      "orientation": {
+        "group": "inference",
+        "text": "官方定位 AI 推理、视频与图形工作负载。",
+        "source": "[1, pp.1-3]; [2, pp.39-40]; [4, L4]"
+      },
+      "low_precision": {
+        "FP8": {
+          "value_tflops": 242,
+          "format": "FP8 E4M3/E5M2",
+          "scope": "matrix",
+          "basis": "dense",
+          "source": "[2, p.40, Table 5]",
+          "note": "白皮书直接dense；不将sparse485折半覆盖242。",
+          "article_line": 32,
+          "eligible_main": true
+        }
+      },
+      "supplements": {
+        "sparse_state": "yes",
+        "sparse_text": "Ada Tensor结构化稀疏；产品表同时列dense/sparse；FP8为242/485TFLOPS，显示舍入保留。",
+        "sparse_source": "[2, pp.24,27,30,40]",
+        "host_text": "PCIe Gen4 x16；产品页64GB/s未在该项明确方向；支持降为Gen4 x8或Gen3 x16。",
+        "host_source": "[1, pp.2,6-7]; [3, Product Specifications]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "l40s",
@@ -657,7 +781,32 @@
       },
       "order": 6,
       "short_label": "L40S",
-      "ratio_status": "16 位峰值有冲突"
+      "ratio_status": "16 位峰值有冲突",
+      "orientation": {
+        "group": "both",
+        "text": "产品页明确覆盖 LLM training and inference，并支持图形和视频。",
+        "source": "[2, Workloads → LLM Training and Inference]"
+      },
+      "low_precision": {
+        "FP8": {
+          "value_tflops": 733,
+          "format": "FP8 E4M3/E5M2",
+          "scope": "matrix",
+          "basis": "dense",
+          "source": "[2, GPU Specifications and note]",
+          "note": "FP8行无FP16行的362.05/733矛盾；本次不由733反推已确认FP16值。",
+          "article_line": 34,
+          "eligible_main": true
+        }
+      },
+      "supplements": {
+        "sparse_state": "yes",
+        "sparse_text": "Ada Tensor结构化稀疏；FP8为733/1466TFLOPS；FP16 dense/sparse两列冲突，保留疑点。",
+        "sparse_source": "[2, GPU Specifications and note]; [3, p.30, Table 2]",
+        "host_text": "PCIe Gen4 x16；64GB/s双向；支持降为Gen4 x8或Gen3 x16，官方明确无NVLink。",
+        "host_source": "[1, pp.2,6-7]; [2, Interconnect Interface; NVLink Support]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "h200_sxm5",
@@ -759,7 +908,32 @@
       },
       "order": 7,
       "short_label": "H200 SXM",
-      "ratio_status": "已配对；矩阵 dense 或明确换算"
+      "ratio_status": "已配对；矩阵 dense 或明确换算",
+      "orientation": {
+        "group": "both",
+        "text": "H200 官方发布稿将 HGX H200 用途明确为大型 LLM training and inference；不把此用途描述当作系统性能的单 GPU 数字。",
+        "source": "[5, NVIDIA H200 Form Factors]"
+      },
+      "low_precision": {
+        "FP8": {
+          "value_tflops": 1979,
+          "format": "FP8 E4M3/E5M2",
+          "scope": "matrix",
+          "basis": "derived_dense",
+          "source": "[1, p.4, Technical Specifications and notes]; [3, pp.11,21]; [28, §9.7.17.6.1]",
+          "note": "3958 sparse / 2；preliminary规格。",
+          "article_line": 23,
+          "eligible_main": true
+        }
+      },
+      "supplements": {
+        "sparse_state": "yes",
+        "sparse_text": "FP16/BF16、FP8/INT8 wgmma.sp为2:4；TF32为1:2，均保留一半元素；普通dense指令不自动跳零。",
+        "sparse_source": "[28, §9.7.17.6.1, Sparse matrix storage]",
+        "host_text": "PCIe Gen5；型号方框图明确128GB/s双向；所引型号表未单列lane数。",
+        "host_source": "[2, p.4]; [1, p.4]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "h200_nvl",
@@ -868,7 +1042,33 @@
       },
       "order": 8,
       "short_label": "H200 NVL",
-      "ratio_status": "已配对；矩阵 dense 或明确换算"
+      "ratio_status": "已配对；矩阵 dense 或明确换算",
+      "orientation": {
+        "group": "inference",
+        "text": "产品简报突出 LLM 推理，官方发布文另列 fine-tuning；本报告按主要目标归类。",
+        "source": "[1, p.1, Overview]; [4, opening paragraphs: fine-tune LLMs / inference and fine-tuning]",
+        "alternative_group": "both"
+      },
+      "low_precision": {
+        "FP8": {
+          "value_tflops": 1670.5,
+          "format": "FP8 E4M3/E5M2",
+          "scope": "matrix",
+          "basis": "derived_dense",
+          "source": "[3, GPU specifications and note 2]; [2, pp.11,21]; [28, §9.7.17.6.1]",
+          "note": "3341 sparse / 2；preliminary；带宽保留现有详细简报4.813TB/s及网页4.8候选。",
+          "article_line": 23,
+          "eligible_main": true
+        }
+      },
+      "supplements": {
+        "sparse_state": "yes",
+        "sparse_text": "FP16/BF16、FP8/INT8 wgmma.sp为2:4；TF32为1:2，均保留一半元素；普通dense指令不自动跳零。",
+        "sparse_source": "[28, §9.7.17.6.1, Sparse matrix storage]",
+        "host_text": "PCIe Gen5 x16；表列128GB/s但NVL表项未明确方向；可降为Gen5 x8或Gen4 x16。",
+        "host_source": "[1, pp.3,7]; [3, GPU specifications]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "b200_sxm6",
@@ -991,7 +1191,42 @@
       },
       "order": 9,
       "short_label": "B200",
-      "ratio_status": "已配对；矩阵 dense 或明确换算"
+      "ratio_status": "已配对；矩阵 dense 或明确换算",
+      "orientation": {
+        "group": "both",
+        "text": "Blackwell 产品官方覆盖 LLM 训练与实时推理；B200 属该产品组合。",
+        "source": "[4, opening and Six Transformative Technologies / Blackwell product portfolio]; [1, p.9, Second-Generation Transformer Engine]"
+      },
+      "low_precision": {
+        "FP8": {
+          "value_tflops": 4500,
+          "format": "FP8/FP6 Tensor",
+          "scope": "matrix",
+          "basis": "derived_dense",
+          "source": "[1, p.8, notes 1-2]",
+          "note": "与180GB/7.7TB/s同一数据手册：9PF sparse / 2。技术简报最高192GB条件不替换本配置。",
+          "article_line": 24,
+          "eligible_main": true
+        },
+        "FP4": {
+          "value_tflops": 9000,
+          "format": "NVFP4",
+          "scope": "matrix",
+          "basis": "derived_dense",
+          "source": "[1, p.8, notes 1-2]; [9, §9.7.18.10.7]",
+          "note": "与180GB数据手册一致：18PF sparse / 2；每16元素FP8 scale，另有tensor FP32 scale。",
+          "article_line": 23,
+          "eligible_main": true
+        }
+      },
+      "supplements": {
+        "sparse_state": "yes",
+        "sparse_text": "FP16/BF16与FP8/FP6等2:4，TF32 1:2；sm_100a的MXFP4/NVFP4 v0为成对4:8，不能称任意4:8。",
+        "sparse_source": "[9, §§9.7.18.10.9.1-9.7.18.10.9.3]",
+        "host_text": "PCIe Gen5；128GB/s，所引表项未明确方向或lane数。",
+        "host_source": "[1, pp.8-9]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "b300_sxm6",
@@ -1100,7 +1335,29 @@
       },
       "order": 10,
       "short_label": "B300",
-      "ratio_status": "容量与算力未配对"
+      "ratio_status": "容量与算力未配对",
+      "orientation": {
+        "group": "both",
+        "text": "Blackwell Ultra 官方覆盖 pre-training、post-training 和低 batch 推理；B300 为 Ultra 的 SXM 产品。",
+        "source": "[2, Streaming multiprocessors; AI factory system architecture]; [3, Table 1]"
+      },
+      "low_precision": {},
+      "supplements": {
+        "sparse_state": "yes",
+        "sparse_text": "对应sm_103a的FP4 v0为成对4:8；其他精度按ISA；270GB规格的FP4 sparse/dense非2倍，不能套用统一倍率。",
+        "sparse_source": "[28, §§9.7.18.10.9.1-9.7.18.10.9.3]; [1, pp.25-26]",
+        "host_text": "GPU端点PCIe Gen6 x16，256GB/s双向；HGX中CPU-facing Gen5属于另一段连接。",
+        "host_source": "[2, Interconnect]; [3, Table 2]"
+      },
+      "supplementary_compute": [
+        {
+          "fp8_tflops": 4500,
+          "fp4_tflops": 14000,
+          "basis": "config_unpaired",
+          "source": "[1, pp.25-26, Table 3]",
+          "note": "270GB/7.7TB/s配置；当前对象288GB/8TB/s，不能拼接；FP4 sparse18PF与dense14PF不构成简单2倍。"
+        }
+      ]
     },
     {
       "id": "mi300x",
@@ -1202,7 +1459,32 @@
       },
       "order": 11,
       "short_label": "MI300X",
-      "ratio_status": "已配对；矩阵 dense 或明确换算"
+      "ratio_status": "已配对；矩阵 dense 或明确换算",
+      "orientation": {
+        "group": "both",
+        "text": "AI training、inference 和高性能计算。",
+        "source": "[8, p.1, 产品简介]"
+      },
+      "low_precision": {
+        "FP8": {
+          "value_tflops": 2614.9,
+          "format": "FP8 E4M3/E5M2 FNUZ",
+          "scope": "matrix",
+          "basis": "dense",
+          "source": "[8, p.1]; [3, §12.10, pp.267-272,277-279]",
+          "note": "Matrix路径，FP32 C/D；不与CDNA4的OCP编码视为完全相同数值格式。",
+          "article_line": 45,
+          "eligible_main": true
+        }
+      },
+      "supplements": {
+        "sparse_state": "yes",
+        "sparse_text": "A每4个元素至少2个零并提供位置metadata；FP8/FP16/BF16等条件峰值约2倍。",
+        "sparse_source": "[2, p.8]; [3, §7.4, pp.52-53]",
+        "host_text": "PCIe Gen5 x16为主机端点；与7条GPU Infinity Fabric分开，不能把总I/O1024GB/s全记为GPU互联。",
+        "host_source": "[8, pp.1-2]; [2, pp.15-17]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "mi325x",
@@ -1304,7 +1586,32 @@
       },
       "order": 12,
       "short_label": "MI325X",
-      "ratio_status": "已配对；矩阵 dense 或明确换算"
+      "ratio_status": "已配对；矩阵 dense 或明确换算",
+      "orientation": {
+        "group": "both",
+        "text": "AI training、inference 和高性能计算。",
+        "source": "[3, p.1, 产品简介]"
+      },
+      "low_precision": {
+        "FP8": {
+          "value_tflops": 2614.9,
+          "format": "FP8 E4M3/E5M2 FNUZ",
+          "scope": "matrix",
+          "basis": "dense",
+          "source": "[3, AI / HPC Peak Theoretical Performance]; [5, §12.10, pp.267-272,277-279]",
+          "note": "Matrix路径，FP32 C/D。",
+          "article_line": 43,
+          "eligible_main": true
+        }
+      },
+      "supplements": {
+        "sparse_state": "yes",
+        "sparse_text": "A每4个元素至少2个零并提供位置metadata；FP8/FP16/BF16等条件峰值约2倍。",
+        "sparse_source": "[2, p.8]; [5, §7.4, pp.52-53]",
+        "host_text": "PCIe Gen5 x16，datasheet列128GB/s；本行未将未明示方向写成单向。",
+        "host_source": "[3, Specifications]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "mi350p",
@@ -1406,7 +1713,42 @@
       },
       "order": 13,
       "short_label": "MI350P",
-      "ratio_status": "已配对；矩阵 dense 或明确换算"
+      "ratio_status": "已配对；矩阵 dense 或明确换算",
+      "orientation": {
+        "group": "inference",
+        "text": "面向企业 AI inference、agentic AI 与 RAG。",
+        "source": "[1, opening]; [3, Performance That Drops into Your Existing Racks]"
+      },
+      "low_precision": {
+        "FP8": {
+          "value_tflops": 2300,
+          "format": "OCP-FP8; MXFP8另列同值",
+          "scope": "matrix",
+          "basis": "dense",
+          "source": "[1, GPU Specifications]; [2, p.1 performance tables]",
+          "note": "单卡144GB；brochure标estimated；MX格式带scale，不能将两条路径相加。",
+          "article_line": 46,
+          "eligible_main": true
+        },
+        "FP4": {
+          "value_tflops": 4600,
+          "format": "MXFP4",
+          "scope": "matrix",
+          "basis": "dense",
+          "source": "[1, GPU Specifications]; [2, p.1 performance tables]",
+          "note": "每32元素scale；MXFP4/6行未给稀疏倍增；原文estimated。",
+          "article_line": 44,
+          "eligible_main": true
+        }
+      },
+      "supplements": {
+        "sparse_state": "yes",
+        "sparse_text": "A沿K轴每4个元素2个零并提供index；OCP-FP8/FP16/BF16/INT8列稀疏值；MX格式不自行倍增。",
+        "sparse_source": "[7, §7.5, pp.60-64; §12.10, pp.278-283,286-288]",
+        "host_text": "PCIe Gen5 x16，brochure列128GB/s，未明确方向及有效载荷口径。",
+        "host_source": "[2, p.1 Specifications]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "mi350x",
@@ -1504,11 +1846,46 @@
       "deployment": {
         "form": "OAM 加速器模组，54V UBB 供电。",
         "cooling": "被动散热；白皮书将其放在兼容 UBB 2.0 的风冷系统路线。",
-        "source": "[1, Requirements / Board Specifications]; [3, p.3, Table 2]"
+        "source": "[1, Requirements / Board Specifications]; [3, p.3; Table 2, p.19]"
       },
       "order": 14,
       "short_label": "MI350X",
-      "ratio_status": "已配对；矩阵 dense 或明确换算"
+      "ratio_status": "已配对；矩阵 dense 或明确换算",
+      "orientation": {
+        "group": "both",
+        "text": "AI training、inference 和高性能计算。",
+        "source": "[2, p.1, 产品简介]"
+      },
+      "low_precision": {
+        "FP8": {
+          "value_tflops": 4614,
+          "format": "OCP-FP8; MXFP8另列同值",
+          "scope": "matrix",
+          "basis": "dense",
+          "source": "[2, p.1 AI / HPC Peak Theoretical Performance]",
+          "note": "brochure精确显示值；现有FP16采用产品页2300，brochure的2309.6与架构复算有冲突，计算跨精度倍率须保留此条件。",
+          "article_line": 52,
+          "eligible_main": true
+        },
+        "FP4": {
+          "value_tflops": 9227.5,
+          "format": "MXFP4",
+          "scope": "matrix",
+          "basis": "dense",
+          "source": "[2, p.1 AI / HPC Peak Theoretical Performance]",
+          "note": "brochure精确显示值；MX路径不自行乘稀疏倍率。",
+          "article_line": 50,
+          "eligible_main": true
+        }
+      },
+      "supplements": {
+        "sparse_state": "yes",
+        "sparse_text": "A沿K轴每4个元素2个零并提供index；OCP-FP8/FP16/BF16/INT8列稀疏值；MX格式不自行倍增。",
+        "sparse_source": "[6, §7.5, pp.60-64; §12.10, pp.278-283,286-288]",
+        "host_text": "PCIe Gen5 x16，brochure列128GB/s，未明确方向及有效载荷口径。",
+        "host_source": "[2, p.1 Specifications]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "mi355x",
@@ -1606,11 +1983,46 @@
       "deployment": {
         "form": "OAM 加速器模组，54V UBB 供电。",
         "cooling": "产品页 Passive & Active，白皮书 Passive/Liquid；支持直接液冷高密度部署，不限定所有模组只用一种实现。",
-        "source": "[1, Requirements / Board Specifications]; [3, p.3, Table 2]"
+        "source": "[1, Requirements / Board Specifications]; [3, p.3; Table 2, p.19]"
       },
       "order": 15,
       "short_label": "MI355X",
-      "ratio_status": "已配对；矩阵 dense 或明确换算"
+      "ratio_status": "已配对；矩阵 dense 或明确换算",
+      "orientation": {
+        "group": "both",
+        "text": "AI training、inference 和高性能计算。",
+        "source": "[2, p.1, 产品简介]"
+      },
+      "low_precision": {
+        "FP8": {
+          "value_tflops": 5033.2,
+          "format": "OCP-FP8; MXFP8另列同值",
+          "scope": "matrix",
+          "basis": "dense",
+          "source": "[2, p.1 AI / HPC Peak Theoretical Performance]",
+          "note": "与现有FP16=2516.6同源；不要改用网页舍入值替换。",
+          "article_line": 52,
+          "eligible_main": true
+        },
+        "FP4": {
+          "value_tflops": 10066.3,
+          "format": "MXFP4",
+          "scope": "matrix",
+          "basis": "dense",
+          "source": "[2, p.1 AI / HPC Peak Theoretical Performance]",
+          "note": "MFMA的A/B均用FP4/FP6时才有最快周期；任一FP8走较慢路径。",
+          "article_line": 50,
+          "eligible_main": true
+        }
+      },
+      "supplements": {
+        "sparse_state": "yes",
+        "sparse_text": "A沿K轴每4个元素2个零并提供index；OCP-FP8/FP16/BF16/INT8列稀疏值；MX格式不自行倍增。",
+        "sparse_source": "[6, §7.5, pp.60-64; §12.10, pp.278-283,286-288]",
+        "host_text": "PCIe Gen5 x16，brochure列128GB/s，未明确方向及有效载荷口径。",
+        "host_source": "[2, p.1 Specifications]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "mi455x",
@@ -1718,7 +2130,42 @@
       },
       "order": 16,
       "short_label": "MI455X",
-      "ratio_status": "已配对；矩阵 dense 或明确换算"
+      "ratio_status": "已配对；矩阵 dense 或明确换算",
+      "orientation": {
+        "group": "both",
+        "text": "面向 Helios 机架系统的 AI training、inference 和 fine-tuning。",
+        "source": "[1, opening]; [2, pp.1-2]"
+      },
+      "low_precision": {
+        "FP8": {
+          "value_tflops": 20133,
+          "format": "OCP FP8; MXFP8另列同值",
+          "scope": "matrix",
+          "basis": "dense",
+          "source": "[2, p.1 AI Peak Theoretical Performance]",
+          "note": "规格表未列FP8稀疏峰值；FP8 WMMA C/D可选FP16/FP32，未逐模式给峰值。",
+          "article_line": 59,
+          "eligible_main": true
+        },
+        "FP4": {
+          "value_tflops": 40265,
+          "format": "OCP MXFP4",
+          "scope": "matrix",
+          "basis": "dense",
+          "source": "[2, p.1 AI Peak Theoretical Performance]; [9, §7.12.6, pp.103-105]",
+          "note": "支持16或32元素scale组，按指令限制使用；block-scale WMMA不支持结构化稀疏。",
+          "article_line": 57,
+          "eligible_main": true
+        }
+      },
+      "supplements": {
+        "sparse_state": "yes",
+        "sparse_text": "SWMMAC沿K轴2:4；产品仅FP16/BF16/INT8列稀疏峰值。FP8稀疏指令存在但未列峰值；block-scale WMMA不支持稀疏。",
+        "sparse_source": "[2, p.1]; [9, Table 43, pp.95-96; §7.12.3, p.101; §7.12.6, pp.103-105]",
+        "host_text": "CPU-GPU Infinity Fabric 16 lanes，256GB/s双向并提供主机访问GPU内存的一致性；2×PCIe Gen6 x16属于NIC scale-out。",
+        "host_source": "[4, p.14]; [4, p.13]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "tpu_v4",
@@ -1820,7 +2267,21 @@
       },
       "order": 17,
       "short_label": "TPU v4",
-      "ratio_status": "已配对；矩阵 dense 或明确换算"
+      "ratio_status": "已配对；矩阵 dense 或明确换算",
+      "orientation": {
+        "group": "training",
+        "text": "官方架构论文以大规模训练为主要定位；此标签不表示不能用于推理。",
+        "source": "[1, pp.2,5–7]"
+      },
+      "low_precision": {},
+      "supplements": {
+        "sparse_state": "unknown",
+        "sparse_text": "现有记录未确认通用结构化稀疏矩阵倍增；SparseCore/不规则访问卸载不能等同于2:4矩阵执行。",
+        "sparse_source": "",
+        "host_text": "PCIe Gen3 x16；模型估算每方向约16GB/s，型号物理接口与开发估算分别记录。",
+        "host_source": "[2, Other]; [7, Table 1 and p.7 footnote 4]; [20, PCIe bandwidth is limited]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "tpu_v5e",
@@ -1929,7 +2390,22 @@
       },
       "order": 18,
       "short_label": "TPU v5e",
-      "ratio_status": "已配对；计算口径带条件"
+      "ratio_status": "已配对；计算口径带条件",
+      "orientation": {
+        "group": "inference",
+        "text": "JAX 架构教程称 v5e 为 inference-optimized；Cloud 同时提供训练与推理。按设计侧重归偏推理，另检查兼顾分类。",
+        "source": "[1, System architecture and Configurations]; [20, What Is a TPU?]",
+        "alternative_group": "both"
+      },
+      "low_precision": {},
+      "supplements": {
+        "sparse_state": "unknown",
+        "sparse_text": "现有记录未确认通用结构化稀疏矩阵倍增；SparseCore/不规则访问卸载不能等同于2:4矩阵执行。",
+        "sparse_source": "",
+        "host_text": "PCIe路径存在；开发者教程估算约16GB/s/TPU；代际/lane数与额定方向规格未确认，不作物理规格定值。",
+        "host_source": "[20, TPU specs]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "tpu_v5p",
@@ -1968,9 +2444,9 @@
           "source": "已查范围：[1, System architecture]; [2, Table1]; [21, TPU_V5P branch and is_matmul_supported]"
         },
         "FP8": {
-          "state": "yes",
-          "detail": "Cloud标FP8、论文标BF8，均有矩阵峰值；不推定所有FP8变体。",
-          "source": "[1, System architecture]; [2, Table1]"
+          "state": "conditional",
+          "detail": "Cloud列FP8459TFLOPS、论文用BF8；Google Ironwood发布文将v5p FP8标为emulated，保留模拟执行条件。",
+          "source": "[1, System architecture]; [2, Table 1]; [24, Figure 2 caption]"
         },
         "FP4": {
           "state": "unknown",
@@ -2038,7 +2514,36 @@
       },
       "order": 19,
       "short_label": "TPU v5p",
-      "ratio_status": "已配对；计算口径带条件"
+      "ratio_status": "已配对；计算口径带条件",
+      "orientation": {
+        "group": "training",
+        "text": "官方突出大规模模型训练；支持推理另列，不按内存规模分类。",
+        "source": "[1, System architecture]; [4, Inside Cloud TPU v5p; Leveraging Google’s deep experience to help power the future of AI]"
+      },
+      "low_precision": {
+        "FP8": {
+          "value_tflops": 459,
+          "format": "FP8/BF8（原文标签）",
+          "scope": "matrix",
+          "basis": "condition_unspecified",
+          "source": "[1, System architecture]; [2, Table 1]; [24, Figure 2 caption]",
+          "note": "Cloud用FP8、论文用BF8；累加/输出与dense条件未全面展开。 官方Ironwood发布文Figure 2称v5p的FP8为emulated；当前矩阵峰值保留459但标转换/模拟条件，不称原生FP8。",
+          "article_line": 22,
+          "eligible_main": true,
+          "execution": "emulated",
+          "additional_source_url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/ironwood-tpu-age-of-inference/",
+          "additional_source_location": "Figure 2 caption",
+          "additional_source_provenance": "主会话已核官方原文并提供；维度代理未联网"
+        }
+      },
+      "supplements": {
+        "sparse_state": "unknown",
+        "sparse_text": "现有记录未确认通用结构化稀疏矩阵倍增；SparseCore/不规则访问卸载不能等同于2:4矩阵执行。",
+        "sparse_source": "",
+        "host_text": "CPU经PCIe连接；代际/lane数未公布。开发教程约16GB/s/TPU；DCN6.25GB/s为分摊host网络，非芯片NIC。",
+        "host_source": "[1, Configurations]; [2, p.5]; [20, TPU specs]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "tpu_v6e",
@@ -2147,7 +2652,33 @@
       },
       "order": 20,
       "short_label": "TPU v6e",
-      "ratio_status": "已配对；计算口径带条件"
+      "ratio_status": "已配对；计算口径带条件",
+      "orientation": {
+        "group": "inference",
+        "text": "Google 设计团队跨代论文明确称 Trillium focused on inference；Cloud 覆盖训练与推理。按设计侧重归偏推理，另检查兼顾分类。",
+        "source": "[24, p.1, footnote 2]; [1, opening]; [5, opening]",
+        "alternative_group": "both"
+      },
+      "low_precision": {
+        "FP8": {
+          "value_tflops": 918,
+          "format": "FP8（官方产品表）",
+          "scope": "matrix",
+          "basis": "condition_unspecified",
+          "source": "[2, TPU architecture specifications]",
+          "note": "与官方BF16=918同速；JAX920是开发模型替代，不能混用于本行比例。",
+          "article_line": 24,
+          "eligible_main": true
+        }
+      },
+      "supplements": {
+        "sparse_state": "unknown",
+        "sparse_text": "现有记录未确认通用结构化稀疏矩阵倍增；SparseCore/不规则访问卸载不能等同于2:4矩阵执行。",
+        "sparse_source": "",
+        "host_text": "开发估算PCIe约32GB/s/TPU；代际/lane数未确认，DCN12.5GB/s为分摊host网络。",
+        "host_source": "[20, TPU specs]; [1, Supported configurations and VM types]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "tpu7x",
@@ -2262,7 +2793,33 @@
       },
       "order": 21,
       "short_label": "TPU7x",
-      "ratio_status": "已配对；计算口径带条件"
+      "ratio_status": "已配对；计算口径带条件",
+      "orientation": {
+        "group": "inference",
+        "text": "首发明确以 inference 为设计目标，后续技术资料同时覆盖训练和 serving；本报告主分类偏推理，另检查兼顾分类。",
+        "source": "[24, opening]; [4, title]; [1, Programming model]",
+        "alternative_group": "both"
+      },
+      "low_precision": {
+        "FP8": {
+          "value_tflops": 4614,
+          "format": "FP8（产品规格）",
+          "scope": "matrix",
+          "basis": "condition_unspecified",
+          "source": "[1, System architecture]; [5, Table 1 and pp.2,6]",
+          "note": "官方峰值，未说明结构化稀疏条件；JAX每核2300两核4600为另一模型。",
+          "article_line": 20,
+          "eligible_main": true
+        }
+      },
+      "supplements": {
+        "sparse_state": "unknown",
+        "sparse_text": "现有记录未确认通用结构化稀疏矩阵倍增；SparseCore/不规则访问卸载不能等同于2:4矩阵执行。",
+        "sparse_source": "",
+        "host_text": "数据接口PCIe Gen5 x16；另有Gen2 x1管理通道，不作第二条等价数据通道。",
+        "host_source": "[4, pp.15,22]; [5, Table 1 and p.7 footnote 4]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "tpu8t",
@@ -2364,7 +2921,47 @@
       },
       "order": 22,
       "short_label": "TPU 8t",
-      "ratio_status": "硬件 16 位峰值未定"
+      "ratio_status": "硬件 16 位峰值未定",
+      "orientation": {
+        "group": "training",
+        "text": "官方以pretraining为主要定位。",
+        "source": "[1, TPU 8t: The pre-training powerhouse]"
+      },
+      "low_precision": {
+        "FP4": {
+          "value_tflops": 12600,
+          "format": "FP4（技术文章规格）",
+          "scope": "matrix",
+          "basis": "condition_unspecified",
+          "source": "[1, Native FP4 and Peak FP4 PFLOPs]",
+          "note": "单芯片；未公开全部缩放/累加/稠密计数条件，不除4制造FP16。",
+          "article_line": 21,
+          "eligible_main": true
+        }
+      },
+      "supplements": {
+        "sparse_state": "unknown",
+        "sparse_text": "现有记录未确认通用结构化稀疏矩阵倍增；SparseCore/不规则访问卸载不能等同于2:4矩阵执行。",
+        "sparse_source": "",
+        "host_text": "数据接口PCIe Gen5 x16；另有Gen2 x1管理通道；TPUDirect RDMA/Storage为直达设备的数据路径。",
+        "host_source": "[1, Figure 1; Faster storage access; Figure 3]"
+      },
+      "supplementary_compute": [
+        {
+          "value_tflops": 996.1,
+          "format": "BF16",
+          "basis": "software_model",
+          "source": "[21, TPU_8T branch]",
+          "note": "JAX静态开发模型；8t一核，8i两核合计；不进入产品额定峰值主图。"
+        },
+        {
+          "value_tflops": 5976.9,
+          "format": "FP8",
+          "basis": "software_model",
+          "source": "[21, TPU_8T branch]",
+          "note": "JAX静态开发模型；不与技术文章FP4峰值相除。"
+        }
+      ]
     },
     {
       "id": "tpu8i",
@@ -2466,7 +3063,47 @@
       },
       "order": 23,
       "short_label": "TPU 8i",
-      "ratio_status": "硬件 16 位峰值未定"
+      "ratio_status": "硬件 16 位峰值未定",
+      "orientation": {
+        "group": "inference",
+        "text": "官方将 sampling、serving 与推理相关 post-training 作为主要目标。",
+        "source": "[1, TPU 8i: The sampling and serving specialist; The Collectives Acceleration Engine]"
+      },
+      "low_precision": {
+        "FP4": {
+          "value_tflops": 10100,
+          "format": "FP4（技术文章规格）",
+          "scope": "matrix",
+          "basis": "condition_unspecified",
+          "source": "[1, Peak FP4 PFLOPs]",
+          "note": "单芯片；官方发布图出现FP8标签冲突，必须显式注释；可在条件面板显示，不进入严格子集。",
+          "article_line": 21,
+          "eligible_main": true
+        }
+      },
+      "supplements": {
+        "sparse_state": "unknown",
+        "sparse_text": "现有记录未确认通用结构化稀疏矩阵倍增；SparseCore/不规则访问卸载不能等同于2:4矩阵执行。",
+        "sparse_source": "",
+        "host_text": "数据接口PCIe Gen5 x16；另有Gen2 x1管理通道。",
+        "host_source": "[1, Figure 4]"
+      },
+      "supplementary_compute": [
+        {
+          "value_tflops": 1101,
+          "format": "BF16",
+          "basis": "software_model",
+          "source": "[21, TPU_8I branch]",
+          "note": "JAX静态开发模型；8t一核，8i两核合计；不进入产品额定峰值主图。"
+        },
+        {
+          "value_tflops": 8808,
+          "format": "FP8",
+          "basis": "software_model",
+          "source": "[21, TPU_8I branch]",
+          "note": "JAX静态开发模型；不与技术文章FP4峰值相除。"
+        }
+      ]
     },
     {
       "id": "inferentia1",
@@ -2575,7 +3212,21 @@
       },
       "order": 24,
       "short_label": "Inf1",
-      "ratio_status": "已配对；计算口径带条件"
+      "ratio_status": "已配对；计算口径带条件",
+      "orientation": {
+        "group": "inference",
+        "text": "官方面向云端机器学习推理，经Inf1实例使用。",
+        "source": "[1, Inferentia Architecture]; [2, Optimized for high throughput and low latency]"
+      },
+      "low_precision": {},
+      "supplements": {
+        "sparse_state": "unknown",
+        "sparse_text": "现有记录未确认结构化稀疏矩阵执行条件；不据此认定不支持。",
+        "sparse_source": "",
+        "host_text": "固定版本官方框图标Host PCIe Gen4；lane数、额定带宽未标明。",
+        "host_source": "[8, Inferentia architecture diagram]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "inferentia2",
@@ -2690,7 +3341,32 @@
       },
       "order": 25,
       "short_label": "Inf2",
-      "ratio_status": "已配对；矩阵 dense 或明确换算"
+      "ratio_status": "已配对；矩阵 dense 或明确换算",
+      "orientation": {
+        "group": "inference",
+        "text": "官方面向生成式AI等推理负载，经Inf2使用。",
+        "source": "[1, chip table]; [5, opening]"
+      },
+      "low_precision": {
+        "FP8": {
+          "value_tflops": 184,
+          "format": "cFP8",
+          "scope": "matrix",
+          "basis": "derived_dense",
+          "source": "[2, engine width/frequency table and Tensor Engine: Data Types]",
+          "note": "2核 × 92TFLOPS纯Tensor；与现有FP16=184统一，不用整芯片advertised190。cFP8编码细节未完整展开。",
+          "article_line": 38,
+          "eligible_main": true
+        }
+      },
+      "supplements": {
+        "sparse_state": "unknown",
+        "sparse_text": "现有记录未确认结构化稀疏矩阵执行条件；不据此认定不支持。",
+        "sparse_source": "",
+        "host_text": "主机PCIe路径已确认；所引资料未给代际、lane数或型号级带宽。",
+        "host_source": "[2, device diagram and memory hierarchy]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "trainium1",
@@ -2805,7 +3481,32 @@
       },
       "order": 26,
       "short_label": "Trn1",
-      "ratio_status": "已配对；矩阵 dense 或明确换算"
+      "ratio_status": "已配对；矩阵 dense 或明确换算",
+      "orientation": {
+        "group": "training",
+        "text": "官方主要面向训练，Neuron 文档另列推理支持。",
+        "source": "[5, Product details]; [1, Neuron导航“Trn1/Trn1n Inference Performance”和“Inference on Inf2/Trn1/Trn2”]"
+      },
+      "low_precision": {
+        "FP8": {
+          "value_tflops": 184,
+          "format": "cFP8",
+          "scope": "matrix",
+          "basis": "derived_dense",
+          "source": "[2, engine width/frequency table and Tensor Engine: Data Types]",
+          "note": "2核 × 92TFLOPS纯Tensor；与现有FP16=184统一，不用整芯片advertised190。cFP8编码细节未完整展开。",
+          "article_line": 36,
+          "eligible_main": true
+        }
+      },
+      "supplements": {
+        "sparse_state": "not_applicable",
+        "sparse_text": "Trainium2 官方跨代表将 Trainium1 的 FP8/FP16/BF16/TF32 Sparse 峰值列为 Not applicable；保留原表状态，不记作零吞吐。",
+        "sparse_source": "[8, Compute comparison table]",
+        "host_text": "主机PCIe路径已确认；所引资料未给代际、lane数或型号级带宽。",
+        "host_source": "[1, chip architecture]; [2, device diagram]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "trainium2",
@@ -2902,8 +3603,8 @@
             "source": "[2, Trainium2 Device Diagram]"
           }
         ],
-        "note": "主值取芯片页96 GiB+2.9 TB/s；HBM3由Trn2产品页确认。",
-        "source": "[1, Memory]; [5, Benefits: Maximize training and inference performance for Generative AI models]"
+        "note": "主值取芯片页96 GiB+2.9 TB/s；HBM3由Trn2产品页确认。 HBM3 代际由 Trn2 产品页说明。",
+        "source": "[1, Memory]; [5, Benefits: Maximize training and inference performance for Generative AI models]; [5, Benefits: Maximize training and inference performance for Generative AI models]"
       },
       "organization": {
         "onchip": "8个NCv3各28 MiB SBUF+2 MiB PSUM。",
@@ -2920,7 +3621,33 @@
       },
       "order": 27,
       "short_label": "Trn2",
-      "ratio_status": "已配对；矩阵 dense 或明确换算"
+      "ratio_status": "已配对；矩阵 dense 或明确换算",
+      "orientation": {
+        "group": "both",
+        "text": "2024 GA明确为训练与推理共同设计；2023首次预告侧重训练，作为历史敏感性分支。",
+        "source": "[12, opening and David Brown statement]; [13, EC2 UltraClusters of Trainium2]; [5, Why Amazon EC2 Trn2?]",
+        "alternative_group": "training"
+      },
+      "low_precision": {
+        "FP8": {
+          "value_tflops": 1264,
+          "format": "FP8 E4/E5 double-row",
+          "scope": "matrix",
+          "basis": "derived_dense",
+          "source": "[2, Table 11 and Tensor Engine; Double FP8 Matmul Performance]",
+          "note": "8核 × 158TFLOPS；对应FP16=8×79=632。E3不翻倍；double FP8不能与sparse、column tiling或transpose mode合用。",
+          "article_line": 23,
+          "eligible_main": true
+        }
+      },
+      "supplements": {
+        "sparse_state": "yes",
+        "sparse_text": "支持4:16、4:12、4:8、2:8、2:4、1:4、1:2；double FP8不能与sparse matmul同时使用，最高值不能套所有模式。",
+        "sparse_source": "[2, Double FP8 Matmul Performance]; [3, Tensor Engine]",
+        "host_text": "主机PCIe路径已确认；所引资料未给代际与lane数。",
+        "host_source": "[2, Trainium2 Device Diagram]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "trainium3",
@@ -3035,7 +3762,44 @@
       },
       "order": 28,
       "short_label": "Trn3",
-      "ratio_status": "已配对；矩阵 dense 或明确换算"
+      "ratio_status": "已配对；矩阵 dense 或明确换算",
+      "orientation": {
+        "group": "both",
+        "text": "GA正文和当前产品页共同强调训练与serving；2024预告训练芯片称谓仅作历史敏感性分支。",
+        "source": "[6, opening and training and serving paragraph]; [5, Why Amazon EC2 Trn3 UltraServers?]",
+        "alternative_group": "training"
+      },
+      "low_precision": {
+        "FP8": {
+          "value_tflops": 2520,
+          "format": "MXFP8",
+          "scope": "matrix",
+          "basis": "derived_dense",
+          "source": "[2, Table 11 and Tensor Engine]; [3, Tensor Engine]",
+          "note": "8核 × 315TFLOPS；对应FP16=632；不同于advertised2517。每32元素共享8-bit scale。",
+          "article_line": 23,
+          "eligible_main": true
+        },
+        "FP4": {
+          "value_tflops": 2520,
+          "format": "MXFP4输入，计算前映射为MXFP8",
+          "scope": "matrix",
+          "basis": "derived_dense",
+          "source": "[2, Table 11 and Quad-MXFP8/MXFP4 Matmul Performance]; [3, Tensor Engine]",
+          "note": "8核 × 315TFLOPS；转换输入路径单独标记，不能称原生FP4乘法阵列；MXFP4与MXFP8同速。",
+          "article_line": 23,
+          "eligible_main": true,
+          "execution": "converted"
+        }
+      },
+      "supplements": {
+        "sparse_state": "yes",
+        "sparse_text": "支持4:16、4:12、4:8、2:8、2:4、1:4、1:2；稀疏FP16/BF16/TF32峰值与MX模式分开。",
+        "sparse_source": "[1, Compute]; [3, Tensor Engine]",
+        "host_text": "系统文档存在多组PCIe Gen6交换连接，但属于设备间通信；不足以确定单芯片到host CPU的完整接口规格。",
+        "host_source": "[4, Trn3 UltraServer Connectivity and Networking; Routing and address-based switching]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "ascend310",
@@ -3137,7 +3901,21 @@
       },
       "order": 29,
       "short_label": "Ascend 310",
-      "ratio_status": "主存配置未固定"
+      "ratio_status": "主存配置未固定",
+      "orientation": {
+        "group": "inference",
+        "text": "终端与边缘推理 SoC。",
+        "source": "[1, pp.24,33]"
+      },
+      "low_precision": {},
+      "supplements": {
+        "sparse_state": "unknown",
+        "sparse_text": "现有记录未确认结构化稀疏矩阵执行条件；不据此认定不支持。",
+        "sparse_source": "",
+        "host_text": "PCIe 3.0 x1至x4 RC/EP控制器；支持根复合体/端点角色，具体板级连接取决于部署。",
+        "host_source": "[1, p.24]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "ascend910",
@@ -3239,7 +4017,21 @@
       },
       "order": 30,
       "short_label": "Ascend 910",
-      "ratio_status": "已配对；计算口径带条件"
+      "ratio_status": "已配对；计算口径带条件",
+      "orientation": {
+        "group": "training",
+        "text": "原始 Ascend 910，官方定位 AI 训练；不合并后续 910B/910C。",
+        "source": "[1, pp.25,37]; [6, opening]"
+      },
+      "low_precision": {},
+      "supplements": {
+        "sparse_state": "unknown",
+        "sparse_text": "MTE零值解压可减少搬运；现有资料不能确认Cube按固定N:M跳过乘法，不写成稀疏算力倍增。",
+        "sparse_source": "[1, p.9]; [2, PDF pp.3-4 / proceedings pp.791-792, Table 2, §2.2]",
+        "host_text": "Nimbus I/O die连接PCIe等外部接口；所引系统的32GB/s组间PCIe数值不作为单芯片host定值。",
+        "host_source": "[1, p.25]; [2, PDF p.8 / proceedings p.796]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "atlas300ia2_32",
@@ -3341,7 +4133,21 @@
       },
       "order": 31,
       "short_label": "Atlas 32GB",
-      "ratio_status": "已配对；计算口径带条件"
+      "ratio_status": "已配对；计算口径带条件",
+      "orientation": {
+        "group": "inference",
+        "text": "服务器 PCIe 推理卡；指南明确用途为推理，覆盖生成式模型、推荐、搜索与内容审核。",
+        "source": "[1, 概述]; [2, 应用场景]; [5, 产品简介“概述”]"
+      },
+      "low_precision": {},
+      "supplements": {
+        "sparse_state": "unknown",
+        "sparse_text": "现有记录未确认结构化稀疏矩阵执行条件；不据此认定不支持。",
+        "sparse_source": "",
+        "host_text": "PCIe 5.0 x16；公开代际与lane数，没有本卡持续DMA吞吐。",
+        "host_source": "[5, 系统框图、表3-1]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "atlas300ia2_64",
@@ -3443,7 +4249,21 @@
       },
       "order": 32,
       "short_label": "Atlas 64GB",
-      "ratio_status": "已配对；计算口径带条件"
+      "ratio_status": "已配对；计算口径带条件",
+      "orientation": {
+        "group": "inference",
+        "text": "服务器 PCIe 推理卡；指南明确用途为推理，覆盖生成式模型、推荐、搜索与内容审核。",
+        "source": "[1, 概述]; [2, 应用场景]; [5, 产品简介“概述”]"
+      },
+      "low_precision": {},
+      "supplements": {
+        "sparse_state": "unknown",
+        "sparse_text": "现有记录未确认结构化稀疏矩阵执行条件；不据此认定不支持。",
+        "sparse_source": "",
+        "host_text": "PCIe 5.0 x16；公开代际与lane数，没有本卡持续DMA吞吐。",
+        "host_source": "[5, 系统框图、表3-1]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "ascend950pr",
@@ -3558,7 +4378,42 @@
       },
       "order": 33,
       "short_label": "950PR",
-      "ratio_status": "计算与内存档位未配对"
+      "ratio_status": "计算与内存档位未配对",
+      "orientation": {
+        "group": "inference",
+        "text": "推荐、大模型 prefill 和多模态推理。",
+        "source": "[1, PDF p.10 / 正文 p.6]"
+      },
+      "low_precision": {},
+      "supplements": {
+        "sparse_state": "unknown",
+        "sparse_text": "现有记录未确认结构化稀疏矩阵执行条件；不据此认定不支持。",
+        "sparse_source": "",
+        "host_text": "PCIe 5.0 x16标称128GB/s双向，占用4个UB端口；SerDes复用使其不能与2016GB/s UB上限直接相加。",
+        "host_source": "[1, PDF pp.15,29-35 / 正文pp.11,25-31]"
+      },
+      "supplementary_compute": [
+        {
+          "cube_count": 32,
+          "fp16_tflops": 432,
+          "fp8_tflops": 865,
+          "fp4_tflops": 1730,
+          "format": "Cube FP16/BF16；FP8/HiF8/MXFP8；MXFP4",
+          "basis": "config_unpaired",
+          "source": "[1, PDF pp.13-14 / 正文pp.9-10, 表3-1]",
+          "note": "纯Cube，不能加Vector；内存档位与计算档位未逐项映射，不进入固定SKU的B/P。"
+        },
+        {
+          "cube_count": 28,
+          "fp16_tflops": 378,
+          "fp8_tflops": 756,
+          "fp4_tflops": 1513,
+          "format": "Cube FP16/BF16；FP8/HiF8/MXFP8；MXFP4",
+          "basis": "config_unpaired",
+          "source": "[1, PDF pp.13-14 / 正文pp.9-10, 表3-1]",
+          "note": "纯Cube，不能加Vector；内存档位与计算档位未逐项映射，不进入固定SKU的B/P。"
+        }
+      ]
     },
     {
       "id": "ascend950dt",
@@ -3667,7 +4522,52 @@
       },
       "order": 34,
       "short_label": "950DT",
-      "ratio_status": "计算与内存档位未配对"
+      "ratio_status": "计算与内存档位未配对",
+      "orientation": {
+        "group": "both",
+        "text": "大模型预训练、后训练及推理，覆盖 prefill 和 decode。",
+        "source": "[1, PDF p.10 / 正文 p.6]"
+      },
+      "low_precision": {},
+      "supplements": {
+        "sparse_state": "unknown",
+        "sparse_text": "现有记录未确认结构化稀疏矩阵执行条件；不据此认定不支持。",
+        "sparse_source": "",
+        "host_text": "PCIe 5.0 x16标称128GB/s双向，占用4个UB端口；SerDes复用使其不能与2016GB/s UB上限直接相加。",
+        "host_source": "[1, PDF pp.15,29-35 / 正文pp.11,25-31]"
+      },
+      "supplementary_compute": [
+        {
+          "cube_count": 36,
+          "fp16_tflops": 486,
+          "fp8_tflops": 973,
+          "fp4_tflops": 1946,
+          "format": "Cube FP16/BF16；FP8/HiF8/MXFP8；MXFP4",
+          "basis": "config_unpaired",
+          "source": "[1, PDF pp.13-14 / 正文pp.9-10, 表3-1]",
+          "note": "纯Cube，不能加Vector；内存档位与计算档位未逐项映射，不进入固定SKU的B/P。"
+        },
+        {
+          "cube_count": 32,
+          "fp16_tflops": 432,
+          "fp8_tflops": 865,
+          "fp4_tflops": 1730,
+          "format": "Cube FP16/BF16；FP8/HiF8/MXFP8；MXFP4",
+          "basis": "config_unpaired",
+          "source": "[1, PDF pp.13-14 / 正文pp.9-10, 表3-1]",
+          "note": "纯Cube，不能加Vector；内存档位与计算档位未逐项映射，不进入固定SKU的B/P。"
+        },
+        {
+          "cube_count": 28,
+          "fp16_tflops": 378,
+          "fp8_tflops": 756,
+          "fp4_tflops": 1513,
+          "format": "Cube FP16/BF16；FP8/HiF8/MXFP8；MXFP4",
+          "basis": "config_unpaired",
+          "source": "[1, PDF pp.13-14 / 正文pp.9-10, 表3-1]",
+          "note": "纯Cube，不能加Vector；内存档位与计算档位未逐项映射，不进入固定SKU的B/P。"
+        }
+      ]
     },
     {
       "id": "groq_gen1",
@@ -3769,7 +4669,21 @@
       },
       "order": 35,
       "short_label": "GroqChip",
-      "ratio_status": "外部 DRAM 不适用"
+      "ratio_status": "外部 DRAM 不适用",
+      "orientation": {
+        "group": "inference",
+        "text": "官方LPU定位AI inference；本文为first-generation GroqChip。",
+        "source": "[3, Overview / Groq LPU AI Inference Technology and Software First]; [2, p.1]"
+      },
+      "low_precision": {},
+      "supplements": {
+        "sparse_state": "no_optimization_in_source",
+        "sparse_text": "第一代论文明确未采用pruning/sparsity优化；188TFLOPS等峰值不再乘稀疏倍率。",
+        "sparse_source": "[1, p.12, §§VI-VII]; [2, p.2, Performance]",
+        "host_text": "集成PCIe Gen4 x16控制器；DMA持续有效带宽和延迟未给出。",
+        "host_source": "[2, p.2, I/O]; [1, pp.4-5, §II]"
+      },
+      "supplementary_compute": []
     },
     {
       "id": "mlu590",
@@ -3871,41 +4785,36 @@
       },
       "order": 36,
       "short_label": "MLU590",
-      "ratio_status": "主存 / 峰值未确认"
+      "ratio_status": "主存 / 峰值未确认",
+      "orientation": {
+        "group": "training",
+        "text": "厂商2022年新闻称云端智能训练芯片，MLUarch05；不以软件支持范围反推独立销售状态。",
+        "source": "[1, 正文“在演讲的最后”及下一段]"
+      },
+      "low_precision": {},
+      "supplements": {
+        "sparse_state": "unknown",
+        "sparse_text": "现有记录未确认结构化稀疏矩阵执行条件；不据此认定不支持。",
+        "sparse_source": "",
+        "host_text": "厂商称升级PCIe接口；型号级代际、lane数和绝对带宽未公开。",
+        "host_source": "[1, 正文“据介绍”]"
+      },
+      "supplementary_compute": []
     }
   ],
   "review_notes": [
-    "本摘录以当前 10 篇 NVIDIA 产品详解为基础；引用编号属于各自产品详解，不能跨卡共用同号。",
-    "本轮直接查过的原始资料：H100/H200 NVL 产品简报、H100 PCIe 产品简报、H200 数据手册、Blackwell 数据手册、H100 架构白皮书；本地网页快照 L40S 产品页、H200 产品页、H200/H200 NVL 发布稿、Blackwell 发布稿、Blackwell Ultra 技术文章。其他事实沿用详解中已定位的摘录，本轮未重核全部原始页。另直接查看 Ada 架构白皮书 p.30 的精度/累加条件表及稀疏配对值。",
-    "16 位图可用 A100 312、H100 SXM 989.4、H100 PCIe 756、L4 121；H100 NVL 835.5、H200 SXM 989.5、H200 NVL 835.5 与 B200 2250 是显式稀疏倍率或同表脚注推导，须图例区分。L40S 与 B300 288GB 主图排除但仍列于覆盖范围。",
-    "H200 原文 INT8 单位写 TFLOPS；执行格式支持与单位无歧义的整数吞吐分开，本摘录没有把错单位自动修成 TOPS。",
-    "L4/L40S FP64 为普通 CUDA 算术支持，不表示具有高速 FP64 Tensor 通路。FP16/BF16 相同位宽不表示相同数值范围、舍入或累加语义，矩阵散点是规格资源比较，非精度等价实验。",
-    "L40S 16 位原表 dense 362.05 与 sparse 733 冲突，不改写为 366.5；该折半数只保留为条件敏感性候选。",
-    "H100 PCIe 的 NVLink 600/900 原文冲突需保留；L40S 64 GB/s 为 PCIe 主机端点，必须与专用 NVLink 分组；L4 方向未明不填。",
-    "B300 的 288 GB/最高 8 TB/s 与 270 GB/7.7 TB/s 不能跨配置拼算力或功耗；B200 180 GB 数据手册直接匹配 4.5 PFLOPS sparse 与 dense 半值脚注。",
-    "H200 NVL 官方明确 fine-tuning 与推理，归 both 并说明推理侧重；不因为 NVL 产品名或低功率自行归纯推理。",
-    "没有公开确认某格式不等于不支持，因此未知用 unknown；本摘录没有用零代表未公开、不适用或配置冲突。",
-    "本摘录覆盖12篇当前产品详解，没有改动产品详解、资料卡或原始资料，没有联网扩展。reference编号全部对应各自card文末编号。",
-    "格式矩阵的yes表示芯片AI执行路径可进行该精度运算；累加/转换/存储支持不单独计入。FP4包含明确的MXFP4但在detail保留scale；TF32原生路径明确被CDNA4移除记no，软件模拟写在detail。未提及采用unknown，不采用推断的no。",
-    "直接复核了AMD六款数据手册/brochure的性能规格页；MI300X另核第2页双向互联说明；CDNA4白皮书TF32、153.6GB/s段；CDNA5白皮书UALoE端点方向段与产品规格表。其余架构细节使用已引用的当前详解，不声称重新通读全部ISA。",
-    "直接复核了Ascend950白皮书PDF pp.10-15（定位、产品层级与表3-1），官方950PR产品页“最大配备128GB、1.6TB/s”与2025路线图950DT 144GB+4TB/s；这些只支持内存组合，不支持计算档位与内存组合配对。",
-    "直接复核了Atlas用户指南2026-06-01基本规格表3-1和电源管理本地快照，确认32GB/800GB/s、64GB/1.6TB/s、FP16 280TFLOPS、300/350W选择规则；不使用旧“原文未取得”状态。",
-    "Ascend310/910运算峰值及Atlas峰值未明确dense/sparse条件，compute16保留官方数但标condition_unspecified，应与确认dense子集分开。Ascend950多档位compute16排除。",
-    "Ascend910容量来自官方ModelZoo具体测试环境，带宽来自芯片架构论文，容量图应带证据层级标记；其300W是芯片rated TDP，不能与AMD OAM TBP和PCIe卡最大功耗混为同一功率边界。Ascend310仅8W原报值，未假定为最大功耗或TDP。",
-    "MI350X dense16采用产品页舍入2300TFLOPS，brochure2309.6及资源复算2306.8672的差异在note保存；MI455X采用专用资料23.3TB/s，Helios页19.6TB/s作为离散来源差异，不画连续区间。",
-    "端点值均为设备对设备scale-up的收发合计，且保留协议和复用条件；UALoE 3600GB/s、UnifiedBus2016GB/s有明确双向原文。PCIe-only、HCCS方向或统计边界不明的产品为unknown，不填0。",
-    "交付范围：14个产品，id/card/label/vendor沿用memory36.json。source中的参考编号均属于对应产品详解，不是此JSON的全局编号。",
-    "精度矩阵表示已确认执行路径可接受的数值格式，不声称同位宽原生乘法器。conditional用于输入进入硬件计算前有映射/精度策略、软件限定组合或证据层级须注明；单纯存储和独立格式转换不作为yes。",
-    "所有容量与带宽数值字段为十进制GB/TB/s。GiB与GB来源冲突按同源组合保留alternatives，不能任意交叉配对或把离散来源差异画连续区间。",
-    "TPU8t/8i的JAX BF16静态模型996.1/1101 TFLOPS仅保留候选，compute16明确excluded，不进入产品16位配比图。",
-    "AWS纯Tensor分母按已披露每核峰值乘物理核数：NCv2两核184，NCv3/NCv4八核632 TFLOPS。芯片190/667/671广告峰值另留原值，不与纯Tensor值相互校正；79/92已为来源取整。NCv2普通矩阵峰值未明写dense标签，主会话若要求原文必须出现dense，可将其basis降为condition_unspecified。",
-    "TPUv4有明确阵列、频率和每乘加计两操作的条件推导；v5e/v5p/v6e/7x的官方矩阵值保留condition_unspecified，不从没有完整条件的型号表宣称严格相同dense测量。",
-    "TPU fleet平均功耗与v4生产实测峰值全部不填max_w。Groq max_w=215仅按scope=chip_tdp表示TDP；实际maximum为300 W另存，绝不能改名TDP。AWS与MLU590绝对功耗未知。",
-    "NeuronLink-v1/v2/v3整芯片数字方向不明；v4还存在来源/部署差异，均不能入明确双向端点轴。Trn3 Gen2分层双向256/320/128也不能相加校正2048 GiB/s/device。Groq480为原始引脚速率，须独立标记与有效负载区别。",
-    "定位按明确官方用途记录：TPU v5p包含serving，TPU8i包含post-training，Trainium2/3同时训练推理。Trainium1的both来自官方产品训练定位与已保存Neuron页面明确Trn1推理文档入口，详解正文只强调训练；主文如仅采用产品正文定位，需保留这一支持范围差别。",
-    "已通读14篇产品详解；未改原文，未联网补研。额外已读原文：Google/JAX/2026-09-17/jax-info-source.py中is_matmul_supported及v4/v5e/v5p/v6e/7x/8t/8i分支；scaling-book-tpus.md的VPU FP32说明。",
-    "额外已读AWS原文：PackageImplementations/2026-08-13/A05-trainium-inferentia2-nki-v2.29.1-2026-08-13.html；Trainium2/2026-08-12/S02_trainium2_nki_architecture_v2.29.1.html；PackageImplementations/2026-08-13/A07-trainium3-nki-v2.31.0-2026-08-13.html的Tensor/Vector/Scalar/Compute Engine Specifications段；产品详解补充/2026-09-17/trn1-chip.html正文与导航、trn1-product.html用途段、trn1-system.html导航。",
-    "额外已读Groq原文：网页快照/Groq/GroqChip/2026-09-17/lpu-explained.html的Overview与first-generation说明。其他论文/PDF数字本轮沿用已引用产品详解，不宣称重新全文核验原始PDF。",
-    "两次非证据阻塞已修复：一次目录名拼写错误属于操作错误；一次本地bs4缺失属于工具/运行环境依赖缺失，已使用标准库HTMLParser读取，不降低摘录结果质量。"
+    "主要设计取向与官方支持用途分开；不依据带宽、功率或产品名分类。Trainium2/3按GA及当前产品目标列训推兼顾，早期训练表述作敏感性分支。",
+    "source中的参考编号属于各条card指向的产品详解，不是JSON全局编号，也不一定等于原资料卡编号。",
+    "所有数值容量与带宽统一到十进制GB/TB/s，原文GB/GiB及来源差异保留在注释和alternatives中。",
+    "第一层27个16位配对对象含19个明确矩阵dense或条件换算、8个条件项；36个产品均保留完整证据条目。",
+    "AWS纯Tensor分母采用已披露每核峰值乘物理核数：NCv2两核184，NCv3/NCv4八核632 TFLOP/s。原报每核已取整，190/667/671 headline另列，不解释其差额来源。",
+    "H100 SXM当前选3.35TB/s；白皮书3352GB/s注明NotFinalized。H200 NVL选专属简报4.813TB/s，综合表4.8TB/s另列，不将显示差异解释为实测收益。",
+    "MI350X 16位选产品页2300TFLOP/s，简报2309.6及资源复算的不同分支保留；本轮不对该型号派生低精度倍率。MI355X选简报2516.6，与网页2500分别记录。",
+    "B300容量配置与峰值、功率映射未解决；L40S原表dense/sparse矛盾保留；Ascend950多档计算未绑定到选定内存配置，均不强行配对。",
+    "TPU8保留FP4/FP8标签分歧，JAX BF16静态模型仅作为软件模型；TPUv5p FP8按Google官方emulated说明标有条件执行。Trainium3 MXFP4先映射MXFP8，两输入峰值相同。",
+    "设备互联只将方向和范围明确的端点写入bidir_gb_s。H100 PCIe 600/900GB/s冲突、AWS方向或部署差异分别保留，不把主机PCIe当成专用设备互联。",
+    "功率按board_max、module_max、chip_tdp分开；Groq215W为TDP、300W为maximum，云端平均功耗不填max_w。P/W为配置比值，不是实测能效。",
+    "新增事实由12个产品组官方资料研究补回原资料卡；第二层的组内原始资源、作用域和来源另存family-comparison-data.json，通用图表资源沿用本文件。",
+    "未知、不适用和配置冲突没有填零；保留36对象及原卡33完成/3调研中状态。"
   ]
 }

@@ -2,7 +2,7 @@
 
 > 模板版本：1.3（芯片架构事实口径）  
 > 卡片状态：已完成  
-> 资料截止日：2026-08-24
+> 资料截止日：2026-09-23
 
 本卡的主语是 NVIDIA H100 SXM5 80GB 模组 SKU。Hopper SM 与 GH100 die 用来解释本 SKU；H100 PCIe、H100 NVL、Grace Hopper、HGX、DGX 和 NVLink Switch System 均不是本卡的产品配置。
 
@@ -65,13 +65,16 @@
 | 时钟 | 1,830 MHz：FP8/FP16/BF16/TF32 Tensor Core 表项；1,980 MHz：FP64 Tensor Core、FP32 与 FP64 non-Tensor 表项 | GPU boost clock；白皮书没有把所有非 Tensor 路径逐项绑定到相邻时钟 | `[1, p. 39, Table 3]` |
 | 理论峰值 | FP8 Tensor：1,978.9/3,957.8 TFLOPS（dense/structured sparse，FP16 或 FP32 accumulate）；FP16/BF16 Tensor：989.4/1,978.9 TFLOPS；TF32 Tensor：494.7/989.4 TFLOPS；FP64 Tensor：66.9 TFLOPS；INT8 Tensor：1,978.9/3,957.8 TOPS；non-Tensor FP16/BF16 133.8 TFLOPS、FP32 66.9 TFLOPS、FP64 33.5 TFLOPS、INT32 33.5 TOPS | 全部为理论峰值。斜杠前为 dense，后为 NVIDIA structured-sparsity 条件；FP64 Tensor 与 non-Tensor 路径没有稀疏值 | `[1, pp. 20, 39-40, Tables 1, 3]` |
 | 内存类型与容量 | 80 GB HBM3，五个 stack，5,120-bit interface | H100 SXM5 单 GPU | `[1, pp. 18, 36, 40]` `[2, p. 2]` |
-| 内存带宽 | 3.35 TB/s | 2024 数据手册的当前名义值；白皮书 Table 3 的细化值为 3,352 GB/s | `[2, p. 2, Technical Specifications]` `[1, pp. 39-40, Table 3]` |
+| 内存带宽 | 3.35 TB/s | 2024 数据手册的名义值；白皮书 Table 3 另列 3,352 GB/s，但该行带有 H100 带宽尚未 finalized 的注记 | `[2, p. 2, Technical Specifications]` `[1, pp. 39-40, Table 3]` |
 | 主机接口 | PCIe Gen5 x16，64 GB/s 每方向，128 GB/s 双向合计 | 每 GPU 主机端点；不等于 NVLink 带宽 | `[1, pp. 49-50]` `[2, p. 2]` |
+| PCIe 事务与虚拟化 | Hopper 原生支持 32-bit 和 64-bit atomic CAS（比较并交换）、exchange 与 fetch-add；支持 SR-IOV（单根 I/O 虚拟化），PF（物理功能）或 VF（虚拟功能）可经 NVLink 访问 peer GPU | 共享 H100 架构能力；原子操作支持不等于 CPU/GPU cache coherence，VF 数也不等于 MIG 实例数 | `[1, p. 50, PCIe Gen 5]` |
 | 设备互联端点 | 18 条第四代 NVLink；每链路 25 GB/s 每方向；每 GPU 900 GB/s 双向聚合 | 每 GPU 端点铭牌口径；payload、持续带宽和延迟未公开 | `[1, p. 47]` `[2, pp. 2-3]` |
 | 内存访问语义 | 常规 NVLink 连接的 GPU 共享 common address space，并按 GPU physical address 路由；跨节点 NVLink Network 使用独立 Network Address Space 与 H100 address-translation hardware，endpoint 连接需由软件显式建立 | 两种系统连接模式不同，不能笼统写成统一内存或缓存一致性 | `[1, p. 47]` |
 | 跨设备集合通信能力 | 未找到 H100 GPU 内独立 collective engine | HGX 8-GPU 的 SHARP/in-network reduction 属外部 NVSwitch；TMA reduction 属单 GPU 数据搬运机制，均不写成 SKU 内跨设备 collective engine | `[1, pp. 15, 32-35, 47-48]` |
 | 功耗 | 最高 700 W，可配置 | Max TDP，不是固定持续功耗 | `[2, p. 2, Technical Specifications]` |
 | 形态与散热 | SXM5 模组；散热方式未公开 | 数据手册只把 `PCIe dual-slot air-cooled` 写在 H100 NVL 列，不能下放给 H100 SXM | `[1, p. 15]` `[2, p. 2, Form Factor]` |
+| MIG 分区 | 最多 7 个 10 GB MIG 实例，采用 2024 数据手册列值；Hopper 为每个 GPU instance 分配独占 crossbar port、L2 bank、memory controller 与 DRAM address bus | MIG（Multi-Instance GPU，多实例 GPU）通过硬件资源隔离提供服务质量；整 GPU 的 L2/HBM 汇总容量不能当作每个实例可用量，实例容量不据物理总量平均分配 | `[2, p. 2, Technical Specifications]` `[1, pp. 42-43, MIG Technology Review]` |
+| MIG 媒体与性能监视 | Hopper 的每个 MIG GPU instance 可分配至少一个 NVDEC 视频解码器和一个 NVJPG JPEG 解码器；每个 instance 有独立 performance monitor，支持 concurrent profiling | 共享 Hopper 架构机制；实际分配取决于实例配置，不表示同一解码器可重复计给多个实例 | `[1, p. 44, H100 MIG Enhancements]` |
 
 ## 6. 系统级互联上下文
 
@@ -93,7 +96,7 @@
 | die NoC 与片上带宽 | 未公开 | GH100 Figure 6、L2 与 SM 小节 | 不填写 L1/L2/register/NoC 带宽或延迟 |
 | NVLink/PCIe payload 与持续性能 | 未公开 | 白皮书 pp. 47, 49、数据手册 p. 2 | 保留厂商铭牌带宽和方向，不写实测或有效载荷值 |
 | Tensor Core 部分累加语义 | 未公开 | 白皮书 pp. 20-24, 39 | FP8/FP16/BF16 按明示累加格式记录；TF32/FP64/INT8 未从相邻格式补写 |
-| HBM 带宽版本 | 已解释 | 2022 发布材料曾给 3 TB/s，白皮书 v1.04 Table 3 给 3,352 GB/s，2024 数据手册给 3.35 TB/s | 当前 SKU 采用数据手册 3.35 TB/s；旧值仅视作发布期规格演进 |
+| HBM 带宽版本 | 已解释 | 2022 发布材料曾给 3 TB/s，白皮书 v1.04 Table 3 给 3,352 GB/s，并在该行注明 H100 memory bandwidth 尚未 finalized；2024 数据手册给 3.35 TB/s | 当前 SKU 采用数据手册 3.35 TB/s；3,352 GB/s 只保留为白皮书历史表值，不称作定版精确规格 |
 | H100 模组精确供货日 | 未找到 | 两份官方 PDF 与 full-production 公告 | 记录 H100 家族 2022-09-20 full production 和 2022-10 合作伙伴产品计划，不把家族状态改写成单独 SXM5 模组零售日期 |
 | 256-GPU NVLink Switch System | 发布期未交付 | 2022 白皮书 Figure 2 注释与 NVLink Network 小节 | 只保留架构目标，不写成 H100 SXM5 已交付系统能力 |
 

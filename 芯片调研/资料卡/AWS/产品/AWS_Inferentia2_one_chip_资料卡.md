@@ -2,7 +2,7 @@
 
 > 模板版本：1.3（芯片架构事实口径）  
 > 卡片状态：已完成  
-> 资料截止日：2026-08-25
+> 资料截止日：2026-09-23
 
 本卡采用一颗第二代AWS Inferentia2 chip/NeuronDevice作为正式比较对象。该芯片包含两个NeuronCore-v2（NCv2，第二代Neuron计算核）、32GiB HBM、32个DMA engine、6个CC-Core和2个NeuronLink-v2接口。`inf2.xlarge`与`inf2.8xlarge`各配置一颗芯片；6-chip与12-chip实例的聚合资源不下放。
 
@@ -39,13 +39,27 @@
 | 维度 | 公开事实 | 作用域与条件 | 来源 |
 |---|---|---|---|
 | 异构执行与调度 | 每个NCv2有Tensor、Vector、Scalar、GpSimd四个独立sequencer和instruction stream，可异步并行；Sync Engine触发DMA，硬件semaphore与compiler处理依赖同步 | 单个NCv2；完整芯片有2个 | `[2, NeuronCore-v2 Compute Engines]` |
-| TensorEngine | 128×128 PE systolic array；每个NCv2超过90TFLOPS FP16/BF16，完整芯片按官方表为190TFLOPS FP16/BF16/cFP8/TF32 | TensorE数据路径2×128 input、1×128 output，频率2.8GHz；pipeline和FMA计数细节未完整公开 | `[2, Tensor Engine and engine width/frequency table]` `[3, TensorEngine paragraph]` |
+| TensorEngine | 128×128 PE systolic array；每个 NCv2 的 TensorE 为 92 TFLOPS BF16/FP16/TF32/cFP8、23 TFLOPS FP32；两核纯 Tensor 资源加总为 184／46 TFLOPS | TensorE 数据路径 2×128 input、1×128 output，频率 2.8 GHz；184／46 为按 NKI 每核值推导，不能替代芯片页未解释执行路径构成的 190／47.5 headline | `[2, device overview; Tensor Engine: Data Types; engine width/frequency table]` `[1, Compute row]` |
 | VectorEngine | 128个parallel vector lanes，面向reduction、LayerNorm、pooling等；2.3TFLOPS FP32 | 数据路径128 input/output，频率1.12GHz；算术内部以FP32执行并自动cast | `[2, Vector Engine and engine width/frequency table]` `[3, VectorEngine paragraph]` |
 | ScalarEngine | 面向element-wise和标量运算；2.9TFLOPS FP32 | 数据路径128 input/output，频率1.4GHz | `[3, ScalarEngine paragraph]` `[2, engine width/frequency table]` |
 | GpSimd Engine | 8个可编程512-bit vector processor，可执行通用C code和custom operator；每个processor有64KB local data RAM | 引擎频率1.4GHz；不等同于8个独立NeuronCore | `[3, GPSIMD paragraph]` `[2, GpSimd Engine and engine width/frequency table]` |
 | 数值与累加路径 | TensorEngine接受cFP8/FP16/BF16/TF32/FP32/INT8输入，输出FP32/INT32；PSUM的matmul accumulation固定用FP32 | cFP8编码、INT8饱和、完整舍入和输出规则未全部公开；支持RNE与stochastic rounding | `[3, TensorEngine and rounding paragraphs]` `[2, Near-memory accumulation in PSUM]` |
 | 局部存储 | 每个NCv2有24MiB SBUF主数据scratchpad和2MiB PSUM累加buffer，均为128 partitions；PSUM每partition 8 banks | SBUF/PSUM由software/compiler管理，不是hardware cache | `[2, NeuronCore-v2 Compute Engines and memory hierarchy]` |
 | 稀疏与专用单元 | 未找到结构化稀疏Tensor path或专用MoE router；chip级有6个CC-Core用于collective communication | CC-Core不是TensorCore稀疏翻倍资源 | `[2, device overview]` |
+
+### 3.1 矩阵分块、局部接口与并行限制
+
+NKI 对 Trainium1 和 Inferentia2 给出共同的 NCv2 执行机制。下列容量、接口和启动成本均属于单个 NCv2，不能把两核局部空间合并解释为共享 cache。`partition` 是 SRAM 的并行分区，`bank` 是 PSUM 分区内可分别承接矩阵结果的存储单元。`[2, NeuronCore-v2 Compute Engines; Data Movement]`
+
+| 机制 | 公开事实 | 条件和含义 | 来源 |
+|---|---|---|---|
+| 矩阵输入与分块 | LoadStationary 先把固定输入载入 TensorEngine 内部，MultiplyMoving 使流动输入与之相乘；stationary[K,M] 与 moving[K,N] 执行 stationary.T @ moving | K、M 最大为 128，N 最大为 512；K 更大时分块并累加到同一 PSUM 位置，N 的限制来自单 bank 输出容量 | `[2, Tensor Engine: Layout and Tile Size]` |
+| 矩阵流水与预装 | 复用已加载 stationary 时，BF16/FP16/TF32/cFP8 连续 MultiplyMoving 的近似启动间隔为 max(N,64) 个 TensorEngine 周期；FP32 成本约为四倍。background LoadStationary 允许下一块固定输入预装与当前计算重叠 | 启动间隔不等同于单指令完成延迟；LoadStationary 本身也可能限制矩阵吞吐 | `[2, Tensor Engine: Performance Consideration]` |
+| PSUM 分 bank 累加 | 每 partition 为 16 KiB，分八个 bank，每 bank 容纳 512 个 32-bit 元素；TensorEngine 可控制逐元素 read-accumulate-write | 最多八组 matmul accumulation group 可并存，允许下一组矩阵计算与前一组结果处理重叠；Vector/Scalar 把 PSUM 当普通 SRAM 访问，不能发起这种累加 | `[2, Near-memory accumulation in PSUM]` |
+| SRAM 接口峰值与步长 | 每条 tensor 读或写接口在 1.4 GHz 下最多 128 elements/cycle；fastest free 维 stride 小于 16 B 时可达该峰值，大于 16 B 时吞吐减半；每次访问启动约有 60 周期开销 | 单接口、单方向；按 FP32 换算为 716.8 GB/s，按 FP16/BF16 换算为 358.4 GB/s，均为 128×元素字节数×1.4 GHz，不是整个 SRAM 的聚合带宽；原文未明确恰好 16 B 的边界 | `[2, Accessing SBUF/PSUM tensors using compute engines: Performance Consideration；本行换算]` |
+| 多引擎访问限制 | Vector 与 GpSimd 不能同时访问 SBUF；Vector 与 Scalar 不能同时访问 PSUM，编译器将冲突访问串行化 | 允许的 Tensor+Vector+Scalar 或 Tensor+GpSimd+Scalar 组合可同时保持各自 SBUF 接口峰值；PSUM 允许 Tensor+Vector 或 Tensor+Scalar；独立指令流不保证任意组合都能无争用执行 | `[2, Data Movement; Accessing SBUF/PSUM tensors using compute engines: Concurrent accesses]` |
+| GpSimd 局部 RAM 与连接 | 每 processor 的 64 KB TCM 为 512-bit 数据宽度、3-cycle 访问延迟；每 processor 固定连接 16 个 SBUF partition，读和写接口分别最多 512 bit/cycle | 八个 processor 覆盖 128 partition；接口峰值不能绕过 Vector/GpSimd 的 SBUF 共享限制 | `[2, GpSimd Engine: Memory Hierarchy and Fig. 54]` |
+| DMA scatter-gather | 一次 transfer 收集源 buffer 列表，再散写目的 buffer 列表；每个 buffer 内存连续，一个 engine 同时处理一个 transfer | 指南建议每 partition 连续数据达到 4 KiB 或以上并尽量使用全部 128 partition，以摊薄 buffer/transfer 开销；这不是合法传输的最小尺寸 | `[2, Data movement between HBM and SBUF using DMAs]` |
 
 ## 4. Die、chiplet 与 package
 
@@ -67,6 +81,7 @@
 | 实际使能计算资源 | 2个NeuronCore-v2、32个DMA engine、6个CC-Core | 单颗Inferentia2 | `[1, chip table]` `[2, device overview]` |
 | 时钟 | Tensor 2.8GHz；Vector 1.12GHz；Scalar和GpSimd各1.4GHz | engine clock，不存在一个公开的统一chip clock | `[2, engine width/frequency table]` |
 | 理论峰值 | 190TFLOPS FP16/BF16/cFP8/TF32；47.5TFLOPS FP32；380TOPS INT8 | per-chip advertised peak；未说明structured-sparse条件 | `[1, Compute row]` |
+| 纯 Tensor 派生峰值 | BF16/FP16/TF32/cFP8 为 184 TFLOPS；FP32 为 46 TFLOPS | 按两个 NCv2×每核 92／23 推导；普通矩阵路径，不含结构化稀疏倍数；保留每核原报取整条件，供同路径比较，与上一行芯片宣传值并列 | `[2, device overview; Tensor Engine: Data Types；本行资源加总]` |
 | 内存类型与容量 | 2个HBM stack，32GiB/chip；产品页写32GB HBM | HBM代际未公开；官方页面存在GB/GiB单位差异 | `[1, Device Memory row]` `[2, device overview]` `[5, high-bandwidth accelerator memory]` |
 | 内存带宽 | 当前技术页820GiB/s；NKI实现页和产品聚合口径为820GB/s | per-chip；官方未解释二进制/十进制标签差异 | `[1, Device Memory row]` `[2, device overview]` |
 | DMA | 32个DMA engine；chip级额定1TB/s DMA bandwidth，支持inline compression/decompression | 每个NCv2有16个DMA，每engine局部峰值27GiB/s；1TB/s的方向与有效负载未公开 | `[1, Data Movement row]` `[2, device overview and DMA section]` |
@@ -93,7 +108,7 @@
 | chip、NeuronDevice与Inf2 | 官方术语跨层 | Inferentia2是chip/NeuronDevice，Inf2是含1/6/12 chips的EC2 instance | 正式主语固定为一颗Inferentia2 chip/device |
 | HBM容量与带宽单位 | 一手资料单位不同 | 当前技术页32GiB、820GiB/s；NKI页32GiB、820GB/s；产品页32GB | 原单位并列，不静默换算 |
 | NeuronLink-v2带宽 | 版本化页面口径变化 | 早期v2.9.1表写384GiB/s/chip；较新Inf2架构表与当前产品页写192GiB/s或192GB/s | 采用较新192口径，并保留历史差异；不猜测单向/双向原因 |
-| NCv2与chip峰值 | 官方直接值不能简单相加 | NKI指南给每个TensorE 92TFLOPS FP16/BF16、23TFLOPS FP32；芯片页给两核合计190与47.5TFLOPS | 芯片规格采用直接per-chip值，NCv2值只写在Core层，不以乘法替代 |
+| NCv2与chip峰值 | 两类来源计数差异未解释 | NKI 给每核 TensorE 92 TFLOPS BF16/FP16/TF32/cFP8、23 TFLOPS FP32；两核纯 Tensor 派生值为 184／46，芯片页另报 190／47.5 | 保留两者；同路径矩阵比较可使用有公式的 184／46，不能声称它改正了官方 headline，也不由差值推断其他引擎贡献 |
 | DMA headline与单engine峰值 | 统计条件不同 | 芯片页写1TB/s DMA；NKI页写每个DMA engine 27GiB/s、每芯片32 engines | 分别保留，不用32×27推翻或重算headline |
 | NCv2与产品边界 | 架构共享但实现不同 | Trainium1和Inferentia2均用NCv2，后者有2条NeuronLink-v2，Trainium1有4条 | 复用Core机制，产品链路数量不互相下放 |
 | 工艺、die/package与功耗 | 未公开 | 当前Neuron硬件页、NKI指南、AWS产品页和GA文章 | 不采用第三方推测，不从实例perf/W反推瓦数 |

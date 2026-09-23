@@ -83,9 +83,13 @@ Thread Block Cluster 把多个 block 同时安排在一个 GPC 内；DSM（Distr
 
 H200 SXM5 通过 PCIe Gen5 与主机连接，官方 H200 方框图写明 128 GB/s 双向带宽。第四代 NVLink 的单 GPU 双向端点带宽为 900 GB/s。两者与 4.8 TB/s HBM 带宽分别处于图的不同位置。[2, p.4；1, p.4]
 
+官方发布稿说明，四卡和八卡 HGX H200 server board 与 HGX H100 系统的硬件和软件兼容，合作伙伴可升级已有系统设计。这是系统平台兼容声明，不能据此认定任意 H100 服务器都允许直接更换模组。[5, NVIDIA H200 Form Factors]
+
 NVLink 允许 GPU 访问对端内存，普通连接使用共同地址空间与 GPU 物理地址路由；这不能等同于缓存一致或一个统一的系统内存池。HGX 服务器中的 NVSwitch 和 SHARP 归约属于模组外系统设施，所引资料未列单 GPU 独立的跨设备集合通信引擎。[3, pp.15,47-48]
 
 H200 支持 MIG（Multi-Instance GPU，多实例 GPU），最多分为 7 个硬件隔离实例。当前 141 GB 配置的 profile 有 1g.18gb、1g.35gb、2g.35gb、3g.71gb、4g.71gb、7g.141gb 及带媒体资源的 1g.18gb+me；18 GB 是最小 profile 的名称所示容量，不能理解为任意分区都相同。[6, Supported GPUs; H200 MIG Profiles, Table 11]
+
+H200 专门 profile 表还给出计算与存储份额：1g.18gb 和 1g.35gb 都使用 1/7 的 SM、1/8 的 L2 和一个 copy engine，HBM 份额分别为 1/8 和 1/4；2g.35gb 保持 1/4 HBM，同时使用 2/7 SM、1/4 L2 和两个 copy engine。同一块 GPU 可以提供不同存算比的隔离实例，整卡配比不能直接代表任意实例。[6, H200 MIG Profiles, Table 11]
 
 ## 功耗与可靠性
 

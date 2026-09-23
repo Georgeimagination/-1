@@ -80,7 +80,11 @@ L40S 使用 PCIe Gen4 x16，产品页明确为 64 GB/s 双向带宽，也可协�
 
 板卡为全高全长双槽，尺寸 4.4×10.5 英寸，采用双向被动散热器并配 4 个 DisplayPort 1.4a。默认和最大板级功耗为 350 W，辅助电源为 16-pin 接口；供电 sense 档位不满足要求时卡不能启动。板卡依靠服务器气流，350 W 是产品上限而非任意程序的持续功耗。[1, pp.1-2,5,10-13；2, GPU Specifications]
 
-虚拟化方面支持 SR-IOV（单根 I/O 虚拟化）的 32 个 VF（虚拟功能），与 MIG 的计算、缓存和内存硬件划分不同。[1, p.3, Table 3]
+虚拟化方面，默认 Display Off 模式支持 SR-IOV（单根 I/O 虚拟化）的 32 个 VF（虚拟功能），运行 vGPU 软件要求采用此模式。此时物理功能的 BAR1 地址窗口为 64 GiB；切换到面向可扩展可视化或专业桌面的 Display On 模式，BAR1 分别为 8 GiB 或 256 MiB，VF BAR 配置不再适用。模式切换需要重启。BAR1 大小是 PCIe 地址窗口条件，32 个 VF 也不等于 MIG 的独立计算、缓存与内存硬件分区。[1, pp.3,7-8, Tables 3 and 5]
+
+Display On 模式最多驱动四个 DisplayPort 显示器，跨卡画面同步和 frame lock 使用外加 Quadro Sync II 板；这种显示同步不能写成 GPU 计算互联。[1, pp.8-9, Display On Modes and Frame Lock]
+
+L40S 可调整功耗上限以适应系统供电与散热预算。`nvidia-smi` 设置需要在驱动重新加载后重设，SMBPBI 带外设置则可配置为跨驱动重载和系统启动保持。简报中的 150 W 为操作示例，最低可配置功耗仍标为 TBD，不能把示例当作最低功耗档位。[1, p.2, Table 1; pp.9-10, Programmable Power]
 
 板上 CEC 安全控制机制提供 secure boot、回滚保护、密钥撤销、带外安全升级、恢复与远程认证。L40S 于 2023 年 8 月发布，当前可读资料对板卡配置较完整，但 L2 实际容量及上述峰值疑点仍未解决。[1, pp.3-4,7；4, opening；2, GPU Specifications]
 

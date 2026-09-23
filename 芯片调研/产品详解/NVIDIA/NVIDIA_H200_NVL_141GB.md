@@ -1,6 +1,6 @@
 # NVIDIA H200 NVL 141GB
 
-H200 NVL 把 Hopper GPU 与 HBM3e（高带宽堆叠内存） 放入 PCIe 加速卡，并通过宽 NVLink bridge 支持相邻卡连接。单卡包含自己的 Hopper GPU 与 HBM3e，桥接负责卡间通信。[1, pp.1,4,9；4, opening]
+H200 NVL 把 Hopper GPU 与 HBM3e（高带宽堆叠内存） 放入 PCIe 加速卡，并通过宽 NVLink bridge 支持相邻卡连接。单卡包含自己的 Hopper GPU 与 HBM3e，桥接负责卡间通信。[1, pp.1,4,9；4, opening] 产品简报把 LLM inference 列为主要优化目标，官方发布文章还明确支持 fine-tuning（模型微调）与 HPC；这些用途可以在同一硬件上共存。[1, p.1, Overview；4, opening paragraphs]
 
 ![NVIDIA H200 NVL 141GB 架构示意](NVIDIA_H200_NVL_141GB-架构.png)
 
@@ -81,7 +81,9 @@ Thread Block Cluster 把多个 block 同时安排在一个 GPC 内；DSM（Distr
 
 ## 一块宽桥连接相邻 GPU
 
-主机接口为 PCIe Gen5 x16，也可协商为 Gen5 x8 或 Gen4 x16。官方产品表写 128 GB/s，但该 NVL 表项没有在数值旁单列方向，故不能只凭这一行把它称作单向带宽。[1, pp.3,7；3, GPU specifications]
+主机接口为 PCIe Gen5 x16，也可协商为 Gen5 x8 或 Gen4 x16。官方产品表写 128 GB/s，但该 NVL 表项没有在数值旁单列方向，故不能只凭这一行把它称作单向带宽。[1, pp.3,7；3, GPU specifications] 此卡还支持 SR-IOV（单根 I/O 虚拟化）中的 32 个 VF，并要求服务器 BIOS 与 OS/hypervisor 配合；32 是 PCIe 虚拟功能数，不能换算为独立 GPU 实例数。[1, pp.4,7, Table 2-3 and §4.1.2]
+
+PF（物理功能）的 BAR2 地址窗口为 256 GiB，VF（虚拟功能）的 BAR1 总窗口为 256 GiB、每 VF 8 GiB。BAR（基址寄存器）规定 PCIe 设备的地址映射窗口，这些数值不等于物理 HBM 容量或 PCIe 带宽；GiB 使用二进制计量。[1, p.4, Table 2-3]
 
 GPU 间连接采用一个宽 NVLink bridge connector，包含 18 条 link，单 GPU 最大双向端点带宽为 900 GB/s，可组成两卡或四卡的相邻 H200 NVL 连接组。四卡容量相加与单卡的 141 GB 是不同层级；是否采用模型并行、怎样分布数据，由软件和系统配置决定。[1, pp.1,9, Table 4-1]
 
@@ -89,9 +91,11 @@ GPU 间连接采用一个宽 NVLink bridge connector，包含 18 条 link，单 
 
 ## 散热、电源与隔离
 
-板卡为全高全长、10.5 英寸、双槽，被动散热器支持两个气流方向；不含支架、延长件和桥时重 1,217 g。默认和最大板级功耗为 600 W，最低可设置 200 W，另有 350 W power compliance limit，供电采用 16-pin 12VHPWR 辅助接口。这些限额要结合供电条件阅读，不能当作实测持续功率。[1, pp.3-8]
+板卡为全高全长、10.5 英寸、双槽，被动散热器支持两个气流方向；不含支架、延长件和桥时重 1,217 g。默认和最大板级功耗为 600 W，最低可设置 200 W，另有 350 W power compliance limit，供电采用 16-pin 12VHPWR 辅助接口。这些限额要结合供电条件阅读，不能当作实测持续功率。[1, pp.3-8] 软件降功率不会放宽供电线缆的启动要求：Sense0/Sense1 必须为 0/0，识别到 600 W 档；450 W、300 W 等较低线缆模式不能启动，即使计划将运行功率上限调低也如此。[1, pp.12-13, Table 4-3]
 
 MIG 多实例 GPU 最多提供 7 个隔离实例，141 GB 配置的 profiles 覆盖 18／35／71／141 GB 等大小，并可选择带媒体资源的版本。Hopper 存储路径提供 SECDED ECC，H200 NVL 支持 secure boot 与 Confidential Computing。当前资料对这些产品能力已有说明，但所引资料未列的核心数量、L2 容量与堆栈数仍应留空。[5, Supported GPUs and H200 MIG Profiles；2, p.38；1, pp.3-4,8；3, GPU specifications, Confidential Computing]
+
+H200 专门 profile 表还给出计算与存储份额：1g.18gb 和 1g.35gb 都使用 1/7 的 SM、1/8 的 L2 和一个 copy engine，HBM 份额分别为 1/8 和 1/4；2g.35gb 保持 1/4 HBM，同时使用 2/7 SM、1/4 L2 和两个 copy engine。同一块 GPU 可以提供不同存算比的隔离实例，整卡配比不能直接代表任意实例。[5, H200 MIG Profiles, Table 11]
 
 ## 参考资料
 

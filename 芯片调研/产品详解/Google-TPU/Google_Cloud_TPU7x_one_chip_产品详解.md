@@ -6,6 +6,8 @@ Ironwood 在 Google Cloud 中称为 TPU7x。它面向推理模型的训练与 se
 
 图：依据 Hot Chips 架构图重绘，封装含两个 compute chiplet、一个独立 SerDes（高速串并转换收发电路）chiplet 和八个 HBM3E（高带宽堆叠内存）stack。chiplet 指一个封装中承担部分功能的独立裸片；下方 HBM 位置仅为示意。两个计算 chiplet 各有自己的存储空间，图中的连线不表示自动一致的共享 cache。[4, pp. 14-15] [1, Dual-chiplet architecture]
 
+Google 的首发文章将 Ironwood 明确描述为针对 inference 设计，后续技术资料同时覆盖 reasoning 模型的训练与 serving。比较报告据首发设计目标归为偏推理，并保留训推均支持的事实；归为训推兼顾时的结果另作敏感性检查。[24, opening；4, title]
+
 ## 一个封装，两套计算与存储空间
 
 每个 compute chiplet 含一个 TensorCore（TPU 的矩阵、向量与标量计算核心）、两个 MXU（矩阵乘法单元）和两个 SparseCore（稀疏访问计算核心），完整封装合计两个 TensorCore、四个物理 MXU、四个 SparseCore。每个 TensorCore 还包含 VPU（向量处理单元）/VMEM（向量暂存存储器）及控制、辅助单元。四个 MXU 在 BF16（16-bit Brain Float）模式描述为 256×256 阵列，在 FP8（8-bit 浮点）模式描述为 512×512 阵列；这是同一组硬件的不同精度模式，不能加起来计成八个 MXU。[4, pp. 14-15] [5, pp. 2, 6]
@@ -86,3 +88,5 @@ TPU7x 使用 cold-plate 液冷，四颗 TPU 组成一块 tray。工艺、die 面
 [22] The JAX Authors，*Pallas: TPU Details*，获取于 2026-09-17。[官方文档](https://docs.jax.dev/en/latest/pallas/tpu/details.html)；[官方仓库原文](https://github.com/jax-ml/jax/blob/main/docs/pallas/tpu/details.rst)。 [本地原文快照](../../原始资料/网页快照/Google/JAX/2026-09-17/jax-details.rst)
 
 [23] The JAX Authors，*SparseCore Kernel Writing*，获取于 2026-09-17。[官方文档](https://docs.jax.dev/en/latest/pallas/tpu/sparsecore.html)；[官方仓库原文](https://github.com/jax-ml/jax/blob/main/docs/pallas/tpu/sparsecore.md)。 [本地原文快照](../../原始资料/网页快照/Google/JAX/2026-09-17/jax-sparsecore.md)
+
+[24] Amin Vahdat，*Ironwood: The first Google TPU for the age of inference*，Google，2025-04-09，2025-04-23 更新。[官方原文](https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/ironwood-tpu-age-of-inference/)。正文首段与 Figure 2 图注分别说明设计目标及旧代 FP8 emulation 条件。

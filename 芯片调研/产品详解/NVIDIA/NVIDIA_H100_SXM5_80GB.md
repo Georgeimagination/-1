@@ -61,7 +61,7 @@ Hopper 的 FP16/BF16 Tensor 通路每 SM 每周期吞吐是 Ampere 同类型的�
 
 离计算最近的是各 SM 的寄存器和局部存储。每个 SM 有 256 KB 寄存器文件，以及合计 256 KB 的 L1 cache／shared memory。L1 是硬件管理的缓存，shared memory 是线程块显式使用的工作区；两者分配同一组容量，shared memory 最多占 228 KB，不能把这些数字相加。全 GPU 的 50 MB L2 是更外层的共享缓存，保存可复用数据，以减少对 HBM 的访问。[1, pp.21, 27, 37, 40]
 
-再往外是封装内的五个 HBM3 stack，合计 80 GB。HBM 是把 DRAM 芯片垂直堆叠而成的高带宽内存；这里的“片外”是相对 GH100 裸片而言，它仍位于 GPU 封装内。该配置启用十个 512-bit 控制器，合计 5,120-bit 接口。数据手册给出的 HBM 带宽为 3.35 TB/s；白皮书的细化值为 3,352 GB/s。这是 GPU 与 HBM 之间的规格，不是 L2 或 NVLink 带宽。[1, pp.18, 36-40；2, p.2]
+再往外是封装内的五个 HBM3 stack，合计 80 GB。HBM 是把 DRAM 芯片垂直堆叠而成的高带宽内存；这里的“片外”是相对 GH100 裸片而言，它仍位于 GPU 封装内。该配置启用十个 512-bit 控制器，合计 5,120-bit 接口。数据手册给出的 HBM 带宽为 3.35 TB/s；白皮书另列 3,352 GB/s，但该行注明 H100 带宽尚未定版。这是 GPU 与 HBM 之间的规格，不是 L2 或 NVLink 带宽。[1, pp.18, 36-40；2, p.2]
 
 Hopper 还提供 TMA（Tensor Memory Accelerator，张量内存搬运器），由少量线程发起张量的异步搬运，并由硬件处理地址和边界。Thread Block Cluster 把若干线程块安排到同一 GPC（Graphics Processing Cluster，图形处理簇） 计算簇内，使它们能够访问彼此的 shared memory。图中未展开这些细节，因为它们改变的是片内协作和搬运方式，没有新增一层外部 DRAM。[1, pp.29-35]
 
@@ -81,9 +81,13 @@ Thread Block Cluster 把多个 block 同时安排在一个 GPC 内；DSM（Distr
 
 图下方两类接口承担不同工作。PCIe Gen5 x16 连接主机，每方向 64 GB/s、双向合计 128 GB/s。第四代 NVLink 则面向 GPU 间连接：18 条链路每条每方向 25 GB/s，合计 900 GB/s 双向带宽。[1, pp.47, 49-50；2, p.2]
 
+H100 还支持 32-bit 与 64-bit 的原生 PCIe atomic CAS（比较并交换）、exchange 和 fetch-add，用于 CPU/GPU 之间的同步；SR-IOV 的 PF（物理功能）或 VF（虚拟功能）可经 NVLink 访问 peer GPU。原子事务能力与缓存一致性是不同的接口语义。[1, p.50, PCIe Gen 5]
+
 SXM5 模组要装到服务器底板上。HGX H100 四卡配置可采用点到点 NVLink，八卡配置由外部 NVSwitch 组织连接；SHARP 网络内归约在交换机中完成，不能把它画进 GH100。普通 NVLink 连接支持访问其他 GPU 的内存，但这不等于各 GPU 的缓存自动一致。白皮书还讨论跨节点、独立网络地址空间的 NVLink Network；其中最多 256 GPU 的描述属于发布期系统目标。[1, pp.15-16, 47-48]
 
 MIG（Multi-Instance GPU，多实例 GPU）支持最多 7 个硬件隔离实例，每个实例分别获得计算、缓存和显存资源；数据手册列出最多 7 个 10 GB 实例。[2, p.2；1, Second-Generation Secure MIG, pp.42-43]
+
+MIG 为各实例划定独占的 crossbar 端口、L2 bank、内存控制器和 DRAM 地址总线，因而实例之间的隔离不仅涉及计算调度。Hopper 还允许每个 MIG 实例获得至少一个 NVDEC 与一个 NVJPG，并提供独立性能监视器，支持多个实例同时 profiling（性能剖析）。这些是资源分配机制；完整 GPU 的缓存容量、带宽和媒体吞吐不能直接当作单个实例的规格。[1, pp.43-44, H100 MIG Enhancements]
 
 ## 功耗、可靠性与使用边界
 

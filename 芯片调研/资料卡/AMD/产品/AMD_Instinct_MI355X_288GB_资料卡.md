@@ -2,7 +2,7 @@
 
 > 模板版本：1.3（芯片架构事实口径）  
 > 卡片状态：已完成  
-> 资料截止日：2026-09-16
+> 资料截止日：2026-09-23
 
 本卡以一块 AMD Instinct MI355X 288GB OAM（OCP Accelerator Module）为正式比较对象。该模组采用 8 个 XCD（Accelerated Compute Die）和 2 个 IOD（I/O Die），有 256 个使能 CU，并以 2.4GHz、1400W 和高密度冷却部署区别于 MI350X。8-OAM MI355X Platform 的聚合资源不下放到单 OAM。
 
@@ -17,7 +17,7 @@
 | 架构代际 | AMD CDNA 4 | 8 XCD、2 mirrored IOD、256 CU、1,024 Matrix Core | `[1, GPU Specifications]` `[2, pp.1-2]` |
 | 发布与可用状态 | 2025-06-12 发布；当前仍列出 | 产品页直接给出 launch date；系列发布稿称平台 2025 年下半年广泛可用，未单列 OAM 首批出货日 | `[1, Product Basics]` `[4, opening and AMD Delivers Leadership Solutions]` |
 | 厂商定位 | 面向高密度 generative AI、inference、training 与 HPC | 高密度是系统部署方向，不改变单 OAM 比较主语 | `[1, opening]` `[2, p.1 heading and Designed for High-Density Computing]` |
-| 产品目标 | 以更高时钟和 1400W 功耗提高 MI350X 同封装家族的持续峰值能力 | datasheet 的“sustain higher performance”是厂商设计表述，不是独立实测 | `[2, p.1 Designed for High-Density Computing]` |
+| 产品目标 | 以更高时钟、1400W 功率预算和相应冷却支持长时间高负载，datasheet 说明其目标包括减少 throttling（因供电或温度约束降频） | datasheet 的“sustain higher performance”是厂商设计表述，未给保证持续频率或独立实测 | `[2, p.1 Designed for High-Density Computing]` |
 
 本卡包含：256 个使能 CU、1,024 个 Matrix Core、精确各精度理论峰值、8 XCD/2 IOD/8 HBM3E stack、cache、PCIe、Infinity Fabric link、1400W TBP、媒体单元、分区与冷却形态。
 
@@ -42,10 +42,17 @@
 | 数值格式 | OCP-FP8 支持 E5M2/E4M3；MXFP6 支持 E3M2/E2M3，MXFP4 为 E2M1 | MX block 通常由 32 个元素共享 scale；TF32 硬件路径已移除，改由 BF16 软件模拟 | `[3, pp.7-8]` |
 | 程序员可见累加 | 低精度 dense MFMA 的选定指令以 FP32 C/D 累加；INT8 MFMA 以 INT32 C/D 累加 | ISA 语义不能解释为物理 accumulator 位宽 | `[6, pp.285-288]` |
 | 结构化稀疏 | OCP-FP8、FP16、BF16、INT8 有 structured sparsity 峰值；sparse MFMA 的 A 矩阵沿 K 轴每 4 个元素含 2 个零，第三输入提供 sparse index | sparse 峰值为对应基础值 2 倍；index 带宽、选择电路与功耗未公开 | `[1, GPU Specifications]` `[6, pp.294 and 307-308]` |
-| LDS | 每 CU 160KB，read throughput 256B/clock，并支持从 L1 直接装入 LDS | software-managed local storage，不是 cache | `[3, p.9]` |
+| LDS | 每 CU 160KB，64 个 bank，每 bank 为 640×4B；含 32 个整数 atomic 单元；读吞吐 256B/clock，可从 L1 直接装入 | 工作组显式管理的 local storage；按 1,280B 连续块分配并按 1,280B 对齐，不能把容量当作统一 cache | `[3, p.9]` `[6, §§2.2.1,3.6.5, 印刷 pp.6,13（PDF pp.14,21）]` |
 | L1/L2 | 每 CU 32KB、64-way L1，128B line；每 XCD 共享 4MB、16-way fully coherent L2 | L2 有 16 个并行 channel；每 channel 每 cycle 读 128B、写 64B | `[2, p.2 Multi-Chip Architecture]` `[3, p.9]` |
+| L2 管理与通道 | 每 XCD 有 16 个 L2 channel，各 channel 每 cycle 读 128B、写 64B；writeback/write-allocate，XCD 内 fully coherent | CDNA 4 可缓存来自 DRAM 的 non-coherent 数据，并在脏行写回后保留副本；一致性与可见性仍须遵守地址和程序语义，不能推广成整机透明一致性 | `[3, p.9]` |
 | 媒体单元 | 4 组 HEVC/H.265、AVC/H.264、VP9 或 AV1 decoder；40 个 JPEG/MJPEG core，每组 10 个 | 主值采用 p.1 规格表；媒体路径需要兼容软件 | `[2, p.1 Decoders and Virtualization]` |
 | 专用 AI 单元缺口 | 未找到专用 attention、MoE routing、top-k、sampling 或 KV Cache 管理物理模块 | 相关 workload 由通用 Matrix/Vector/Scalar 路径和软件完成 | `[2, pp.1-2]` `[3, pp.5-9]` |
+
+### 3.1 矩阵吞吐与输入格式条件
+
+CDNA 4 的 dense 矩阵执行能力按每 CU 每周期计，FP16/BF16 为 4,096 FLOP，OCP-FP8 为 8,192 FLOP。Vector FP16/FP32 为 256 FLOP、FP64 为 128 FLOP；Matrix FP32 为 256 FLOP、FP64 为 128 FLOP。它们是独立路径的上限，不相加为一种精度的峰值。白皮书 Table 1 的 MXFP4/MXFP6 行原印为 16,834 FLOP/CU/clock，与全芯片峰值算术不符，保留疑点，不自行修正官方值。[3, Table 1, p.8]
+
+MFMA（Matrix Fused Multiply-Add，矩阵融合乘加）的 F8F6F4 指令允许 A、B 独立选 FP8、FP6 或 FP4。16×16×128 变体在 A/B 都使用 FP4 或 FP6 时为 16 cycles，任一输入使用 FP8 时为 32 cycles；32×32×64 变体分别为 32 与 64 cycles。结果 C/D 使用 FP32，scaled 变体的共享 scale 为 E8M0。因而仅将权重换成 FP4、另一侧仍为 FP8，不能套用最快的 FP4×FP4 指令周期；这些周期也不包括完整 kernel 的搬运与同步时间。[6, Table 28; §§7.1.5,7.1.5.1, 印刷 pp.43,50-51（PDF pp.51,58-59）]
 
 ## 4. Die、chiplet 与 package
 
@@ -59,6 +66,9 @@
 | Infinity Cache | 256MB、16-way memory-side cache，连接 8 个 HBM stack | 每 stack 对应 16 个 64B channel 与 2MB banked data array | `[1, GPU Memory]` `[3, pp.10-11]` |
 | 封装内互联 | 双 IOD 直接连接，Figure 5 标出 5.5TB/s advanced-package bisection | 属于封装内 cross-section，不等于 HBM、P2P 或持续 workload 带宽 | `[3, p.10 Figure 5]` |
 | RAS 与分区 | Full-chip ECC、page retirement、page avoidance、SR-IOV；计算分区最多 8 个；架构白皮书给 NPS1/NPS2 内存 NUMA 模式 | brochure 的 Memory Partitions 栏另写 1 or 4，与架构说明不一致；计算分区和内存分区不能等同 | `[1, GPU Memory and Additional Features]` `[2, p.1 Decoders and Virtualization]` `[3, pp.12-13 Figure 6]` |
+| 计算分区与内存局部性 | Figure 6 给出 SPX+NPS1 的 8 XCD/288GB 单实例，DPX+NPS2 的每实例 4 XCD/144GB，QPX+NPS2 的 2 XCD/72GB，CPX+NPS2 的 1 XCD/36GB | SPX、DPX、QPX、CPX 分别为单、双、四、八计算分区；NPS1 跨两 IOD 交织，NPS2 将内存分成每 IOD 144GB 的两个池。实例容量与 NUMA 池容量处于不同层次，八实例不等于八个 NPS 域 | `[3, pp.11-13, Figure 6]` |
+
+白皮书将 NPS1 的用途表述为便于应用移植和适合访问较均匀的负载；在 NPS2 所示的本地分区配置中，内存访问留在对应 IOD 与 XCD 组内，减少跨 IOD Infinity Fabric 流量。其延迟、带宽和功耗改善是厂商机制说明，未给本型号逐场景的绝对测量值。该机制同时服务大任务与多个小任务，不能只据分区能力把芯片定位成推理专用。[3, pp.11-13]
 
 ## 5. SKU 配置
 
@@ -75,7 +85,7 @@
 | Host 接口 | 1×PCIe Gen5 x16，128GB/s | datasheet 未说明 128GB/s 的方向、payload 或持续口径 | `[1, Board Specifications]` `[2, p.1 Specifications]` |
 | GPU P2P 端点 | 7 条 scale-up Infinity Fabric link，每条 153.6GB/s peak aggregate bidirectional；七端口合计 1,075.2GB/s | 面向 8-OAM fully connected domain；产品页把单链路舍入为 153GB/s | `[2, p.1 Specifications]` `[3, pp.13 and 19-21]` `[1, Board Specifications]` |
 | 功耗 | 1400W TBP | 单 OAM，不是 8-GPU platform 或 server 功耗 | `[1, Requirements]` `[2, p.1 Specifications]` |
-| 形态与散热 | OAM Module；当前产品页写 Passive & Active；白皮书把 1400W MI355X 定位为 direct-liquid-cooled | 冷板、液流、温度和压降未公开 | `[1, Board Specifications]` `[3, p.4]` |
+| 形态与散热 | OAM Module；当前产品页写 Passive & Active；白皮书把 1400W MI355X 定位为 direct-liquid-cooled | 冷板、液流、温度和压降未公开 | `[1, Board Specifications]` `[3, pp.3,15-16; Table 2, p.19]` |
 
 ## 6. 系统级互联上下文
 

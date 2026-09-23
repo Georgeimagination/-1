@@ -60,7 +60,7 @@ Vmem 总量是 128 MB/芯片，原图将其与 VPU 放在同一个模块中。JA
 
 主机接口为 PCIe Gen5 x16，另有连接 gBMC（板级管理控制器）的 PCIe Gen2 x1 管理通道。TPUDirect RDMA（远程直接存储器访问）可在 TPU HBM（高带宽堆叠内存）与 NIC（网络接口卡）之间传输数据，绕过 host CPU 与 DRAM；TPUDirect Storage 则提供绕过 host 的存储访问路径。这些机制描述数据如何直达设备，不代表主机、TPU、NIC 之间形成了自动一致的统一内存。[1, Figure 1; Faster storage access; Figure 3]
 
-系统内部采用 3D torus，一个 Superpod 可含 9,600 颗 TPU 8t。更大的部署依靠外部 Virgo 网络，其扁平两层、多 plane 架构属于 scale-out fabric；NIC、交换机、Axion host 和存储都在单颗 TPU 之外。已有技术资料未公开芯片工艺、面积、频率、绝对功耗、散热规格及 Vmem 的物理 bank、端口与带宽细节，因此现阶段可以解释功能组织，不能据此建立完整的物理实现或功耗模型。[1, TPU 8t: The pre-training powerhouse; Virgo Network topology; Figures 1-3]
+系统内部采用 3D torus，一个 Superpod 可含 9,600 颗 TPU 8t。更大的部署依靠外部 Virgo 网络，其扁平两层、多 plane 架构属于 scale-out fabric；NIC、交换机、Axion host 和存储都在单颗 TPU 之外。发布规格图另给每芯片配置的 scale-out networking bandwidth 为 400 Gb/s；这属于系统网络资源，不能与双向 ICI 带宽相加，也不表示 TPU 内集成同速率 NIC。[2, TPU 8t 规格图 / Scale-out networking bandwidth]已有技术资料未公开芯片工艺、面积、频率、绝对功耗、散热规格及 Vmem 的物理 bank、端口与带宽细节，因此现阶段可以解释功能组织，不能据此建立完整的物理实现或功耗模型。[1, TPU 8t: The pre-training powerhouse; Virgo Network topology; Figures 1-3]
 
 ## 参考资料
 

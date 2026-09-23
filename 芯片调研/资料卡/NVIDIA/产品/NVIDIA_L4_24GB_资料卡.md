@@ -2,7 +2,7 @@
 
 > 模板版本：1.3（芯片架构事实口径）  
 > 卡片状态：已完成  
-> 资料截止日：2026-08-24
+> 资料截止日：2026-09-23
 
 本卡的主语是一张 NVIDIA L4 24GB PCIe 加速卡，即 PG193 SKU 200。Ada Lovelace 架构与 AD104 用来解释该 SKU；包含多张 L4 的服务器和云实例不是本卡的产品配置。
 
@@ -39,10 +39,16 @@
 | 维度 | 公开事实 | 作用域与条件 | 来源 |
 |---|---|---|---|
 | 矩阵、向量、标量与控制路径 | 每个 Ada SM 有 128 个 CUDA Core、1 个第三代 RT Core、4 个第四代 Tensor Core、4 个 Texture Unit、256KB register file 和 128KB L1/shared memory；SM 分四个 processing block | 每 SM；每个 block 有 warp scheduler、dispatch、FP32/INT32 路径、Tensor Core、LD/ST 与 SFU | `[2, pp. 8-11, Figures 2, 5]` |
-| 执行模型与调度 | Ada SM 沿用 warp/SIMT 组织；每个处理分区含一个 warp scheduler 与 dispatch unit | 官方白皮书没有在 L4 Appendix 中另给线程/warp 上限 | `[2, pp. 8, 10-11]` |
+| 执行模型与调度 | Ada SM 沿用 warp/SIMT 组织；每个处理分区含 warp scheduler 与 dispatch；每 SM 最多驻留 48 个 warp、24 个 thread block，64K 个 32-bit 寄存器由驻留线程共享，单线程最多使用 255 个寄存器 | Ada compute capability 8.9 的共同上限；寄存器、shared memory 和 block 大小共同限制实际 occupancy，不能把各项上限视为必然同时达到 | `[2, pp. 8, 10-11]` `[6, §1.4.1.1, Occupancy]` |
 | 局部存储与数据搬运 | 每 SM 有 256KB register file 和 128KB unified L1 data cache/shared memory，可按 workload 配置 | L1 与 shared memory 是统一资源，不能相加；L4 的全 GPU L2 为 49,152KB | `[2, pp. 8, 12, 40]` |
 | 数值与累加路径 | 第四代 Tensor Core 支持 FP8、FP16、BF16、TF32、INT8 与 INT4 matrix formats；FP8/FP16 可累加到 FP16 或 FP32，BF16 使用 FP32 accumulator | 程序员可见格式与实际物理累加器位宽分开 | `[2, pp. 24, 27, 30, Table 2]` |
 | 稀疏与专用单元 | structured sparsity 可使相应 Tensor Core operation 的有效吞吐提高 2 倍；第三代 RT Core 含 Opacity Micromap 与 Displaced Micro-Mesh 专用单元 | 稀疏峰值与 dense 峰值在 SKU 表中成对记录 | `[2, pp. 9, 30, Table 2]` |
+
+### 3.1. shared memory 配额与媒体格式
+
+每 SM 的 128KB unified L1/shared memory 中，软件可选择 0、8、16、32、64 或 100KB 的 shared-memory carveout（为软件管理工作区分配的容量）。CUDA 为每个 thread block 保留 1KB，因此单 block 最多寻址 99KB；静态分配上限仍为 48KB，更大的动态分配需要显式 opt-in。GPU 总 SM 数增加不改变这些单 SM、单 block 的限制。`[6, §§1.4.1.1, 1.4.2.2]`
+
+Ada 的 NVENC 为第八代专用编码器，新增 AV1 编码；第五代 NVDEC 支持 MPEG-2、VC-1、H.264、H.265/HEVC、VP8、VP9 和 AV1 解码。引擎数量与 Tensor Core 数量分开统计，不由媒体引擎个数推算未给出 codec、分辨率和帧率条件的视频流数。`[2, pp. 24-25, NVIDIA Broadcast/Video]`
 
 ## 4. Die、chiplet 与 package
 
@@ -67,6 +73,7 @@
 | 内存类型与容量 | 24GB GDDR6 ECC；6,251MHz；192-bit bus | ECC 默认开启，可由软件关闭 | `[1, p. 3, Tables 2-3]` |
 | 内存带宽 | 300GB/s | 单卡 peak memory bandwidth | `[1, p. 3, Table 2]` |
 | 主机接口 | 物理 x16 lanes；PCIe Gen4 x16/x8 或 Gen3 x16；当前产品页另列 PCIe Gen4 x16 64GB/s | 支持 lane/polarity reversal；64GB/s 原表未说明方向，保持厂商 headline 口径 | `[1, pp. 2, 6-7]` `[3, Product Specifications]` |
+| 虚拟化与地址窗口 | SR-IOV 支持 32 个 VF；物理功能 PF 的 BAR1 为 32GiB，虚拟功能的 BAR1 合计 64GiB，即每 VF 2GiB | BAR 是 PCIe 地址窗口，不是新增显存容量，也不表示每个 VF 拥有独立的 2GiB 硬件内存分区；需要 SBIOS 与 OS/hypervisor 配合启用 SR-IOV | `[1, p. 3, Table 3; p. 6, Single Root I/O Virtualization Support]` |
 | 设备互联端点 | 除 PCIe 外未找到 NVLink 或其他专用设备互联端点 | 多卡服务器需依赖主机 PCIe/外部网络，不把服务器结构写成卡内端点 | `[1, pp. 2, 6-7]` `[3, Product Specifications]` |
 | 内存访问语义 | 未公开 | 所选资料没有说明统一地址、远端显存访问、页迁移或 cache coherence | `[1, pp. 2-7]` |
 | 跨设备集合通信能力 | 未找到 | 没有公开卡内 collective engine；软件库支持不写入硬件卡 | `[1, pp. 1-7]` |
@@ -104,6 +111,7 @@ L4 是普通 PCIe 卡，没有公开专用 scale-up fabric。这里不为 1 至 
 | `[3]` | NVIDIA，*NVIDIA L4 Tensor Core GPU* | 当前官方产品页 | 当前规格、PCIe headline、72W 与服务器选项 | <https://www.nvidia.com/en-us/data-center/l4/> |
 | `[4]` | NVIDIA，*NVIDIA Launches Inference Platforms for Large Language Models and Generative AI Workloads*，2023-03-21 | 官方发布公告 | L4 发布日期与 AI video 定位 | <https://nvidianews.nvidia.com/news/nvidia-launches-inference-platforms-for-large-language-models-and-generative-ai-workloads> |
 | `[5]` | NVIDIA，*NVIDIA Virtual PC: Sizing and GPU Selection Guide: Recommended NVIDIA GPUs for NVIDIA vPC*，更新于 2026-08-19 | 官方支持文档 | 单 GPU/board、24GB、72W、passive 形态与 MIG 不支持 | <https://docs.nvidia.com/vgpu/sizing/virtual-pc/latest/gpu-vpc.html> |
+| `[6]` | NVIDIA，*Ada Tuning Guide*，13.4，网页标注更新于 2026-09-13 | 官方 CUDA 架构调优指南 | Ada 8.9 的驻留上限、寄存器配额与 shared-memory carveout、单 block 保留容量和显式 opt-in 条件 | [本地快照](../../../原始资料/网页快照/NVIDIA/产品详解补充/2026-09-17/ref-1b87ffef1f91-index.html)，[原文](https://docs.nvidia.com/cuda/ada-tuning-guide/index.html) |
 
 ## 9. 完成检查
 

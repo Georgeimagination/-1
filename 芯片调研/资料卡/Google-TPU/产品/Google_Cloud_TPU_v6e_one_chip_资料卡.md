@@ -2,7 +2,7 @@
 
 > 模板版本：1.3（芯片架构事实口径）  
 > 卡片状态：已完成  
-> 资料截止日：2026-09-16
+> 资料截止日：2026-09-23
 
 Trillium在Cloud API、日志和技术文档中统一称为TPU v6e。本卡采用`v6e-1`/`ct6e-standard-1t`对应的一颗TPU v6e chip作为正式比较对象。该单芯片VM主要用于测试；四芯片half-host、八芯片full-host、slice、Pod及Multislice是更高层配置。
 
@@ -17,6 +17,7 @@ Trillium在Cloud API、日志和技术文档中统一称为TPU v6e。本卡采�
 | 架构代际 | 第六代Cloud TPU，v6e/Trillium | 一个TensorCore、两个256×256 MXU和两个SparseCore的实现 | `[1, opening and System architecture]` `[2, TPU architecture specifications]` |
 | 发布与可用状态 | 2024-05-14宣布、计划当年稍晚开放；2024-12-11 发布 GA 博客公告，release notes 于 12-16 记录 GA；当前仍有按chip-hour计价的Trillium资源 | 首次公开、GA和当前云服务状态分开 | `[5, page date and Learn more]` `[6, page date and opening]` `[7, Regional pricing]` `[9, December 16, 2024]` |
 | 厂商定位 | 同时面向训练、fine-tuning与serving/inference | 不是仅推理或仅训练的产品 | `[1, opening]` `[6, opening and workload list]` |
+| 主要设计取向 | Google 设计团队跨代论文称 Trillium focused on inference | 设计侧重与上一行支持用途分别记录；不据此否定训练支持 | `[10, p.1, footnote 2]` |
 | 目标 workload | transformer、text-to-image、CNN、dense/MoE LLM和embedding-intensive模型 | 产品和系统定位，不把模型参数写成芯片属性 | `[1, opening]` `[6, workload list]` |
 | 产品目标 | 相对v5e扩大MXU，提高单芯片算力、HBM容量/带宽和ICI带宽，并以第三代SparseCore处理大型embedding | 单芯片增量与系统扩展目标分开 | `[5, opening; 4.7X increase; 2X ICI and HBM]` |
 
@@ -108,6 +109,7 @@ Trillium在Cloud API、日志和技术文档中统一称为TPU v6e。本卡采�
 | `[7]` | Google Cloud，*Cloud TPU pricing* | 当前官方定价页 | Trillium当前仍按chip-hour提供 | <https://cloud.google.com/tpu/pricing> |
 | `[8]` | Ian Schneider等（Google），*Life-Cycle Emissions of AI Hardware: A Cradle-To-Grave Approach and Generational Trends*，2025 | Google作者一手硬件生命周期论文 | HBM硬件口径、die/工艺未披露状态和fleet实测功耗 | [本地PDF](../../../原始资料/论文/Google_TPU/03_系统与性能补充/2025_Life_Cycle_Emissions_AI_Hardware.pdf) |
 | `[9]` | Google Cloud，*Cloud TPU release notes* | 官方服务发布记录 | 2024-12-16 的 Trillium GA 记录，与 12-11 博客公告分开 | <https://docs.cloud.google.com/tpu/docs/release-notes> |
+| `[10]` | Norman P. Jouppi 等，*Google's Training Supercomputers from TPU v2 to Ironwood*，2026 | Google 设计团队架构论文 | Trillium 的主要设计取向 | [本地PDF](../../../原始资料/论文/Google_TPU/01_厂商直接架构论文/2026_TPUv2_to_Ironwood_Five_Generations.pdf) |
 
 ## 9. 完成检查
 

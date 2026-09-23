@@ -2,7 +2,7 @@
 
 > 模板版本：1.3（芯片架构事实口径）  
 > 卡片状态：已完成  
-> 资料截止日：2026-09-16
+> 资料截止日：2026-09-23
 
 本卡的主语是 NVIDIA H200 SXM5 141GB 单 GPU 模组。当前产品页简称“H200 SXM”，MIG 文档使用“H200-SXM5”；H200 NVL 141GB、HGX H200、DGX H200 和 GH200 Superchip 均不是本卡的产品配置。
 
@@ -64,6 +64,7 @@
 | 实际使能计算资源 | 132 SM、50MB L2、7 NVDEC、7 JPEG；由 Hopper 每 SM 结构可得 16,896 FP32 CUDA Core和528 Tensor Core，但这是官方数值间推导 | 132 SM/L2/media 为 H200 SXM block diagram 直接值；GPC/TPC 未直接公开 | `[2, p. 4]` `[3, pp. 21, 39-41]` |
 | 时钟 | 未公开 | 所选 H200 per-SKU 资料没有 base/boost/SM clock，不从 H100 SXM5 或第三方数据库补齐 | `[1, p. 4]` `[2, p. 4]` |
 | 理论峰值 | FP64 34TFLOPS；FP64 Tensor 67TFLOPS；FP32 67TFLOPS；TF32 Tensor 989TFLOPS；BF16/FP16 Tensor 1,979TFLOPS；FP8 Tensor 3,958TFLOPS；INT8 Tensor 3,958，官方表单位写为 TFLOPS | 后五项是官方 with-sparsity headline；dense 值未在 H200 表中单列。INT8 通常使用 TOPS，但此处不静默改写原表单位 | `[1, p. 4, Technical Specifications and notes]` |
+| 比较用 dense 推导值 | FP16/BF16 989.5TFLOP/s；FP8 1,979TFLOP/s | 对上述 1,979/3,958TFLOPS 稀疏峰值分别按 Hopper 明确的 2 倍关系折半；带原表舍入误差，非官方另列 dense 规格 | `[1, p. 4, note 2]` `[3, pp. 11, 21-23]` |
 | 内存类型与容量 | 141GB HBM3e | 单 GPU SXM5 | `[1, pp. 1, 4]` `[2, p. 4]` |
 | 内存带宽 | 4.8TB/s | 单 GPU peak memory bandwidth | `[1, pp. 1, 4]` |
 | 主机接口 | PCIe Gen5，128GB/s bidirectional | 每 GPU host endpoint，不是 NVLink 带宽 | `[2, p. 4]` `[1, p. 4]` |
@@ -73,6 +74,18 @@
 | 功耗 | up to 700W，configurable | 单 GPU maximum TDP，不是 HGX 系统功耗 | `[1, p. 4]` |
 | 形态与散热 | SXM5 模组；散热方式未由 per-GPU 资料指定 | 空冷/液冷由 HGX/OEM 系统设计决定，不能借用 H200 NVL 的 dual-slot air-cooled | `[1, p. 4, Form Factor]` `[6, Supported GPUs, Table 1]` |
 | MIG | 最多 7 个 instance；当前 profiles 包括 1g.18gb、1g.35gb、2g.35gb、3g.71gb、4g.71gb、7g.141gb，以及一个 1g.18gb+me | 当前 MIG Guide 口径；18GB 是最小 profile，不是所有 instance 固定大小 | `[6, H200 MIG Profiles, Table 11]` |
+
+### 5.1 MIG 中计算与内存份额的组合
+
+MIG（Multi-Instance GPU，多实例 GPU）分别分配计算和内存资源。Hopper 的实例拥有独立的 crossbar 端口、L2 bank、内存控制器和 DRAM 地址总线路径；这些是共享架构的隔离机制，不将整颗 GPU 的 L2/HBM 数值当作每个实例的资源。`[3, p. 43, MIG Technology Review]`
+
+| H200 141GB profile | HBM 份额 | SM 份额 | L2 份额 | Copy engine 数 | 同类实例数上限 |
+|---|---:|---:|---:|---:|---:|
+| 1g.18gb | 1/8 | 1/7 | 1/8 | 1 | 7 |
+| 1g.35gb | 1/4 | 1/7 | 1/8 | 1 | 4 |
+| 2g.35gb | 2/8 | 2/7 | 2/8 | 2 | 3 |
+
+表中份额采用 H200 141GB 专门 profile 表。1g.35gb 与 1g.18gb 的 SM、L2、copy engine 配额相同，HBM 份额不同；2g.35gb 又在相同 HBM 份额下配置更多 SM 和 L2。实例容量与计算规模并非固定比例，各 profile 的最大数量也不能相加当作可同时启用的总数。`[6, H200 MIG Profiles, Table 11]`
 
 ## 6. 系统级互联上下文
 
@@ -84,6 +97,7 @@
 | Scale-out | 未记录 | H200 SXM5 没有集成的 scale-out network endpoint；系统 NIC 不下放为 GPU 属性 | `[1, p. 4]` |
 | 系统可靠性 | NVLink 链路支持 error detection 与 packet replay | 这是端点/链路 RAS；节点冗余和维修域未公开 | `[3, p. 47]` |
 | 相关系统 | NVIDIA HGX H200 partner 与 NVIDIA-Certified Systems，4 或 8 GPU | 八卡 1.1TB aggregate HBM 与超过 32PFLOPS FP8 是系统值 | `[1, p. 4]` `[5, NVIDIA H200 Form Factors]` |
+| HGX 平台兼容性 | 官方发布稿明确四卡、八卡 HGX H200 server board 与 HGX H100 系统的硬件和软件兼容，合作伙伴可据此升级已有系统设计 | 这是系统平台兼容声明；不等于任意服务器可直接换装 H200 模组，也不提供具体散热或固件改造步骤 | `[5, NVIDIA H200 Form Factors]` |
 
 ## 7. 证据缺口与来源冲突
 

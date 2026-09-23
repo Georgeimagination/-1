@@ -2,7 +2,7 @@
 
 > 模板版本：1.3（芯片架构事实口径）  
 > 卡片状态：已完成  
-> 资料截止日：2026-09-16
+> 资料截止日：2026-09-23
 
 本卡以 Huawei Ascend 950PR packaged processor 为正式主语。950PR 是包含多个计算资源和内存配置的产品族，不能把各字段的最大值任意拼接成唯一销售 SKU。它与 950DT 共用第三代 DaVinci 架构，封装内包含 2 个 AI Die、2 个 IO Die 和 8 个高速内存模块；HiBL 1.0 是官方路线图给出的高带宽内存（HBM）名称。Atlas 350 PCIe accelerator card 是上层产品，其系统聚合值不作为本卡的单封装规格。[1, PDF pp.10, 12-15，正文 pp.6, 8-11，图3-1、表3-1] [2, Ascend 950PR] [4, 新品发布]
 
@@ -40,17 +40,30 @@
 | 维度 | 公开事实 | 作用域与限制 | 来源 |
 |---|---|---|---|
 | 矩阵、向量与控制路径 | 一个 AI Core 含 1 个 Cube、2 个 Vector 及各自 Scalar 控制；图中 Cube 标为 16×16×16 FP16，Vector 各有两组 64×FP32 或 128×FP16 执行资源 | 图示资源与运算组织，不自行换算每周期吞吐、延迟或未公开时钟 | `[1, PDF p.17，正文 p.13，图4-1]` |
-| 执行模型 | 支持 SIMD/SIMT 混合编程；SIMD 是主要向量计算路径，SIMT 可处理不规则访存与复杂分支；Vector Function 可选择两种模式并切换 | SIMD 为单指令多数据，SIMT 为单指令多线程；具体线程宽度、scheduler 数量和完整发射限制未公开 | `[1, PDF pp.16, 21，正文 pp.12, 17，§4.1、§4.1.3]` |
+| 执行模型 | 支持 SIMD/SIMT 混合编程；SIMD 是主要向量计算路径，SIMT 可处理不规则访存与复杂分支；Vector Function 可选择两种模式并切换 | SIMD 为单指令多数据，SIMT 为单指令多线程；CANN 9.1.0 明确 Warp 为 32 线程，完整线程及寄存器限制见本节补充；物理 scheduler 数量和完整发射限制未公开 `[7, Warp执行机制]` | `[1, PDF pp.16, 21，正文 pp.12, 17，§4.1、§4.1.3]` |
 | Vector 执行 | register-based SIMD，支持双发 ALU 指令与乱序执行；Unified Buffer（UB，向量局部缓冲）与 Vector ALU 之间增加 Register File | 不能由双发推断任意指令组合均能同时发射 | `[1, PDF pp.11, 21，正文 pp.7, 17]` |
 | 显式局部存储 | SIMD 编程显式管理 Global Memory、Local Memory 与 Register；CANN 文档给出 256B 单寄存器及 GM→UB→Register 层次 | 256B 是单寄存器大小，不是寄存器文件总容量 | `[5, AI Core 组成、显式分层访存与三级内存层次]` |
 | SIMT 存储视图 | UB 可作为 Shared Memory 与 Data Cache；Vector Core 通过共享 L2 访问全局内存 | 编程抽象与物理 SRAM 容量分别记录，不把 SIMD 寄存器和 SIMT 线程寄存器重复计数 | `[6, 抽象硬件架构]` |
 | Cube-Vector 数据通路 | Cube L1 与 Vector UB 有直接数据交换通路，支持随路精度和布局转换 | 减少融合算子中间结果搬运；未公开此通路的独立带宽 | `[1, PDF p.22，正文 p.18，§4.1.4]` |
-| 数据搬运与同步 | NDDMA 是多维 DMA 引擎，支持五维数据排布变换；内部 cache 聚合 128B 读请求；BufferID 的 get_buf/rel_buf 协调生产者与消费者 | NDDMA 的 128B 请求粒度与全局 L2 的 512B cache line 是不同层次 | `[1, PDF pp.22-24，正文 pp.18-20，§4.1.4]` |
+| 数据搬运与同步 | NDDMA 是多维 DMA 引擎，支持五维数据排布变换；内部 cache 聚合 128B 读请求；BufferID 的 get_buf/rel_buf 协调生产者与消费者 | NDDMA 的 128B 请求粒度与全局 L2 的 512B cache line 是不同层次 | `[1, PDF pp.22-24，正文 pp.18-20，§4.1.5-4.1.6]` |
 | 矩阵数值格式 | Cube 支持 MXFP4、HiF8、MXFP8、FP8、INT8、BF16、FP16、TF32；图中 FP8 分为 E5M2/E4M3，FP4 为 E2M1 | 算力使用表3-1纯 Cube 栏；图中 FP32 格式示意不提供 Cube FP32 峰值 | `[1, PDF pp.13-14, 18，正文 pp.9-10, 14，表3-1、图4-3]` |
 | 相对计算速率 | 同频下，Cube 的 HiF8/MXFP8/FP8 TFLOPS 为 FP16 的 2 倍，MXFP4 为 4 倍 | 是精度带来的相对速率，不是稀疏翻倍 | `[1, PDF p.17，正文 p.13，§4.1.1]` |
 | 输出转换与累加边界 | L0C→UB 可将 FP32/INT32 量化到 BF16/FP16/FP8/INT8，并转换 NZ→ND/DN 布局 | 可确认输出数据路径；完整输入/乘积/累加/输出组合、舍入与溢出规则未全部公开 | `[1, PDF p.17，正文 p.13，§4.1.1]` |
 | HiF8 编码 | 8 位格式动态分配指数与尾数，描述的指数幂次覆盖为 [-22,15]，不采用 MX 格式的额外 8 位 scale | 独立的数值编码；不把“接近 FP16”视为对任意模型精度的保证 | `[1, PDF pp.19-20，正文 pp.15-16，§4.1.1]` |
 | 稀疏与专用功能 | 未找到结构化稀疏模式或专用 MoE routing、top-k、sampling、KV Cache 单元的一手证据；已公开针对 FlashAttention、Softmax、GELU 的数据通路或微架构优化 | 算子优化不等于独立专用引擎；没有充分测试条件的厂商性能倍数不列为可比实测 | `[1, PDF pp.16-17, 21-22，正文 pp.12-13, 17-18]` |
+
+### SIMT 线程、寄存器与局部存储配置
+
+CANN 9.1.0 将一个 Warp 定义为 32 个线程，Thread Block 最多 2048 个线程，一个 Grid 最多 65535 个 Thread Block。这些是编程与 launch 限制，不能视为同时驻留数量；分支发散时，硬件按活跃掩码串行执行各分支。`__launch_bounds__(N)` 的默认最大线程数为 1024，编译时按下表分配每线程寄存器。寄存器需求超过可分配量时可能 spill 至栈空间。这里的每线程寄存器个数不能乘以 SIMD 的 256B 单向量寄存器容量来推导物理 Register File。[7, 线程层次结构、Warp执行机制、配置最大线程数]
+
+| 编译期最大线程数 | 每线程可用寄存器数 |
+|---|---:|
+| 1 至 256 | 127 |
+| 257 至 512 | 64 |
+| 513 至 1024 | 32 |
+| 1025 至 2048 | 16 |
+
+每个 Vector Core 的 256KB Unified Buffer 同时承载共享内存、编译器预留区和 SIMT Data Cache。默认预留 8KB，Data Cache 最少 32KB、最多 128KB，容量为 `min(256KB - 静态共享内存 - 动态共享内存 - 8KB, 128KB)`。据此，默认模式下用户共享内存的推导上限为 216KB，实际访问仍必须局限于已申请区域。禁用预留区的编译选项附注存在公式仍保留 8KB 的不一致，本卡保留默认模式，不自行扩充可用容量。共享内存和 Data Cache 均来自同一块 UB，不能分别叠加计入 SRAM 总量。[8, 共享内存大小的限制、寄存器]
 
 ## 4. Die、chiplet 与 package
 
@@ -61,10 +74,12 @@
 | CPU 缓存 | 每 Linx816 Core：L1 64KB、L2 1MB；每 CPU Cluster：L3 4MB | CPU 基于 ARMv8-A，支持单/双线程配置，核内线程共享 CPU L1/L2；实际 CPU 档位见§5 | `[1, PDF pp.24-25，正文 pp.20-21，§4.2、表4-2]` |
 | 全局 L2 | 128 / 112 MB；512B cache line，由 4×128B sector 组成；支持 Hint、按 way 管理及 CMO | 与 AI Core 的 L1/L0/UB、CPU 的 L1/L2/L3区分 | `[1, PDF pp.11, 15, 25-27，正文 pp.7, 11, 21-23，表3-1、§4.3]` |
 | 本地内存一致性 | 两计算 die 采用统一内存访问；AI CPU 与 AI Core 共享芯片内存，以硬件缓存一致性协调 CPU cache 与 AI Core+L2；L2支持跨 die 一致性 | 只确认本芯片范围，不扩展为所有远程设备的全系统 cache coherence | `[1, PDF pp.24-26，正文 pp.20-22，图4-9、§4.3]` |
+| L2 组织与软件管理 | 多 bank 分布式结构，按 512B 低位交织并采用高位异或；每 bank 支持同时读写；跨 die 硬件一致性下仍有局部亲和性。Hint 控制分配/替换，non-allocate 可使近期不再使用的输出直接写 Global Memory；SDMA 支持预取、写回、无效化和冲刷等 CMO | 局部亲和性可用于任务放置；未给出 bank 数、各 bank/全局 L2 带宽和命中延迟，不能从 DRAM 带宽推算 | `[1, PDF pp.26-27，正文 pp.22-23，§4.3.2]` |
 | 高速内存模块 | 8 个高速内存模块；白皮书明确为 DRAM，官方路线图名称为 HiBL 1.0 HBM | 模块数不等于 DRAM 堆叠层数；controller/PHY宽度、内存时钟及堆叠层数未公开 | `[1, PDF pp.12, 25，正文 pp.8, 21]` `[2, Ascend 950PR]` |
 | 封装内互联 | AI Die、IO Die与内存模块通过 D2D Clink 和 Memory Interface 相连 | 链路宽度、各条链路峰值及完整 D2D 拓扑未公开；外部 2016GB/s 不是 D2D 带宽 | `[1, PDF p.12，正文 p.8，图3-1及前文]` |
 | 片内 NoC 与转发 | 每个 IO Die 支持 9 个×4端口之间的路由转发，流量通过 IO Die 的 NoC，不进入计算 die、不占用 DRAM 带宽 | 完整计算 NoC 的拓扑与带宽未公开 | `[1, PDF p.34，正文 p.30，§4.6.5]` |
 | STARS2.0 调度 | 硬件调度 AI Core、AI CPU、DVPP、系统DMA（SDMA）、UB通信与集合通信单元（CCU）；支持 2048 条任务流，并行支持 16 个 AI CPU任务、64个Host任务、64个UB Jetty任务、32个CCU任务、32个SDMA通道 | 任务并发数不是相应物理引擎数量，32 个CCU任务不代表32个CCU | `[1, PDF pp.27-28，正文 pp.23-24，§4.4]` |
+| STARS 控制路径与资源切分 | 通过专用 HSCB 高速控制总线向 AIC/AIV 调度，独立于数据 NoC，并支持广播；最多 8 个 Group 可按 die 做亲和性调度；AIC/AIV/SDMA 最多划分 16 个资源池，其他加速器最多 8 个资源池，可绑定虚拟机实现隔离；支持最多 128K 个单比特或 4096 个 32-bit 同步标志 | 白皮书仅称 ns 级调度开销，未给精确延迟；Group、资源池和任务并发不是物理核或引擎数量，资源池绑定不证明全部内存与带宽独占 | `[1, PDF p.28，正文 p.24，§4.4]` |
 | 内存可靠性（RAS） | DRAM online ECC、巡检弱单元并重写/隔离、保留行动态修复 | 纠错码参数、SRAM覆盖范围与完整故障颗粒度未公开 | `[1, PDF p.26，正文 p.22，§4.3]` |
 | 制造与物理规模 | process、foundry、die area、transistor count、die clock、封装尺寸未公开 | 不从“自主制造”表述推断具体工艺，也不用传闻补值 | `[1, §3-4；未列这些参数]` |
 
@@ -109,6 +124,7 @@
 | 全局L2 | 128 / 112 MB | 本产品使能档位，不能统一按完整设计计128MB | `[1, PDF p.15，正文 p.11，表3-1]` |
 | AI CPU | Linx816，8C16T / 6C12T / 4C8T；支持NEON | C为CPU核，T为线程；不是AI Core数量 | `[1, PDF p.14，正文 p.10，表3-1]` |
 | DVPP | 4/2个VPC、8个JPEGD、4/2个JPEGE | 图像预处理及JPEG编解码硬件；资源档位不与Core/内存强配 | `[1, PDF p.14，正文 p.10，表3-1]` |
+| DVPP 吞吐与格式约束 | VPC 为 5760/2880 FPS，JPEGD 为 4096 FPS，JPEGE 为 1024/512 FPS，均为 1080p 等效规格；VPC 支持 resize/crop/padding、色彩/HSV/像素处理及仿射/透视变换；JPEGD 为 8-bit baseline JPEG，支持 YUV444/422/420/440/400 及区域解码；JPEGE 为 Baseline Sequential DCT，支持 YUV420 semi-planar、YUV422 packed/semi-planar、YUV444 planar/packed、YUV400；JPEG 编解码最大分辨率均为 32768×32768 | 最大分辨率与最高 FPS 未声明可同时达到；吞吐档位不与计算、内存档位强配 | `[1, PDF pp.14、29，正文 pp.10、25，表3-1、§4.5]` |
 | 外部SerDes | 72条HiLink lane，每lane最高112Gbps，组成18个×4端口 | 全封装合计，不是每IO die18端口 | `[1, PDF pp.10, 13，正文 pp.6, 9]` |
 | UB设备互联 | Unified Bus 2.0（通信语境中的UB）；2016GB/s双向 | 18×4×112Gbps÷8×2；出框速率还受光模块限制，非有效payload或持续吞吐 | `[1, PDF p.15，正文 p.11，表3-1]` |
 | UBoE（UB over Ethernet） | 全芯片2×400Gbps Ethernet Link，200GB/s双向合计 | 集成于芯片；与UB共用2个端口，支持2个×4或4个×2配置 | `[1, PDF pp.15, 30-31，正文 pp.11, 26-27，表3-1、§4.6.2]` |
@@ -130,10 +146,11 @@ CCU包含任务解释控制部分CCUM，以及带MemorySlice和Reduce Unit的CCU
 | Scale-up拓扑能力 | 支持Clos、Full Mesh+Clos、nD-Mesh；通过UB Switch扩展；厂商给出最大8192卡超节点 | 芯片/架构支持上限，不等于现有某台系统的规模或已交付集群 | `[1, PDF p.30，正文 p.26，§4.6]` |
 | Scale-out端点 | 芯片集成UBoE，可通过以太网交换机组网，scale-up与scale-out端口复用 | 2×400Gbps为芯片能力，系统可暴露更少端口；不将UBoE自动等同独立RoCE NIC | `[1, PDF pp.11, 31，正文 pp.7, 27，§4.6.2]` |
 | 共享访问规模 | 白皮书称支持最高128TB的Host-Device及Device-Device内存共享访问 | 是远程共享访问范围，不是本封装DRAM容量，也不证明远端全局cache coherence | `[1, PDF p.11，正文 p.7]` |
+| 外部内存池与存储池访问 | Rack/Pod 内的计算芯片可通过 UB 端口直接访问 CPU 内存池；也可访问基于 UB 的存储资源池，白皮书描述该路径省去中间存储协议转换 | 属于外部资源访问和组网能力，不计入封装内 DRAM；资料没有给出本方案持续带宽、负载实测、自动迁移或远端全局缓存一致性保证 | `[1, PDF pp.36-37，正文 pp.32-33，§4.7.2-4.7.3]` |
 | 传输可靠性 | UB支持链路层重传；RTP支持端到端可靠重传，CTP不支持端到端可靠重传 | §4.6.1分别写RTP支持4个Port可靠传输带宽、CTP支持9个Port带宽，但未明确按单IO die或全封装计，不乘2或外推18端口全速可靠传输 | `[1, PDF pp.30-31，正文 pp.26-27，§4.6.1]` |
 | Atlas 350 | 搭载950PR的PCIe加速卡，于2026-03-20正式上市 | 证明相应产品已商用；卡级互联、散热和功耗不替代processor规格，各芯片档位是否独立销售仍未知 | `[4, 新品发布：Atlas 350 加速卡上市]` |
 
-白皮书表3-1直接列出950PR的112GB/1.4TB/s配置，它属于processor产品族规格。具体Atlas350或其他上层产品采用哪些资源组合，仍以相应产品资料为准。[1, PDF p.14，正文 p.10，表3-1]
+白皮书表3-1分别列出950PR的112GB容量档位与1.4TB/s带宽档位，它们属于processor产品族规格；表中未给完整料号及资源组合映射，不单凭斜杠位置把它们绑定成确定的销售配置。具体Atlas350或其他上层产品采用哪些资源组合，仍以相应产品资料为准。[1, PDF p.14，正文 p.10，表3-1]
 
 ## 7. 证据缺口与来源差异
 
@@ -160,6 +177,8 @@ CCU包含任务解释控制部分CCUM，以及带MemorySlice和Reduce Unit的CCU
 | `[4]` | Huawei Ascend Community，《技术创新赋能千行万业，昇腾人工智能伙伴峰会2026圆满举办》，2026-03-20 | 官方发布稿 | Atlas350搭载950PR、正式上市与商用状态 | <https://www.hiascend.com/activities/dynamic-news/20260320-3> |
 | `[5]` | Huawei Ascend Community，《概述：AI Core SIMD编程》，CANN9.1.0 | 官方编程指南 | 显式分层访存、256B单寄存器、GM→UB→Register | <https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/910/programug/Ascendcopdevg/docs/guide/%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97/%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B/AI-Core-SIMD%E7%BC%96%E7%A8%8B/%E6%A6%82%E8%BF%B0.md> |
 | `[6]` | Huawei Ascend Community，《抽象硬件架构：AI Core SIMT编程》，CANN9.1.0 | 官方编程指南 | SIMT的Shared Memory、Data Cache与L2抽象 | <https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/910/programug/Ascendcopdevg/docs/guide/%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97/%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B/AI-Core-SIMT%E7%BC%96%E7%A8%8B/%E6%8A%BD%E8%B1%A1%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84.md> |
+| `[7]` | Huawei Ascend Community，《线程架构：AI Core SIMT编程》，CANN9.1.0 | 官方编程指南 | 线程层次、Warp宽度、分支行为和线程/寄存器分配关系 | <https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/910/programug/Ascendcopdevg/docs/guide/%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97/%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B/AI-Core-SIMT%E7%BC%96%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E6%9E%B6%E6%9E%84.md>；[本地原文](../../../原始资料/网页快照/华为/产品详解补充/2026-09-17/simt-threads-910.md) |
+| `[8]` | Huawei Ascend Community，《内存层级：AI Core SIMT编程》，CANN9.1.0 | 官方编程指南 | UB与Data Cache分配、默认预留和寄存器限制 | <https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/910/programug/Ascendcopdevg/docs/guide/%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97/%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B/AI-Core-SIMT%E7%BC%96%E7%A8%8B/%E5%86%85%E5%AD%98%E5%B1%82%E7%BA%A7.md>；[本地原文](../../../原始资料/网页快照/华为/产品详解补充/2026-09-17/simt-memory-910.md) |
 
 ## 9. 完成检查
 

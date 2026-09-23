@@ -6,6 +6,8 @@ TPU v5e 面向训练和推理，Google 强调的是成本与性能的配合。�
 
 图：依据 v5e 专页和 TPU 通用架构说明重绘。图中 HBM 为容量集合，stack 数量没有公开，不能按框的个数理解为物理颗数；VMEM（向量暂存存储器）与 SMEM（标量存储器）按 JAX 数值计算框架的 v5e 配置补入，分别服务向量数据和标量控制，不添加没有来源的 L2 cache。[1, System architecture] [2, TPU chip] [21, TPU_V5E branch]
 
+Google DeepMind 作者的 JAX 架构教程称 v5e 为 inference-optimized（针对推理优化）；这描述设计侧重，Cloud 仍明确支持训练与推理两类配置。[20, What Is a TPU?]
+
 ## 一个核心内部怎样分工
 
 每颗 v5e 有一个 TensorCore（TPU 的矩阵、向量与标量计算核心），内含四个 128×128 MXU（矩阵乘法单元）、一个 vector unit 和一个 scalar unit。MXU 是矩阵乘法阵列，vector unit 负责 activation、softmax 等通用计算，scalar unit 负责控制流与地址运算。这里的“一个核心”并不等于一次只能算一个值：四个矩阵阵列与向量路径本身都具有大量并行计算资源。[1, System architecture] [2, TPU chip]
@@ -53,7 +55,7 @@ HBM 容量决定能够留在单颗设备内的数据规模，HBM 带宽约束这
 
 ## 从单芯片到二维互联
 
-四个 ICI 端口服务于芯片间连接，v5e 系统采用 2D torus，即两个方向都首尾相连的二维网格。一个 Pod 最多有 256 颗芯片；用户也可以使用更小的 slice，slice 是同一 Pod 内共同执行任务的一组互联芯片。400 GB/s 是单颗芯片端点的双向聚合值，Pod 的 all-reduce 带宽则属于整套网络，二者对应图中的不同层级。[1, System architecture and Configurations]
+四个 ICI 端口服务于芯片间连接，v5e 系统采用 2D torus，即两个方向都首尾相连的二维网格。一个 Pod 最多有 256 颗芯片；用户也可以使用更小的 slice，slice 是同一 Pod 内共同执行任务的一组互联芯片。小 slice 不自动具备完整回环：scaling book 用 4×4 slice 说明未达到 16 颗芯片的轴长时，该方向没有 wrap-around 链路，因此不能把四端口聚合峰值直接用于任意小 slice 的通信估算。[20, TPU specs / ICI table footnote; Worked Problems, Question 5]400 GB/s 是单颗芯片端点的双向聚合值，Pod 的 all-reduce 带宽则属于整套网络，二者对应图中的不同层级。[1, System architecture and Configurations]
 
 v5e 提供一芯片 VM，也有多芯片配置。完整 host 中的 CPU、主机 DRAM 和 NIC 都在 TPU 外部；即便某个云实例页面把这些资源与 TPU 并列，它们也不属于图中 TensorCore 或本地 HBM。多个 slice 通过数据中心网络连接时，还会引入另一层通信路径。[1, VM types] [2, Multislice versus single slice]
 

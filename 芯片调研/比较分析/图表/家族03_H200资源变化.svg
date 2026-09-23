@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="726.84pt" height="471.064pt" viewBox="0 0 726.84 471.064" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-09-23T05:30:51.974234</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 471.064 
+L 726.84 471.064 
+L 726.84 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 144 353.16 
+L 715.32 353.16 
+L 715.32 72.36 
+L 144 72.36 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 264.457775 353.16 
+L 264.457775 72.36 
+" clip-path="url(#p390c51af34)" style="fill: none; stroke: #dfe7eb; stroke-width: 0.6; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_2">
+      <defs>
+       <path id="md8df88aa16" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#md8df88aa16" x="264.457775" y="353.16" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle" x="264.457775" y="367.440273" transform="rotate(-0 264.457775 367.440273)">0.5×</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 401.393172 353.16 
+L 401.393172 72.36 
+" clip-path="url(#p390c51af34)" style="fill: none; stroke: #dfe7eb; stroke-width: 0.6; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#md8df88aa16" x="401.393172" y="353.16" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle" x="401.393172" y="367.440273" transform="rotate(-0 401.393172 367.440273)">0.75×</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 498.550382 353.16 
+L 498.550382 72.36 
+" clip-path="url(#p390c51af34)" style="fill: none; stroke: #dfe7eb; stroke-width: 0.6; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#md8df88aa16" x="498.550382" y="353.16" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle" x="498.550382" y="367.440273" transform="rotate(-0 498.550382 367.440273)">1×</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_7">
+      <path d="M 635.485779 353.16 
+L 635.485779 72.36 
+" clip-path="url(#p390c51af34)" style="fill: none; stroke: #dfe7eb; stroke-width: 0.6; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#md8df88aa16" x="635.485779" y="353.16" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle" x="635.485779" y="367.440273" transform="rotate(-0 635.485779 367.440273)">1.5×</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_9">
+      <defs>
+       <path id="m966b6a8e7b" d="M 0 0 
+L 0 2 
+" style="stroke: #000000; stroke-width: 0.6"/>
+      </defs>
+      <g>
+       <use xlink:href="#m966b6a8e7b" x="189.096788" y="353.16" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_10">
+      <g>
+       <use xlink:href="#m966b6a8e7b" x="326.032185" y="353.16" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_11">
+      <g>
+       <use xlink:href="#m966b6a8e7b" x="378.092607" y="353.16" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_12">
+      <g>
+       <use xlink:href="#m966b6a8e7b" x="423.189395" y="353.16" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_9">
+     <g id="line2d_13">
+      <g>
+       <use xlink:href="#m966b6a8e7b" x="462.967582" y="353.16" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="text_5">
+     <text style="font-size: 11px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle" x="429.66" y="390.664453" transform="rotate(-0 429.66 390.664453)">以 H200 SXM5 141GB 的对应资源为 1（对数坐标）</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_14"/>
+     <g id="text_6">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(76.6 103.353311)">16 位矩阵峰值</text>
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(80.496875 115.186514)">（TFLOP/s）</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_15"/>
+     <g id="text_7">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(95.5 157.303311)">HBM 容量</text>
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(106.051563 169.136514)">（GB）</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_16"/>
+     <g id="text_8">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(95.5 211.278311)">HBM 带宽</text>
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(99.94375 223.111514)">（TB/s）</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_17"/>
+     <g id="text_9">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(65.485938 265.282998)">NVLink 收发合计</text>
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(98.273438 277.116201)">（GB/s）</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_18"/>
+     <g id="text_10">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(100.5 319.313467)">功率上限</text>
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(111.060938 331.14667)">（W）</text>
+     </g>
+    </g>
+   </g>
+   <g id="line2d_19">
+    <path d="M 498.550382 353.16 
+L 498.550382 72.36 
+" clip-path="url(#p390c51af34)" style="fill: none; stroke-dasharray: 3.7,1.6; stroke-dashoffset: 0; stroke: #7a8b95"/>
+   </g>
+   <g id="line2d_20">
+    <path d="M 498.550382 104.76 
+L 441.417769 104.76 
+" clip-path="url(#p390c51af34)" style="fill: none; stroke: #218378; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_21">
+    <path d="M 498.550382 158.76 
+L 498.550382 158.76 
+" clip-path="url(#p390c51af34)" style="fill: none; stroke: #218378; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_22">
+    <path d="M 498.550382 212.76 
+L 499.463816 212.76 
+" clip-path="url(#p390c51af34)" style="fill: none; stroke: #218378; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_23">
+    <path d="M 498.550382 266.76 
+L 498.550382 266.76 
+" clip-path="url(#p390c51af34)" style="fill: none; stroke: #218378; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_24">
+    <path d="M 498.550382 320.76 
+L 446.489961 320.76 
+" clip-path="url(#p390c51af34)" style="fill: none; stroke: #218378; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 144 353.16 
+L 144 72.36 
+" style="fill: none; stroke: #000000; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 144 353.16 
+L 715.32 353.16 
+" style="fill: none; stroke: #000000; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="PathCollection_1">
+    <defs>
+     <path id="m3b6c232ac8" d="M 0 3.774917 
+C 1.00112 3.774917 1.961371 3.377168 2.66927 2.66927 
+C 3.377168 1.961371 3.774917 1.00112 3.774917 0 
+C 3.774917 -1.00112 3.377168 -1.961371 2.66927 -2.66927 
+C 1.961371 -3.377168 1.00112 -3.774917 0 -3.774917 
+C -1.00112 -3.774917 -1.961371 -3.377168 -2.66927 -2.66927 
+C -3.377168 -1.961371 -3.774917 -1.00112 -3.774917 0 
+C -3.774917 1.00112 -3.377168 1.961371 -2.66927 2.66927 
+C -1.961371 3.377168 -1.00112 3.774917 0 3.774917 
+z
+" style="stroke: #218378"/>
+    </defs>
+    <g clip-path="url(#p390c51af34)">
+     <a xlink:href="#panorama-h200_nvl" target="_blank">
+      <use xlink:href="#m3b6c232ac8" x="441.417769" y="104.76" style="fill: #218378; stroke: #218378"/>
+     </a>
+    </g>
+   </g>
+   <g id="text_11">
+    <g id="patch_5">
+     <path d="M 449.217769 110.652383 
+L 482.480269 110.652383 
+L 482.480269 98.867617 
+L 449.217769 98.867617 
+z
+" style="fill: #ffffff; opacity: 0.94"/>
+    </g>
+    <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'; text-anchor: start" x="450.417769" y="107.347891" transform="rotate(-0 450.417769 107.347891)">0.844×</text>
+   </g>
+   <g id="PathCollection_2">
+    <g clip-path="url(#p390c51af34)">
+     <a xlink:href="#panorama-h200_nvl" target="_blank">
+      <use xlink:href="#m3b6c232ac8" x="498.550382" y="158.76" style="fill: #218378; stroke: #218378"/>
+     </a>
+    </g>
+   </g>
+   <g id="text_12">
+    <g id="patch_6">
+     <path d="M 506.350382 164.652383 
+L 539.612882 164.652383 
+L 539.612882 152.867617 
+L 506.350382 152.867617 
+z
+" style="fill: #ffffff; opacity: 0.94"/>
+    </g>
+    <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'; text-anchor: start" x="507.550382" y="161.347891" transform="rotate(-0 507.550382 161.347891)">1.000×</text>
+   </g>
+   <g id="PathCollection_3">
+    <g clip-path="url(#p390c51af34)">
+     <a xlink:href="#panorama-h200_nvl" target="_blank">
+      <use xlink:href="#m3b6c232ac8" x="499.463816" y="212.76" style="fill: #218378; stroke: #218378"/>
+     </a>
+    </g>
+   </g>
+   <g id="text_13">
+    <g id="patch_7">
+     <path d="M 507.263816 218.652383 
+L 540.526316 218.652383 
+L 540.526316 206.867617 
+L 507.263816 206.867617 
+z
+" style="fill: #ffffff; opacity: 0.94"/>
+    </g>
+    <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'; text-anchor: start" x="508.463816" y="215.347891" transform="rotate(-0 508.463816 215.347891)">1.003×</text>
+   </g>
+   <g id="PathCollection_4">
+    <g clip-path="url(#p390c51af34)">
+     <a xlink:href="#panorama-h200_nvl" target="_blank">
+      <use xlink:href="#m3b6c232ac8" x="498.550382" y="266.76" style="fill: #218378; stroke: #218378"/>
+     </a>
+    </g>
+   </g>
+   <g id="text_14">
+    <g id="patch_8">
+     <path d="M 506.350382 272.652383 
+L 539.612882 272.652383 
+L 539.612882 260.867617 
+L 506.350382 260.867617 
+z
+" style="fill: #ffffff; opacity: 0.94"/>
+    </g>
+    <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'; text-anchor: start" x="507.550382" y="269.347891" transform="rotate(-0 507.550382 269.347891)">1.000×</text>
+   </g>
+   <g id="PathCollection_5">
+    <g clip-path="url(#p390c51af34)">
+     <a xlink:href="#panorama-h200_nvl" target="_blank">
+      <use xlink:href="#m3b6c232ac8" x="446.489961" y="320.76" style="fill: #218378; stroke: #218378"/>
+     </a>
+    </g>
+   </g>
+   <g id="text_15">
+    <g id="patch_9">
+     <path d="M 454.289961 326.652383 
+L 487.552461 326.652383 
+L 487.552461 314.867617 
+L 454.289961 314.867617 
+z
+" style="fill: #ffffff; opacity: 0.94"/>
+    </g>
+    <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'; text-anchor: start" x="455.489961" y="323.347891" transform="rotate(-0 455.489961 323.347891)">0.857×</text>
+   </g>
+  </g>
+  <g id="text_16">
+   <text style="font-size: 14px; font-family: 'Arial', 'Heiti TC'; text-anchor: start" x="144" y="22.971562" transform="rotate(-0 144 22.971562)">H200 NVL 相对 SXM：内存容量相同，计算峰值较低</text>
+  </g>
+  <g id="text_17">
+   <text style="font-size: 9px; font-family: 'Arial', 'Heiti TC'; text-anchor: start; fill: #64737b" x="11.52" y="423.36" transform="rotate(-0 11.52 423.36)">NVL 4.813 与 SXM 4.8 TB/s 按各简报保留；1.003× 不解读为已测得的带宽优势。</text>
+  </g>
+  <g id="legend_1">
+   <g id="line2d_25">
+    <path d="M 313.7225 449.939508 
+L 323.7225 449.939508 
+L 333.7225 449.939508 
+" style="fill: none; stroke: #218378; stroke-linecap: square"/>
+    <defs>
+     <path id="mc6129908da" d="M 0 3 
+C 0.795609 3 1.55874 2.683901 2.12132 2.12132 
+C 2.683901 1.55874 3 0.795609 3 0 
+C 3 -0.795609 2.683901 -1.55874 2.12132 -2.12132 
+C 1.55874 -2.683901 0.795609 -3 0 -3 
+C -0.795609 -3 -1.55874 -2.683901 -2.12132 -2.12132 
+C -2.683901 -1.55874 -3 -0.795609 -3 0 
+C -3 0.795609 -2.683901 1.55874 -2.12132 2.12132 
+C -1.55874 2.683901 -0.795609 3 0 3 
+z
+" style="stroke: #218378"/>
+    </defs>
+    <g>
+     <use xlink:href="#mc6129908da" x="323.7225" y="449.939508" style="fill: #218378; stroke: #218378"/>
+    </g>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'; text-anchor: start" x="341.7225" y="453.439508" transform="rotate(-0 341.7225 453.439508)">H200 NVL 141GB</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p390c51af34">
+   <rect x="144" y="72.36" width="571.32" height="280.8"/>
+  </clipPath>
+ </defs>
+</svg>

@@ -2,7 +2,7 @@
 
 > 模板版本：1.3（芯片架构事实口径）  
 > 卡片状态：已完成  
-> 资料截止日：2026-08-25
+> 资料截止日：2026-09-23
 
 Google公开了TPU v5p的per-chip规格，但云端最小拓扑是4-chip `2×2×1` slice，没有独立的单芯片租用配置。本卡以规格表中的一颗TPU v5p chip作为正式比较对象；四芯片VM/host、cube、slice、Pod和Multislice只用于解释部署关系，不把聚合资源写成芯片属性。
 
@@ -40,16 +40,24 @@ Google公开了TPU v5p的per-chip规格，但云端最小拓扑是4-chip `2×2×
 |---|---|---|---|
 | 矩阵、向量、标量与控制路径 | 每芯片2个TensorCore，每个TensorCore含4个128×128 MXU、1个vector unit和1个scalar unit；单芯片共8个MXU | v5p直接数量；每个TensorCore结构由当前产品页给出 | `[1, System architecture]` `[2, p. 2, Table 1]` |
 | 执行模型与调度 | scalar unit取VLIW bundle并转发解码指令，vector与matrix路径相对scalar解耦执行；异步DMA可与计算重叠 | Google称TPU v2框图的基本结构持续适用于包括v5p的训练TPU | `[2, pp. 3-4, Figure 2]` |
-| 局部存储与数据搬运 | 每芯片128MiB VMEM；vector lane寄存器读写本地VMEM切片，异步DMA在HBM和VMEM间搬运；层次由编译器控制而非硬件cache | 128MiB是per-TPU总量；每TensorCore分配量未直接列出 | `[2, pp. 2, 4, Table 1 and Figure 2]` |
-| 数值与累加路径 | 128×128 MXU采用systolic array；BF16乘法、FP32累加；v5p另有459TFLOPS的低精度峰值 | 当前Cloud页标为FP8，Google跨代论文标为BF8；完整乘积、累加和输出语义未公开 | `[2, pp. 2, 4, Table 1]` `[1, System architecture]` |
-| 稀疏与专用单元 | 每芯片4个SparseCore；每个SparseCore含16个compute tile，每tile有Fetch Unit、8-wide SIMD Vector Processing Unit和Flush Unit，并访问2.5MiB Sparse Vector Memory中属于该tile的切片 | 2.5MiB是单个SparseCore内由tiles分片访问的存储，不是每tile容量；用于embedding、scatter/gather及部分collective、Top-K和小稀疏张量操作 | `[1, System architecture]` `[2, p. 5, SparseCore]` |
+| 局部存储与数据搬运 | 每TensorCore有64MiB VMEM、1MiB SMEM，两核VMEM合计128MiB；vector lane寄存器读写本地VMEM切片，异步DMA在HBM和VMEM间搬运；由编译器管理 | JAX明确给出per-TensorCore容量，128MiB不是每核可独立使用的共享池；SMEM用于标量控制和动态索引 | `[2, pp. 2, 4, Table 1 and Figure 2]` `[10, TPU_V5P branch]` `[12, Placing operands in SMEM]` |
+| 数值与累加路径 | 128×128 MXU采用systolic array；BF16乘法、FP32累加；v5p另有459TFLOPS的低精度峰值 | 当前Cloud页标为FP8，Google跨代论文标为BF8；官方Ironwood发布文将v5p的FP8标为emulated，保留模拟执行条件；完整乘积、累加和输出语义未公开 `[9, Figure 2 caption]` | `[2, pp. 2, 4, Table 1]` `[1, System architecture]` |
+| 稀疏与专用单元 | 每芯片4个SparseCore，每SC有16个vector subcore（tile），每tile为8-wide SIMD、512KiB局部VMEM；SC内另有共享SPMEM | tile局部VMEM与共享SPMEM是不同空间；跨代论文的2.5MiB通用Sparse Vector Memory描述不能替代v5p专属分支。支持embedding、scatter/gather及部分collective、Top-K和小稀疏张量操作 | `[1, System architecture]` `[2, p. 5, SparseCore]` `[10, TPU_V5P branch]` `[13, Hardware overview]` |
+
+### 3.1 寄存器、DMA与逻辑核心配置
+
+scaling book以v5p为例给出每TensorCore 64个VREG，每个容纳8×128个32-bit元素，即4KiB；VMEM每周期可向VREG读入3个完整寄存器、写回1个。按教程约1.75GHz计算，分别为21.504TB/s和7.168TB/s/核；这两个方向须分别使用，也不能将两核合计带宽看成单核共享总线。每个标量核最多每周期创建一个DMA请求，并控制VPU、4个MXU、2个XLU和多个DMA engine，描述符创建速率与搬运吞吐不是同一个量。[11, Appendix A / VREGs; Scalar Core]
+
+JAX明确v5p支持Megacore模式，即一个逻辑device包含两个物理TensorCore，也支持一个逻辑device只使用一个TensorCore的split模式。该软件映射不改变芯片的两核物理数量或每核64MiB VMEM；Pallas利用两核时需要将一个grid轴并行化，不能仅凭逻辑device数量认定执行资源自动翻倍。[10, ChipVersion.supports_megacore; get_tpu_info_for_chip] [12, Multicore TPU configurations]
+
+v5p SparseCore DMA的最小传输粒度为32B。Pallas文档区分tile局部VMEM/SMEM、SC共享VMEM（常称SPMEM）和标量subcore的SMEM；gather/scatter DMA原生搬运32-bit类型，BF16/FP16数据须打包后读取并拆分。这是访问路径约束，不是结构化稀疏矩阵峰值倍增。[10, TPU_V5P branch] [13, Hardware overview; Gathering and scattering 16-bit dtypes]
 
 ## 4. Die、chiplet 与 package
 
 | 维度 | 共享实现或物理组成 | 作用域与条件 | 来源 |
 |---|---|---|---|
 | 计算单元数量 | 2个TensorCore、8个128×128 MXU、4个SparseCore | 单颗v5p chip | `[1, System architecture]` `[2, p. 2, Table 1]` |
-| 片上存储 | 128MiB VMEM；每个SparseCore有2.5MiB Sparse Vector Memory，由16个tiles分片访问 | VMEM为per-TPU直接值；Sparse Vector Memory是跨代SparseCore结构，未在v5p Table 1中另列全芯片总量 | `[2, pp. 2, 4-5, Table 1]` |
+| 片上存储 | TensorCore：64MiB VMEM与1MiB SMEM/核；SparseCore：512KiB局部VMEM/tile，16 tile/SC | 两TensorCore合计128MiB VMEM；每SC分散tile空间算术合计8MiB，不含容量未明确的共享SPMEM，不将不同管理层级拼成统一cache | `[2, p. 2, Table 1]` `[10, TPU_V5P branch]` `[13, Hardware overview]` |
 | 片内互联 | TensorCore、HBM、SparseCore和ICI router之间存在数据通路；具体NoC、crossbar、路由和一致性未公开 | Figure 2是跨代基本框图，不是v5p版图 | `[2, pp. 4-5, Figures 2-3]` |
 | 内存控制器与PHY | 连接6个HBM2E stack和6条外部ICI link；控制器、PHY数量和宽度未公开 | per-chip物理端点 | `[2, pp. 2, 6, Table 1 and Figure 3]` |
 | 工艺与物理规模 | 未公开 | Google作者资料将v5p die size和technology标为N.A. | `[7, p. 2, Table 1 and footnote 1]` |
@@ -62,11 +70,11 @@ Google公开了TPU v5p的per-chip规格，但云端最小拓扑是4-chip `2×2×
 | 字段 | 原始值 | 条件和口径 | 来源 |
 |---|---:|---|---|
 | 实际使能计算资源 | 2个TensorCore、8个128×128 MXU、4个SparseCore | 单芯片 | `[1, System architecture]` `[2, p. 2, Table 1]` |
-| 时钟 | 未公开 | 不由阵列规模与峰值反推 | `[1, System architecture]` |
-| 理论峰值 | 459TFLOPS BF16；459TFLOPS FP8或BF8 | per-chip；当前Cloud页写FP8，Google论文写BF8，均未给dense/sparse与FMA计数说明 | `[1, System architecture]` `[2, p. 2, Table 1]` |
+| 时钟 | 产品保证频率未公开；scaling book给约1.75GHz | 开发者架构说明的近似工作频率，不由峰值反推或升格为额定时钟 | `[1, System architecture]` `[11, Appendix A / VPU]` |
+| 理论峰值 | Cloud/论文：459TFLOPS BF16、459TFLOPS FP8或BF8；JAX：918TOPS INT8、1,840TOPS INT4/全芯片 | 低精度浮点保留官方emulated条件；整数为每核459/920TOPS乘两核，不能等同FP4；来源未给完整稠密/稀疏与FMA计数说明 | `[1, System architecture]` `[2, p. 2, Table 1]` `[9, Figure 2 caption]` `[10, TPU_V5P branch]` |
 | 内存类型与容量 | 当前Cloud页95GiB；Google论文96GiB HBM2E，6 stacks | 两份一手资料存在1GiB差异；原样并列 | `[1, System architecture]` `[2, pp. 2, 6, Table 1 and Figure 3]` |
 | 内存带宽 | 2,765GB/s | per-chip；原文未说明读写方向和有效负载 | `[1, System architecture]` `[2, p. 2, Table 1]` |
-| 主机接口 | CPU host经PCIe连接，但代际、lane数与单芯片带宽未公开 | host连接机制来自跨代训练TPU说明 | `[2, p. 5, SparseCore]` |
+| 主机接口 | CPU host经PCIe连接，开发者教程估算约16GB/s/TPU；接口代际、lane数与保证带宽未公开 | 教程DCN约6.25GB/s/TPU是host网络分摊量，不能写成芯片NIC | `[2, p. 5, SparseCore]` `[11, TPU Networking; TPU specs]` |
 | 设备互联端点 | 6条ICI link，每条100GB/s per direction；当前规格表给1,200GB/s per-chip双向聚合带宽 | 6×100GB/s×两个方向与当前聚合口径一致 | `[2, pp. 2, 7, Table 1 and footnote 4]` `[1, System architecture]` |
 | 内存访问语义 | SparseCore利用HBM和ICI形成flat、globally addressable的系统级内存空间；ICI DMA与本地HBM DMA类似但仅支持push/write | 远程可寻址依赖多芯片系统和软件同步，不等同于cache coherence | `[2, pp. 4-5, SparseCore]` |
 | 跨设备集合通信能力 | SparseCore可卸载AllReduce、AllGather、ReduceScatter和Broadcast等操作；ICI支持芯片间直接DMA | 公开为训练TPU演进中的硬件路径，未给v5p单芯片独立吞吐 | `[2, pp. 4-5, SparseCore]` |
@@ -82,16 +90,21 @@ Google公开了TPU v5p的per-chip规格，但云端最小拓扑是4-chip `2×2×
 | 系统可靠性 | 一个cube及以上v5p slice默认启用ICI resiliency，可绕过光链路或OCS故障，但会暂时降低ICI性能 | cube内铜链路和cube间光链路的容错是系统特性 | `[1, Cloud TPU ICI resiliency]` |
 | 相关系统 | `ct5p-hightpu-4t` VM/host有4 chips、208 vCPU、448GB RAM、2个NUMA node和200Gbps NIC | CPU、RAM、NUMA与NIC不是chip内资源，也不能除以4写成per-chip属性 | `[1, VM, host and slice properties]` |
 
+### 6.1 相同端点带宽下的拓扑选择
+
+v5p部分slice支持twisted torus（改变边界回环连接的环面拓扑），要求各维长度等于最短维或为其两倍。官方以4×4×8为例给出约70%的理论二分带宽增加，4×8×8约40%，相对于相同形状的普通torus；端点规格仍是每芯片1,200GB/s双向聚合。优势来自负载均衡、路径长度和全局通信布局，不能改写为单芯片带宽增加或所有模型同幅加速。官方要求按LLM的实际并行策略比较两种拓扑。[1, Twisted torus topologies]
+
 ## 7. 证据缺口与来源冲突
 
 | 项目 | 状态 | 已检查范围或冲突来源 | 当前处理 |
 |---|---|---|---|
 | HBM容量 | 一手资料冲突 | 当前Cloud规格表写95GiB；Google跨代论文Table 1写96GiB HBM2E | 两种原始口径并列，不猜测是否为保留容量或实现/云配置差异 |
-| FP8/BF8标签 | 一手资料用词不同 | 当前Cloud规格表写FP8 459TFLOPS；Google跨代论文写BF8 459TFLOPS | 保留两种标签，不把BF8自动扩成所有FP8格式 |
+| FP8/BF8标签 | 一手资料用词不同 | 当前Cloud规格表写FP8 459TFLOPS；Google跨代论文写BF8 459TFLOPS | 保留两种标签；官方Ironwood发布文标为emulated，不把此峰值解释为原生FP8执行 `[9, Figure 2 caption]` |
 | HBM带宽历史页面 | 官方页面版本冲突 | 当前2026-08-11英文页写2,765GB/s；较早缓存页面曾写2,575GiB/s | 采用当前页且由Google论文2,765GB/s交叉确认，保留旧值为页面历史口径 |
+| JAX硬件模型的HBM值 | 与产品规格不同 | JAX使用103×10⁹B全芯片容量及2,460GB/s带宽，产品页为95GiB及2,765GB/s | 只用JAX解释开发模型，不将它定义为实测带宽，也不替换产品规格主值 |
 | 工艺、die和chiplet | 未公开 | Google作者资料将die size与technology标为N.A.，package照片未给chiplet说明 | 不从照片、相邻代际或第三方资料补值 |
-| 时钟、主机接口细节与TDP | 未公开 | 当前产品页和Google论文 | 不由峰值、PCIe连接叙述或331W fleet平均值反推 |
-| VMEM分配与Sparse Vector Memory总量 | 部分公开 | 128MiB只标per TPU；SparseCore段写每个2.5MiB memory由16个tiles分片访问，但Table 1未列v5p全芯片稀疏存储总量 | 不自行拆分VMEM；不把2.5MiB误乘为每tile容量 |
+| 时钟、主机接口细节与TDP | 额定参数未公开；开发估算另列 | 产品页/论文无保证时钟或接口lane数；scaling book约1.75GHz和PCIe约16GB/s/TPU | 不将开发估算或331W fleet平均值当作保证规格和TDP |
+| VMEM分配与Sparse Vector Memory总量 | VMEM按核分配已公开，稀疏存储须分层 | JAX给64MiB VMEM/TC及512KiB局部VMEM/tile；Pallas另列SC共享SPMEM，跨代论文用2.5MiB描述通用Sparse Vector Memory | 保留两类原文，不把2.5MiB覆盖v5p专属tile容量，不估算共享SPMEM总量 |
 | per-chip与系统聚合值 | 对象层级不同 | 同页并列chip、VM、host、cube、slice和Pod数据 | 只有明确per-chip或per-TPU字段进入SKU配置 |
 
 ## 8. 最小参考资料
@@ -105,6 +118,11 @@ Google公开了TPU v5p的per-chip规格，但云端最小拓扑是4-chip `2×2×
 | `[5]` | Google Cloud，*What's new with Google Cloud's AI Hypercomputer architecture*，2024-04-09 | 官方GA公告 | v5p与GKE/多host serving GA | <https://cloud.google.com/blog/products/compute/whats-new-with-google-clouds-ai-hypercomputer-architecture> |
 | `[6]` | Google Cloud，*Cloud TPU pricing* | 当前官方定价页 | v5p仍按chip-hour提供 | <https://cloud.google.com/tpu/pricing> |
 | `[7]` | Ian Schneider等（Google），*Life-Cycle Emissions of AI Hardware: A Cradle-To-Grave Approach and Generational Trends*，2025 | Google作者一手硬件生命周期论文 | die/工艺未披露状态与fleet实测功耗 | [本地PDF](../../../原始资料/论文/Google_TPU/03_系统与性能补充/2025_Life_Cycle_Emissions_AI_Hardware.pdf) |
+| `[9]` | Amin Vahdat，*Ironwood: The first Google TPU for the age of inference*，2025-04-23 更新 | 官方发布文 | Figure 2 图注中的v5p FP8模拟执行条件 | <https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/ironwood-tpu-age-of-inference/> |
+| `[10]` | The JAX Authors，*TPU hardware information*，2026-09-17快照 | 官方JAX源码 | v5p每核存储、整数吞吐、SparseCore专属参数及Megacore模式 | [本地源码](../../../原始资料/网页快照/Google/JAX/2026-09-17/jax-info-source.py)，<https://github.com/jax-ml/jax/blob/main/jax/_src/tpu_info.py> |
+| `[11]` | Jacob Austin等，*How to Think About TPUs*，2026-09-17快照 | Google DeepMind作者的JAX架构教程 | v5p寄存器/VMEM端口、DMA控制和近似时钟/接口带宽 | [本地原文](../../../原始资料/网页快照/Google/JAX/2026-09-17/scaling-book-tpus.md)，<https://jax-ml.github.io/scaling-book/tpus/> |
+| `[12]` | The JAX Authors，*Pallas: TPU Details*，2026-09-17快照 | 官方编程文档 | SMEM、向量布局和多核执行映射 | [本地原文](../../../原始资料/网页快照/Google/JAX/2026-09-17/jax-details.rst)，<https://docs.jax.dev/en/latest/pallas/tpu/details.html> |
+| `[13]` | The JAX Authors，*SparseCore Kernel Writing*，2026-09-17快照 | 官方编程文档 | tile局部与SC共享存储及32-bit gather/scatter约束 | [本地原文](../../../原始资料/网页快照/Google/JAX/2026-09-17/jax-sparsecore.md)，<https://docs.jax.dev/en/latest/pallas/tpu/sparsecore.html> |
 
 ## 9. 完成检查
 
@@ -120,4 +138,4 @@ Google公开了TPU v5p的per-chip规格，但云端最小拓扑是4-chip `2×2×
 - [x] 所有数字和技术描述都能回到原文位置
 - [x] 文末只列正文实际使用的资料
 
-复核结论：Google Cloud TPU v5p单芯片的主语、两个TensorCore、八个128×128 MXU、四个SparseCore、128MiB VMEM、六个HBM2E stack、459TFLOPS BF16与低精度峰值、2,765GB/s HBM带宽、六条ICI link和1,200GB/s双向带宽已由Google一手资料固定。95/96GiB与FP8/BF8按来源并列，331W仅作为不含host的fleet实测平均值；四芯片VM/host、cube、slice、Pod和Multislice没有下放。工艺、die/chiplet、主机接口细节、时钟和TDP保持缺失。
+复核结论：Google Cloud TPU v5p单芯片的主语、两个TensorCore、八个128×128 MXU、四个SparseCore、128MiB VMEM、六个HBM2E stack、459TFLOPS BF16与低精度峰值、2,765GB/s HBM带宽、六条ICI link和1,200GB/s双向带宽已由Google一手资料固定。95/96GiB与FP8/BF8按来源并列，331W仅作为不含host的fleet实测平均值；四芯片VM/host、cube、slice、Pod和Multislice没有下放。JAX补充了每核64MiB VMEM、SparseCore tile局部存储和开发估算；工艺、die/chiplet、主机接口代际与lane数、保证时钟和TDP仍保留缺口。

@@ -2,7 +2,7 @@
 
 > 模板版本：1.3（芯片架构事实口径）  
 > 卡片状态：已完成  
-> 资料截止日：2026-09-16
+> 资料截止日：2026-09-23
 
 本卡的主语是一张 NVIDIA H200 NVL 141GB PCIe 卡，官方产品号为 P1010 SKU 230。两张或四张卡加 NVLink bridge 构成的互联组、MGX H200 NVL 服务器和其他 NVIDIA-Certified Systems 都不是本卡的 SKU 主语。
 
@@ -16,8 +16,8 @@
 | 对象形态 | PCIe Gen5 ×16，FHFL 10.5-inch，dual-slot，passive air-cooled | 单张全高全长卡 | `[1, pp. 1, 3, 11]` |
 | 架构代际 | NVIDIA Hopper；GH100 microarchitecture；Compute Capability 9.0 | H200 NVL 141GB | `[1, p. 1]` `[5, Supported GPUs, Table 1]` |
 | 发布与可用状态 | 2024-11-18 宣布 H200 NVL PCIe GPU 可用，合作伙伴系统计划从 2024 年 12 月起供货；当前 H200 产品页标为 Now available | 日期指 H200 NVL 产品/平台发布与系统供货，不是裸 GPU 零售日期 | `[4, page header and Platforms with H200 NVL]` `[3, page header]` |
-| 厂商定位 | 面向低功耗、风冷企业机架的 AI 与 HPC 加速卡 | 厂商定位，不是 benchmark 结论 | `[3, Accelerating AI Acceleration for Mainstream Enterprise Servers With H200 NVL]` |
-| 目标 workload | LLM inference、AI/data analytics 与 HPC；支持 FP64、FP32、FP16、FP8 和 INT8 compute | 官方产品范围 | `[1, p. 1]` |
+| 厂商定位 | 主要优化 LLM inference，同时面向低功耗、风冷企业机架的 AI 与 HPC 加速 | 简报 p.1 明确 LLM inference 优化目标；用途支持不表示排他定位 | `[1, p. 1, Overview]` `[3, Accelerating AI Acceleration for Mainstream Enterprise Servers With H200 NVL]` |
+| 目标 workload | LLM inference 与 fine-tuning（模型微调）、AI/data analytics 与 HPC；支持 FP64、FP32、FP16、FP8 和 INT8 compute | 官方发布文章明确支持 fine-tuning；不把偏推理理解为不支持训练 | `[1, p. 1]` `[4, opening paragraphs: fine-tune LLMs / inference and fine-tuning]` |
 | 产品目标 | 在标准 PCIe 卡形态中提供 141GB HBM3e、4.8TB/s 级内存带宽和最多四卡 NVLink bridge 扩展 | 单卡属性与多卡能力分开记录 | `[1, pp. 1, 4, 9-10]` |
 
 本卡包含：H200 NVL 141GB 单卡的 GH100/Hopper 共享架构、实际时钟、分精度峰值、HBM3e、PCIe/NVLink 端点、MIG、功耗与机械形态。
@@ -55,7 +55,7 @@
 | 工艺与物理规模 | NVIDIA 定制 TSMC 4N；约 800 亿晶体管；814mm² | GH100 bare die，不是 PCIe 卡面积 | `[2, pp. 17, 40]` |
 | 封装与板卡组成 | GH100/HBM3e 封装搭载于 H200 NVL PCIe 卡；141GB HBM3e，memory bus 6016 bits | HBM stack 数、interposer 与基板细节未找到；不把 NVLink bridge 算入 GPU package | `[1, pp. 1, 4, Table 2-2]` |
 | 封装内互联 | 未公开 | NVLink bridge 和 PCIe 是设备间/主机接口，不是 GPU-HBM 的 D2D 协议 | `[1, pp. 7, 9-10]` |
-| RAS | Hopper HBM 路径、L2、L1 与 register file 使用 SECDED ECC；H200 NVL 支持 secure boot 和 Confidential Computing | 前者为共享 Hopper RAS，后者为 SKU 功能 | `[2, p. 38]` `[1, pp. 3-4, 8]` `[3, NVIDIA H200 GPU specifications]` |
+| RAS 与启动信任 | Hopper HBM、L2、L1 和 register file 使用 SECDED ECC；H200 NVL 支持 secure boot 与 Confidential Computing。板上 CEC 硬件信任根在 GPU 从 ROM 启动前认证固件，并支持防回滚、密钥撤销、带外安全更新、处理器恢复和远程证明 | ECC 为共享 Hopper 机制；CEC 的固件认证与恢复是本板卡简报明示功能，不能等同于作业实测可靠性 | `[2, p. 38]` `[1, p. 8, §4.2]` `[3, NVIDIA H200 GPU specifications]` |
 
 ## 5. SKU 配置
 
@@ -64,15 +64,30 @@
 | 实际使能计算资源 | SM、GPC、TPC、CUDA Core、Tensor Core 与 L2 实际使能数未公开；官方列出 7 NVDEC 与 7 JPEG | 单张 H200 NVL；不从四舍五入的峰值反推资源数 | `[3, NVIDIA H200 GPU specifications]` |
 | 时钟 | Base 1,230MHz；Boost 1,785MHz；HBM memory clock 3,201MHz | P1010 SKU 230 单卡官方值 | `[1, pp. 3-4, Tables 2-1 and 2-2]` |
 | 理论峰值 | FP64 30TFLOPS；FP64 Tensor 60TFLOPS；FP32 60TFLOPS；TF32 Tensor 835TFLOPS；BF16/FP16 Tensor 1,671TFLOPS；FP8 Tensor 3,341TFLOPS；INT8 Tensor 3,341，官方页面单位写为 TFLOPS | 后五项是官方 with-sparsity headline；dense 值未直接列出。INT8 通常使用 TOPS，此处不静默改写官方单位 | `[3, NVIDIA H200 GPU specifications and note 2]` |
+| 比较用 dense 推导值 | FP16/BF16 835.5TFLOP/s；FP8 1,670.5TFLOP/s | 对上述 1,671/3,341TFLOPS 稀疏峰值分别按 Hopper 明确的 2 倍关系折半；带原表舍入误差，非官方另列 dense 规格 | `[3, NVIDIA H200 GPU specifications and note 2]` `[2, pp. 11, 21-23]` |
 | 内存类型与容量 | 141GB HBM3e；6016-bit memory bus | 单张卡 | `[1, p. 4, Table 2-2]` |
 | 内存带宽 | 4,813GB/s；产品页四舍五入为 4.8TB/s | 单 GPU peak memory bandwidth | `[1, p. 4, Table 2-2]` `[3, NVIDIA H200 GPU specifications]` |
 | 主机接口 | PCIe Gen5 ×16，同时支持 Gen5 ×8 或 Gen4 ×16；Gen5 ×16 官方表记 128GB/s | 当前 H200 NVL 表没有在这个数值旁明说单向或双向，不自行补充 | `[1, pp. 3, 7]` `[3, NVIDIA H200 GPU specifications]` |
+| PCIe 地址映射窗口 | PF（物理功能）的 BAR2 为 256 GiB；VF（虚拟功能）的 BAR1 聚合窗口为 256 GiB，64-bit，每 VF 8 GiB；最多 32 VF | BAR（Base Address Register，基址寄存器）规定设备地址映射窗口；这里的 GiB 是二进制单位，窗口大小不等于物理 HBM 容量，也不表示接口吞吐 | `[1, p. 4, Table 2-3]` |
+| PCIe 虚拟化 | SR-IOV 支持 32 个 VF（Virtual Function，虚拟功能）；仅支持 MSI-X 中断，不支持 MSI | 需服务器 BIOS 与 OS/hypervisor 配置支持；32 VF 是 PCIe 功能上限，不是 32 个 MIG instance；MIG 最多 7 个 | `[1, pp. 4, 7, Table 2-3 and §§4.1.2-4.1.3]` |
 | 设备互联端点 | 1 个 wide NVLink bridge connector，18 条 link；单 GPU 最大 NVLink 带宽 900GB/s | 最多连接四张相邻 H200 NVL 卡；900GB/s 为 per-GPU 双向端点口径 | `[1, pp. 1, 9, Table 4-1]` `[3, NVIDIA H200 GPU specifications]` |
 | 内存访问语义 | 常规 NVLink 连接的 GPU 共享 common address space，并按 GPU physical address 路由 | 共享 Hopper 语义；不等于 cache coherence 或系统统一内存池 | `[2, p. 47]` |
 | 跨设备集合通信能力 | 未找到单卡内独立 collective engine | Bridge 只提供 GPU P2P 链路，不把外部 NVSwitch/SHARP 下放为卡内功能 | `[1, pp. 9-10]` `[2, pp. 47-48]` |
-| 功耗 | 600W maximum/default，350W power compliance limit，200W minimum；programmable power cap | 单卡 total board power，通过 16-pin 12VHPWR auxiliary connector 供电 | `[1, pp. 3, 8, Table 2-1]` |
+| 功耗 | 600W maximum/default，350W power compliance limit，200W minimum；programmable power cap | 单卡 total board power。16-pin 12VHPWR 线缆必须识别为 600W 档，Sense0/Sense1=0/0；即使软件设置更低功率也要满足该启动条件，较低线缆档位不支持 | `[1, pp. 3, 8, 12-13, Tables 2-1 and 4-3]` |
 | 形态与散热 | FHFL 10.5-inch dual-slot PCIe card，passive bidirectional heatsink，板重 1,217g（不含 bracket、extender 和 bridge） | 需要系统风道，支持从左到右或从右到左的 airflow | `[1, pp. 3-6, Tables 2-1 and 2-4]` |
 | MIG | 最多 7 个硬件隔离 GPU instance；当前 H200 141GB profiles 包括 1g.18gb、1g.35gb、2g.35gb、3g.71gb、4g.71gb、7g.141gb 和 1g.18gb+me | H200 NVL 明确列为 GH100/141GB/7-instance 支持产品；profile 表以 H200 141GB 为主语 | `[1, pp. 1, 3, 8]` `[5, Supported GPUs, Table 1; H200 MIG Profiles, Table 11]` |
+
+### 5.1 MIG 中计算与内存份额的组合
+
+MIG（Multi-Instance GPU，多实例 GPU）分别分配计算和内存资源。Hopper 的实例拥有独立的 crossbar 端口、L2 bank、内存控制器和 DRAM 地址总线路径；这些是共享架构的隔离机制，不将整颗 GPU 的 L2/HBM 数值当作每个实例的资源。`[2, p. 43, MIG Technology Review]`
+
+| H200 141GB profile | HBM 份额 | SM 份额 | L2 份额 | Copy engine 数 | 同类实例数上限 |
+|---|---:|---:|---:|---:|---:|
+| 1g.18gb | 1/8 | 1/7 | 1/8 | 1 | 7 |
+| 1g.35gb | 1/4 | 1/7 | 1/8 | 1 | 4 |
+| 2g.35gb | 2/8 | 2/7 | 2/8 | 2 | 3 |
+
+表中份额采用 H200 141GB 专门 profile 表。1g.35gb 与 1g.18gb 的 SM、L2、copy engine 配额相同，HBM 份额不同；2g.35gb 又在相同 HBM 份额下配置更多 SM 和 L2。实例容量与计算规模并非固定比例，各 profile 的最大数量也不能相加当作可同时启用的总数。`[5, H200 MIG Profiles, Table 11]`
 
 ## 6. 系统级互联上下文
 

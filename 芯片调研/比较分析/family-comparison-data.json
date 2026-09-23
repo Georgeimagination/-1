@@ -1,0 +1,2216 @@
+{
+  "scope": "36 产品；12 组；原始资源及各自来源，图中通用规格沿用 panorama36.json",
+  "groups": [
+    {
+      "group": "A01",
+      "title": "TPU 8t / 8i",
+      "products": [
+        "tpu8t",
+        "tpu8i"
+      ],
+      "baseline": "tpu8t",
+      "resources": [
+        {
+          "name": "Vmem 容量",
+          "unit": "MB",
+          "values": {
+            "tpu8t": 128,
+            "tpu8i": 384
+          },
+          "source": "../产品详解/Google-TPU/Google_TPU_8t_one_chip_产品详解.md#ref-1 / On-Chip SRAM (Vmem)",
+          "condition": "产品技术表整芯片容量，8i 两局部区域之和不等于统一共享空间。"
+        },
+        {
+          "name": "HBM 容量",
+          "unit": "GB",
+          "values": {
+            "tpu8t": 216,
+            "tpu8i": 288
+          },
+          "source": "../产品详解/Google-TPU/Google_TPU_8t_one_chip_产品详解.md#ref-1 / HBM Capacity",
+          "condition": "同表整芯片 HBM3E 容量；保留原文单位。"
+        },
+        {
+          "name": "HBM 带宽",
+          "unit": "GB/s",
+          "values": {
+            "tpu8t": 6528,
+            "tpu8i": 8601
+          },
+          "source": "../产品详解/Google-TPU/Google_TPU_8t_one_chip_产品详解.md#ref-1 / HBM Bandwidth",
+          "condition": "同表公布峰值；读写方向、持续有效负载未披露。"
+        },
+        {
+          "name": "FP4 公布峰值（标签冲突）",
+          "unit": "PFLOPS",
+          "values": {
+            "tpu8t": 12.6,
+            "tpu8i": 10.1
+          },
+          "source": "../产品详解/Google-TPU/Google_TPU_8t_one_chip_产品详解.md#ref-1 / Peak FP4 PFLOPs",
+          "condition": "条件项：使用同篇技术文章 FP4 表头；8i 发布图另标 FP8，累加、稀疏与功耗点未完整公开。"
+        },
+        {
+          "name": "ICI 双向端点带宽",
+          "unit": "GB/s",
+          "values": {
+            "tpu8t": 2400,
+            "tpu8i": 2400
+          },
+          "source": "../产品详解/Google-TPU/Google_TPU_8t_one_chip_产品详解.md#ref-2；../产品详解/Google-TPU/Google_TPU_8i_one_chip_产品详解.md#ref-2 / Bidirectional scale-up bandwidth",
+          "condition": "两张官方图均给 19.2 Tb/s per chip，除以 8；与系统网络规模和拓扑分开。"
+        }
+      ],
+      "notes": [
+        "Vmem/HBM 使用同一官方技术文章的十进制标注，不把 JAX 的 MiB 与 GB 模型混入。",
+        "FP4 数值仅是技术文章同表公布值；8i 发布图使用 FP8 标签，不能用于无条件跨产品峰值排序。",
+        "所有资源为整芯片；ICI 双向端点带宽不表示等拓扑、等延迟或等有效吞吐。"
+      ],
+      "product_ids": [
+        "tpu8i",
+        "tpu8t"
+      ]
+    },
+    {
+      "group": "A02",
+      "product_ids": [
+        "ascend950dt",
+        "ascend950pr"
+      ],
+      "warning": "计算档位与内存档位未绑定，资源应按共同计算档位、明确主推内存组合、共享机制分别作图，不计算B/P或C/P，不将所有行拼接为一个销售SKU。",
+      "resources": [
+        {
+          "name": "共同32-Cube档位：FP16/BF16 Cube峰值",
+          "unit": "TFLOPS",
+          "values": {
+            "ascend950pr": 432,
+            "ascend950dt": 432
+          },
+          "source": {
+            "document": "昇腾950 NPU架构白皮书",
+            "path": "芯片调研/原始资料/论文/华为昇腾_DaVinci/90_官方白皮书与技术资料/2026_Ascend950_NPU_Architecture_White_Paper.pdf",
+            "article_ref": "../产品详解/华为昇腾/华为_Ascend950PR.md#ref-1",
+            "location": "PDF pp.13-14，表3-1"
+          },
+          "condition": "纯Cube规格；未给完整稀疏、FMA及频率条件；不是选中的唯一内存配置",
+          "facet": "shared_compute_profile"
+        },
+        {
+          "name": "共同32-Cube档位：FP16/BF16 Vector峰值",
+          "unit": "TFLOPS",
+          "values": {
+            "ascend950pr": 54,
+            "ascend950dt": 54
+          },
+          "source": {
+            "document": "昇腾950 NPU架构白皮书",
+            "path": "芯片调研/原始资料/论文/华为昇腾_DaVinci/90_官方白皮书与技术资料/2026_Ascend950_NPU_Architecture_White_Paper.pdf",
+            "article_ref": "../产品详解/华为昇腾/华为_Ascend950PR.md#ref-1",
+            "location": "PDF pp.13-14，表3-1"
+          },
+          "condition": "Vector分项，不加到Cube矩阵峰值中",
+          "facet": "shared_compute_profile"
+        },
+        {
+          "name": "共同32-Cube档位：FP8/MXFP8/HiF8 Cube峰值",
+          "unit": "TFLOPS",
+          "values": {
+            "ascend950pr": 865,
+            "ascend950dt": 865
+          },
+          "source": {
+            "document": "昇腾950 NPU架构白皮书",
+            "path": "芯片调研/原始资料/论文/华为昇腾_DaVinci/90_官方白皮书与技术资料/2026_Ascend950_NPU_Architecture_White_Paper.pdf",
+            "article_ref": "../产品详解/华为昇腾/华为_Ascend950PR.md#ref-1",
+            "location": "PDF pp.13-14，表3-1"
+          },
+          "condition": "保留具体编码名称，三者数值语义不同；未给完整稀疏条件",
+          "facet": "shared_compute_profile"
+        },
+        {
+          "name": "共同32-Cube档位：MXFP4 Cube峰值",
+          "unit": "TFLOPS",
+          "values": {
+            "ascend950pr": 1730,
+            "ascend950dt": 1730
+          },
+          "source": {
+            "document": "昇腾950 NPU架构白皮书",
+            "path": "芯片调研/原始资料/论文/华为昇腾_DaVinci/90_官方白皮书与技术资料/2026_Ascend950_NPU_Architecture_White_Paper.pdf",
+            "article_ref": "../产品详解/华为昇腾/华为_Ascend950PR.md#ref-1",
+            "location": "PDF pp.13-14，表3-1"
+          },
+          "condition": "MXFP4含scale；未给完整稀疏条件",
+          "facet": "shared_compute_profile"
+        },
+        {
+          "name": "主推内存组合：DRAM容量",
+          "unit": "GB",
+          "values": {
+            "ascend950pr": 128,
+            "ascend950dt": 144
+          },
+          "source": {
+            "document": "昇腾950 NPU架构白皮书",
+            "path": "芯片调研/原始资料/论文/华为昇腾_DaVinci/90_官方白皮书与技术资料/2026_Ascend950_NPU_Architecture_White_Paper.pdf",
+            "article_ref": "../产品详解/华为昇腾/华为_Ascend950PR.md#ref-1",
+            "location": "PDF p.10，§3"
+          },
+          "condition": "官方明确同时给出容量与带宽的组合，不与计算档位绑定",
+          "facet": "memory_profile"
+        },
+        {
+          "name": "主推内存组合：DRAM带宽",
+          "unit": "TB/s",
+          "values": {
+            "ascend950pr": 1.6,
+            "ascend950dt": 4
+          },
+          "source": {
+            "document": "昇腾950 NPU架构白皮书",
+            "path": "芯片调研/原始资料/论文/华为昇腾_DaVinci/90_官方白皮书与技术资料/2026_Ascend950_NPU_Architecture_White_Paper.pdf",
+            "article_ref": "../产品详解/华为昇腾/华为_Ascend950PR.md#ref-1",
+            "location": "PDF p.10，§3"
+          },
+          "condition": "标称带宽，非实测持续吞吐；不与计算档位绑定",
+          "facet": "memory_profile"
+        },
+        {
+          "name": "主推内存组合：容量/带宽",
+          "unit": "ms",
+          "values": {
+            "ascend950pr": 80,
+            "ascend950dt": 36
+          },
+          "source": {
+            "document": "昇腾950 NPU架构白皮书",
+            "path": "芯片调研/原始资料/论文/华为昇腾_DaVinci/90_官方白皮书与技术资料/2026_Ascend950_NPU_Architecture_White_Paper.pdf",
+            "article_ref": "../产品详解/华为昇腾/华为_Ascend950PR.md#ref-1",
+            "location": "PDF p.10，§3；由容量/带宽计算"
+          },
+          "condition": "十进制GB与TB/s；流过全部容量一次的理想时间，不是访问延迟",
+          "facet": "memory_profile"
+        },
+        {
+          "name": "全封装设备互联双向原始速率",
+          "unit": "GB/s",
+          "values": {
+            "ascend950pr": 2016,
+            "ascend950dt": 2016
+          },
+          "source": {
+            "document": "昇腾950 NPU架构白皮书",
+            "path": "芯片调研/原始资料/论文/华为昇腾_DaVinci/90_官方白皮书与技术资料/2026_Ascend950_NPU_Architecture_White_Paper.pdf",
+            "article_ref": "../产品详解/华为昇腾/华为_Ascend950PR.md#ref-1",
+            "location": "PDF p.15，表3-1"
+          },
+          "condition": "UB 18个x4端口；PCIe/UBoE复用，不能把最大值相加",
+          "facet": "shared_capability"
+        },
+        {
+          "name": "每AI子系统L1局部缓冲",
+          "unit": "KB",
+          "values": {
+            "ascend950pr": 512,
+            "ascend950dt": 512
+          },
+          "source": {
+            "document": "昇腾950 NPU架构白皮书",
+            "path": "芯片调研/原始资料/论文/华为昇腾_DaVinci/90_官方白皮书与技术资料/2026_Ascend950_NPU_Architecture_White_Paper.pdf",
+            "article_ref": "../产品详解/华为昇腾/华为_Ascend950PR.md#ref-1",
+            "location": "PDF p.25，表4-2"
+          },
+          "condition": "表中原单位KB；局部缓冲不是全局硬件cache",
+          "facet": "shared_capability"
+        },
+        {
+          "name": "每AI子系统L0C局部缓冲",
+          "unit": "KB",
+          "values": {
+            "ascend950pr": 256,
+            "ascend950dt": 256
+          },
+          "source": {
+            "document": "昇腾950 NPU架构白皮书",
+            "path": "芯片调研/原始资料/论文/华为昇腾_DaVinci/90_官方白皮书与技术资料/2026_Ascend950_NPU_Architecture_White_Paper.pdf",
+            "article_ref": "../产品详解/华为昇腾/华为_Ascend950PR.md#ref-1",
+            "location": "PDF p.25，表4-2"
+          },
+          "condition": "表中原单位KB",
+          "facet": "shared_capability"
+        },
+        {
+          "name": "每Vector Unified Buffer",
+          "unit": "KB",
+          "values": {
+            "ascend950pr": 256,
+            "ascend950dt": 256
+          },
+          "source": {
+            "document": "昇腾950 NPU架构白皮书",
+            "path": "芯片调研/原始资料/论文/华为昇腾_DaVinci/90_官方白皮书与技术资料/2026_Ascend950_NPU_Architecture_White_Paper.pdf",
+            "article_ref": "../产品详解/华为昇腾/华为_Ascend950PR.md#ref-1",
+            "location": "PDF p.17，图4-1"
+          },
+          "condition": "SIMT共享内存与Data Cache共用；不重复计数",
+          "facet": "shared_capability"
+        },
+        {
+          "name": "封装内高速DRAM模块数",
+          "unit": "modules",
+          "values": {
+            "ascend950pr": 8,
+            "ascend950dt": 4
+          },
+          "source": {
+            "document": "昇腾950 NPU架构白皮书",
+            "path": "芯片调研/原始资料/论文/华为昇腾_DaVinci/90_官方白皮书与技术资料/2026_Ascend950_NPU_Architecture_White_Paper.pdf",
+            "article_ref": "../产品详解/华为昇腾/华为_Ascend950PR.md#ref-1",
+            "location": "PDF p.12，图3-1"
+          },
+          "condition": "模块数量不等于内存层数、容量或每通道带宽",
+          "facet": "package_organization"
+        }
+      ],
+      "unpaired_configurations": {
+        "ascend950pr": {
+          "cube_count": [
+            32,
+            28
+          ],
+          "vector_count": [
+            64,
+            56
+          ],
+          "l2_mb": [
+            128,
+            112
+          ],
+          "memory_gb": [
+            128,
+            112
+          ],
+          "memory_tb_s": [
+            1.6,
+            1.4
+          ]
+        },
+        "ascend950dt": {
+          "cube_count": [
+            36,
+            32,
+            28
+          ],
+          "vector_count": [
+            72,
+            64,
+            56
+          ],
+          "l2_mb": [
+            128
+          ],
+          "memory_gb": [
+            144,
+            96
+          ],
+          "memory_tb_s": [
+            4
+          ]
+        }
+      }
+    },
+    {
+      "group_id": "A03",
+      "products": [
+        "trainium1",
+        "inferentia2"
+      ],
+      "resources": [
+        {
+          "name": "纯 Tensor FP16/BF16 峰值",
+          "unit": "TFLOPS",
+          "values": {
+            "trainium1": 184,
+            "inferentia2": 184
+          },
+          "source": "../产品详解/AWS/AWS_Trainium1_one_chip_产品详解.md#ref-2",
+          "condition": "2 个 NCv2 × 92 TFLOPS/核；普通矩阵路径资源加总，不含结构化稀疏倍数；每核官方值已取整。NKI device overview / Tensor Engine: Data Types。"
+        },
+        {
+          "name": "纯 Tensor cFP8 峰值",
+          "unit": "TFLOPS",
+          "values": {
+            "trainium1": 184,
+            "inferentia2": 184
+          },
+          "source": "../产品详解/AWS/AWS_Trainium1_one_chip_产品详解.md#ref-2",
+          "condition": "2 × 92 TFLOPS/核；cFP8 与 FP16/BF16 相同吞吐，不能按字长推导倍增。NKI Tensor Engine: Data Types。"
+        },
+        {
+          "name": "HBM 容量",
+          "unit": "GiB",
+          "values": {
+            "trainium1": 32,
+            "inferentia2": 32
+          },
+          "source": "../产品详解/AWS/AWS_Trainium1_one_chip_产品详解.md#ref-1; ../产品详解/AWS/AWS_Inferentia2_one_chip_产品详解.md#ref-1",
+          "condition": "每芯片技术页 Device Memory 主分支；2 个 HBM stack。"
+        },
+        {
+          "name": "HBM 带宽",
+          "unit": "GiB/s",
+          "values": {
+            "trainium1": 820,
+            "inferentia2": 820
+          },
+          "source": "../产品详解/AWS/AWS_Trainium1_one_chip_产品详解.md#ref-1; ../产品详解/AWS/AWS_Inferentia2_one_chip_产品详解.md#ref-1",
+          "condition": "各芯片技术页 Device Memory 主分支；NKI 另报 820 GB/s，保留为替代来源，不混入当前柱。"
+        },
+        {
+          "name": "每 NCv2 的 SBUF",
+          "unit": "MiB/core",
+          "values": {
+            "trainium1": 24,
+            "inferentia2": 24
+          },
+          "source": "../产品详解/AWS/AWS_Trainium1_one_chip_产品详解.md#ref-2",
+          "condition": "每核软件管理 scratchpad，128 partition；两核局部空间不视为统一共享 cache。NKI Compute Engines。"
+        },
+        {
+          "name": "每 NCv2 的 PSUM",
+          "unit": "MiB/core",
+          "values": {
+            "trainium1": 2,
+            "inferentia2": 2
+          },
+          "source": "../产品详解/AWS/AWS_Trainium1_one_chip_产品详解.md#ref-2",
+          "condition": "每核累加 buffer，128 partition、8 bank/partition。NKI Compute Engines / Near-memory accumulation in PSUM。"
+        },
+        {
+          "name": "DMA 数量",
+          "unit": "engines/chip",
+          "values": {
+            "trainium1": 32,
+            "inferentia2": 32
+          },
+          "source": "../产品详解/AWS/AWS_Trainium1_one_chip_产品详解.md#ref-2",
+          "condition": "芯片级计数；16 个 DMA/NCv2。NKI device overview / DMA。"
+        },
+        {
+          "name": "CC-Core 数量",
+          "unit": "cores/chip",
+          "values": {
+            "trainium1": 6,
+            "inferentia2": 6
+          },
+          "source": "../产品详解/AWS/AWS_Trainium1_one_chip_产品详解.md#ref-2",
+          "condition": "芯片级集合通信单元数，不是通信吞吐。NKI device overview。"
+        },
+        {
+          "name": "NeuronLink-v2 接口数量",
+          "unit": "interfaces/chip",
+          "values": {
+            "trainium1": 4,
+            "inferentia2": 2
+          },
+          "source": "../产品详解/AWS/AWS_Trainium1_one_chip_产品详解.md#ref-2",
+          "condition": "设备互联接口数；不推断单端口带宽、带宽方向或实际通信性能倍数。NKI device overview。"
+        }
+      ],
+      "comparison_kind": "主要负载定位对照；共同 NCv2 的不同连接实现",
+      "plot_note": "资源变化图若以 Trainium1=1 归一化，Inferentia2 仅 NeuronLink 数量为 0.5，其余所列资源为 1；标题必须写接口数量，不能标成互联性能。",
+      "source_branches": {
+        "pure_tensor_tflops": 184,
+        "advertised_chip_tflops": 190,
+        "primary_memory_capacity_gib": 32,
+        "primary_memory_bandwidth_gib_s": 820,
+        "nki_alternative_memory_bandwidth_gb_s": 820
+      },
+      "limits": [
+        "两产品系统不是相同部署配置，标称资源相同不等于实测表现相同。",
+        "芯片功率与接口方向未公开，不构造能效或双向互联值。",
+        "Trainium1 官方后代比较表出现 Sparse N/A，只能保留该字段原意，不在 Inferentia2 下复制。"
+      ],
+      "group": "A03",
+      "product_ids": [
+        "inferentia2",
+        "trainium1"
+      ]
+    },
+    {
+      "group": "A04",
+      "products": [
+        "tpu_v5e",
+        "tpu_v5p"
+      ],
+      "resources": [
+        {
+          "name": "TensorCore数量",
+          "unit": "core/chip",
+          "values": {
+            "tpu_v5e": 1,
+            "tpu_v5p": 2
+          },
+          "condition": "芯片物理核心，不是逻辑device",
+          "source": "Cloud v5e/v5p, System architecture"
+        },
+        {
+          "name": "MXU数量",
+          "unit": "MXU/chip",
+          "values": {
+            "tpu_v5e": 4,
+            "tpu_v5p": 8
+          },
+          "condition": "每核4个128×128 MXU，两款结构相同",
+          "source": "Cloud v5e/v5p, System architecture"
+        },
+        {
+          "name": "每核VMEM",
+          "unit": "MiB/TensorCore",
+          "values": {
+            "tpu_v5e": 128,
+            "tpu_v5p": 64
+          },
+          "condition": "每核软件管理局部scratchpad，不能作为统一L2",
+          "source": "JAX tpu_info.py TPU_V5E / TPU_V5P branches"
+        },
+        {
+          "name": "整芯片VMEM合计",
+          "unit": "MiB/chip",
+          "values": {
+            "tpu_v5e": 128,
+            "tpu_v5p": 128
+          },
+          "condition": "v5p由两份64MiB局部空间算术合计",
+          "source": "JAX branches; Google five-generation paper p.2 Table1"
+        },
+        {
+          "name": "每核SMEM",
+          "unit": "MiB/TensorCore",
+          "values": {
+            "tpu_v5e": 1,
+            "tpu_v5p": 1
+          },
+          "condition": "标量控制局部存储",
+          "source": "JAX branches"
+        },
+        {
+          "name": "BF16矩阵峰值",
+          "unit": "TFLOPS/chip",
+          "values": {
+            "tpu_v5e": 197,
+            "tpu_v5p": 459
+          },
+          "condition": "沿用第一层Cloud铭牌值，condition_unspecified",
+          "source": "panorama36.json / Cloud System architecture"
+        },
+        {
+          "name": "Cloud HBM容量",
+          "unit": "GB/chip",
+          "values": {
+            "tpu_v5e": 16,
+            "tpu_v5p": 102.00547328
+          },
+          "condition": "十进制转换；v5e 16GB，v5p95GiB；不混配论文替代值",
+          "source": "panorama36.json / Cloud System architecture"
+        },
+        {
+          "name": "Cloud HBM带宽",
+          "unit": "TB/s/chip",
+          "values": {
+            "tpu_v5e": 0.8589934592,
+            "tpu_v5p": 2.765
+          },
+          "condition": "十进制转换；v5e800GiB/s，v5p2765GB/s",
+          "source": "panorama36.json / Cloud System architecture"
+        },
+        {
+          "name": "ICI双向端点",
+          "unit": "GB/s/chip",
+          "values": {
+            "tpu_v5e": 400,
+            "tpu_v5p": 1200
+          },
+          "condition": "per-chip总收发，不是任意collective持续带宽",
+          "source": "Cloud v5e/v5p System architecture"
+        },
+        {
+          "name": "最大单slice训练配置",
+          "unit": "chips",
+          "values": {
+            "tpu_v5e": 256,
+            "tpu_v5p": 6144
+          },
+          "condition": "系统部署上限，须与单芯片图分开",
+          "source": "Cloud v5e/v5p Configurations"
+        }
+      ],
+      "classification_note": "Cloud v5e combined training/inference; JAX scaling-book additionally calls it inference-optimized. v5p highlights large-scale training but supports serving. Treat v5e as both in primary report and record optional inference alternative rather than equate e with inference.",
+      "unpaired_resources": [
+        {
+          "product": "tpu_v5p",
+          "name": "SparseCore tile局部VMEM",
+          "value": 512,
+          "unit": "KiB/tile",
+          "condition": "16 tile/SC，4SC/chip；不含共享SPMEM",
+          "source": "JAX TPU_V5P branch"
+        },
+        {
+          "product": "tpu_v5p",
+          "name": "twisted torus理论二分带宽增幅",
+          "value": 70,
+          "unit": "percent",
+          "condition": "4×4×8与相同形状普通torus比；不改变端点1200GB/s",
+          "source": "Cloud v5p Twisted torus topologies"
+        }
+      ],
+      "product_ids": [
+        "tpu_v5e",
+        "tpu_v5p"
+      ]
+    },
+    {
+      "group": "A05",
+      "products": [
+        "h100_sxm5",
+        "h100_pcie",
+        "h100_nvl"
+      ],
+      "resources": [
+        {
+          "name": "FP16/BF16 matrix dense",
+          "unit": "TFLOP/s",
+          "values": {
+            "h100_pcie": 756,
+            "h100_nvl": 835.5
+          },
+          "source": {
+            "h100_pcie": "[1, pp.20,39-40, Table 3]",
+            "h100_nvl": "[2, p.2, Technical Specifications and note]; 稀疏倍数 [3, pp.11,21]; FP16/BF16 2:4 规则 [28, §9.7.17.6.1]"
+          },
+          "condition": "单 GPU；取 panorama36 当前选值。NVL dense 为 1671 sparse/2；PCIe NVLink 600 GB/s 采用专门桥接表，首页 900 GB/s 冲突保留。"
+        },
+        {
+          "name": "DRAM capacity",
+          "unit": "GB",
+          "values": {
+            "h100_pcie": 80,
+            "h100_nvl": 94
+          },
+          "source": {
+            "h100_pcie": "[2, p.4, Tables 2-3]; [1, pp.18,36-40]",
+            "h100_nvl": "[1, p.4, Table 2]; [2, p.2]"
+          },
+          "condition": "单 GPU；取 panorama36 当前选值。NVL dense 为 1671 sparse/2；PCIe NVLink 600 GB/s 采用专门桥接表，首页 900 GB/s 冲突保留。"
+        },
+        {
+          "name": "DRAM bandwidth",
+          "unit": "TB/s",
+          "values": {
+            "h100_pcie": 2,
+            "h100_nvl": 3.938
+          },
+          "source": {
+            "h100_pcie": "[2, p.4, Tables 2-3]; [1, pp.18,36-40]",
+            "h100_nvl": "[1, p.4, Table 2]; [2, p.2]"
+          },
+          "condition": "单 GPU；取 panorama36 当前选值。NVL dense 为 1671 sparse/2；PCIe NVLink 600 GB/s 采用专门桥接表，首页 900 GB/s 冲突保留。"
+        },
+        {
+          "name": "NVLink endpoint bidirectional",
+          "unit": "GB/s",
+          "values": {
+            "h100_pcie": 600,
+            "h100_nvl": 600
+          },
+          "source": {
+            "h100_pcie": "[2, pp.1,8-9, Table 6]; [1, p.15]",
+            "h100_nvl": "[1, pp.1,9-10]"
+          },
+          "condition": "单 GPU；取 panorama36 当前选值。NVL dense 为 1671 sparse/2；PCIe NVLink 600 GB/s 采用专门桥接表，首页 900 GB/s 冲突保留。"
+        },
+        {
+          "name": "Enabled SM",
+          "unit": "SM",
+          "values": {
+            "h100_sxm5": 132,
+            "h100_pcie": 114
+          },
+          "source": "Hopper whitepaper pp.18,39, Table 3",
+          "condition": "NVL 型号资料未披露，不由峰值/频率倒算。"
+        },
+        {
+          "name": "L2 cache",
+          "unit": "MB",
+          "values": {
+            "h100_sxm5": 50,
+            "h100_pcie": 50
+          },
+          "source": "Hopper whitepaper pp.18,40, Table 3",
+          "condition": "实际使能容量；NVL 未披露；不可作为任一 MIG 实例容量。"
+        },
+        {
+          "name": "FP8/FP16/BF16/TF32 Tensor clock condition",
+          "unit": "MHz",
+          "values": {
+            "h100_sxm5": 1830,
+            "h100_pcie": 1620
+          },
+          "source": "Hopper whitepaper p.39, Table 3",
+          "condition": "峰值计算使用的 GPU boost clock；NVL 1785 MHz 是简报 boost 字段，没有同样逐路径对应。"
+        },
+        {
+          "name": "Shared memory programmable per SM",
+          "unit": "KB/SM",
+          "values": {
+            "h100_sxm5": 228,
+            "h100_pcie": 228,
+            "h100_nvl": 228
+          },
+          "source": "Hopper whitepaper pp.27,40",
+          "condition": "shared 为 combined L1/shared 的可配置部分；三款共享机制。"
+        },
+        {
+          "name": "MIG maximum instances",
+          "unit": "instance",
+          "values": {
+            "h100_sxm5": 7,
+            "h100_pcie": 7,
+            "h100_nvl": 7
+          },
+          "source": "H100 Datasheet p.2；H100 PCIe Brief p.4；H100 NVL Brief p.8",
+          "condition": "支持上限；不等于 SR-IOV 的 32 VF。"
+        },
+        {
+          "name": "Per-instance memory at maximum instance count",
+          "unit": "GB",
+          "values": {
+            "h100_sxm5": 10,
+            "h100_nvl": 12
+          },
+          "source": "H100 Datasheet Sep24 p.2",
+          "condition": "只记录该数据手册两列明示的 7 实例配置，不把物理 HBM 容量除以 7。"
+        }
+      ],
+      "non_comparable_power": {
+        "h100_sxm5": {
+          "value": 700,
+          "unit": "W",
+          "scope": "module max TDP"
+        },
+        "h100_pcie": {
+          "value": 350,
+          "unit": "W",
+          "scope": "maximum board power"
+        },
+        "h100_nvl": {
+          "value": 400,
+          "unit": "W",
+          "scope": "maximum board power"
+        }
+      },
+      "classification": {
+        "h100_sxm5": "多用途，强调多 GPU 及跨服务器扩展；Hopper whitepaper p.15",
+        "h100_pcie": "多用途，强调功率受限的标准服务器及 1–2 GPU 作业；Hopper whitepaper p.15",
+        "h100_nvl": "主要针对 LLM inference；NVL Product Brief p.1"
+      },
+      "open_items": [
+        "NVL SM/L2/HBM stack 数未由本组型号原文确认",
+        "PCIe NVLink 简报 p.1 与 Table 6 冲突",
+        "白皮书 Table 3 的 H100 memory bandwidth 行仍带 Not Finalized，SXM 主表采用 Sep24 数据手册 3.35 TB/s"
+      ],
+      "product_ids": [
+        "h100_nvl",
+        "h100_pcie",
+        "h100_sxm5"
+      ]
+    },
+    {
+      "group": "A06",
+      "ids": [
+        "mi350p",
+        "mi350x",
+        "mi355x"
+      ],
+      "resources": [
+        {
+          "name": "XCD 数量",
+          "unit": "count",
+          "values": {
+            "mi350p": 4,
+            "mi350x": 8,
+            "mi355x": 8
+          },
+          "source": {
+            "mi350p": "../产品详解/AMD/MI350P.md#ref-2; brochure pp.1-2",
+            "mi350x": "../产品详解/AMD/MI350X.md#ref-2; brochure pp.1-2",
+            "mi355x": "../产品详解/AMD/MI355X.md#ref-2; brochure pp.1-2"
+          },
+          "condition": "",
+          "derived": false
+        },
+        {
+          "name": "IOD 数量",
+          "unit": "count",
+          "values": {
+            "mi350p": 1,
+            "mi350x": 2,
+            "mi355x": 2
+          },
+          "source": {
+            "mi350p": "../产品详解/AMD/MI350P.md#ref-2; brochure pp.1-2",
+            "mi350x": "../产品详解/AMD/MI350X.md#ref-2; brochure pp.1-2",
+            "mi355x": "../产品详解/AMD/MI355X.md#ref-2; brochure pp.1-2"
+          },
+          "condition": "",
+          "derived": false
+        },
+        {
+          "name": "使能 CU",
+          "unit": "count",
+          "values": {
+            "mi350p": 128,
+            "mi350x": 256,
+            "mi355x": 256
+          },
+          "source": {
+            "mi350p": "../产品详解/AMD/MI350P.md#ref-2; brochure pp.1-2",
+            "mi350x": "../产品详解/AMD/MI350X.md#ref-2; brochure pp.1-2",
+            "mi355x": "../产品详解/AMD/MI355X.md#ref-2; brochure pp.1-2"
+          },
+          "condition": "",
+          "derived": false
+        },
+        {
+          "name": "Matrix Core",
+          "unit": "count",
+          "values": {
+            "mi350p": 512,
+            "mi350x": 1024,
+            "mi355x": 1024
+          },
+          "source": {
+            "mi350p": "../产品详解/AMD/MI350P.md#ref-2; brochure pp.1-2",
+            "mi350x": "../产品详解/AMD/MI350X.md#ref-2; brochure pp.1-2",
+            "mi355x": "../产品详解/AMD/MI355X.md#ref-2; brochure pp.1-2"
+          },
+          "condition": "",
+          "derived": false
+        },
+        {
+          "name": "最高引擎时钟",
+          "unit": "GHz",
+          "values": {
+            "mi350p": 2.2,
+            "mi350x": 2.2,
+            "mi355x": 2.4
+          },
+          "source": {
+            "mi350p": "../产品详解/AMD/MI350P.md#ref-2; brochure pp.1-2",
+            "mi350x": "../产品详解/AMD/MI350X.md#ref-2; brochure pp.1-2",
+            "mi355x": "../产品详解/AMD/MI355X.md#ref-2; brochure pp.1-2"
+          },
+          "condition": "并非保证持续频率，也未被确认为 L2/cache 时钟",
+          "derived": false
+        },
+        {
+          "name": "FP16/BF16 dense Matrix 峰值",
+          "unit": "TFLOPS",
+          "values": {
+            "mi350p": 1150,
+            "mi350x": 2300,
+            "mi355x": 2516.6
+          },
+          "source": {
+            "mi350p": "[1, GPU Specifications]",
+            "mi350x": "[1, GPU Specifications]",
+            "mi355x": "[2, p.1, AI / HPC Peak Theoretical Performance]"
+          },
+          "condition": "与 panorama36.json 同值；MI350X 采用官网 2300，保留 brochure 2309.6 与资源复算不一致；MI355X 采用 datasheet 2516.6。MI350P 未绑定功率运行点。",
+          "derived": false
+        },
+        {
+          "name": "HBM 容量",
+          "unit": "GB",
+          "values": {
+            "mi350p": 144,
+            "mi350x": 288,
+            "mi355x": 288
+          },
+          "source": {
+            "mi350p": "../产品详解/AMD/MI350P.md#ref-2; brochure pp.1-2",
+            "mi350x": "../产品详解/AMD/MI350X.md#ref-2; brochure pp.1-2",
+            "mi355x": "../产品详解/AMD/MI355X.md#ref-2; brochure pp.1-2"
+          },
+          "condition": "单设备 HBM3E",
+          "derived": false
+        },
+        {
+          "name": "HBM 带宽",
+          "unit": "TB/s",
+          "values": {
+            "mi350p": 4,
+            "mi350x": 8,
+            "mi355x": 8
+          },
+          "source": {
+            "mi350p": "../产品详解/AMD/MI350P.md#ref-2; brochure pp.1-2",
+            "mi350x": "../产品详解/AMD/MI350X.md#ref-2; brochure pp.1-2",
+            "mi355x": "../产品详解/AMD/MI355X.md#ref-2; brochure pp.1-2"
+          },
+          "condition": "规格峰值，非持续实测",
+          "derived": false
+        },
+        {
+          "name": "每 CU LDS",
+          "unit": "KB",
+          "values": {
+            "mi350p": 160,
+            "mi350x": 160,
+            "mi355x": 160
+          },
+          "source": "../产品详解/AMD/MI350X.md#ref-3; CDNA 4 whitepaper pp.5,8-9,18-19",
+          "condition": "软件管理、分布式局部空间，原文 KB",
+          "derived": false
+        },
+        {
+          "name": "每 CU LDS 读吞吐",
+          "unit": "B/cycle",
+          "values": {
+            "mi350p": 256,
+            "mi350x": 256,
+            "mi355x": 256
+          },
+          "source": "../产品详解/AMD/MI350X.md#ref-3; CDNA 4 whitepaper pp.5,8-9,18-19",
+          "condition": "理论值；不含 bank 冲突与 kernel 开销",
+          "derived": false
+        },
+        {
+          "name": "每 XCD L2",
+          "unit": "MB",
+          "values": {
+            "mi350p": 4,
+            "mi350x": 4,
+            "mi355x": 4
+          },
+          "source": {
+            "mi350p": "../产品详解/AMD/MI350P.md#ref-2; brochure pp.1-2",
+            "mi350x": "../产品详解/AMD/MI350X.md#ref-2; brochure pp.1-2",
+            "mi355x": "../产品详解/AMD/MI355X.md#ref-2; brochure pp.1-2"
+          },
+          "condition": "各 XCD 局部共享",
+          "derived": false
+        },
+        {
+          "name": "L2 容量之和",
+          "unit": "MB",
+          "values": {
+            "mi350p": 16,
+            "mi350x": 32,
+            "mi355x": 32
+          },
+          "source": {
+            "mi350p": "../产品详解/AMD/MI350P.md#ref-2; brochure pp.1-2",
+            "mi350x": "../产品详解/AMD/MI350X.md#ref-2; brochure pp.1-2",
+            "mi355x": "../产品详解/AMD/MI355X.md#ref-2; brochure pp.1-2"
+          },
+          "condition": "4MB/XCD × XCD 数量；不是单一全局共享 cache",
+          "derived": true
+        },
+        {
+          "name": "Infinity Cache",
+          "unit": "MB",
+          "values": {
+            "mi350p": 128,
+            "mi350x": 256,
+            "mi355x": 256
+          },
+          "source": {
+            "mi350p": "../产品详解/AMD/MI350P.md#ref-2; brochure pp.1-2",
+            "mi350x": "../产品详解/AMD/MI350X.md#ref-2; brochure pp.1-2",
+            "mi355x": "../产品详解/AMD/MI355X.md#ref-2; brochure pp.1-2"
+          },
+          "condition": "内存侧 cache，独立于 XCD L2 与 CU LDS",
+          "derived": false
+        },
+        {
+          "name": "额定功率上限",
+          "unit": "W",
+          "values": {
+            "mi350p": 600,
+            "mi350x": 1000,
+            "mi355x": 1400
+          },
+          "source": {
+            "mi350p": "../产品详解/AMD/MI350P.md#ref-2; brochure pp.1-2",
+            "mi350x": "../产品详解/AMD/MI350X.md#ref-2; brochure pp.1-2",
+            "mi355x": "../产品详解/AMD/MI355X.md#ref-2; brochure pp.1-2"
+          },
+          "condition": "MI350P 为板卡 TBP，另外两款为 OAM 模组 TBP；只显示规格，不推导实际能效",
+          "derived": false
+        },
+        {
+          "name": "专用 GPU scale-up 端点",
+          "unit": "GB/s",
+          "values": {
+            "mi350x": 1075.2,
+            "mi355x": 1075.2
+          },
+          "source": "../产品详解/AMD/MI350X.md#ref-3; p.13 and p.21 MI350-007",
+          "condition": "每设备 7×153.6GB/s，双向合计，排除主机 PCIe。MI350P 未公开，不填 0。",
+          "derived": true
+        }
+      ],
+      "interpretation": "P→X 主要扩大资源规模；X→355 主要提高频率与供电冷却档位。专用互联未公开不等于不存在。",
+      "data_notes": [
+        "三款共享 CDNA 4，每 CU 和每 XCD 参数不能作为三项独立架构创新。",
+        "表中 B/P: MI350P=4/1150，MI350X=8/2300，MI355X=8/2516.6，单位 TB/s per TFLOPS。",
+        "MI350X 与 MI355X panorama deployment.source 的 [3, p.3, Table 2] 应改为 [3, p.3; Table 2, p.19]。"
+      ],
+      "product_ids": [
+        "mi350p",
+        "mi350x",
+        "mi355x"
+      ]
+    },
+    {
+      "group": "A07",
+      "products": [
+        "h200_sxm5",
+        "h200_nvl"
+      ],
+      "resources": [
+        {
+          "name": "FP16/BF16 matrix dense",
+          "unit": "TFLOP/s",
+          "values": {
+            "h200_sxm5": 989.5,
+            "h200_nvl": 835.5
+          },
+          "source": {
+            "h200_sxm5": "[1, p.4, Technical Specifications, notes 1-2]; 稀疏倍数 [3, pp.11,21]; FP16/BF16 2:4 [28, §9.7.17.6.1]",
+            "h200_nvl": "[3, GPU specifications, note 2]; 稀疏倍数 [2, pp.11,21]; FP16/BF16 2:4 [28, §9.7.17.6.1]"
+          },
+          "condition": "单 GPU；引用编号使用各自产品详解。dense 为明确 2 倍稀疏倍率推导；HBM 带宽 4.8 与 4.813 的微小差距不能解释成性能提升。"
+        },
+        {
+          "name": "HBM capacity",
+          "unit": "GB",
+          "values": {
+            "h200_sxm5": 141,
+            "h200_nvl": 141
+          },
+          "source": {
+            "h200_sxm5": "[1, pp.1,4]; [2, p.4]",
+            "h200_nvl": "[1, p.4, Table 2-2]; [3, GPU specifications]"
+          },
+          "condition": "单 GPU；引用编号使用各自产品详解。dense 为明确 2 倍稀疏倍率推导；HBM 带宽 4.8 与 4.813 的微小差距不能解释成性能提升。"
+        },
+        {
+          "name": "HBM bandwidth",
+          "unit": "TB/s",
+          "values": {
+            "h200_sxm5": 4.8,
+            "h200_nvl": 4.813
+          },
+          "source": {
+            "h200_sxm5": "[1, pp.1,4]; [2, p.4]",
+            "h200_nvl": "[1, p.4, Table 2-2]; [3, GPU specifications]"
+          },
+          "condition": "单 GPU；引用编号使用各自产品详解。dense 为明确 2 倍稀疏倍率推导；HBM 带宽 4.8 与 4.813 的微小差距不能解释成性能提升。"
+        },
+        {
+          "name": "NVLink endpoint bidirectional",
+          "unit": "GB/s",
+          "values": {
+            "h200_sxm5": 900,
+            "h200_nvl": 900
+          },
+          "source": {
+            "h200_sxm5": "[2, p.4]; [1, p.4]",
+            "h200_nvl": "[1, pp.1,9, Table 4-1]"
+          },
+          "condition": "单 GPU；引用编号使用各自产品详解。dense 为明确 2 倍稀疏倍率推导；HBM 带宽 4.8 与 4.813 的微小差距不能解释成性能提升。"
+        },
+        {
+          "name": "Enabled SM",
+          "unit": "SM",
+          "values": {
+            "h200_sxm5": 132
+          },
+          "source": "H200 SXM CUDA training p.4",
+          "condition": "NVL 未披露，不能填零或从峰值反推。"
+        },
+        {
+          "name": "Enabled L2",
+          "unit": "MB",
+          "values": {
+            "h200_sxm5": 50
+          },
+          "source": "H200 SXM CUDA training p.4",
+          "condition": "NVL 未披露；只用于本型号资源记录，不做伪配对。"
+        },
+        {
+          "name": "MIG maximum instances",
+          "unit": "instance",
+          "values": {
+            "h200_sxm5": 7,
+            "h200_nvl": 7
+          },
+          "source": "MIG Guide, Supported GPUs; H200 Profiles Table 11",
+          "condition": "配置上限；1g.18gb 最多7，1g.35gb最多4，2g.35gb最多3，不能相加。"
+        }
+      ],
+      "non_comparable_power": {
+        "h200_sxm5": {
+          "value": 700,
+          "unit": "W",
+          "scope": "module_max"
+        },
+        "h200_nvl": {
+          "value": 600,
+          "unit": "W",
+          "scope": "board_max"
+        }
+      },
+      "derived_ratios_nvl_over_sxm": {
+        "P16": 0.844365841334007,
+        "capacity": 1,
+        "bandwidth_selected": 1.0027083333333333,
+        "capacity_over_P16": 1.1843207660083783,
+        "bandwidth_over_P16_selected": 1.1875283014163176,
+        "bandwidth_over_P16_rounded_4p8": 1.1843207660083783,
+        "NVLink_endpoint": 1
+      },
+      "classification": {
+        "h200_sxm5": "训推兼顾/AI-HPC多用途",
+        "h200_nvl": "主要 LLM inference，支持 fine-tuning 和 HPC；敏感性分析可改为 both。"
+      },
+      "new_facts": [
+        "NVL 600W sense pin boot requirement remains after power-cap reduction",
+        "NVL 32 SR-IOV virtual functions vs 7 MIG instances",
+        "H200 MIG profiles independently combine HBM and compute/cache fractions",
+        "NVL CEC firmware authentication, rollback protection and recovery"
+      ],
+      "open_items": [
+        "NVL SM/L2 未披露",
+        "SXM SKU 时钟未披露",
+        "NVL Table4-1 lane速率方向矛盾保留",
+        "产品表16.5GB与H200专项MIG18GB冲突保留",
+        "4.813/4.8披露精度差不作为真实带宽差结论"
+      ],
+      "product_ids": [
+        "h200_nvl",
+        "h200_sxm5"
+      ]
+    },
+    {
+      "group": "A08",
+      "product_ids": [
+        "l4",
+        "l40s"
+      ],
+      "classification_notes": {
+        "l4": {
+          "orientation": "inference",
+          "supported_uses": "both",
+          "source": "L4 Product Brief p.1 Overview; Ada pp.39–40; launch NVIDIA L4 for AI Video"
+        },
+        "l40s": {
+          "orientation": "both",
+          "supported_uses": "both",
+          "source": "L40S Product Brief p.1; official product page Workloads"
+        }
+      },
+      "resources": [
+        {
+          "name": "SM数量",
+          "unit": "SM",
+          "values": {
+            "l4": 58,
+            "l40s": 142
+          },
+          "source": "Ada pp.39–40 Table5; L40S Specs; Ada pp.7–8",
+          "condition": "L4 directly listed; L40S derived from 18176 CUDA/128 and568 Tensor/4; TPC not inferred"
+        },
+        {
+          "name": "Tensor Core数量",
+          "unit": "core",
+          "values": {
+            "l4": 232,
+            "l40s": 568
+          },
+          "source": "Ada Table5; L40S Specs",
+          "condition": "Ada fourth-generation Tensor Cores"
+        },
+        {
+          "name": "boost时钟",
+          "unit": "MHz",
+          "values": {
+            "l4": 2040,
+            "l40s": 2520
+          },
+          "source": "Both Product Brief p.2 Table1",
+          "condition": "Rated boost clock, not sustained measured frequency"
+        },
+        {
+          "name": "dense FP8峰值",
+          "unit": "TFLOPS",
+          "values": {
+            "l4": 242,
+            "l40s": 733
+          },
+          "source": "Ada p.40 Table5; L40S official Specs",
+          "condition": "Product dense headline; accumulation mode not individually broken out; do not infer L40S FP16"
+        },
+        {
+          "name": "GDDR6容量",
+          "unit": "GB",
+          "values": {
+            "l4": 24,
+            "l40s": 48
+          },
+          "source": "Both Product Brief p.3 Table2",
+          "condition": "Per physical PCIe card"
+        },
+        {
+          "name": "GDDR6带宽",
+          "unit": "GB/s",
+          "values": {
+            "l4": 300,
+            "l40s": 864
+          },
+          "source": "Both Product Brief p.3 Table2",
+          "condition": "Per card peak memory bandwidth"
+        },
+        {
+          "name": "GDDR6接口位宽",
+          "unit": "bit",
+          "values": {
+            "l4": 192,
+            "l40s": 384
+          },
+          "source": "Both Product Brief p.3 Table2",
+          "condition": "Per card memory interface"
+        },
+        {
+          "name": "NVENC数量",
+          "unit": "engine",
+          "values": {
+            "l4": 2,
+            "l40s": 3
+          },
+          "source": "Ada pp.39–40 Table5; L40S Specs NVENC|NVDEC",
+          "condition": "Video encoders; engine count not codec-normalized throughput"
+        },
+        {
+          "name": "NVDEC数量",
+          "unit": "engine",
+          "values": {
+            "l4": 4,
+            "l40s": 3
+          },
+          "source": "Ada pp.39–40 Table5; L40S Specs NVENC|NVDEC",
+          "condition": "Video decoders; engine count not codec-normalized throughput"
+        },
+        {
+          "name": "额定最大板级功耗",
+          "unit": "W",
+          "values": {
+            "l4": 72,
+            "l40s": 350
+          },
+          "source": "Both Product Brief p.2 Table1",
+          "condition": "Not measured workload power"
+        },
+        {
+          "name": "每SM统一L1/shared容量",
+          "unit": "KB",
+          "values": {
+            "l4": 128,
+            "l40s": 128
+          },
+          "source": "Ada p.8 andp.12",
+          "condition": "Common shared pool, do not add L1 and shared twice"
+        },
+        {
+          "name": "每SM最大shared配额",
+          "unit": "KB",
+          "values": {
+            "l4": 100,
+            "l40s": 100
+          },
+          "source": "Ada Tuning Guide13.4 §1.4.1.1 and1.4.2.2",
+          "condition": "Same Ada CC8.9 rules, per-block accessible99KB"
+        }
+      ],
+      "exclusions": [
+        "L40S FP16/BF16 peak:362.05 dense vs733 sparse inconsistent; no16-bit ratio",
+        "L40S L2 and JPEG resources:SKU-specific values not disclosed in checked sources",
+        "PCIe bandwidth is not NVLink or dedicated scale-up fabric",
+        "FP8 product table does not disaggregate accumulator modes"
+      ]
+    },
+    {
+      "group": "A09",
+      "products": [
+        "atlas300ia2_32",
+        "atlas300ia2_64"
+      ],
+      "resources": [
+        {
+          "name": "FP16 厂商峰值",
+          "unit": "TFLOP/s",
+          "values": {
+            "atlas300ia2_32": 280,
+            "atlas300ia2_64": 280
+          },
+          "source": "A300I A2 推理卡 用户指南 03，表3-1；产品彩页 p.1",
+          "condition": "单卡一颗处理器；未说明矩阵/向量分解与 dense/sparse，不能并入严格 dense 矩阵样本"
+        },
+        {
+          "name": "HBM 容量",
+          "unit": "GB",
+          "values": {
+            "atlas300ia2_32": 32,
+            "atlas300ia2_64": 64
+          },
+          "source": "A300I A2 推理卡 用户指南 03，表3-1；产品彩页 p.1",
+          "condition": "按官方十进制标称值，未披露代际和堆栈数"
+        },
+        {
+          "name": "HBM 带宽",
+          "unit": "TB/s",
+          "values": {
+            "atlas300ia2_32": 0.8,
+            "atlas300ia2_64": 1.6
+          },
+          "source": "A300I A2 推理卡 用户指南 03，表3-1；产品彩页 p.1",
+          "condition": "标称值，非实测持续带宽"
+        },
+        {
+          "name": "AI Core 数",
+          "unit": "core",
+          "values": {
+            "atlas300ia2_32": 20,
+            "atlas300ia2_64": 20
+          },
+          "source": "A300I A2 推理卡 用户指南 03，表3-1；产品彩页 p.1",
+          "condition": "同一指南两配置共用处理器字段"
+        },
+        {
+          "name": "TaiShan Core 数",
+          "unit": "core",
+          "values": {
+            "atlas300ia2_32": 8,
+            "atlas300ia2_64": 8
+          },
+          "source": "A300I A2 推理卡 用户指南 03，表3-1；产品彩页 p.1",
+          "condition": "物理CPU数量；虚拟化另有7个可分配AI CPU，不混用"
+        },
+        {
+          "name": "PCIe 5.0 lane 数",
+          "unit": "lane",
+          "values": {
+            "atlas300ia2_32": 16,
+            "atlas300ia2_64": 16
+          },
+          "source": "A300I A2 推理卡 用户指南 03，表3-1；产品彩页 p.1",
+          "condition": "主机接口，不替代专用scale-up端点带宽"
+        },
+        {
+          "name": "板卡最大功耗",
+          "unit": "W",
+          "values": {
+            "atlas300ia2_32": 350,
+            "atlas300ia2_64": 350
+          },
+          "source": "A300I A2 推理卡 用户指南 03，表3-1；产品彩页 p.1；电源管理",
+          "condition": "两者均可选300/350W，350W要求S4接地；不按容量分档"
+        },
+        {
+          "name": "半卡模板内存",
+          "unit": "GB",
+          "values": {
+            "atlas300ia2_32": 16,
+            "atlas300ia2_64": 32
+          },
+          "source": "NPU 卡虚拟化硬切分参考实践，附录查询切分模板表2/表1",
+          "condition": "分别vir10_3c_16g/vir10_3c_32g，均10 AI Core、3 AI CPU，HDK25.5.0/CANN9.0.0-beta.1"
+        },
+        {
+          "name": "四分之一模板内存",
+          "unit": "GB",
+          "values": {
+            "atlas300ia2_32": 8,
+            "atlas300ia2_64": 16
+          },
+          "source": "NPU 卡虚拟化硬切分参考实践，附录查询切分模板表2/表1",
+          "condition": "分别vir05_1c_8g/vir05_1c_16g，均5 AI Core、1 AI CPU、0 VDEC，同上版本"
+        },
+        {
+          "name": "HBM 带宽 / FP16 峰值",
+          "unit": "byte/FLOP",
+          "values": {
+            "atlas300ia2_32": 0.002857142857142857,
+            "atlas300ia2_64": 0.005714285714285714
+          },
+          "source": "A300I A2 推理卡 用户指南 03，表3-1；产品彩页 p.1；由上述数值计算",
+          "condition": "仅组内相同厂商峰值口径，计算条件未展开"
+        },
+        {
+          "name": "HBM 容量 / FP16 峰值",
+          "unit": "GB/(TFLOP/s)",
+          "values": {
+            "atlas300ia2_32": 0.11428571428571428,
+            "atlas300ia2_64": 0.22857142857142856
+          },
+          "source": "A300I A2 推理卡 用户指南 03，表3-1；产品彩页 p.1；由上述数值计算",
+          "condition": "容量翻倍且P不变，该比值与B/P变化不构成独立证据"
+        },
+        {
+          "name": "容量 / 带宽",
+          "unit": "ms",
+          "values": {
+            "atlas300ia2_32": 40.0,
+            "atlas300ia2_64": 40.0
+          },
+          "source": "A300I A2 推理卡 用户指南 03，表3-1；产品彩页 p.1；由上述数值计算",
+          "condition": "理想顺序搬运等容量数据的尺度，不是实测延迟"
+        }
+      ],
+      "classification": "同为推理卡，控制用途和计算峰值后比较内存配置；不是独立训推差异证据",
+      "unresolved": [
+        "确切910子型号、die/package和HBM组织",
+        "Cache容量、带宽、层级",
+        "dense/sparse及计算通路分解",
+        "没有公开32GB和64GB分别选择内存档位的设计理由",
+        "64GB是否支持_m/_nm媒体切分模板未确认"
+      ],
+      "product_ids": [
+        "atlas300ia2_32",
+        "atlas300ia2_64"
+      ]
+    },
+    {
+      "group": "A10",
+      "products": [
+        "h100_sxm5",
+        "h200_sxm5",
+        "h100_nvl",
+        "h200_nvl"
+      ],
+      "resources": [
+        {
+          "name": "FP16/BF16 matrix dense",
+          "unit": "TFLOP/s",
+          "values": {
+            "h100_sxm5": 989.4,
+            "h200_sxm5": 989.5,
+            "h100_nvl": 835.5,
+            "h200_nvl": 835.5
+          },
+          "source": {
+            "h100_sxm5": "[1, pp.20,39-40, Table 3]",
+            "h200_sxm5": "[1, p.4, Technical Specifications, notes 1-2]; 稀疏倍数 [3, pp.11,21]; FP16/BF16 2:4 [28, §9.7.17.6.1]",
+            "h100_nvl": "[2, p.2, Technical Specifications and note]; 稀疏倍数 [3, pp.11,21]; FP16/BF16 2:4 规则 [28, §9.7.17.6.1]",
+            "h200_nvl": "[3, GPU specifications, note 2]; 稀疏倍数 [2, pp.11,21]; FP16/BF16 2:4 [28, §9.7.17.6.1]"
+          },
+          "condition": "Single GPU; references use each product article; preserve H200 NVL 4.813 TB/s and H100 SXM 3.35 TB/s. Dense may be sparse/2 derived; no core uplift inferred from rounding."
+        },
+        {
+          "name": "HBM capacity",
+          "unit": "GB",
+          "values": {
+            "h100_sxm5": 80,
+            "h200_sxm5": 141,
+            "h100_nvl": 94,
+            "h200_nvl": 141
+          },
+          "source": {
+            "h100_sxm5": "[2, p.2]; [1, pp.18,36-40]",
+            "h200_sxm5": "[1, pp.1,4]; [2, p.4]",
+            "h100_nvl": "[1, p.4, Table 2]; [2, p.2]",
+            "h200_nvl": "[1, p.4, Table 2-2]; [3, GPU specifications]"
+          },
+          "condition": "Single GPU; references use each product article; preserve H200 NVL 4.813 TB/s and H100 SXM 3.35 TB/s. Dense may be sparse/2 derived; no core uplift inferred from rounding."
+        },
+        {
+          "name": "HBM bandwidth",
+          "unit": "TB/s",
+          "values": {
+            "h100_sxm5": 3.35,
+            "h200_sxm5": 4.8,
+            "h100_nvl": 3.938,
+            "h200_nvl": 4.813
+          },
+          "source": {
+            "h100_sxm5": "[2, p.2]; [1, pp.18,36-40]",
+            "h200_sxm5": "[1, pp.1,4]; [2, p.4]",
+            "h100_nvl": "[1, p.4, Table 2]; [2, p.2]",
+            "h200_nvl": "[1, p.4, Table 2-2]; [3, GPU specifications]"
+          },
+          "condition": "Single GPU; references use each product article; preserve H200 NVL 4.813 TB/s and H100 SXM 3.35 TB/s. Dense may be sparse/2 derived; no core uplift inferred from rounding."
+        },
+        {
+          "name": "NVLink endpoint bidirectional",
+          "unit": "GB/s",
+          "values": {
+            "h100_sxm5": 900,
+            "h200_sxm5": 900,
+            "h100_nvl": 600,
+            "h200_nvl": 900
+          },
+          "source": {
+            "h100_sxm5": "[1, pp.47,49-50]; [2, p.2]",
+            "h200_sxm5": "[2, p.4]; [1, p.4]",
+            "h100_nvl": "[1, pp.1,9-10]",
+            "h200_nvl": "[1, pp.1,9, Table 4-1]"
+          },
+          "condition": "Single GPU; references use each product article; preserve H200 NVL 4.813 TB/s and H100 SXM 3.35 TB/s. Dense may be sparse/2 derived; no core uplift inferred from rounding."
+        },
+        {
+          "name": "Enabled SM",
+          "unit": "SM",
+          "values": {
+            "h100_sxm5": 132,
+            "h200_sxm5": 132
+          },
+          "source": "Hopper whitepaper pp.18,39; H200 CUDA training p.4; NVL undisclosed.",
+          "condition": "Same scope within each branch. Address apertures are not physical HBM capacity or bandwidth."
+        },
+        {
+          "name": "Enabled L2",
+          "unit": "MB",
+          "values": {
+            "h100_sxm5": 50,
+            "h200_sxm5": 50
+          },
+          "source": "Hopper whitepaper pp.18,40; H200 CUDA training p.4; NVL undisclosed.",
+          "condition": "Same scope within each branch. Address apertures are not physical HBM capacity or bandwidth."
+        },
+        {
+          "name": "HBM bus width",
+          "unit": "bit",
+          "values": {
+            "h100_nvl": 6016,
+            "h200_nvl": 6016
+          },
+          "source": "H100 NVL brief p.4 Table 2; H200 NVL brief p.4 Table 2-2",
+          "condition": "Same scope within each branch. Address apertures are not physical HBM capacity or bandwidth."
+        },
+        {
+          "name": "HBM memory clock",
+          "unit": "MHz",
+          "values": {
+            "h100_nvl": 2619,
+            "h200_nvl": 3201
+          },
+          "source": "H100 NVL brief p.4 Table 2; H200 NVL brief p.4 Table 2-2",
+          "condition": "Same scope within each branch. Address apertures are not physical HBM capacity or bandwidth."
+        },
+        {
+          "name": "PF BAR2 address aperture",
+          "unit": "GiB",
+          "values": {
+            "h100_nvl": 128,
+            "h200_nvl": 256
+          },
+          "source": "H100 NVL brief p.4 Table 3; H200 NVL brief p.4 Table 2-3",
+          "condition": "Same scope within each branch. Address apertures are not physical HBM capacity or bandwidth."
+        },
+        {
+          "name": "VF BAR1 aperture per VF",
+          "unit": "GiB/VF",
+          "values": {
+            "h100_nvl": 4,
+            "h200_nvl": 8
+          },
+          "source": "H100 NVL brief p.4 Table 3; H200 NVL brief p.4 Table 2-3",
+          "condition": "Same scope within each branch. Address apertures are not physical HBM capacity or bandwidth."
+        }
+      ],
+      "non_comparable_power": {
+        "h100_sxm5": {
+          "value": 700,
+          "unit": "W",
+          "scope": "module_max"
+        },
+        "h200_sxm5": {
+          "value": 700,
+          "unit": "W",
+          "scope": "module_max"
+        },
+        "h100_nvl": {
+          "value": 400,
+          "unit": "W",
+          "scope": "board_max"
+        },
+        "h200_nvl": {
+          "value": 600,
+          "unit": "W",
+          "scope": "board_max"
+        }
+      },
+      "derived_ratios_H200_over_H100": {
+        "SXM": {
+          "P16": 1.0001010713563776,
+          "capacity": 1.7625,
+          "bandwidth": 1.4328358208955223,
+          "capacity_over_P16": 1.762321879737241,
+          "bandwidth_over_P16": 1.432691016871177,
+          "NVLink_endpoint": 1.0,
+          "power_limit": 1.0
+        },
+        "NVL": {
+          "P16": 1.0,
+          "capacity": 1.5,
+          "bandwidth": 1.2221940071102082,
+          "capacity_over_P16": 1.5,
+          "bandwidth_over_P16": 1.2221940071102082,
+          "NVLink_endpoint": 1.5,
+          "power_limit": 1.5
+        }
+      },
+      "NVL_memory_clock_ratio": 1.2222222222222223,
+      "new_facts": [
+        "NVL PF/VF address apertures expanded",
+        "HGX H200 platform hardware/software compatibility with HGX H100"
+      ],
+      "workload_condition": {
+        "source": "H200 datasheet pp.1-2",
+        "model": "Llama2 70B",
+        "ISL": 2048,
+        "OSL": 128,
+        "H100_SXM_batch": 8,
+        "H200_SXM_batch": 32,
+        "scope": "single GPU throughput comparison; not a chip property or equal-batch latency comparison"
+      },
+      "open_items": [
+        "NVL actual SM/L2 and HBM stack count remain unknown.",
+        "SXM 989.4 vs989.5 is source rounding, not a core-upgrade claim.",
+        "NVL board power and interconnect also change; not memory-only causal experiment."
+      ],
+      "product_ids": [
+        "h100_nvl",
+        "h100_sxm5",
+        "h200_nvl",
+        "h200_sxm5"
+      ]
+    },
+    {
+      "group": "A11",
+      "product_ids": [
+        "mi300x",
+        "mi325x"
+      ],
+      "case_type": "同一CDNA3计算实现的产品代际内存升级辅助案例",
+      "resources": [
+        {
+          "name": "使能 CU",
+          "unit": "CU",
+          "values": {
+            "mi300x": 304,
+            "mi325x": 304
+          },
+          "condition": "单 OAM，8 XCD，每 XCD 38使能CU",
+          "source": "CDNA 3 白皮书 Table 2, pp.23-25；MI300X datasheet p.1；MI325X datasheet p.1"
+        },
+        {
+          "name": "Matrix Core",
+          "unit": "core",
+          "values": {
+            "mi300x": 1216,
+            "mi325x": 1216
+          },
+          "condition": "单 OAM",
+          "source": "CDNA 3 白皮书 Table 2, pp.23-25；MI300X datasheet p.1；MI325X datasheet p.1"
+        },
+        {
+          "name": "最高引擎频率",
+          "unit": "GHz",
+          "values": {
+            "mi300x": 2.1,
+            "mi325x": 2.1
+          },
+          "condition": "peak engine clock，不是保证持续频率",
+          "source": "CDNA 3 白皮书 Table 2, pp.23-25；MI300X datasheet p.1；MI325X datasheet p.1"
+        },
+        {
+          "name": "FP16/BF16 Matrix dense",
+          "unit": "TFLOPS",
+          "values": {
+            "mi300x": 1307.4,
+            "mi325x": 1307.4
+          },
+          "condition": "单 OAM；和 panorama36.json 相同；不加 Vector",
+          "source": "CDNA 3 白皮书 Table 2, pp.23-25；MI300X datasheet p.1；MI325X datasheet p.1"
+        },
+        {
+          "name": "FP8 Matrix dense",
+          "unit": "TFLOPS",
+          "values": {
+            "mi300x": 2614.9,
+            "mi325x": 2614.9
+          },
+          "condition": "单 OAM；FNUZ；和 panorama36.json 相同",
+          "source": "CDNA 3 白皮书 Table 2, pp.23-25；MI300X datasheet p.1；MI325X datasheet p.1"
+        },
+        {
+          "name": "HBM 容量",
+          "unit": "GB",
+          "values": {
+            "mi300x": 192,
+            "mi325x": 256
+          },
+          "condition": "原文GB显示口径，不含cache；MI325X采用正式256GB",
+          "source": "CDNA 3 白皮书 Table 2, pp.23-25；MI300X datasheet p.1；MI325X datasheet p.1"
+        },
+        {
+          "name": "HBM 峰值带宽",
+          "unit": "TB/s",
+          "values": {
+            "mi300x": 5.3,
+            "mi325x": 6
+          },
+          "condition": "采用datasheet5.3/6.0；MI300X白皮书脚注另有推算5.325，未改变主图选值",
+          "source": "CDNA 3 白皮书 Table 2, pp.23-25；MI300X datasheet p.1；MI325X datasheet p.1"
+        },
+        {
+          "name": "每 XCD L2 容量",
+          "unit": "MB",
+          "values": {
+            "mi300x": 4,
+            "mi325x": 4
+          },
+          "condition": "每XCD范围，不能等同全GPU共享32MB",
+          "source": "CDNA 3 白皮书 pp.9-10"
+        },
+        {
+          "name": "全 GPU Infinity Cache 容量",
+          "unit": "MB",
+          "values": {
+            "mi300x": 256,
+            "mi325x": 256
+          },
+          "condition": "单GPU内存侧cache",
+          "source": "CDNA 3 白皮书 pp.10-11"
+        },
+        {
+          "name": "每 CU LDS 容量",
+          "unit": "KB",
+          "values": {
+            "mi300x": 64,
+            "mi325x": 64
+          },
+          "condition": "软件管理局部暂存区",
+          "source": "CDNA 3 白皮书 p.9"
+        },
+        {
+          "name": "设备互联端点带宽",
+          "unit": "GB/s",
+          "values": {
+            "mi300x": 896,
+            "mi325x": 896
+          },
+          "condition": "7×128 GB/s，双向合计；不含host PCIe",
+          "source": "CDNA 3 白皮书 Table 2, pp.23-25；MI300X datasheet p.1；MI325X datasheet p.1"
+        },
+        {
+          "name": "模组功率上限",
+          "unit": "W",
+          "values": {
+            "mi300x": 750,
+            "mi325x": 1000
+          },
+          "condition": "Maximum TBP；不表示实测耗电",
+          "source": "CDNA 3 白皮书 Table 2, pp.23-25；MI300X datasheet p.1；MI325X datasheet p.1"
+        },
+        {
+          "name": "SPX 每逻辑分区 HBM 容量",
+          "unit": "GB",
+          "values": {
+            "mi300x": 192.0,
+            "mi325x": 256.0
+          },
+          "condition": "ROCm 7.2.4型号表分配量，不是所有驱动和虚拟化配置的保证",
+          "source": "ROCm workload optimization 7.2.4, Partitioning；两文章ref-9/ref-8"
+        },
+        {
+          "name": "DPX 每逻辑分区 HBM 容量",
+          "unit": "GB",
+          "values": {
+            "mi300x": 96.0,
+            "mi325x": 128.0
+          },
+          "condition": "ROCm 7.2.4型号表分配量，不是所有驱动和虚拟化配置的保证",
+          "source": "ROCm workload optimization 7.2.4, Partitioning；两文章ref-9/ref-8"
+        },
+        {
+          "name": "QPX 每逻辑分区 HBM 容量",
+          "unit": "GB",
+          "values": {
+            "mi300x": 48.0,
+            "mi325x": 64.0
+          },
+          "condition": "ROCm 7.2.4型号表分配量，不是所有驱动和虚拟化配置的保证",
+          "source": "ROCm workload optimization 7.2.4, Partitioning；两文章ref-9/ref-8"
+        },
+        {
+          "name": "CPX 每逻辑分区 HBM 容量",
+          "unit": "GB",
+          "values": {
+            "mi300x": 24.0,
+            "mi325x": 32.0
+          },
+          "condition": "ROCm 7.2.4型号表分配量，不是所有驱动和虚拟化配置的保证",
+          "source": "ROCm workload optimization 7.2.4, Partitioning；两文章ref-9/ref-8"
+        }
+      ],
+      "derived": {
+        "capacity_compute_increase": 0.33333333333333326,
+        "bandwidth_compute_increase": 0.13207547169811318,
+        "rated_compute_power_change": -0.25
+      },
+      "non_plottable_disclosures": [
+        {
+          "name": "on-package fabric",
+          "value": "4TB/s",
+          "source": "CDNA 3白皮书p.26",
+          "reason": "代际结论未给方向、聚合链路或型号边界，不作为两款SKU可比payload带宽"
+        }
+      ]
+    },
+    {
+      "group": "A12",
+      "products": [
+        "trainium2",
+        "trainium3"
+      ],
+      "comparison_kind": "cross-generation control, not an independent training/inference split",
+      "resources": [
+        {
+          "name": "物理NeuronCore",
+          "unit": "core/chip",
+          "values": {
+            "trainium2": 8,
+            "trainium3": 8
+          },
+          "source": "../产品详解/AWS/AWS_Trainium2_one_chip_产品详解.md#ref-2; ../产品详解/AWS/AWS_Trainium3_one_chip_产品详解.md#ref-2 device overview",
+          "condition": "NCv3→NCv4；不映射为物理die数"
+        },
+        {
+          "name": "BF16/FP16纯Tensor名义合计",
+          "unit": "TFLOPS/chip",
+          "values": {
+            "trainium2": 632,
+            "trainium3": 632
+          },
+          "source": "../产品详解/AWS/AWS_Trainium2_one_chip_产品详解.md#ref-2; ../产品详解/AWS/AWS_Trainium3_one_chip_产品详解.md#ref-2 Tensor Engine",
+          "condition": "8×每核79；每核原值已取整；headline667/671另存"
+        },
+        {
+          "name": "FP8/MXFP8纯Tensor名义合计",
+          "unit": "TFLOPS/chip",
+          "values": {
+            "trainium2": 1264,
+            "trainium3": 2520
+          },
+          "source": "../产品详解/AWS/AWS_Trainium2_one_chip_产品详解.md#ref-2; ../产品详解/AWS/AWS_Trainium3_one_chip_产品详解.md#ref-2 Tensor Engine",
+          "condition": "NCv3 E4/E5 double-row与NCv4 MXFP8格式不同，8×158/315；NCv4 MXFP4输入同速且先转换"
+        },
+        {
+          "name": "单核SBUF",
+          "unit": "MiB/core",
+          "values": {
+            "trainium2": 28,
+            "trainium3": 32
+          },
+          "source": "../产品详解/AWS/AWS_Trainium2_one_chip_产品详解.md#ref-2; ../产品详解/AWS/AWS_Trainium3_one_chip_产品详解.md#ref-2 Compute Engine Updates",
+          "condition": "软件管理局部scratchpad"
+        },
+        {
+          "name": "单核PSUM",
+          "unit": "MiB/core",
+          "values": {
+            "trainium2": 2,
+            "trainium3": 2
+          },
+          "source": "../产品详解/AWS/AWS_Trainium2_one_chip_产品详解.md#ref-2; ../产品详解/AWS/AWS_Trainium3_one_chip_产品详解.md#ref-2 Compute Engine Updates",
+          "condition": "物理容量延续；NCv4新增BF16结果保存"
+        },
+        {
+          "name": "单核Vector FP32",
+          "unit": "TFLOPS/core",
+          "values": {
+            "trainium2": 1.0,
+            "trainium3": 1.2
+          },
+          "source": "../产品详解/AWS/AWS_Trainium2_one_chip_产品详解.md#ref-2; ../产品详解/AWS/AWS_Trainium3_one_chip_产品详解.md#ref-2 Vector Engine",
+          "condition": "原文每核已取整；不和Tensor峰值合为单一可达算子峰值"
+        },
+        {
+          "name": "单核Scalar FP32",
+          "unit": "TFLOPS/core",
+          "values": {
+            "trainium2": 1.2,
+            "trainium3": 1.2
+          },
+          "source": "../产品详解/AWS/AWS_Trainium2_one_chip_产品详解.md#ref-2; ../产品详解/AWS/AWS_Trainium3_one_chip_产品详解.md#ref-2 Scalar Engine",
+          "condition": "原文每核峰值"
+        },
+        {
+          "name": "HBM容量",
+          "unit": "GiB/chip",
+          "values": {
+            "trainium2": 96,
+            "trainium3": 144
+          },
+          "source": "../产品详解/AWS/AWS_Trainium2_one_chip_产品详解.md#ref-1 Memory; ../产品详解/AWS/AWS_Trainium3_one_chip_产品详解.md#ref-1 Device memory",
+          "condition": "芯片页一致GiB标签；不是产品网页GB标签"
+        },
+        {
+          "name": "HBM带宽",
+          "unit": "TB/s/chip",
+          "values": {
+            "trainium2": 2.9,
+            "trainium3": 4.9
+          },
+          "source": "../产品详解/AWS/AWS_Trainium2_one_chip_产品详解.md#ref-1 Memory; ../产品详解/AWS/AWS_Trainium3_one_chip_产品详解.md#ref-1 Device memory",
+          "condition": "统一主值；NKI3/4.7分支保留；方向未充分披露"
+        },
+        {
+          "name": "主DMA数量",
+          "unit": "engine/chip",
+          "values": {
+            "trainium2": 128,
+            "trainium3": 128
+          },
+          "source": "../产品详解/AWS/AWS_Trainium2_one_chip_产品详解.md#ref-2; ../产品详解/AWS/AWS_Trainium3_one_chip_产品详解.md#ref-2 device overview",
+          "condition": "不含GpSimd内集成DMA"
+        },
+        {
+          "name": "DMA带宽",
+          "unit": "TB/s/chip",
+          "values": {
+            "trainium2": 3.5,
+            "trainium3": 4.9
+          },
+          "source": "../产品详解/AWS/AWS_Trainium2_one_chip_产品详解.md#ref-1 Data movement; ../产品详解/AWS/AWS_Trainium3_one_chip_产品详解.md#ref-1 Data movement",
+          "condition": "官方芯片页原口径，方向未充分披露，不能加到HBM带宽"
+        },
+        {
+          "name": "NeuronLink接口数",
+          "unit": "interface/chip",
+          "values": {
+            "trainium2": 4,
+            "trainium3": 4
+          },
+          "source": "../产品详解/AWS/AWS_Trainium2_one_chip_产品详解.md#ref-2; ../产品详解/AWS/AWS_Trainium3_one_chip_产品详解.md#ref-2 device overview",
+          "condition": "NeuronLink-v3→v4"
+        },
+        {
+          "name": "NeuronLink芯片页聚合带宽",
+          "unit": "TB/s/chip",
+          "values": {
+            "trainium2": 1.28,
+            "trainium3": 2.56
+          },
+          "source": "../产品详解/AWS/AWS_Trainium2_one_chip_产品详解.md#ref-1 Interconnect; ../产品详解/AWS/AWS_Trainium3_one_chip_产品详解.md#ref-1 NeuronLink",
+          "condition": "仅原始芯片页对照，不进入需要已知双向的第一层D图；Trn3系统值冲突保留"
+        }
+      ],
+      "orientation_recommendations": {
+        "trainium2": {
+          "group": "both",
+          "alternative_group": "training",
+          "text": "2024 GA明确为训练与推理共同设计；2023首次预告侧重训练，作为历史敏感性分支。",
+          "source": "[12, opening and David Brown statement]; [13, EC2 UltraClusters of Trainium2]; [5, Why Amazon EC2 Trn2?]",
+          "official_url": "https://press.aboutamazon.com/2024/12/aws-trainium2-instances-now-generally-available"
+        },
+        "trainium3": {
+          "group": "both",
+          "alternative_group": "training",
+          "text": "GA正文和当前产品页共同强调训练与serving；2024预告训练芯片称谓仅作历史敏感性分支。",
+          "source": "[6, opening and training and serving paragraph]; [5, Why Amazon EC2 Trn3 UltraServers?]",
+          "historical_url": "https://press.aboutamazon.com/2024/12/aws-trainium2-instances-now-generally-available",
+          "historical_section": "Trainium3 chips—designed for the high-performance needs of the next frontier of generative AI workloads"
+        }
+      },
+      "preserve_conflicts": [
+        "HBM GB/GiB labels",
+        "Trainium2 HBM2.9/3TB/s",
+        "Trainium3 HBM4.9/4.7TB/s",
+        "CC-Core16/20",
+        "NeuronLink chip/system scopes and direction"
+      ],
+      "ratio_examples": {
+        "b_over_p16_increase": 0.6896551724137931,
+        "b_over_fp8_change_with_format_difference": -0.1524904214559386,
+        "sbuf_increase": 0.1428571428571428
+      },
+      "product_ids": [
+        "trainium2",
+        "trainium3"
+      ]
+    }
+  ],
+  "charts": [
+    {
+      "group": "A01",
+      "name": "家族01_TPU8资源变化",
+      "title": "TPU 8i 相对 8t：局部存储增加最明显",
+      "baseline": "tpu8t",
+      "products": [
+        "tpu8i"
+      ],
+      "resources": [
+        {
+          "name": "Vmem 容量",
+          "unit": "MB",
+          "values": {
+            "tpu8t": 128,
+            "tpu8i": 384
+          },
+          "source": "../产品详解/Google-TPU/Google_TPU_8t_one_chip_产品详解.md#ref-1 / On-Chip SRAM (Vmem)",
+          "condition": "产品技术表整芯片容量，8i 两局部区域之和不等于统一共享空间。"
+        },
+        {
+          "name": "HBM 容量",
+          "unit": "GB",
+          "values": {
+            "tpu8t": 216,
+            "tpu8i": 288
+          },
+          "source": "../产品详解/Google-TPU/Google_TPU_8t_one_chip_产品详解.md#ref-1 / HBM Capacity",
+          "condition": "同表整芯片 HBM3E 容量；保留原文单位。"
+        },
+        {
+          "name": "HBM 带宽",
+          "unit": "GB/s",
+          "values": {
+            "tpu8t": 6528,
+            "tpu8i": 8601
+          },
+          "source": "../产品详解/Google-TPU/Google_TPU_8t_one_chip_产品详解.md#ref-1 / HBM Bandwidth",
+          "condition": "同表公布峰值；读写方向、持续有效负载未披露。"
+        },
+        {
+          "name": "FP4 公布峰值（标签冲突）",
+          "unit": "PFLOPS",
+          "values": {
+            "tpu8t": 12.6,
+            "tpu8i": 10.1
+          },
+          "source": "../产品详解/Google-TPU/Google_TPU_8t_one_chip_产品详解.md#ref-1 / Peak FP4 PFLOPs",
+          "condition": "条件项：使用同篇技术文章 FP4 表头；8i 发布图另标 FP8，累加、稀疏与功耗点未完整公开。"
+        },
+        {
+          "name": "ICI 双向端点带宽",
+          "unit": "GB/s",
+          "values": {
+            "tpu8t": 2400,
+            "tpu8i": 2400
+          },
+          "source": "../产品详解/Google-TPU/Google_TPU_8t_one_chip_产品详解.md#ref-2；../产品详解/Google-TPU/Google_TPU_8i_one_chip_产品详解.md#ref-2 / Bidirectional scale-up bandwidth",
+          "condition": "两张官方图均给 19.2 Tb/s per chip，除以 8；与系统网络规模和拓扑分开。"
+        }
+      ],
+      "note": "整芯片产品表；Vmem 非统一共享 cache。FP4 保留来源标签冲突；带宽均为标称值。"
+    },
+    {
+      "group": "A06",
+      "name": "家族02_MI350资源变化",
+      "title": "MI350 家族：规模减半与功率档位调整",
+      "baseline": "mi350x",
+      "products": [
+        "mi350p",
+        "mi355x"
+      ],
+      "resources": [
+        {
+          "name": "使能 CU",
+          "unit": "count",
+          "values": {
+            "mi350p": 128,
+            "mi350x": 256,
+            "mi355x": 256
+          },
+          "source": {
+            "mi350p": "../产品详解/AMD/MI350P.md#ref-2; brochure pp.1-2",
+            "mi350x": "../产品详解/AMD/MI350X.md#ref-2; brochure pp.1-2",
+            "mi355x": "../产品详解/AMD/MI355X.md#ref-2; brochure pp.1-2"
+          },
+          "condition": "",
+          "derived": false
+        },
+        {
+          "name": "16 位矩阵峰值",
+          "unit": "TFLOP/s",
+          "values": {
+            "mi350x": 2300,
+            "mi350p": 1150,
+            "mi355x": 2516.6
+          },
+          "sources": {
+            "mi350x": "[1, GPU Specifications]",
+            "mi350p": "[1, GPU Specifications]",
+            "mi355x": "[2, p.1, AI / HPC Peak Theoretical Performance]"
+          },
+          "condition": "使用 panorama36.json 中同一 SKU 的选定值；功率为各自模组或板卡边界的上限。"
+        },
+        {
+          "name": "最高引擎时钟",
+          "unit": "GHz",
+          "values": {
+            "mi350p": 2.2,
+            "mi350x": 2.2,
+            "mi355x": 2.4
+          },
+          "source": {
+            "mi350p": "../产品详解/AMD/MI350P.md#ref-2; brochure pp.1-2",
+            "mi350x": "../产品详解/AMD/MI350X.md#ref-2; brochure pp.1-2",
+            "mi355x": "../产品详解/AMD/MI355X.md#ref-2; brochure pp.1-2"
+          },
+          "condition": "并非保证持续频率，也未被确认为 L2/cache 时钟",
+          "derived": false
+        },
+        {
+          "name": "每 CU LDS",
+          "unit": "KB",
+          "values": {
+            "mi350p": 160,
+            "mi350x": 160,
+            "mi355x": 160
+          },
+          "source": "../产品详解/AMD/MI350X.md#ref-3; CDNA 4 whitepaper pp.5,8-9,18-19",
+          "condition": "软件管理、分布式局部空间，原文 KB",
+          "derived": false
+        },
+        {
+          "name": "HBM 容量",
+          "unit": "GB",
+          "values": {
+            "mi350x": 288,
+            "mi350p": 144,
+            "mi355x": 288
+          },
+          "sources": {
+            "mi350x": "[1, GPU Memory]; [2, p.1, Specifications]",
+            "mi350p": "[1, GPU Memory]; [2, p.1, Specifications]",
+            "mi355x": "[1, GPU Memory]; [2, p.1, Specifications]"
+          },
+          "condition": "使用 panorama36.json 中同一 SKU 的选定值；功率为各自模组或板卡边界的上限。"
+        },
+        {
+          "name": "HBM 带宽",
+          "unit": "TB/s",
+          "values": {
+            "mi350x": 8,
+            "mi350p": 4,
+            "mi355x": 8
+          },
+          "sources": {
+            "mi350x": "[1, GPU Memory]; [2, p.1, Specifications]",
+            "mi350p": "[1, GPU Memory]; [2, p.1, Specifications]",
+            "mi355x": "[1, GPU Memory]; [2, p.1, Specifications]"
+          },
+          "condition": "使用 panorama36.json 中同一 SKU 的选定值；功率为各自模组或板卡边界的上限。"
+        },
+        {
+          "name": "功率上限",
+          "unit": "W",
+          "values": {
+            "mi350x": 1000,
+            "mi350p": 600,
+            "mi355x": 1400
+          },
+          "sources": {
+            "mi350x": "[1, Requirements / Board Specifications]; [2, p.1]",
+            "mi350p": "[1, Board Specifications]; [2, p.1, Specifications]",
+            "mi355x": "[1, Requirements / Board Specifications]; [2, p.1]"
+          },
+          "condition": "使用 panorama36.json 中同一 SKU 的选定值；功率为各自模组或板卡边界的上限。"
+        }
+      ],
+      "note": "MI350X 选网页 2,300；MI355X 选简报 2,516.6 TFLOP/s。P 为 PCIe 卡，X 为 OAM 模组。"
+    },
+    {
+      "group": "A07",
+      "name": "家族03_H200资源变化",
+      "title": "H200 NVL 相对 SXM：内存容量相同，计算峰值较低",
+      "baseline": "h200_sxm5",
+      "products": [
+        "h200_nvl"
+      ],
+      "resources": [
+        {
+          "name": "16 位矩阵峰值",
+          "unit": "TFLOP/s",
+          "values": {
+            "h200_sxm5": 989.5,
+            "h200_nvl": 835.5
+          },
+          "sources": {
+            "h200_sxm5": "[1, p.4, Technical Specifications, notes 1-2]; 稀疏倍数 [3, pp.11,21]; FP16/BF16 2:4 [28, §9.7.17.6.1]",
+            "h200_nvl": "[3, GPU specifications, note 2]; 稀疏倍数 [2, pp.11,21]; FP16/BF16 2:4 [28, §9.7.17.6.1]"
+          },
+          "condition": "使用 panorama36.json 中同一 SKU 的选定值；功率为各自模组或板卡边界的上限。"
+        },
+        {
+          "name": "HBM 容量",
+          "unit": "GB",
+          "values": {
+            "h200_sxm5": 141,
+            "h200_nvl": 141
+          },
+          "sources": {
+            "h200_sxm5": "[1, pp.1,4]; [2, p.4]",
+            "h200_nvl": "[1, p.4, Table 2-2]; [3, GPU specifications]"
+          },
+          "condition": "使用 panorama36.json 中同一 SKU 的选定值；功率为各自模组或板卡边界的上限。"
+        },
+        {
+          "name": "HBM 带宽",
+          "unit": "TB/s",
+          "values": {
+            "h200_sxm5": 4.8,
+            "h200_nvl": 4.813
+          },
+          "sources": {
+            "h200_sxm5": "[1, pp.1,4]; [2, p.4]",
+            "h200_nvl": "[1, p.4, Table 2-2]; [3, GPU specifications]"
+          },
+          "condition": "使用 panorama36.json 中同一 SKU 的选定值；功率为各自模组或板卡边界的上限。"
+        },
+        {
+          "name": "NVLink 收发合计",
+          "unit": "GB/s",
+          "values": {
+            "h200_sxm5": 900,
+            "h200_nvl": 900
+          },
+          "sources": {
+            "h200_sxm5": "[2, p.4]; [1, p.4]",
+            "h200_nvl": "[1, pp.1,9, Table 4-1]"
+          },
+          "condition": "相同标称端点预算不表示相同连接域或拓扑。"
+        },
+        {
+          "name": "功率上限",
+          "unit": "W",
+          "values": {
+            "h200_sxm5": 700,
+            "h200_nvl": 600
+          },
+          "sources": {
+            "h200_sxm5": "[1, p.4]",
+            "h200_nvl": "[1, pp.3-8]"
+          },
+          "condition": "使用 panorama36.json 中同一 SKU 的选定值；功率为各自模组或板卡边界的上限。"
+        }
+      ],
+      "note": "NVL 4.813 与 SXM 4.8 TB/s 按各简报保留；1.003× 不解读为已测得的带宽优势。"
+    }
+  ]
+}

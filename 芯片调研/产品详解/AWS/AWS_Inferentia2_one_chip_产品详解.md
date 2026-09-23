@@ -24,7 +24,8 @@ DMA 在 HBM 与 SBUF 之间搬运数据，TensorEngine 计算的结果进入 PSU
 
 | 所在位置 | 单颗 Inferentia2 的规格 | 条件 |
 |---|---|---|
-| Tensor 计算路径 | 190 TFLOPS（每秒万亿次浮点运算） FP16/BF16/cFP8/TF32；47.5 TFLOPS FP32；380 TOPS（每秒万亿次运算） INT8 | 官方 per-chip 峰值，未声明结构化稀疏倍增 [1, Compute] |
+| 官方芯片宣传峰值 | 190 TFLOPS FP16/BF16/cFP8/TF32；47.5 TFLOPS FP32；380 TOPS（每秒万亿次运算）INT8 | 芯片表的 per-chip 指标，未解释各执行路径的计数构成；未声明结构化稀疏倍增 [1, Compute] |
+| 纯 Tensor 派生峰值 | 184 TFLOPS BF16/FP16/TF32/cFP8；46 TFLOPS FP32 | 两个 NCv2×每核 92／23；普通矩阵路径资源加总，保留原报取整条件，不以此纠正上一行 [2, device overview and Tensor Engine: Data Types；本行计算] |
 | HBM | 2 stack；技术页 32 GiB、产品页 32 GB | 所引资料未给出 HBM 代际与 stack 高度 [1, Device Memory] [2, device overview] [5, high-bandwidth accelerator memory] |
 | HBM 带宽 | 技术页 820 GiB/s；NKI 指南 820 GB/s | 官方单位冲突，不能静默统一 [1, Device Memory] [2, device overview] |
 | 每核局部 SRAM | SBUF 24 MiB + PSUM 2 MiB | 两核独立局部空间，软件管理 [2, memory hierarchy] |
@@ -40,7 +41,7 @@ NKI 矩阵指令把两个输入分别称为 stationary 和 moving：先用 LoadS
 | ScalarEngine | 输入/输出各 128 elements/cycle；1.4 GHz | 2.9 TFLOPS FP32 [2, engine width/frequency table] [3, ScalarEngine] |
 | GpSimd | 输入/输出各 128 elements/cycle；1.4 GHz；8 个 512-bit processor | 每 processor 支持 16 路 FP32/INT32/UINT32、32 路 FP16/INT16/UINT16，或 64 路 INT8/UINT8；没有可直接比较的统一 FLOPS [2, engine width/frequency table and GpSimd Engine: Data Types] |
 
-通路的 elements/cycle 表示搬入、搬出的元素数，TFLOPS 表示执行算术的操作数，不能相互替代。两个核心的 Vector 与 Scalar 峰值若仅做资源加总，分别是 4.6 与 5.8 TFLOPS FP32；这是按每核值乘核心数的计算，不是独立公布的芯片实测。矩阵每核值乘核心数也不能精确复现芯片页的 190/47.5 TFLOPS，因此全文分别保留 core 和 chip 两种官方口径。[1, Compute] [2, Tensor Engine: Data Types] [3, VectorEngine and ScalarEngine；本段资源加总计算]
+通路的 elements/cycle 表示搬入、搬出的元素数，TFLOPS 表示执行算术的操作数，不能相互替代。两个核心的 Vector 与 Scalar 峰值若仅做资源加总，分别是 4.6 与 5.8 TFLOPS FP32；这是按每核值乘核心数的计算，不是独立公布的芯片实测。两个核心的纯 Tensor 资源加总为 184 TFLOPS BF16/FP16/TF32/cFP8、46 TFLOPS FP32；该派生值采用 NKI 的每核取整数，供同路径矩阵比较。它不能精确复现芯片页的 190/47.5 TFLOPS，官方没有解释计数差别，因此两类数值分别保留。[1, Compute] [2, Tensor Engine: Data Types] [3, VectorEngine and ScalarEngine；本段资源加总计算]
 
 矩阵流水线的启动间隔也有明确约束：在复用已经加载的 stationary、连续发送 BF16/FP16/TF32/cFP8 MultiplyMoving 的条件下，指南给出的近似间隔为 `max(N, 64)` 个 TensorEngine 周期，FP32 成本约为其四倍。这里的 64 周期是启动间隔模型中的下限，并非整个矩阵操作的完成延迟。background LoadStationary 可将下一块权重的载入与当前计算重叠。[2, Tensor Engine: Performance Consideration]
 

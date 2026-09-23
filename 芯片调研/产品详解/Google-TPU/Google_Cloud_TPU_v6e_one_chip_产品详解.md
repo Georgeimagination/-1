@@ -1,6 +1,6 @@
 # Google Cloud TPU v6e（Trillium）：更大的矩阵阵列与独立稀疏路径
 
-Trillium 是 Google 的第六代 TPU，在 Cloud 产品中称为 v6e，面向训练与推理。它仍以一个 TensorCore（TPU 的矩阵、向量与标量计算核心）为计算主体，但矩阵阵列扩大，并搭配第三代 SparseCore 处理不规则数据。[1, System architecture] [5, opening]
+Trillium 是 Google 的第六代 TPU，在 Cloud 产品中称为 v6e，面向训练与推理。Google 设计团队的跨代论文将其设计侧重概括为 inference；这一侧重与 Cloud 覆盖的两类用途分别记录。[24, p.1, footnote 2] 它仍以一个 TensorCore（TPU 的矩阵、向量与标量计算核心）为计算主体，但矩阵阵列扩大，并搭配第三代 SparseCore 处理不规则数据。[1, System architecture] [5, opening]
 
 ![TPU v6e 架构示意](Google_Cloud_TPU_v6e_one_chip_产品详解-架构.png)
 
@@ -87,3 +87,5 @@ Google 发布文章提到提高时钟，但没有公布明确频率。生命周�
 [22] The JAX Authors，*Pallas: TPU Details*，获取于 2026-09-17。[官方文档](https://docs.jax.dev/en/latest/pallas/tpu/details.html)；[官方仓库原文](https://github.com/jax-ml/jax/blob/main/docs/pallas/tpu/details.rst)。 [本地原文快照](../../原始资料/网页快照/Google/JAX/2026-09-17/jax-details.rst)
 
 [23] The JAX Authors，*SparseCore Kernel Writing*，获取于 2026-09-17。[官方文档](https://docs.jax.dev/en/latest/pallas/tpu/sparsecore.html)；[官方仓库原文](https://github.com/jax-ml/jax/blob/main/docs/pallas/tpu/sparsecore.md)。 [本地原文快照](../../原始资料/网页快照/Google/JAX/2026-09-17/jax-sparsecore.md)
+
+[24] Norman P. Jouppi 等，*Google's Training Supercomputers from TPU v2 to Ironwood*，2026。p.1 注 2 说明 Trillium 的设计取向。[本地PDF](../../原始资料/论文/Google_TPU/01_厂商直接架构论文/2026_TPUv2_to_Ironwood_Five_Generations.pdf)

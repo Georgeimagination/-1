@@ -2,7 +2,7 @@
 
 > 模板版本：1.3（芯片架构事实口径）  
 > 卡片状态：已完成  
-> 资料截止日：2026-08-24
+> 资料截止日：2026-09-23
 
 本卡的主语是一张 NVIDIA L40S 48GB PCIe 加速卡，即 PG133 SKU 242。Ada Lovelace 与 AD102 用来解释该 SKU；L40 300W、OVX 服务器和多卡聚合规格不属于本卡。
 
@@ -29,7 +29,7 @@
 | 层级 | 本 SKU 对应对象 | 是否与其他 SKU 共享 | 本卡怎么使用 | 来源 |
 |---|---|---|---|---|
 | Core IP | Ada SM、第四代 Tensor Core、第三代 RT Core | 与其他 AD10x SKU 共享 | 复用 [Ada Lovelace 架构资料](../架构/NVIDIA_Ada_Lovelace_架构.md)，本卡补 L40S 实际总数 | `[3, pp. 8-12]` |
-| die / chiplet | AD102 单 GPU die | 与 L40 等产品共享设计 | 满配 144 SM 与 L40S 实际 142 SM 分开；142 SM/71 TPC 由 SKU 总数与 Ada 每 SM/TPC 关系交叉得到 | `[3, pp. 7-8]` `[2, GPU Specifications]` `[5, Ada Lovelace]` |
+| die / chiplet | AD102 单 GPU die | 与 L40 等产品共享设计 | 满配 144 SM 与 L40S 实际 142 SM 分开；142 SM 由 SKU 总数与 Ada 每 SM 资源关系交叉得到。满配每 TPC 含 2 个 SM，但本卡 TPC 使能数未直接披露，不能据此确认 71 TPC | `[3, pp. 7-8]` `[2, GPU Specifications]` `[5, Ada Lovelace]` |
 | package | 一个 AD102 GPU 与板上 48GB GDDR6 ECC | 本 SKU 的显存与板卡配置 | package、基板和 die-to-memory 物理结构未公开 | `[1, pp. 1-3]` |
 | 产品 SKU | NVIDIA L40S 48GB，PG133 SKU 242 | 不适用 | 正式比较单位 | `[1, p. 2, Table 1]` |
 | 相关系统 | OVX 与 partner data-center/edge systems | 多种服务器配置 | 只保留本卡没有 NVLink 的设备边界 | `[1, p. 1]` `[4, Availability]` |
@@ -39,10 +39,16 @@
 | 维度 | 公开事实 | 作用域与条件 | 来源 |
 |---|---|---|---|
 | 矩阵、向量、标量与控制路径 | 每个 Ada SM 有 128 CUDA Core、1 第三代 RT Core、4 第四代 Tensor Core、4 Texture Unit、256KB register file 和 128KB L1/shared memory；SM 分四个 processing block | 每个 block 有 warp scheduler、dispatch、FP32/INT32 路径、Tensor Core、LD/ST 与 SFU | `[3, pp. 8-11, Figures 2, 5]` |
-| 执行模型与调度 | Ada SM 使用 warp/SIMT 组织；每个处理分区包含独立 warp scheduler 与 dispatch unit | L40S 资料没有另给线程或 warp 上限 | `[3, pp. 8, 10-11]` |
+| 执行模型与调度 | Ada SM 沿用 warp/SIMT 组织；每个处理分区含 warp scheduler 与 dispatch；每 SM 最多驻留 48 个 warp、24 个 thread block，64K 个 32-bit 寄存器由驻留线程共享，单线程最多使用 255 个寄存器 | Ada compute capability 8.9 的共同上限；寄存器、shared memory 和 block 大小共同限制实际 occupancy，不能把各项上限视为必然同时达到 | `[3, pp. 8, 10-11]` `[6, §1.4.1.1, Occupancy]` |
 | 局部存储与数据搬运 | 每 SM 有 256KB register file 和 128KB unified L1 data cache/shared memory | L1 与 shared memory 共用资源；L40S per-SKU L2 容量未直接公开 | `[3, pp. 8, 12]` |
 | 数值与累加路径 | 第四代 Tensor Core 支持 FP8、FP16、BF16、TF32、INT8 与 INT4；Transformer Engine 可在 FP8/FP16 间重铸 | FP8/FP16 可累加到 FP16 或 FP32，BF16 使用 FP32 accumulator | `[3, pp. 24, 27, 30, Table 2]` `[2, Transformer Engine]` |
 | 稀疏与专用单元 | structured sparsity 可把相应 Tensor Core effective throughput 提高 2 倍；第三代 RT Core 含 Opacity Micromap 与 Displaced Micro-Mesh 单元 | dense/sparse 峰值在 SKU 表中分列 | `[3, pp. 9, 30]` `[2, Fourth-Generation Tensor Cores]` |
+
+### 3.1. shared memory 配额与媒体格式
+
+每 SM 的 128KB unified L1/shared memory 中，软件可选择 0、8、16、32、64 或 100KB 的 shared-memory carveout（为软件管理工作区分配的容量）。CUDA 为每个 thread block 保留 1KB，因此单 block 最多寻址 99KB；静态分配上限仍为 48KB，更大的动态分配需要显式 opt-in。GPU 总 SM 数增加不改变这些单 SM、单 block 的限制。`[6, §§1.4.1.1, 1.4.2.2]`
+
+Ada 的 NVENC 为第八代专用编码器，新增 AV1 编码；第五代 NVDEC 支持 MPEG-2、VC-1、H.264、H.265/HEVC、VP8、VP9 和 AV1 解码。引擎数量与 Tensor Core 数量分开统计，不由媒体引擎个数推算未给出 codec、分辨率和帧率条件的视频流数。`[3, pp. 24-25, NVIDIA Broadcast/Video]`
 
 ## 4. Die、chiplet 与 package
 
@@ -61,7 +67,7 @@
 
 | 字段 | 原始值 | 条件和口径 | 来源 |
 |---|---:|---|---|
-| 实际使能计算资源 | 18,176 CUDA Core、568 第四代 Tensor Core、142 第三代 RT Core；由每 SM 128 CUDA/4 Tensor/1 RT 得到 142 SM，由每 TPC 2 SM 得到 71 TPC；GPC 数未由 L40S 资料直接公开；3 NVENC、3 NVDEC | Core 总数与 media engine 为当前 L40S 页直接值；SM/TPC 是官方数值间的精确推导 | `[2, NVIDIA L40S GPU Specifications]` `[3, pp. 7-8]` |
+| 实际使能计算资源 | 18,176 CUDA Core、568 第四代 Tensor Core、142 第三代 RT Core；由每 SM 128 CUDA/4 Tensor/1 RT 得到 142 SM；GPC 与 TPC 实际使能数未由 L40S 资料直接公开；3 NVENC、3 NVDEC | Core 总数与 media engine 为当前 L40S 页直接值；SM 是官方数值间的精确推导，TPC 不从 142÷2 推定 | `[2, NVIDIA L40S GPU Specifications]` `[3, pp. 7-8]` |
 | 时钟 | base 1,065MHz；boost 2,520MHz | PG133 SKU 242；页面注明峰值按 boost clock | `[1, p. 2, Table 1]` `[2, Highlights note]` |
 | 理论峰值 | FP32 91.6TFLOPS；TF32 Tensor 183/366TFLOPS；BF16/FP16 Tensor 官方网页列 362.05/733TFLOPS（dense 项待核）；FP8 Tensor 733/1,466TFLOPS；INT8 Tensor 733/1,466TOPS；INT4 Tensor 733/1,466TOPS；RT Core 212TFLOPS | 斜杠前为 dense，后为 with sparsity；FP16/BF16 的 362.05×2=724.1，与所列 733 不自洽。该 dense 值和 INT4 原值均不可当作无争议比较数据 | `[2, NVIDIA L40S GPU Specifications and note]` |
 | 内存类型与容量 | 48GB GDDR6 ECC；9,001MHz；384-bit bus | 单卡 | `[1, pp. 3-4, Tables 2-3]` |
@@ -72,6 +78,14 @@
 | 跨设备集合通信能力 | 未找到 | 无卡内 collective engine；软件通信库不写成硬件属性 | `[1, pp. 1-8]` |
 | 功耗 | 350W default/maximum total board power；minimum 为 TBD | 一个 PCIe 16-pin auxiliary connector；低于支持的 power-sense 档位时卡不会启动 | `[1, pp. 2, 11-13, Tables 1, 7-8]` |
 | 形态与散热 | 4.4-inch × 10.5-inch、dual-slot FHFL PCIe 卡；passive bidirectional heatsink；4 个 DisplayPort 1.4a | 依赖服务器气流，支持左右两种 airflow | `[1, pp. 1-2, 5, 10-11]` `[2, GPU Specifications]` |
+
+### 5.1. 显示、虚拟化模式与可编程功耗
+
+L40S 默认使用 Display Off 模式，此时物理功能 PF 的 BAR1 为 64GiB，支持 32 个 SR-IOV 虚拟功能 VF，运行 NVIDIA vGPU 软件要求采用此模式。两种 Display On 模式分别为 8GiB BAR1 的 scalable visualization 配置和 256MiB BAR1 的 professional desktop 配置，均可驱动最多四个 DisplayPort 显示器；这些显示模式不适用 VF BAR 配置。切换模式后需重启系统。BAR1 是 PCIe 地址窗口，不能把其大小写成 GPU 显存容量或硬件隔离配额。`[1, pp. 3, 7-8, Tables 3 and 5; Switching Operating Modes]`
+
+跨卡画面同步及 frame lock 通过外加 Quadro Sync II 板实现，不是 L40S 内置的 GPU-to-GPU 计算互联。`[1, pp. 8-9, Display On Modes and Frame Lock]`
+
+板卡允许配置 power cap（功耗上限）以适配服务器供电、散热或性能/功耗目标。通过 `nvidia-smi` 设置的上限需要在重新加载驱动后重新设置；通过 SMBPBI 带外通道设置的上限可配置为跨驱动重载及系统启动保持。产品简报给出的 150W 命令只是操作示例，Table 1 的最低可配置功耗仍为 TBD；也不能把 350W 标称最大板级功耗当作所有负载的实测功耗。`[1, p. 2, Table 1; pp. 9-10, Programmable Power]`
 
 ## 6. 系统级互联上下文
 
@@ -88,7 +102,7 @@ L40S 没有 NVLink，普通多卡服务器不形成由本 SKU 专用端点定义
 
 | 项目 | 状态 | 已检查范围或冲突来源 | 当前处理 |
 |---|---|---|---|
-| L40S GPC/L2 与完整使能表 | 未直接公开 | 当前 L40S 页、Product Brief、Ada whitepaper | 只写直接资源总数与可严格推导的 SM/TPC；不把 L40 的 12 GPC/98,304KB L2冒充 L40S 原表值 |
+| L40S GPC/TPC/L2 与完整使能表 | 未直接公开 | 当前 L40S 页、Product Brief、Ada whitepaper | 只写直接资源总数与可严格推导的 SM；满配每 TPC 2 SM 不能证明实际恰为 71 TPC；不把 L40 的 12 GPC/98,304KB L2 冒充 L40S 原表值 |
 | RT Core 峰值 | 版本差异 | 2023 L40S datasheet 为 209TFLOPS，当前产品页与发布公告为 212TFLOPS | 采用当前 212，并保留旧值差异，不猜测原因 |
 | L40 与 L40S 功耗 | 对象差异 | Ada whitepaper Appendix C 主语是 L40，300W；L40S Product Brief 为 350W | 本卡采用 L40S 350W，不混用 L40 300W |
 | minimum board power | 未公开 | Product Brief Table 1 为 TBD；可编程功耗章节的 150W 只是命令示例 | 保留 TBD，不把示例值写成下限 |
@@ -106,6 +120,7 @@ L40S 没有 NVLink，普通多卡服务器不形成由本 SKU 专用端点定义
 | `[3]` | NVIDIA，*NVIDIA Ada GPU Architecture*，v2.02，2022 | 官方架构白皮书 | Ada SM、满配 AD102、数值路径、cache、工艺与相邻 L40 边界 | [本地 PDF](../../../原始资料/论文/NVIDIA_GPU/90_官方白皮书与技术资料/2022_NVIDIA_Ada_Architecture_Whitepaper.pdf) |
 | `[4]` | NVIDIA，*NVIDIA, Global Data Center System Manufacturers to Supercharge Generative AI and Industrial Digitalization*，2023-08-08 | 官方发布公告 | L40S 发布、计划供货口径、资源与服务器边界 | <https://nvidianews.nvidia.com/news/nvidia-global-data-center-system-manufacturers-to-supercharge-generative-ai-and-industrial-digitalization> |
 | `[5]` | NVIDIA，*Hardware Setup and Requirements: NVIDIA Omniverse NuRec*，更新于 2026-06-24 | 官方硬件文档 | L20/L40/L40S 与 AD102 codename 映射 | <https://docs.nvidia.com/nurec/basics/hardware.html> |
+| `[6]` | NVIDIA，*Ada Tuning Guide*，13.4，网页标注更新于 2026-09-13 | 官方 CUDA 架构调优指南 | Ada 8.9 的驻留上限、寄存器配额与 shared-memory carveout、单 block 保留容量和显式 opt-in 条件 | [本地快照](../../../原始资料/网页快照/NVIDIA/产品详解补充/2026-09-17/ref-1b87ffef1f91-index.html)，[原文](https://docs.nvidia.com/cuda/ada-tuning-guide/index.html) |
 
 ## 9. 完成检查
 

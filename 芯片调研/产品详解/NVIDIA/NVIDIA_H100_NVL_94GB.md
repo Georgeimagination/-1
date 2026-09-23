@@ -79,13 +79,23 @@ Thread Block Cluster 把多个 block 同时安排在一个 GPC 内；DSM（Distr
 
 PCIe Gen5 x16 负责主机连接，支持 Gen5 x8 或 Gen4 x16 协商。Gen5 x16 的每方向规格为 64 GB/s，双向合计 128 GB/s。另一组接口是卡顶端的三个 NVLink bridge connector：连接一张相邻 H100 NVL 时，必须把三块 bridge 全部装上，最大双向带宽为 600 GB/s。[1, pp.3,7,9-10；3, pp.49-50]
 
+PF（物理功能）的 BAR2 地址窗口为 128 GiB，VF（虚拟功能）的 BAR1 总窗口为 128 GiB、每 VF 4 GiB。BAR（基址寄存器）规定 PCIe 设备的地址映射窗口，这些数值不等于物理 HBM 容量或 PCIe 带宽；GiB 使用二进制计量。[1, p.4, Table 3]
+
+H100 还支持 32-bit 与 64-bit 的原生 PCIe atomic CAS（比较并交换）、exchange 和 fetch-add，用于 CPU/GPU 之间的同步；SR-IOV 的 PF（物理功能）或 VF（虚拟功能）可经 NVLink 访问 peer GPU。原子事务能力与缓存一致性是不同的接口语义。[3, p.50, PCIe Gen 5]
+
 两张卡仍各有自己的 GPU 和 94 GB HBM。产品简报定义了点到点数据传输，却没有声明桥接后自动获得一个统一的 188 GB 内存池。模型如何跨两张卡分配参数、如何交换中间结果，仍由软件安排。所引单卡资料也未列独立的集合通信引擎。[1, pp.9-11]
 
 本卡支持 MIG（Multi-Instance GPU，多实例 GPU），最多划分 7 个独立的计算、缓存和显存实例；SR-IOV（单根 I/O 虚拟化）另支持 32 个 VF（虚拟功能），与 MIG 实例数含义不同。[1, pp.3-4,8]
 
+2024 数据手册列出最多 7 个 12 GB MIG 实例；94 GB 物理容量不能直接平均分配成实例规格。[2, p.2, Technical Specifications]
+
+MIG 为各实例划定独占的 crossbar 端口、L2 bank、内存控制器和 DRAM 地址总线，因而实例之间的隔离不仅涉及计算调度。Hopper 还允许每个 MIG 实例获得至少一个 NVDEC 与一个 NVJPG，并提供独立性能监视器，支持多个实例同时 profiling（性能剖析）。这些是资源分配机制；完整 GPU 的缓存容量、带宽和媒体吞吐不能直接当作单个实例的规格。[3, pp.43-44, H100 MIG Enhancements]
+
 ## 供电、散热与可靠性
 
 H100 NVL 为全高全长、10.5 英寸、双槽卡，带双向被动散热器，需要服务器风道。450 W／600 W 线缆模式下，默认和最大板卡功耗为 400 W，最低为 200 W；300 W 模式下，默认和最大限制为 310 W。数据手册的可配置 350 至 400 W 是概括描述，装机时还要满足产品简报的具体供电条件。[1, pp.1,3,6,12-15；2, p.2]
+
+功率上限还受设置保持方式影响。简报规定，nvidia-smi 的带内设置需在驱动重新加载后恢复，SMBPBI（SMBus Post-Box Interface，带外管理接口）可以让设置跨驱动加载和系统启动保持。官方在这里给出了配置行为，没有给降功率后的频率或模型吞吐曲线。[1, pp.8-9, Programmable Power]
 
 HBM 配置启用 ECC，Hopper 架构对 HBM、L2、L1 与寄存器提供单比特纠错、双比特检错保护。该型号在 2023 年 3 月的推理平台发布中公布。实际使能核心数、L2 容量、HBM stack 数以及封装基板仍未由所引型号资料确认。[1, p.5；3, p.38；4, H100 NVL]
 

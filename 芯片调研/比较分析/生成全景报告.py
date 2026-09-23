@@ -1,4 +1,4 @@
-"""Assemble the human-readable first-layer report from reviewed plot records.
+"""Assemble the human-readable two-layer report from reviewed plot records.
 
 This uses existing product articles as citation namespaces. It is a report
 builder, not a replacement for the product cards or their original sources.
@@ -8,7 +8,11 @@ import json, re, html
 R=Path(__file__).resolve().parent
 D=json.loads((R/'panorama36.json').read_text());M=D['products']
 S=json.loads((R/'panorama-stats.json').read_text())
-pos={'training':'训练定位','inference':'推理定位','both':'训推均有资料','unclear':'未明确'}
+from collections import Counter
+FC={f:Counter(r['formats'][f]['state'] for r in M) for f in ('BF16','FP8','FP4')}
+pos={'training':'偏训练','inference':'偏推理','both':'训推兼顾','unclear':'未明确'}
+support_pos={'training':'训练有资料','inference':'推理有资料','both':'训推均有资料','unclear':'未明确'}
+from comparison_analysis import supplemental_report, robustness_report
 state={'yes':'支持','conditional':'有条件执行','unknown':'未确认','conflict':'有分歧','no':'无原生支持'}
 power_scope={'board_max':'板卡上限','module_max':'模组上限','chip_tdp':'芯片 TDP','unknown':'口径未确定'}
 basis_text={'dense':'原文明确 dense','derived_dense':'依据明确条件换算 dense','condition_unspecified':'条件尚未完全对齐','excluded':'不纳入配比图'}
@@ -46,40 +50,40 @@ def alternatives(r,items):
 parts=[]
 def add(s):parts.append(s.strip()+'\n')
 
-add(f'''# 训练与推理芯片：全产品比较
+add(f'''# 训练与推理芯片：全产品分布与家族内比较
 
-第一层 · 7 家厂商、36 个产品 · 2026 年 9 月 20 日
+两层比较 · 7 家厂商、36 个产品、12 个产品组 · 2026 年 9 月 23 日
 
 这份报告比较现有清单中产品的数值格式、计算规模、存储供给、设备互联与部署条件。产品按照具体 SKU（硬件配置明确的型号）或官方单芯片配置计数；服务器、机架和集群只用于解释接口与部署边界。范围限于现有 36 个对象，尚不能代表整个市场。
 
 全部产品进入格式矩阵、产品总表和逐项证据；每张定量图使用条件足够明确的子集。当前有 {S['dram_capacity']} 个产品可列外部主存容量、{S['dram_bandwidth']} 个可列带宽，{S['paired16']} 个能将 16 位峰值与主存配置配对。其中 {S['strict_matrix_dense']} 个采用明确的矩阵 dense 值或有依据的换算，另 {S['conditional_pairs']} 个仍有计算路径或稠密条件未完全对齐。dense 指未利用结构化稀疏跳过运算。
 
-现有清单中，数值格式和主存类型在不同定位的产品之间广泛交叉；相近计算规模的产品，其容量、带宽与互联供给也不总是同比增加。本层呈现这些资源分布，产品间的具体设计原因留给第二层对照。规格差异仍需结合负载和实测，才能解释实际性能或能效差异。
+现有数据尚不支持用单一存算比区分训练与推理产品。数值格式和主存类型在不同定位的产品之间广泛交叉；相近计算规模的产品，其容量、带宽与互联供给也不总是同比增加。第一层呈现资源分布，第二层结合 12 个产品组的官方资料说明哪些差异来自共同核心下的配置调整，哪些涉及机制改变。规格差异仍需结合负载和实测，才能解释实际性能或能效差异。
 
 ## 1. 产品范围与读图方法
 
-颜色表示当前官方资料明确覆盖的用途：训练、推理、或两者均有依据。它不表示产品只能用于该任务，也不代表厂商投入比例。支持推理的训练取向产品仍可以归入“训推均有资料”；官方定位的具体表述保存在文末证据中。分类在读取图中数值前确定，不根据带宽、功耗或产品名字推断。
+颜色表示官方主要设计目标：偏训练、偏推理或训推兼顾。官方支持用途在另一列保留，支持另一用途不自动改变主要取向。这是依据官方产品目标的研究分类，不表示用途排他性或厂商投入比例。TPU v5e、Trillium、Ironwood、Trainium2/3、H100 PCIe、H200 NVL 的表述存在交叉，正文另检查采用其他有来源分类时的结果；分类依据保存在文末，不根据带宽、功耗或名称推断。
 
 算力和配比图中的实心点采用明确矩阵 dense 口径，空心点表示整芯片值或条件未展开的厂商值。实心点也没有统一所有累加格式和时钟，它们适合比较公开资源配置，不构成相同精度质量下的性能测试。依据稀疏倍率或核数换算的值在证据中注明计算过程。产品编号在图表与证据条目间保持一致，点击图中数据点可回查证据。
 
 “未确认”表示资料不足；“不适用”表示该层资源并不存在于当前比较对象中；“配置未配对”表示已有数值无法组合为同一产品配置。三者都没有按零处理。重复使用同一底层架构的多个 SKU 是多个产品观察，不能算作多个独立架构证据。
 ''')
-add('| 编号与产品 | 官方资料覆盖用途 | 外部主存 | 产品形态 |\n|---|---|---|---|')
+add('| 编号与产品 | 主要设计取向 | 官方资料覆盖用途 | 外部主存 | 产品形态 |\n|---|---|---|---|---|')
 for r in M:
-    add(f"| {p_link(r)} | {pos[r['position']['group']]} | {cell(memkind(r))} | {cell(form(r))} |")
-add('PCIe 是主机与加速器之间常用的连接接口；SXM、OAM、EAM 是不同的加速器模组形态；SoC 指集成多个功能单元的系统芯片。表中只概括产品形态，封装组成与冷却条件见第 8 节。')
+    add(f"| {p_link(r)} | {pos[r['orientation']['group']]} | {support_pos[r['position']['group']]} | {cell(memkind(r))} | {cell(form(r))} |")
+add('PCIe 是主机与加速器之间常用的连接接口；SXM、OAM、EAM 是不同的加速器模组形态；SoC 指集成多个功能单元的系统芯片。表中只概括产品形态，封装组成与冷却条件见第 10 节。')
 
-add('''## 2. 数值格式与计算规模
+add(f'''## 2. 数值格式与计算规模
 
 FP64、FP32、FP16、FP8、FP4 分别使用相应位数的浮点表示；BF16 是另一种 16 位浮点格式，TF32 是具有特定尾数和指数范围的矩阵输入模式。INT8、INT4 表示整数格式。相同位数不保证相同数值范围、舍入、缩放或累加行为，FP8/FP4 家族中的不同编码在图中合并展示可用性，具体变体仍见逐产品证据。
 
 ![36个产品的数值格式支持](图表/全景01_数值格式.png)
 
-图 1。圆点表示有对应运算路径，不保证是矩阵路径，也不保证高速执行。方块表示经转换等条件后执行；叉号仅用于来源明确排除的原生支持，问号表示未确认，菱形保留来源分歧。仅能存储某格式或做独立类型转换，不计作该格式的计算支持。每个格子的执行范围和来源可在第 8 节展开。
+图 1。圆点表示有对应运算路径，不保证是矩阵路径，也不保证高速执行。方块表示经转换等条件后执行；叉号仅用于来源明确排除的原生支持，问号表示未确认，菱形保留来源分歧。仅能存储某格式或做独立类型转换，不计作该格式的计算支持。每个格子的执行范围和来源可在第 10 节展开。
 
 格式支持矩阵没有形成训练与推理之间的单一精度界线。FP16/BF16 等路径在多类定位中出现，低位输入也不能单凭位宽判断是“推理专用”。例如 Trainium3 的 MXFP4 输入先映射到 MXFP8 后进入 TensorEngine（AWS 的矩阵计算引擎），故保留为条件支持；AMD CDNA 4 架构的 TF32 软件模拟也与原生 TF32 路径区分。MXFP4/MXFP8 属于带共享缩放因子的低位浮点格式；这些执行条件不能相加为“支持格式总分”。[Trainium3](../产品详解/AWS/AWS_Trainium3_one_chip_产品详解.md) [MI350X](../产品详解/AMD/MI350X.md)
 
-36 个产品中，30 个有 BF16 运算路径记录，另 1 个保留条件支持；FP8 家族为 27 个，FP4 家族为 10 个、另 1 个条件支持。这说明低位浮点已出现在多种产品中，但尚不是本清单所有产品共有的能力。其余格子主要是当前资料未确认，不能据此断言硬件不支持。
+36 个产品中，{FC['BF16']['yes']} 个有 BF16 运算路径记录，另 {FC['BF16']['conditional']} 个保留条件支持；FP8 家族为 {FC['FP8']['yes']} 个、另 {FC['FP8']['conditional']} 个条件支持，FP4 家族为 {FC['FP4']['yes']} 个、另 {FC['FP4']['conditional']} 个条件支持。这说明低位浮点已出现在多种产品中，但尚不是本清单所有产品共有的能力。其余格子主要是当前资料未确认，不能据此断言硬件不支持。
 
 ![16位公开计算峰值](图表/全景02_16位峰值.png)
 
@@ -99,7 +103,7 @@ groups=[
  ('AMD：MI300X、MI325X、MI350P/X、MI355X','mi350x','计算侧局部存储和 L2，与内存侧 Infinity Cache 分层组织。','各计算裸片的 L2 总量不等同于一个统一共享 L2；显式工作存储与 cache 分开。'),
  ('AMD：MI455X','mi455x','本地 SRAM 在工作存储与 vector cache 间分配，全局 L2 位于 fabric/cache 裸片。','共享本地 SRAM 的不同配置不能重复求和；全局 L2 与本地层保持区别。'),
  ('Google：TPU v4、v5e、v5p、v6e、TPU7x','tpu_v4','片上工作存储服务矩阵与向量路径，外部 HBM 保存更大的数据集。','按各代 TensorCore 与工作存储的作用域记录，不以名称推断等效 GPU cache。'),
- ('Google：TPU 8t、8i','tpu8t','公开 Vmem 与 HBM 配置。','Vmem 的全部管理语义和可分配用途尚不完整，保留原名。'),
+ ('Google：TPU 8t、8i','tpu8t','公开 Vmem 与 HBM 配置。','产品表 MB 与开发接口 MiB 分开；每核局部空间不能视作统一共享 cache。'),
  ('AWS：Inferentia1/2、Trainium1/2/3','trainium3','片上工作存储、部分和缓冲与数据搬运路径分工；各代按实际公开内容展开。','显式搬运与缓冲的容量、端口和服务引擎分别解释，不把它们标成 L2。'),
  ('昇腾：Ascend 310、910','ascend310','核内工作缓冲与芯片共享存储、CPU cache 分属不同层级。','Ascend 310 的外部内存配置未固定；不能借用具体板卡填单芯片容量。'),
  ('昇腾：Atlas 300I A2 两容量版本','atlas300ia2_32','新用户指南确认 Cache 和 HBM。','本卡的 cache 层级和容量未展开，不迁移其他 910 子型号细节。'),
@@ -110,7 +114,7 @@ byid={r['id']:r for r in M}
 add('| 产品范围 | 已确认的组织特点 | 比较时保留的边界 |\n|---|---|---|')
 for name,rid,a,b in groups:
     r=byid[rid];add(f'| {name} | {a} {article(r)} | {b} |')
-add('''各组文字只概括共同组织，组内每款的确切容量、管理语义和来源分别保存在第 8 节，不从一个型号的规格推断同组所有型号。
+add('''各组文字只概括共同组织，组内每款的确切容量、管理语义和来源分别保存在第 10 节，不从一个型号的规格推断同组所有型号。
 
 ![36个产品的外部DRAM容量与带宽](图表/全景02_DRAM.png)
 
@@ -120,7 +124,7 @@ add('''各组文字只概括共同组织，组内每款的确切容量、管理�
 
 本清单有 30 个产品采用 HBM，L4 和 L40S 采用 GDDR6，Inferentia1 使用 DDR4。Ascend 310 已确认 LPDDR4X 接口但未固定外存配置，Groq 采用片上主存，MLU590 的主存规格尚未确认。因此，“外部 DRAM”能够覆盖大部分产品，仍需为片上主存路线保留独立位置。
 
-图 3 为每个产品选择可定位的展示值，离散候选没有画成连续误差区间。H100 SXM 的 3.35/3.352 TB/s 属显示精度差异，MI455X 的 23.3/19.6 TB/s 则保留各自来源上下文。Ascend 910 的容量来自具体官方测试配置，950PR/DT 的内存来自主推组合；这些记录不自动保证其他字段已与它们完整配对。
+图 3 为每个产品选择可定位的展示值，离散候选没有画成连续误差区间。H100 SXM 采用现行简报的 3.35 TB/s，白皮书的 3.352 TB/s 带未定版注记，MI455X 的 23.3/19.6 TB/s 则保留各自来源上下文。Ascend 910 的容量来自具体官方测试配置，950PR/DT 的内存来自主推组合；这些记录不自动保证其他字段已与它们完整配对。
 
 容量除以带宽 C/B 可以补充描述存储本身：按标称带宽顺序流过一遍完整容量，理想情况下需要多长时间。33 个可配对主存记录的结果约为 18.5 至 160 ms；它不需要计算峰值，因此 B300、TPU 8 和 Ascend 950 的已确认主存组合也能参与。这个数值不包含访问启动、随机访问、利用率或其他流量，不能当成内存访问延迟。各产品结果列在第 5 节的补充配比表。
 ''')
@@ -182,26 +186,20 @@ add(f'''## 6. 功率规格与部署条件
 
 PCIe 插卡、SXM/OAM/EAM 模组和云内芯片处于不同供电及部署约束。第一层可以展示这些预算的范围，不能用峰值除上限功率得到实测训练或推理能效，也不能从模组功率反推计算裸片功耗。所有产品的形态与冷却条件见第 1 节及逐项证据。
 
-## 7. 本层能够支持的判断
-
-36 个产品中，22 个的官方用途同时覆盖训练与推理。数值格式、主存类型和某个固定存算比都不能在现有样本中单独划出训练与推理的统一边界；同一格式的可用性还包含不同执行路径、累加和缩放条件。
-
-产品的计算、容量、外存带宽和设备端点也不必同比增长。分开观察绝对规模与配比，能发现值得进入第二层的产品组；它尚不能确定差异出于用途、代际、功率预算还是部署目标。第二层应围绕这些观察选取条件接近的产品，进一步解释具体机制。
-
-公开资料不足限制了比较的广度，但不等同于产品能力弱。这里没有根据未知格子的多少给芯片打分，也没有把同一底层架构的多个 SKU 当作独立重复证据。图中全部数值均为规格、已明确的配置或注明过程的推导，没有新增硬件性能实测。
-
 ## 8. 全产品数值、条件与来源
 
 每个条目保留本报告采用的值、候选或冲突以及引用位置。参考编号属于相应产品详解，点击即可定位到该篇的原始资料入口；同号不表示跨产品共用同一资料。格式矩阵中的每个状态也在这里逐格解释。
 
-原始单位、完整候选和来源另存于[本报告绘图数据](panorama36.json)。图表由[全产品图表脚本](生成全产品图表.py)生成；现有产品详解和原始资料仍是事实追溯入口。
+原始单位、完整候选和来源另存于[全产品绘图数据](panorama36.json)与[家族资源及来源记录](family-comparison-data.json)。图表由[全产品图表脚本](生成全产品图表.py)及[配比计算与家族绘图模块](comparison_analysis.py)生成；现有产品详解和原始资料仍是事实追溯入口。
 ''')
 for r in M:
     c=r['compute16'];m=r['memory'];e=r['endpoint'];p=r['power'];o=r['organization'];d=r['deployment']
-    add(f"<details id=\"panorama-{r['id']}\"><summary>{r['order']:02d} {html.escape(r['label'])} · {pos[r['position']['group']]}</summary>\n\n{article(r)}")
+    add(f"<details id=\"panorama-{r['id']}\"><summary>{r['order']:02d} {html.escape(r['label'])} · {pos[r['orientation']['group']]}</summary>\n\n{article(r)}")
     add('| 项目 | 本报告采用的内容与来源 |\n|---|---|')
-    add(f"| 定位 | {fact(r,r['position']['text'],r['position']['source'])} |")
+    add(f"| 主要设计取向 | {pos[r['orientation']['group']]}；{fact(r,r['orientation']['text'],r['orientation']['source'])} |")
+    add(f"| 官方支持用途 | {fact(r,r['position']['text'],r['position']['source'])} |")
     add(f"| 16 位峰值 | {fact(r,val(c.get('value_tflops'),' TFLOP/s')+'；'+c['format']+'；'+scope_text[c['scope']]+'；'+basis_text[c['basis']]+'。'+c['note'],c['source'])} |")
+    for fmt,lp in r.get('low_precision',{}).items():add(f"| {fmt} 家族峰值 | {fact(r,val(lp['value_tflops'],' TFLOP/s')+'；'+lp['format']+'。'+lp['note'],lp['source'])} |")
     if c.get('alternatives'):add(f"| 峰值候选 | {cell(alternatives(r,c['alternatives']))} |")
     memory_numbers='容量与带宽不适用' if m['kind']=='none' else val(m.get('capacity_gb'),' GB')+'；'+val(m.get('bandwidth_tb_s'),' TB/s')
     add(f"| DRAM | {fact(r,memkind(r)+'；'+memory_numbers+'。'+m['note'],m['source'])} |")
@@ -218,10 +216,17 @@ for r in M:
 
 add('''本版依据当前 36 篇产品详解整理；对算力口径、容量配置、带宽方向和功率边界回查了相应规格页及关键原文，核对范围限于本报告使用的事实与条件。
 
-旧版的局部产品对照与图表保存在[改写前版本](../../99_归档/02_主线旧流程/历史比较分析/第一层改写前-20260920/训练与推理架构比较.md)。第二层的产品组对照另行展开。
+旧版的局部产品对照与图表保存在[改写前版本](../../99_归档/02_主线旧流程/历史比较分析/第一层改写前-20260920/训练与推理架构比较.md)。本版第二层已整合至第 9 节，来源为相邻的《第二层产品组比较》；图与数值取自同一套记录。
 ''')
 report='\n'.join(parts)
+end=report.index('## 8. 全产品数值、条件与来源')
+family_path=R/'第二层产品组比较.md'
+family_text=family_path.read_text()
+family_text=re.sub(r'^# [^\n]+\n', '', family_text)
+report=report[:end]+supplemental_report(D)+'\n'+robustness_report(D)+'\n## 9. 家族内定位、资源与机制\n\n'+family_text+'\n'+report[end:]
+report=report.replace('## 8. 全产品数值、条件与来源','## 10. 全产品数值、条件与来源')
+
 report=re.sub(r'(?m)^(\|[^\n]*\|)\n\n(?=\|)',r'\1\n',report)
 report=report.replace('–','-').replace('—','至')
 (R/'训练与推理架构比较.md').write_text(report)
-print('Wrote first-layer report with',len(M),'source entries')
+print('Wrote two-layer report with',len(M),'source entries')

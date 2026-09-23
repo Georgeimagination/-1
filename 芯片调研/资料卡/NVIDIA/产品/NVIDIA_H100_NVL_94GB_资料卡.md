@@ -2,7 +2,7 @@
 
 > 模板版本：1.3（芯片架构事实口径）  
 > 卡片状态：已完成  
-> 资料截止日：2026-08-24
+> 资料截止日：2026-09-23
 
 本卡的主语是一张 NVIDIA H100 NVL 94GB PCIe 卡，即 P1010 SKU 210。NVIDIA 资料也常用“H100 NVL”指两张 94GB 卡通过三个 NVLink bridge 组成的 188GB 配置；本卡把单卡 SKU 与双卡系统配置分开。
 
@@ -67,11 +67,16 @@
 | 内存类型与容量 | 94GB HBM3；2,619MHz；6,016-bit bus | 单卡，不是两卡 188GB | `[1, p. 4, Table 2]` |
 | 内存带宽 | 3,938GB/s | 单卡 peak；数据手册四舍五入为 3.9TB/s | `[1, p. 4, Table 2]` `[2, p. 2]` |
 | 主机接口 | PCIe Gen5 x16、Gen5 x8 或 Gen4 x16；Gen5 x16 双向合计 128GB/s、每方向 64GB/s | 支持 lane/polarity reversal | `[1, pp. 3, 7]` `[2, p. 2]` `[3, pp. 49-50]` |
+| PCIe 地址映射窗口 | PF（物理功能）的 BAR2 为 128 GiB；VF（虚拟功能）的 BAR1 聚合窗口为 128 GiB，64-bit，每 VF 4 GiB；最多 32 VF | BAR（Base Address Register，基址寄存器）规定设备地址映射窗口；这里的 GiB 是二进制单位，窗口大小不等于物理 HBM 容量，也不表示接口吞吐 | `[1, p. 4, Table 3]` |
+| PCIe 事务与虚拟化 | Hopper 原生支持 32-bit 和 64-bit atomic CAS（比较并交换）、exchange 与 fetch-add；支持 SR-IOV（单根 I/O 虚拟化），PF（物理功能）或 VF（虚拟功能）可经 NVLink 访问 peer GPU | 共享 H100 架构能力；原子操作支持不等于 CPU/GPU cache coherence，VF 数也不等于 MIG 实例数 | `[3, p. 50, PCIe Gen 5]` |
 | 设备互联端点 | 三个 bridge connector，合计 48 条 Rx+Tx lane，每 lane 每方向 100Gbps；双卡连接最大 600GB/s bidirectional | 单卡只能连接一张相邻 H100 NVL，须同时安装三块 bridge 才能正确工作并达到 peak | `[1, pp. 9-10, Table 6]` |
 | 内存访问语义 | 简报仅定义 point-to-point peer transfer；没有声明两卡 HBM 自动形成单一统一 188GB 地址空间 | 188GB 是两张 94GB 卡容量相加 | `[1, pp. 9-10]` |
 | 跨设备集合通信能力 | 未找到卡内独立 collective engine | 两卡 bridge 是 P2P 链路，不等于 collective offload | `[1, pp. 9-11]` |
 | 功耗 | 450W/600W cable mode 下 default/maximum 400W、minimum 200W；300W cable mode 下 default/maximum 310W、minimum 200W | 产品页概括为 configurable 350 至 400W；精确供电条件采用 SKU 简报 | `[1, pp. 3, 13-15, Tables 1, 7-8]` `[2, p. 2]` |
+| 可编程功率上限 | nvidia-smi 的带内设定需在每次重新加载驱动后恢复；SMBPBI（SMBus Post-Box Interface，带外管理接口）的设定可跨驱动加载和系统启动保持，完整功能仍需要驱动加载 | 用于匹配系统供电、散热或性能/功率目标；本段只记录 NVL 简报明示的保持行为，未给出降功率后的算力或频率曲线 | `[1, pp. 8-9, Programmable Power]` |
 | 形态与散热 | FHFL 10.5-inch、dual-slot PCIe 卡；passive bidirectional heatsink | 依赖服务器强制气流，卡自身没有主动风扇 | `[1, pp. 1, 3, 6, 12]` |
+| MIG 分区 | 最多 7 个 12 GB MIG 实例，采用 2024 数据手册列值；SR-IOV 支持 32 个 VF；Hopper 为每个 GPU instance 分配独占 crossbar port、L2 bank、memory controller 与 DRAM address bus | MIG（Multi-Instance GPU，多实例 GPU）通过硬件资源隔离提供服务质量；整 GPU 的 L2/HBM 汇总容量不能当作每个实例可用量，实例容量不据物理总量平均分配 | `[2, p. 2, Technical Specifications]` `[1, pp. 4, 7-8]` `[3, pp. 42-43, MIG Technology Review]` |
+| MIG 媒体与性能监视 | Hopper 的每个 MIG GPU instance 可分配至少一个 NVDEC 视频解码器和一个 NVJPG JPEG 解码器；每个 instance 有独立 performance monitor，支持 concurrent profiling | 共享 Hopper 架构机制；实际分配取决于实例配置，不表示同一解码器可重复计给多个实例 | `[3, p. 44, H100 MIG Enhancements]` |
 
 ## 6. 系统级互联上下文
 

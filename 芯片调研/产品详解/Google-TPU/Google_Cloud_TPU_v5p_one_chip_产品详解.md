@@ -19,7 +19,7 @@ v5p 含两个 TensorCore（TPU 的矩阵、向量与标量计算核心），每�
 | 执行路径 | 完整芯片公开值 | 单核心或每周期说明 |
 |---|---|---|
 | BF16 矩阵 | 459 TFLOPS | 4 个 128×128 MXU/核；按约 1.75 GHz、乘加计两次操作计算为每核 229.376、全芯片 458.752 TFLOPS，与产品值取整一致 [1, System architecture] [20, Appendix A and TPU specs] |
-| FP8/BF8 矩阵 | 459 TFLOPS | Cloud 与论文分别使用 FP8 与 BF8 格式标签；JAX 数值表没有给这个字段的峰值，不代表该产品物理不支持 FP8 [1, System architecture] [2, Table 1] [21, TPU_V5P branch] |
+| FP8/BF8 矩阵 | 459 TFLOPS | Cloud 与论文分别使用 FP8 与 BF8 标签；Google Ironwood 发布文图注将 v5p 的 FP8 标为 emulated，保留模拟执行条件 [24, Figure 2 caption] [1, System architecture] [2, Table 1] [21, TPU_V5P branch] |
 | INT8 矩阵 | 918 TOPS | JAX 与 scaling book 的全芯片值；每核心硬件模型为 459 TOPS [20, TPU specs] [21, TPU_V5P branch] |
 | INT4 矩阵 | 1,840 TOPS | JAX 每核心列 920 TOPS，两核加总；没有给相同条件下的实测持续利用率 [21, TPU_V5P branch] |
 | FP32 普通向量操作 | 约 14.336 TFLOPS，两核合计的条件推导 | 每核 8×128×4 = 4,096 个单操作 ALU（算术逻辑单元）槽位/周期，按约 1.75 GHz 得 7.168 TFLOPS；这是 add 等一次计一个操作的路径，不能按 FMA（融合乘加）再乘二 [20, Appendix A / VPU] |
@@ -32,12 +32,14 @@ v5p 含两个 TensorCore（TPU 的矩阵、向量与标量计算核心），每�
 
 封装照片显示六个 HBM stack，跨代论文注明为 HBM2E，总容量 96 GiB；Cloud 产品规格表写 95 GiB。官方没有解释这 1 GiB 差额，不能擅自归因于保留空间、纠错或系统占用。两份资料均给出 2,765 GB/s HBM 带宽，因而带宽的跨来源一致性好于容量标签。[1, System architecture] [2, Table 1 and Figure 3]
 
+JAX 支持把 v5p 的两个物理 TensorCore 呈现为一个逻辑 device（Megacore），或以 split 模式每个逻辑 device 使用一个核心。Pallas 要利用两核，需要把一个 grid 轴并行映射；这种逻辑分组不改变每核的局部存储边界。[21, ChipVersion.supports_megacore; get_tpu_info_for_chip] [22, Multicore TPU configurations]
+
 片上 VMEM 总计 128 MiB，由编译器控制数据放置。向量寄存器访问对应的 VMEM 切片，异步 DMA 在 VMEM 与 HBM 之间搬运数据。JAX 的 v5p 分支进一步给出每核 64 MiB，两个核心合计 128 MiB；图中据此标明两套局部空间。[21, TPU_V5P branch] 读者可把它理解为计算所需的局部工作集空间，但不能套用 CPU/GPU 的透明缓存命中模型。[2, pp. 2, 4, Table 1 and Figure 2]
 
 | 架构位置 | 单颗 v5p 规格 | 来源与条件 |
 |---|---|---|
 | TensorCore / MXU | 2 核、8 个 128×128 MXU；459 TFLOPS（每秒万亿次浮点运算） BF16 | 厂商理论峰值 [1, System architecture] [2, Table 1] |
-| 低精度计算 | 459 TFLOPS，Cloud 标 FP8、论文标 BF8 | 不推定支持所有 FP8 格式；完整累加与输出语义未公开 [1, System architecture] [2, Table 1] |
+| 低精度计算 | 459 TFLOPS，Cloud 标 FP8、论文标 BF8 | 官方 Ironwood 发布文将旧代 FP8 标为模拟实现，不推定原生支持所有 FP8 格式；完整累加与输出语义未公开 [24, Figure 2 caption] [1, System architecture] [2, Table 1] |
 | HBM2E | 6 stack；95 GiB（Cloud）/96 GiB（论文）；2,765 GB/s | 两种容量记录保留原单位 [1, System architecture] [2, Figure 3 and Table 1] |
 | VMEM | 128 MiB/TPU | 软件管理，非统一硬件 cache [2, Table 1 and Figure 2] |
 
@@ -61,7 +63,7 @@ Pallas 的 SparseCore 编程说明还区分 tile 局部 VMEM/SMEM、SC 共享 VM
 
 ## ICI 把多个本地存储组织起来
 
-每颗 v5p 有六条 ICI（芯片间互联）link，每条每方向 100 GB/s，单芯片双向聚合为 1,200 GB/s。4×4×4 及更大的 slice 采用 3D torus；更小的 slice 仍为三维连接，但没有 wrap-around 回环。六条 link 对应三维互联的相邻连接。ICI DMA 与访问本地 HBM 的 DMA 具有相似编程方式，但远程路径只支持 push/write，需要软件协调同步。SparseCore 可借助 HBM 和 ICI 形成系统级全局可寻址空间，这不等于自动保持 cache coherence 的共享内存。[1, System architecture] [2, pp. 4-5, 7, footnote 4]
+每颗 v5p 有六条 ICI（芯片间互联）link，每条每方向 100 GB/s，单芯片双向聚合为 1,200 GB/s。4×4×4 及更大的 slice 采用 3D torus；更小的 slice 仍为三维连接，但没有 wrap-around 回环。六条 link 对应三维互联的相邻连接。官方还允许部分 slice 使用 twisted torus（改变回环连接的拓扑）：4×4×8 的理论二分带宽比同形状普通 torus 高约 70%，4×8×8 高约 40%；每芯片 1,200 GB/s 端点规格保持不变。实际收益取决于模型并行策略，不能将拓扑差异当成单芯片带宽升级。[1, Twisted torus topologies]ICI DMA 与访问本地 HBM 的 DMA 具有相似编程方式，但远程路径只支持 push/write，需要软件协调同步。SparseCore 可借助 HBM 和 ICI 形成系统级全局可寻址空间，这不等于自动保持 cache coherence 的共享内存。[1, System architecture] [2, pp. 4-5, 7, footnote 4]
 
 scaling book 用每条每方向约 90 GB/s 估算 v5p 的 ICI 操作，而产品物理规格为 100 GB/s；作者明确说明不同 collective 操作会出现不同带宽。主机路径在同一估算模型中约为 PCIe 16 GB/s/TPU，DCN（数据中心网络）egress 为 6.25 GB/s/TPU，后者是 host 网络按 TPU 分摊后的量，不能画成 TPU die 自带的 NIC。[20, TPU Networking and TPU specs]
 
@@ -76,7 +78,7 @@ v5p 使用液冷封装。Google 生命周期论文测得 fleet 平均 331 W/TPU�
 
 [2] Norman P. Jouppi等（Google），*Google's Training Supercomputers from TPU v2 to Ironwood: Architectural Stability, Scale, Resilience, Power Efficiency, and Sustainability Across Five Generations*，2026。[本地PDF](../../原始资料/论文/Google_TPU/01_厂商直接架构论文/2026_TPUv2_to_Ironwood_Five_Generations.pdf)
 
-[4] Google Cloud，*Enabling next-generation AI workloads: Announcing TPU v5p and AI Hypercomputer*，2023-12-07（当前页面显示日期）。<https://cloud.google.com/blog/products/ai-machine-learning/introducing-cloud-tpu-v5p-and-ai-hypercomputer>
+[4] Google Cloud，*Enabling next-generation AI workloads: Announcing TPU v5p and AI Hypercomputer*，2023-12-06（官方页面当前显示日期）。<https://cloud.google.com/blog/products/ai-machine-learning/introducing-cloud-tpu-v5p-and-ai-hypercomputer>
 
 [7] Ian Schneider等（Google），*Life-Cycle Emissions of AI Hardware: A Cradle-To-Grave Approach and Generational Trends*，2025。[本地PDF](../../原始资料/论文/Google_TPU/03_系统与性能补充/2025_Life_Cycle_Emissions_AI_Hardware.pdf)
 
@@ -87,3 +89,5 @@ v5p 使用液冷封装。Google 生命周期论文测得 fleet 平均 331 W/TPU�
 [22] The JAX Authors，*Pallas: TPU Details*，获取于 2026-09-17。[官方文档](https://docs.jax.dev/en/latest/pallas/tpu/details.html)；[官方仓库原文](https://github.com/jax-ml/jax/blob/main/docs/pallas/tpu/details.rst)。 [本地原文快照](../../原始资料/网页快照/Google/JAX/2026-09-17/jax-details.rst)
 
 [23] The JAX Authors，*SparseCore Kernel Writing*，获取于 2026-09-17。[官方文档](https://docs.jax.dev/en/latest/pallas/tpu/sparsecore.html)；[官方仓库原文](https://github.com/jax-ml/jax/blob/main/docs/pallas/tpu/sparsecore.md)。 [本地原文快照](../../原始资料/网页快照/Google/JAX/2026-09-17/jax-sparsecore.md)
+
+[24] Amin Vahdat，*Ironwood: The first Google TPU for the age of inference*，Google，2025-04-09，2025-04-23 更新。[官方原文](https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/ironwood-tpu-age-of-inference/)。Figure 2 图注明确 v4/v5p 的 FP8 为 emulated。

@@ -2,7 +2,7 @@
 
 > 模板版本：1.3（芯片架构事实口径）  
 > 卡片状态：已完成  
-> 资料截止日：2026-09-16
+> 资料截止日：2026-09-23
 
 本卡以一张 AMD Instinct MI350P 144GB PCIe add-in card 为正式比较对象。它是全高、全长、双槽的 PCIe CEM（Card Electromechanical）插卡，采用 4 个 XCD（Accelerated Compute Die）和 1 个 IOD（I/O Die），与 8-XCD、2-IOD 的 MI350X/MI355X OAM 模组不同。服务器中的多卡数量、主机配置和聚合算力不下放到单卡。
 
@@ -38,12 +38,19 @@
 |---|---|---|---|
 | CU 执行组织 | CDNA 4 CU 含 scalar、vector、Matrix Core、load/store、32KB L1 data cache 与显式寻址 LDS | 架构级机制；MI350P 共 128 个使能 CU | `[4, pp.5-6 and p.9]` `[1, GPU Specifications]` |
 | Matrix Core | 每 CU 有 4 个 Matrix Core；本卡共 512 个 | 产品页直接给出整卡数量 | `[1, GPU Specifications]` |
-| 数值格式 | 原生支持 BF16/FP16、OCP-FP8、INT8，以及 MXFP8、MXFP6、MXFP4 | OCP-FP8 含 E5M2/E4M3；MXFP6 含 E3M2/E2M3，MXFP4 为 E2M1 | `[2, p.2 Multi-Chip Architecture]` `[4, pp.7-8]` |
+| 数值格式 | 原生支持 BF16/FP16、OCP-FP8、INT8，以及 MXFP8、MXFP6、MXFP4 | OCP-FP8 含 E5M2/E4M3；MXFP6 含 E3M2/E2M3，MXFP4 为 E2M1；CDNA 4 已移除 TF32 硬件路径，由 BF16 软件模拟 | `[2, p.2 Multi-Chip Architecture]` `[4, pp.7-8]` |
 | 结构化稀疏 | OCP-FP8、FP16、BF16、INT8 均列有 structured sparsity 峰值，数值为对应基础峰值的 2 倍 | CDNA 4 sparse MFMA 的 A 矩阵沿 K 轴每 4 个元素有 2 个零，第三输入提供 sparse index；index 带宽、选择电路和功耗未公开 | `[1, GPU Specifications]` `[7, pp.294 and 307-308]` |
-| LDS | 每个 CDNA 4 CU 有 160KB LDS，读带宽 256B/clock，并支持从 L1 直接装入 LDS | 架构级 software-managed local storage；brochure 没有另给 MI350P 特例 | `[4, p.9]` |
+| LDS | 每 CU 160KB，64 个 bank，每 bank 为 640×4B；含 32 个整数 atomic 单元；读吞吐 256B/clock，可从 L1 直接装入 | 工作组显式管理的 local storage；按 1,280B 连续块分配并按 1,280B 对齐，不能把容量当作统一 cache | `[4, p.9]` `[7, §§2.2.1,3.6.5, 印刷 pp.6,13（PDF pp.14,21）]` |
 | L1/L2 | 每 CU 32KB、64-way L1，128B line；每 XCD 共享 4MB、16-way coherent L2 | brochure 直接确认 MI350P 的 32KB L1/CU 与 4MB L2/XCD；端口细节来自 CDNA 4 架构 | `[2, p.2 Multi-Chip Architecture]` `[4, p.9]` |
+| L2 管理与通道 | 每 XCD 有 16 个 L2 channel，各 channel 每 cycle 读 128B、写 64B；writeback/write-allocate，XCD 内 fully coherent | CDNA 4 可缓存来自 DRAM 的 non-coherent 数据，并在脏行写回后保留副本；一致性与可见性仍须遵守地址和程序语义，不能推广成整机透明一致性 | `[4, p.9]` |
 | 媒体单元 | 2 组 HEVC/H.265、AVC/H.264、VP9 或 AV1 decoder；20 个 JPEG/MJPEG core，每组 10 个 | 需要兼容 media player；不能并入 Matrix Core 数量 | `[2, p.1 Decoders and Virtualization]` |
 | 专用 AI 单元缺口 | 未找到专用 attention、MoE routing、top-k、sampling 或 KV Cache 管理物理模块 | 相关 workload 由通用计算路径和软件执行 | `[1, full page]` `[2, pp.1-2]` `[4, pp.5-9]` |
+
+### 3.1 矩阵吞吐与输入格式条件
+
+CDNA 4 的 dense 矩阵执行能力按每 CU 每周期计，FP16/BF16 为 4,096 FLOP，OCP-FP8 为 8,192 FLOP。Vector FP16/FP32 为 256 FLOP、FP64 为 128 FLOP；Matrix FP32 为 256 FLOP、FP64 为 128 FLOP。它们是独立路径的上限，不相加为一种精度的峰值。白皮书 Table 1 的 MXFP4/MXFP6 行原印为 16,834 FLOP/CU/clock，与全芯片峰值算术不符，保留疑点，不自行修正官方值。[4, Table 1, p.8]
+
+MFMA（Matrix Fused Multiply-Add，矩阵融合乘加）的 F8F6F4 指令允许 A、B 独立选 FP8、FP6 或 FP4。16×16×128 变体在 A/B 都使用 FP4 或 FP6 时为 16 cycles，任一输入使用 FP8 时为 32 cycles；32×32×64 变体分别为 32 与 64 cycles。结果 C/D 使用 FP32，scaled 变体的共享 scale 为 E8M0。因而仅将权重换成 FP4、另一侧仍为 FP8，不能套用最快的 FP4×FP4 指令周期；这些周期也不包括完整 kernel 的搬运与同步时间。[7, Table 28; §§7.1.5,7.1.5.1, 印刷 pp.43,50-51（PDF pp.51,58-59）]
 
 ## 4. Die、chiplet 与 package
 
@@ -73,7 +80,7 @@
 | 主机接口 | 1×PCIe Gen5 x16，128GB/s | brochure 未说明 128GB/s 的方向、payload 或持续口径，不自行拆分或翻倍 | `[1, Board Specifications]` `[2, p.1 Specifications]` |
 | 功耗 | 600W maximum TBP，可配置到 450W | 未公开峰值性能对应哪一功耗点 | `[1, Requirements]` `[2, p.1 Specifications]` |
 | 散热 | 卡级 passive cooling；面向标准 air-cooled server | 前者是卡的散热器形态，后者是服务器冷却环境 | `[1, Board Specifications]` `[3, Performance That Drops into Your Existing Racks]` |
-| 虚拟化与 RAS | 当前产品页列 SR-IOV、page retirement、page avoidance；brochure 列最多 4 个 36GB physical partition | brochure p.2 又把 SR-IOV 写为 future support，版本差异见第 7 节 | `[1, Additional Features]` `[2, pp.1-2]` |
+| 虚拟化与 RAS | 当前产品页列 SR-IOV、page retirement、page avoidance；brochure 列最多 4 个 36GB physical partition，Memory Partitions 栏为 1 | brochure p.2 又把 SR-IOV 写为 future support，版本差异见第 7 节 | `[1, Additional Features]` `[2, pp.1-2]` |
 
 ## 6. 系统级互联上下文
 

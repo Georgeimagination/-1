@@ -2,7 +2,7 @@
 
 > 模板版本：1.3（芯片架构事实口径）  
 > 卡片状态：已完成  
-> 资料截止日：2026-09-16
+> 资料截止日：2026-09-23
 
 本卡采用一块AMD Instinct MI325X 256GB OAM（OCP Accelerator Module）加速模组作为正式比较对象。它沿用CDNA 3的8个5nm XCD和4个6nm IOD计算封装，将外部内存升级为8个32GB HBM3E stack，并保持304个使能CU。8-OAM MI325X Platform的2TB总HBM和聚合资源不下放。
 
@@ -45,7 +45,7 @@
 | FP8与累加 | FP8支持E5M2和E4M3；FP8/BF8与FP16/BF16 MFMA写FP32 C/D，INT8写INT32 C/D | ISA语义，不等同于物理accumulator位宽 | `[1, FP8 rows]` `[5, pp.274, 276 and 284]` |
 | 结构化稀疏 | Matrix Core支持4:2 sparse，将非零值压紧并携带location metadata | 适用路径峰值为dense的2倍；metadata带宽成本未完整披露 | `[2, p.8]` `[5, pp.59-60]` |
 | CU局部存储 | 64KB LDS为software scratchpad；32KB L1 vector data cache、128B cache line | L1需显式同步取得强coherence/ordering | `[2, p.9]` |
-| XCD存储 | 每XCD有4MB、16-way L2，由38个使能CU共享，read throughput为2KB/clock/XCD | 8个XCD；L2为XCD内hardware-coherent cache | `[2, pp.5 and 10]` |
+| XCD存储 | 每XCD有4MB、16-way L2，由38个使能CU共享；16个channel各256KB，cache line为128B | 每channel每周期读128B、写64B；每XCD读2KB/clock。正文给全GPU最高34.4TB/s聚合读带宽，Figure 6另标51.6TB/s aggregate而未注明读写方向，不能当作同一纯读取指标 | `[2, Figure 6 and pp.9-10]` |
 | 媒体单元 | datasheet列4组HEVC/H.265、AVC/H.264、VP9或AV1 decoder，以及32个JPEG/MJPEG core | 单OAM；兼容媒体软件是使用条件，不能将codec数并入Matrix Core | `[3, Decoders and Virtualization]` |
 | 专用AI单元缺口 | 未找到专用attention、MoE routing、top-k或sampling物理模块 | 由通用Matrix/Vector/Scalar路径和软件完成 | `[2, pp.5-8]` |
 
@@ -59,8 +59,23 @@
 | HBM组成 | 8个HBM3E stack，每个32GB；每个IOD连接2 stack | 合计256GB；stack高度未公开 | `[2, p.11]` |
 | 晶体管与工艺 | 153 billion transistors；TSMC 5nm XCD + 6nm IOD | 产品页未按chiplet拆晶体管数量 | `[1, GPU Specifications]` `[2, pp.5 and 10]` |
 | Infinity Cache | 256MB LLC，位于4个IOD；128 channels，16-way，峰值17.2TB/s | memory-side cache/snoop filter，不保存下级L2 dirty eviction | `[1, GPU Memory]` `[2, pp.10-11]` |
-| 封装内互联 | 4th Gen Infinity Fabric连接XCD、IOD、cache、HBM与外部link端点 | 未公开单一on-package aggregate payload带宽 | `[2, pp.4, 9-11 and 15]` |
+| 封装内互联 | 4th Gen Infinity Fabric连接XCD、IOD、cache、HBM与外部link端点；白皮书结论对CDNA 3封装整体写4TB/s fabric | 4TB/s未注明方向、链路求和方法或各SKU边界，不能据此建立本SKU同口径D2D payload带宽，也不能用cache带宽替代 | `[2, pp.4, 9-11, 15 and 26]` |
 | RAS与分区 | Full-chip ECC、page retirement/avoidance、SR-IOV和最多8 partitions | 分区不改变物理资源总量 | `[1, GPU Memory and Additional Features]` `[3, Decoders and Virtualization]` |
+
+### 4.1 计算分区与 HBM 分区
+
+计算分区改变软件可见的 GPU 数及每个逻辑 GPU 包含的 XCD 数；NPS（NUMA Per Socket，每插槽的非统一内存访问域数）另行配置 HBM 的分区。白皮书要求内存分区数不多于计算分区数，并明确举出 NPS4 可配四个或八个计算分区的例子。SR-IOV 为各虚拟功能提供状态和访问隔离；它与分区模式共同影响可提供的逻辑设备，不能仅凭物理 XCD 数断言某个驱动版本支持全部虚拟机配置。`[2, pp.12-14]`
+
+ROCm 7.2.4 的型号表给出以下 MI325X 配置，容量表示该表中的每个逻辑分区分配量，原文 GB 标法保持不变。表列组合不视为所有软件版本的完整支持清单。`[8, Partitioning]`
+
+| 计算模式 | 逻辑分区数 | 每分区 XCD | 每分区 HBM | 型号表所列 NPS |
+|---|---:|---:|---:|---|
+| SPX | 1 | 8 | 256GB | NPS1 |
+| DPX | 2 | 4 | 128GB | NPS1 |
+| QPX | 4 | 2 | 64GB | NPS1 / NPS4 |
+| CPX | 8 | 1 | 32GB | NPS1 |
+
+白皮书 p.14 图标题同时列出 MI300X 与 MI325X，却全部画为 24GB HBM stack、192GB 总量，并给出 192/96/48/24GB 分区容量。该图的容量对应 MI300X，不能用于 MI325X 的容量字段；MI325X 应采用型号资料中的 256/128/64/32GB。`[2, p.14]` `[8, Partitioning]`
 
 ## 5. SKU 配置
 
@@ -113,7 +128,7 @@
 | `[5]` | AMD，*AMD Instinct MI300 Instruction Set Architecture* | 官方ISA | MFMA累加格式与4:2 sparse指令语义 | <https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/instruction-set-architectures/amd-instinct-mi300-cdna3-instruction-set-architecture.pdf> |
 | `[6]` | AMD，*AMD Delivers Leadership AI Performance with AMD Instinct MI325X Accelerators*，2024-10-10 | 官方发布稿 | 正式发布、出货时间和training/inference定位 | <https://www.amd.com/en/newsroom/press-releases/2024-10-10-amd-delivers-leadership-ai-performance-with-amd-in.html> |
 | `[7]` | AMD，*AMD Accelerates Pace of Data Center AI Innovation*，2024-06-02 | 官方路线图公告 | 首次预告日期和288GB pre-launch规格 | <https://www.amd.com/en/newsroom/press-releases/2024-6-2-amd-accelerates-pace-of-data-center-ai-innovation-.html> |
-| `[8]` | AMD ROCm，*AMD Instinct MI300 Series / MI350 Series workload optimization*，7.2.4 | 官方硬件优化文档 | CDNA 3 的 FP8 FNUZ 与 CDNA 4 的 OCP 编码区别 | <https://rocm.docs.amd.com/en/docs-7.2.4/how-to/rocm-for-ai/inference-optimization/workload.html> |
+| `[8]` | AMD ROCm，*AMD Instinct MI300 Series / MI350 Series workload optimization*，7.2.4 | 官方硬件优化文档 | CDNA 3 的 FP8 FNUZ 与 CDNA 4 的 OCP 编码区别；两型号的计算分区、每分区容量及 NPS 配置 | <https://rocm.docs.amd.com/en/docs-7.2.4/how-to/rocm-for-ai/inference-optimization/workload.html> |
 
 ## 9. 完成检查
 

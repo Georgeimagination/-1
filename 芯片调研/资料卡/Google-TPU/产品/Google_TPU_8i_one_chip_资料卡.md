@@ -2,7 +2,7 @@
 
 > 模板版本：1.3（芯片架构事实口径）  
 > 卡片状态：已完成  
-> 资料截止日：2026-09-16
+> 资料截止日：2026-09-23
 
 本卡以 Google 官方公布的单颗 TPU 8i 配置为主语。Google 没有为 TPU 8i 公布常规板卡 SKU；Arm Axion host、tray、Boardfly group、Optical Circuit Switch（OCS）和 Pod 仅用于解释芯片的系统互联，不能作为单芯片规格。
 
@@ -42,16 +42,22 @@
 |---|---|---|---|
 | 矩阵、向量、标量与控制路径 | 每个 TPU 8i chip 有两个 TensorCore，分别位于两个 on-core die。Figure 4 中每个 TensorCore 含中央 `VPU + Vmem`、两个 MXU、两个 XLU 和一个 TCS | 每 TensorCore 图示组成；阵列尺寸、频率、每单元吞吐及 TCS/XLU 的完整职责未公开 | `[1, The Collectives Acceleration Engine; Figure 4]` |
 | 执行模型与调度 | CAE 聚合跨 Core 的结果，用于 autoregressive decoding 与 chain-of-thought 处理中的 reduction 和 synchronization | 芯片内、跨两个 TensorCore 的集合操作；调度粒度、消息大小和指令语义未公开 | `[1, The Collectives Acceleration Engine]` |
-| 局部存储与数据搬运 | 每颗芯片有 384 MB `Vmem`；Figure 4 在两个 TensorCore 内分别画出 `VPU + Vmem`，并由各自的 Memory and DMA Interconnect 连接 HBM controller | 384 MB 是 per-chip 总量，不能自行均分为每 TensorCore 192 MB；管理语义、bank 划分与带宽未公开 | `[1, TPU 8t and TPU 8i at a glance / On-Chip SRAM (Vmem); Figure 4]` |
+| 局部存储与数据搬运 | 产品文章给整芯片 384 MB Vmem；官方 JAX 8i 分支独立给每 TensorCore 192 MiB VMEM 和 1 MiB SMEM，Figure 4 的两个 TensorCore 各连接本地 Memory and DMA Interconnect | 每核值来自开发配置，不由产品总量均分推导；MB/MiB 分列。Pallas 使用显式局部工作区，跨核共享、一致性、bank 和绝对带宽未公开 | `[1, On-Chip SRAM (Vmem); Figure 4]` `[5, TPU_8I branch]` `[6, BlockSpecs and grid iteration; Placing operands in SMEM]` |
 | 数值与累加路径 | 官方规格表给出 FP4 峰值，证明 TPU 8i 具有 FP4 计算路径 | FP4 输入、乘积、累加、输出、舍入、缩放和 FMA 计数口径未公开 | `[1, TPU 8t and TPU 8i at a glance / Peak FP4 PFLOPs]` |
 | 稀疏与专用单元 | 一个 CAE 位于独立 chiplet die，替代前代 on-core die 上的四个 SparseCore；CAE 加速片内归约与同步 | TPU 8i 没有被正文描述为仍启用这四个 SparseCore；CAE 内部结构和吞吐未公开 | `[1, The Collectives Acceleration Engine; Figure 4]` |
+
+### 3.1 官方开发资料中的局部工作区与接口
+
+JAX 的 TPU_8I 分支列每 TensorCore 1 MiB SMEM（标量存储器），与 192 MiB VMEM 分开。Pallas 文档将 kernel 输入输出映射到这些局部工作区，由编译器处理 HBM 搬运；控制流与不规则索引可使用 SMEM。较大 Vmem 的产品设计目的，是在长上下文 decoding 时保存更多 KV Cache（已处理 token 的 key/value 状态），减少计算核心等待。实际可驻留量仍取决于模型、精度和分块方式。[5, TPU_8I branch] [6, BlockSpecs and grid iteration; Placing operands in SMEM] [1, Large on-chip SRAM]
+
+同一 JAX 配置保留一个 SparseCore 软件接口，含 4 个 vector subcore、每 subcore 16 lane；每 subcore VMEM 为 512 KiB，DMA 粒度为 64 B。官方物理图与正文将独立 chiplet 描述为 CAE，并说它替代 Ironwood 的四个 SparseCore。现有资料没有说明该软件接口与 CAE 的物理映射，不能据此在封装图上再增加一个 SparseCore，也不能把 64 B 当作 CAE 消息粒度。[5, TPU_8I branch / SparseCoreInfo] [1, The Collectives Acceleration Engine; Figure 4]
 
 ## 4. Die、chiplet 与 package
 
 | 维度 | 共享实现或物理组成 | 作用域与条件 | 来源 |
 |---|---|---|---|
 | 计算单元数量 | 两个 on-core die 各含一个 TensorCore；每个 TensorCore 图示两个 MXU、两个 XLU、一个 `VPU + Vmem` 和一个 TCS；另有一个 CAE | per-chip package；矩阵阵列内部规模与每单元吞吐未公开 | `[1, The Collectives Acceleration Engine; Figure 4]` |
-| 片上存储 | per-chip Vmem 总量为 384 MB，分布在两个 TensorCore 图示区域 | 不能按两个 TensorCore 等分；Vmem 的 cache/scratchpad 管理方式和带宽未公开 | `[1, TPU 8t and TPU 8i at a glance / On-Chip SRAM (Vmem); Figure 4]` |
+| 片上存储 | 产品文章给 per-chip Vmem 384 MB，分布在两个 TensorCore 区域；JAX 专属配置给 192 MiB VMEM/TensorCore，两核局部容量算术合计 384 MiB | 每核容量有独立来源，MB/MiB 不静默换算；局部工作区合计不表示任一核心可访问全部容量，物理带宽与一致共享方式未公开 | `[1, On-Chip SRAM (Vmem); Figure 4]` `[5, TPU_8I branch]` |
 | 片内互联 | 两个 logic die 各有一个 `Memory and DMA interconnect`，两侧互联之间存在图示双向连接；左侧连接 host/management，右侧连接 ICI/CAE chiplet | package 内结构；拓扑、宽度、带宽和一致性未公开 | `[1, Figure 4]` |
 | 内存控制器与 PHY | 两个 logic die 各有四个 `HBM3 Ctrl`；ICI/SerDes chiplet 内标有 ICI Router、`6x Link Stack` 与 `6x200G SerDes octals + PCS` | Figure 4 原始标签。`200G` 的 lane、octal、编码和方向口径未解释，不由此计算聚合带宽 | `[1, Figure 4]` |
 | 工艺与物理规模 | 未公开 | 未找到工艺、die 面积或晶体管数的一手数据 | `[1, 全文及 Figure 4]` |
@@ -95,7 +101,7 @@
 | Boardfly building block 拓扑 | 来源冲突 | 正文写四芯片 `ring`，Figure 5 及图注写四芯片 `fully connected` `[1, Boardfly consists of the following elements; Figure 5]` | 并列保留，不裁定实际 tray 拓扑 |
 | Boardfly Pod 芯片数 | 口径未解释 | 正文前段写 `up to 1,152 chips`；Pod structure 写 `up to 1,024 active chips`；Figure 5 的 4×8×36 为 1,152 个位置 `[1, Boardfly ICI topology; Pod structure; Figure 5]` | 保留物理位置与 active 口径差异，不擅自解释为 spare 或降级配置 |
 | FP4 完整数值语义 | 未公开 | 官方规格表、Figure 4 | 只记录官方峰值，不猜测乘积、累加、输出、舍入和 FMA 计数 |
-| Vmem 管理、分配与带宽 | 未公开 | 规格表、Figure 4 | 不按 TensorCore 均分，也不擅自写成硬件 cache 或软件 scratchpad |
+| Vmem 管理、分配与带宽 | 每核容量及软件管理语义已有公开说明；跨核共享和物理带宽未公开 | JAX 给 192 MiB/TensorCore；Pallas 描述显式 VMEM/SMEM 工作区与编译器搬运 | 保留产品 384 MB 与两核开发配置合计 384 MiB 的单位差异；不当作自动共享的 L2 `[5, TPU_8I branch]` `[6, BlockSpecs and grid iteration]` |
 | CAE 内部结构与性能条件 | 未公开 | CAE 段、Figure 4 | 只记录归约/同步职责；5× 时延为缺少消息大小和基线的厂商相对值，不写成芯片铭牌规格 `[1, The Collectives Acceleration Engine]` |
 | ICI 有效载荷与编码 | 未公开 | Figure 4、Google 官方 TPU 8i 规格图 | 方向与 per-chip 口径已确认为双向 19.2 Tb/s；不把该值进一步解释为 payload 或持续带宽 |
 | 时钟、功耗与散热 | 未公开 | 三个官方页面 | 如实登记缺失 |
@@ -111,6 +117,8 @@
 | `[2]` | Amin Vahdat，*Our eighth generation TPUs: two chips for the agentic era*，Google，2026-04-22 | 官方发布文章与规格图 | TPU 8i 的 19.2 Tb/s per-chip 双向 scale-up 带宽口径 | [官方文章](https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/eighth-generation-tpu-agentic-era/)；[官方规格图](https://storage.googleapis.com/gweb-uniblog-publish-prod/images/TPU_8_Cloud_inline_2.width-1200.format-webp.webp) |
 | `[3]` | *Tensor Processing Units (TPUs)*，Google Cloud，访问日期 2026-09-16 | 官方产品页 | TPU 8i 当前状态与产品定位 | <https://cloud.google.com/tpu> |
 | `[4]` | Google，*TPU 8i 发布规格图* | 官方发布文章原始图像 | 1,152-chip Pod 的 11.6EFLOPS 被标为 FP8，与技术规格表 FP4 标签冲突 | <https://storage.googleapis.com/gweb-uniblog-publish-prod/images/TPU_8_Cloud_inline_2.width-1200.format-webp.webp> |
+| `[5]` | The JAX Authors，*TPU hardware information*，`jax/_src/tpu_info.py`，2026-09-17 快照 | 官方开发源码 | TensorCore 数量、每核 VMEM/SMEM 与 SparseCore 软件资源；不采用其中开发模型的峰值替代产品规格 | [官方源码](https://github.com/jax-ml/jax/blob/main/jax/_src/tpu_info.py)；[本地快照](../../../原始资料/网页快照/Google/JAX/2026-09-17/jax-info-source.py) |
+| `[6]` | The JAX Authors，*Pallas: TPU Details*，2026-09-17 快照 | 官方开发文档 | BlockSpecs and grid iteration、Placing operands in SMEM 的显式工作区与搬运语义 | [官方文档](https://docs.jax.dev/en/latest/pallas/tpu/details.html)；[本地快照](../../../原始资料/网页快照/Google/JAX/2026-09-17/jax-details.rst) |
 
 ## 9. 完成检查
 

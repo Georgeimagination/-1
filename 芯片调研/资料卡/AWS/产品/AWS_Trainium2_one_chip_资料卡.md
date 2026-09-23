@@ -2,7 +2,7 @@
 
 > 模板版本：1.3（芯片架构事实口径）  
 > 卡片状态：已完成  
-> 资料截止日：2026-09-16
+> 资料截止日：2026-09-23
 
 本卡采用一颗AWS Trainium2 chip/NeuronDevice作为正式比较对象。该芯片包含8个NeuronCore-v3（NCv3，第三代Neuron计算核）、4个HBM stack、128个主DMA engine和4个NeuronLink-v3接口。`trn2.3xlarge`确实配置一颗Trainium2；16-chip Trn2/Trn2u实例和64-chip Trn2 UltraServer的聚合资源不下放。
 
@@ -16,7 +16,7 @@
 | 对象形态 | 一颗Cloud AI accelerator chip/package | 单裸片、chiplet数量与物理package构造未公开 | `[1, device diagram and chip components]` |
 | 架构代际 | 8个NeuronCore-v3 | 每个NCv3有Tensor、Vector、Scalar和GPSIMD引擎 | `[1, Trainium2 chip components]` `[2, NeuronCore-v3 Compute Engines]` |
 | 发布与可用状态 | 2023-11-28公布；2024-12-03 Trn2正式可用；当前产品页仍列Trn2实例 | 芯片经Cloud实例交付，不写成独立销售芯片的GA | `[7, page date and Trainium2 announcement]` `[6, page date and opening]` `[5, Product details]` |
-| 厂商定位 | 面向generative AI training与inference | 产品页同时写training和inference，不将其简化为只训练 | `[5, opening and Why Amazon EC2 Trn2?]` |
+| 厂商定位 | 当前按训练与推理兼顾记录；2023年预告侧重训练 | 2023预告称purpose-built training；2024 GA定位段已明确为training与inference共同设计，当前产品页延续双用途，不能只据产品名称归为偏训练 | `[7, EC2 UltraClusters of Trainium2]` `[9, David Brown statement and opening]` `[5, Why Amazon EC2 Trn2?]` |
 | 目标 workload | LLM、diffusion、multimodal和MoE等大模型 | 产品定位；模型参数量和训练/推理成绩不写成芯片属性 | `[5, Benefits and Features]` |
 | 产品目标 | 提高FP8/BF16算力、HBM容量/带宽与NeuronLink扩展能力 | 单芯片规格与16/64-chip系统分层记录 | `[1, Trainium2 performance improvements]` |
 
@@ -49,6 +49,16 @@
 | 局部存储 | 每NCv3有28MiB software-managed SBUF和2MiB PSUM；SBUF有128个224KiB partition | SBUF/PSUM是core-local scratchpad，不是统一共享cache | `[2, NeuronCore-v3 Compute Engine Updates and Data Movement Updates]` |
 | 数据搬运辅助 | 每NCv3通常有16个主DMA和2个Descriptor Generation Engine；DMA支持copy与transpose | 一颗芯片共有128个主DMA；DGE按需生成DMA描述符 | `[1, Data movement]` `[2, DMA Transpose and Descriptor Generation Engine]` |
 
+### 3.1 局部存储争用与 DMA 调度条件
+
+| 机制 | 已公开条件 | 对执行的限制 | 来源 |
+|---|---|---|---|
+| SRAM并行访问 | Vector与GpSimd可并行访问SBUF；Vector performance mode使用两者共享总线，由硬件仲裁。Vector与Scalar可各按完整接口带宽并行访问PSUM，前提是不碰撞到同一bank | 独立sequencer不保证所有并行访问都无争用 | `[2, Data Movement Updates]` |
+| Vector performance mode | BF16/FP16的tensor_copy、tensor_scalar在输入输出均为SBUF且最内层free维物理连续时，相对NCv2可达四倍指令吞吐；一端为PSUM等情况只能进入两倍模式。内部算术仍为FP32 | 格式、指令、布局和存储位置共同决定吞吐；不等同FP32向量峰值四倍 | `[2, Vector Engine Performance Mode]` |
+| DMA transpose | 支持2-byte与4-byte数据；HBM→SBUF把最内层维映射为partition维。输出partition维为128的倍数、连续最内层free维为16的倍数时更有利于带宽利用 | 指南的友好布局上限为HBM→SBUF transpose约90% DMA吞吐、SBUF→SBUF transpose约50%，普通copy最高100%；不是任意shape的固定效率 | `[2, DMA Transpose, HBM2SBUF DMA transpose and SBUF2SBUF DMA transpose]` |
+| Descriptor Generation Engine（DGE，描述符生成引擎） | 每核两个，由Sync或Scalar sequencer发命令，按需生成copy/transpose描述符；指南估计每条DGE-based DMA指令约600ns | 所引版本不支持indirect DMA gather/scatter；600ns是指令开销，不是任意数据量的搬运完成延迟 | `[2, Descriptor Generation Engine]` |
+| GpSimd集成DMA | 每核八个GpSimd processor各带一个DMA；可与GpSimd计算及主DMA并行，访问同一Trn2实例内本地或其他芯片的SBUF/HBM；每核合计307GB/s，原文分方向各写153GB/s | 与全芯片128个主DMA分属不同路径，不将307GB/s相加为全芯片端到端带宽 | `[2, Gpsimd Engine]` |
+
 ## 4. Die、chiplet 与 package
 
 | 维度 | 共享实现或物理组成 | 作用域与条件 | 来源 |
@@ -56,7 +66,7 @@
 | 计算与专用单元 | 8个NCv3、128个主DMA、4个NeuronLink-v3接口；CC-Core数量在官方文档中存在16与20的冲突 | 单颗Trainium2 chip/device；CC-Core不取唯一值 | `[1, Trainium2 chip components]` `[2, Trainium2 Device Diagram]` |
 | 片上存储 | 28MiB SBUF和2MiB PSUM/NCv3；芯片SBUF合计224MiB | 八组core-local SRAM，不写成单一共享SRAM；PSUM合计16MiB为按核容量关系，不替代官方共享容量 | `[1, Memory]` `[2, NeuronCore-v3 Compute Engine Updates]` |
 | 片内互联 | 未公开完整拓扑 | 文档给出NCv3、HBM、DMA、CC-Core和NeuronLink功能块，未给chip级NoC或coherence | `[2, Trainium2 Device Diagram]` |
-| 内存控制器与PHY | 4个HBM stack，总容量96GiB | controller、PHY宽度、HBM代际、bank映射和stack高度未公开 | `[1, Memory]` `[2, Trainium2 Device Diagram]` |
+| 内存控制器与PHY | 4个HBM stack，总容量96GiB；Trn2产品页说明HBM3 | controller、PHY宽度、bank映射和stack高度未公开；不从实例规格推算未公开的物理接口 | `[1, Memory]` `[2, Trainium2 Device Diagram]` `[5, Benefits: Maximize training and inference performance for Generative AI models]` |
 | 工艺与物理规模 | 未公开 | 未找到process node、foundry、die area、晶体管数或电压范围 | `[1, full page]` `[5, full page]` |
 | 封装组成 | 未公开 | 单裸片/chiplet数量、interposer、基板和package尺寸均未找到；4个HBM stack不足以证明封装方式 | `[2, Trainium2 Device Diagram]` |
 | 封装内互联 | 未公开 | 没有足够证据证明compute chiplet或D2D协议 | `[1, device diagram]` |
@@ -70,7 +80,7 @@
 | 时钟 | Tensor 2.4GHz；Vector 0.96GHz；Scalar和GPSIMD各1.2GHz | engine clock，不存在一个公开的统一chip clock | `[2, Table 11]` |
 | 稠密理论峰值 | 1,299TFLOPS FP8；667TFLOPS BF16/FP16/TF32；181TFLOPS FP32 | 当前per-chip advertised peak；计数规则和频率条件未完整披露 | `[1, Compute]` |
 | 结构化稀疏峰值 | 最高 2,563TFLOPS FP8/FP16/BF16/TF32 | 当前per-chip advertised peak；是最高值；支持上述七种 M:N 模式，但官方未逐模式报告芯片峰值，不能认为每种模式均达到此值，也不能当作稠密峰值 | `[1, Compute]` `[3, Tensor Engine]` |
-| 内存类型与容量 | 4个HBM stack，96GiB/chip | NKI图另写4×24GB，原单位保留；HBM代际未公开 | `[1, Memory]` `[2, Trainium2 Device Diagram]` |
+| 内存类型与容量 | 4个HBM stack，96GiB/chip；Trn2产品页说明HBM3 | NKI图另写4×24GB，原单位保留；HBM3来自实例产品说明，不据此推断stack高度或PHY | `[1, Memory]` `[2, Trainium2 Device Diagram]` `[5, Benefits: Maximize training and inference performance for Generative AI models]` |
 | 内存带宽 | 2.9TB/s，NKI页另四舍五入为3TB/s | per-chip；方向和有效负载未公开 | `[1, Memory]` `[2, Trainium2 Device Diagram]` |
 | 片上存储 | 224MiB SBUF/chip；每NCv3另有2MiB PSUM | SBUF为8×28MiB core-local software-managed SRAM；PSUM也是core-local | `[1, Memory]` `[2, NeuronCore-v3 Compute Engine Updates]` |
 | DMA | 128个主DMA；chip级3.5TB/s，支持inline compression/decompression | 方向、有效负载和每engine峰值未作为芯片统一口径披露 | `[1, Data movement]` `[2, Trainium2 Device Diagram]` |
@@ -95,12 +105,12 @@
 | 项目 | 状态 | 已检查范围或冲突来源 | 当前处理 |
 |---|---|---|---|
 | Trainium代际称谓 | 官方术语计数基准不同 | 第二代Trainium与第三代NeuronDevice/自研ML chip措辞并存 | 产品名固定为Trainium2，不自行统一其余代际计数 |
-| 芯片与每核Tensor峰值 | 官方直接值不能简单相加 | chip页为1,299/667/181/2,563；NKI每核为158/79/20/316，乘8得到不同结果 | 芯片字段采用direct per-chip值，每核值只在Core层记录 |
+| 芯片与每核Tensor峰值 | 官方直接值不能简单相加 | chip页为1,299/667/181/2,563；NKI每核为158/79/20/316，乘8得到1,264/632/160/2,528TFLOPS | 比较纯Tensor矩阵资源时可用每核值乘8的名义合计，注明每核已取整；chip advertised peak另列，所查资料未完整说明计数范围，不把差额解释成确定的其他引擎贡献 |
 | 早期FP8稀疏峰值 | 官方版本发生变化 | 2024发布文章写5.2PFLOPS sparse FP8/chip；当前芯片页写2,563TFLOPS | 当前字段采用版本化芯片架构页；NKI 明确 double FP8 不能与 sparse matmul 合用。旧 5.2PFLOPS 保留为历史冲突，不猜测原因 `[2, Double FP8 Matmul Performance]` |
 | CC-Core数量 | 当前官方文档相互冲突 | 高层架构页写16个，NKI device图写20个 | 不填写唯一数量，只确认CC-Core存在 |
 | HBM容量单位 | 一手资料单位不同 | 芯片页96GiB；NKI图4×24GB；产品表96GB | 原单位按来源保留，不静默换算 |
 | HBM与NeuronLink带宽 | 粗略值与分层值并存 | NKI页3TB/s；芯片页2.9TB/s；芯片聚合NeuronLink 1.28TB/s，16/64-chip架构又分intra/inter | 主字段用直接per-chip 2.9和1.28；系统分层值不下放 |
-| 工艺、die/package与功耗 | 未公开 | 当前Neuron硬件页、NKI指南、产品页和GA公告 | 不采用第三方推测，不从实例指标反推 |
+| 工艺、die/package与功耗 | 未公开 | 当前Neuron硬件页、NKI指南、产品页和GA公告；HBM3另有Trn2产品页说明 | 不采用第三方推测，不从实例指标反推 |
 | 主机接口与RAS | 未公开完整规格 | 只确认逻辑PCIe路径，没有代际/lane/带宽或芯片级RAS细节 | 保持缺失 |
 
 ## 8. 最小参考资料
@@ -115,6 +125,7 @@
 | `[6]` | AWS，*Amazon EC2 Trn2 instances, powered by AWS Trainium2 chips, are now generally available*，2024-12-03 | 官方GA公告 | Trn2正式可用日期与当时UltraServer Preview状态 | <https://aws.amazon.com/about-aws/whats-new/2024/12/amazon-ec2-trn2-instances-available/> |
 | `[7]` | Amazon Press Center，*AWS Unveils Next Generation of AWS-Designed Chips*，2023-11-28 | 官方发布稿 | Trainium2公布日期、产品代际与计划定位 | <https://press.aboutamazon.com/2023/11/aws-unveils-next-generation-aws-designed-chips> |
 | `[8]` | AWS Neuron，*nki.isa.nc_matmul* | 官方ISA文档 | 物理阵列、FP8 double-row、输入格式与FP32累加 | <https://awsdocs-neuron.readthedocs-hosted.com/en/v2.29.1/nki/api/generated/nki.isa.nc_matmul.html> |
+| `[9]` | Amazon Press Center，*AWS Trainium2 Instances Now Generally Available*，2024-12-03 | 官方GA发布稿 | purpose-built for both training and inference的明确设计定位及其时间 | <https://press.aboutamazon.com/2024/12/aws-trainium2-instances-now-generally-available> |
 
 ## 9. 完成检查
 
@@ -130,4 +141,4 @@
 - [x] 所有数字和技术描述都能回到原文位置
 - [x] 文末只列正文实际使用的资料
 
-复核结论：AWS Trainium2 one chip的主语已经固定为一颗包含8个NeuronCore-v3的chip/NeuronDevice。当前官方1,299TFLOPS FP8、667TFLOPS BF16/FP16/TF32、181TFLOPS FP32、2,563TFLOPS结构化稀疏、96GiB HBM、224MiB SBUF、128个DMA engine和4个NeuronLink-v3接口均有AWS一手资料支持；1/16/64-chip对象、NeuronLink与EFA的边界没有混用。每核与每芯片峰值、早期FP8稀疏峰值以及16/20个CC-Core冲突已经按原始作用域保留，process、die/package构造、HBM代际、PCIe配置、绝对功耗和芯片级RAS保持缺失。
+复核结论：AWS Trainium2 one chip的主语已经固定为一颗包含8个NeuronCore-v3的chip/NeuronDevice。当前官方1,299TFLOPS FP8、667TFLOPS BF16/FP16/TF32、181TFLOPS FP32、2,563TFLOPS结构化稀疏、96GiB HBM、224MiB SBUF、128个DMA engine和4个NeuronLink-v3接口均有AWS一手资料支持；1/16/64-chip对象、NeuronLink与EFA的边界没有混用。每核与每芯片峰值、早期FP8稀疏峰值以及16/20个CC-Core冲突已经按原始作用域保留，HBM3由Trn2产品页说明；process、die/package构造、PCIe配置、绝对功耗和芯片级RAS保持缺失。

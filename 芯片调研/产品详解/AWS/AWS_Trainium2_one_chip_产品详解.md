@@ -4,7 +4,7 @@
 
 图：依据芯片与 NKI 架构文档重绘，完整芯片有八个 NCv3、四个 HBM stack、128 个主 DMA 与四组 NeuronLink-v3。图中只展开一核；CC-Core 的数量在两份官方资料中分别为 16 与 20，故不在图中选取单一数字。[1, Trainium2 chip components] [2, Trainium2 Device Diagram and NeuronCore-v3 Compute Engine Updates]
 
-Trainium2 将 AWS 的训练加速器扩展为八个 NeuronCore-v3，并支持推理负载。除核心数量增加外，FP8 执行模式、结构化稀疏、局部工作存储和数据搬运路径也有更新。[1, Trainium2 chip components and Compute] [2, NeuronCore-v3 Compute Engine Updates]
+Trainium2 由八个 NeuronCore-v3 构成，面向生成式 AI 训练与推理。2023 年初次预告强调训练；到 2024 年 GA 时，AWS 已明确把训练和推理都列为芯片的设计目标，当前产品页也沿用双用途定位。FP8 执行模式、结构化稀疏、局部工作存储和数据搬运路径相对前代有所更新。[12, opening and David Brown statement] [13, EC2 UltraClusters of Trainium2] [5, Why Amazon EC2 Trn2?] [1, Trainium2 chip components and Compute] [2, NeuronCore-v3 Compute Engine Updates]
 
 文中的 HBM 是高带宽外部存储，SBUF（State Buffer）是核心内的软件管理工作存储，PSUM（Partial Sum Buffer）保存矩阵部分和；DMA 负责直接搬运数据，CC-Core 负责集合通信。NKI（Neuron Kernel Interface）提供直接编写这些硬件计算与搬运操作的接口。[2, Trainium2 Device Diagram, NeuronCore-v3 Compute Engine Updates and Data Movement Updates]
 
@@ -41,7 +41,7 @@ VectorEngine 的高吞吐模式有操作与布局条件。BF16/FP16 的 `tensor_
 
 | 架构位置 | 单颗 Trainium2 规格 | 限定条件 |
 |---|---|---|
-| 稠密矩阵峰值 | FP8 1,299 TFLOPS（每秒万亿次浮点运算）；BF16/FP16/TF32 667 TFLOPS；FP32 181 TFLOPS | 官方完整芯片 advertised peak [1, Compute] |
+| 全芯片 advertised peak | FP8 1,299 TFLOPS（每秒万亿次浮点运算）；BF16/FP16/TF32 667 TFLOPS；FP32 181 TFLOPS | 官方未完整解释这些总值与各核Tensor资源加总的计数范围差别；纯Tensor名义合计为FP8 1,264、BF16/FP16 632 TFLOPS [1, Compute] [2, Tensor Engine；按八核计算] |
 | 结构化稀疏峰值 | 最高 2,563 TFLOPS，标注 FP8/FP16/BF16/TF32 | 非所有模式的统一值；double FP8 与 sparse 不合用 [1, Compute] [2, Double FP8 Matmul Performance] |
 | 本地 HBM | 4 stack，96 GiB；2.9 TB/s（NKI 写 3 TB/s） | HBM3 由 Trn2 实例产品页说明，单芯片页只称 HBM [1, Memory] [2, Trainium2 Device Diagram] [5, Benefits: Maximize training and inference performance for Generative AI models] |
 | 每核 SRAM | 28 MiB SBUF + 2 MiB PSUM | 八组局部空间，不是共享 cache [2, NeuronCore-v3 Compute Engine Updates] |
@@ -95,5 +95,9 @@ EC2 规格表将 `trn2.3xlarge` 列为一颗 Trainium2；十六芯片实例与�
 [8] AWS Neuron，*nki.isa.nc_matmul*。<https://awsdocs-neuron.readthedocs-hosted.com/en/v2.29.1/nki/api/generated/nki.isa.nc_matmul.html>
 
 [10] AWS Neuron，*Logical NeuronCore configuration*。<https://awsdocs-neuron.readthedocs-hosted.com/en/v2.29.1/about-neuron/arch/neuron-features/logical-neuroncore-config.html>
+
+[12] Amazon Press Center，*AWS Trainium2 Instances Now Generally Available*，2024-12-03。<https://press.aboutamazon.com/2024/12/aws-trainium2-instances-now-generally-available>
+
+[13] Amazon Press Center，*AWS Unveils Next Generation of AWS-Designed Chips*，2023-11-28。<https://press.aboutamazon.com/2023/11/aws-unveils-next-generation-aws-designed-chips>
 
 [11] AWS，*Accelerated computing instances*，Hardware specifications。<https://docs.aws.amazon.com/ec2/latest/instancetypes/ac.html>

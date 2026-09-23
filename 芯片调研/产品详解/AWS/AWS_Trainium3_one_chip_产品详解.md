@@ -4,7 +4,7 @@
 
 图：依据 Trainium3 芯片与 NKI 架构指南重绘。四个 HBM stack、八个 NCv4、128 个 DMA 和四组 NeuronLink-v4 为全芯片资源。公开文档没有确认 die/chiplet 拆分，本图不把八个核心画成八个物理裸片。[1, NeuronCore-v4 table] [2, device overview and NeuronCore-v4 Compute Engine Updates] [6, each-chip paragraph]
 
-Trainium3 是 AWS 的第三代训练芯片，也面向推理。它由八个 NeuronCore-v4 构成，保留多引擎与软件管理 SRAM 的基本组织，新增 MX 低精度路径，并扩大 HBM 与互联资源。[1, Compute and Memory] [2, device overview]
+Trainium3 由八个 NeuronCore-v4 构成，官方 GA 公告和当前产品页共同强调训练与 serving，本文按训推兼顾记录。它保留多引擎与软件管理 SRAM 的基本组织，新增 MX 低精度路径，并扩大 HBM 与互联资源。[6, opening and training and serving paragraph] [5, Why Amazon EC2 Trn3 UltraServers?] [1, Compute and Memory] [2, device overview]
 
 文中的 HBM 是高带宽外部存储，SBUF（State Buffer）是核心内的软件管理工作存储，PSUM（Partial Sum Buffer）保存矩阵部分和；DMA 负责直接搬运数据，CC-Core 负责集合通信。NKI（Neuron Kernel Interface）提供直接编写这些硬件计算与搬运操作的接口。[2, device overview, NeuronCore-v4 Compute Engine Updates and Data Movement and DMA updates]
 
@@ -51,8 +51,8 @@ Activation2 还支持 bias 减法、关闭 scale/bias，以及 add、max、min�
 
 | 架构位置 | 单颗 Trainium3 规格 | 阅读条件 |
 |---|---|---|
-| MX 矩阵路径 | 2,517 TFLOPS（每秒万亿次浮点运算） MXFP8/MXFP4 | 两种输入列同一峰值，MXFP4 不再翻倍 [1, Compute] [3, Tensor Engine] |
-| 其他稠密精度 | 671 TFLOPS BF16/FP16/TF32；183 TFLOPS FP32 | 官方完整芯片峰值 [1, Compute] |
+| MX advertised peak | 2,517 TFLOPS（每秒万亿次浮点运算） MXFP8/MXFP4 | 官方芯片页值；每核315×8得到2,520 TFLOPS的纯Tensor名义合计，原报每核已取整。两种输入列同一峰值，MXFP4不再翻倍 [1, Compute] [2, Tensor Engine] [3, Tensor Engine] |
+| 其他稠密精度 | 671 TFLOPS BF16/FP16/TF32；183 TFLOPS FP32 | 官方全芯片advertised peak；与各核Tensor相加的计数差别未完整解释。纯Tensor名义合计为BF16/FP16 632、FP32 160 TFLOPS [1, Compute] [2, Tensor Engine；按八核计算] |
 | 结构化稀疏 | 2,517 TFLOPS FP16/BF16/TF32 sparse | 与稠密值分开；模式包括 4:16、4:12、4:8、2:8、2:4、1:4、1:2 [1, Compute] [3, Tensor Engine] |
 | HBM3e | 4 stack；144 GiB/144 GB；4.9/4.7 TB/s | 单位与带宽差异按上述来源保留 [1, Device memory] [2, device overview] [6, each-chip paragraph] |
 | 每核 SRAM | 32 MiB SBUF + 2 MiB PSUM | 八套局部存储 [2, NeuronCore-v4 Compute Engine Updates] |

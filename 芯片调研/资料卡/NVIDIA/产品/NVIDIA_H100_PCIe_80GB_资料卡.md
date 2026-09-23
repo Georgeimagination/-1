@@ -2,7 +2,7 @@
 
 > 模板版本：1.3（芯片架构事实口径）  
 > 卡片状态：已完成  
-> 资料截止日：2026-08-24
+> 资料截止日：2026-09-23
 
 本卡的主语是标准 NVIDIA H100 PCIe 80GB 加速卡，即 P1010 SKU 200 / GH100-200。H100 SXM5、94 GB H100 NVL、Grace Hopper、HGX 与 DGX 均不是本卡的产品配置。
 
@@ -18,7 +18,7 @@
 | 发布与可用状态 | H100 家族于 2022-09-20 进入 full production；本卡产品简报 v02 日期为 2022-11-30 | 家族状态不改写成该卡的单独零售日期 | `[3, Global Rollout of Hopper]` `[2, Document History]` |
 | 厂商定位 | 主流服务器中的 AI、data analytics 与 HPC 加速 | 产品简报对 H100 PCIe 的定位 | `[2, p. 1, Overview]` |
 | 目标 workload | 对话式 AI、推荐、视觉 AI，以及需要 FP64、FP32、FP16 或 INT8 的 AI/HPC workload | 厂商列举，不等于 benchmark 结果 | `[2, p. 1, Overview]` |
-| 产品目标 | 在标准 PCIe 服务器中提供高计算与内存吞吐，并允许七个硬件隔离 MIG 实例或两卡桥接 | 目标与实际端点配置分开记录 | `[2, pp. 1, 4, 8-9]` |
+| 产品目标 | 面向标准机架中功率预算较低的主流服务器，白皮书特别列出一次扩展到 1 或 2 个 GPU 的应用，包括 AI inference 和部分 HPC；可划分七个 MIG 实例或进行两卡桥接 | 这是部署和扩展目标；所列用途不构成推理专用限制 | `[1, p. 15, H100 PCIe Gen 5 GPU]` `[2, pp. 1, 4, 8-9]` |
 
 本卡包含：H100 PCIe 80GB 的实际使能 GH100 资源、HBM2e、PCIe 接口、可选 NVLink bridge、功耗和卡形态。
 
@@ -67,11 +67,15 @@
 | 内存类型与容量 | 80 GB HBM2e；1,593 MHz；5,120-bit interface | 单卡，五个 stack、十个 512-bit controller | `[1, pp. 18, 40]` `[2, p. 4, Table 2]` |
 | 内存带宽 | 2,000 GB/s | 采用 2022-11 产品简报定版值；白皮书的 2,039 GB/s 明示尚未 finalized | `[2, p. 4, Table 2]` `[1, p. 40, Table 3, GPU Memory Bandwidth row: Not Finalized]` |
 | 主机接口 | PCIe Gen5 x16、Gen5 x8 或 Gen4 x16；Gen5 x16 为每方向 64 GB/s、双向合计 128 GB/s | lane/polarity reversal supported；带宽只对应 Gen5 x16 | `[2, p. 4, Table 1 continued]` `[1, pp. 49-50]` |
+| PCIe 事务与虚拟化 | Hopper 原生支持 32-bit 和 64-bit atomic CAS（比较并交换）、exchange 与 fetch-add；支持 SR-IOV（单根 I/O 虚拟化），PF（物理功能）或 VF（虚拟功能）可经 NVLink 访问 peer GPU | 共享 H100 架构能力；原子操作支持不等于 CPU/GPU cache coherence，VF 数也不等于 MIG 实例数 | `[1, p. 50, PCIe Gen 5]` |
 | 设备互联端点 | 三个两槽 NVLink bridge 可把本卡与一张相邻 H100 PCIe 卡连接；Table 6 给出 48 条 Rx+Tx lane、每 lane 每方向 100 Gbps、最大 600 GB/s | 三个 bridge 必须全部安装才有 peak bridge bandwidth；产品简报 p. 1 的 900 GB/s 与 Table 6 冲突 | `[2, pp. 8-9, Table 6]` |
 | 内存访问语义 | 常规 NVLink 连接的 GPU 共享 common address space，并按 GPU physical address 路由 | 不等同于 cache coherence；资料未说明 PCIe bridge 配置的远端访问性能 | `[1, p. 47]` |
 | 跨设备集合通信能力 | 未找到 H100 PCIe 卡内独立 collective engine | 两卡 bridge 提供点到点链路，不能据此写入卡内 collective offload | `[2, pp. 8-10]` |
 | 功耗 | 350 W maximum board power；支持的 300 W cable mode 将 default/maximum 限制为 310 W，minimum 为 200 W | 350 W 需要 450 W 或 600 W power mode；不是固定持续功耗 | `[2, pp. 3, 11-12, Tables 1, 7-8]` |
 | 形态与散热 | FHFL 10.5-inch、dual-slot PCIe 卡；passive heatsink，支持两种服务器气流方向 | 卡自身无风扇，依赖 system airflow | `[2, pp. 1, 3, 7-8]` |
+| MIG 分区 | 最多 7 个 MIG 实例；SR-IOV 支持 32 个 VF；Hopper 为每个 GPU instance 分配独占 crossbar port、L2 bank、memory controller 与 DRAM address bus | MIG（Multi-Instance GPU，多实例 GPU）通过硬件资源隔离提供服务质量；整 GPU 的 L2/HBM 汇总容量不能当作每个实例可用量，实例容量不据物理总量平均分配 | `[2, p. 4, Tables 1, 3]` `[1, pp. 42-43, MIG Technology Review]` |
+| MIG 媒体与性能监视 | Hopper 的每个 MIG GPU instance 可分配至少一个 NVDEC 视频解码器和一个 NVJPG JPEG 解码器；每个 instance 有独立 performance monitor，支持 concurrent profiling | 共享 Hopper 架构机制；实际分配取决于实例配置，不表示同一解码器可重复计给多个实例 | `[1, p. 44, H100 MIG Enhancements]` |
+| 热管理测量与阈值 | TAVG 为 GPU 内部温度传感器的平均值，THBM 为全部 HBM 传感器的最高值；热资格条件为 TAVG＝87°C、THBM＝95°C。TLIMIT 表示距软件降频阈值的摄氏温度余量，最大运行条件 TLIMIT＝0°C，硬件降频至 50% 时钟的阈值为 −2°C，硬件关断为 −5°C | TLIMIT 是相对阈值的余量，负数不是芯片实际温度；本卡热资格条件也不能移用于其他 H100 SKU | `[2, pp. 5-6, Tables 4-5]` |
 
 ## 6. 系统级互联上下文
 
