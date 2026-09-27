@@ -204,23 +204,23 @@ def draw_family(data,out,family_path):
             if all(values.values()):metrics.append({'name':name,'unit':unit,'values':values,'sources':{i:rows[i][field]['source'] for i in ids},'condition':'使用 panorama36.json 中同一 SKU 的选定值；功率为各自模组或板卡边界的上限。'})
         return metrics
     if 'A01' in groups:
-        charts.append({'group':'A01','name':'家族01_TPU8资源变化','title':'TPU 8i 相对 8t：局部存储增加最明显','baseline':'tpu8t','products':['tpu8i'],
+        charts.append({'group':'A01','name':'家族01_TPU8资源变化','title':'TPU 8t / 8i 资源对比','baseline':'tpu8t','products':['tpu8i'],
                        'resources':groups['A01']['resources'],
                        'note':'整芯片产品表；Vmem 非统一共享 cache。FP4 保留来源标签冲突；带宽均为标称值。'})
     if 'A06' in groups:
         ids=['mi350x','mi350p','mi355x'];resources=common(ids)
         local=[m for m in groups['A06']['resources'] if m['name'] in ('使能 CU','最高引擎时钟','每 CU LDS')]
         resources=local[:1]+resources[:1]+local[1:]+resources[1:]
-        charts.append({'group':'A06','name':'家族02_MI350资源变化','title':'MI350 家族：规模减半与功率档位调整','baseline':'mi350x','products':['mi350p','mi355x'],
+        charts.append({'group':'A06','name':'家族02_MI350资源变化','title':'MI350 系列资源对比','baseline':'mi350x','products':['mi350p','mi355x'],
                        'resources':resources,'note':'MI350X 选网页 2,300；MI355X 选简报 2,516.6 TFLOP/s。P 为 PCIe 卡，X 为 OAM 模组。'})
     if 'A07' in groups:
         ids=['h200_sxm5','h200_nvl'];resources=common(ids)
         resources.insert(3,{'name':'NVLink 收发合计','unit':'GB/s','values':{i:rows[i]['endpoint']['bidir_gb_s'] for i in ids},'sources':{i:rows[i]['endpoint']['source'] for i in ids},'condition':'相同标称端点预算不表示相同连接域或拓扑。'})
-        charts.append({'group':'A07','name':'家族03_H200资源变化','title':'H200 NVL 相对 SXM：内存容量相同，计算峰值较低','baseline':'h200_sxm5','products':['h200_nvl'],
+        charts.append({'group':'A07','name':'家族03_H200资源变化','title':'H200 SXM / NVL 资源对比','baseline':'h200_sxm5','products':['h200_nvl'],
                        'resources':resources,'note':'NVL 4.813 与 SXM 4.8 TB/s 按各简报保留；1.003× 不解读为已测得的带宽优势。'})
     for ch in charts:
         rr=ch['resources'];base=ch['baseline'];targets=ch['products']
-        fig,ax=plt.subplots(figsize=(11.5,max(6.5,len(rr)*.70+2)));fig.subplots_adjust(left=.28,right=.97,top=.85,bottom=.25)
+        fig,ax=plt.subplots(figsize=(11.5,max(6,len(rr)*.70+1.5)));fig.subplots_adjust(left=.28,right=.97,top=.85,bottom=.18)
         ax.set_xscale('log');ax.set_xlim(.35,4.7 if ch['group']=='A01' else 1.9)
         ax.set_xticks([.5,1,2,3] if ch['group']=='A01' else [.5,.75,1,1.5]);ax.xaxis.set_major_formatter(FuncFormatter(lambda x,p:f'{x:g}×'));ax.xaxis.set_minor_formatter(NullFormatter())
         ax.set_yticks(range(len(rr)),[f"{r['name']}\n（{'个' if r['unit']=='count' else r['unit']}）" for r in rr]);ax.set_ylim(len(rr)-.4,-.6)
@@ -234,9 +234,8 @@ def draw_family(data,out,family_path):
                 ax.plot([1,ratio],[y,y],color=c,lw=1.5)
                 a=ax.scatter(ratio,y,s=57,marker=marker,color=c,zorder=3);a.set_urls(['#panorama-'+t])
                 ax.annotate(f'{ratio:.3f}×',(ratio,y),xytext=(9,0),textcoords='offset points',va='center',fontsize=10,bbox={'facecolor':'white','edgecolor':'none','pad':1.2,'alpha':.94})
-        ax.set_xlabel(f"以 {rows[base]['label']} 的对应资源为 1（对数坐标）",labelpad=12)
+        ax.set_xlabel(f"资源比值（{rows[base]['short_label']} = 1）",labelpad=12)
         fig.suptitle(ch['title'],x=.28,ha='left',fontsize=14)
-        fig.text(.12,.10,ch['note'],fontsize=9,color='#64737B')
         fig.legend(handles=handles,loc='lower center',ncol=len(handles),frameon=False,bbox_to_anchor=(.55,.012))
         for ext in ('svg','pdf','png'):fig.savefig(out/f"{ch['name']}.{ext}",bbox_inches='tight',pad_inches=.16,facecolor='white')
         plt.close(fig);figs.append(ch['name'])

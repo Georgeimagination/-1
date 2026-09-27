@@ -114,6 +114,10 @@ MIG 为各实例划定独占的 crossbar 端口、L2 bank、内存控制器和 D
 
 H100 家族于 2022 年 9 月宣布进入量产。现有资料没有披露本卡完整片内网络带宽、封装基板或持续 NVLink 有效载荷性能；图只画已能确认的组成和访问关系。[3, Global Rollout of Hopper；1, pp.18-19；2, pp.8-10]
 
+## 型号公开与供货时间
+
+本次采用的首次型号公开时间为 2022-03-22。公告明确 PCIe 形态；后续简报日期不当首次公开日。正式发布或供货记录：2022-09：家族量产；卡片 v02 简报 2022-11-30。[29, NVIDIA H100 at Every Scale; Availability]; [3, Global Rollout of Hopper]; [2, Document History]
+
 ## 参考资料
 
 页码采用文内印刷页码；独立微基准采用 PDF 页序。网页按所列章节、表或图定位。
@@ -135,3 +139,5 @@ H100 家族于 2022 年 9 月宣布进入量产。现有资料没有披露本卡
 [27] Tim Lühnen 等，*Benchmarking Thread Block Cluster*，本地 PDF 版本生成于 2024。[本地 PDF](../../原始资料/论文/NVIDIA_GPU/02_独立逆向与微基准/2024_Benchmarking_Thread_Block_Cluster.pdf)
 
 [28] NVIDIA，*Parallel Thread Execution ISA*，9.4。[原文](https://docs.nvidia.com/cuda/parallel-thread-execution/) [本地原文](../../原始资料/网页快照/NVIDIA/CUDA-PTX/2026-09-17/ptx-9.4.html)
+
+[29] NVIDIA，*NVIDIA Announces Hopper Architecture, the Next Generation of Accelerated Computing*，2022-03-22。[原文](https://nvidianews.nvidia.com/news/nvidia-announces-hopper-architecture-the-next-generation-of-accelerated-computing)；[本地原文](../../原始资料/网页快照/比较补充/2026-09-24/f03b0c4d4193.html)

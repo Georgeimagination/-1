@@ -61,6 +61,10 @@ Ascend 310 提供 PCIe 3.0 的 1 至 4 lane RC/EP 控制器、Gigabit Ethernet �
 
 裸片照片标注边长为 9.8×10.65mm。封装类型、尺寸、晶体管数及当前销售状态没有在本文参考资料中明确披露。该型号于 2018 年推出，华为 2019 年报记录了基于 Ascend 310 的 Atlas 产品部署；这些记录不应与后来的 Ascend 310P、310B、310C 合并使用。[1, p.40] [2, Table 10] [8, p.34]
 
+## 型号公开与供货时间
+
+本次采用的首次型号公开时间为 2018。官方回顾确认型号发布年；不将仅列系列的公告日期强行当成精确型号日期。正式发布或供货记录：未找到精确日期。[10, Chips are the building blocks]; [2, Table 10]
+
 ## 参考资料
 
 [1] Huawei，*DaVinci: A Scalable Architecture for Neural Network Computing*，Hot Chips 31，2019。[本地 PDF](../../原始资料/论文/华为昇腾_DaVinci/01_厂商直接架构论文/2019_DaVinci_Scalable_Architecture_HotChips31.pdf)
@@ -70,3 +74,5 @@ Ascend 310 提供 PCIe 3.0 的 1 至 4 lane RC/EP 控制器、Gigabit Ethernet �
 [8] 华为投资控股有限公司，*华为 2019 年年度报告*。<https://www-file.huawei.com/-/media/corporate/pdf/annual-report/annual_report_2019_cn.pdf?la=zh> [本地原文](../../原始资料/论文/华为昇腾_DaVinci/90_官方白皮书与技术资料/Huawei-2019-Annual-Report.pdf)
 
 [9] Yifeng Tang and Cho-li Wang，*Performance modeling on DaVinci AI core*，Journal of Parallel and Distributed Computing 175 (2023), pp.134-149。[本地 PDF](../../原始资料/论文/华为昇腾_DaVinci/02_独立逆向与微基准/2023_Performance_Modeling_DaVinci_AI_Core.pdf)
+
+[10] Huawei，*Groundbreaking SuperPoD Interconnect: Leading a New Paradigm for AI Infrastructure*，2025。[原文](https://www.huawei.com/en/news/2025/9/hc-xu-keynote-speech)；[本地原文](../../原始资料/网页快照/比较补充/2026-09-24/451d351a4ef3.html)

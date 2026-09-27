@@ -83,6 +83,10 @@ Trillium在Cloud API、日志和技术文档中统一称为TPU v6e。本卡采�
 | 系统可靠性 | 未找到v6e的ICI故障绕行说明 | 不套用v4、v5p或TPU7x的ICI resiliency | `[3, Cloud TPU ICI resiliency]` |
 | 相关系统 | full host有8 chips和1,536GiB DRAM；1-chip VM有44 vCPU/176GB RAM，4-chip VM为180/720GB，8-chip VM为360/1,440GB | host DRAM、VM RAM、CPU与NIC不是chip内资源；1,536GiB物理host值也不同于1,440GB VM分配值 | `[1, System architecture and VM types]` |
 
+### scale-up 域的配置边界
+
+官方支持形状表列出 16×16、256 芯片的 slice。8-chip 单 VM 配置是推理优化形态，多 host inference 另有软件支持，因此单 VM 数量不等于整个 ICI 域的上限。 [1, Supported configurations]
+
 ## 7. 证据缺口与来源冲突
 
 | 项目 | 状态 | 已检查范围或冲突来源 | 当前处理 |

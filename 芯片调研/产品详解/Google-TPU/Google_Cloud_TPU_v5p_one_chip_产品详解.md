@@ -72,6 +72,10 @@ v5p 的一个 host 连接四颗 TPU，Pod 包含 8,960 颗，单个可调度 sli
 v5p 使用液冷封装。Google 生命周期论文测得 fleet 平均 331 W/TPU，不含 host；TDP（散热设计功耗）、峰值功耗、die 工艺与面积仍未公开；本文使用的约 1.75 GHz 来自开发者架构说明，未被定义为产品保证频率。331 W 适合描述该论文所统计的生产运行情况，不适合作为所有模型或所有频率下的固定功耗。[2, pp. 2, 6] [7, p. 2, Table 1] [20, Appendix A / VPU]
 
 
+## 型号公开与供货时间
+
+本次采用的首次型号公开时间为 2023-12-06。首次型号公开与正式可用跨年。正式发布或供货记录：2024-04-09：Cloud TPU v5p GA。[4, page date and opening]; [25, Cloud TPU v5p GA]
+
 ## 参考资料
 
 [1] Google Cloud，*TPU v5p*。<https://docs.cloud.google.com/tpu/docs/v5p>
@@ -91,3 +95,5 @@ v5p 使用液冷封装。Google 生命周期论文测得 fleet 平均 331 W/TPU�
 [23] The JAX Authors，*SparseCore Kernel Writing*，获取于 2026-09-17。[官方文档](https://docs.jax.dev/en/latest/pallas/tpu/sparsecore.html)；[官方仓库原文](https://github.com/jax-ml/jax/blob/main/docs/pallas/tpu/sparsecore.md)。 [本地原文快照](../../原始资料/网页快照/Google/JAX/2026-09-17/jax-sparsecore.md)
 
 [24] Amin Vahdat，*Ironwood: The first Google TPU for the age of inference*，Google，2025-04-09，2025-04-23 更新。[官方原文](https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/ironwood-tpu-age-of-inference/)。Figure 2 图注明确 v4/v5p 的 FP8 为 emulated。
+
+[25] Google Cloud，*What's new with Google Cloud's AI Hypercomputer architecture*，2024-04-09。[原文](https://cloud.google.com/blog/products/compute/whats-new-with-google-clouds-ai-hypercomputer-architecture)；[本地原文](../../原始资料/网页快照/比较补充/2026-09-24/248f3e789891.html)

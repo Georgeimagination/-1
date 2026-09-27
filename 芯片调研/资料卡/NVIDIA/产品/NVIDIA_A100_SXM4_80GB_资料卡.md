@@ -81,6 +81,10 @@
 | 相邻产品 | A100 PCIe 80GB为300W、1,935GB/s的PCIe card，经NVLink Bridge最多连接2卡 | 不用PCIe卡的功耗、带宽、散热和bridge拓扑补写SXM4 | `[1, p. 1, specifications and note 2]` |
 | 早期40GB配置 | A100 SXM4 40GB为HBM2、1,555GB/s，MIG最小profile为5GB | 2020-05首发A100/DGX的320GB系统是40GB时代资料，不用于80GB SKU发布或容量 | `[2, pp. 34-36]` `[4, opening paragraphs]` |
 
+### scale-up 域的配置边界
+
+80GB 数据手册列出八 GPU 的 HGX A100 配置；A100 白皮书给出八颗 GPU 经 NVSwitch 连接的组织。80GB 发布稿另列四 GPU 形态，但本次来源没有单列四卡拓扑。更大的 DGX POD 经 InfiniBand 或 Ethernet 连接，不能将集群 GPU 数当成单个 NVLink 域。 [1, p.1, Server Options] [2, pp.52-53,70-71] [4, HGX A100 systems paragraph]
+
 ## 7. 证据缺口与来源冲突
 
 | 项目 | 状态 | 已检查范围或冲突来源 | 当前处理 |

@@ -62,6 +62,14 @@ v5e 提供一芯片 VM，也有多芯片配置。完整 host 中的 CPU、主机
 Google 的硬件生命周期论文给出生产 fleet 平均 66 W/TPU，且不含 host。这是部署中测得的平均值，没有被定义为 TDP（散热设计功耗）或功耗上限；论文同时指出 v5e tray 使用散热器和主动强制风冷。scaling book 使用约 1.5 GHz 的架构估算时钟，[20, What Is a TPU?] 产品页未给保证频率范围；主机物理接口细节、die 工艺与面积仍未公开，也没有给出可重画其真实封装布局的 stack 数量。图中的简化程度由这些证据限制决定。[6, p. 2, Table 1; p. 12, Appendix B.1-B.2]
 
 
+## 型号公开与供货时间
+
+本次采用的首次型号公开时间为 2023-08-29。8 月公告为 Preview，11 月是正式可用。正式发布或供货记录：2023-11-08：Cloud TPU v5e GA。[23, opening and page date]; [4, opening]
+
+## scale-up 域的配置边界
+
+Cloud 文档明确支持最多 256 颗芯片的训练 slice。单 host serving 提供 1、4、8 芯片配置，更多芯片的多 host serving 需结合 Sax；因此 8 颗不能写成全部 v5e 推理任务的上限。 [1, Cloud TPU v5e types for training / Cloud TPU v5e types for serving]
+
 ## 参考资料
 
 [1] Google Cloud，*TPU v5e*。<https://docs.cloud.google.com/tpu/docs/v5e>
@@ -77,3 +85,5 @@ Google 的硬件生命周期论文给出生产 fleet 平均 66 W/TPU，且不含
 [21] The JAX Authors，*TPU hardware information*，`jax/_src/tpu_info.py`，获取于 2026-09-17。[官方源码](https://github.com/jax-ml/jax/blob/main/jax/_src/tpu_info.py)；[TPU Hardware Reference](https://docs.jax.dev/en/latest/pallas/tpu/hardware.html)。数值引用对应产品分支；该表是开发工具的硬件描述，`0 / Not Available` 不作为物理资源不存在的证据。 [本地原文快照](../../原始资料/网页快照/Google/JAX/2026-09-17/jax-info-source.py)
 
 [22] The JAX Authors，*Pallas: TPU Details*，获取于 2026-09-17。[官方文档](https://docs.jax.dev/en/latest/pallas/tpu/details.html)；[官方仓库原文](https://github.com/jax-ml/jax/blob/main/docs/pallas/tpu/details.rst)。 [本地原文快照](../../原始资料/网页快照/Google/JAX/2026-09-17/jax-details.rst)
+
+[23] Google Cloud，*Expanding our AI-optimized infrastructure portfolio: Introducing Cloud TPU v5e and announcing A3 GA*，2023-08-29。[原文](https://cloud.google.com/blog/products/compute/announcing-cloud-tpu-v5e-and-a3-gpus-in-ga)；[本地原文](../../原始资料/网页快照/比较补充/2026-09-24/a16809a3458a.html)

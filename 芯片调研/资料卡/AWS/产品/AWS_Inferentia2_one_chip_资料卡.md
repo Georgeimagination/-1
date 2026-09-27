@@ -101,6 +101,10 @@ NKI 对 Trainium1 和 Inferentia2 给出共同的 NCv2 执行机制。下列容�
 | 实例网络与厂商“scale-out”措辞 | 最大实例有100Gbps网络，单芯片实例最高15或25Gbps；AWS把单个多芯片Inf2内的模型分片称为scale-out distributed inference | NeuronLink证据只支持6/12-chip instance内通信；当前四种Inf2均无EFA，不能写成跨instance/server fabric | `[5, opening and Product details]` `[6, NeuronLink v2]` `[8, Network specifications: Inf2]` |
 | 相关系统 | Inf2有1/6/12-chip四种实例，最大实例有192 vCPU和768GiB host RAM | host资源与9.8TB/s实例内存带宽不下放 | `[5, Product details and high-bandwidth accelerator memory]` |
 
+### scale-up 域的配置边界
+
+Inf2 的多芯片配置分别为 inf2.24xlarge 的六颗和 inf2.48xlarge 的十二颗，NeuronLink-v2 支持这些芯片间的 collective 和模型切分。已查系统页没有给出精确图形拓扑，因此不单凭两组端口推定环形连接。 [4, Inf2 Architecture table / NeuronLink-v2 paragraph]
+
 ## 7. 证据缺口与来源冲突
 
 | 项目 | 状态 | 已检查范围或冲突来源 | 当前处理 |

@@ -1,0 +1,820 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1225.514336pt" height="388.332pt" viewBox="0 0 1225.514336 388.332" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-09-24T23:06:31.502054</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 388.332
+L 1225.514336 388.332
+L 1225.514336 0
+L 0 0
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 52.634336 316.224
+L 366.126228 316.224
+L 366.126228 65.376
+L 52.634336 65.376
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1"/>
+     <g id="text_1">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(93.253865 328.582887)">偏训练</text>
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(101.303865 339.466676)">1/6</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2"/>
+     <g id="text_2">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(194.380282 328.532887)">偏推理</text>
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(199.649813 339.416676)">1/15</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3"/>
+     <g id="text_3">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(290.506699 328.543824)">训推兼顾</text>
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(300.77623 339.427613)">0/15</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_4">
+      <path d="M 52.634336 245.844031
+L 366.126228 245.844031
+" clip-path="url(#p523edf1895)" style="fill: none; stroke: #e2e8eb; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_5">
+      <defs>
+       <path id="m8873887f77" d="M 0 0
+L -3.5 0
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m8873887f77" x="52.634336" y="245.844031" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 11px; font-family: 'Arial', 'Heiti TC'; text-anchor: end" x="45.634336" y="249.848182" transform="rotate(-0 45.634336 249.848182)">200</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_6">
+      <path d="M 52.634336 120.736822
+L 366.126228 120.736822
+" clip-path="url(#p523edf1895)" style="fill: none; stroke: #e2e8eb; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_7">
+      <g>
+       <use xlink:href="#m8873887f77" x="52.634336" y="120.736822" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 11px; font-family: 'Arial', 'Heiti TC'; text-anchor: end" x="45.634336" y="124.740972" transform="rotate(-0 45.634336 124.740972)">500</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_8">
+      <defs>
+       <path id="m2f0c58f87b" d="M 0 0
+L -2 0
+" style="stroke: #000000; stroke-width: 0.6"/>
+      </defs>
+      <g>
+       <use xlink:href="#m2f0c58f87b" x="52.634336" y="190.483209" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_9">
+      <g>
+       <use xlink:href="#m2f0c58f87b" x="52.634336" y="151.204081" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_10">
+      <g>
+       <use xlink:href="#m2f0c58f87b" x="52.634336" y="95.843259" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_11">
+      <g>
+       <use xlink:href="#m2f0c58f87b" x="52.634336" y="74.796051" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 11px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle" x="20.968301" y="190.8" transform="rotate(-90 20.968301 190.8)">W</text>
+    </g>
+   </g>
+   <g id="line2d_12">
+    <path d="M 86.006053 190.483209
+L 130.501677 190.483209
+" clip-path="url(#p523edf1895)" style="fill: none; stroke: #b64945; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_13">
+    <path d="M 187.13247 235.969615
+L 231.628094 235.969615
+" clip-path="url(#p523edf1895)" style="fill: none; stroke: #218378; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 52.634336 316.224
+L 52.634336 65.376
+" style="fill: none; stroke: #000000; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 52.634336 316.224
+L 366.126228 316.224
+" style="fill: none; stroke: #000000; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 9px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle; fill: #b64945" x="108.253865" y="62.86752" transform="rotate(-0 108.253865 62.86752)">300</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 9px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle; fill: #218378" x="209.380282" y="62.86752" transform="rotate(-0 209.380282 62.86752)">215</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle; fill: #88949c" x="310.506699" y="215.8848" transform="rotate(-0 310.506699 215.8848)">暂无可用值</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 13px; font-family: 'Arial', 'Heiti TC'; text-anchor: start" x="52.634336" y="50.376" transform="rotate(-0 52.634336 50.376)">芯片 TDP</text>
+   </g>
+   <g id="point-power_chip-ascend910"><title>Ascend 910 | 偏训练 | 300 W</title>
+    <defs>
+     <path id="m10de663957" d="M 0 -3.122499
+L -3.122499 3.122499
+L 3.122499 3.122499
+z
+" style="stroke: #b64945; stroke-width: 1.15"/>
+    </defs>
+    <g clip-path="url(#p523edf1895)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/%E5%8D%8E%E4%B8%BA%E6%98%87%E8%85%BE/%E5%8D%8E%E4%B8%BA_Ascend910.md" target="_blank">
+      <use xlink:href="#m10de663957" x="108.253865" y="190.483209" style="fill: #b64945; stroke: #b64945; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-power_chip-groq_gen1"><title>GroqChip | 偏推理 | 215 W</title>
+    <defs>
+     <path id="m5f63b51f97" d="M -0 3.122499
+L 3.122499 -3.122499
+L -3.122499 -3.122499
+z
+" style="stroke: #218378; stroke-width: 1.15"/>
+    </defs>
+    <g clip-path="url(#p523edf1895)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/Groq/Groq_GroqChip_Processor_%E7%AC%AC%E4%B8%80%E4%BB%A3.md" target="_blank">
+      <use xlink:href="#m5f63b51f97" x="209.380282" y="235.969615" style="fill: #218378; stroke: #218378; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_5">
+    <path d="M 475.84839 316.224
+L 789.340282 316.224
+L 789.340282 65.376
+L 475.84839 65.376
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_3">
+    <g id="xtick_4">
+     <g id="line2d_14"/>
+     <g id="text_11">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(516.467919 328.582887)">偏训练</text>
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(524.517919 339.466676)">0/6</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_15"/>
+     <g id="text_12">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(617.594336 328.532887)">偏推理</text>
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(622.863867 339.416676)">6/15</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_16"/>
+     <g id="text_13">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(713.720753 328.543824)">训推兼顾</text>
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(723.990284 339.427613)">2/15</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_4">
+    <g id="ytick_7">
+     <g id="line2d_17">
+      <path d="M 475.84839 300.779781
+L 789.340282 300.779781
+" clip-path="url(#p65e31ae8a4)" style="fill: none; stroke: #e2e8eb; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_18">
+      <g>
+       <use xlink:href="#m8873887f77" x="475.84839" y="300.779781" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_14">
+      <text style="font-size: 11px; font-family: 'Arial', 'Heiti TC'; text-anchor: end" x="468.84839" y="304.783932" transform="rotate(-0 468.84839 304.783932)">50</text>
+     </g>
+    </g>
+    <g id="ytick_8">
+     <g id="line2d_19">
+      <path d="M 475.84839 252.805657
+L 789.340282 252.805657
+" clip-path="url(#p65e31ae8a4)" style="fill: none; stroke: #e2e8eb; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_20">
+      <g>
+       <use xlink:href="#m8873887f77" x="475.84839" y="252.805657" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_15">
+      <text style="font-size: 11px; font-family: 'Arial', 'Heiti TC'; text-anchor: end" x="468.84839" y="256.809807" transform="rotate(-0 468.84839 256.809807)">100</text>
+     </g>
+    </g>
+    <g id="ytick_9">
+     <g id="line2d_21">
+      <path d="M 475.84839 204.831532
+L 789.340282 204.831532
+" clip-path="url(#p65e31ae8a4)" style="fill: none; stroke: #e2e8eb; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_22">
+      <g>
+       <use xlink:href="#m8873887f77" x="475.84839" y="204.831532" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_16">
+      <text style="font-size: 11px; font-family: 'Arial', 'Heiti TC'; text-anchor: end" x="468.84839" y="208.835682" transform="rotate(-0 468.84839 208.835682)">200</text>
+     </g>
+    </g>
+    <g id="ytick_10">
+     <g id="line2d_23">
+      <path d="M 475.84839 141.413189
+L 789.340282 141.413189
+" clip-path="url(#p65e31ae8a4)" style="fill: none; stroke: #e2e8eb; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_24">
+      <g>
+       <use xlink:href="#m8873887f77" x="475.84839" y="141.413189" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_17">
+      <text style="font-size: 11px; font-family: 'Arial', 'Heiti TC'; text-anchor: end" x="468.84839" y="145.417339" transform="rotate(-0 468.84839 145.417339)">500</text>
+     </g>
+    </g>
+    <g id="ytick_11">
+     <g id="line2d_25">
+      <path d="M 475.84839 93.439064
+L 789.340282 93.439064
+" clip-path="url(#p65e31ae8a4)" style="fill: none; stroke: #e2e8eb; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_26">
+      <g>
+       <use xlink:href="#m8873887f77" x="475.84839" y="93.439064" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_18">
+      <text style="font-size: 11px; font-family: 'Arial', 'Heiti TC'; text-anchor: end" x="468.84839" y="97.443214" transform="rotate(-0 468.84839 97.443214)">1,000</text>
+     </g>
+    </g>
+    <g id="ytick_12">
+     <g id="line2d_27">
+      <g>
+       <use xlink:href="#m2f0c58f87b" x="475.84839" y="316.224" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_13">
+     <g id="line2d_28">
+      <g>
+       <use xlink:href="#m2f0c58f87b" x="475.84839" y="288.160936" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_14">
+     <g id="line2d_29">
+      <g>
+       <use xlink:href="#m2f0c58f87b" x="475.84839" y="277.491854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_15">
+     <g id="line2d_30">
+      <g>
+       <use xlink:href="#m2f0c58f87b" x="475.84839" y="268.249875" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_16">
+     <g id="line2d_31">
+      <g>
+       <use xlink:href="#m2f0c58f87b" x="475.84839" y="260.097872" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_17">
+     <g id="line2d_32">
+      <g>
+       <use xlink:href="#m2f0c58f87b" x="475.84839" y="176.768468" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_18">
+     <g id="line2d_33">
+      <g>
+       <use xlink:href="#m2f0c58f87b" x="475.84839" y="156.857407" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_19">
+     <g id="line2d_34">
+      <g>
+       <use xlink:href="#m2f0c58f87b" x="475.84839" y="128.794343" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_20">
+     <g id="line2d_35">
+      <g>
+       <use xlink:href="#m2f0c58f87b" x="475.84839" y="118.125262" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_21">
+     <g id="line2d_36">
+      <g>
+       <use xlink:href="#m2f0c58f87b" x="475.84839" y="108.883283" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_22">
+     <g id="line2d_37">
+      <g>
+       <use xlink:href="#m2f0c58f87b" x="475.84839" y="100.731279" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="text_19">
+     <text style="font-size: 11px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle" x="435.009386" y="190.8" transform="rotate(-90 435.009386 190.8)">W</text>
+    </g>
+   </g>
+   <g id="patch_6">
+    <path d="M 608.323996 166.099386
+L 656.864676 166.099386
+L 656.864676 134.816577
+L 608.323996 134.816577
+L 608.323996 166.099386
+z
+" clip-path="url(#p65e31ae8a4)" style="fill: #218378; fill-opacity: 0.12549; stroke: #218378; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_38">
+    <path d="M 632.594336 166.099386
+L 632.594336 275.542091
+" clip-path="url(#p65e31ae8a4)" style="fill: none; stroke: #218378; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_39">
+    <path d="M 632.594336 134.816577
+L 632.594336 128.794343
+" clip-path="url(#p65e31ae8a4)" style="fill: none; stroke: #218378; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_40">
+    <path d="M 620.459166 275.542091
+L 644.729506 275.542091
+" clip-path="url(#p65e31ae8a4)" style="fill: none; stroke: #218378; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_41">
+    <path d="M 620.459166 128.794343
+L 644.729506 128.794343
+" clip-path="url(#p65e31ae8a4)" style="fill: none; stroke: #218378; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_42">
+    <path d="M 711.472941 166.099386
+L 755.968564 166.099386
+" clip-path="url(#p65e31ae8a4)" style="fill: none; stroke: #387991; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_43">
+    <path d="M 608.323996 161.324249
+L 656.864676 161.324249
+" clip-path="url(#p65e31ae8a4)" style="fill: none; stroke: #218378; stroke-width: 2"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 475.84839 316.224
+L 475.84839 65.376
+" style="fill: none; stroke: #000000; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 475.84839 316.224
+L 789.340282 316.224
+" style="fill: none; stroke: #000000; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle; fill: #88949c" x="531.467919" y="215.8848" transform="rotate(-0 531.467919 215.8848)">暂无可用值</text>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 9px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle; fill: #218378" x="632.594336" y="62.86752" transform="rotate(-0 632.594336 62.86752)">375</text>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 9px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle; fill: #387991" x="733.720753" y="62.86752" transform="rotate(-0 733.720753 62.86752)">350</text>
+   </g>
+   <g id="text_23">
+    <text style="font-size: 13px; font-family: 'Arial', 'Heiti TC'; text-anchor: start" x="475.84839" y="50.376" transform="rotate(-0 475.84839 50.376)">整卡功率上限</text>
+   </g>
+   <g id="point-power_board-l4"><title>L4 | 偏推理 | 72 W</title>
+    <g clip-path="url(#p65e31ae8a4)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/NVIDIA/NVIDIA_L4_24GB.md" target="_blank">
+      <use xlink:href="#m5f63b51f97" x="628.144774" y="275.542091" style="fill: #218378; stroke: #218378; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-power_board-atlas300ia2_32"><title>Atlas 32GB | 偏推理 | 350 W</title>
+    <g clip-path="url(#p65e31ae8a4)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/%E5%8D%8E%E4%B8%BA%E6%98%87%E8%85%BE/%E5%8D%8E%E4%B8%BA_Atlas300I_A2_32GB.md" target="_blank">
+      <use xlink:href="#m5f63b51f97" x="637.043898" y="166.099386" style="fill: #218378; stroke: #218378; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-power_board-atlas300ia2_64"><title>Atlas 64GB | 偏推理 | 350 W</title>
+    <g clip-path="url(#p65e31ae8a4)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/%E5%8D%8E%E4%B8%BA%E6%98%87%E8%85%BE/%E5%8D%8E%E4%B8%BA_Atlas300I_A2_64GB.md" target="_blank">
+      <use xlink:href="#m5f63b51f97" x="645.943023" y="166.099386" style="fill: #218378; stroke: #218378; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-power_board-h100_nvl"><title>H100 NVL | 偏推理 | 400 W</title>
+    <g clip-path="url(#p65e31ae8a4)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/NVIDIA/NVIDIA_H100_NVL_94GB.md" target="_blank">
+      <use xlink:href="#m5f63b51f97" x="619.245649" y="156.857407" style="fill: #218378; stroke: #218378; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-power_board-h200_nvl"><title>H200 NVL | 偏推理 | 600 W</title>
+    <g clip-path="url(#p65e31ae8a4)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/NVIDIA/NVIDIA_H200_NVL_141GB.md" target="_blank">
+      <use xlink:href="#m5f63b51f97" x="610.346524" y="128.794343" style="fill: #218378; stroke: #218378; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-power_board-mi350p"><title>MI350P | 偏推理 | 600 W</title>
+    <g clip-path="url(#p65e31ae8a4)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/AMD/MI350P.md" target="_blank">
+      <use xlink:href="#m5f63b51f97" x="654.842148" y="128.794343" style="fill: #218378; stroke: #218378; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-power_board-h100_pcie"><title>H100 PCIe | 训推兼顾 | 350 W</title>
+    <defs>
+     <path id="m8463af0d96" d="M 0 3.122499
+C 0.828096 3.122499 1.622388 2.793493 2.20794 2.20794
+C 2.793493 1.622388 3.122499 0.828096 3.122499 0
+C 3.122499 -0.828096 2.793493 -1.622388 2.20794 -2.20794
+C 1.622388 -2.793493 0.828096 -3.122499 0 -3.122499
+C -0.828096 -3.122499 -1.622388 -2.793493 -2.20794 -2.20794
+C -2.793493 -1.622388 -3.122499 -0.828096 -3.122499 0
+C -3.122499 0.828096 -2.793493 1.622388 -2.20794 2.20794
+C -1.622388 2.793493 -0.828096 3.122499 0 3.122499
+z
+" style="stroke: #387991; stroke-width: 1.15"/>
+    </defs>
+    <g clip-path="url(#p65e31ae8a4)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/NVIDIA/NVIDIA_H100_PCIe_80GB.md" target="_blank">
+      <use xlink:href="#m8463af0d96" x="711.472941" y="166.099386" style="fill: #387991; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-power_board-l40s"><title>L40S | 训推兼顾 | 350 W</title>
+    <g clip-path="url(#p65e31ae8a4)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/NVIDIA/NVIDIA_L40S_48GB.md" target="_blank">
+      <use xlink:href="#m8463af0d96" x="755.968564" y="166.099386" style="fill: #387991; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+  </g>
+  <g id="axes_3">
+   <g id="patch_9">
+    <path d="M 899.062444 316.224
+L 1212.554336 316.224
+L 1212.554336 65.376
+L 899.062444 65.376
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_5">
+    <g id="xtick_7">
+     <g id="line2d_44"/>
+     <g id="text_24">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(939.681973 328.582887)">偏训练</text>
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(947.731973 339.466676)">0/6</text>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_45"/>
+     <g id="text_25">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(1040.80839 328.532887)">偏推理</text>
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(1046.077921 339.416676)">0/15</text>
+     </g>
+    </g>
+    <g id="xtick_9">
+     <g id="line2d_46"/>
+     <g id="text_26">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(1136.934807 328.543824)">训推兼顾</text>
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(1147.204338 339.427613)">8/15</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_6">
+    <g id="ytick_23">
+     <g id="line2d_47">
+      <path d="M 899.062444 242.436549
+L 1212.554336 242.436549
+" clip-path="url(#p477cdfe528)" style="fill: none; stroke: #e2e8eb; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_48">
+      <g>
+       <use xlink:href="#m8873887f77" x="899.062444" y="242.436549" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_27">
+      <text style="font-size: 11px; font-family: 'Arial', 'Heiti TC'; text-anchor: end" x="892.062444" y="246.4407" transform="rotate(-0 892.062444 246.4407)">500</text>
+     </g>
+    </g>
+    <g id="ytick_24">
+     <g id="line2d_49">
+      <path d="M 899.062444 179.366309
+L 1212.554336 179.366309
+" clip-path="url(#p477cdfe528)" style="fill: none; stroke: #e2e8eb; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_50">
+      <g>
+       <use xlink:href="#m8873887f77" x="899.062444" y="179.366309" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_28">
+      <text style="font-size: 11px; font-family: 'Arial', 'Heiti TC'; text-anchor: end" x="892.062444" y="183.370459" transform="rotate(-0 892.062444 183.370459)">1,000</text>
+     </g>
+    </g>
+    <g id="ytick_25">
+     <g id="line2d_51">
+      <path d="M 899.062444 116.296069
+L 1212.554336 116.296069
+" clip-path="url(#p477cdfe528)" style="fill: none; stroke: #e2e8eb; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_52">
+      <g>
+       <use xlink:href="#m8873887f77" x="899.062444" y="116.296069" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_29">
+      <text style="font-size: 11px; font-family: 'Arial', 'Heiti TC'; text-anchor: end" x="892.062444" y="120.300219" transform="rotate(-0 892.062444 120.300219)">2,000</text>
+     </g>
+    </g>
+    <g id="ytick_26">
+     <g id="line2d_53">
+      <g>
+       <use xlink:href="#m2f0c58f87b" x="899.062444" y="288.917146" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_27">
+     <g id="line2d_54">
+      <g>
+       <use xlink:href="#m2f0c58f87b" x="899.062444" y="262.740631" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_28">
+     <g id="line2d_55">
+      <g>
+       <use xlink:href="#m2f0c58f87b" x="899.062444" y="225.846906" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_29">
+     <g id="line2d_56">
+      <g>
+       <use xlink:href="#m2f0c58f87b" x="899.062444" y="211.820563" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_30">
+     <g id="line2d_57">
+      <g>
+       <use xlink:href="#m2f0c58f87b" x="899.062444" y="199.670391" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_31">
+     <g id="line2d_58">
+      <g>
+       <use xlink:href="#m2f0c58f87b" x="899.062444" y="188.953181" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_32">
+     <g id="line2d_59">
+      <g>
+       <use xlink:href="#m2f0c58f87b" x="899.062444" y="79.402343" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="text_30">
+     <text style="font-size: 11px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle" x="858.22344" y="190.8" transform="rotate(-90 858.22344 190.8)">W</text>
+    </g>
+   </g>
+   <g id="patch_10">
+    <path d="M 1132.664467 211.820563
+L 1181.205147 211.820563
+L 1181.205147 179.366309
+L 1132.664467 179.366309
+L 1132.664467 211.820563
+z
+" clip-path="url(#p477cdfe528)" style="fill: #387991; fill-opacity: 0.12549; stroke: #387991; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_60">
+    <path d="M 1156.934807 211.820563
+L 1156.934807 262.740631
+" clip-path="url(#p477cdfe528)" style="fill: none; stroke: #387991; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_61">
+    <path d="M 1156.934807 179.366309
+L 1156.934807 148.750322
+" clip-path="url(#p477cdfe528)" style="fill: none; stroke: #387991; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_62">
+    <path d="M 1144.799637 262.740631
+L 1169.069977 262.740631
+" clip-path="url(#p477cdfe528)" style="fill: none; stroke: #387991; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_63">
+    <path d="M 1144.799637 148.750322
+L 1169.069977 148.750322
+" clip-path="url(#p477cdfe528)" style="fill: none; stroke: #387991; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_64">
+    <path d="M 1132.664467 191.51648
+L 1181.205147 191.51648
+" clip-path="url(#p477cdfe528)" style="fill: none; stroke: #387991; stroke-width: 2"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 899.062444 316.224
+L 899.062444 65.376
+" style="fill: none; stroke: #000000; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 899.062444 316.224
+L 1212.554336 316.224
+" style="fill: none; stroke: #000000; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_31">
+    <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle; fill: #88949c" x="954.681973" y="215.8848" transform="rotate(-0 954.681973 215.8848)">暂无可用值</text>
+   </g>
+   <g id="text_32">
+    <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle; fill: #88949c" x="1055.80839" y="215.8848" transform="rotate(-0 1055.80839 215.8848)">暂无可用值</text>
+   </g>
+   <g id="text_33">
+    <text style="font-size: 9px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle; fill: #387991" x="1156.934807" y="62.86752" transform="rotate(-0 1156.934807 62.86752)">875</text>
+   </g>
+   <g id="text_34">
+    <text style="font-size: 13px; font-family: 'Arial', 'Heiti TC'; text-anchor: start" x="899.062444" y="50.376" transform="rotate(-0 899.062444 50.376)">模组功率上限</text>
+   </g>
+   <g id="point-power_module-a100_sxm4"><title>A100 | 训推兼顾 | 400 W</title>
+    <g clip-path="url(#p477cdfe528)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/NVIDIA/NVIDIA_A100_SXM4_80GB.md" target="_blank">
+      <use xlink:href="#m8463af0d96" x="1153.756548" y="262.740631" style="fill: #387991; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-power_module-h100_sxm5"><title>H100 SXM | 训推兼顾 | 700 W</title>
+    <g clip-path="url(#p477cdfe528)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/NVIDIA/NVIDIA_H100_SXM5_80GB.md" target="_blank">
+      <use xlink:href="#m8463af0d96" x="1160.113066" y="211.820563" style="fill: #387991; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-power_module-h200_sxm5"><title>H200 SXM | 训推兼顾 | 700 W</title>
+    <g clip-path="url(#p477cdfe528)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/NVIDIA/NVIDIA_H200_SXM5_141GB.md" target="_blank">
+      <use xlink:href="#m8463af0d96" x="1147.40003" y="211.820563" style="fill: #387991; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-power_module-mi300x"><title>MI300X | 训推兼顾 | 750 W</title>
+    <g clip-path="url(#p477cdfe528)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/AMD/MI300X.md" target="_blank">
+      <use xlink:href="#m8463af0d96" x="1166.469583" y="205.542824" style="fill: #387991; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-power_module-b200_sxm6"><title>B200 | 训推兼顾 | 1,000 W</title>
+    <g clip-path="url(#p477cdfe528)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/NVIDIA/NVIDIA_B200_SXM6_180GB.md" target="_blank">
+      <use xlink:href="#m8463af0d96" x="1141.043513" y="179.366309" style="fill: #387991; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-power_module-mi325x"><title>MI325X | 训推兼顾 | 1,000 W</title>
+    <g clip-path="url(#p477cdfe528)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/AMD/MI325X.md" target="_blank">
+      <use xlink:href="#m8463af0d96" x="1172.826101" y="179.366309" style="fill: #387991; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-power_module-mi350x"><title>MI350X | 训推兼顾 | 1,000 W</title>
+    <g clip-path="url(#p477cdfe528)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/AMD/MI350X.md" target="_blank">
+      <use xlink:href="#m8463af0d96" x="1134.686995" y="179.366309" style="fill: #387991; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-power_module-mi355x"><title>MI355X | 训推兼顾 | 1,400 W</title>
+    <g clip-path="url(#p477cdfe528)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/AMD/MI355X.md" target="_blank">
+      <use xlink:href="#m8463af0d96" x="1179.182618" y="148.750322" style="fill: #387991; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+  </g>
+  <g id="text_35">
+   <text style="font-size: 16px; font-family: 'Arial', 'Heiti TC'; text-anchor: start" x="52.634336" y="26.065" transform="rotate(-0 52.634336 26.065)">功率规格</text>
+  </g>
+  <g id="legend_1">
+   <g id="line2d_65">
+    <defs>
+     <path id="mfbb7668882" d="M 0 3
+C 0.795609 3 1.55874 2.683901 2.12132 2.12132
+C 2.683901 1.55874 3 0.795609 3 0
+C 3 -0.795609 2.683901 -1.55874 2.12132 -2.12132
+C 1.55874 -2.683901 0.795609 -3 0 -3
+C -0.795609 -3 -1.55874 -2.683901 -2.12132 -2.12132
+C -2.683901 -1.55874 -3 -0.795609 -3 0
+C -3 0.795609 -2.683901 1.55874 -2.12132 2.12132
+C -1.55874 2.683901 -0.795609 3 0 3
+z
+" style="stroke: #62727b"/>
+    </defs>
+    <g>
+     <use xlink:href="#mfbb7668882" x="577.154336" y="366.727957" style="fill: #62727b; stroke: #62727b"/>
+    </g>
+   </g>
+   <g id="text_36">
+    <text style="font-size: 9px; font-family: 'Arial', 'Heiti TC'; text-anchor: start" x="593.354336" y="369.877957" transform="rotate(-0 593.354336 369.877957)">可比值</text>
+   </g>
+   <g id="line2d_66">
+    <defs>
+     <path id="md3f9b26f64" d="M 0 3
+C 0.795609 3 1.55874 2.683901 2.12132 2.12132
+C 2.683901 1.55874 3 0.795609 3 0
+C 3 -0.795609 2.683901 -1.55874 2.12132 -2.12132
+C 1.55874 -2.683901 0.795609 -3 0 -3
+C -0.795609 -3 -1.55874 -2.683901 -2.12132 -2.12132
+C -2.683901 -1.55874 -3 -0.795609 -3 0
+C -3 0.795609 -2.683901 1.55874 -2.12132 2.12132
+C -1.55874 2.683901 -0.795609 3 0 3
+z
+" style="stroke: #62727b"/>
+    </defs>
+    <g>
+     <use xlink:href="#md3f9b26f64" x="647.354336" y="366.727957" style="fill: #ffffff; stroke: #62727b"/>
+    </g>
+   </g>
+   <g id="text_37">
+    <text style="font-size: 9px; font-family: 'Arial', 'Heiti TC'; text-anchor: start" x="663.554336" y="369.877957" transform="rotate(-0 663.554336 369.877957)">参考值</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p523edf1895">
+   <rect x="52.634336" y="65.376" width="313.491892" height="250.848"/>
+  </clipPath>
+  <clipPath id="p65e31ae8a4">
+   <rect x="475.84839" y="65.376" width="313.491892" height="250.848"/>
+  </clipPath>
+  <clipPath id="p477cdfe528">
+   <rect x="899.062444" y="65.376" width="313.491892" height="250.848"/>
+  </clipPath>
+ </defs>
+</svg>

@@ -69,7 +69,7 @@ J=[r for r in M if r['endpoint']['state']=='known' and numeric(r['endpoint'].get
 
 # Numerical formats: a categorical support matrix, not a throughput heat map.
 formats=['FP64','FP32','TF32','BF16','FP16','FP8','FP4','INT8','INT4']
-state={'yes':('o','#387991','运算路径支持'),'conditional':('s','#637D38','转换等条件下执行'),
+state={'yes':('o','#387991','运算路径支持'),'conditional':('s','#637D38','有执行限制（见正文）'),
        'unknown':('$?$','#9AA5AC','资料未确认'),'conflict':('D','#AB5678','来源或配置有分歧'),'no':('x','#283E48','明确无原生支持')}
 f,ax=plt.subplots(figsize=(12,15.7));f.subplots_adjust(left=.28,right=.97,top=.93,bottom=.09)
 row_axis(ax);ax.set_xlim(-.6,len(formats)-.4);ax.set_xticks(range(len(formats)),formats);ax.xaxis.tick_top()
@@ -83,7 +83,7 @@ for i,r in enumerate(M):
 ax.set_title('36 个产品的数值格式支持',loc='left',pad=43)
 f.legend(handles=[Line2D([],[],marker=v[0],color='none',markerfacecolor=v[1],markeredgecolor=v[1],markersize=7,label=v[2]) for v in state.values()],
     loc='lower center',ncol=3,frameon=False,bbox_to_anchor=(.53,.035))
-f.text(.28,.014,'支持表示有运算路径；位宽、累加精度及稀疏条件仍需逐项区分。编号对应正文证据表。',fontsize=9,color=GRAY)
+f.text(.28,.014,'支持表示有运算路径；位宽、累加精度及稀疏条件仍需逐项区分。编号对应产品清单。',fontsize=9,color=GRAY)
 save(f,'全景01_数值格式')
 
 # Absolute compute is separate from DRAM: SRAM-only products remain visible here.
@@ -139,10 +139,10 @@ def scatter_labels(ax, rows, coords):
         evidence_link(t,r)
 
 def scatter_plot(name, yfield, ylabel, ratio_levels, ratio_unit):
-    f,ax=plt.subplots(figsize=(12,8.2));f.subplots_adjust(left=.095,right=.965,top=.9,bottom=.27)
+    f,ax=plt.subplots(figsize=(12,7.6));f.subplots_adjust(left=.095,right=.965,top=.9,bottom=.18)
     ax.set_xscale('log');ax.set_yscale('log');ax.set_xlim(40,1e4)
     ys=[r['memory'][yfield] for r in Q];ax.set_ylim(min(ys)/2.0,max(ys)*2.3)
-    title(ax,f'16 位计算峰值与{ylabel.split("（")[0]}：{len(Q)} 个可配对产品','公开 16 位峰值（TFLOP/s，对数坐标）')
+    title(ax,f'16 位计算峰值与{ylabel.split("（")[0]}','16 位计算峰值（TFLOP/s）')
     ax.set_ylabel(ylabel+'，对数坐标');ax.grid(which='major',color='#E1E8EB',lw=.6)
     ax.xaxis.set_major_formatter(FuncFormatter(lambda v,p:f'{v:g}'));ax.yaxis.set_major_formatter(FuncFormatter(lambda v,p:f'{v:g}'))
     xx=np.logspace(math.log10(ax.get_xlim()[0]),math.log10(ax.get_xlim()[1]),100)
@@ -159,9 +159,7 @@ def scatter_plot(name, yfield, ylabel, ratio_levels, ratio_unit):
         size=150 if count>1 and rank==0 else (31 if count>1 else 65)
         a=ax.scatter(*xy,s=size,marker=MARK[r['orientation']['group']],facecolor=color(r) if strict(r) else 'white',edgecolor=color(r),linewidth=1.2,zorder=4+rank);evidence_link(a,r)
     scatter_labels(ax,Q,coords)
-    pos_legend(f,[Line2D([],[],marker='o',color='none',markerfacecolor='white',markeredgecolor=GRAY,label='空心：路径或稠密条件未完全对齐')])
-    f.text(.1,.145,'实心：明确的矩阵 dense 值或有依据的换算；空心保留整芯片值或条件未展开的厂商值。',fontsize=10,color=GRAY)
-    f.text(.1,.116,'重合点用嵌套符号表示，坐标未作偏移。颜色表示主要设计取向，累加精度尚未统一。',fontsize=10,color=GRAY)
+    pos_legend(f,[Line2D([],[],marker='o',color='none',markerfacecolor='white',markeredgecolor=GRAY,label='参考值')])
     save(f,name)
 
 scatter_plot('全景03_带宽与算力','bandwidth_tb_s','DRAM 带宽（TB/s）',[.001,.01,.1],'byte/FLOP')
@@ -228,13 +226,15 @@ save(f,'全景07_功率边界')
 from comparison_analysis import draw_extra, draw_family, analyze
 FIGS.extend(draw_extra(D,O))
 FIGS.extend(draw_family(D,O,R/'family-comparison-data.json'))
+from comparison_supplement import draw as draw_supplement, counts as supplement_counts, load as load_supplement
+FIGS.extend(draw_supplement(D, O, scatter_labels))
 
 stats={'products':len(M),'paired16':len(Q),'strict_matrix_dense':sum(strict(r) for r in Q),
        'conditional_pairs':sum(not strict(r) for r in Q),'dram_capacity':sum(numeric(r['memory'].get('capacity_gb')) for r in M),
        'dram_bandwidth':sum(numeric(r['memory'].get('bandwidth_tb_s')) for r in M),
        'endpoint_known':len(J),'power_plotted':len(P),'positions':{k:sum(r['orientation']['group']==k for r in M) for k in COL},
        'paired_ids':[r['id'] for r in Q], 'strict_ids':[r['id'] for r in Q if strict(r)],
-       'figures':FIGS, 'analysis':analyze(D),
+       'figures':FIGS, 'analysis':analyze(D), 'supplements':supplement_counts(D, load_supplement()),
        'low_precision':{fmt:sum(bool(r.get('low_precision',{}).get(fmt)) for r in M) for fmt in ('FP8','FP4')}}
 (R/'panorama-stats.json').write_text(json.dumps(stats,ensure_ascii=False,indent=2))
 (R/'figures.json').write_text(json.dumps(FIGS,ensure_ascii=False,indent=2))

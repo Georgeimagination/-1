@@ -93,6 +93,14 @@ CC-Core 负责 collective，但高层页写 16 个、NKI 指南写 20 个；数�
 AWS 宣布 Trainium3 采用 3 nm 工艺，但没有在这些资料中公开 foundry、die 面积、晶体管数、物理 chiplet 组成和绝对功耗。单颗芯片规格用于理解组成，不代表已有可独立申请的一芯片 Trn3 实例；现有交付说明主要围绕 UltraServer。[6, opening] [4, opening] [5, opening]
 
 
+## 型号公开与供货时间
+
+本次采用的首次型号公开时间为 2024-12-03。2024 稿件标题是 Trainium2 GA，但正文首次公开 Trainium3；不把当时预告写为 GA。正式发布或供货记录：2025-12-02：Trn3 UltraServer GA。[8, Trainium3 announcement]; [6, page date and opening]
+
+## scale-up 域的配置边界
+
+Trn3 Gen1 UltraServer 由四台每台十六芯片的 server 组成，合计六十四颗；Gen2 则为三十六台每台四芯片的 server，合计一百四十四颗。两者通过 NeuronSwitch 与 NeuronLink 形成单一 scale-up 域，all-to-all 描述的是交换网络的可达关系。 [4, Trn3 Gen1 UltraServer / Trn3 Gen2 UltraServer]
+
 ## 参考资料
 
 [1] AWS Neuron，*Trainium3 Architecture*。<https://awsdocs-neuron.readthedocs-hosted.com/en/v2.28.1/about-neuron/arch/neuron-hardware/trainium3.html>
@@ -108,3 +116,5 @@ AWS 宣布 Trainium3 采用 3 nm 工艺，但没有在这些资料中公开 foun
 [6] AWS，*Announcing Amazon EC2 Trn3 UltraServers for faster, lower-cost generative AI training*，2025-12-02。<https://aws.amazon.com/about-aws/whats-new/2025/12/amazon-ec2-trn3-ultraservers/>
 
 [7] AWS Neuron，*nki.isa.nc_matmul*，NCv4-specific output types and tile-size limits。<https://awsdocs-neuron.readthedocs-hosted.com/en/v2.29.1/nki/api/generated/nki.isa.nc_matmul.html>
+
+[8] Amazon Press Center，*AWS Trainium2 Instances Now Generally Available*，2024-12-03。[原文](https://press.aboutamazon.com/2024/12/aws-trainium2-instances-now-generally-available)；[本地原文](../../原始资料/网页快照/比较补充/2026-09-24/e9e13f65348f.html)

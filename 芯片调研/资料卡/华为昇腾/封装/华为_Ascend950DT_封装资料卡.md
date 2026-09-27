@@ -2,7 +2,7 @@
 
 > 模板版本：1.3（芯片架构事实口径）  
 > 卡片状态：已完成  
-> 资料截止日：2026-09-23
+> 资料截止日：2026-09-27
 
 本卡以 Huawei Ascend 950DT packaged processor 为正式主语。950DT 是包含多个计算资源和内存配置的产品族，不能把各字段的最大值任意拼接成唯一销售 SKU。它与 950PR 共用第三代 DaVinci 架构，封装内包含 2 个 AI Die、2 个 IO Die 和 4 个高速内存模块；HiZQ 2.0 是官方路线图给出的高带宽内存（HBM）名称。Atlas 650E server、Atlas 850E SuperPoD、Atlas 950 SuperPoD 是上层产品，其系统聚合值不作为本卡的单封装规格。[1, PDF pp.10, 12-15，正文 pp.6, 8-11，图3-1、表3-1] [2, Ascend 950DT] [3, Table 1] [4, Atlas 650E specifications] [5, 真机亮相]
 
@@ -21,6 +21,12 @@
 | 可用状态 | 已有官方系统型号与 Atlas 950 真机展示；950DT 独立上市或普遍可用日期仍未确认。2025 年路线图给出的 single-chip availability window 为 2026Q4 | 白皮书公开架构规格，不单独证明全部配置均已供货 | `[2, Ascend 950DT] [3, Table 1] [5, 真机亮相与 Atlas 850E]` |
 | 厂商定位与目标 workload | 大模型预训练、后训练与推理全流程，包括 decode 和 prefill | 厂商定位，不是应用实测结论，也不表示另一款产品不能执行这些任务 | `[1, PDF p.10，正文 p.6，§3]` |
 | 产品目标 | 以较高内存带宽和互联能力支持生成式模型的训练与复杂推理 | 厂商设计意图，不等同于已测量性能、能效或成本 | `[1, PDF pp.8, 10，正文 pp.4, 6]` |
+
+### 定位与配置的版本说明
+
+2025 年路线图以 decode 与训练概括 950DT 的主要场景，并以较高访存及互联带宽解释设计目标。2026 年白皮书的定位更完整，明确覆盖预训练、后训练，以及包含 decode 和 prefill 的推理全流程。因此，本卡采用当前白皮书的完整用途描述，保留早期定位的来源和日期。Prefill 指处理输入上下文的阶段，decode 指后续逐步生成输出的阶段。[2, Ascend 950DT 段] [1, PDF p.10，正文 p.6，§3]
+
+访存带宽与芯片间互联带宽分别记录。表3-1为 950DT 列出 4 TB/s 内存带宽；两款产品的 UB 2.0 芯片互联则均列 2016 GB/s 双向。早期对 DT 的带宽需求描述，不能替代两款产品实际互联规格的核对。计算资源仍按白皮书的多个使能档位记录，不从“decode 与训练”标签推定核心数量或算术强度。[1, PDF pp.13-15，正文 pp.9-11，表3-1] [2, Ascend 950DT 段]
 
 ## 2. 层级关系与复用
 
@@ -153,6 +159,10 @@ CCU包含任务解释控制部分CCUM，以及带MemorySlice和Reduce Unit的CCU
 
 96GB和144GB均已由白皮书表3-1直接列为950DT芯片容量，4TB/s也是单芯片表列带宽。Atlas650E的8×96GB是具体系统配置，产品族的144GB档位和4TB/s现有直接芯片规格来源，不依赖该服务器配置推断。[1, PDF p.14，正文 p.10，表3-1] [4, Atlas 650E specifications]
 
+### scale-up 域的配置边界
+
+2025 年发布稿把 Atlas 950 的规划满配明确写成 8,192 张 950DT 卡，并说明每卡对应一颗芯片，上市时间为 2026 年第四季度。2026 年 7 月真机稿展示 1,024 卡 Atlas 950，但没有直接指明 PR 或 DT；不能将这次展示自动绑定到 DT 型号，或据此宣称 8,192 卡满配已交付。 [2, Atlas 950超节点段] [5, 昇腾950超节点真机首次亮相]
+
 ## 7. 证据缺口与来源差异
 
 | 项目 | 已确认内容 | 仍未确认的边界与处理 | 来源 |
@@ -173,7 +183,7 @@ CCU包含任务解释控制部分CCUM，以及带MemorySlice和Reduce Unit的CCU
 | 编号 | 资料 | 类型 | 本卡使用的信息 | 链接 |
 |---:|---|---|---|---|
 | `[1]` | Huawei，《昇腾950 NPU架构白皮书》，40页，版权2026，未标明确切发布日期 | 官方架构白皮书 | 产品档位、计算/内存/CPU资源、多die、Core微架构、数值格式、互联、CCU、调度和RAS | <https://public-download.obs.cn-east-2.myhuaweicloud.com/ascend/%E6%98%87%E8%85%BE950%20NPU%E6%9E%B6%E6%9E%84%E7%99%BD%E7%9A%AE%E4%B9%A6.pdf>；[本地 PDF](../../../原始资料/论文/华为昇腾_DaVinci/90_官方白皮书与技术资料/2026_Ascend950_NPU_Architecture_White_Paper.pdf) |
-| `[2]` | Huawei，《以开创的超节点互联技术，引领AI基础设施新范式》，2025-09-18 | 官方主题演讲 | 首次公开、HiBL1.0/HiZQ2.0名称、早期路线图及DT availability window | <https://www.huawei.com/cn/news/2025/9/hc-xu-keynote-speech> |
+| `[2]` | Huawei，《以开创的超节点互联技术，引领AI基础设施新范式》，2025-09-18 | 官方主题演讲 | 首次公开、decode/训练定位、HiBL1.0/HiZQ2.0名称、早期路线图及DT availability window | <https://www.huawei.com/cn/news/2025/9/hc-xu-keynote-speech>；[本地原文](../../../原始资料/网页快照/华为/Ascend950/2026-09-27/huawei-connect-2025-ascend-roadmap.html) |
 | `[3]` | Huawei Ascend Community，《昇腾产品形态说明》 | 官方FAQ | 950DT对应Atlas650E/850E/950 | <https://www.hiascend.com/document/detail/zh/AscendFAQ/ProduTech/productform/hardwaredesc_0001.html> |
 | `[4]` | Huawei Ascend Community，Atlas 650E | 官方server产品页 | 8×950DT、8×96GB配置、16-NPU full-mesh及系统边界 | <https://www.hiascend.com/en/hardware/ai-server?tag=800A2> |
 | `[5]` | Huawei，《昇腾950超节点真机亮相2026世界人工智能大会》，2026-07-17 | 官方新闻 | Atlas950真机与Atlas850E支持96卡商用部署的能力表述 | <https://www.huawei.com/cn/news/2026/7/atlas-950-superpod> |

@@ -74,6 +74,10 @@ Trainium2 架构页的跨代比较表为 Trainium1 直接列出 384 GB/s/chip in
 现有资料确认主机 PCIe 路径，但没有给出代际、lane 数和单芯片带宽；这些资料也未给出芯片工艺、die 面积、封装组成、功耗和散热。已有证据能解释它的显式数据流与训练互联，不能据此推断硬件缓存一致性或物理 chiplet 组织。[1, chip architecture] [2, device diagram]
 
 
+## 型号公开与供货时间
+
+本次采用的首次型号公开时间为 2020-12-01。直播页建立于 11 月 27 日，但正文明确演讲在 12 月 1 日；2021 年是实例 Preview，不是芯片首次宣布。正式发布或供货记录：2021-11-30 Trn1 Preview；2022-10-10 GA。[9, opening event date; Coming soon / AWS Trainium]; [7, page date and opening]
+
 ## 参考资料
 
 [1] AWS Neuron，*Trainium Architecture*。<https://awsdocs-neuron.readthedocs-hosted.com/en/v2.28.0/about-neuron/arch/neuron-hardware/trainium.html> [本地原文](../../原始资料/网页快照/AWS/产品详解补充/2026-09-17/trn1-chip.html)
@@ -89,3 +93,5 @@ Trainium2 架构页的跨代比较表为 Trainium1 直接列出 384 GB/s/chip in
 [7] AWS，*Amazon EC2 Trn1 Instances for High-Performance Model Training are Now Available*，2022-10-10。<https://aws.amazon.com/blogs/aws/amazon-ec2-trn1-instances-for-high-performance-model-training-are-now-available/> [本地原文](../../原始资料/网页快照/AWS/产品详解补充/2026-09-17/trn1-launch.html)
 
 [8] AWS Neuron，*Trainium2 Architecture*，Interconnect comparison table。<https://awsdocs-neuron.readthedocs-hosted.com/en/v2.29.1/about-neuron/arch/neuron-hardware/trainium2.html>
+
+[9] Jeff Barr，re:Invent 2020 Liveblog: Andy Jassy Keynote，2020-12-01 演讲。[原文](https://aws.amazon.com/blogs/aws/reinvent-2020-liveblog-andy-jassy-keynote/)；[本地原文](../../原始资料/网页快照/比较补充/2026-09-24/c225314673ae.html)

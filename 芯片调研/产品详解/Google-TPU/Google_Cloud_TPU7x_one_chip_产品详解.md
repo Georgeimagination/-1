@@ -69,9 +69,17 @@ SparseCore gather/scatter 的原生 DMA 搬运类型为 32-bit；BF16/FP16 需�
 TPU7x 使用 cold-plate 液冷，四颗 TPU 组成一块 tray。工艺、die 面积、绝对功耗、TDP（散热设计功耗）与工作频率未在现有一手资料中公开；支持动态电压频率调节并不提供一个固定频率值。官方相对能效改善也不能据此换算为单芯片瓦数。[4, pp. 2, 14, 22] [5, Table 1]
 
 
+## 型号公开与供货时间
+
+本次采用的首次型号公开时间为 2025-04-09。11 月发布博客中的即将可用不改写为当日 GA。正式发布或供货记录：2025-11-24 Preview；2026-03-31 GA。[24, page date and opening]; [25, November 24, 2025; March 31, 2026]
+
+## scale-up 域的配置边界
+
+官方配置说明明确写出单 slice 可扩至 9,216 颗芯片，与 Pod 的名义芯片数相同。表格只列常见形状，不能将其最后一个示例当成系统上限；可申请的配额及当时资源可用性仍由云服务决定。 [1, Supported configurations]
+
 ## 参考资料
 
-[1] Google Cloud，*TPU7x (Ironwood)*。<https://docs.cloud.google.com/tpu/docs/tpu7x>
+[1] Google Cloud，*TPU7x (Ironwood)*。<https://docs.cloud.google.com/tpu/docs/tpu7x> [2026-09-24 配置页快照](../../原始资料/网页快照/比较补充/2026-09-24/b3d2608b0dbb.html)
 
 [3] Google Cloud，*TPU7x (Ironwood) performance optimizations*。<https://docs.cloud.google.com/tpu/docs/ironwood-performance>
 
@@ -90,3 +98,5 @@ TPU7x 使用 cold-plate 液冷，四颗 TPU 组成一块 tray。工艺、die 面
 [23] The JAX Authors，*SparseCore Kernel Writing*，获取于 2026-09-17。[官方文档](https://docs.jax.dev/en/latest/pallas/tpu/sparsecore.html)；[官方仓库原文](https://github.com/jax-ml/jax/blob/main/docs/pallas/tpu/sparsecore.md)。 [本地原文快照](../../原始资料/网页快照/Google/JAX/2026-09-17/jax-sparsecore.md)
 
 [24] Amin Vahdat，*Ironwood: The first Google TPU for the age of inference*，Google，2025-04-09，2025-04-23 更新。[官方原文](https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/ironwood-tpu-age-of-inference/)。正文首段与 Figure 2 图注分别说明设计目标及旧代 FP8 emulation 条件。
+
+[25] Google Cloud，*Cloud TPU release notes*。[原文](https://docs.cloud.google.com/tpu/docs/release-notes)；[本地原文](../../原始资料/网页快照/比较补充/2026-09-24/6295285e278e.html)

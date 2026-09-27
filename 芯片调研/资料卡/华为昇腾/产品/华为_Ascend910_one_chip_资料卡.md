@@ -22,6 +22,9 @@
 
 本卡不包含 8-chip server、Atlas training card、Atlas 900 cluster 或 cloud service 的聚合算力、内存、互联、主机 CPU、网络、供电和散热，也不使用 910A/B/C 的参数补齐原始 910。
 
+首次型号公开时间补充：2018。2019 年官方稿回顾本处理器计划规格已于 Huawei Connect 2018 公布；2019 是正式发布年。正式发布或可用时间仍单独保留：2019-08-23 正式发布。[6, Ascend 910: More computing power than any other AI processor in the world]
+
+
 ## 2. 层级关系与复用
 
 | 层级 | 本 SKU 对应对象 | 是否与其他 SKU 共享 | 本卡怎么使用 | 来源 |
@@ -83,6 +86,10 @@
 | Intra-group | 4-chip group 采用 HCCS（Huawei Cache Coherence System） | 论文给 30GB/s，但未说明是否 per-link、per-chip 或 group aggregate，不能下放为芯片端点铭牌 | `[2, PDF p.8 / proceedings p.796]` |
 | Inter-group | 两个 4-chip group 通过 PCIe 通信 | 论文给 32GB/s，属于 server inter-group 连接 | `[2, PDF p.8 / proceedings p.796]` |
 | Cluster | Atlas 900 由数千颗 Ascend processor 组成，华为云也提供 Ascend cluster service | cluster aggregate 与 ResNet-50 训练时间不进入 SKU 卡 | `[4, p.49]` `[9, Atlas 900 section]` |
+
+### scale-up 域的配置边界
+
+原论文中八芯片服务器的专用 HCCS 域应按每组四颗计，八颗是整机芯片数；两个 HCCS 组之间的 PCIe 通路属于另一层连接。 [2, PDF p.8 / proceedings p.796, Figure 15(a)]
 
 ## 7. 证据缺口与来源差异
 

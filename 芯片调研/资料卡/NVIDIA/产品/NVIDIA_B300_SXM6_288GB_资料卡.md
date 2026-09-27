@@ -79,6 +79,10 @@
 | 相关系统 | 当前 HGX B300 规格以 8 个 Blackwell Ultra SXM 为一个 baseboard 配置 | 系统峰值、总 GPU memory 和整机功耗不下放 | `[9, NVIDIA HGX Specifications and note 4]` |
 | 更高层对象 | GB300 Superchip 为 1 Grace CPU 加 2 Blackwell Ultra GPU；GB300 NVL72 为 36 Grace CPU、72 GPU | CPU memory、NVLink-C2C 与 rack-scale 指标不属于 B300 SXM6 | `[2, NVIDIA Grace Blackwell Ultra Superchip]` `[5, NVIDIA Blackwell Ultra Enables AI Reasoning]` |
 
+### scale-up 域的配置边界
+
+HGX B300 的系统配置表明确列出八颗 B300 GPU，并通过第五代 NVLink 与 NVSwitch 连接。这里按八颗逻辑 GPU 计数，不因每 GPU 内部的双裸片而翻倍。 [3, Table 2, NVIDIA HGX B300 system elements]
+
 ## 7. 证据缺口与来源冲突
 
 | 项目 | 状态 | 已检查范围或冲突来源 | 当前处理 |

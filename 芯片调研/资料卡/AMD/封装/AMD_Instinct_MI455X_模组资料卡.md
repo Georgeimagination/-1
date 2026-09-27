@@ -88,6 +88,10 @@
 | 产品属性 | Helios 是供 OEM/ODM 构建系统的 reference design，不是 AMD 直接销售的单一产品 | MI455X 产品页仍以单 GPU/EAM 列规格 | `[8, FAQ: Is the AMD Helios rackscale solution an AMD product or a reference design?]` `[1, full page]` |
 | 供货语境 | Helios 已进入生产，reference design 正交付合作伙伴，系统预计 2026 年下半年 volume deployment | 不等于单个 MI455X EAM 已有独立 GA 或零售日期 | `[7, opening]` `[5, FAQ]` |
 
+### scale-up 域的配置边界
+
+Helios 的四组 scale-up cartridge 可连接最多七十二颗 MI455X，采用多 plane 的 UALoE 交换网络，支持域内 all-to-all 通信；这表示芯片之间可通过交换网络互通，不表示七十二颗 GPU 两两物理直连。 [8, Scale-Up Network / Switch Tray / Rackscale Highlights]
+
 ## 7. 证据缺口与来源差异
 
 | 项目 | 状态 | 已检查范围或差异来源 | 当前处理 |

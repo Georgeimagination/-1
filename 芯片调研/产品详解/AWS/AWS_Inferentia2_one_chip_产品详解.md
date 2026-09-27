@@ -74,6 +74,14 @@ SRAM 的并行维也受布局约束。超过 64 个 partition 的 tensor 必须�
 Inf2 有一、六、十二芯片配置，一芯片实例没有形成芯片间互联。主机通过 PCIe 与芯片交互，但所引资料未给出接口代际与 lane 数；HBM、各核 SRAM 的显式搬运也不证明存在透明远端内存或 cache coherence。本文采用的一手资料未给出工艺、die 面积、芯片绝对功耗和散热规格，实例级能效宣传无法补齐这些数值。[2, device diagram and memory hierarchy] [5, Product details and Meet your sustainability goals]
 
 
+## 型号公开与供货时间
+
+本次采用的首次型号公开时间为 2022-11-29。Preview 公告与正式可用分开。正式发布或供货记录：2023-04-13：Inf2 GA。[6, Inf2 announcement]; [7, page date and opening]
+
+## scale-up 域的配置边界
+
+Inf2 的多芯片配置分别为 inf2.24xlarge 的六颗和 inf2.48xlarge 的十二颗，NeuronLink-v2 支持这些芯片间的 collective 和模型切分。已查系统页没有给出精确图形拓扑，因此不单凭两组端口推定环形连接。 [4, Inf2 Architecture table / NeuronLink-v2 paragraph]
+
 ## 参考资料
 
 [1] AWS Neuron，*Inferentia2 Architecture*。<https://awsdocs-neuron.readthedocs-hosted.com/en/v2.31.1/about-neuron/arch/neuron-hardware/inferentia2.html> [本地原文](../../原始资料/网页快照/AWS/产品详解补充/2026-09-17/inf2-chip.html)
@@ -85,3 +93,7 @@ Inf2 有一、六、十二芯片配置，一芯片实例没有形成芯片间互
 [4] AWS Neuron，*Amazon EC2 Inf2 Architecture*。<https://awsdocs-neuron.readthedocs-hosted.com/en/v2.27.0/about-neuron/arch/neuron-hardware/inf2-arch.html> [本地原文](../../原始资料/网页快照/AWS/产品详解补充/2026-09-17/inf2-system.html)
 
 [5] AWS，*Amazon EC2 Inf2 Instances*。<https://aws.amazon.com/ec2/instance-types/inf2/> [本地原文](../../原始资料/网页快照/AWS/产品详解补充/2026-09-17/inf2-product.html)
+
+[6] AWS，*AWS Announces Three Amazon EC2 Instances Powered by New AWS-Designed Chips*，2022-11-29。[原文](https://press.aboutamazon.com/2022/11/aws-announces-three-amazon-ec2-instances-powered-by-new-aws-designed-chips)；[本地原文](../../原始资料/网页快照/比较补充/2026-09-24/20b7bc4ca064.html)
+
+[7] AWS，*Amazon EC2 Inf2 Instances ... Are Now Generally Available*，2023-04-13。[原文](https://aws.amazon.com/blogs/aws/amazon-ec2-inf2-instances-for-low-cost-high-performance-generative-ai-inference-are-now-generally-available/)；[本地原文](../../原始资料/网页快照/比较补充/2026-09-24/c2621cfe8537.html)

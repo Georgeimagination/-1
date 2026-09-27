@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1246.927598pt" height="388.332pt" viewBox="0 0 1246.927598 388.332" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-09-24T23:06:34.156788</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 388.332
+L 1246.927598 388.332
+L 1246.927598 0
+L 0 0
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 74.047598 316.224
+L 387.53949 316.224
+L 387.53949 65.376
+L 74.047598 65.376
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1"/>
+     <g id="text_1">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(114.667127 328.582887)">偏训练</text>
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(109.936658 339.656715)">0/6，另1</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2"/>
+     <g id="text_2">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(215.793544 328.532887)">偏推理</text>
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(208.282606 339.606715)">1/15，另1</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3"/>
+     <g id="text_3">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(311.91996 328.543824)">训推兼顾</text>
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(309.409023 339.617652)">4/15，另1</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_4">
+      <path d="M 74.047598 200.864762
+L 387.53949 200.864762
+" clip-path="url(#p6bdfccd2a5)" style="fill: none; stroke: #e2e8eb; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_5">
+      <defs>
+       <path id="m12167abbb8" d="M 0 0
+L -3.5 0
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m12167abbb8" x="74.047598" y="200.864762" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 11px; font-family: 'Arial', 'Heiti TC'; text-anchor: end" x="67.047598" y="204.868912" transform="rotate(-0 67.047598 204.868912)">10,000</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_6">
+      <path d="M 74.047598 65.763432
+L 387.53949 65.763432
+" clip-path="url(#p6bdfccd2a5)" style="fill: none; stroke: #e2e8eb; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_7">
+      <g>
+       <use xlink:href="#m12167abbb8" x="74.047598" y="65.763432" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 11px; font-family: 'Arial', 'Heiti TC'; text-anchor: end" x="67.047598" y="69.767582" transform="rotate(-0 67.047598 69.767582)">100,000</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_8">
+      <defs>
+       <path id="m340ee0f40e" d="M 0 0
+L -2 0
+" style="stroke: #000000; stroke-width: 0.6"/>
+      </defs>
+      <g>
+       <use xlink:href="#m340ee0f40e" x="74.047598" y="295.296539" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_9">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="74.047598" y="271.506376" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_10">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="74.047598" y="254.626986" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_11">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="74.047598" y="241.534315" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_12">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="74.047598" y="230.836823" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_8">
+     <g id="line2d_13">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="74.047598" y="221.792223" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_9">
+     <g id="line2d_14">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="74.047598" y="213.957434" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_10">
+     <g id="line2d_15">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="74.047598" y="207.04666" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_11">
+     <g id="line2d_16">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="74.047598" y="160.195209" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_12">
+     <g id="line2d_17">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="74.047598" y="136.405046" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_13">
+     <g id="line2d_18">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="74.047598" y="119.525656" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_14">
+     <g id="line2d_19">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="74.047598" y="106.432985" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_15">
+     <g id="line2d_20">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="74.047598" y="95.735493" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_16">
+     <g id="line2d_21">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="74.047598" y="86.690893" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_17">
+     <g id="line2d_22">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="74.047598" y="78.856103" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_18">
+     <g id="line2d_23">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="74.047598" y="71.94533" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 11px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle" x="20.974531" y="190.8" transform="rotate(-90 20.974531 190.8)">TFLOP/s</text>
+    </g>
+   </g>
+   <g id="line2d_24">
+    <path d="M 208.545732 246.426627
+L 253.041355 246.426627
+" clip-path="url(#p6bdfccd2a5)" style="fill: none; stroke: #218378; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 307.64962 205.944716
+L 356.1903 205.944716
+L 356.1903 167.642442
+L 307.64962 167.642442
+L 307.64962 205.944716
+z
+" clip-path="url(#p6bdfccd2a5)" style="fill: #387991; fill-opacity: 0.12549; stroke: #387991; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_25">
+    <path d="M 331.91996 205.944716
+L 331.91996 207.04666
+" clip-path="url(#p6bdfccd2a5)" style="fill: none; stroke: #387991; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_26">
+    <path d="M 331.91996 167.642442
+L 331.91996 119.138224
+" clip-path="url(#p6bdfccd2a5)" style="fill: none; stroke: #387991; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_27">
+    <path d="M 319.78479 207.04666
+L 344.05513 207.04666
+" clip-path="url(#p6bdfccd2a5)" style="fill: none; stroke: #387991; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_28">
+    <path d="M 319.78479 119.138224
+L 344.05513 119.138224
+" clip-path="url(#p6bdfccd2a5)" style="fill: none; stroke: #387991; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_29">
+    <path d="M 307.64962 202.973994
+L 356.1903 202.973994
+" clip-path="url(#p6bdfccd2a5)" style="fill: none; stroke: #387991; stroke-width: 2"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 74.047598 316.224
+L 74.047598 65.376
+" style="fill: none; stroke: #000000; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 74.047598 316.224
+L 387.53949 316.224
+" style="fill: none; stroke: #000000; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 9px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle; fill: #218378" x="230.793544" y="62.86752" transform="rotate(-0 230.793544 62.86752)">4,600</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 9px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle; fill: #387991" x="331.91996" y="62.86752" transform="rotate(-0 331.91996 62.86752)">9,647</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 13px; font-family: 'Arial', 'Heiti TC'; text-anchor: start" x="74.047598" y="50.376" transform="rotate(-0 74.047598 50.376)">FP4 / MXFP4 矩阵峰值</text>
+   </g>
+   <g id="point-fp4-tpu8t"><title>TPU 8t | 偏训练 | 12,600 TFLOP/s</title>
+    <defs>
+     <path id="m092a515c52" d="M 0 -3.122499
+L -3.122499 3.122499
+L 3.122499 3.122499
+z
+" style="stroke: #b64945; stroke-width: 1.15"/>
+    </defs>
+    <g clip-path="url(#p6bdfccd2a5)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/Google-TPU/Google_TPU_8t_one_chip_%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3.md" target="_blank">
+      <use xlink:href="#m092a515c52" x="129.667127" y="187.304568" style="fill: #ffffff; stroke: #b64945; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-fp4-mi350p"><title>MI350P | 偏推理 | 4,600 TFLOP/s</title>
+    <defs>
+     <path id="m2577d53fe0" d="M -0 3.122499
+L 3.122499 -3.122499
+L -3.122499 -3.122499
+z
+" style="stroke: #218378; stroke-width: 1.15"/>
+    </defs>
+    <g clip-path="url(#p6bdfccd2a5)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/AMD/MI350P.md" target="_blank">
+      <use xlink:href="#m2577d53fe0" x="208.545732" y="246.426627" style="fill: #218378; stroke: #218378; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-fp4-tpu8i"><title>TPU 8i | 偏推理 | 10,100 TFLOP/s</title>
+    <defs>
+     <path id="mb118789c27" d="M -0 3.122499
+L 3.122499 -3.122499
+L -3.122499 -3.122499
+z
+" style="stroke: #218378; stroke-width: 1.15"/>
+    </defs>
+    <g clip-path="url(#p6bdfccd2a5)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/Google-TPU/Google_TPU_8i_one_chip_%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3.md" target="_blank">
+      <use xlink:href="#mb118789c27" x="253.041355" y="200.280939" style="fill: #ffffff; stroke: #218378; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-fp4-trainium3"><title>Trn3 | 训推兼顾 | 2,520 TFLOP/s</title>
+    <defs>
+     <path id="m6ca1773c0b" d="M 0 3.122499
+C 0.828096 3.122499 1.622388 2.793493 2.20794 2.20794
+C 2.793493 1.622388 3.122499 0.828096 3.122499 0
+C 3.122499 -0.828096 2.793493 -1.622388 2.20794 -2.20794
+C 1.622388 -2.793493 0.828096 -3.122499 0 -3.122499
+C -0.828096 -3.122499 -1.622388 -2.793493 -2.20794 -2.20794
+C -2.793493 -1.622388 -3.122499 -0.828096 -3.122499 0
+C -3.122499 0.828096 -2.793493 1.622388 -2.20794 2.20794
+C -1.622388 2.793493 -0.828096 3.122499 0 3.122499
+z
+" style="stroke: #387991; stroke-width: 1.15"/>
+    </defs>
+    <g clip-path="url(#p6bdfccd2a5)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/AWS/AWS_Trainium3_one_chip_%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3.md" target="_blank">
+      <use xlink:href="#m6ca1773c0b" x="331.91996" y="281.736345" style="fill: #ffffff; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-fp4-b200_sxm6"><title>B200 | 训推兼顾 | 9,000 TFLOP/s</title>
+    <defs>
+     <path id="mc34d59b1e9" d="M 0 3.122499
+C 0.828096 3.122499 1.622388 2.793493 2.20794 2.20794
+C 2.793493 1.622388 3.122499 0.828096 3.122499 0
+C 3.122499 -0.828096 2.793493 -1.622388 2.20794 -2.20794
+C 1.622388 -2.793493 0.828096 -3.122499 0 -3.122499
+C -0.828096 -3.122499 -1.622388 -2.793493 -2.20794 -2.20794
+C -2.793493 -1.622388 -3.122499 -0.828096 -3.122499 0
+C -3.122499 0.828096 -2.793493 1.622388 -2.20794 2.20794
+C -1.622388 2.793493 -0.828096 3.122499 0 3.122499
+z
+" style="stroke: #387991; stroke-width: 1.15"/>
+    </defs>
+    <g clip-path="url(#p6bdfccd2a5)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/NVIDIA/NVIDIA_B200_SXM6_180GB.md" target="_blank">
+      <use xlink:href="#mc34d59b1e9" x="320.796055" y="207.04666" style="fill: #387991; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-fp4-mi350x"><title>MI350X | 训推兼顾 | 9,228 TFLOP/s</title>
+    <g clip-path="url(#p6bdfccd2a5)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/AMD/MI350X.md" target="_blank">
+      <use xlink:href="#mc34d59b1e9" x="343.043866" y="205.581953" style="fill: #387991; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-fp4-mi355x"><title>MI355X | 训推兼顾 | 10,066 TFLOP/s</title>
+    <g clip-path="url(#p6bdfccd2a5)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/AMD/MI355X.md" target="_blank">
+      <use xlink:href="#mc34d59b1e9" x="309.672149" y="200.477039" style="fill: #387991; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-fp4-mi455x"><title>MI455X | 训推兼顾 | 40,265 TFLOP/s</title>
+    <g clip-path="url(#p6bdfccd2a5)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/AMD/MI455X.md" target="_blank">
+      <use xlink:href="#mc34d59b1e9" x="354.167772" y="119.138224" style="fill: #387991; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_6">
+    <path d="M 497.261652 316.224
+L 810.753544 316.224
+L 810.753544 65.376
+L 497.261652 65.376
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_3">
+    <g id="xtick_4">
+     <g id="line2d_30"/>
+     <g id="text_10">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(537.881181 328.582887)">偏训练</text>
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(533.150712 339.656715)">0/6，另1</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_31"/>
+     <g id="text_11">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(639.007598 328.532887)">偏推理</text>
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(631.49666 339.606715)">1/15，另1</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_32"/>
+     <g id="text_12">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(735.134014 328.543824)">训推兼顾</text>
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(732.623077 339.617652)">4/15，另1</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_4">
+    <g id="ytick_19">
+     <g id="line2d_33">
+      <path d="M 497.261652 205.70384
+L 810.753544 205.70384
+" clip-path="url(#pa76230c6ed)" style="fill: none; stroke: #e2e8eb; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_34">
+      <g>
+       <use xlink:href="#m12167abbb8" x="497.261652" y="205.70384" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_13">
+      <text style="font-size: 11px; font-family: 'Arial', 'Heiti TC'; text-anchor: end" x="490.261652" y="209.70799" transform="rotate(-0 490.261652 209.70799)">0.001</text>
+     </g>
+    </g>
+    <g id="ytick_20">
+     <g id="line2d_35">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="497.261652" y="312.549109" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_21">
+     <g id="line2d_36">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="497.261652" y="287.019074" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_22">
+     <g id="line2d_37">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="497.261652" y="267.216439" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_23">
+     <g id="line2d_38">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="497.261652" y="251.036509" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_24">
+     <g id="line2d_39">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="497.261652" y="237.356573" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_25">
+     <g id="line2d_40">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="497.261652" y="225.506474" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_26">
+     <g id="line2d_41">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="497.261652" y="215.053945" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_27">
+     <g id="line2d_42">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="497.261652" y="144.19124" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_28">
+     <g id="line2d_43">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="497.261652" y="108.208676" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_29">
+     <g id="line2d_44">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="497.261652" y="82.67864" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="text_14">
+     <text style="font-size: 11px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle" x="456.422433" y="190.8" transform="rotate(-90 456.422433 190.8)">byte/FLOP</text>
+    </g>
+   </g>
+   <g id="line2d_45">
+    <path d="M 631.759786 218.106863
+L 676.255409 218.106863
+" clip-path="url(#pa76230c6ed)" style="fill: none; stroke: #218378; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 730.863674 232.339408
+L 779.404354 232.339408
+L 779.404354 219.252669
+L 730.863674 219.252669
+L 730.863674 232.339408
+z
+" clip-path="url(#pa76230c6ed)" style="fill: #387991; fill-opacity: 0.12549; stroke: #387991; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_46">
+    <path d="M 755.134014 232.339408
+L 755.134014 254.249361
+" clip-path="url(#pa76230c6ed)" style="fill: none; stroke: #387991; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_47">
+    <path d="M 755.134014 219.252669
+L 755.134014 218.371734
+" clip-path="url(#pa76230c6ed)" style="fill: none; stroke: #387991; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_48">
+    <path d="M 742.998844 254.249361
+L 767.269184 254.249361
+" clip-path="url(#pa76230c6ed)" style="fill: none; stroke: #387991; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_49">
+    <path d="M 742.998844 218.371734
+L 767.269184 218.371734
+" clip-path="url(#pa76230c6ed)" style="fill: none; stroke: #387991; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_50">
+    <path d="M 730.863674 222.760269
+L 779.404354 222.760269
+" clip-path="url(#pa76230c6ed)" style="fill: none; stroke: #387991; stroke-width: 2"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 497.261652 316.224
+L 497.261652 65.376
+" style="fill: none; stroke: #000000; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 497.261652 316.224
+L 810.753544 316.224
+" style="fill: none; stroke: #000000; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 9px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle; fill: #218378" x="654.007598" y="62.86752" transform="rotate(-0 654.007598 62.86752)">0.00087</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 9px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle; fill: #387991" x="755.134014" y="62.86752" transform="rotate(-0 755.134014 62.86752)">0.000825</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 13px; font-family: 'Arial', 'Heiti TC'; text-anchor: start" x="497.261652" y="50.376" transform="rotate(-0 497.261652 50.376)">主存带宽 / FP4 算力</text>
+   </g>
+   <g id="point-fp4_bp-tpu8t"><title>TPU 8t | 偏训练 | 0.000518 byte/FLOP</title>
+    <g clip-path="url(#pa76230c6ed)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/Google-TPU/Google_TPU_8t_one_chip_%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3.md" target="_blank">
+      <use xlink:href="#m092a515c52" x="552.881181" y="264.061506" style="fill: #ffffff; stroke: #b64945; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-fp4_bp-tpu8i"><title>TPU 8i | 偏推理 | 0.000852 byte/FLOP</title>
+    <g clip-path="url(#pa76230c6ed)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/Google-TPU/Google_TPU_8i_one_chip_%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3.md" target="_blank">
+      <use xlink:href="#mb118789c27" x="631.759786" y="219.961167" style="fill: #ffffff; stroke: #218378; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-fp4_bp-mi350p"><title>MI350P | 偏推理 | 0.00087 byte/FLOP</title>
+    <g clip-path="url(#pa76230c6ed)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/AMD/MI350P.md" target="_blank">
+      <use xlink:href="#m2577d53fe0" x="676.255409" y="218.106863" style="fill: #218378; stroke: #218378; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-fp4_bp-mi455x"><title>MI455X | 训推兼顾 | 0.000579 byte/FLOP</title>
+    <g clip-path="url(#pa76230c6ed)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/AMD/MI455X.md" target="_blank">
+      <use xlink:href="#mc34d59b1e9" x="755.134014" y="254.249361" style="fill: #387991; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-fp4_bp-mi355x"><title>MI355X | 训推兼顾 | 0.000795 byte/FLOP</title>
+    <g clip-path="url(#pa76230c6ed)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/AMD/MI355X.md" target="_blank">
+      <use xlink:href="#mc34d59b1e9" x="744.010109" y="226.092904" style="fill: #387991; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-fp4_bp-b200_sxm6"><title>B200 | 训推兼顾 | 0.000856 byte/FLOP</title>
+    <g clip-path="url(#pa76230c6ed)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/NVIDIA/NVIDIA_B200_SXM6_180GB.md" target="_blank">
+      <use xlink:href="#mc34d59b1e9" x="766.25792" y="219.548269" style="fill: #387991; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-fp4_bp-mi350x"><title>MI350X | 训推兼顾 | 0.000867 byte/FLOP</title>
+    <g clip-path="url(#pa76230c6ed)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/AMD/MI350X.md" target="_blank">
+      <use xlink:href="#mc34d59b1e9" x="732.886203" y="218.371734" style="fill: #387991; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-fp4_bp-trainium3"><title>Trn3 | 训推兼顾 | 0.00194 byte/FLOP</title>
+    <g clip-path="url(#pa76230c6ed)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/AWS/AWS_Trainium3_one_chip_%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3.md" target="_blank">
+      <use xlink:href="#m6ca1773c0b" x="777.381826" y="146.691234" style="fill: #ffffff; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+  </g>
+  <g id="axes_3">
+   <g id="patch_10">
+    <path d="M 920.475706 316.224
+L 1233.967598 316.224
+L 1233.967598 65.376
+L 920.475706 65.376
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_5">
+    <g id="xtick_7">
+     <g id="line2d_51"/>
+     <g id="text_18">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(961.095235 328.582887)">偏训练</text>
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(956.364766 339.656715)">0/6，另1</text>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_52"/>
+     <g id="text_19">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(1062.221652 328.532887)">偏推理</text>
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(1054.710714 339.606715)">1/15，另1</text>
+     </g>
+    </g>
+    <g id="xtick_9">
+     <g id="line2d_53"/>
+     <g id="text_20">
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(1158.348068 328.543824)">训推兼顾</text>
+      <text style="font-size: 10px; font-family: 'Arial', 'Heiti TC'" transform="translate(1155.837131 339.617652)">4/15，另1</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_6">
+    <g id="ytick_30">
+     <g id="line2d_54">
+      <path d="M 920.475706 276.260197
+L 1233.967598 276.260197
+" clip-path="url(#p0d4b055f30)" style="fill: none; stroke: #e2e8eb; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_55">
+      <g>
+       <use xlink:href="#m12167abbb8" x="920.475706" y="276.260197" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_21">
+      <text style="font-size: 11px; font-family: 'Arial', 'Heiti TC'; text-anchor: end" x="913.475706" y="280.264347" transform="rotate(-0 913.475706 280.264347)">0.01</text>
+     </g>
+    </g>
+    <g id="ytick_31">
+     <g id="line2d_56">
+      <path d="M 920.475706 98.419185
+L 1233.967598 98.419185
+" clip-path="url(#p0d4b055f30)" style="fill: none; stroke: #e2e8eb; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_57">
+      <g>
+       <use xlink:href="#m12167abbb8" x="920.475706" y="98.419185" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_22">
+      <text style="font-size: 11px; font-family: 'Arial', 'Heiti TC'; text-anchor: end" x="913.475706" y="102.423336" transform="rotate(-0 913.475706 102.423336)">0.1</text>
+     </g>
+    </g>
+    <g id="ytick_32">
+     <g id="line2d_58">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="920.475706" y="315.714003" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_33">
+     <g id="line2d_59">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="920.475706" y="303.808118" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_34">
+     <g id="line2d_60">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="920.475706" y="293.494772" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_35">
+     <g id="line2d_61">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="920.475706" y="284.397756" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_36">
+     <g id="line2d_62">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="920.475706" y="222.724718" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_37">
+     <g id="line2d_63">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="920.475706" y="191.40847" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_38">
+     <g id="line2d_64">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="920.475706" y="169.189239" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_39">
+     <g id="line2d_65">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="920.475706" y="151.954664" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_40">
+     <g id="line2d_66">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="920.475706" y="137.872991" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_41">
+     <g id="line2d_67">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="920.475706" y="125.967107" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_42">
+     <g id="line2d_68">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="920.475706" y="115.65376" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_43">
+     <g id="line2d_69">
+      <g>
+       <use xlink:href="#m340ee0f40e" x="920.475706" y="106.556744" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="text_23">
+     <text style="font-size: 11px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle" x="885.753518" y="190.8" transform="rotate(-90 885.753518 190.8)">GB/(TFLOP/s)</text>
+    </g>
+   </g>
+   <g id="line2d_70">
+    <path d="M 1054.97384 188.121363
+L 1099.469463 188.121363
+" clip-path="url(#p0d4b055f30)" style="fill: none; stroke: #218378; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 1154.077728 232.237959
+L 1202.618408 232.237959
+L 1202.618408 193.336184
+L 1154.077728 193.336184
+L 1154.077728 232.237959
+z
+" clip-path="url(#p0d4b055f30)" style="fill: #387991; fill-opacity: 0.12549; stroke: #387991; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_71">
+    <path d="M 1178.348068 232.237959
+L 1178.348068 270.826079
+" clip-path="url(#p0d4b055f30)" style="fill: none; stroke: #387991; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_72">
+    <path d="M 1178.348068 193.336184
+L 1178.348068 188.351885
+" clip-path="url(#p0d4b055f30)" style="fill: none; stroke: #387991; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_73">
+    <path d="M 1166.212898 270.826079
+L 1190.483238 270.826079
+" clip-path="url(#p0d4b055f30)" style="fill: none; stroke: #387991; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_74">
+    <path d="M 1166.212898 188.351885
+L 1190.483238 188.351885
+" clip-path="url(#p0d4b055f30)" style="fill: none; stroke: #387991; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_75">
+    <path d="M 1154.077728 207.667199
+L 1202.618408 207.667199
+" clip-path="url(#p0d4b055f30)" style="fill: none; stroke: #387991; stroke-width: 2"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 920.475706 316.224
+L 920.475706 65.376
+" style="fill: none; stroke: #000000; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 920.475706 316.224
+L 1233.967598 316.224
+" style="fill: none; stroke: #000000; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_24">
+    <text style="font-size: 9px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle; fill: #218378" x="1077.221652" y="62.86752" transform="rotate(-0 1077.221652 62.86752)">0.0313</text>
+   </g>
+   <g id="text_25">
+    <text style="font-size: 9px; font-family: 'Arial', 'Heiti TC'; text-anchor: middle; fill: #387991" x="1178.348068" y="62.86752" transform="rotate(-0 1178.348068 62.86752)">0.0243</text>
+   </g>
+   <g id="text_26">
+    <text style="font-size: 13px; font-family: 'Arial', 'Heiti TC'; text-anchor: start" x="920.475706" y="50.376" transform="rotate(-0 920.475706 50.376)">主存容量 / FP4 算力</text>
+   </g>
+   <g id="point-fp4_cp-tpu8t"><title>TPU 8t | 偏训练 | 0.0171 GB/(TFLOP/s)</title>
+    <g clip-path="url(#p0d4b055f30)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/Google-TPU/Google_TPU_8t_one_chip_%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3.md" target="_blank">
+      <use xlink:href="#m092a515c52" x="976.095235" y="234.630603" style="fill: #ffffff; stroke: #b64945; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-fp4_cp-tpu8i"><title>TPU 8i | 偏推理 | 0.0285 GB/(TFLOP/s)</title>
+    <g clip-path="url(#p0d4b055f30)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/Google-TPU/Google_TPU_8i_one_chip_%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3.md" target="_blank">
+      <use xlink:href="#mb118789c27" x="1054.97384" y="195.32989" style="fill: #ffffff; stroke: #218378; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-fp4_cp-mi350p"><title>MI350P | 偏推理 | 0.0313 GB/(TFLOP/s)</title>
+    <g clip-path="url(#p0d4b055f30)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/AMD/MI350P.md" target="_blank">
+      <use xlink:href="#m2577d53fe0" x="1099.469463" y="188.121363" style="fill: #218378; stroke: #218378; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-fp4_cp-mi455x"><title>MI455X | 训推兼顾 | 0.0107 GB/(TFLOP/s)</title>
+    <g clip-path="url(#p0d4b055f30)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/AMD/MI455X.md" target="_blank">
+      <use xlink:href="#mc34d59b1e9" x="1178.348068" y="270.826079" style="fill: #387991; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-fp4_cp-b200_sxm6"><title>B200 | 训推兼顾 | 0.02 GB/(TFLOP/s)</title>
+    <g clip-path="url(#p0d4b055f30)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/NVIDIA/NVIDIA_B200_SXM6_180GB.md" target="_blank">
+      <use xlink:href="#mc34d59b1e9" x="1167.224163" y="222.724718" style="fill: #387991; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-fp4_cp-mi355x"><title>MI355X | 训推兼顾 | 0.0286 GB/(TFLOP/s)</title>
+    <g clip-path="url(#p0d4b055f30)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/AMD/MI355X.md" target="_blank">
+      <use xlink:href="#mc34d59b1e9" x="1189.471974" y="195.071753" style="fill: #387991; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-fp4_cp-mi350x"><title>MI350X | 训推兼顾 | 0.0312 GB/(TFLOP/s)</title>
+    <g clip-path="url(#p0d4b055f30)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/AMD/MI350X.md" target="_blank">
+      <use xlink:href="#mc34d59b1e9" x="1156.100257" y="188.351885" style="fill: #387991; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+   <g id="point-fp4_cp-trainium3"><title>Trn3 | 训推兼顾 | 0.0614 GB/(TFLOP/s)</title>
+    <g clip-path="url(#p0d4b055f30)">
+     <a xlink:href="file:///Users/gxli/Documents/Workspace/2026projects/%E8%B0%83%E7%A0%94-%E8%AE%AD%E7%BB%83%E6%8E%A8%E7%90%86%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94-%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/%E8%8A%AF%E7%89%87%E8%B0%83%E7%A0%94/%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3/AWS/AWS_Trainium3_one_chip_%E4%BA%A7%E5%93%81%E8%AF%A6%E8%A7%A3.md" target="_blank">
+      <use xlink:href="#m6ca1773c0b" x="1200.59588" y="136.146054" style="fill: #ffffff; stroke: #387991; stroke-width: 1.15"/>
+     </a>
+    </g>
+   </g>
+  </g>
+  <g id="text_27">
+   <text style="font-size: 16px; font-family: 'Arial', 'Heiti TC'; text-anchor: start" x="74.047598" y="26.0475" transform="rotate(-0 74.047598 26.0475)">FP4 计算峰值与存算比</text>
+  </g>
+  <g id="legend_1">
+   <g id="line2d_76">
+    <defs>
+     <path id="m41db3f7ee7" d="M 0 3
+C 0.795609 3 1.55874 2.683901 2.12132 2.12132
+C 2.683901 1.55874 3 0.795609 3 0
+C 3 -0.795609 2.683901 -1.55874 2.12132 -2.12132
+C 1.55874 -2.683901 0.795609 -3 0 -3
+C -0.795609 -3 -1.55874 -2.683901 -2.12132 -2.12132
+C -2.683901 -1.55874 -3 -0.795609 -3 0
+C -3 0.795609 -2.683901 1.55874 -2.12132 2.12132
+C -1.55874 2.683901 -0.795609 3 0 3
+z
+" style="stroke: #62727b"/>
+    </defs>
+    <g>
+     <use xlink:href="#m41db3f7ee7" x="598.567598" y="366.727957" style="fill: #62727b; stroke: #62727b"/>
+    </g>
+   </g>
+   <g id="text_28">
+    <text style="font-size: 9px; font-family: 'Arial', 'Heiti TC'; text-anchor: start" x="614.767598" y="369.877957" transform="rotate(-0 614.767598 369.877957)">可比值</text>
+   </g>
+   <g id="line2d_77">
+    <defs>
+     <path id="m2232cd7f7e" d="M 0 3
+C 0.795609 3 1.55874 2.683901 2.12132 2.12132
+C 2.683901 1.55874 3 0.795609 3 0
+C 3 -0.795609 2.683901 -1.55874 2.12132 -2.12132
+C 1.55874 -2.683901 0.795609 -3 0 -3
+C -0.795609 -3 -1.55874 -2.683901 -2.12132 -2.12132
+C -2.683901 -1.55874 -3 -0.795609 -3 0
+C -3 0.795609 -2.683901 1.55874 -2.12132 2.12132
+C -1.55874 2.683901 -0.795609 3 0 3
+z
+" style="stroke: #62727b"/>
+    </defs>
+    <g>
+     <use xlink:href="#m2232cd7f7e" x="668.767598" y="366.727957" style="fill: #ffffff; stroke: #62727b"/>
+    </g>
+   </g>
+   <g id="text_29">
+    <text style="font-size: 9px; font-family: 'Arial', 'Heiti TC'; text-anchor: start" x="684.967598" y="369.877957" transform="rotate(-0 684.967598 369.877957)">参考值</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p6bdfccd2a5">
+   <rect x="74.047598" y="65.376" width="313.491892" height="250.848"/>
+  </clipPath>
+  <clipPath id="pa76230c6ed">
+   <rect x="497.261652" y="65.376" width="313.491892" height="250.848"/>
+  </clipPath>
+  <clipPath id="p0d4b055f30">
+   <rect x="920.475706" y="65.376" width="313.491892" height="250.848"/>
+  </clipPath>
+ </defs>
+</svg>

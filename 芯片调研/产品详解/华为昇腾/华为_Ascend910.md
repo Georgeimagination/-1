@@ -91,6 +91,14 @@ Nimbus 提供的是芯片外部连接能力；实际训练服务器再把多颗 
 
 Ascend 910 于 2019 年 8 月 23 日正式发布，随后用于 Atlas 部件、服务器与云服务。这里介绍的是原始 Ascend 910，后来的 910B、910C 和 Atlas A2/A3 配置需要各自的资料。当前独立销售状态、更多数值格式的型号级峰值，以及 attention、MoE routing 或 KV Cache 的专用硬件，现有参考资料没有给出足够证据。[6, opening] [4, pp.5, 34, 36] [9, Huawei's computing strategy；Atlas 900, the world's fastest AI training cluster]
 
+## 型号公开与供货时间
+
+本次采用的首次型号公开时间为 2018。2019 年官方稿回顾本处理器计划规格已于 Huawei Connect 2018 公布；2019 是正式发布年。正式发布或供货记录：2019-08-23 正式发布。[6, Ascend 910: More computing power than any other AI processor in the world; page date]
+
+## scale-up 域的配置边界
+
+原论文中八芯片服务器的专用 HCCS 域应按每组四颗计，八颗是整机芯片数；两个 HCCS 组之间的 PCIe 通路属于另一层连接。 [2, PDF p.8 / proceedings p.796, Figure 15(a)]
+
 ## 参考资料
 
 [1] Huawei，*DaVinci: A Scalable Architecture for Neural Network Computing*，Hot Chips 31，2019。[本地 PDF](../../原始资料/论文/华为昇腾_DaVinci/01_厂商直接架构论文/2019_DaVinci_Scalable_Architecture_HotChips31.pdf)

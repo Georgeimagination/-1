@@ -66,6 +66,14 @@ ICI（芯片间互联）把 v6e 芯片连成多芯片 slice，即共同执行任
 Google 发布文章提到提高时钟，但没有公布明确频率。生命周期论文将工艺与 die 面积列为未披露，并报告不含 host 的 fleet 平均功耗为 153 W/TPU；该值不是 TDP（散热设计功耗）或峰值。现有资料足以说明 v6e 的计算与存储分工，还不足以复原其物理版图、散热方案或完整 cache/一致性结构。[5, 4.7X increase in compute performance per Trillium chip] [8, p. 2, Table 1]
 
 
+## 型号公开与供货时间
+
+本次采用的首次型号公开时间为 2024-05-14。两类 GA 公告日期分别保留，年份图采用首次 Trillium 公告。正式发布或供货记录：2024-12-11：GA 博客；12-16：release notes 记录。[5, page date and Learn more]; [25, page date and opening]; [26, December 16, 2024]
+
+## scale-up 域的配置边界
+
+官方支持形状表列出 16×16、256 芯片的 slice。8-chip 单 VM 配置是推理优化形态，多 host inference 另有软件支持，因此单 VM 数量不等于整个 ICI 域的上限。 [1, Supported configurations]
+
 ## 参考资料
 
 [1] Google Cloud，*TPU v6e*。<https://docs.cloud.google.com/tpu/docs/v6e>
@@ -89,3 +97,7 @@ Google 发布文章提到提高时钟，但没有公布明确频率。生命周�
 [23] The JAX Authors，*SparseCore Kernel Writing*，获取于 2026-09-17。[官方文档](https://docs.jax.dev/en/latest/pallas/tpu/sparsecore.html)；[官方仓库原文](https://github.com/jax-ml/jax/blob/main/docs/pallas/tpu/sparsecore.md)。 [本地原文快照](../../原始资料/网页快照/Google/JAX/2026-09-17/jax-sparsecore.md)
 
 [24] Norman P. Jouppi 等，*Google's Training Supercomputers from TPU v2 to Ironwood*，2026。p.1 注 2 说明 Trillium 的设计取向。[本地PDF](../../原始资料/论文/Google_TPU/01_厂商直接架构论文/2026_TPUv2_to_Ironwood_Five_Generations.pdf)
+
+[25] Google Cloud，*Announcing the general availability of Trillium, our sixth-generation TPU*，2024-12-11。[原文](https://cloud.google.com/blog/products/compute/trillium-tpu-is-ga)；[本地原文](../../原始资料/网页快照/比较补充/2026-09-24/ff642e8cecd6.html)
+
+[26] Google Cloud，*Cloud TPU release notes*。[原文](https://docs.cloud.google.com/tpu/docs/release-notes)；[本地原文](../../原始资料/网页快照/比较补充/2026-09-24/6295285e278e.html)

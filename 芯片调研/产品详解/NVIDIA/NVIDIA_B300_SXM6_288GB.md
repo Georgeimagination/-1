@@ -94,6 +94,14 @@ Ultra datasheet 为 HGX B300 列出最多 7 个 MIG（Multi-Instance GPU，多�
 
 所引资料仍未厘清 288GB 与 270GB 两组配置的对应关系，整芯片算力和能效比较应分别保留这两组来源条件。[3, Table 1；1, pp.25-26]
 
+## 型号公开与供货时间
+
+本次采用的首次型号公开时间为 2025-03-18。B300/HGX Blackwell Ultra 型号公开；270GB/288GB 后续规格分支仍保留，不据日期解决峰值配置绑定。正式发布或供货记录：公告计划 2025 H2 合作伙伴供货。[29, page header; Global Technology Leaders Embrace Blackwell Ultra]
+
+## scale-up 域的配置边界
+
+HGX B300 的系统配置表明确列出八颗 B300 GPU，并通过第五代 NVLink 与 NVSwitch 连接。这里按八颗逻辑 GPU 计数，不因每 GPU 内部的双裸片而翻倍。 [3, Table 2, NVIDIA HGX B300 system elements]
+
 ## 参考资料
 
 页码采用文内印刷页码；独立微基准采用 PDF 页序。网页按所列章节、表或图定位。
@@ -115,3 +123,5 @@ Ultra datasheet 为 HGX B300 列出最多 7 个 MIG（Multi-Instance GPU，多�
 [11] NVIDIA，*R595 Trusted Computing Solutions Release Notes*。[原文](https://docs.nvidia.com/595trd1-trusted-computing-solutions-release-notes.pdf) [本地原文](../../原始资料/论文/NVIDIA_GPU/90_官方白皮书与技术资料/20260917-ref-f84a41e761a5-595trd1-trusted-computing-solutions-release-notes.pdf)
 
 [28] NVIDIA，*Parallel Thread Execution ISA*，9.4。[原文](https://docs.nvidia.com/cuda/parallel-thread-execution/) [本地原文](../../原始资料/网页快照/NVIDIA/CUDA-PTX/2026-09-17/ptx-9.4.html)
+
+[29] NVIDIA，*NVIDIA Blackwell Ultra AI Factory Platform Paves Way for Age of AI Reasoning*，2025-03-18。[原文](https://nvidianews.nvidia.com/news/nvidia-blackwell-ultra-ai-factory-platform-paves-way-for-age-of-ai-reasoning)；[本地原文](../../原始资料/网页快照/比较补充/2026-09-24/7dbb891270a3.html)

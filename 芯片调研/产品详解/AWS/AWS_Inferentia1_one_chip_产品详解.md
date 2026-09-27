@@ -12,7 +12,7 @@ NeuronCore 是 AWS 的神经网络计算核心。每个 NeuronCore-v1 内含 Ten
 
 ScalarEngine 的名称容易令人联想到串行 CPU 标量执行，但这里并不表示单 lane：官方给出其每周期可执行 512 次浮点操作，VectorEngine 则为每周期 256 次。两者支持 FP16、BF16、FP32 以及多种整数格式。所引资料没有给出时钟和具体向量宽度，不能只用“每周期操作数”推出一条带有确定 GHz 条件的全芯片峰值。[4, VectorEngine and ScalarEngine]
 
-TensorEngine 接受 FP16、BF16、INT8 输入，输出为 FP32 或 INT32。每核 FP16/BF16 峰值为 16 TFLOPS，四核芯片公开值为 64 TFLOPS；INT8 则是 128 TOPS。TFLOPS 表示每秒万亿次浮点运算，TOPS 表示每秒万亿次运算，后者在这里对应整数路径。所引资料没有充分说明物理累加器位宽、舍入、饱和及结构化稀疏条件，因此不能给这些峰值增加额外的稀疏倍数。[1, Compute] [4, TensorEngine]
+TensorEngine 接受 FP16、BF16、INT8 输入，输出为 FP32 或 INT32。每核 FP16/BF16 峰值为 16 TFLOPS，四核芯片公开值为 64 TFLOPS；芯片规格表另给 INT8 128 TOPS。TFLOPS 表示每秒万亿次浮点运算，TOPS 表示每秒万亿次运算，后者在这里对应整数路径。所引资料没有充分说明物理累加器位宽、舍入、饱和及结构化稀疏条件，因此不能给这些峰值增加额外的稀疏倍数。[1, Compute] [4, TensorEngine]
 
 ## SRAM 负责局部复用，DDR4 保存更大的状态
 
@@ -22,7 +22,7 @@ SBUF/PSUM 与 L2 cache 的关键区别是数据管理方式。程序和编译器
 
 | 图中资源 | 单芯片规格 | 对程序的含义 |
 |---|---|---|
-| TensorEngine 路径 | 4 个 NCv1；64 TFLOPS FP16/BF16；128 TOPS INT8 | 矩阵路径的理论上限，不代表每个算子都能达到 [1, Compute] [4, TensorEngine] |
+| 官方芯片宣传峰值 | 4 个 NCv1；64 TFLOPS FP16/BF16；128 TOPS INT8 | 单芯片标称值；核心文档只单列每核 16 TFLOPS FP16/BF16，未给单核 INT8 峰值以独立核算纯矩阵总量。[1, Compute] [4, TensorEngine] |
 | 外部 DDR4 / DRAM | 8 GB（产品页）或 8 GiB（架构页）；50 GiB/s | 保存模型参数与中间状态 [1, Device Memory] [2, Optimized for high throughput and low latency] |
 | 片上 SBUF / PSUM | 存在，所引资料未给出容量 | 软件控制的数据复用空间，不能标作已知容量 L2 [4, opening] [9, State Buffer and Partial Sum Buffer] |
 
@@ -51,6 +51,10 @@ Pipeline 文档给出一个初步选择核心数的经验式：`4 × round(模�
 Inf1 有一芯片、四芯片和十六芯片配置。一芯片实例的芯片间互联栏为 N/A，不能因为芯片家族支持 NeuronLink 就认定一芯片部署也存在模型跨设备通信。实例中的主机内存、CPU、Nitro 和网络位于加速器之外；所引资料未给出芯片工艺、面积、频率、封装结构、散热以及绝对功耗。它们不能由实例价格或系统级相对性能反算出来。[3, Product details] [7, Inf1 Architecture table]
 
 
+## 型号公开与供货时间
+
+本次采用的首次型号公开时间为 2018-11-28。芯片宣布与实例正式可用分开。正式发布或供货记录：2019-12-03：Inf1 GA。[11, page date and opening]; [12, page date and opening]
+
 ## 参考资料
 
 [1] AWS Neuron，*Inferentia Architecture*。<https://awsdocs-neuron.readthedocs-hosted.com/en/latest/about-neuron/arch/neuron-hardware/inferentia.html>
@@ -68,3 +72,7 @@ Inf1 有一芯片、四芯片和十六芯片配置。一芯片实例的芯片间
 [9] AWS Neuron，*Neuron Glossary*。<https://awsdocs-neuron.readthedocs-hosted.com/en/latest/about-neuron/arch/glossary.html> [本地原文](../../原始资料/网页快照/AWS/产品详解补充/2026-09-17/glossary.html)
 
 [10] AWS Neuron，*NeuronCore Pipeline*。<https://awsdocs-neuron.readthedocs-hosted.com/en/latest/about-neuron/arch/neuron-features/neuroncore-pipeline.html> [本地原文](../../原始资料/网页快照/AWS/产品详解补充/2026-09-17/v1-pipeline.html)
+
+[11] AWS，*Announcing AWS Inferentia: Machine Learning Inference Chip*，2018-11-28。[原文](https://aws.amazon.com/about-aws/whats-new/2018/11/announcing-amazon-inferentia-machine-learning-inference-microchip/)；[本地原文](../../原始资料/网页快照/比较补充/2026-09-24/2362229f45a3.html)
+
+[12] AWS，*Amazon EC2 Update: Inf1 Instances with AWS Inferentia Chips*，2019-12-03。[原文](https://aws.amazon.com/blogs/aws/amazon-ec2-update-inf1-instances-with-aws-inferentia-chips-for-high-performance-cost-effective-inferencing/)；[本地原文](../../原始资料/网页快照/比较补充/2026-09-24/cf60ec42512d.html)

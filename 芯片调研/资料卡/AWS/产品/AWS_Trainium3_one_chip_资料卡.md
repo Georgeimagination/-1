@@ -106,6 +106,10 @@
 | Scale-up fabric | Gen1/Gen2以NeuronSwitch-v1和NeuronLink-v4形成all-to-all connectivity；公开表写2,048GiB/s/device | NeuronSwitch是系统交换fabric，不是芯片内NoC，也不改变每芯片四个端点的对象边界 | `[4, full page]` |
 | Scale-out | Trn3 UltraServer经EFA进入EC2 UltraCluster 3.0 | EFA和数十万芯片规模属于集群，不是Trainium3片上NIC或SKU属性 | `[5, opening and Features]` |
 
+### scale-up 域的配置边界
+
+Trn3 Gen1 UltraServer 由四台每台十六芯片的 server 组成，合计六十四颗；Gen2 则为三十六台每台四芯片的 server，合计一百四十四颗。两者通过 NeuronSwitch 与 NeuronLink 形成单一 scale-up 域，all-to-all 描述的是交换网络的可达关系。 [4, Trn3 Gen1 UltraServer / Trn3 Gen2 UltraServer]
+
 ## 7. 证据缺口与来源冲突
 
 Trn3 系统文档新增按芯片列出的 Gen6 x8 互联：intra-server 4 组、256GB/s 双向；inter-server 5 组、320GB/s 双向；inter-rack 2 组、128GB/s 双向。该段使用每 sled 4 chips 的描述，前文另有 Gen1 每 server 16 chips，适用系统版本需分开；这些分层数值与同页 2,048GiB/s、芯片页 2.56TB/s 的关系未说明，不能简单相加替代 NeuronLink 额定值，也不是已确认的 host-CPU 接口。`[4, Trn3 UltraServer Connectivity and Networking]`

@@ -1,0 +1,4439 @@
+{
+  "updated": "2026-09-24",
+  "scope": "现有36个产品；新增四类事实不改变原始产品口径或完成状态",
+  "sources": "参考编号属于对应产品详解；数值单位、配置与原文条件保留",
+  "products": {
+    "a100_sxm4": {
+      "card": "NVIDIA/NVIDIA_A100_SXM4_80GB.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 8,
+            "kind": "physical_domain",
+            "system": "HGX/DGX A100 80GB 八 GPU 配置",
+            "topology": "NVLink 3 + NVSwitch",
+            "condition": "80GB 数据手册明确 HGX 八 GPU；白皮书给 A100 八 GPU NVSwitch 组织。",
+            "source": "[1, p.1, Server Options] [2, pp.52-53] [4, opening / HGX A100 systems paragraph]"
+          }
+        ],
+        "status": "known",
+        "note": "80GB 发布稿也列 HGX 四 GPU 形态，但该来源未单列四 GPU 互联拓扑，因此图采用已确认的八 GPU NVSwitch 配置；更大的 DGX 集群经 InfiniBand/Ethernet 连接，不属于此 NVLink 域。",
+        "source": "[1, p.1] [2, pp.52-53,70-71] [4, opening]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "shared memory 最大分配",
+            "value": 164,
+            "unit": "KB",
+            "scope": "每 SM",
+            "kind": "local_work",
+            "instances": 108,
+            "shared": false,
+            "condition": "程序显式工作区；与 L1 共用 192 KB，不相加；每 block 可寻址上限比此值少 1 KB。",
+            "source": "[2, pp.21-22,30-37]; [22, §§1.4.1.1,1.4.2.3]",
+            "instance_source": "[2, pp.19-22,36]; [6, §4.3, Figure 4]"
+          },
+          {
+            "name": "GPU L2",
+            "value": 40,
+            "unit": "MB",
+            "scope": "chip",
+            "kind": "cache",
+            "instances": 1,
+            "shared": true,
+            "condition": "全 GPU 共享的硬件缓存；分区和访问局部性不改变本记录的产品容量。",
+            "source": "[2, pp.35-36, A100 L2 Cache]"
+          }
+        ],
+        "status": "known_layers",
+        "note": "仅记录 shared carveout 最大容量；不重复加入统一 L1/shared 容量或寄存器。",
+        "source": "[2, pp.21-22,30-37]",
+        "card": "NVIDIA/NVIDIA_A100_SXM4_80GB.md"
+      },
+      "integer": {
+        "card": "NVIDIA/NVIDIA_A100_SXM4_80GB.md",
+        "label": "A100 SXM4 80GB",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 624,
+            "path": "matrix",
+            "density": "dense",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "INT32；程序员可见累加格式 [2, pp.27,34]",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 GPU、INT8 Tensor Core。",
+            "source": "[1, p.1]; [2, pp.15,36]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true
+          },
+          {
+            "format": "INT8",
+            "value_tops": 1248,
+            "path": "matrix",
+            "density": "sparse",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "INT32；程序员可见累加格式 [2, pp.27,34]",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 GPU、INT8 Tensor Core。；官方结构化稀疏峰值，要求相应压缩输入、位置元数据和执行指令，不代表任意含零矩阵的吞吐。",
+            "source": "[1, p.1]; [2, pp.15,36]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true
+          },
+          {
+            "format": "INT4",
+            "value_tops": 1248,
+            "path": "matrix",
+            "density": "dense",
+            "execution": "native",
+            "input": "INT4",
+            "accumulation": "INT32；程序员可见累加格式 [2, pp.27,34]",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 GPU、INT4 Tensor Core；不是 FP4。",
+            "source": "[2, pp.15,36]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true
+          },
+          {
+            "format": "INT4",
+            "value_tops": 2496,
+            "path": "matrix",
+            "density": "sparse",
+            "execution": "native",
+            "input": "INT4",
+            "accumulation": "INT32；程序员可见累加格式 [2, pp.27,34]",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 GPU、INT4 Tensor Core；不是 FP4。；官方结构化稀疏峰值，要求相应压缩输入、位置元数据和执行指令，不代表任意含零矩阵的吞吐。",
+            "source": "[2, pp.15,36]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/NVIDIA/NVIDIA_A100_SXM4_80GB.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2020,
+        "date": "2020-11-16",
+        "availability": "2020 Q4：DGX 系统供货；HGX 合作伙伴系统计划 2021 H1",
+        "note": "80GB 型号发布，不采用 A100 40GB 的更早日期。",
+        "source": "[4, page header, opening and availability]"
+      }
+    },
+    "h100_sxm5": {
+      "card": "NVIDIA/NVIDIA_H100_SXM5_80GB.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 4,
+            "kind": "physical_domain",
+            "system": "HGX H100 四 GPU",
+            "topology": "NVLink 点到点全互联",
+            "condition": "与八 GPU NVSwitch 方案分开。",
+            "source": "[1, pp.15-16, HGX H100]"
+          },
+          {
+            "chips": 8,
+            "kind": "physical_domain",
+            "system": "HGX/DGX H100 八 GPU",
+            "topology": "NVLink 4 + NVSwitch",
+            "condition": "单服务器内完整 NVLink 域；SHARP 属于外部交换机。",
+            "source": "[1, pp.15-16, HGX H100]"
+          }
+        ],
+        "status": "known",
+        "note": "白皮书的 256 GPU NVLink Switch System 是发布期跨节点方案目标，采用 2:1 tapered fat tree；未当作与当前 HGX 八 GPU 形态相同的已交付配置。",
+        "source": "[1, pp.12,15-16,47-49]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "shared memory 最大分配",
+            "value": 228,
+            "unit": "KB",
+            "scope": "每 SM",
+            "kind": "local_work",
+            "instances": 132,
+            "shared": false,
+            "condition": "程序显式工作区；与 L1 共用 256 KB，不相加；每 block 可寻址上限比此值少 1 KB。",
+            "source": "[1, pp.21,27,37,40]; [22, §§1.4.1.1,1.4.2.4]",
+            "instance_source": "[1, pp.18-21,39-40]"
+          },
+          {
+            "name": "GPU L2",
+            "value": 50,
+            "unit": "MB",
+            "scope": "chip",
+            "kind": "cache",
+            "instances": 1,
+            "shared": true,
+            "condition": "全 GPU 共享的硬件缓存；分区和访问局部性不改变本记录的产品容量。",
+            "source": "[1, pp.37,39-40, Table 3]"
+          }
+        ],
+        "status": "known_layers",
+        "note": "仅记录 shared carveout 最大容量；不重复加入统一 L1/shared 容量或寄存器。",
+        "source": "[1, pp.21,27,29-37,40-41]",
+        "card": "NVIDIA/NVIDIA_H100_SXM5_80GB.md"
+      },
+      "integer": {
+        "card": "NVIDIA/NVIDIA_H100_SXM5_80GB.md",
+        "label": "H100 SXM5 80GB",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 1978.9,
+            "path": "matrix",
+            "density": "dense",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 GPU、白皮书规格；不使用双 GPU 汇总。",
+            "source": "[1, pp.20,39-40, Tables 1,3]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true
+          },
+          {
+            "format": "INT8",
+            "value_tops": 3957.8,
+            "path": "matrix",
+            "density": "sparse",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 GPU、白皮书规格；不使用双 GPU 汇总。；官方结构化稀疏峰值，要求相应压缩输入、位置元数据和执行指令，不代表任意含零矩阵的吞吐。",
+            "source": "[1, pp.20,39-40, Tables 1,3]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所引资料未确认该格式的硬件运算路径；不据此认定不支持。",
+            "source": "[1, pp.22-24,39-46]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/NVIDIA/NVIDIA_H100_SXM5_80GB.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2022,
+        "date": "2022-03-22",
+        "availability": "2022-09：家族量产；合作伙伴系统计划 2022-10",
+        "note": "公告明确 SXM 与 PCIe 两种形态；不将家族量产当模组零售日。",
+        "source": "[4, NVIDIA H100 at Every Scale; Availability]; [3, Global Rollout of Hopper]"
+      }
+    },
+    "h100_pcie": {
+      "card": "NVIDIA/NVIDIA_H100_PCIe_80GB.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 2,
+            "kind": "physical_domain",
+            "system": "H100 PCIe 两卡桥接组",
+            "topology": "3 个 NVLink bridge 的点到点连接",
+            "condition": "达到桥接章节的最大带宽需要同时安装三块桥；不可套用 SXM NVSwitch 域。",
+            "source": "[2, pp.8-9, Table 6]"
+          }
+        ],
+        "status": "known",
+        "note": "正文采用桥接章节 600 GB/s，而非首页冲突的 900 GB/s；该差异不改变两卡数量。",
+        "source": "[2, pp.1,8-9] [1, p.15]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "shared memory 最大分配",
+            "value": 228,
+            "unit": "KB",
+            "scope": "每 SM",
+            "kind": "local_work",
+            "instances": 114,
+            "shared": false,
+            "condition": "程序显式工作区；与 L1 共用 256 KB，不相加；每 block 可寻址上限比此值少 1 KB。",
+            "source": "[1, pp.21,27,29-35,41]; [22, §§1.4.1.1,1.4.2.4]",
+            "instance_source": "[1, pp.39-40]; [2, p.4]"
+          },
+          {
+            "name": "GPU L2",
+            "value": 50,
+            "unit": "MB",
+            "scope": "chip",
+            "kind": "cache",
+            "instances": 1,
+            "shared": true,
+            "condition": "全 GPU 共享的硬件缓存；分区和访问局部性不改变本记录的产品容量。",
+            "source": "[1, pp.36-40, Table 3]"
+          }
+        ],
+        "status": "known_layers",
+        "note": "仅记录 shared carveout 最大容量；不重复加入统一 L1/shared 容量或寄存器。",
+        "source": "[1, pp.21,27,29-37,40-41]",
+        "card": "NVIDIA/NVIDIA_H100_PCIe_80GB.md"
+      },
+      "integer": {
+        "card": "NVIDIA/NVIDIA_H100_PCIe_80GB.md",
+        "label": "H100 PCIe 80GB",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 1513,
+            "path": "matrix",
+            "density": "dense",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 PCIe GPU、白皮书规格；不使用桥接对的汇总。",
+            "source": "[1, pp.20,39-40, Tables 1,3]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true
+          },
+          {
+            "format": "INT8",
+            "value_tops": 3026,
+            "path": "matrix",
+            "density": "sparse",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 PCIe GPU、白皮书规格；不使用桥接对的汇总。；官方结构化稀疏峰值，要求相应压缩输入、位置元数据和执行指令，不代表任意含零矩阵的吞吐。",
+            "source": "[1, pp.20,39-40, Tables 1,3]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所引资料未确认该格式的硬件运算路径；不据此认定不支持。",
+            "source": "[1, pp.22-24,39-46]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/NVIDIA/NVIDIA_H100_PCIe_80GB.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2022,
+        "date": "2022-03-22",
+        "availability": "2022-09：家族量产；卡片 v02 简报 2022-11-30",
+        "note": "公告明确 PCIe 形态；后续简报日期不当首次公开日。",
+        "source": "[29, NVIDIA H100 at Every Scale; Availability]; [3, Global Rollout of Hopper]; [2, Document History]"
+      }
+    },
+    "h100_nvl": {
+      "card": "NVIDIA/NVIDIA_H100_NVL_94GB.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 2,
+            "kind": "physical_domain",
+            "system": "H100 NVL 两卡组",
+            "topology": "3 个 NVLink bridge 的点到点连接",
+            "condition": "每卡 94 GB，188 GB 是两卡合计，桥接本身不证明透明统一内存池。",
+            "source": "[1, pp.9-10, NVIDIA NVLink Bridge Support]"
+          }
+        ],
+        "status": "known",
+        "note": "两张卡仍是两个独立 GPU 封装。",
+        "source": "[1, pp.9-11]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "shared memory 最大分配",
+            "value": 228,
+            "unit": "KB",
+            "scope": "每 SM",
+            "kind": "local_work",
+            "instances": null,
+            "shared": false,
+            "condition": "程序显式工作区；与 L1 共用 256 KB，不相加；每 block 可寻址上限比此值少 1 KB。",
+            "source": "[3, pp.21,27,37,40]; [22, §§1.4.1.1,1.4.2.4]",
+            "instance_source": ""
+          }
+        ],
+        "status": "partial",
+        "note": "仅记录 shared carveout 最大容量；不重复加入统一 L1/shared 容量或寄存器。 所引型号资料未确认实际 L2 容量，保留未知，不借用其他板型或完整裸片。",
+        "source": "[3, pp.21,27,29-37,40-41]",
+        "card": "NVIDIA/NVIDIA_H100_NVL_94GB.md"
+      },
+      "integer": {
+        "card": "NVIDIA/NVIDIA_H100_NVL_94GB.md",
+        "label": "H100 NVL 94GB",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 3341,
+            "path": "matrix",
+            "density": "sparse",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "H100 NVL 单卡 94GB 列；2:4 结构化稀疏 Tensor 峰值。未把双卡值下放，也未折半伪装成直接公布的 dense 值。",
+            "source": "[2, p.2, Technical Specifications and note]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所引资料未确认该格式的硬件运算路径；不据此认定不支持。",
+            "source": "[3, pp.22-24,39-46]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/NVIDIA/NVIDIA_H100_NVL_94GB.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2023,
+        "date": "2023-03-21",
+        "availability": null,
+        "note": "公告明确 H100 NVL 的 94GB 单 GPU；188GB 为双卡合计。",
+        "source": "[4, NVIDIA H100 NVL and NVIDIA L4 for LLM Inference]"
+      }
+    },
+    "l4": {
+      "card": "NVIDIA/NVIDIA_L4_24GB.md",
+      "scaleup": {
+        "records": [],
+        "status": "not_found",
+        "note": "已查产品简报与产品页，仅有 PCIe Gen4 x16，未给专用 GPU 间高速域；不填 1，也不把主机多卡数当作 scale-up 域。",
+        "source": "[1, pp.2,6-7] [3, Product Specifications]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "shared memory 最大分配",
+            "value": 100,
+            "unit": "KB",
+            "scope": "每 SM",
+            "kind": "local_work",
+            "instances": 58,
+            "shared": false,
+            "condition": "程序显式工作区；与 L1 共用 128 KB，不相加；每 block 可寻址上限比此值少 1 KB。",
+            "source": "[2, pp.10-12]; [22, §§1.4.1.1,1.4.2.2]",
+            "instance_source": "[2, pp.39-40]"
+          },
+          {
+            "name": "GPU L2",
+            "value": 49152,
+            "unit": "KB",
+            "scope": "chip",
+            "kind": "cache",
+            "instances": 1,
+            "shared": true,
+            "condition": "全 GPU 共享的硬件缓存；分区和访问局部性不改变本记录的产品容量。",
+            "source": "[2, p.40]"
+          }
+        ],
+        "status": "known_layers",
+        "note": "仅记录 shared carveout 最大容量；不重复加入统一 L1/shared 容量或寄存器。",
+        "source": "[2, pp.8-12,40]; [22, §§1.4.1.1,1.4.2.2]",
+        "card": "NVIDIA/NVIDIA_L4_24GB.md"
+      },
+      "integer": {
+        "card": "NVIDIA/NVIDIA_L4_24GB.md",
+        "label": "L4 24GB",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 242,
+            "path": "matrix",
+            "density": "dense",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 GPU；保留原报整数，未按稀疏列除二重算。",
+            "source": "[2, p.40, Appendix D, Table 5 and note]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true
+          },
+          {
+            "format": "INT8",
+            "value_tops": 485,
+            "path": "matrix",
+            "density": "sparse",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 GPU；保留原报整数，未按稀疏列除二重算。；官方结构化稀疏峰值，要求相应压缩输入、位置元数据和执行指令，不代表任意含零矩阵的吞吐。",
+            "source": "[2, p.40, Appendix D, Table 5 and note]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true
+          },
+          {
+            "format": "INT4",
+            "value_tops": 484,
+            "path": "matrix",
+            "density": "dense",
+            "execution": "native",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 GPU；保留原报整数，INT4 与 FP4 分开。",
+            "source": "[2, p.40, Appendix D, Table 5 and note]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true
+          },
+          {
+            "format": "INT4",
+            "value_tops": 969,
+            "path": "matrix",
+            "density": "sparse",
+            "execution": "native",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 GPU；保留原报整数，INT4 与 FP4 分开。；官方结构化稀疏峰值，要求相应压缩输入、位置元数据和执行指令，不代表任意含零矩阵的吞吐。",
+            "source": "[2, p.40, Appendix D, Table 5 and note]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/NVIDIA/NVIDIA_L4_24GB.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2023,
+        "date": "2023-03-21",
+        "availability": null,
+        "note": "L4 型号发布；规格书文档日期不自动等于公开日期。",
+        "source": "[4, NVIDIA L4 for AI Video]"
+      }
+    },
+    "l40s": {
+      "card": "NVIDIA/NVIDIA_L40S_48GB.md",
+      "scaleup": {
+        "records": [],
+        "status": "not_applicable",
+        "note": "官方明确不支持 NVLink；多卡连接由主机和外部系统提供，未建立专用高速域数量。",
+        "source": "[1, pp.2,6-7] [2, Interconnect Interface / NVLink Support]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "shared memory 最大分配",
+            "value": 100,
+            "unit": "KB",
+            "scope": "每 SM",
+            "kind": "local_work",
+            "instances": 142,
+            "shared": false,
+            "condition": "程序显式工作区；与 L1 共用 128 KB，不相加；每 block 可寻址上限比此值少 1 KB。",
+            "source": "[3, pp.10-12,37]; [22, §§1.4.1.1,1.4.2.2]",
+            "instance_source": "[2, GPU Specifications]; [3, pp.7-8]"
+          }
+        ],
+        "status": "partial",
+        "note": "仅记录 shared carveout 最大容量；不重复加入统一 L1/shared 容量或寄存器。 所引型号资料未确认实际 L2 容量，保留未知，不借用其他板型或完整裸片。",
+        "source": "[3, pp.8,12,37]; [22, §§1.4.1.1,1.4.2.2]",
+        "card": "NVIDIA/NVIDIA_L40S_48GB.md"
+      },
+      "integer": {
+        "card": "NVIDIA/NVIDIA_L40S_48GB.md",
+        "label": "L40S 48GB",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 733,
+            "path": "matrix",
+            "density": "dense",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 GPU，官方产品页 peak 采用 boost 条件。",
+            "source": "[2, GPU Specifications and note]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true
+          },
+          {
+            "format": "INT8",
+            "value_tops": 1466,
+            "path": "matrix",
+            "density": "sparse",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 GPU，官方产品页 peak 采用 boost 条件。；官方结构化稀疏峰值，要求相应压缩输入、位置元数据和执行指令，不代表任意含零矩阵的吞吐。",
+            "source": "[2, GPU Specifications and note]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true
+          },
+          {
+            "format": "INT4",
+            "value_tops": 733,
+            "path": "matrix",
+            "density": "dense",
+            "execution": "native",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "原表 INT4 与 INT8 同值；保留原文疑点，不按位宽翻倍修正。",
+            "source": "[2, GPU Specifications and note]",
+            "status": "ambiguous_source",
+            "sku_bound": true,
+            "comparison_eligible": false
+          },
+          {
+            "format": "INT4",
+            "value_tops": 1466,
+            "path": "matrix",
+            "density": "sparse",
+            "execution": "native",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "原表 INT4 与 INT8 同值；保留原文疑点，不按位宽翻倍修正。；官方结构化稀疏峰值，要求相应压缩输入、位置元数据和执行指令，不代表任意含零矩阵的吞吐。",
+            "source": "[2, GPU Specifications and note]",
+            "status": "ambiguous_source",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "INT8 有可引用峰值；INT4 两个原表值仅列作待核数据，不进入无歧义比较。",
+        "source_document": "芯片调研/产品详解/NVIDIA/NVIDIA_L40S_48GB.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2023,
+        "date": "2023-08-08",
+        "availability": "计划 2023 秋季供货",
+        "note": "公告同时列出型号及合作伙伴供货安排。",
+        "source": "[4, NVIDIA L40S GPUs; Availability]"
+      }
+    },
+    "h200_sxm5": {
+      "card": "NVIDIA/NVIDIA_H200_SXM5_141GB.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 4,
+            "kind": "physical_domain",
+            "system": "HGX H200 四 GPU",
+            "topology": "NVLink；四卡细分拓扑未在 H200 发布稿单列",
+            "condition": "官方确认四卡、八卡 HGX H200 与 HGX H100 硬件软件兼容；四卡不据此补画 NVSwitch。",
+            "source": "[5, NVIDIA H200 Form Factors]"
+          },
+          {
+            "chips": 8,
+            "kind": "physical_domain",
+            "system": "HGX H200 八 GPU",
+            "topology": "NVLink 4 + NVSwitch",
+            "condition": "八 GPU 聚合容量与计算均属于上层平台。",
+            "source": "[5, NVIDIA H200 Form Factors] [1, p.4, Server Options]"
+          }
+        ],
+        "status": "known",
+        "note": "仅列 HGX H200，GH200 的 Grace 与 C2C 是另一产品配置。",
+        "source": "[5, NVIDIA H200 Form Factors]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "shared memory 最大分配",
+            "value": 228,
+            "unit": "KB",
+            "scope": "每 SM",
+            "kind": "local_work",
+            "instances": 132,
+            "shared": false,
+            "condition": "程序显式工作区；与 L1 共用 256 KB，不相加；每 block 可寻址上限比此值少 1 KB。",
+            "source": "[3, pp.21,27,40-41]; [22, §§1.4.1.1,1.4.2.4]",
+            "instance_source": "[2, p.4]"
+          },
+          {
+            "name": "GPU L2",
+            "value": 50,
+            "unit": "MB",
+            "scope": "chip",
+            "kind": "cache",
+            "instances": 1,
+            "shared": true,
+            "condition": "全 GPU 共享的硬件缓存；分区和访问局部性不改变本记录的产品容量。",
+            "source": "[2, p.4]"
+          }
+        ],
+        "status": "known_layers",
+        "note": "仅记录 shared carveout 最大容量；不重复加入统一 L1/shared 容量或寄存器。",
+        "source": "本型号 50 MB L2 [2, p.4]; Hopper 局部存储与共享机制 [3, pp.21,27,29-37,40-41]",
+        "card": "NVIDIA/NVIDIA_H200_SXM5_141GB.md"
+      },
+      "integer": {
+        "card": "NVIDIA/NVIDIA_H200_SXM5_141GB.md",
+        "label": "H200 SXM5 141GB",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": null,
+            "path": "matrix",
+            "density": "sparse",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "原表写 3,958 TFLOPS INT8；单位与整数运算不一致，保留原文，不能静默改为 TOPS。",
+            "source": "[1, p.4, Technical Specifications and notes]",
+            "status": "unit_ambiguous",
+            "sku_bound": true,
+            "comparison_eligible": false,
+            "raw_value": 3958,
+            "raw_unit": "TFLOPS",
+            "raw_format": "INT8 Tensor"
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所引资料未确认该格式的硬件运算路径；不据此认定不支持。",
+            "source": "[3, pp.22-24,39-46]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/NVIDIA/NVIDIA_H200_SXM5_141GB.md",
+        "has_sku_numeric_peak": false,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2023,
+        "date": "2023-11-13",
+        "availability": "计划 2024 Q2：系统厂商与云服务商供货",
+        "note": "HGX H200 公告列 141GB/4.8TB/s 和四/八 GPU 板型；不借用后来 NVL 日期。",
+        "source": "[5, opening; Availability]"
+      }
+    },
+    "h200_nvl": {
+      "card": "NVIDIA/NVIDIA_H200_NVL_141GB.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 2,
+            "kind": "physical_domain",
+            "system": "H200 NVL 两卡组",
+            "topology": "宽 NVLink bridge",
+            "condition": "原文支持的相邻卡配置。",
+            "source": "[1, p.9, Table 4-1]"
+          },
+          {
+            "chips": 4,
+            "kind": "physical_domain",
+            "system": "H200 NVL 四卡组",
+            "topology": "宽 NVLink bridge",
+            "condition": "18 条 link 的整卡端点；四 GPU 连接组，未在本次文本证据中强行重建 bridge 的逐链路分配。",
+            "source": "[1, pp.9-10, Table 4-1]"
+          }
+        ],
+        "status": "known",
+        "note": "产品页的最多八卡服务器装卡数不能替代 NVLink 最多四卡连接组。",
+        "source": "[1, pp.1,9-10]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "shared memory 最大分配",
+            "value": 228,
+            "unit": "KB",
+            "scope": "每 SM",
+            "kind": "local_work",
+            "instances": null,
+            "shared": false,
+            "condition": "程序显式工作区；与 L1 共用 256 KB，不相加；每 block 可寻址上限比此值少 1 KB。",
+            "source": "[2, pp.21,27,40]; [22, §§1.4.1.1,1.4.2.4]",
+            "instance_source": ""
+          }
+        ],
+        "status": "partial",
+        "note": "仅记录 shared carveout 最大容量；不重复加入统一 L1/shared 容量或寄存器。 所引型号资料未确认实际 L2 容量，保留未知，不借用其他板型或完整裸片。",
+        "source": "[2, pp.21,27,29-37,40-41]",
+        "card": "NVIDIA/NVIDIA_H200_NVL_141GB.md"
+      },
+      "integer": {
+        "card": "NVIDIA/NVIDIA_H200_NVL_141GB.md",
+        "label": "H200 NVL 141GB",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": null,
+            "path": "matrix",
+            "density": "sparse",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "原表写 3,341 TFLOPS INT8；单 NVL GPU 列，单位与整数运算不一致，不能静默改为 TOPS。",
+            "source": "[3, GPU specifications and note 2]",
+            "status": "unit_ambiguous",
+            "sku_bound": true,
+            "comparison_eligible": false,
+            "raw_value": 3341,
+            "raw_unit": "TFLOPS",
+            "raw_format": "INT8 Tensor"
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所引资料未确认该格式的硬件运算路径；不据此认定不支持。",
+            "source": "[2, pp.22-24,39-46]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/NVIDIA/NVIDIA_H200_NVL_141GB.md",
+        "has_sku_numeric_peak": false,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2024,
+        "date": "2024-11-18",
+        "availability": "2024-12 起合作伙伴系统供货",
+        "note": "H200 NVL 专属发布文；不借用 2023 年 H200 SXM 公告。",
+        "source": "[4, page header; Platforms with H200 NVL]"
+      }
+    },
+    "b200_sxm6": {
+      "card": "NVIDIA/NVIDIA_B200_SXM6_180GB.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 8,
+            "kind": "physical_domain",
+            "system": "HGX B200",
+            "topology": "NVLink 5 + NVSwitch",
+            "condition": "八颗 B200 逻辑 GPU，每颗内部双裸片仍只计一颗 GPU。",
+            "source": "[1, pp.6,8-9, NVIDIA HGX B200 / Technical Specifications] [2, pp.8-10]"
+          }
+        ],
+        "status": "known",
+        "note": "GB200 NVL72/NVL4 属于不同 Grace 平台与 GPU 配置，未将其 72/4 GPU 域归入 B200 SXM6 180GB。",
+        "source": "[1, pp.4-9]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "shared memory 最大分配",
+            "value": 228,
+            "unit": "KB",
+            "scope": "每 SM",
+            "kind": "local_work",
+            "instances": 148,
+            "shared": false,
+            "condition": "程序显式工作区；与 L1 共用 256 KB，不相加；每 block 可寻址上限比此值少 1 KB。",
+            "source": "[3, §§1.4.1.1,1.4.2.3]",
+            "instance_source": "[8, MLOPart device capabilities and characteristics; Streaming multiprocessor count]"
+          },
+          {
+            "name": "TMEM 可寻址工作区",
+            "value": 256,
+            "unit": "KiB",
+            "scope": "每 SM",
+            "kind": "partial_sum",
+            "instances": 148,
+            "shared": false,
+            "condition": "128 lanes × 512 columns × 32 bits = 262144 B；特定矩阵通路的逻辑可寻址工作区，不能视为任意线程可寻址 shared memory。",
+            "source": "[9, §§9.7.18.1-9.7.18.1.1]",
+            "instance_source": "[8, Streaming multiprocessor count]",
+            "derivation": "128 * 512 * 4 / 1024 = 256 KiB",
+            "value_basis": "derived_logical_capacity"
+          }
+        ],
+        "status": "partial",
+        "note": "仅记录 shared carveout 最大容量；不重复加入统一 L1/shared 容量或寄存器。 所引型号资料未确认实际 L2 容量，保留未知，不借用其他板型或完整裸片。",
+        "source": "[2, pp.7-10]; [3, §§1.4.1.1,1.4.2]; [8, MLOPart device capabilities and characteristics; Peer access]; [9, §9.7.18.1]",
+        "card": "NVIDIA/NVIDIA_B200_SXM6_180GB.md"
+      },
+      "integer": {
+        "card": "NVIDIA/NVIDIA_B200_SXM6_180GB.md",
+        "label": "B200 SXM6 180GB",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 4500,
+            "path": "matrix",
+            "density": "dense",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "技术简报的 HGX B200 单 GPU；该表内存栏写最高 192GB，180GB 数据手册同为 sparse 9 POPS，dense 为其一半。",
+            "source": "[2, pp.25-26, Table 3, Per GPU Specs]; [1, p.8, notes 1-2]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "raw_value": 4.5,
+            "raw_unit": "POPS",
+            "normalization": "4.5 POPS × 1000 = 4500 TOPS；仅单位换算。"
+          },
+          {
+            "format": "INT8",
+            "value_tops": 9000,
+            "path": "matrix",
+            "density": "sparse",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "技术简报的 HGX B200 单 GPU；该表内存栏写最高 192GB，180GB 数据手册同为 sparse 9 POPS，dense 为其一半。；官方结构化稀疏峰值，要求相应压缩输入、位置元数据和执行指令，不代表任意含零矩阵的吞吐。",
+            "source": "[2, pp.25-26, Table 3, Per GPU Specs]; [1, p.8, notes 1-2]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "raw_value": 9,
+            "raw_unit": "POPS",
+            "normalization": "9 POPS × 1000 = 9000 TOPS；仅单位换算。"
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所引资料未确认该格式的硬件运算路径；不据此认定不支持。",
+            "source": "[1, p.8]; [2, pp.8-9,25-26]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/NVIDIA/NVIDIA_B200_SXM6_180GB.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": null,
+        "date": null,
+        "availability": null,
+        "note": "2024-03-18 为 B200/HGX B200 平台发布；尚未确认 180GB SXM6 配置的首次公开日期。",
+        "source": "[4, A Massive Superchip; Global Network of Blackwell Partners]; [1, p.8]"
+      }
+    },
+    "b300_sxm6": {
+      "card": "NVIDIA/NVIDIA_B300_SXM6_288GB.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 8,
+            "kind": "physical_domain",
+            "system": "HGX B300",
+            "topology": "NVLink 5 + NVSwitch 5",
+            "condition": "Table 2 明确八颗 B300 GPU 及交换连接。",
+            "source": "[3, Table 2, NVIDIA HGX B300 system elements]"
+          }
+        ],
+        "status": "known",
+        "note": "不以 GB300 NVL72 替代本 SKU 的 HGX B300 配置。",
+        "source": "[3, NVIDIA HGX B300 Baseboard / Table 2]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "TMEM",
+            "value": 256,
+            "unit": "KB",
+            "scope": "每 SM",
+            "kind": "partial_sum",
+            "instances": null,
+            "shared": false,
+            "condition": "原文 SM 图为 4×64 KB；与另外的 256 KB unified L1/shared 独立。实际使能 SM 数未确认，不能按完整架构上限求总量。",
+            "source": "[2, Streaming multiprocessors; Figure 2; Memory]"
+          }
+        ],
+        "status": "partial",
+        "note": "实际 L2 容量未知。已确认每 SM 的 L1/shared 组合资源合计 256 KB，所用 Ultra 文章未单列 shared carveout 上限，因此不把组合资源全额记作显式工作存储。",
+        "source": "[2, Dual-reticle design; Figure 2; Memory; update note]",
+        "card": "NVIDIA/NVIDIA_B300_SXM6_288GB.md"
+      },
+      "integer": {
+        "card": "NVIDIA/NVIDIA_B300_SXM6_288GB.md",
+        "label": "B300 SXM6 288GB",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": null,
+            "path": "matrix",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "288GB SKU 的 INT8 峰值未绑定；下面单独保留 270GB/7.7TB/s/1100W 参考表。",
+            "source": "[1, pp.25-26, Table 3]; [3, Table 1]; [10, p.5]",
+            "status": "sku_binding_unresolved",
+            "sku_bound": true,
+            "comparison_eligible": false
+          },
+          {
+            "format": "INT8",
+            "value_tops": 150,
+            "path": "matrix",
+            "density": "dense",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "270GB/7.7TB/s/1100W 的 HGX B300 参考配置，不能当作 288GB SKU 规格。",
+            "source": "[1, pp.25-26, Table 3, Per GPU Specs]",
+            "status": "reference_configuration",
+            "sku_bound": false,
+            "comparison_eligible": false,
+            "raw_value": 0.15,
+            "raw_unit": "POPS",
+            "normalization": "0.15 POPS × 1000 = 150 TOPS；仅单位换算。"
+          },
+          {
+            "format": "INT8",
+            "value_tops": 300,
+            "path": "matrix",
+            "density": "sparse",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "270GB/7.7TB/s/1100W 的 HGX B300 参考配置，不能当作 288GB SKU 规格。；官方结构化稀疏峰值，要求相应压缩输入、位置元数据和执行指令，不代表任意含零矩阵的吞吐。",
+            "source": "[1, pp.25-26, Table 3, Per GPU Specs]",
+            "status": "reference_configuration",
+            "sku_bound": false,
+            "comparison_eligible": false,
+            "raw_value": 0.3,
+            "raw_unit": "POPS",
+            "normalization": "0.3 POPS × 1000 = 300 TOPS；仅单位换算。"
+          },
+          {
+            "format": "INT8",
+            "value_tops": 307,
+            "path": "matrix",
+            "density": "sparse",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "另一份 270GB 数据手册原值；其脚注称 dense 为一半。307 与简报 300 均保留，不解释差异来源，不绑定 288GB。",
+            "source": "[10, p.5, Individual Blackwell Ultra GPU Specifications and note 2]",
+            "status": "reference_configuration",
+            "sku_bound": false,
+            "comparison_eligible": false
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所引资料未确认该格式的硬件运算路径；不据此认定不支持。",
+            "source": "[1, pp.25-26, Table 3]; [2, Streaming multiprocessors; Ultra-charged NVFP4 performance]; [28, §9.7.18.10]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/NVIDIA/NVIDIA_B300_SXM6_288GB.md",
+        "has_sku_numeric_peak": false,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2025,
+        "date": "2025-03-18",
+        "availability": "公告计划 2025 H2 合作伙伴供货",
+        "note": "B300/HGX Blackwell Ultra 型号公开；270GB/288GB 后续规格分支仍保留，不据日期解决峰值配置绑定。",
+        "source": "[29, page header; Global Technology Leaders Embrace Blackwell Ultra]"
+      }
+    },
+    "mi300x": {
+      "card": "AMD/MI300X.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 8,
+            "kind": "physical_domain",
+            "system": "AMD Instinct MI300X 八 GPU 平台",
+            "topology": "7 路 Infinity Fabric 点到点全互联",
+            "condition": "每块模组分别直连其他七块，另有 PCIe 主机端点。",
+            "source": "[8, pp.1-2] [2, pp.15-17]"
+          }
+        ],
+        "status": "known",
+        "note": "八 GPU 平台总量不下放到单 GPU；产品页八条 IF 与资料表七条 GPU link 加一条主机接口的差异保留。",
+        "source": "[8, pp.1-2] [2, pp.15-17,24-25]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "LDS",
+            "value": 64,
+            "unit": "KB",
+            "scope": "每 CU",
+            "kind": "local_work",
+            "instances": 304,
+            "shared": false,
+            "condition": "workgroup 显式管理的局部数据存储，不是全 GPU 共用空间。",
+            "source": "[3, §2.2.1, p.6]; [2, p.9]",
+            "instance_source": "[2, pp.4-5, Table 2]; [1, GPU Specifications]"
+          },
+          {
+            "name": "L1 vector data cache",
+            "value": 32,
+            "unit": "KB",
+            "scope": "每 CU",
+            "kind": "cache",
+            "instances": 304,
+            "shared": false,
+            "condition": "CU 局部硬件数据 cache，与 LDS 独立。",
+            "source": "[2, p.9]",
+            "instance_source": "[2, pp.4-5, Table 2]; [1, GPU Specifications]"
+          },
+          {
+            "name": "XCD L2",
+            "value": 4,
+            "unit": "MB",
+            "scope": "每 XCD",
+            "kind": "cache",
+            "instances": 8,
+            "shared": false,
+            "condition": "8 份局部 L2；算术合计 32 MB 不构成一个统一共享 L2。",
+            "source": "[2, pp.9-10]",
+            "instance_source": "[2, pp.4-5, Table 2]; [1, GPU Specifications]"
+          },
+          {
+            "name": "Infinity Cache",
+            "value": 256,
+            "unit": "MB",
+            "scope": "chip（IOD 上分布式内存侧缓存合计）",
+            "kind": "cache",
+            "instances": 1,
+            "shared": true,
+            "condition": "全 GPU 标称总量；位于内存侧，不与各 XCD L2 合并为单层 cache。",
+            "source": "[2, pp.10-11]"
+          }
+        ],
+        "status": "known_layers",
+        "note": "L1/LDS/L2 的局部作用域与内存侧 Infinity Cache 分开；保留原文 KB/MB 标法。",
+        "source": "[2, pp.9-11]; [3, §2.2.1, p.6]",
+        "card": "AMD/MI300X.md"
+      },
+      "integer": {
+        "card": "AMD/MI300X.md",
+        "label": "MI300X",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 2614.9,
+            "path": "matrix",
+            "density": "dense",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "INT32 C/D；程序员可见格式 [3, §12.10, pp.277-279]",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 GPU INT8 Matrix，Matrix/Vector 峰值不相加；乘加按两次操作。",
+            "source": "[8, p.1, AI / HPC Peak Theoretical Performance]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "raw_value": 2.6149,
+            "raw_unit": "POPS",
+            "normalization": "2.6149 POPS × 1000 = 2614.9 TOPS；仅单位换算。"
+          },
+          {
+            "format": "INT8",
+            "value_tops": 5229.8,
+            "path": "matrix",
+            "density": "sparse",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "INT32 C/D；程序员可见格式 [3, §12.10, pp.277-279]",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 GPU INT8 Matrix，Matrix/Vector 峰值不相加；乘加按两次操作。；官方结构化稀疏峰值，要求相应压缩输入、位置元数据和执行指令，不代表任意含零矩阵的吞吐。",
+            "source": "[8, p.1, AI / HPC Peak Theoretical Performance]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "raw_value": 5.2298,
+            "raw_unit": "POPS",
+            "normalization": "5.2298 POPS × 1000 = 5229.8 TOPS；仅单位换算。"
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+            "source": "[8, p.1, AI / HPC Peak Theoretical Performance]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/AMD/MI300X.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2023,
+        "date": "2023-06-13",
+        "availability": "2023-12-06 正式发布",
+        "note": "6 月已按型号预告 192GB MI300X；不是 12 月才首次公开。",
+        "source": "[11, AMD Instinct Accelerators; page date]; [4, opening]"
+      }
+    },
+    "mi325x": {
+      "card": "AMD/MI325X.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 8,
+            "kind": "physical_domain",
+            "system": "AMD Instinct MI325X Platform",
+            "topology": "7 路 Infinity Fabric 点到点全互联",
+            "condition": "每模组直连其余七 GPU。",
+            "source": "[4, High-Speed GPU Interconnects / Specifications] [3, Specifications]"
+          }
+        ],
+        "status": "known",
+        "note": "只用平台已公开连接，不将 2.048 TB 平台 HBM 当作单 GPU。",
+        "source": "[4, High-Speed GPU Interconnects / Specifications]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "LDS",
+            "value": 64,
+            "unit": "KB",
+            "scope": "每 CU",
+            "kind": "local_work",
+            "instances": 304,
+            "shared": false,
+            "condition": "workgroup 显式管理的局部数据存储，不是全 GPU 共用空间。",
+            "source": "[5, §2.2.1, p.6]; [2, p.9]",
+            "instance_source": "[2, pp.4-5, Table 2]; [1, GPU Specifications]"
+          },
+          {
+            "name": "L1 vector data cache",
+            "value": 32,
+            "unit": "KB",
+            "scope": "每 CU",
+            "kind": "cache",
+            "instances": 304,
+            "shared": false,
+            "condition": "CU 局部硬件数据 cache，与 LDS 独立。",
+            "source": "[2, p.9]",
+            "instance_source": "[2, pp.4-5, Table 2]; [1, GPU Specifications]"
+          },
+          {
+            "name": "XCD L2",
+            "value": 4,
+            "unit": "MB",
+            "scope": "每 XCD",
+            "kind": "cache",
+            "instances": 8,
+            "shared": false,
+            "condition": "8 份局部 L2；算术合计 32 MB 不构成一个统一共享 L2。",
+            "source": "[2, pp.9-10]",
+            "instance_source": "[2, pp.4-5, Table 2]; [1, GPU Specifications]"
+          },
+          {
+            "name": "Infinity Cache",
+            "value": 256,
+            "unit": "MB",
+            "scope": "chip（IOD 上分布式内存侧缓存合计）",
+            "kind": "cache",
+            "instances": 1,
+            "shared": true,
+            "condition": "全 GPU 标称总量；位于内存侧，不与各 XCD L2 合并为单层 cache。",
+            "source": "[2, pp.10-11]"
+          }
+        ],
+        "status": "known_layers",
+        "note": "L1/LDS/L2 的局部作用域与内存侧 Infinity Cache 分开；保留原文 KB/MB 标法。",
+        "source": "[2, pp.9-11]; [5, §2.2.1, p.6]",
+        "card": "AMD/MI325X.md"
+      },
+      "integer": {
+        "card": "AMD/MI325X.md",
+        "label": "MI325X",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 2614.9,
+            "path": "matrix",
+            "density": "dense",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "INT32 C/D；程序员可见格式 [5, §12.10, pp.277-279]",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 GPU INT8 Matrix，Matrix/Vector 峰值不相加；乘加按两次操作。",
+            "source": "[3, p.1, AI / HPC Peak Theoretical Performance]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "raw_value": 2.6149,
+            "raw_unit": "POPS",
+            "normalization": "2.6149 POPS × 1000 = 2614.9 TOPS；仅单位换算。"
+          },
+          {
+            "format": "INT8",
+            "value_tops": 5229.8,
+            "path": "matrix",
+            "density": "sparse",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "INT32 C/D；程序员可见格式 [5, §12.10, pp.277-279]",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 GPU INT8 Matrix，Matrix/Vector 峰值不相加；乘加按两次操作。；官方结构化稀疏峰值，要求相应压缩输入、位置元数据和执行指令，不代表任意含零矩阵的吞吐。",
+            "source": "[3, p.1, AI / HPC Peak Theoretical Performance]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "raw_value": 5.2298,
+            "raw_unit": "POPS",
+            "normalization": "5.2298 POPS × 1000 = 5229.8 TOPS；仅单位换算。"
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+            "source": "[3, p.1, AI / HPC Peak Theoretical Performance]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/AMD/MI325X.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2024,
+        "date": "2024-10-10",
+        "availability": "2024 Q4 生产出货；2025 Q1 系统广泛可用",
+        "note": "2024-06-02 预告为 288GB；本研究是正式 256GB 配置，采用确认该配置的正式发布日期。",
+        "source": "[6, MI325X product and availability]; [7, AMD Previews New Accelerators]"
+      }
+    },
+    "mi350p": {
+      "card": "AMD/MI350P.md",
+      "scaleup": {
+        "records": [],
+        "status": "not_found",
+        "note": "服务器最多八张 MI350P 仅是装卡能力；已查产品页、brochure 与发布文章，未给本卡专用 GPU 间 scale-up 链路和单一域拓扑。",
+        "source": "[1, Board Specifications] [2, pp.1-2] [3, Performance That Drops into Your Existing Racks]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "LDS",
+            "value": 160,
+            "unit": "KB",
+            "scope": "每 CU",
+            "kind": "local_work",
+            "instances": 128,
+            "shared": false,
+            "condition": "workgroup 显式管理的局部数据存储，不是全 GPU 共用空间。",
+            "source": "[7, §2.2.1, p.6]; [4, p.9]",
+            "instance_source": "[1, GPU Specifications]; [2, pp.1-2]"
+          },
+          {
+            "name": "L1 vector data cache",
+            "value": 32,
+            "unit": "KB",
+            "scope": "每 CU",
+            "kind": "cache",
+            "instances": 128,
+            "shared": false,
+            "condition": "CU 局部硬件数据 cache，与 LDS 独立。",
+            "source": "[4, p.9]",
+            "instance_source": "[1, GPU Specifications]; [2, pp.1-2]"
+          },
+          {
+            "name": "XCD L2",
+            "value": 4,
+            "unit": "MB",
+            "scope": "每 XCD",
+            "kind": "cache",
+            "instances": 4,
+            "shared": false,
+            "condition": "4 份局部 L2；算术合计 16 MB 不构成一个统一共享 L2。",
+            "source": "[4, pp.9-10]",
+            "instance_source": "[1, GPU Specifications]; [2, pp.1-2]"
+          },
+          {
+            "name": "Infinity Cache",
+            "value": 128,
+            "unit": "MB",
+            "scope": "chip（IOD 上分布式内存侧缓存合计）",
+            "kind": "cache",
+            "instances": 1,
+            "shared": true,
+            "condition": "全 GPU 标称总量；位于内存侧，不与各 XCD L2 合并为单层 cache。",
+            "source": "[2, p.2]"
+          }
+        ],
+        "status": "known_layers",
+        "note": "L1/LDS/L2 的局部作用域与内存侧 Infinity Cache 分开；保留原文 KB/MB 标法。",
+        "source": "[4, pp.9-13]; [2, pp.1-2]; [7, §2.2.1, p.6]",
+        "card": "AMD/MI350P.md"
+      },
+      "integer": {
+        "card": "AMD/MI350P.md",
+        "label": "MI350P",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 2300,
+            "path": "matrix",
+            "density": "dense",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "INT32 C/D；程序员可见格式 [7, §12.10, pp.286-288]",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 GPU INT8 Matrix，Matrix/Vector 峰值不相加；乘加按两次操作。2026 年 5 月 brochure 标为 estimated，产品页给同组数值。",
+            "source": "[1, GPU Specifications]; [2, p.1, performance tables]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "raw_value": 2.3,
+            "raw_unit": "POPS",
+            "normalization": "2.3 POPS × 1000 = 2300 TOPS；仅单位换算。"
+          },
+          {
+            "format": "INT8",
+            "value_tops": 4600,
+            "path": "matrix",
+            "density": "sparse",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "INT32 C/D；程序员可见格式 [7, §12.10, pp.286-288]",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 GPU INT8 Matrix，Matrix/Vector 峰值不相加；乘加按两次操作。2026 年 5 月 brochure 标为 estimated，产品页给同组数值。；官方结构化稀疏峰值，要求相应压缩输入、位置元数据和执行指令，不代表任意含零矩阵的吞吐。",
+            "source": "[1, GPU Specifications]; [2, p.1, performance tables]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "raw_value": 4.6,
+            "raw_unit": "POPS",
+            "normalization": "4.6 POPS × 1000 = 4600 TOPS；仅单位换算。"
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+            "source": "[2, p.1, AI / HPC Peak Theoretical Performance]; [4, pp.7-8]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/AMD/MI350P.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2026,
+        "date": "2026-05-07",
+        "availability": "2026-07-23 正式发布；精确供货日未找到",
+        "note": "型号专属博客早于正式发布稿；系列页的 Preview 文案不用于反推供货。",
+        "source": "[3, page date and opening]; [6, Delivering the Highest Performance Data Center CPUs and GPUs]"
+      }
+    },
+    "mi350x": {
+      "card": "AMD/MI350X.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 8,
+            "kind": "physical_domain",
+            "system": "AMD Instinct MI350 Series 八 GPU 平台",
+            "topology": "7 路 Infinity Fabric 点到点全互联",
+            "condition": "每模组直连其余七 GPU；与主机 PCIe 端点分开。",
+            "source": "[2, p.1, Specifications] [3, p.13] [5, AMD Instinct MI350 Series Platforms]"
+          }
+        ],
+        "status": "known",
+        "note": "产品页 scale-out 字段与主机 PCIe 不重复计成附加 GPU 间端口。",
+        "source": "[2, p.1] [3, p.13] [5, AMD Instinct MI350 Series Platforms]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "LDS",
+            "value": 160,
+            "unit": "KB",
+            "scope": "每 CU",
+            "kind": "local_work",
+            "instances": 256,
+            "shared": false,
+            "condition": "workgroup 显式管理的局部数据存储，不是全 GPU 共用空间。",
+            "source": "[6, §2.2.1, p.6]; [3, p.9]",
+            "instance_source": "[3, pp.4-8]; [1, GPU Specifications]"
+          },
+          {
+            "name": "L1 vector data cache",
+            "value": 32,
+            "unit": "KB",
+            "scope": "每 CU",
+            "kind": "cache",
+            "instances": 256,
+            "shared": false,
+            "condition": "CU 局部硬件数据 cache，与 LDS 独立。",
+            "source": "[3, p.9]",
+            "instance_source": "[3, pp.4-8]; [1, GPU Specifications]"
+          },
+          {
+            "name": "XCD L2",
+            "value": 4,
+            "unit": "MB",
+            "scope": "每 XCD",
+            "kind": "cache",
+            "instances": 8,
+            "shared": false,
+            "condition": "8 份局部 L2；算术合计 32 MB 不构成一个统一共享 L2。",
+            "source": "[3, pp.9-10]",
+            "instance_source": "[3, pp.4-8]; [1, GPU Specifications]"
+          },
+          {
+            "name": "Infinity Cache",
+            "value": 256,
+            "unit": "MB",
+            "scope": "chip（IOD 上分布式内存侧缓存合计）",
+            "kind": "cache",
+            "instances": 1,
+            "shared": true,
+            "condition": "全 GPU 标称总量；位于内存侧，不与各 XCD L2 合并为单层 cache。",
+            "source": "[3, pp.10-11]"
+          }
+        ],
+        "status": "known_layers",
+        "note": "L1/LDS/L2 的局部作用域与内存侧 Infinity Cache 分开；保留原文 KB/MB 标法。",
+        "source": "[3, pp.9-13]; [2, pp.1-2]; [6, §2.2.1, p.6]",
+        "card": "AMD/MI350X.md"
+      },
+      "integer": {
+        "card": "AMD/MI350X.md",
+        "label": "MI350X",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 4614,
+            "path": "matrix",
+            "density": "dense",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "INT32 C/D；程序员可见格式 [6, §12.10, pp.286-288]",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 GPU INT8 Matrix，Matrix/Vector 峰值不相加；乘加按两次操作。",
+            "source": "[2, p.1, AI / HPC Peak Theoretical Performance]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "raw_value": 4.614,
+            "raw_unit": "POPS",
+            "normalization": "4.614 POPS × 1000 = 4614 TOPS；仅单位换算。"
+          },
+          {
+            "format": "INT8",
+            "value_tops": 9227.4,
+            "path": "matrix",
+            "density": "sparse",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "INT32 C/D；程序员可见格式 [6, §12.10, pp.286-288]",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 GPU INT8 Matrix，Matrix/Vector 峰值不相加；乘加按两次操作。；官方结构化稀疏峰值，要求相应压缩输入、位置元数据和执行指令，不代表任意含零矩阵的吞吐。",
+            "source": "[2, p.1, AI / HPC Peak Theoretical Performance]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "raw_value": 9.2274,
+            "raw_unit": "POPS",
+            "normalization": "9.2274 POPS × 1000 = 9227.4 TOPS；仅单位换算。"
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+            "source": "[2, p.1, AI / HPC Peak Theoretical Performance]; [3, pp.7-8]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/AMD/MI350X.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2024,
+        "date": "2024-06-02",
+        "availability": "2025-06-12 正式发布；平台计划 2025 H2 广泛可用",
+        "note": "预告明确 MI350X 名称及最高 288GB；坐标使用后来定版计算与内存规格。",
+        "source": "[7, AMD Previews New Accelerators]; [4, opening; AMD Delivers Leadership Solutions]"
+      }
+    },
+    "mi355x": {
+      "card": "AMD/MI355X.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 8,
+            "kind": "physical_domain",
+            "system": "AMD Instinct MI350 Series 八 GPU 平台",
+            "topology": "7 路 Infinity Fabric 点到点全互联",
+            "condition": "每模组直连其余七 GPU；与主机 PCIe 端点分开。",
+            "source": "[2, p.1, Specifications] [3, p.13] [5, AMD Instinct MI350 Series Platforms]"
+          }
+        ],
+        "status": "known",
+        "note": "产品页 scale-out 字段与主机 PCIe 不重复计成附加 GPU 间端口。",
+        "source": "[2, p.1] [3, p.13] [5, AMD Instinct MI350 Series Platforms]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "LDS",
+            "value": 160,
+            "unit": "KB",
+            "scope": "每 CU",
+            "kind": "local_work",
+            "instances": 256,
+            "shared": false,
+            "condition": "workgroup 显式管理的局部数据存储，不是全 GPU 共用空间。",
+            "source": "[6, §2.2.1, p.6]; [3, p.9]",
+            "instance_source": "[3, pp.4-8]; [1, GPU Specifications]"
+          },
+          {
+            "name": "L1 vector data cache",
+            "value": 32,
+            "unit": "KB",
+            "scope": "每 CU",
+            "kind": "cache",
+            "instances": 256,
+            "shared": false,
+            "condition": "CU 局部硬件数据 cache，与 LDS 独立。",
+            "source": "[3, p.9]",
+            "instance_source": "[3, pp.4-8]; [1, GPU Specifications]"
+          },
+          {
+            "name": "XCD L2",
+            "value": 4,
+            "unit": "MB",
+            "scope": "每 XCD",
+            "kind": "cache",
+            "instances": 8,
+            "shared": false,
+            "condition": "8 份局部 L2；算术合计 32 MB 不构成一个统一共享 L2。",
+            "source": "[3, pp.9-10]",
+            "instance_source": "[3, pp.4-8]; [1, GPU Specifications]"
+          },
+          {
+            "name": "Infinity Cache",
+            "value": 256,
+            "unit": "MB",
+            "scope": "chip（IOD 上分布式内存侧缓存合计）",
+            "kind": "cache",
+            "instances": 1,
+            "shared": true,
+            "condition": "全 GPU 标称总量；位于内存侧，不与各 XCD L2 合并为单层 cache。",
+            "source": "[3, pp.10-11]"
+          }
+        ],
+        "status": "known_layers",
+        "note": "L1/LDS/L2 的局部作用域与内存侧 Infinity Cache 分开；保留原文 KB/MB 标法。",
+        "source": "[3, pp.9-13]; [2, pp.1-2]; [6, §2.2.1, p.6]",
+        "card": "AMD/MI355X.md"
+      },
+      "integer": {
+        "card": "AMD/MI355X.md",
+        "label": "MI355X",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 5033.2,
+            "path": "matrix",
+            "density": "dense",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "INT32 C/D；程序员可见格式 [6, §12.10, pp.286-288]",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 GPU INT8 Matrix，Matrix/Vector 峰值不相加；乘加按两次操作。",
+            "source": "[2, p.1, AI / HPC Peak Theoretical Performance]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "raw_value": 5.0332,
+            "raw_unit": "POPS",
+            "normalization": "5.0332 POPS × 1000 = 5033.2 TOPS；仅单位换算。"
+          },
+          {
+            "format": "INT8",
+            "value_tops": 10066.4,
+            "path": "matrix",
+            "density": "sparse",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "INT32 C/D；程序员可见格式 [6, §12.10, pp.286-288]",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 GPU INT8 Matrix，Matrix/Vector 峰值不相加；乘加按两次操作。；官方结构化稀疏峰值，要求相应压缩输入、位置元数据和执行指令，不代表任意含零矩阵的吞吐。",
+            "source": "[2, p.1, AI / HPC Peak Theoretical Performance]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "raw_value": 10.0664,
+            "raw_unit": "POPS",
+            "normalization": "10.0664 POPS × 1000 = 10066.4 TOPS；仅单位换算。"
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+            "source": "[2, p.1, AI / HPC Peak Theoretical Performance]; [3, pp.7-8]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/AMD/MI355X.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2025,
+        "date": "2025-06-12",
+        "availability": "平台计划 2025 H2 广泛可用",
+        "note": "MI350 系列更早路线图不能自动作为 MI355X 型号首次公开日。",
+        "source": "[1, Product Basics]; [4, AMD Delivers Leadership Solutions]"
+      }
+    },
+    "mi455x": {
+      "card": "AMD/MI455X.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 72,
+            "kind": "physical_domain",
+            "system": "AMD Helios 机架",
+            "topology": "UALoE 多 plane 交换网络，all-to-all 可达",
+            "condition": "四组 scale-up cartridge 连接最多 72 GPU；具体 switches/planes 由机架系统提供。",
+            "source": "[8, Scale-Up Network / Switch Tray / Rackscale Highlights] [4, pp.4,12-13]"
+          }
+        ],
+        "status": "known",
+        "note": "72 是单一 Helios 域的公开配置；经 Pensando 网络继续扩展属于 scale-out。EAM 与四 GPU 托盘不能当成同一数量层级。",
+        "source": "[8, Scale-Up Network / Switch Tray / Compute Tray]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "LDS",
+            "value": 320,
+            "unit": "KB",
+            "scope": "每 WGP",
+            "kind": "local_work",
+            "instances": 256,
+            "shared": false,
+            "condition": "与 64 KB vector cache 共用每 WGP 384 KB 本地 SRAM；384 KB 不能再次累加。",
+            "source": "[4, p.10, Figure 7]",
+            "instance_source": "[4, p.6]; [1, GPU Specifications]"
+          },
+          {
+            "name": "vector cache",
+            "value": 64,
+            "unit": "KB",
+            "scope": "每 WGP",
+            "kind": "cache",
+            "instances": 256,
+            "shared": false,
+            "condition": "公开配置 320 KB LDS + 64 KB vector cache；cache tag 另有存储，不能将 384 KB 都称作 LDS。",
+            "source": "[4, p.10, Figure 7]",
+            "instance_source": "[4, p.6]; [1, GPU Specifications]"
+          },
+          {
+            "name": "全局 L2",
+            "value": 192,
+            "unit": "MB",
+            "scope": "chip（2 个 FCD 合计）",
+            "kind": "cache",
+            "instances": 1,
+            "shared": true,
+            "condition": "两个 FCD 各 96 MB；全局 L2 服务计算侧，物理分布在两个裸片。",
+            "source": "[4, p.10, Figure 7]; [3, Fabric and Cache Die]",
+            "derivation": "2 * 96 MB = 192 MB；原文也直接列出总量"
+          }
+        ],
+        "status": "known_layers",
+        "note": "384 KB/WGP 是同一 LDS/vector cache 共享资源；本记录以公开分配 320+64 保留，不能再加 384。",
+        "source": "[4, pp.8-11, Figure 5 / Figure 7]; [3, Fabric and Cache Die]",
+        "card": "AMD/MI455X.md"
+      },
+      "integer": {
+        "card": "AMD/MI455X.md",
+        "label": "MI455X",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 5033,
+            "path": "matrix",
+            "density": "dense",
+            "execution": "native",
+            "input": "INT8/UINT8",
+            "accumulation": "INT32 C/D；程序员可见格式 [9, Table 43, pp.95-96; §15.10, pp.454-464]",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 GPU INT8 Matrix，Matrix/Vector 峰值不相加；乘加按两次操作。",
+            "source": "[2, p.1, AI Peak Theoretical Performance]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "raw_value": 5.033,
+            "raw_unit": "POPS",
+            "normalization": "5.033 POPS × 1000 = 5033 TOPS；仅单位换算。"
+          },
+          {
+            "format": "INT8",
+            "value_tops": 10066,
+            "path": "matrix",
+            "density": "sparse",
+            "execution": "native",
+            "input": "INT8/UINT8",
+            "accumulation": "INT32 C/D；程序员可见格式 [9, Table 43, pp.95-96; §15.10, pp.454-464]",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单 GPU INT8 Matrix，Matrix/Vector 峰值不相加；乘加按两次操作。；官方结构化稀疏峰值，要求相应压缩输入、位置元数据和执行指令，不代表任意含零矩阵的吞吐。",
+            "source": "[2, p.1, AI Peak Theoretical Performance]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "raw_value": 10.066,
+            "raw_unit": "POPS",
+            "normalization": "10.066 POPS × 1000 = 10066 TOPS；仅单位换算。"
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+            "source": "[2, p.1, AI Peak Theoretical Performance]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/AMD/MI455X.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2025,
+        "date": "2025-11-11",
+        "availability": "2026-07-23 正式发布；系统计划 2026 H2 volume deployment",
+        "note": "按 MI455X 名称公开的预览，不借用 MI400 家族更早路线图。",
+        "source": "[10, Advancing AI Leadership Across AMD Instinct GPUs and ROCm]; [7, News Highlights; opening]"
+      }
+    },
+    "tpu_v4": {
+      "card": "Google-TPU/Google_Cloud_TPU_v4_one_chip_产品详解.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 4096,
+            "kind": "physical_domain",
+            "system": "TPU v4 Pod",
+            "topology": "3D mesh/torus，OCS 可重构 cube 连接",
+            "condition": "4×4×4 cube 及其上层网络；非 TensorCore 数。",
+            "source": "[1, pp.2-4] [2, System architecture / Configurations]"
+          }
+        ],
+        "status": "known",
+        "note": "已查官方 Cloud 配置页。表内列到 2,048-chip slice 后有省略号，不能把所列最大示例误写成单任务上限；本次未新增可调度上限定值。",
+        "source": "[2, Large v4 topologies]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "TensorCore VMEM",
+            "value": 16,
+            "unit": "MiB",
+            "scope": "每 TensorCore",
+            "kind": "local_work",
+            "instances": 2,
+            "shared": false,
+            "condition": "编译器/程序管理的局部向量工作存储；全 chip 算术合计不代表统一共享空间。",
+            "source": "[21, TPU_V4 branch]",
+            "instance_source": "[21, num_physical_tensor_cores_per_chip]"
+          },
+          {
+            "name": "TensorCore SMEM",
+            "value": 1,
+            "unit": "MiB",
+            "scope": "每 TensorCore",
+            "kind": "local_work",
+            "instances": 2,
+            "shared": false,
+            "condition": "保存标量索引与控制数据，不并入 VMEM 或共享 CMEM。",
+            "source": "[21, TPU_V4 branch]; [22, Placing operands in SMEM]",
+            "instance_source": "[21, num_physical_tensor_cores_per_chip]"
+          },
+          {
+            "name": "CMEM",
+            "value": 128,
+            "unit": "MiB",
+            "scope": "chip（两个 TensorCore 共享）",
+            "kind": "shared_work",
+            "instances": 1,
+            "shared": true,
+            "condition": "通过 load/store 访问的共享片上工作存储，不能改称透明 L2 cache。",
+            "source": "[1, pp.2,5-8]; [2, TensorCores]"
+          },
+          {
+            "name": "SparseCore SpMEM",
+            "value": 2.5,
+            "unit": "MiB",
+            "scope": "每 SparseCore",
+            "kind": "local_work",
+            "instances": 4,
+            "shared": false,
+            "condition": "SparseCore 内部工作存储，不与 TC VMEM/CMEM 合成同一空间。",
+            "source": "[1, pp.5-6, Figure 7]"
+          }
+        ],
+        "status": "known_layers",
+        "note": "VMEM/SMEM 是软件可见的局部工作空间；JAX 字节配置明确使用二进制容量。",
+        "source": "[1, pp.2,5–7]; [2, TensorCores and Other memory system differences]; [21, TPU_V4 branch]",
+        "card": "Google-TPU/Google_Cloud_TPU_v4_one_chip_产品详解.md"
+      },
+      "integer": {
+        "card": "Google-TPU/Google_Cloud_TPU_v4_one_chip_产品详解.md",
+        "label": "TPU v4",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": null,
+            "path": "matrix",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "Cloud 标 BF16 或 INT8；JAX 仅列 FP32/BF16 左输入配 INT8 右输入",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "Cloud 原表为 275 TFLOPS（BF16 or INT8）；单位及整数输入/累加/计数语义不足，不改写为无歧义 275 TOPS。JAX 的 0/Not Available 不代表硬件吞吐为零。",
+            "source": "[2, System architecture]; [1, Table 4]; [21, is_matmul_supported / TPU_V4 branch]",
+            "status": "unit_and_semantics_ambiguous",
+            "sku_bound": true,
+            "comparison_eligible": false,
+            "raw_value": 275,
+            "raw_unit": "TFLOPS",
+            "raw_format": "BF16 or INT8"
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+            "source": "已查范围：[1, p.2 and Table4]; [2, System architecture]; [21, TPU_V4 branch]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/Google-TPU/Google_Cloud_TPU_v4_one_chip_产品详解.md",
+        "has_sku_numeric_peak": false,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2021,
+        "date": "2021-05-18",
+        "availability": "2022-10-12/13：Cloud TPU v4 GA 公告",
+        "note": "芯片公开与 Cloud 服务 GA 分开；GA 页面存在地区日期差一天。",
+        "source": "[25, Pushing the frontier of computing]; [26, Powering AI/ML workloads]"
+      }
+    },
+    "tpu_v5e": {
+      "card": "Google-TPU/Google_Cloud_TPU_v5e_one_chip_产品详解.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 256,
+            "kind": "physical_domain",
+            "system": "TPU v5e Pod",
+            "topology": "16×16 2D torus",
+            "condition": "小 slice 可能没有相应方向的 wrap-around 回环。",
+            "source": "[1, System architecture / Configurations]"
+          },
+          {
+            "chips": 256,
+            "kind": "schedulable_slice",
+            "system": "TPU v5e training slice",
+            "topology": "16×16 2D torus",
+            "condition": "官方训练 slice 最大 256；单 host serving 的 8-chip 优化配置不等于整个 v5e 推理上限，多 host serving 另需 Sax。",
+            "source": "[1, Cloud TPU v5e types for training / Cloud TPU v5e types for serving]"
+          }
+        ],
+        "status": "known",
+        "note": "训练与 serving 的供给配置分开；不将单 host serving 8 颗误作物理 Pod 上限。",
+        "source": "[1, Configurations / Cloud TPU v5e types for training / Cloud TPU v5e types for serving]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "TensorCore VMEM",
+            "value": 128,
+            "unit": "MiB",
+            "scope": "每 TensorCore",
+            "kind": "local_work",
+            "instances": 1,
+            "shared": false,
+            "condition": "编译器/程序管理的局部向量工作存储；全 chip 算术合计不代表统一共享空间。",
+            "source": "[21, TPU_V5E branch]",
+            "instance_source": "[21, num_physical_tensor_cores_per_chip]"
+          },
+          {
+            "name": "TensorCore SMEM",
+            "value": 1,
+            "unit": "MiB",
+            "scope": "每 TensorCore",
+            "kind": "local_work",
+            "instances": 1,
+            "shared": false,
+            "condition": "保存标量索引与控制数据，不并入 VMEM 或共享 CMEM。",
+            "source": "[21, TPU_V5E branch]; [22, Placing operands in SMEM]",
+            "instance_source": "[21, num_physical_tensor_cores_per_chip]"
+          }
+        ],
+        "status": "known_layers",
+        "note": "VMEM/SMEM 是软件可见的局部工作空间；JAX 字节配置明确使用二进制容量。",
+        "source": "[20, What Is a TPU?]; [21, TPU_V5E branch]; [22, BlockSpecs and grid iteration]",
+        "card": "Google-TPU/Google_Cloud_TPU_v5e_one_chip_产品详解.md"
+      },
+      "integer": {
+        "card": "Google-TPU/Google_Cloud_TPU_v5e_one_chip_产品详解.md",
+        "label": "TPU v5e",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 393,
+            "path": "matrix",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT8/UINT8 左右矩阵输入",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "Cloud 单芯片值；JAX 开发模型为 394 TOPS，保留来源差异。未明确 dense/sparse 和完整 FMA 计数规则。",
+            "source": "[1, System architecture]; [21, TPU_V5E branch and is_matmul_supported]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "alternatives": [
+              {
+                "value_tops": 394,
+                "source": "[21, TPU_V5E branch]",
+                "condition": "JAX 静态硬件模型，非持续实测。"
+              }
+            ]
+          },
+          {
+            "format": "INT4",
+            "value_tops": 788,
+            "path": "matrix",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT4/UINT4 左右矩阵输入",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单芯片 JAX 静态硬件模型；没有相应输入形状、频率或持续执行测试，不是 FP4。",
+            "source": "[21, TPU_V5E branch and is_matmul_supported]",
+            "status": "developer_model",
+            "sku_bound": true,
+            "comparison_eligible": true
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/Google-TPU/Google_Cloud_TPU_v5e_one_chip_产品详解.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2023,
+        "date": "2023-08-29",
+        "availability": "2023-11-08：Cloud TPU v5e GA",
+        "note": "8 月公告为 Preview，11 月是正式可用。",
+        "source": "[23, opening and page date]; [4, opening]"
+      }
+    },
+    "tpu_v5p": {
+      "card": "Google-TPU/Google_Cloud_TPU_v5p_one_chip_产品详解.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 8960,
+            "kind": "physical_domain",
+            "system": "TPU v5p 物理 Pod",
+            "topology": "3D ICI 网络，140 个 64-chip cube",
+            "condition": "8,960 颗是整 Pod；不是单任务可申请数量。",
+            "source": "[1, System architecture / VM, host and slice properties]"
+          },
+          {
+            "chips": 6144,
+            "kind": "schedulable_slice",
+            "system": "TPU v5p 最大单 slice",
+            "topology": "16×16×24 3D torus",
+            "condition": "96 个 cube；不包含经 DCN 连接的 Multislice。",
+            "source": "[1, Configurations / VM, host and slice properties]"
+          }
+        ],
+        "status": "known",
+        "note": "物理 Pod 8,960 与单 slice 6,144 同时保留；部分别的 slice 可选 twisted torus，不将该拓扑强加给 16×16×24。",
+        "source": "[1, Configurations / Twisted torus topologies / VM, host and slice properties]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "TensorCore VMEM",
+            "value": 64,
+            "unit": "MiB",
+            "scope": "每 TensorCore",
+            "kind": "local_work",
+            "instances": 2,
+            "shared": false,
+            "condition": "编译器/程序管理的局部向量工作存储；全 chip 算术合计不代表统一共享空间。",
+            "source": "[21, TPU_V5P branch]",
+            "instance_source": "[21, num_physical_tensor_cores_per_chip]"
+          },
+          {
+            "name": "TensorCore SMEM",
+            "value": 1,
+            "unit": "MiB",
+            "scope": "每 TensorCore",
+            "kind": "local_work",
+            "instances": 2,
+            "shared": false,
+            "condition": "保存标量索引与控制数据，不并入 VMEM 或共享 CMEM。",
+            "source": "[21, TPU_V5P branch]; [22, Placing operands in SMEM]",
+            "instance_source": "[21, num_physical_tensor_cores_per_chip]"
+          },
+          {
+            "name": "SparseCore tile VMEM",
+            "value": 512,
+            "unit": "KiB",
+            "scope": "每 SparseCore tile",
+            "kind": "local_work",
+            "instances": 64,
+            "shared": false,
+            "condition": "每 SC 16 tile；全 chip 4 个物理 SC，局部容量分散在 tile；不包含另有的共享 SPMEM。",
+            "source": "[21, TPU_V5P branch]; [23, Hardware overview]",
+            "instance_source": "[21, TPU_V5P branch]",
+            "derivation": "4 SC * 16 tile/SC = 64 tile/chip"
+          }
+        ],
+        "status": "known_layers",
+        "note": "VMEM/SMEM 是软件可见的局部工作空间；JAX 字节配置明确使用二进制容量。",
+        "source": "[2, pp.2,4–6, Table1 and Figures2–3]; [21, TPU_V5P branch]; [23, Hardware overview]",
+        "card": "Google-TPU/Google_Cloud_TPU_v5p_one_chip_产品详解.md"
+      },
+      "integer": {
+        "card": "Google-TPU/Google_Cloud_TPU_v5p_one_chip_产品详解.md",
+        "label": "TPU v5p",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 918,
+            "path": "matrix",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT8/UINT8 左右矩阵输入",
+            "accumulation": "未公开完整累加语义",
+            "basis": "derived",
+            "derivation": "459 TOPS/TensorCore × 2 TensorCore/chip = 918 TOPS/chip。",
+            "condition": "两个 TensorCore 的全芯片 JAX 名义合计；未给完整稠密/稀疏、FMA 计数与实测条件。",
+            "source": "[21, TPU_V5P branch and is_matmul_supported]; [20, TPU specs]",
+            "status": "developer_model",
+            "sku_bound": true,
+            "comparison_eligible": true
+          },
+          {
+            "format": "INT4",
+            "value_tops": 1840,
+            "path": "matrix",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT4/UINT4 左右矩阵输入",
+            "accumulation": "未公开完整累加语义",
+            "basis": "derived",
+            "derivation": "920 TOPS/TensorCore × 2 TensorCore/chip = 1840 TOPS/chip。",
+            "condition": "两个 TensorCore 的全芯片 JAX 名义合计；不等同 FP4，不当作持续实测。",
+            "source": "[21, TPU_V5P branch and is_matmul_supported]",
+            "status": "developer_model",
+            "sku_bound": true,
+            "comparison_eligible": true
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/Google-TPU/Google_Cloud_TPU_v5p_one_chip_产品详解.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2023,
+        "date": "2023-12-06",
+        "availability": "2024-04-09：Cloud TPU v5p GA",
+        "note": "首次型号公开与正式可用跨年。",
+        "source": "[4, page date and opening]; [25, Cloud TPU v5p GA]"
+      }
+    },
+    "tpu_v6e": {
+      "card": "Google-TPU/Google_Cloud_TPU_v6e_one_chip_产品详解.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 256,
+            "kind": "physical_domain",
+            "system": "TPU v6e Pod",
+            "topology": "16×16 2D torus",
+            "condition": "每 Pod 的物理芯片数。",
+            "source": "[1, System architecture]"
+          },
+          {
+            "chips": 256,
+            "kind": "schedulable_slice",
+            "system": "TPU v6e 最大列示 slice",
+            "topology": "16×16 2D torus",
+            "condition": "官方支持形状表的最大 slice；8-chip 单 VM 为推理优化配置，非总推理域上限。",
+            "source": "[1, Supported configurations]"
+          }
+        ],
+        "status": "known",
+        "note": "跨 Pod 的数据中心网络不并入 ICI 域。",
+        "source": "[1, Supported configurations / VM types]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "TensorCore VMEM",
+            "value": 128,
+            "unit": "MiB",
+            "scope": "每 TensorCore",
+            "kind": "local_work",
+            "instances": 1,
+            "shared": false,
+            "condition": "编译器/程序管理的局部向量工作存储；全 chip 算术合计不代表统一共享空间。",
+            "source": "[21, TPU_V6E branch]",
+            "instance_source": "[21, num_physical_tensor_cores_per_chip]"
+          },
+          {
+            "name": "TensorCore SMEM",
+            "value": 1,
+            "unit": "MiB",
+            "scope": "每 TensorCore",
+            "kind": "local_work",
+            "instances": 1,
+            "shared": false,
+            "condition": "保存标量索引与控制数据，不并入 VMEM 或共享 CMEM。",
+            "source": "[21, TPU_V6E branch]; [22, Placing operands in SMEM]",
+            "instance_source": "[21, num_physical_tensor_cores_per_chip]"
+          },
+          {
+            "name": "SparseCore tile VMEM",
+            "value": 256,
+            "unit": "KiB",
+            "scope": "每 SparseCore tile",
+            "kind": "local_work",
+            "instances": 32,
+            "shared": false,
+            "condition": "每 SC 16 tile；全 chip 2 个物理 SC，局部容量分散在 tile；不包含另有的共享 SPMEM。",
+            "source": "[21, TPU_V6E branch]; [23, Hardware overview]",
+            "instance_source": "[21, TPU_V6E branch]",
+            "derivation": "2 SC * 16 tile/SC = 32 tile/chip"
+          }
+        ],
+        "status": "known_layers",
+        "note": "VMEM/SMEM 是软件可见的局部工作空间；JAX 字节配置明确使用二进制容量。",
+        "source": "[4, High bandwidth memory, Memory hierarchy and Overall memory management strategy]; [21, TPU_V6E branch]",
+        "card": "Google-TPU/Google_Cloud_TPU_v6e_one_chip_产品详解.md"
+      },
+      "integer": {
+        "card": "Google-TPU/Google_Cloud_TPU_v6e_one_chip_产品详解.md",
+        "label": "TPU v6e",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 1836,
+            "path": "matrix",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT8/UINT8 左右矩阵输入",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "Cloud 单芯片值；JAX 开发模型为 1840 TOPS。未说明完整密度与计数条件，不把两值替换成同一精确峰值。",
+            "source": "[1, System architecture]; [21, TPU_V6E branch and is_matmul_supported]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "alternatives": [
+              {
+                "value_tops": 1840,
+                "source": "[21, TPU_V6E branch]",
+                "condition": "JAX 静态硬件模型，非持续实测。"
+              }
+            ]
+          },
+          {
+            "format": "INT4",
+            "value_tops": 3680,
+            "path": "matrix",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT4/UINT4 左右矩阵输入",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单芯片 JAX 静态硬件模型，非 Cloud 已公布型号表；未给完整累加及持续执行条件。",
+            "source": "[21, TPU_V6E branch and is_matmul_supported]",
+            "status": "developer_model",
+            "sku_bound": true,
+            "comparison_eligible": true
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/Google-TPU/Google_Cloud_TPU_v6e_one_chip_产品详解.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2024,
+        "date": "2024-05-14",
+        "availability": "2024-12-11：GA 博客；12-16：release notes 记录",
+        "note": "两类 GA 公告日期分别保留，年份图采用首次 Trillium 公告。",
+        "source": "[5, page date and Learn more]; [25, page date and opening]; [26, December 16, 2024]"
+      }
+    },
+    "tpu7x": {
+      "card": "Google-TPU/Google_Cloud_TPU7x_one_chip_产品详解.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 9216,
+            "kind": "physical_domain",
+            "system": "TPU7x / Ironwood Pod",
+            "topology": "3D mesh/torus + OCS",
+            "condition": "按 chip/package 计数，不按 JAX 暴露的两个 chiplet device 翻倍。",
+            "source": "[1, System architecture / Supported configurations] [4, pp.14,21]"
+          },
+          {
+            "chips": 9216,
+            "kind": "schedulable_slice",
+            "system": "TPU7x 最大单 slice",
+            "topology": "3D torus",
+            "condition": "官方 Supported configurations 明文说 slice 可扩至 9,216；配额和资源可用性另受云服务安排约束。",
+            "source": "[1, Supported configurations]"
+          }
+        ],
+        "status": "known",
+        "note": "常见 slice 形状表只列部分示例，9,216 上限来自表前正文。",
+        "source": "[1, Supported configurations]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "TensorCore VMEM",
+            "value": 64,
+            "unit": "MiB",
+            "scope": "每 TensorCore",
+            "kind": "local_work",
+            "instances": 2,
+            "shared": false,
+            "condition": "编译器/程序管理的局部向量工作存储；全 chip 算术合计不代表统一共享空间。",
+            "source": "[21, TPU_7X branch]",
+            "instance_source": "[21, num_physical_tensor_cores_per_chip]"
+          },
+          {
+            "name": "TensorCore SMEM",
+            "value": 1,
+            "unit": "MiB",
+            "scope": "每 TensorCore",
+            "kind": "local_work",
+            "instances": 2,
+            "shared": false,
+            "condition": "保存标量索引与控制数据，不并入 VMEM 或共享 CMEM。",
+            "source": "[21, TPU_7X branch]; [22, Placing operands in SMEM]",
+            "instance_source": "[21, num_physical_tensor_cores_per_chip]"
+          },
+          {
+            "name": "SparseCore tile VMEM",
+            "value": 512,
+            "unit": "KiB",
+            "scope": "每 SparseCore tile",
+            "kind": "local_work",
+            "instances": 64,
+            "shared": false,
+            "condition": "每 SC 16 tile；全 chip 4 个物理 SC，局部容量分散在 tile；不包含另有的共享 SPMEM。 JAX/Pallas 软件调度视图与四个物理 SC 的计数分开；不按软件 num_cores=2 抹去另两核。",
+            "source": "[21, TPU_7X branch]; [23, Hardware overview]",
+            "instance_source": "[4, p.15]; [23, Hardware overview]",
+            "derivation": "4 SC * 16 tile/SC = 64 tile/chip"
+          }
+        ],
+        "status": "known_layers",
+        "note": "VMEM/SMEM 是软件可见的局部工作空间；JAX 字节配置明确使用二进制容量。",
+        "source": "[1, Dual-chiplet architecture and Programming model]; [3, Scoped VMEM tuning]; [4, pp.14–15]; [21, TPU_7X branch]",
+        "card": "Google-TPU/Google_Cloud_TPU7x_one_chip_产品详解.md"
+      },
+      "integer": {
+        "card": "Google-TPU/Google_Cloud_TPU7x_one_chip_产品详解.md",
+        "label": "TPU7x / Ironwood",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+            "source": "已查范围：[1, System architecture]; [5, Table1 and pp.3–6]; [21, TPU_7X branch and is_matmul_supported]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+            "source": "已查范围：[1, System architecture]; [5, Table1 and pp.3–6]; [21, TPU_7X branch and is_matmul_supported]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/Google-TPU/Google_Cloud_TPU7x_one_chip_产品详解.md",
+        "has_sku_numeric_peak": false,
+        "has_any_reported_number": false
+      },
+      "release": {
+        "year": 2025,
+        "date": "2025-04-09",
+        "availability": "2025-11-24 Preview；2026-03-31 GA",
+        "note": "11 月发布博客中的即将可用不改写为当日 GA。",
+        "source": "[24, page date and opening]; [25, November 24, 2025; March 31, 2026]"
+      }
+    },
+    "tpu8t": {
+      "card": "Google-TPU/Google_TPU_8t_one_chip_产品详解.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 9600,
+            "kind": "physical_domain",
+            "system": "TPU 8t Superpod",
+            "topology": "3D torus",
+            "condition": "技术发布稿明确为单个 Superpod；Virgo 扩展到更多 Superpod 属于 scale-out。",
+            "source": "[1, TPU 8t: The pre-training powerhouse / Virgo Network topology]"
+          }
+        ],
+        "status": "known",
+        "note": "技术发布规格；现有资料未给可调度单 slice 配置上限，不据 Superpod 规模推定该上限。",
+        "source": "[1, TPU 8t: The pre-training powerhouse]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "TensorCore VMEM",
+            "value": 128,
+            "unit": "MiB",
+            "scope": "每 TensorCore",
+            "kind": "local_work",
+            "instances": 1,
+            "shared": false,
+            "condition": "编译器/程序管理的局部向量工作存储；全 chip 算术合计不代表统一共享空间。 技术文章另写整 chip 128 MB；与本记录 128 MiB 不视为精确等值。",
+            "source": "[21, TPU_8T branch]",
+            "instance_source": "[21, num_physical_tensor_cores_per_chip]",
+            "alternatives": [
+              {
+                "value": 128,
+                "unit": "MB",
+                "scope": "chip",
+                "source": "[1, Figure 1; On-Chip SRAM (Vmem)]",
+                "note": "同一 VMEM 的另一来源标法，不是额外容量。"
+              }
+            ]
+          },
+          {
+            "name": "TensorCore SMEM",
+            "value": 1,
+            "unit": "MiB",
+            "scope": "每 TensorCore",
+            "kind": "local_work",
+            "instances": 1,
+            "shared": false,
+            "condition": "保存标量索引与控制数据，不并入 VMEM 或共享 CMEM。",
+            "source": "[21, TPU_8T branch]; [22, Placing operands in SMEM]",
+            "instance_source": "[21, num_physical_tensor_cores_per_chip]"
+          },
+          {
+            "name": "SparseCore tile VMEM",
+            "value": 256,
+            "unit": "KiB",
+            "scope": "每 SparseCore tile",
+            "kind": "local_work",
+            "instances": 32,
+            "shared": false,
+            "condition": "每 SC 16 tile；全 chip 2 个物理 SC，局部容量分散在 tile；不包含另有的共享 SPMEM。",
+            "source": "[21, TPU_8T branch]",
+            "instance_source": "[21, TPU_8T branch]",
+            "derivation": "2 SC * 16 tile/SC = 32 tile/chip"
+          }
+        ],
+        "status": "known_layers",
+        "note": "技术文章 128 MB 与 JAX 128 MiB 原样并列；不能静默互换。",
+        "source": "[1, Figure1 and On-Chip SRAM (Vmem)]; [21, TPU_8T branch]; [22, BlockSpecs and grid iteration]",
+        "card": "Google-TPU/Google_TPU_8t_one_chip_产品详解.md"
+      },
+      "integer": {
+        "card": "Google-TPU/Google_TPU_8t_one_chip_产品详解.md",
+        "label": "TPU 8t",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 996.1,
+            "path": "matrix",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT8 峰值字段非零；原生输入检查暂未列 INT8 并保留 TODO",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单芯片 JAX 静态模型，工作频率、输入形状和执行条件未完整确认；不能仅由非零字段证明已公开原生 INT8×INT8 乘法。",
+            "source": "[21, TPU_8T branch and is_matmul_supported]",
+            "status": "developer_model_conditional",
+            "sku_bound": true,
+            "comparison_eligible": true
+          },
+          {
+            "format": "INT4",
+            "value_tops": 11953.8,
+            "path": "matrix",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "浮点左输入（FP32/BF16/部分 FP8）× INT4 右输入；非任意 INT4×INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单芯片 JAX 静态模型，原生类型检查只确认列出的混合输入；未给该字段与各输入组合的一一映射及持续测试。",
+            "source": "[21, TPU_8T branch and is_matmul_supported]",
+            "status": "developer_model_conditional",
+            "sku_bound": true,
+            "comparison_eligible": true
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/Google-TPU/Google_TPU_8t_one_chip_产品详解.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2026,
+        "date": "2026-04-22",
+        "availability": "所用 2026-09-16 资料仍为 Coming soon",
+        "note": "两款分别按官方命名公开；引用的是资料快照状态，不宣称已核实今日供货。",
+        "source": "[2, page date; TPU 8t / TPU 8i]"
+      }
+    },
+    "tpu8i": {
+      "card": "Google-TPU/Google_TPU_8i_one_chip_产品详解.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 1152,
+            "kind": "physical_domain",
+            "system": "TPU 8i Boardfly Pod（名义连接规模）",
+            "topology": "Boardfly 分层 high-radix，组间 OCS",
+            "condition": "原文写 up to 1,152 connected chips；同页另写 1,024 active chips，关系未说明，图上必须保留口径差异标记。",
+            "source": "[1, Boardfly ICI topology / Pod structure / Figure 5]"
+          }
+        ],
+        "status": "qualified",
+        "note": "1,152 是所述连接规模，1,024 是 active chip 描述，不能擅自判定差额为 spare，也不能将 1,024 当作已证实的可调度上限。四芯片 building block 的 ring 与 fully connected 文字冲突，图只画分层 Boardfly。",
+        "source": "[1, Boardfly ICI topology / Boardfly consists of the following elements / Figures 5-6]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "TensorCore VMEM",
+            "value": 192,
+            "unit": "MiB",
+            "scope": "每 TensorCore",
+            "kind": "local_work",
+            "instances": 2,
+            "shared": false,
+            "condition": "编译器/程序管理的局部向量工作存储；全 chip 算术合计不代表统一共享空间。 两个核合计 384 MiB；技术文章另写整 chip 384 MB，且跨核共享/一致性没有充分披露。",
+            "source": "[21, TPU_8I branch]",
+            "instance_source": "[21, num_physical_tensor_cores_per_chip]",
+            "alternatives": [
+              {
+                "value": 384,
+                "unit": "MB",
+                "scope": "chip",
+                "source": "[1, Figure 4; On-Chip SRAM (Vmem)]",
+                "note": "同一 VMEM 的另一来源标法，不是额外容量。"
+              }
+            ]
+          },
+          {
+            "name": "TensorCore SMEM",
+            "value": 1,
+            "unit": "MiB",
+            "scope": "每 TensorCore",
+            "kind": "local_work",
+            "instances": 2,
+            "shared": false,
+            "condition": "保存标量索引与控制数据，不并入 VMEM 或共享 CMEM。",
+            "source": "[21, TPU_8I branch]; [22, Placing operands in SMEM]",
+            "instance_source": "[21, num_physical_tensor_cores_per_chip]"
+          },
+          {
+            "name": "SparseCore 接口 subcore VMEM",
+            "value": 512,
+            "unit": "KiB",
+            "scope": "每软件 SparseCore subcore",
+            "kind": "local_work",
+            "instances": null,
+            "shared": false,
+            "condition": "软件接口四个 subcore 的局部空间合计 2 MiB；与 CAE 的物理映射未知，不求物理整芯片 SRAM 总量。",
+            "source": "[21, TPU_8I branch]",
+            "value_basis": "software_description_only"
+          }
+        ],
+        "status": "partial",
+        "note": "每核 192 MiB × 2 为局部空间之和；技术文章 384 MB 与 JAX 384 MiB 原样并列。软件 SparseCore 接口与 CAE 物理映射不明确。",
+        "source": "[1, Figure4; On-Chip SRAM (Vmem); The Collectives Acceleration Engine]; [21, TPU_8I branch]",
+        "card": "Google-TPU/Google_TPU_8i_one_chip_产品详解.md"
+      },
+      "integer": {
+        "card": "Google-TPU/Google_TPU_8i_one_chip_产品详解.md",
+        "label": "TPU 8i",
+        "records": [
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "matrix",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "FP32/BF16/部分 FP8 左输入 × INT4/UINT4 右输入",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "软件确认部分原生混合输入，int4_ops_per_second 列 0/Not Available，只表示峰值未提供，不代表不支持或零算力。",
+            "source": "[21, TPU_8I branch and is_matmul_supported]",
+            "status": "supported_peak_unavailable",
+            "sku_bound": true,
+            "comparison_eligible": false
+          },
+          {
+            "format": "INT8",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+            "source": "已查范围：[1, Peak FP4 PFLOPs]; [21, TPU_8I branch and is_matmul_supported]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/Google-TPU/Google_TPU_8i_one_chip_产品详解.md",
+        "has_sku_numeric_peak": false,
+        "has_any_reported_number": false
+      },
+      "release": {
+        "year": 2026,
+        "date": "2026-04-22",
+        "availability": "所用 2026-09-16 资料仍为 Coming soon",
+        "note": "两款分别按官方命名公开；引用的是资料快照状态，不宣称已核实今日供货。",
+        "source": "[2, page date; TPU 8t / TPU 8i]"
+      }
+    },
+    "inferentia1": {
+      "card": "AWS/AWS_Inferentia1_one_chip_产品详解.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 4,
+            "kind": "physical_domain",
+            "system": "EC2 inf1.6xlarge",
+            "topology": "NeuronLink-v1 直连；精确拓扑未公开",
+            "condition": "实例表给四芯片配置及 chip-to-chip NeuronLink 带宽。",
+            "source": "[7, Inf1 Architecture table / NeuronLink-v1 paragraph]"
+          },
+          {
+            "chips": 16,
+            "kind": "physical_domain",
+            "system": "EC2 inf1.24xlarge",
+            "topology": "NeuronLink-v1 直连；精确拓扑未公开",
+            "condition": "实例表给十六芯片配置及 chip-to-chip NeuronLink 带宽，利用 NeuronCore Pipeline 协同。",
+            "source": "[7, Inf1 Architecture table / NeuronLink-v1 paragraph]"
+          }
+        ],
+        "status": "known",
+        "note": "一芯片实例的互联栏为 N/A；不能把未知拓扑补成 ring，也不把 EFA 带宽纳入域内连接。",
+        "source": "[7, Inf1 Architecture]"
+      },
+      "onchip": {
+        "records": [],
+        "status": "unknown",
+        "note": "确认四个 NeuronCore-v1 各有软件管理 SRAM，但未找到精确 SBUF/PSUM 容量。不能用 NeuronCore Pipeline 的模型权重经验公式倒推容量。",
+        "source": "[4, opening]; [9, State Buffer and Partial Sum Buffer]; [10, NeuronCore Pipeline]",
+        "card": "AWS/AWS_Inferentia1_one_chip_产品详解.md"
+      },
+      "integer": {
+        "card": "AWS/AWS_Inferentia1_one_chip_产品详解.md",
+        "label": "Inferentia1",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 128,
+            "path": "chip",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "公开输出为 INT32；完整物理累加/舍入/饱和未公开",
+            "basis": "source",
+            "derivation": "",
+            "condition": "四个 NCv1 的单芯片 advertised INT8 峰值；核心文档确认 TensorEngine INT8 输入/INT32 输出，但未给每核 INT8 峰值以独立核算纯矩阵总量；不外推 Vector/Scalar 整数吞吐，未声明结构化稀疏倍率。",
+            "source": "[1, Compute]; [4, TensorEngine]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+            "source": "已查范围：[1, Compute]; [4, TensorEngine, VectorEngine and ScalarEngine]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "详解原表标为 TensorEngine 路径；本次按直接来源的 per-chip 层级保守记录，建议调整原表标签，见 chip-integer-newfacts.md。",
+        "source_document": "芯片调研/产品详解/AWS/AWS_Inferentia1_one_chip_产品详解.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2018,
+        "date": "2018-11-28",
+        "availability": "2019-12-03：Inf1 GA",
+        "note": "芯片宣布与实例正式可用分开。",
+        "source": "[11, page date and opening]; [12, page date and opening]"
+      }
+    },
+    "inferentia2": {
+      "card": "AWS/AWS_Inferentia2_one_chip_产品详解.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 6,
+            "kind": "physical_domain",
+            "system": "EC2 inf2.24xlarge",
+            "topology": "NeuronLink-v2；已查原文未给精确拓扑",
+            "condition": "六颗 Inferentia2；NeuronLink 支持跨芯片 collective 与模型切分。",
+            "source": "[4, Inf2 Architecture table / NeuronLink-v2 paragraph]"
+          },
+          {
+            "chips": 12,
+            "kind": "physical_domain",
+            "system": "EC2 inf2.48xlarge",
+            "topology": "NeuronLink-v2；已查原文未给精确拓扑",
+            "condition": "十二颗 Inferentia2；不把两组端口数直接解释为确定 ring。",
+            "source": "[4, Inf2 Architecture table / NeuronLink-v2 paragraph]"
+          }
+        ],
+        "status": "known",
+        "note": "一芯片实例的互联栏为 N/A；本次原文只确认直接互联和 collective，未用一般代际印象补拓扑。",
+        "source": "[4, Inf2 Architecture]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "SBUF",
+            "value": 24,
+            "unit": "MiB",
+            "scope": "每 NeuronCore-v2",
+            "kind": "local_work",
+            "instances": 2,
+            "shared": false,
+            "condition": "软件管理的数据工作存储，物理核心各自拥有局部空间。",
+            "source": "[2, device overview and memory hierarchy]",
+            "instance_source": "[2, device overview]"
+          },
+          {
+            "name": "PSUM",
+            "value": 2,
+            "unit": "MiB",
+            "scope": "每 NeuronCore-v2",
+            "kind": "partial_sum",
+            "instances": 2,
+            "shared": false,
+            "condition": "矩阵结果与累加工作存储，与 SBUF 独立；不把各核心局部和称作共享 L2。",
+            "source": "[2, device overview and memory hierarchy]",
+            "instance_source": "[2, device overview]"
+          },
+          {
+            "name": "GpSimd TCM",
+            "value": 64,
+            "unit": "KB",
+            "scope": "每 GpSimd processor",
+            "kind": "local_work",
+            "instances": 16,
+            "shared": false,
+            "condition": "每 NeuronCore 有 8 个处理器，各自的紧耦合局部 RAM；2 核合计 16 个实例。",
+            "source": "[2, GpSimd Engine: Memory Hierarchy]",
+            "derivation": "2 NeuronCore * 8 processors/core = 16",
+            "instance_source": "[2, device overview and GpSimd Engine]"
+          }
+        ],
+        "status": "known_layers",
+        "note": "记录物理 NeuronCore 本地资源；逻辑核心配置不改变这组物理容量或使之成为统一共享 cache。",
+        "source": "[2, device overview, memory hierarchy and GpSimd Engine: Memory Hierarchy]",
+        "card": "AWS/AWS_Inferentia2_one_chip_产品详解.md"
+      },
+      "integer": {
+        "card": "AWS/AWS_Inferentia2_one_chip_产品详解.md",
+        "label": "Inferentia2",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 380,
+            "path": "chip",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "TensorEngine 公开 INT32 输出；完整整数累加/饱和规则未公开",
+            "basis": "source",
+            "derivation": "",
+            "condition": "官方 per-chip advertised peak；未解释各执行引擎的计数构成，不能自动当作纯 Tensor 峰值，未声明结构化稀疏倍增。",
+            "source": "[1, Compute]; [3, TensorEngine]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+            "source": "已查范围：[1, Compute]; [2, Tensor Engine: Data Types]; [3, TensorEngine]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/AWS/AWS_Inferentia2_one_chip_产品详解.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2022,
+        "date": "2022-11-29",
+        "availability": "2023-04-13：Inf2 GA",
+        "note": "Preview 公告与正式可用分开。",
+        "source": "[6, Inf2 announcement]; [7, page date and opening]"
+      }
+    },
+    "trainium1": {
+      "card": "AWS/AWS_Trainium1_one_chip_产品详解.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 16,
+            "kind": "physical_domain",
+            "system": "EC2 trn1.32xlarge / trn1n.32xlarge",
+            "topology": "NeuronLink-v2 2D torus",
+            "condition": "单实例十六芯片可直接寻址池化的 device memory；跨实例 EFA 是另一层。",
+            "source": "[4, Trn1/Trn1n Architecture]"
+          }
+        ],
+        "status": "known",
+        "note": "一芯片 trn1.2xlarge 的 NeuronLink 为 N/A；十万芯片 UltraCluster 不属于一个 NeuronLink 域。",
+        "source": "[4, Trn1/Trn1n Architecture] [7, instance specifications table]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "SBUF",
+            "value": 24,
+            "unit": "MiB",
+            "scope": "每 NeuronCore-v2",
+            "kind": "local_work",
+            "instances": 2,
+            "shared": false,
+            "condition": "软件管理的数据工作存储，物理核心各自拥有局部空间。",
+            "source": "[2, device overview and memory hierarchy]",
+            "instance_source": "[2, device overview]"
+          },
+          {
+            "name": "PSUM",
+            "value": 2,
+            "unit": "MiB",
+            "scope": "每 NeuronCore-v2",
+            "kind": "partial_sum",
+            "instances": 2,
+            "shared": false,
+            "condition": "矩阵结果与累加工作存储，与 SBUF 独立；不把各核心局部和称作共享 L2。",
+            "source": "[2, device overview and memory hierarchy]",
+            "instance_source": "[2, device overview]"
+          },
+          {
+            "name": "GpSimd TCM",
+            "value": 64,
+            "unit": "KB",
+            "scope": "每 GpSimd processor",
+            "kind": "local_work",
+            "instances": 16,
+            "shared": false,
+            "condition": "每 NeuronCore 有 8 个处理器，各自的紧耦合局部 RAM；2 核合计 16 个实例。",
+            "source": "[2, GpSimd Engine: Memory Hierarchy]",
+            "derivation": "2 NeuronCore * 8 processors/core = 16",
+            "instance_source": "[2, device overview and GpSimd Engine]"
+          }
+        ],
+        "status": "known_layers",
+        "note": "记录物理 NeuronCore 本地资源；逻辑核心配置不改变这组物理容量或使之成为统一共享 cache。",
+        "source": "[2, device overview, memory hierarchy and GpSimd Engine: Memory Hierarchy]",
+        "card": "AWS/AWS_Trainium1_one_chip_产品详解.md"
+      },
+      "integer": {
+        "card": "AWS/AWS_Trainium1_one_chip_产品详解.md",
+        "label": "Trainium1",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 380,
+            "path": "chip",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "TensorEngine 公开 INT32 输出；完整整数累加/饱和规则未公开",
+            "basis": "source",
+            "derivation": "",
+            "condition": "官方 per-chip advertised peak；未解释各执行引擎的计数构成，不能自动当作纯 Tensor 峰值，未声明结构化稀疏倍增。",
+            "source": "[1, Compute]; [3, TensorEngine]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+            "source": "已查范围：[1, Compute]; [2, Tensor Engine: Data Types]; [3, TensorEngine]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "采用当前 Neuron 文档的 380 TOPS；资料卡记录的历史 420 TOPS 不混为当前配置峰值。",
+        "source_document": "芯片调研/产品详解/AWS/AWS_Trainium1_one_chip_产品详解.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2020,
+        "date": "2020-12-01",
+        "availability": "2021-11-30 Trn1 Preview；2022-10-10 GA",
+        "note": "直播页建立于 11 月 27 日，但正文明确演讲在 12 月 1 日；2021 年是实例 Preview，不是芯片首次宣布。",
+        "source": "[9, opening event date; Coming soon / AWS Trainium]; [7, page date and opening]"
+      }
+    },
+    "trainium2": {
+      "card": "AWS/AWS_Trainium2_one_chip_产品详解.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 16,
+            "kind": "physical_domain",
+            "system": "EC2 trn2.48xlarge / trn2u.48xlarge 单实例",
+            "topology": "NeuronLink-v3 4×4 2D torus",
+            "condition": "每实例内部连接。",
+            "source": "[4, trn2.48xlarge / trn2u.48xlarge]"
+          },
+          {
+            "chips": 64,
+            "kind": "physical_domain",
+            "system": "Trn2 UltraServer",
+            "topology": "4 个 4×4 torus + 同坐标芯片跨实例 ring",
+            "condition": "四个 trn2u.48xlarge 通过额外 NeuronLink 链路组成域；不把外部 EFA 计入。",
+            "source": "[4, Trn2 UltraServer / Trn2 instance specifications]"
+          }
+        ],
+        "status": "known",
+        "note": "16 与 64 分别是实例和 UltraServer 级别，不能混成一个节点数。",
+        "source": "[4, Trn2 UltraServer / Trn2 instance specifications]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "SBUF",
+            "value": 28,
+            "unit": "MiB",
+            "scope": "每 NeuronCore-v3",
+            "kind": "local_work",
+            "instances": 8,
+            "shared": false,
+            "condition": "软件管理的数据工作存储，物理核心各自拥有局部空间。",
+            "source": "[2, NeuronCore-v3 Compute Engine Updates]",
+            "instance_source": "[1, Trainium2 chip components]; [2, Trainium2 Device Diagram]"
+          },
+          {
+            "name": "PSUM",
+            "value": 2,
+            "unit": "MiB",
+            "scope": "每 NeuronCore-v3",
+            "kind": "partial_sum",
+            "instances": 8,
+            "shared": false,
+            "condition": "矩阵结果与累加工作存储，与 SBUF 独立；不把各核心局部和称作共享 L2。",
+            "source": "[2, NeuronCore-v3 Compute Engine Updates]",
+            "instance_source": "[1, Trainium2 chip components]; [2, Trainium2 Device Diagram]"
+          }
+        ],
+        "status": "known_layers",
+        "note": "记录物理 NeuronCore 本地资源；逻辑核心配置不改变这组物理容量或使之成为统一共享 cache。",
+        "source": "[2, NeuronCore-v3 Compute Engine Updates]; [10, Logical NeuronCores and Logical NeuronCore configurations]",
+        "card": "AWS/AWS_Trainium2_one_chip_产品详解.md"
+      },
+      "integer": {
+        "card": "AWS/AWS_Trainium2_one_chip_产品详解.md",
+        "label": "Trainium2",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": null,
+            "path": "vector/scalar",
+            "density": "unspecified",
+            "execution": "converted",
+            "input": "可接受 INT8 数据并转换到 FP32 算术",
+            "accumulation": "内部算术使用 FP32",
+            "basis": "source",
+            "derivation": "",
+            "condition": "只确认输入数据格式与转换后的向量/逐元素算术；未公开可采用的原生 INT8 矩阵 TOPS，不能按 FP8 或 FP32 峰值推算。",
+            "source": "[2, Vector Engine]; [3, Scalar engine]",
+            "status": "converted_no_integer_peak",
+            "sku_bound": true,
+            "comparison_eligible": false
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+            "source": "已查范围：[2, Tensor Engine and Vector Engine]; [3, Tensor Engine]; [8, Data types]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/AWS/AWS_Trainium2_one_chip_产品详解.md",
+        "has_sku_numeric_peak": false,
+        "has_any_reported_number": false
+      },
+      "release": {
+        "year": 2023,
+        "date": "2023-11-28",
+        "availability": "2024-12-03：Trn2 GA",
+        "note": "芯片预告与实例正式交付分开。",
+        "source": "[13, page date; Trainium2]; [12, opening]"
+      }
+    },
+    "trainium3": {
+      "card": "AWS/AWS_Trainium3_one_chip_产品详解.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 64,
+            "kind": "physical_domain",
+            "system": "Trn3 Gen1 UltraServer",
+            "topology": "NeuronSwitch-v1 + NeuronLink-v4 交换 fabric",
+            "condition": "4 个 server，每 server 16 devices；单一 all-to-all 可达 scale-up 域。",
+            "source": "[4, Trn3 Gen1 UltraServer]"
+          },
+          {
+            "chips": 144,
+            "kind": "physical_domain",
+            "system": "Trn3 Gen2 UltraServer",
+            "topology": "两级 NeuronSwitch-v1 + NeuronLink-v4 交换 fabric",
+            "condition": "36 个 server，每 server 4 devices；all-to-all 是可达通信关系，不表示 144 芯片两两物理直连。",
+            "source": "[4, Trn3 Gen2 UltraServer]"
+          }
+        ],
+        "status": "known",
+        "note": "两种 UltraServer 形态分开；EFA 构成更大规模的 scale-out。系统页后续 PCIe 分层描述未清楚逐项绑定 Gen1/Gen2，本次不据此重建逐端口拓扑。",
+        "source": "[4, Trn3 Gen1 UltraServer / Trn3 Gen2 UltraServer / Trn3 UltraServer Connectivity and Networking]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "SBUF",
+            "value": 32,
+            "unit": "MiB",
+            "scope": "每 NeuronCore-v4",
+            "kind": "local_work",
+            "instances": 8,
+            "shared": false,
+            "condition": "软件管理的数据工作存储，物理核心各自拥有局部空间。",
+            "source": "[2, NeuronCore-v4 Compute Engine Updates]",
+            "instance_source": "[2, device overview]"
+          },
+          {
+            "name": "PSUM",
+            "value": 2,
+            "unit": "MiB",
+            "scope": "每 NeuronCore-v4",
+            "kind": "partial_sum",
+            "instances": 8,
+            "shared": false,
+            "condition": "矩阵结果与累加工作存储，与 SBUF 独立；不把各核心局部和称作共享 L2。",
+            "source": "[2, NeuronCore-v4 Compute Engine Updates]",
+            "instance_source": "[2, device overview]"
+          }
+        ],
+        "status": "known_layers",
+        "note": "记录物理 NeuronCore 本地资源；逻辑核心配置不改变这组物理容量或使之成为统一共享 cache。",
+        "source": "[2, device overview, NeuronCore-v4 Compute Engine Updates, Data Movement and DMA updates]",
+        "card": "AWS/AWS_Trainium3_one_chip_产品详解.md"
+      },
+      "integer": {
+        "card": "AWS/AWS_Trainium3_one_chip_产品详解.md",
+        "label": "Trainium3",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": null,
+            "path": "vector/scalar",
+            "density": "unspecified",
+            "execution": "converted",
+            "input": "可接受 INT8 数据并转换到 FP32 算术",
+            "accumulation": "内部算术使用 FP32",
+            "basis": "source",
+            "derivation": "",
+            "condition": "只确认输入数据格式与转换后的向量/逐元素算术；未公开可采用的原生 INT8 矩阵 TOPS，不能按 FP8 或 FP32 峰值推算。",
+            "source": "[2, Vector Engine and Scalar Engine]",
+            "status": "converted_no_integer_peak",
+            "sku_bound": true,
+            "comparison_eligible": false
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+            "source": "已查范围：[2, Tensor Engine, Vector Engine and Scalar Engine]; [3, Tensor Engine]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/AWS/AWS_Trainium3_one_chip_产品详解.md",
+        "has_sku_numeric_peak": false,
+        "has_any_reported_number": false
+      },
+      "release": {
+        "year": 2024,
+        "date": "2024-12-03",
+        "availability": "2025-12-02：Trn3 UltraServer GA",
+        "note": "2024 稿件标题是 Trainium2 GA，但正文首次公开 Trainium3；不把当时预告写为 GA。",
+        "source": "[8, Trainium3 announcement]; [6, page date and opening]"
+      }
+    },
+    "ascend310": {
+      "card": "华为昇腾/华为_Ascend310.md",
+      "scaleup": {
+        "records": [],
+        "status": "not_found",
+        "note": "已查 Hot Chips SoC 框图和产品资料，仅给 PCIe、Ethernet 与外设控制器，未给多颗 AI 芯片的专用 scale-up 域。",
+        "source": "[1, p.24]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "on-chip buffer",
+            "value": 8,
+            "unit": "MB",
+            "scope": "chip",
+            "kind": "shared_work",
+            "instances": 1,
+            "shared": true,
+            "condition": "Hot Chips 原图标 on-chip buffer；管理语义未单独确认，不据此宣称是硬件 L2 或编译器显式 scratchpad。",
+            "source": "[1, p.24]",
+            "management": "unspecified"
+          },
+          {
+            "name": "LLC",
+            "value": 3,
+            "unit": "MB",
+            "scope": "chip（SoC LLC）",
+            "kind": "cache",
+            "instances": 1,
+            "shared": true,
+            "condition": "SoC 框图独立列出的 Last Level Cache；不与 8 MB AI buffer 合并。",
+            "source": "[1, p.24]"
+          }
+        ],
+        "status": "partial",
+        "note": "本产品 AI Core 局部缓冲的型号级容量未单列；不从 Ascend910 移植。8 MB buffer 的管理语义保留未知。",
+        "source": "[1, pp.9,24]; [2, pp.3-4]",
+        "card": "华为昇腾/华为_Ascend310.md"
+      },
+      "integer": {
+        "card": "华为昇腾/华为_Ascend310.md",
+        "label": "Ascend 310",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 16,
+            "path": "chip",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "Ascend 310 单芯片官方 AI 峰值；未说明稀疏及 MAC 计数规则，不由架构表每核吞吐重构。",
+            "source": "[1, p.33]; [1, pp.9-10]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+            "source": "[1, pp.9-10,33]; [2, pp.3-4]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/华为昇腾/华为_Ascend310.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2018,
+        "date": "2018",
+        "availability": null,
+        "note": "官方回顾确认型号发布年；不将仅列系列的公告日期强行当成精确型号日期。",
+        "source": "[10, Chips are the building blocks]; [2, Table 10]"
+      }
+    },
+    "ascend910": {
+      "card": "华为昇腾/华为_Ascend910.md",
+      "scaleup": {
+        "records": [
+          {
+            "chips": 4,
+            "kind": "physical_domain",
+            "system": "HPCA 2021 Ascend 910 服务器内 HCCS 组",
+            "topology": "HCCS 组内高速缓存一致性网络",
+            "condition": "八芯片服务器分两组，每组四芯片；两组经 PCIe 连接，故专用 HCCS 域按 4 计。",
+            "source": "[2, PDF p.8 / proceedings p.796, §V / Figure 15(a)]"
+          }
+        ],
+        "status": "known",
+        "note": "Figure 15(a) 的八芯片服务器不可写成八颗在同一 HCCS 域。未从模糊的 30 GB/s 数值反推拓扑或端点速率。",
+        "source": "[2, PDF p.8 / proceedings p.796, Figure 15(a)]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "L1 Buffer",
+            "value": 1,
+            "unit": "MB",
+            "scope": "每 AI Core",
+            "kind": "local_work",
+            "instances": 32,
+            "shared": false,
+            "condition": "显式搬运的 AI Core 本地工作缓冲；不含共享 AI 存储或 CPU cache。",
+            "source": "[1, pp.9,12]; [2, Figure 1, pp.3-4]",
+            "instance_source": "[1, pp.25,33]; [2, p.7, Figure 12]"
+          },
+          {
+            "name": "L0A",
+            "value": 64,
+            "unit": "KB",
+            "scope": "每 AI Core",
+            "kind": "local_work",
+            "instances": 32,
+            "shared": false,
+            "condition": "显式搬运的 AI Core 本地工作缓冲；不含共享 AI 存储或 CPU cache。",
+            "source": "[1, pp.9,12]; [2, Figure 1, pp.3-4]",
+            "instance_source": "[1, pp.25,33]; [2, p.7, Figure 12]"
+          },
+          {
+            "name": "L0B",
+            "value": 64,
+            "unit": "KB",
+            "scope": "每 AI Core",
+            "kind": "local_work",
+            "instances": 32,
+            "shared": false,
+            "condition": "显式搬运的 AI Core 本地工作缓冲；不含共享 AI 存储或 CPU cache。",
+            "source": "[1, pp.9,12]; [2, Figure 1, pp.3-4]",
+            "instance_source": "[1, pp.25,33]; [2, p.7, Figure 12]"
+          },
+          {
+            "name": "L0C",
+            "value": 256,
+            "unit": "KB",
+            "scope": "每 AI Core",
+            "kind": "partial_sum",
+            "instances": 32,
+            "shared": false,
+            "condition": "显式搬运的 AI Core 本地工作缓冲；不含共享 AI 存储或 CPU cache。",
+            "source": "[1, pp.9,12]; [2, Figure 1, pp.3-4]",
+            "instance_source": "[1, pp.25,33]; [2, p.7, Figure 12]"
+          },
+          {
+            "name": "Unified Buffer",
+            "value": 256,
+            "unit": "KB",
+            "scope": "每 AI Core",
+            "kind": "local_work",
+            "instances": 32,
+            "shared": false,
+            "condition": "显式搬运的 AI Core 本地工作缓冲；不含共享 AI 存储或 CPU cache。",
+            "source": "[1, pp.9,12]; [2, Figure 1, pp.3-4]",
+            "instance_source": "[1, pp.25,33]; [2, p.7, Figure 12]"
+          },
+          {
+            "name": "共享 AI 存储 / L2（原图 on-chip buffer）",
+            "value": 32,
+            "unit": "MB",
+            "scope": "chip",
+            "kind": "cache",
+            "instances": 1,
+            "shared": true,
+            "condition": "32 MB 来自 Hot Chips 的 on-chip buffer 标签；HPCA 以 AI LLC/L2 描述对应层级，保留原始命名，不额外造出另一块 32 MB。",
+            "source": "[1, p.25]; [2, pp.6-7, §3.1, Figure 12]",
+            "management": "AI LLC/L2 per HPCA; buffer label per Hot Chips"
+          }
+        ],
+        "status": "known_layers",
+        "note": "共享 AI 层保留来源的 buffer / LLC / L2 命名差别；每核本地缓冲分别列出。",
+        "source": "[1, pp.9,25]; [2, pp.6-7]",
+        "card": "华为昇腾/华为_Ascend910.md"
+      },
+      "integer": {
+        "card": "华为昇腾/华为_Ascend910.md",
+        "label": "Ascend 910",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 512,
+            "path": "matrix",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "32 个 AI Core 的单芯片 Cube 矩阵峰值；不加入独立 Vector 路径，未给结构化稀疏倍率。",
+            "source": "[1, p.33]; [1, p.9]; [2, PDF p.3 / proceedings p.791]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+            "source": "[1, pp.9-10,33]; [2, pp.3-4]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/华为昇腾/华为_Ascend910.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2018,
+        "date": "2018",
+        "availability": "2019-08-23 正式发布",
+        "note": "2019 年官方稿回顾本处理器计划规格已于 Huawei Connect 2018 公布；2019 是正式发布年。",
+        "source": "[6, Ascend 910: More computing power than any other AI processor in the world; page date]"
+      }
+    },
+    "atlas300ia2_32": {
+      "card": "华为昇腾/华为_Atlas300I_A2_32GB.md",
+      "scaleup": {
+        "records": [],
+        "status": "not_found",
+        "note": "已查本卡产品页、彩页与用户指南系统框图，仅确认 PCIe 主机接口；未找到本卡 HCCS/RoCE 专用端点、单一高速域规模或拓扑，不能由其他 Atlas 产品移用。",
+        "source": "[1, Technical Specifications] [2, Product Specifications] [5, 系统框图 / 表3-1]"
+      },
+      "onchip": {
+        "records": [],
+        "status": "unknown",
+        "note": "用户指南确认处理器有 cache，但层级和容量未展开；不能从原始 Ascend910 或其他子型号迁移容量。",
+        "source": "[5, 图1-2、表3-1]",
+        "card": "华为昇腾/华为_Atlas300I_A2_32GB.md"
+      },
+      "integer": {
+        "card": "华为昇腾/华为_Atlas300I_A2_32GB.md",
+        "label": "Atlas 300I A2 32GB",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 560,
+            "path": "card",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单卡最高理论设计值；Cube/Vector 路径、dense/sparse、输入累加及操作计数未分解。",
+            "source": "[1, 技术规格]; [2, 产品规格]; [5, 表3-1脚注a]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+            "source": "[1, 技术规格]; [2, 产品规格]; [5, 表3-1]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/华为昇腾/华为_Atlas300I_A2_32GB.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": null,
+        "date": null,
+        "availability": null,
+        "note": "未找到可固定到本研究产品配置的首次公开日期；不以论文、手册或网页更新时间代替。",
+        "source": "[1, 产品说明]; [5, 文档版本与表3-1]"
+      }
+    },
+    "atlas300ia2_64": {
+      "card": "华为昇腾/华为_Atlas300I_A2_64GB.md",
+      "scaleup": {
+        "records": [],
+        "status": "not_found",
+        "note": "已查本卡产品页、彩页与用户指南系统框图，仅确认 PCIe 主机接口；未找到本卡 HCCS/RoCE 专用端点、单一高速域规模或拓扑，不能由其他 Atlas 产品移用。",
+        "source": "[1, Technical Specifications] [2, Product Specifications] [5, 系统框图 / 表3-1]"
+      },
+      "onchip": {
+        "records": [],
+        "status": "unknown",
+        "note": "用户指南确认处理器有 cache，但层级和容量未展开；不能从原始 Ascend910 或其他子型号迁移容量。",
+        "source": "[5, 图1-2、表3-1]",
+        "card": "华为昇腾/华为_Atlas300I_A2_64GB.md"
+      },
+      "integer": {
+        "card": "华为昇腾/华为_Atlas300I_A2_64GB.md",
+        "label": "Atlas 300I A2 64GB",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 560,
+            "path": "card",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "单卡最高理论设计值；Cube/Vector 路径、dense/sparse、输入累加及操作计数未分解。",
+            "source": "[1, 技术规格]; [2, 产品规格]; [5, 表3-1脚注a]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+            "source": "[1, 技术规格]; [2, 产品规格]; [5, 表3-1]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/华为昇腾/华为_Atlas300I_A2_64GB.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": null,
+        "date": null,
+        "availability": null,
+        "note": "未找到可固定到本研究产品配置的首次公开日期；不以论文、手册或网页更新时间代替。",
+        "source": "[1, 产品说明]; [5, 文档版本与表3-1]"
+      }
+    },
+    "ascend950pr": {
+      "card": "华为昇腾/华为_Ascend950PR.md",
+      "scaleup": {
+        "records": [],
+        "status": "not_found",
+        "note": "950 架构白皮书给最高 8,192 卡扩展能力，但 2025 发布稿将 Atlas 950 8,192 卡系统明确绑定 950DT。950PR 的 Atlas 350 卡上市资料未给单一专用域规模，故 PR 不填 8,192。",
+        "source": "[1, PDF pp.30-31 / 正文 pp.26-27] [2, Atlas 950超节点段] [4, Atlas 350上市段]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "L1",
+            "value": 512,
+            "unit": "KB",
+            "scope": "每 AI Core",
+            "kind": "local_work",
+            "instances": null,
+            "shared": false,
+            "condition": "AI Core 显式管理的 Local Memory；实际核心有多个档位，未绑定唯一料号，不求整 chip 总量。",
+            "source": "[1, PDF pp.17,25 / 正文 pp.13,21, 图4-1、表4-2]"
+          },
+          {
+            "name": "L0A",
+            "value": 64,
+            "unit": "KB",
+            "scope": "每 AI Core",
+            "kind": "local_work",
+            "instances": null,
+            "shared": false,
+            "condition": "AI Core 显式管理的 Local Memory；实际核心有多个档位，未绑定唯一料号，不求整 chip 总量。",
+            "source": "[1, PDF pp.17,25 / 正文 pp.13,21, 图4-1、表4-2]"
+          },
+          {
+            "name": "L0B",
+            "value": 64,
+            "unit": "KB",
+            "scope": "每 AI Core",
+            "kind": "local_work",
+            "instances": null,
+            "shared": false,
+            "condition": "AI Core 显式管理的 Local Memory；实际核心有多个档位，未绑定唯一料号，不求整 chip 总量。",
+            "source": "[1, PDF pp.17,25 / 正文 pp.13,21, 图4-1、表4-2]"
+          },
+          {
+            "name": "L0C",
+            "value": 256,
+            "unit": "KB",
+            "scope": "每 AI Core",
+            "kind": "partial_sum",
+            "instances": null,
+            "shared": false,
+            "condition": "AI Core 显式管理的 Local Memory；实际核心有多个档位，未绑定唯一料号，不求整 chip 总量。",
+            "source": "[1, PDF pp.17,25 / 正文 pp.13,21, 图4-1、表4-2]"
+          },
+          {
+            "name": "Unified Buffer",
+            "value": 256,
+            "unit": "KB",
+            "scope": "每 Vector Core",
+            "kind": "local_work",
+            "instances": null,
+            "shared": false,
+            "condition": "每 AI 子系统两个 Vector，各 256 KB（合计 512 KB）；SIMT 的 shared/data cache 从同一 UB 划分，不能再加。",
+            "source": "[1, PDF pp.17,25 / 正文 pp.13,21, 图4-1、表4-2]"
+          },
+          {
+            "name": "全局 L2",
+            "value": 128,
+            "unit": "MB",
+            "scope": "chip（两个 AI Die 的一致全局 L2）",
+            "kind": "cache",
+            "instances": 1,
+            "shared": true,
+            "condition": "多 bank 分布式，跨 die 硬件一致并保留访问局部性；不含 CPU 的每核 L2。 本字段还有 112 MB 档位，不能将 128 MB 视为唯一 SKU 定值。",
+            "source": "[1, PDF pp.15,26-27 / 正文 pp.11,22-23, 表3-1、§4.3.2]",
+            "alternatives": [
+              {
+                "value": 112,
+                "unit": "MB",
+                "scope": "chip",
+                "source": "[1, PDF p.15 / 正文 p.11, 表3-1]",
+                "note": "另一公开档位；不是额外容量，不能与其他字段按斜杠顺序绑定。"
+              }
+            ]
+          }
+        ],
+        "status": "partial",
+        "note": "AI/Vector 核数量有多个产品档位，无法绑定唯一料号，局部实例数留空；CPU cache 和同封装 DRAM 不纳入本图。",
+        "source": "[1, PDF pp.12,17,24-27 / 正文 pp.8,13,20-23, 图4-1、表4-2、§4.3.2]",
+        "card": "华为昇腾/华为_Ascend950PR.md"
+      },
+      "integer": {
+        "card": "华为昇腾/华为_Ascend950PR.md",
+        "label": "Ascend 950PR",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 865,
+            "path": "matrix/Cube",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "32 Cube 档位，频率、功耗模式和稀疏条件未给。与另一执行路径分开，不相加为同一种矩阵峰值。",
+            "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "tier_cube_count": 32
+          },
+          {
+            "format": "INT8",
+            "value_tops": 54,
+            "path": "vector",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "32 Cube 档位，频率、功耗模式和稀疏条件未给。与另一执行路径分开，不相加为同一种矩阵峰值。",
+            "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "tier_cube_count": 32
+          },
+          {
+            "format": "INT8",
+            "value_tops": 919,
+            "path": "chip/Cube+Vector",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "32 Cube 档位，频率、功耗模式和稀疏条件未给。厂商原报 Cube+Vector 聚合，不视作纯矩阵吞吐，不按取整分项改算。",
+            "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "tier_cube_count": 32
+          },
+          {
+            "format": "INT8",
+            "value_tops": 756,
+            "path": "matrix/Cube",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "28 Cube 档位，频率、功耗模式和稀疏条件未给。与另一执行路径分开，不相加为同一种矩阵峰值。",
+            "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "tier_cube_count": 28
+          },
+          {
+            "format": "INT8",
+            "value_tops": 47,
+            "path": "vector",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "28 Cube 档位，频率、功耗模式和稀疏条件未给。与另一执行路径分开，不相加为同一种矩阵峰值。",
+            "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "tier_cube_count": 28
+          },
+          {
+            "format": "INT8",
+            "value_tops": 804,
+            "path": "chip/Cube+Vector",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "28 Cube 档位，频率、功耗模式和稀疏条件未给。厂商原报 Cube+Vector 聚合，不视作纯矩阵吞吐，不按取整分项改算。",
+            "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "tier_cube_count": 28
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+            "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "保留各个 Cube 档位；这些档位不是新增 SKU。INT8 与 MXFP4 属于不同数值格式，不能把 MXFP4 填入 INT4。",
+        "source_document": "芯片调研/产品详解/华为昇腾/华为_Ascend950PR.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2025,
+        "date": "2025-09-18",
+        "availability": "路线图：PR 2026 Q1、DT 2026 Q4；不等于实际 GA",
+        "note": "2025 主题演讲明确分别命名 PR/DT；白皮书版权年不当首次发布日期。",
+        "source": "[2, Ascend 950 series / 昇腾950系列; page date]"
+      }
+    },
+    "ascend950dt": {
+      "card": "华为昇腾/华为_Ascend950DT.md",
+      "scaleup": {
+        "records": [],
+        "status": "planned_only",
+        "note": "2025-09 发布稿明确规划 Atlas 950 支持 8,192 张 950DT 卡，且每卡一颗芯片，上市时间为 2026 Q4。2026-07 真机稿的 1,024 卡 Atlas 950 未直接写 PR/DT，无法据此确认 DT 的已交付物理域。规划的 8,192 留作系统上限注记，不混入已经确认的配置数值。",
+        "source": "[2, Atlas 950超节点段] [5, 昇腾950超节点真机首次亮相]",
+        "planned_records": [
+          {
+            "chips": 8192,
+            "kind": "physical_domain",
+            "system": "规划 Atlas 950 超节点",
+            "topology": "Unified Bus 2.0，跨柜全光互联；具体已交付拓扑未核实",
+            "condition": "2025-09-18 发布稿将 8,192 卡明确绑定 950DT，一卡一芯片；规划 2026 Q4 上市，不表示已交付满配。",
+            "source": "[2, Atlas 950超节点段]"
+          }
+        ]
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "L1",
+            "value": 512,
+            "unit": "KB",
+            "scope": "每 AI Core",
+            "kind": "local_work",
+            "instances": null,
+            "shared": false,
+            "condition": "AI Core 显式管理的 Local Memory；实际核心有多个档位，未绑定唯一料号，不求整 chip 总量。",
+            "source": "[1, PDF pp.17,25 / 正文 pp.13,21, 图4-1、表4-2]"
+          },
+          {
+            "name": "L0A",
+            "value": 64,
+            "unit": "KB",
+            "scope": "每 AI Core",
+            "kind": "local_work",
+            "instances": null,
+            "shared": false,
+            "condition": "AI Core 显式管理的 Local Memory；实际核心有多个档位，未绑定唯一料号，不求整 chip 总量。",
+            "source": "[1, PDF pp.17,25 / 正文 pp.13,21, 图4-1、表4-2]"
+          },
+          {
+            "name": "L0B",
+            "value": 64,
+            "unit": "KB",
+            "scope": "每 AI Core",
+            "kind": "local_work",
+            "instances": null,
+            "shared": false,
+            "condition": "AI Core 显式管理的 Local Memory；实际核心有多个档位，未绑定唯一料号，不求整 chip 总量。",
+            "source": "[1, PDF pp.17,25 / 正文 pp.13,21, 图4-1、表4-2]"
+          },
+          {
+            "name": "L0C",
+            "value": 256,
+            "unit": "KB",
+            "scope": "每 AI Core",
+            "kind": "partial_sum",
+            "instances": null,
+            "shared": false,
+            "condition": "AI Core 显式管理的 Local Memory；实际核心有多个档位，未绑定唯一料号，不求整 chip 总量。",
+            "source": "[1, PDF pp.17,25 / 正文 pp.13,21, 图4-1、表4-2]"
+          },
+          {
+            "name": "Unified Buffer",
+            "value": 256,
+            "unit": "KB",
+            "scope": "每 Vector Core",
+            "kind": "local_work",
+            "instances": null,
+            "shared": false,
+            "condition": "每 AI 子系统两个 Vector，各 256 KB（合计 512 KB）；SIMT 的 shared/data cache 从同一 UB 划分，不能再加。",
+            "source": "[1, PDF pp.17,25 / 正文 pp.13,21, 图4-1、表4-2]"
+          },
+          {
+            "name": "全局 L2",
+            "value": 128,
+            "unit": "MB",
+            "scope": "chip（两个 AI Die 的一致全局 L2）",
+            "kind": "cache",
+            "instances": 1,
+            "shared": true,
+            "condition": "多 bank 分布式，跨 die 硬件一致并保留访问局部性；不含 CPU 的每核 L2。",
+            "source": "[1, PDF pp.15,26-27 / 正文 pp.11,22-23, 表3-1、§4.3.2]"
+          }
+        ],
+        "status": "partial",
+        "note": "AI/Vector 核数量有多个产品档位，无法绑定唯一料号，局部实例数留空；CPU cache 和同封装 DRAM 不纳入本图。",
+        "source": "[1, PDF pp.12,17,24-27 / 正文 pp.8,13,20-23, 图4-1、表4-2、§4.3.2]",
+        "card": "华为昇腾/华为_Ascend950DT.md"
+      },
+      "integer": {
+        "card": "华为昇腾/华为_Ascend950DT.md",
+        "label": "Ascend 950DT",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 973,
+            "path": "matrix/Cube",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "36 Cube 档位，频率、功耗模式和稀疏条件未给。与另一执行路径分开，不相加为同一种矩阵峰值。",
+            "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "tier_cube_count": 36
+          },
+          {
+            "format": "INT8",
+            "value_tops": 60,
+            "path": "vector",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "36 Cube 档位，频率、功耗模式和稀疏条件未给。与另一执行路径分开，不相加为同一种矩阵峰值。",
+            "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "tier_cube_count": 36
+          },
+          {
+            "format": "INT8",
+            "value_tops": 1034,
+            "path": "chip/Cube+Vector",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "36 Cube 档位，频率、功耗模式和稀疏条件未给。厂商原报 Cube+Vector 聚合，不视作纯矩阵吞吐，不按取整分项改算。",
+            "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "tier_cube_count": 36
+          },
+          {
+            "format": "INT8",
+            "value_tops": 865,
+            "path": "matrix/Cube",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "32 Cube 档位，频率、功耗模式和稀疏条件未给。与另一执行路径分开，不相加为同一种矩阵峰值。",
+            "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "tier_cube_count": 32
+          },
+          {
+            "format": "INT8",
+            "value_tops": 54,
+            "path": "vector",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "32 Cube 档位，频率、功耗模式和稀疏条件未给。与另一执行路径分开，不相加为同一种矩阵峰值。",
+            "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "tier_cube_count": 32
+          },
+          {
+            "format": "INT8",
+            "value_tops": 919,
+            "path": "chip/Cube+Vector",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "32 Cube 档位，频率、功耗模式和稀疏条件未给。厂商原报 Cube+Vector 聚合，不视作纯矩阵吞吐，不按取整分项改算。",
+            "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "tier_cube_count": 32
+          },
+          {
+            "format": "INT8",
+            "value_tops": 756,
+            "path": "matrix/Cube",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "28 Cube 档位，频率、功耗模式和稀疏条件未给。与另一执行路径分开，不相加为同一种矩阵峰值。",
+            "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "tier_cube_count": 28
+          },
+          {
+            "format": "INT8",
+            "value_tops": 47,
+            "path": "vector",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "28 Cube 档位，频率、功耗模式和稀疏条件未给。与另一执行路径分开，不相加为同一种矩阵峰值。",
+            "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "tier_cube_count": 28
+          },
+          {
+            "format": "INT8",
+            "value_tops": 804,
+            "path": "chip/Cube+Vector",
+            "density": "unspecified",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "28 Cube 档位，频率、功耗模式和稀疏条件未给。厂商原报 Cube+Vector 聚合，不视作纯矩阵吞吐，不按取整分项改算。",
+            "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true,
+            "tier_cube_count": 28
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所用型号资料未确认原生运算支持；不把未提及记为不支持。",
+            "source": "[1, PDF pp.13-14 / 正文 pp.9-10, 表3-1]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "保留各个 Cube 档位；这些档位不是新增 SKU。INT8 与 MXFP4 属于不同数值格式，不能把 MXFP4 填入 INT4。",
+        "source_document": "芯片调研/产品详解/华为昇腾/华为_Ascend950DT.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": 2025,
+        "date": "2025-09-18",
+        "availability": "路线图：PR 2026 Q1、DT 2026 Q4；不等于实际 GA",
+        "note": "2025 主题演讲明确分别命名 PR/DT；白皮书版权年不当首次发布日期。",
+        "source": "[2, Ascend 950 series / 昇腾950系列; page date]"
+      }
+    },
+    "groq_gen1": {
+      "card": "Groq/Groq_GroqChip_Processor_第一代.md",
+      "scaleup": {
+        "records": [],
+        "status": "not_found",
+        "note": "产品简报与第一代论文给 16 个 RealScale C2C 端点及可直接连接其他芯片的机制，但没有固定本代 GroqRack 的域大小或拓扑；不能由端口数推算芯片上限。",
+        "source": "[2, p.1, 16 chip-to-chip interconnects] [1, pp.4-5, §II / Table I]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "MEM 全局可寻址 SRAM",
+            "value": 220,
+            "unit": "MiB",
+            "scope": "chip（88 个 MEM slices）",
+            "kind": "shared_work",
+            "instances": 1,
+            "shared": true,
+            "condition": "分区但全局可寻址，编译器安排权重、activation 和程序文本；bank 和距离影响调度，不是透明 cache。",
+            "source": "[1, pp.5-6, §II-B; p.8, §III-B; p.9, §IV]",
+            "alternatives": [
+              {
+                "value": 230,
+                "unit": "MB",
+                "scope": "chip",
+                "source": "[2, p.2, Memory]",
+                "note": "产品标称近似值；220 MiB = 230.68672 MB，不是精确 230 MB。"
+              }
+            ]
+          }
+        ],
+        "status": "known_layers",
+        "note": "MEM 是主要数据空间，程序指令也占用；不把 220 MiB 全部视为模型参数的可用容量。",
+        "source": "[1, pp.5–6, §II-B; p.8, §III-B; pp.9–10, §IV-A]; [2, p.2, Memory]",
+        "card": "Groq/Groq_GroqChip_Processor_第一代.md"
+      },
+      "integer": {
+        "card": "Groq/Groq_GroqChip_Processor_第一代.md",
+        "label": "GroqChip Gen1",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": 750,
+            "path": "chip",
+            "density": "dense",
+            "execution": "native",
+            "input": "INT8",
+            "accumulation": "MXM INT8 输入、INT32 累加",
+            "basis": "source",
+            "derivation": "",
+            "condition": "v1.7 产品 900MHz、最高 750 TOPS；MXM 路径支持 INT8。论文明确不使用 pruning/sparsity 优化；1GHz 的 820 TeraOps/s 是另一来源条件，不当作同频规格。",
+            "source": "[2, p.2, Performance]; [1, p.8, §III-D; p.10, §IV-D; p.12, §VI、§VII]",
+            "status": "reported",
+            "sku_bound": true,
+            "comparison_eligible": true
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+            "source": "已查范围：[1, pp.8–10, §III-C/D and §IV-D]; [2, p.2, Numerics]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/Groq/Groq_GroqChip_Processor_第一代.md",
+        "has_sku_numeric_peak": true,
+        "has_any_reported_number": true
+      },
+      "release": {
+        "year": null,
+        "date": null,
+        "availability": "2022 v1.5 产品简报写 In production",
+        "note": "2020 ISCA 是架构论文公开，不自动当具体商业产品首次发布；2025 LPU 品牌解释也不替代原始产品日期。",
+        "source": "[1, publication]; [4, p.2]"
+      }
+    },
+    "mlu590": {
+      "card": "寒武纪/寒武纪_思元590_MLU590.md",
+      "scaleup": {
+        "records": [],
+        "status": "not_found",
+        "note": "已查型号发布稿、CNToolkit 和软件源码，未找到型号级 MLU-Link 端点、专用高速域规模或拓扑；通用多卡 API 不能补成物理连接规格。",
+        "source": "[1, 新品介绍] [2, §§3.4.3-3.4.4]"
+      },
+      "onchip": {
+        "records": [
+          {
+            "name": "NRAM",
+            "value": 512,
+            "unit": "KiB",
+            "scope": "每计算 core",
+            "kind": "local_work",
+            "instances": null,
+            "shared": false,
+            "condition": "显式声明和拷贝的编译目标容量；源码将原 KB 宏乘 1024 得字节，故明确为 KiB；不等于扣除 kernel/编译器保留量后的用户容量。",
+            "source": "[4, lines123-127]; [5, core/context.cpp, lines204-208; kernels/kernel.h, lines36-80]",
+            "derivation": "原 KB 宏 × 1024 bytes，KiB 为源码明确语义。"
+          },
+          {
+            "name": "WRAM",
+            "value": 512,
+            "unit": "KiB",
+            "scope": "每计算 core",
+            "kind": "local_work",
+            "instances": null,
+            "shared": false,
+            "condition": "显式声明和拷贝的编译目标容量；源码将原 KB 宏乘 1024 得字节，故明确为 KiB；不等于扣除 kernel/编译器保留量后的用户容量。",
+            "source": "[4, lines123-127]; [5, core/context.cpp, lines209-213; kernels/kernel.h, lines36-80]",
+            "derivation": "原 KB 宏 × 1024 bytes，KiB 为源码明确语义。"
+          },
+          {
+            "name": "cluster SRAM",
+            "value": 2048,
+            "unit": "KiB",
+            "scope": "每 cluster",
+            "kind": "shared_work",
+            "instances": null,
+            "shared": false,
+            "condition": "显式声明和拷贝的编译目标容量；源码将原 KB 宏乘 1024 得字节，故明确为 KiB；不等于扣除 kernel/编译器保留量后的用户容量。",
+            "source": "[4, lines123-127]; [5, core/context.cpp, lines214-219; kernels/kernel.h, lines36-80]",
+            "derivation": "原 KB 宏 × 1024 bytes，KiB 为源码明确语义。"
+          }
+        ],
+        "status": "partial",
+        "note": "每核与每 cluster 容量已确认，实例总数未知。公开 48 MiB 是 LLC 测试工作集，不能当成硬件 L2 容量。",
+        "source": "[4, lines123–127]; [5, core/context.cpp, lines204–219,239–249; kernels/kernel.h, lines36–80]; [7, executor.cpp, lines1521–1536]",
+        "card": "寒武纪/寒武纪_思元590_MLU590.md"
+      },
+      "integer": {
+        "card": "寒武纪/寒武纪_思元590_MLU590.md",
+        "label": "MLU590",
+        "records": [
+          {
+            "format": "INT8",
+            "value_tops": null,
+            "path": "matrix",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT8",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "固定版本源码有 MLU590 INT8 张量测试分支，但峰值常量为零占位；这不代表硬件为零，也不足以建立型号级吞吐规格。",
+            "source": "[7, executor.h, lines 69-110; executor.cpp, lines 948-969,1027-1157]",
+            "status": "source_placeholder",
+            "sku_bound": true,
+            "comparison_eligible": false
+          },
+          {
+            "format": "INT4",
+            "value_tops": null,
+            "path": "unknown",
+            "density": "unspecified",
+            "execution": "unknown",
+            "input": "INT4",
+            "accumulation": "未公开完整累加语义",
+            "basis": "source",
+            "derivation": "",
+            "condition": "已查型号与架构资料未给可引用的该格式峰值；不由位宽、FP4、相邻型号或支持列表推算。所查型号资料未明确确认该格式的运算支持；不据缺项认定不支持。",
+            "source": "已查范围：[2, §3.1–3.2, Tables3.1–3.3]; [6, 型号592算子分支]; [7, executor.cpp, lines972–1024]",
+            "status": "not_found",
+            "sku_bound": true,
+            "comparison_eligible": false
+          }
+        ],
+        "note": "",
+        "source_document": "芯片调研/产品详解/寒武纪/寒武纪_思元590_MLU590.md",
+        "has_sku_numeric_peak": false,
+        "has_any_reported_number": false
+      },
+      "release": {
+        "year": 2022,
+        "date": "2022-09-02",
+        "availability": null,
+        "note": "公开时仍在研；后续 SDK 支持不能确定 GA 或量产日。",
+        "source": "[1, 页面日期及正文“在演讲的最后”]"
+      }
+    }
+  }
+}

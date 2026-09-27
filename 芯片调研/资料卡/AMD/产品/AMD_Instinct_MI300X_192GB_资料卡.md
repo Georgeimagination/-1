@@ -24,6 +24,9 @@
 
 本卡不包含：8-GPU MI300X Platform的1.5TB HBM、聚合算力、主机CPU、UBB系统功耗及机箱网络。
 
+首次型号公开时间补充：2023-06-13。6 月已按型号预告 192GB MI300X；不是 12 月才首次公开。正式发布或可用时间仍单独保留：2023-12-06 正式发布。[10, AMD Instinct Accelerators; page date]
+
+
 ## 2. 层级关系与复用
 
 | 层级 | 本 SKU 对应对象 | 是否与其他 SKU 共享 | 本卡怎么使用 | 来源 |
@@ -128,6 +131,7 @@ ROCm 7.2.4 的型号表给出以下 MI300X 配置，容量表示该表中的每�
 | `[7]` | AMD，*AMD Instinct MI300 Series Accelerators* | 官方家族页 | 1,024GB/s per-OAM P2P聚合脚注与MI300X/MI325X边界 | <https://www.amd.com/en/products/accelerators/instinct/mi300.html> |
 | `[8]` | AMD，*AMD Instinct MI300X Accelerator Data Sheet* | 当前官方SKU datasheet | 单OAM精确峰值、7条scale-up IF、1条host PCIe、OAM与750W | <https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/data-sheets/amd-instinct-mi300x-data-sheet.pdf> |
 | `[9]` | AMD ROCm，*AMD Instinct MI300 Series / MI350 Series workload optimization*，7.2.4 | 官方硬件优化文档 | CDNA 3 的 FP8 FNUZ 与 CDNA 4 的 OCP 编码区别；两型号的计算分区、每分区容量及 NPS 配置 | <https://rocm.docs.amd.com/en/docs-7.2.4/how-to/rocm-for-ai/inference-optimization/workload.html> |
+| `[10]` | AMD，AMD Expands Leadership Data Center Portfolio，2023-06-13 | 官方发布原文 | 首次按型号公开与后续正式发布的区别 | <https://www.amd.com/en/newsroom/press-releases/2023-6-13-amd-expands-leadership-data-center-portfolio-with-.html> |
 
 ## 9. 完成检查
 

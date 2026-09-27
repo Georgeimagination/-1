@@ -87,6 +87,10 @@ JAX的`is_matmul_supported`对v5e接受E5M2、E4M3B11FNUZ浮点输入组合，�
 | 系统可靠性 | 未找到v5e的ICI故障绕行或系统冗余说明 | 不套用v4/v5p/TPU7x的ICI resiliency | `[2, Cloud TPU ICI resiliency]` |
 | 相关系统 | full host有8 chips和512GiB DRAM；1-chip VM为`ct5lp-hightpu-1t`、24 vCPU、48GB RAM；full Pod为256 chips | host DRAM、VM RAM、CPU和NIC均不是chip内资源 | `[1, System architecture, Configurations and VM types]` |
 
+### scale-up 域的配置边界
+
+Cloud 文档明确支持最多 256 颗芯片的训练 slice。单 host serving 提供 1、4、8 芯片配置，更多芯片的多 host serving 需结合 Sax；因此 8 颗不能写成全部 v5e 推理任务的上限。 [1, Cloud TPU v5e types for training / Cloud TPU v5e types for serving]
+
 ## 7. 证据缺口与来源冲突
 
 | 项目 | 状态 | 已检查范围或冲突来源 | 当前处理 |

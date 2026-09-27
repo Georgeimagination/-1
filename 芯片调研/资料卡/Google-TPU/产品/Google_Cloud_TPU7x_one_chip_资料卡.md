@@ -82,6 +82,10 @@
 | 系统可靠性 | 芯片/package提供BIST、SDC mitigation与logic repair；Pod通过OCS和ICI resiliency处理更高层故障 | 芯片级和Pod级机制分开 | `[4, pp. 2 and 14]` |
 | 相关系统 | 每个`tpu7x-standard-4t` full-host VM固定4 chips、224 vCPU、960GB RAM、2 NUMA nodes；tray也有4 chips | 4-chip VM合计768GiB HBM；CPU、RAM、NIC与tray connector不是chip内资源 | `[1, TPU7x VM]` `[2, TPU7x machine types]` `[4, p. 22]` |
 
+### scale-up 域的配置边界
+
+官方配置说明明确写出单 slice 可扩至 9,216 颗芯片，与 Pod 的名义芯片数相同。表格只列常见形状，不能将其最后一个示例当成系统上限；可申请的配额及当时资源可用性仍由云服务决定。 [1, Supported configurations]
+
 ## 7. 证据缺口与来源冲突
 
 | 项目 | 状态 | 已检查范围或冲突来源 | 当前处理 |
@@ -99,7 +103,7 @@
 
 | 编号 | 资料 | 类型 | 本卡使用的信息 | 链接或本地文件 |
 |---:|---|---|---|---|
-| `[1]` | Google Cloud，*TPU7x (Ironwood)* | 当前官方产品与系统文档 | 身份、per-chip规格、dual-chiplet、VM、slice和Pod边界 | <https://docs.cloud.google.com/tpu/docs/tpu7x> |
+| `[1]` | Google Cloud，*TPU7x (Ironwood)* | 当前官方产品与系统文档 | 身份、per-chip规格、dual-chiplet、VM、slice和Pod边界 | <https://docs.cloud.google.com/tpu/docs/tpu7x>；[2026-09-24 快照](../../../原始资料/网页快照/比较补充/2026-09-24/b3d2608b0dbb.html) |
 | `[2]` | Google Cloud，*TPU machines in accelerator-optimized machine family* | 当前官方机器规格页 | per-chip规格、4-chip VM和DCN交叉核对 | <https://docs.cloud.google.com/compute/docs/tpus/tpu-machines> |
 | `[3]` | Google Cloud，*TPU7x (Ironwood) performance optimizations* | 当前官方性能与编程文档 | 64MiB per TensorCore 的 VMEM，以及 E4M3/E5M2 编程说明 | <https://docs.cloud.google.com/tpu/docs/ironwood-performance> |
 | `[4]` | Norman P. Jouppi、Sridhar Lakshmanamurthy，*Ironwood: Delivering Best-in-Class Perf, Perf/TCO, and Perf/Watt for Reasoning Model Training and Serving*，Hot Chips 37，2025 | Google官方演讲 | package组成、TensorCore/SparseCore、HBM、ICI、PCIe、散热、RAS与安全 | [本地PDF](../../../原始资料/论文/Google_TPU/01_厂商直接架构论文/2025_Ironwood_HotChips37.pdf) |

@@ -6,6 +6,24 @@ builder, not a replacement for the product cards or their original sources.
 from pathlib import Path
 import json, re, html
 R=Path(__file__).resolve().parent
+# The user-edited Markdown is the narrative source. Rebuild figures and the
+# reading copy without regenerating prose over the user's edits.
+editable=R/'训练与推理架构比较-可编辑稿.md'
+if editable.exists():
+    from grouped_comparison import draw_all
+    grouped=draw_all()
+    narrative=editable.read_text()
+    (R/'训练与推理架构比较.md').write_text(narrative)
+    active_figures=[Path(x).stem for x in re.findall(r'!\[[^\]]*\]\(([^)]+)\)',narrative)]
+    (R/'figures.json').write_text(json.dumps(active_figures,ensure_ascii=False,indent=2)+'\n')
+    stats_path=R/'panorama-stats.json'
+    if stats_path.exists():
+        stats=json.loads(stats_path.read_text())
+        stats['figures']=active_figures
+        stats['grouped_analysis']='grouped-comparison-data.json'
+        stats_path.write_text(json.dumps(stats,ensure_ascii=False,indent=2)+'\n')
+    print(f'Updated comparison from editable Markdown: {len(active_figures)} figures')
+    raise SystemExit(0)
 D=json.loads((R/'panorama36.json').read_text());M=D['products']
 S=json.loads((R/'panorama-stats.json').read_text())
 from collections import Counter
@@ -13,6 +31,7 @@ FC={f:Counter(r['formats'][f]['state'] for r in M) for f in ('BF16','FP8','FP4')
 pos={'training':'偏训练','inference':'偏推理','both':'训推兼顾','unclear':'未明确'}
 support_pos={'training':'训练有资料','inference':'推理有资料','both':'训推均有资料','unclear':'未明确'}
 from comparison_analysis import supplemental_report, robustness_report
+from comparison_supplement import reports as supplement_reports
 state={'yes':'支持','conditional':'有条件执行','unknown':'未确认','conflict':'有分歧','no':'无原生支持'}
 power_scope={'board_max':'板卡上限','module_max':'模组上限','chip_tdp':'芯片 TDP','unknown':'口径未确定'}
 basis_text={'dense':'原文明确 dense','derived_dense':'依据明确条件换算 dense','condition_unspecified':'条件尚未完全对齐','excluded':'不纳入配比图'}
@@ -52,7 +71,7 @@ def add(s):parts.append(s.strip()+'\n')
 
 add(f'''# 训练与推理芯片：全产品分布与家族内比较
 
-两层比较 · 7 家厂商、36 个产品、12 个产品组 · 2026 年 9 月 23 日
+两层比较 · 7 家厂商、36 个产品、12 个产品组 · 2026 年 9 月 24 日
 
 这份报告比较现有清单中产品的数值格式、计算规模、存储供给、设备互联与部署条件。产品按照具体 SKU（硬件配置明确的型号）或官方单芯片配置计数；服务器、机架和集群只用于解释接口与部署边界。范围限于现有 36 个对象，尚不能代表整个市场。
 
@@ -223,8 +242,12 @@ end=report.index('## 8. 全产品数值、条件与来源')
 family_path=R/'第二层产品组比较.md'
 family_text=family_path.read_text()
 family_text=re.sub(r'^# [^\n]+\n', '', family_text)
-report=report[:end]+supplemental_report(D)+'\n'+robustness_report(D)+'\n## 9. 家族内定位、资源与机制\n\n'+family_text+'\n'+report[end:]
+new_sections=supplement_reports(D)
+report=report[:end]+supplemental_report(D)+'\n'+robustness_report(D)+'\n'+new_sections['release']+'\n## 9. 家族内定位、资源与机制\n\n'+family_text+'\n'+report[end:]
 report=report.replace('## 8. 全产品数值、条件与来源','## 10. 全产品数值、条件与来源')
+for heading, section in [('## 3. 存储组织与外部主存','integer'),('## 4. DRAM 与计算资源的配比','onchip'),('## 6. 功率规格与部署条件','scaleup')]:
+    report=report.replace(heading, new_sections[section]+'\n'+heading, 1)
+report=report.replace('原始单位、完整候选和来源另存于', '本轮片上存储、扩展规模、整数峰值与日期的原始记录见[补充比较数据](supplement36.json)，由[补充图表与正文生成模块](comparison_supplement.py)生成。原始单位、完整候选和来源另存于')
 
 report=re.sub(r'(?m)^(\|[^\n]*\|)\n\n(?=\|)',r'\1\n',report)
 report=report.replace('–','-').replace('—','至')

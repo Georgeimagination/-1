@@ -62,6 +62,10 @@ DMA（Direct Memory Access，直接存储器访问）负责安排搬运，v4 支
 v4 采用 7 nm 工艺，die 面积小于 600 mm²、晶体管数为 220 亿。论文没有公布 TDP（散热设计功耗）；它报告的 idle 功耗是 90 W，生产应用最小、平均、最大实测值为 121 / 170 / 192 W。当前产品页把 90 / 170 / 192 W 简写为 measured min/mean/max，阅读时应保留论文对 idle 与生产负载的区分。192 W 不能直接作为散热设计功耗使用。[1, p. 7, Table 4] [2, System architecture]
 
 
+## 型号公开与供货时间
+
+本次采用的首次型号公开时间为 2021-05-18。芯片公开与 Cloud 服务 GA 分开；GA 页面存在地区日期差一天。正式发布或供货记录：2022-10-12/13：Cloud TPU v4 GA 公告。[25, Pushing the frontier of computing]; [26, Powering AI/ML workloads]
+
 ## 参考资料
 
 [1] Norman P. Jouppi等，*TPU v4: An Optically Reconfigurable Supercomputer for Machine Learning with Hardware Support for Embeddings*，ISCA 2023。[本地PDF](../../原始资料/论文/Google_TPU/01_厂商直接架构论文/2023_TPUv4_Optically_Reconfigurable_Supercomputer.pdf)
@@ -79,3 +83,7 @@ v4 采用 7 nm 工艺，die 面积小于 600 mm²、晶体管数为 220 亿。�
 [22] The JAX Authors，*Pallas: TPU Details*，获取于 2026-09-17。[官方文档](https://docs.jax.dev/en/latest/pallas/tpu/details.html)；[官方仓库原文](https://github.com/jax-ml/jax/blob/main/docs/pallas/tpu/details.rst)。 [本地原文快照](../../原始资料/网页快照/Google/JAX/2026-09-17/jax-details.rst)
 
 [24] Jingtian Dang等，*SCALE-Sim TPU: Validating and Extending SCALE-Sim for TPUs*，2026。[本地PDF](../../原始资料/论文/Google_TPU/02_独立逆向与微基准/2026_SCALE_Sim_TPUv4_Validation.pdf)。
+
+[25] Google，*Google I/O 2021: Being helpful in moments that matter*，2021-05-18。[原文](https://blog.google/innovation-and-ai/technology/developers-tools/io21-helpful-google/)；[本地原文](../../原始资料/网页快照/比较补充/2026-09-24/ff27058466b6.html)
+
+[26] Google Cloud，*Google Cloud infrastructure enhancements tailored for your workloads*，2022-10-12（地区页面亦显示10-13）。[原文](https://cloud.google.com/blog/products/infrastructure-modernization/open-infrastructure-announcements-at-google-cloud-next)；[本地原文](../../原始资料/网页快照/比较补充/2026-09-24/8d07f8973804.html)

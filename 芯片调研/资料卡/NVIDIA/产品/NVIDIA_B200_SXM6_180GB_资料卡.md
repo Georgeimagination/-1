@@ -79,6 +79,10 @@
 | 相关系统 | HGX B200 partner 与 NVIDIA-Certified Systems，8 GPU | 1.4TB HBM3e、62TB/s memory bandwidth、144/72 PFLOPS FP4 都是八卡系统值 | `[1, pp. 6, 8]` |
 | 更高层对象 | GB200 Superchip 把两个 Blackwell GPU（配置有别于 B200 SXM）和 Grace CPU 通过 NVLink-C2C 连接；NVL72 包含 72 GPU/36 CPU | Superchip 与 rack-scale 数据不写入本 SKU 属性 | `[4, A Massive Superchip]` |
 
+### scale-up 域的配置边界
+
+本型号的 HGX B200 配置包含八颗 GPU，通过 NVLink 与 NVSwitch 组成高速域。GB200 NVL72 的七十二 GPU 域对应另一种 Grace 系统配置，不能移作 B200 SXM6 180GB 的域规模。 [1, pp.6,8-9] [2, pp.8-10]
+
 ## 7. 证据缺口与来源冲突
 
 | 项目 | 状态 | 已检查范围或冲突来源 | 当前处理 |

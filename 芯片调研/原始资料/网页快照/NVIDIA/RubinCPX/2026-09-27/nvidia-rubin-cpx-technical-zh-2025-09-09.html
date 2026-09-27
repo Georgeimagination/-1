@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="zh-CN" id="html">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge"><script type="text/javascript">(window.NREUM||(NREUM={})).init={ajax:{deny_list:["bam.nr-data.net"]}};(window.NREUM||(NREUM={})).loader_config={licenseKey:"NRJS-2b0defbeb07862260b2",applicationID:"745178505",browserID:"745179240"};;/*! For license information please see nr-loader-rum-1.322.0.min.js.LICENSE.txt */
+(()=>{var e={8122(e,t,r){"use strict";r.d(t,{a:()=>i});var n=r(944);function i(e,t){try{if(!e||"object"!=typeof e)return(0,n.R)(3);if(!t||"object"!=typeof t)return(0,n.R)(4);const r=Object.create(Object.getPrototypeOf(t),Object.getOwnPropertyDescriptors(t)),a=0===Object.keys(r).length?e:r;for(let s in a)if(void 0!==e[s])try{if(null===e[s]){r[s]=null;continue}Array.isArray(e[s])&&Array.isArray(t[s])?r[s]=Array.from(new Set([...e[s],...t[s]])):e[s]instanceof Map||e[s]instanceof Set||e[s]instanceof Date||e[s]instanceof RegExp?r[s]=e[s]:"object"==typeof e[s]&&null!==t[s]&&"object"==typeof t[s]?r[s]=i(e[s],t[s]):r[s]=e[s]}catch(e){r[s]||(0,n.R)(1,e)}return r}catch(e){(0,n.R)(2,e)}}},2555(e,t,r){"use strict";r.d(t,{f:()=>s});var n=r(384),i=r(8122);const a={beacon:n.NT.beacon,errorBeacon:n.NT.errorBeacon,licenseKey:void 0,applicationID:void 0,sa:void 0,queueTime:void 0,applicationTime:void 0,ttGuid:void 0,user:void 0,account:void 0,product:void 0,extra:void 0,jsAttributes:{},userAttributes:void 0,atts:void 0,transactionName:void 0,tNamePlain:void 0};function s(e){try{return!!e.licenseKey&&!!e.errorBeacon&&!!e.applicationID}catch(e){return!1}}r.d(t,["D",0,e=>(0,i.a)(e,a)])},7699(e,t,r){"use strict";var n=r(860);const i={[n.K7.logging]:!0,[n.K7.genericEvents]:!0,[n.K7.jserrors]:!0,[n.K7.ajax]:!0};r.d(t,["It",0,1e6,"KC",0,i,"qh",0,"SESSION_ERROR"])},9324(e,t,r){"use strict";r.d(t,["xv",0,"1.322.0"])},981(e,t,r){"use strict";r.d(t,["R",0,{AJAX:"AjaxRequest",PA:"PageAction",UA:"UserAction",BP:"BrowserPerformance",WS:"WebSocket",SPV:"SecurityPolicyViolation",JSE:"JavaScriptError",LOG:"Log",PVE:"PageView",PVT:"PageViewTiming",SR:"SessionReplay",ST:"SessionTrace",BI:"BrowserInteraction"}])},6154(e,t,r){"use strict";var n=r(1863);const i="undefined"!=typeof window&&!!window.document,a="undefined"!=typeof WorkerGlobalScope&&("undefined"!=typeof self&&self instanceof WorkerGlobalScope&&self.navigator instanceof WorkerNavigator||"undefined"!=typeof globalThis&&globalThis instanceof WorkerGlobalScope&&globalThis.navigator instanceof WorkerNavigator),s=i?window:"undefined"!=typeof WorkerGlobalScope&&("undefined"!=typeof self&&self instanceof WorkerGlobalScope&&self||"undefined"!=typeof globalThis&&globalThis instanceof WorkerGlobalScope&&globalThis),o=Boolean("hidden"===s?.document?.visibilityState),c=""+s?.location,u=/iPad|iPhone|iPod/.test(s.navigator?.userAgent),d=u&&"undefined"==typeof SharedWorker,l=((()=>{const e=s.navigator?.userAgent?.match(/Firefox[/\s](\d+\.\d+)/);Array.isArray(e)&&e.length>=2&&e[1]})(),Date.now()-(0,n.t)());r.d(t,["OF",0,u,"RI",0,i,"WN",0,l,"bv",0,a,"gm",0,s,"m",0,c,"mw",0,o,"sb",0,d,"zk",0,()=>{const e=s?.performance?.getEntriesByType?.("navigation")?.[0];if(e&&e.responseStart>0&&e.responseStart<s.performance.now())return e}])},3241(e,t,r){"use strict";r.d(t,{W:()=>i});var n=r(6154);function i(e={}){try{n.gm.dispatchEvent(new CustomEvent("newrelic",{detail:e}))}catch(e){}}},1687(e,t,r){"use strict";r.d(t,{Ak:()=>o,Ze:()=>u,x3:()=>c});var n=r(3241),i=r(3606),a=r(860),s=r(2646);function o(e,t){if(!e)return;const r={staged:!1,priority:a.P3[t]||0};e.runtime.drainRegistry.get(t)||e.runtime.drainRegistry.set(t,r)}function c(e,t){if(!e)return;const r=e.runtime.drainRegistry;r&&(r.get(t)&&r.delete(t),l(e,t,!1),r.size&&d(e))}function u(e,t="feature",r=!1){if(e){if(!e.runtime.drainRegistry.get(t)||r)return l(e,t);e.runtime.drainRegistry.get(t).staged=!0,d(e)}}function d(e){if(!e)return;const t=Array.from(e.runtime.drainRegistry);t.every(([e,t])=>t.staged)&&(t.sort((e,t)=>e[1].priority-t[1].priority),t.forEach(([t])=>{e.runtime.drainRegistry.delete(t),l(e,t)}))}function l(e,t,r=!0){if(!e)return;const a=e.ee,o=i.i.handlers;if(a&&!a.aborted&&a.backlog&&o){if((0,n.W)({type:"lifecycle",name:"drain",feature:t}),r){const e=a.backlog[t],r=o[t];if(r){for(let t=0;e&&t<e.length;++t)f(e[t],r);Object.entries(r).forEach(([e,t])=>{Object.values(t||{}).forEach(t=>{t[0]?.on&&t[0].context()instanceof s.y&&!t[0].listeners(e).includes(t[1])&&t[0].on(e,t[1])})})}}a.isolatedBacklog||delete o[t],a.backlog[t]=null,a.emit("drain-"+t,[])}}function f(e,t){var r=e[1];Object.values(t[r]||{}).forEach(t=>{var r=e[0];if(t[0]===r){var n=t[1],i=e[3],a=e[2];n.apply(i,a)}})}},7836(e,t,r){"use strict";var n=r(384),i=r(8990),a=r(2646),s=r(5607);const o="nr@context:".concat(s.W),c=function e(t,r){var n={},s={},d={},l=!1;try{l=16===r.length&&u.initializedAgents?.[r]?.runtime.isolatedBacklog}catch(e){}var f={on:p,addEventListener:p,removeEventListener:function(e,t){var r=n[e];if(!r)return;for(var i=0;i<r.length;i++)r[i]===t&&r.splice(i,1)},emit:function(e,r,n,i,a){!1!==a&&(a=!0);if(c.aborted&&!i)return;t&&a&&t.emit(e,r,n);var o=g(n);m(e).forEach(e=>{e.apply(o,r)});var u=v()[s[e]];u&&u.push([f,e,r,o]);return o},get:h,listeners:m,context:g,buffer:function(e,t){const r=v();if(t=t||"feature",f.aborted)return;Object.entries(e||{}).forEach(([e,n])=>{s[n]=t,t in r||(r[t]=[])})},abort:function(){f._aborted=!0,Object.keys(f.backlog).forEach(e=>{delete f.backlog[e]})},isBuffering:function(e){return!!v()[s[e]]},debugId:r,backlog:l?{}:t&&"object"==typeof t.backlog?t.backlog:{},isolatedBacklog:l};return Object.defineProperty(f,"aborted",{get:()=>{let e=f._aborted||!1;return e||(t&&(e=t.aborted),e)}}),f;function g(e){return e&&e instanceof a.y?e:e?(0,i.I)(e,o,()=>new a.y(o)):new a.y(o)}function p(e,t){n[e]=m(e).concat(t)}function m(e){return n[e]||[]}function h(t){return d[t]=d[t]||e(f,t)}function v(){return f.backlog}}(void 0,"globalEE"),u=(0,n.Zm)();u.ee||(u.ee=c),r.d(t,["P",0,o,"ee",0,c])},2646(e,t,r){"use strict";r.d(t,{y:()=>n});class n{constructor(e){this.contextId=e}}},9908(e,t,r){"use strict";r.d(t,{d:()=>n,p:()=>i});var n=r(7836).ee.get("handle");function i(e,t,r,i,a){a?(a.buffer([e],i),a.emit(e,t,r)):(n.buffer([e],i),n.emit(e,t,r))}},3606(e,t,r){"use strict";r.d(t,{i:()=>a});var n=r(9908);a.on=s;var i=a.handlers={};function a(e,t,r,a){s(a||n.d,i,e,t,r)}function s(e,t,r,i,a){a||(a="feature"),e||(e=n.d);var s=t[a]=t[a]||{};(s[r]=s[r]||[]).push([e,i])}},3878(e,t,r){"use strict";function n(e,t){return{capture:e,passive:!1,signal:t}}function i(e,t,r=!1,i){window.addEventListener(e,t,n(r,i))}function a(e,t,r=!1,i){document.addEventListener(e,t,n(r,i))}r.d(t,{DD:()=>a,jT:()=>n,sp:()=>i})},5607(e,t,r){"use strict";const n=(0,r(9566).bz)();r.d(t,["W",0,n])},9566(e,t,r){"use strict";r.d(t,{LA:()=>s,bz:()=>a});var n=r(6154);function i(e,t){return e?15&e[t]:16*Math.random()|0}function a(){const e=n.gm?.crypto||n.gm?.msCrypto;let t,r=0;return e&&e.getRandomValues&&(t=e.getRandomValues(new Uint8Array(30))),"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".split("").map(e=>"x"===e?i(t,r++).toString(16):"y"===e?(3&i()|8).toString(16):e).join("")}function s(e){const t=n.gm?.crypto||n.gm?.msCrypto;let r,a=0;t&&t.getRandomValues&&(r=t.getRandomValues(new Uint8Array(e)));const s=[];for(var o=0;o<e;o++)s.push(i(r,a++).toString(16));return s.join("")}},2614(e,t,r){"use strict";r.d(t,["BB",0,18e5,"Wt",0,"NRBA_SESSION::","iL",0,{SAME_TAB:"same-tab",CROSS_TAB:"cross-tab"},"tS",0,{STARTED:"session-started",PAUSE:"session-pause",RESET:"session-reset",RESUME:"session-resume",UPDATE:"session-update"},"wk",0,144e5])},1863(e,t,r){"use strict";function n(){return Math.floor(performance.now())}r.d(t,{t:()=>n})},944(e,t,r){"use strict";r.d(t,{R:()=>i});var n=r(3241);function i(e,t){"function"==typeof console.debug&&(console.debug("New Relic Warning: https://github.com/newrelic/newrelic-browser-agent/blob/main/docs/warning-codes.md#".concat(e),t),(0,n.W)({drained:null,type:"data",name:"warn",feature:"warn",data:{code:e,secondary:t}}))}},8990(e,t,r){"use strict";r.d(t,{I:()=>i});var n=Object.prototype.hasOwnProperty;function i(e,t,r){if(n.call(e,t))return e[t];var i=r();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,t,{value:i,writable:!0,enumerable:!1}),i}catch(e){}return e[t]=i,i}},6389(e,t,r){"use strict";function n(e,t=500,r={}){const n=r?.leading||!1;let i;return(...r)=>{n&&void 0===i&&(e.apply(this,r),i=setTimeout(()=>{i=clearTimeout(i)},t)),n||(clearTimeout(i),i=setTimeout(()=>{e.apply(this,r)},t))}}function i(e){let t=!1;return(...r)=>{t||(t=!0,e.apply(this,r))}}r.d(t,{J:()=>i,s:()=>n})},1910(e,t,r){"use strict";r.d(t,{i:()=>a});var n=r(944);const i=new Map;function a(...e){return e.every(e=>{if(i.has(e))return i.get(e);const t="function"==typeof e?e.toString():"",r=t.includes("[native code]"),a=t.includes("nrWrapper");return r||a||(0,n.R)(64,e?.name||t),i.set(e,r),r})}},5289(e,t,r){"use strict";r.d(t,{GG:()=>s,Qr:()=>c,sB:()=>o});var n=r(3878),i=r(6389);function a(){return"undefined"==typeof document||"complete"===document.readyState}function s(e,t){if(a())return e();const r=(0,i.J)(e),s=setInterval(()=>{a()&&(clearInterval(s),r())},500);(0,n.sp)("load",r,t)}function o(e){if(a())return e();(0,n.DD)("DOMContentLoaded",e)}function c(e){if(a())return e();(0,n.sp)("popstate",e)}},384(e,t,r){"use strict";r.d(t,{Zm:()=>c,bQ:()=>d,dV:()=>u,pV:()=>l});var n=r(6154),i=r(1863),a=r(944),s=r(1910);const o={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net"};function c(){return n.gm.NREUM||(n.gm.NREUM={}),void 0===n.gm.newrelic&&(n.gm.newrelic=n.gm.NREUM),n.gm.NREUM}function u(){let e=c();return e.o||(e.o={ST:n.gm.setTimeout,SI:n.gm.setImmediate||n.gm.setInterval,CT:n.gm.clearTimeout,XHR:n.gm.XMLHttpRequest,REQ:n.gm.Request,EV:n.gm.Event,PR:n.gm.Promise,MO:n.gm.MutationObserver,FETCH:n.gm.fetch,WS:n.gm.WebSocket},(0,s.i)(...Object.values(e.o))),e}function d(e,t){let r=c();r.initializedAgents??={},t.initializedAt={ms:(0,i.t)(),date:new Date},r.initializedAgents[e]=t,2===Object.keys(r.initializedAgents).length&&(0,a.R)(69)}function l(){return function(){let e=c();const t=e.info||{};e.info={beacon:o.beacon,errorBeacon:o.errorBeacon,...t}}(),function(){let e=c();const t=e.init||{};e.init={...t}}(),u(),function(){let e=c();const t=e.loader_config||{};e.loader_config={...t}}(),c()}r.d(t,["NT",0,o])},2843(e,t,r){"use strict";r.d(t,{G:()=>a,u:()=>i});var n=r(3878);function i(e,t=!1,r,i){(0,n.DD)("visibilitychange",function(){if(t)return void("hidden"===document.visibilityState&&e());e(document.visibilityState)},r,i)}function a(e,t,r){(0,n.sp)("pagehide",e,t,r)}},9300(e,t,r){"use strict";r(860).K7.ajax;r.d(t,["mo",0,{NONE:"none",FAILURES:"failures",ALL:"all"}])},3969(e,t,r){"use strict";const n=r(860).K7.metrics;r.d(t,["TZ",0,n,"XG",0,"storeEventMetrics","xV",0,"storeSupportabilityMetrics"])},6630(e,t,r){"use strict";const n=r(860).K7.pageViewEvent;r.d(t,["T",0,n])},782(e,t,r){"use strict";const n=r(860).K7.pageViewTiming;r.d(t,["T",0,n])},4234(e,t,r){"use strict";r.d(t,{W:()=>i});var n=r(1687);class i{constructor(e,t){this.agentRef=e,this.ee=e?.ee,this.featureName=t,this.blocked=!1}deregisterDrain(){(0,n.x3)(this.agentRef,this.featureName)}}},7767(e,t,r){"use strict";var n=r(6154);r.d(t,["V",0,e=>n.RI&&!0===e?.privacy.cookies_enabled])},8362(e,t,r){"use strict";r.d(t,{d:()=>a});var n=r(9566),i=r(1741);class a extends i.W{agentIdentifier=(0,n.LA)(16)}},1741(e,t,r){"use strict";r.d(t,{W:()=>a});var n=r(944),i=r(4261);class a{#e(e,...t){if(this[e]!==a.prototype[e])return this[e](...t);(0,n.R)(35,e)}addPageAction(e,t){return this.#e(i.hG,e,t)}register(e){return this.#e(i.eY,e)}recordCustomEvent(e,t){return this.#e(i.fF,e,t)}setPageViewName(e,t){return this.#e(i.Fw,e,t)}setCustomAttribute(e,t,r){return this.#e(i.cD,e,t,r)}noticeError(e,t){return this.#e(i.o5,e,t)}setUserId(e,t=!1){return this.#e(i.Dl,e,t)}setApplicationVersion(e){return this.#e(i.nb,e)}setErrorHandler(e){return this.#e(i.bt,e)}addRelease(e,t){return this.#e(i.k6,e,t)}log(e,t){return this.#e("log",e,t)}start(){return this.#e("start")}finished(e){return this.#e(i.BL,e)}recordReplay(){return this.#e(i.CH)}pauseReplay(){return this.#e(i.Tb)}addToTrace(e){return this.#e(i.U2,e)}setCurrentRouteName(e){return this.#e(i.PA,e)}interaction(e){return this.#e(i.dT,e)}wrapLogger(e,t,r){return this.#e(i.Wb,e,t,r)}measure(e,t){return this.#e(i.V1,e,t)}consent(e){return this.#e(i.Pv,e)}}},4261(e,t,r){"use strict";r.d(t,["BL",0,"finished","CH",0,"recordReplay","Dl",0,"setUserId","Fw",0,"setPageViewName","PA",0,"setCurrentRouteName","Pv",0,"consent","Tb",0,"pauseReplay","U2",0,"addToTrace","V1",0,"measure","Wb",0,"wrapLogger","bt",0,"setErrorHandler","cD",0,"setCustomAttribute","dT",0,"interaction","eY",0,"register","fF",0,"recordCustomEvent","hG",0,"addPageAction","k6",0,"addRelease","nb",0,"setApplicationVersion","o5",0,"noticeError"])},1738(e,t,r){"use strict";r.d(t,{U:()=>l,Y:()=>d});var n=r(3241),i=r(9908),a=r(1863),s=r(944),o=r(3969),c=r(8362),u=r(860);function d(e,t,r,a){const d=a||r;!d||d[e]&&d[e]!==c.d.prototype[e]||(d[e]=function(){(0,i.p)(o.xV,["API/"+e+"/called"],void 0,u.K7.metrics,r.ee),(0,n.W)({drained:!!r.runtime?.activatedFeatures,type:"data",name:"api",feature:"api-"+e,data:{}});try{return t.apply(this,arguments)}catch(e){(0,s.R)(23,e)}})}function l(e,t,r,n,s){const o=e.info;null===r?delete o.jsAttributes[t]:o.jsAttributes[t]=r,(s||null===r)&&(0,i.p)("api-"+n,[(0,a.t)(),t,r],void 0,"session",e.ee)}},8374(e,t,r){r.nc=(()=>{try{return document?.currentScript?.nonce}catch(e){}return""})()},860(e,t,r){"use strict";const n="events",i="jserrors",a="browser/blobs",s="browser/logs",o={ajax:"ajax",genericEvents:"generic_events",jserrors:i,logging:"logging",metrics:"metrics",pageAction:"page_action",pageViewEvent:"page_view_event",pageViewTiming:"page_view_timing",sessionReplay:"session_replay",sessionTrace:"session_trace",softNav:"soft_navigations"},c={[o.pageViewEvent]:1,[o.pageViewTiming]:2,[o.metrics]:3,[o.jserrors]:4,[o.softNav]:5,[o.ajax]:6,[o.sessionTrace]:7,[o.sessionReplay]:8,[o.logging]:9,[o.genericEvents]:10},u={[o.pageViewEvent]:"rum",[o.pageViewTiming]:n,[o.ajax]:n,[o.softNav]:n,[o.metrics]:i,[o.jserrors]:i,[o.sessionTrace]:a,[o.sessionReplay]:a,[o.logging]:s,[o.genericEvents]:"ins"};r.d(t,["$J",0,u,"K7",0,o,"P3",0,c,"XX",0,i,"Yy",0,s,"df",0,a,"hg",0,"connect"])}};const t={};function r(n){const i=t[n];if(void 0!==i)return i.exports;const a=t[n]={exports:{}};return e[n](a,a.exports,r),a.exports}r.m=e,r.d=(e,t)=>{if(Array.isArray(t))for(var n=0;n<t.length;){var i=t[n++],a=t[n++];r.o(e,i)?0===a&&n++:0===a?Object.defineProperty(e,i,{enumerable:!0,value:t[n++]}):Object.defineProperty(e,i,{enumerable:!0,get:a})}else for(var i in t)r.o(t,i)&&!r.o(e,i)&&Object.defineProperty(e,i,{enumerable:!0,get:t[i]})},r.f={},r.e=e=>Promise.all(Object.keys(r.f).reduce((t,n)=>(r.f[n](e,t),t),[])),r.u=e=>"nr-rum-1.322.0.min.js",r.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t),(()=>{const e={},t="NRBA-1.322.0.PROD:";r.l=(n,i,a,s)=>{if(e[n])return void e[n].push(i);let o,c;if(void 0!==a){const e=document.getElementsByTagName("script");for(var u=0;u<e.length;u++){const r=e[u];if(r.getAttribute("src")==n||r.getAttribute("data-webpack")==t+a){o=r;break}}}if(!o){c=!0;var d={296:"sha512-/59P7qAoMYQDJAZerTRPChdYcdrlcoEAw2TwA1wz6Y0/XLmt3sblLI5JCXAuxG0YxsW7iqJzgrcO7NJWO58EfQ=="};o=document.createElement("script"),o.charset="utf-8",r.nc&&o.setAttribute("nonce",r.nc),o.setAttribute("data-webpack",t+a),o.src=n,0!==o.src.indexOf(window.location.origin+"/")&&(o.crossOrigin="anonymous"),d[s]&&(o.integrity=d[s])}e[n]=[i];const l=(t,r)=>{o.onerror=o.onload=null,clearTimeout(f);const i=e[n];if(delete e[n],o.parentNode?.removeChild(o),i?.forEach(e=>e(r)),t)return t(r)},f=setTimeout(l.bind(null,void 0,{type:"timeout",target:o}),12e4);o.onerror=l.bind(null,o.onerror),o.onload=l.bind(null,o.onload),c&&document.head.appendChild(o)}})(),r.r=e=>{Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},r.p="https://js-agent.newrelic.com/",(()=>{const e={374:0,840:0};r.f.j=(t,n)=>{let i=r.o(e,t)?e[t]:void 0;if(0!==i)if(i)n.push(i[2]);else{const a=new Promise((r,n)=>i=e[t]=[r,n]);n.push(i[2]=a);const s=r.p+r.u(t),o=new Error,c=n=>{if(r.o(e,t)&&(i=e[t],0!==i&&(e[t]=void 0),i)){const e=n&&("load"===n.type?"missing":n.type),r=n&&n.target&&n.target.src;o.message="Loading chunk "+t+" failed: ("+e+": "+r+")",o.name="ChunkLoadError",o.type=e,o.request=r,i[1](o)}};r.l(s,c,"chunk-"+t,t)}};const t=(t,n)=>{let[i,a,s]=n;var o,c,u=0;if(i.some(t=>0!==e[t])){for(o in a)r.o(a,o)&&(r.m[o]=a[o]);if(s)s(r)}for(t&&t(n);u<i.length;u++)c=i[u],r.o(e,c)&&e[c]&&e[c][0](),e[c]=0},n=self["webpackChunk:NRBA-1.322.0.PROD"]=self["webpackChunk:NRBA-1.322.0.PROD"]||[];n.forEach(t.bind(null,0)),n.push=t.bind(null,n.push.bind(n))})(),(()=>{"use strict";r(8374);var e=r(8362),t=r(860);const n=Object.values(t.K7);var i=r(384),a=r(1741);var s=r(2555),o=r(981);t.K7.genericEvents,o.R.PA,o.R.UA,o.R.BP;const c={RESOURCES:"experimental.resources",REGISTER:"register"};var u=r(9300);const d=e=>{if(!e||"string"!=typeof e)return!1;try{document.createDocumentFragment().querySelector(e)}catch{return!1}return!0};var l=r(2614),f=r(944),g=r(8122);const p="[data-nr-mask]",m=e=>(0,g.a)(e,(()=>{const e={feature_flags:[],experimental:{register:!1,resources:!1,iframe_bridge:!1,iframe_domains:[]},mask_selector:"*",block_selector:"[data-nr-block]",mask_input_options:{color:!1,date:!1,"datetime-local":!1,email:!1,month:!1,number:!1,range:!1,search:!1,tel:!1,text:!1,time:!1,url:!1,week:!1,textarea:!1,select:!1,password:!0}};return{ajax:{deny_list:void 0,block_internal:!0,enabled:!0,autoStart:!0,capture_payloads:u.mo.NONE},api:{register:{get enabled(){return e.feature_flags.includes(c.REGISTER)||e.experimental.register},set enabled(t){e.experimental.register=t},duplicate_data_to_container:!1,get allow_iframe_bridge(){return e.feature_flags.includes(c.IFRAME_BRIDGE)||e.experimental.iframe_bridge},set allow_iframe_bridge(t){e.experimental.iframe_bridge=t},get iframe_domains(){return e.experimental.iframe_domains},set iframe_domains(t){Array.isArray(t)?e.experimental.iframe_domains=t:(0,f.R)(1,t)}}},browser_consent_mode:{enabled:!1},distributed_tracing:{enabled:void 0,exclude_newrelic_header:void 0,cors_use_newrelic_header:void 0,cors_use_tracecontext_headers:void 0,allowed_origins:void 0},get feature_flags(){return e.feature_flags},set feature_flags(t){e.feature_flags=t},generic_events:{enabled:!0,autoStart:!0},harvest:{interval:30},jserrors:{enabled:!0,autoStart:!0},logging:{enabled:!0,autoStart:!0},metrics:{enabled:!0,autoStart:!0},obfuscate:void 0,page_action:{enabled:!0},page_view_event:{enabled:!0,autoStart:!0},page_view_timing:{enabled:!0,autoStart:!0},performance:{capture_marks:!1,capture_measures:!1,capture_detail:!0,resources:{get enabled(){return e.feature_flags.includes(c.RESOURCES)||e.experimental.resources},set enabled(t){e.experimental.resources=t},asset_types:[],first_party_domains:[],ignore_newrelic:!0}},privacy:{cookies_enabled:!0},proxy:{assets:void 0,beacon:void 0},session:{expiresMs:l.wk,inactiveMs:l.BB},session_replay:{autoStart:!0,enabled:!1,preload:!1,sampling_rate:10,error_sampling_rate:100,collect_fonts:!1,inline_images:!1,fix_stylesheets:!0,mask_all_inputs:!0,get mask_text_selector(){return e.mask_selector},set mask_text_selector(t){d(t)?e.mask_selector="".concat(t,",").concat(p):""===t||null===t?e.mask_selector=p:(0,f.R)(5,t)},get block_class(){return"nr-block"},get ignore_class(){return"nr-ignore"},get mask_text_class(){return"nr-mask"},get block_selector(){return e.block_selector},set block_selector(t){d(t)?e.block_selector+=",".concat(t):""!==t&&(0,f.R)(6,t)},get mask_input_options(){return e.mask_input_options},set mask_input_options(t){t&&"object"==typeof t?e.mask_input_options={...t,password:!0}:(0,f.R)(7,t)}},session_trace:{enabled:!0,autoStart:!0},soft_navigations:{enabled:!0,autoStart:!0},ssl:void 0,user_actions:{enabled:!0,elementAttributes:["id","className","tagName","type"]},web_sockets:{enabled:!1}}})());var h=r(6154),v=r(9324);let b=0;const y={buildEnv:"PROD",distMethod:"CDN",version:v.xv,originTime:h.WN},_={consented:!1},w={activatedFeatures:void 0,appMetadata:{},configured:!1,get consented(){return this.session?.state?.consent||_.consented},set consented(e){_.consented=e},customTransaction:void 0,denyList:[],disabled:!1,drainRegistry:new Map,connector:void 0,harvester:void 0,v2Target:void 0,isolatedBacklog:!1,isRecording:!1,loaderType:void 0,maxBytes:3e4,obfuscator:void 0,onerror:void 0,ptid:void 0,releaseIds:{},session:void 0,timeKeeper:void 0,registeredEntities:[],jsAttributesMetadata:{bytes:0},get harvestCount(){return++b},listeningForIframeMessages:!1},R="BA";var A=r(7836),x=r(3241);const E={accountID:void 0,trustKey:void 0,agentID:void 0,licenseKey:void 0,applicationID:void 0,xpid:void 0};var S=r(9908);const k="newrelic-iframe-";function T(e,t={},n,o){let{init:c,info:u,loader_config:d,runtime:l={},exposed:f=!0}=t;if(!u){const e=(0,i.pV)();c=e.init,u=e.info,d=e.loader_config}var p;e.init=m(c||{}),e.loader_config=(p=d||{},(0,g.a)(p,E)),u.jsAttributes??={},h.bv&&(u.jsAttributes.isWorker=!0),e.info=(0,s.D)(u);const v=e.init;e.runtime??=(e=>{const t=(0,g.a)(e,w),r=Object.keys(y).reduce((e,t)=>(e[t]={value:y[t],writable:!1,configurable:!0,enumerable:!0},e),{});return Object.defineProperties(t,r)})(l),e.runtime.v2Target??={type:R,instance:e.agentIdentifier,get id(){return e.runtime.appMetadata?.agents?.[0]?.entityGuid},get attributes(){return{"entity.guid":this.id,appId:e.info.applicationID}}},v.proxy.assets&&(e=>{const t=e.startsWith("http");e+="/",r.p=t?e:"https://"+e})(v.proxy.assets),e.runtime.configured||(Object.defineProperty(e,"beacons",{get:()=>[e.info.beacon,e.info.errorBeacon,e.init.proxy.assets,e.init.proxy.beacon].filter(Boolean)}),Object.defineProperty(e.runtime,"denyList",{get:()=>[...e.init.ajax.deny_list||[],...e.init.ajax.block_internal?e.beacons:[]]}),e.runtime.ptid=e.agentIdentifier,function(e){const t=(0,i.pV)();Object.getOwnPropertyNames(a.W.prototype).forEach(r=>{const n=a.W.prototype[r];if("function"!=typeof n||"constructor"===n)return;let i=t[r];e[r]&&!1!==e.exposed&&"micro-agent"!==e.runtime?.loaderType&&(t[r]=(...t)=>{const n=e[r](...t);return i?i(...t):n})})}(e),e.runtime.loaderType=n,e.ee=A.ee.get(e.agentIdentifier),e.exposed=f,(0,x.W)({drained:!!e.runtime.activatedFeatures,type:"lifecycle",name:"initialize",feature:void 0,data:e.config}),e.init.api.register.allow_iframe_bridge&&h.gm.addEventListener("message",t=>{"string"==typeof t.data?.type&&t.data.type.startsWith(k)&&(0,S.p)("iframe-message",[t],void 0,"IFRAME",e.ee)}),e.runtime.configured=!0)}var j=r(1863),P=r(4261),N=r(1738);var O=r(1687),M=r(4234),I=r(5289),D=r(7767);function V(e){return!!(0,i.dV)().o.MO&&(0,D.V)(e)&&!0===e?.session_trace.enabled}var W=r(6389),B=r(7699);const C=new WeakSet,K=new WeakMap;class U extends M.W{constructor(e,t){super(e,t),this.abortHandler=void 0,this.featAggregate=void 0,this.loadedSuccessfully=void 0,this.onAggregateImported=new Promise(e=>{this.loadedSuccessfully=e}),this.deferred=Promise.resolve(),!1===e.init[this.featureName].autoStart?this.deferred=new Promise((t,r)=>{this.ee.on("manual-start-all",(0,W.J)(()=>{(0,O.Ak)(e,this.featureName),t()}))}):(0,O.Ak)(e,t)}importAggregator(e,t,n={}){if(this.featAggregate)return;const i=async()=>{if(await this.deferred,this.#t(e),!(0,s.f)(e.info))return(0,f.R)(43),e.ee.abort(),void this.loadedSuccessfully(!1);try{await async function(e,t,n){if(K.has(e))return K.get(e);const i=(async()=>{if((0,D.V)(e.init))try{const{setupAgentSession:t}=await r.e(296).then(r.bind(r,1768));t(e)}catch(e){(0,f.R)(20,e),t.emit("internal-error",[e]),(0,S.p)(B.qh,[e],void 0,n,t)}if(e.init.api.register.allow_iframe_bridge)try{const{setupIframeMFEMessageListener:t}=await Promise.resolve().then(function(){const e=new Error("Cannot find module '../../loaders/configure/iframe-message-handler'");throw e.code="MODULE_NOT_FOUND",e});t(e)}catch(e){(0,f.R)(23,e)}const[{Connector:i},{Harvester:a}]=await Promise.all([r.e(296).then(r.bind(r,6589)),r.e(296).then(r.bind(r,5237))]);e.runtime.connector=new i(e),e.runtime.harvester=new a(e);const s=Object.values(e.features).filter(t=>e.runtime.drainRegistry.has(t.featureName));Promise.all(s.map(e=>e.onAggregateImported)).then(()=>e.runtime.harvester.startTimer())})();K.set(e,i),await i}(e,this.ee,this.featureName)}catch(e){return(0,f.R)(79,e),this.ee.abort(),void this.loadedSuccessfully(!1)}try{if(!this.#r(this.featureName,e.runtime.session,e.init))return this.abortHandler?.(),(0,O.Ze)(this.agentRef,this.featureName),void this.loadedSuccessfully(!1);const{Aggregate:r}=await t();this.featAggregate=new r(e,n),e.runtime.harvester.initializedAggregates.push(this.featAggregate),this.loadedSuccessfully(!0)}catch(e){(0,f.R)(34,e),this.abortHandler?.(),(0,O.Ze)(this.agentRef,this.featureName,!0),this.loadedSuccessfully(!1)}};h.RI?(0,I.GG)(()=>i(),!0):i()}#r(e,r,n){if(this.blocked)return!1;switch(e){case t.K7.sessionReplay:return V(n)&&!!r;case t.K7.sessionTrace:return!!r;default:return!0}}#t(e){if(!C.has(e)&&(C.add(e),!(0,s.f)(e.info))){const t=(0,i.pV)();let r={...t.info?.jsAttributes};try{r={...r,...e.info?.jsAttributes}}catch(e){}T(e,{...t,info:{...t.info,jsAttributes:r},runtime:e.runtime},e.runtime.loaderType)}}}var L=r(6630);class F extends U{static featureName=L.T;constructor(e){var t;super(e,L.T),this.setupInspectionEvents(),t=e,(0,N.Y)(P.Fw,function(e,r){"string"==typeof e&&("/"!==e.charAt(0)&&(e="/"+e),t.runtime.customTransaction=(r||"http://custom.transaction")+e,(0,S.p)("api-"+P.Fw,[(0,j.t)()],void 0,void 0,t.ee))},t),this.importAggregator(e,()=>e.init.feature_flags.includes("rum_v2")?r.e(296).then(r.bind(r,908)):r.e(296).then(r.bind(r,7927)))}setupInspectionEvents(){const e=(e,t)=>{e&&(0,x.W)({timeStamp:e.timeStamp,loaded:"complete"===e.target.readyState,type:"window",name:t,data:e.target.location+""})};(0,I.sB)(t=>{e(t,"DOMContentLoaded")}),(0,I.GG)(t=>{e(t,"load")}),(0,I.Qr)(t=>{e(t,"navigate")}),this.ee.on(l.tS.UPDATE,(e,t)=>{(0,x.W)({type:"lifecycle",name:"session",data:t})})}}class G extends e.d{constructor(e){var t;(super(),h.gm)?(this.features={},(0,i.bQ)(this.agentIdentifier,this),this.desiredFeatures=new Set(e.features||[]),this.desiredFeatures.add(F),T(this,e,e.loaderType||"agent"),t=this,(0,N.Y)(P.cD,function(e,r,n=!1){if("string"==typeof e){if(["string","number","boolean"].includes(typeof r)||null===r)return(0,N.U)(t,e,r,P.cD,n);(0,f.R)(40,typeof r)}else(0,f.R)(39,typeof e)},t),function(e){(0,N.Y)(P.Dl,function(t,r=!1){if("string"!=typeof t&&null!==t)return void(0,f.R)(41,typeof t);const n=e.info.jsAttributes["enduser.id"];r&&null!=n&&n!==t?(0,S.p)("api-setUserIdAndResetSession",[t],void 0,"session",e.ee):(0,N.U)(e,"enduser.id",t,P.Dl,!0)},e)}(this),function(e){(0,N.Y)(P.nb,function(t){if("string"==typeof t||null===t)return(0,N.U)(e,"application.version",t,P.nb,!1);(0,f.R)(42,typeof t)},e)}(this),function(e){(0,N.Y)("start",function(){e.ee.emit("manual-start-all")},e)}(this),function(e){(0,N.Y)(P.Pv,function(t=!0){if("boolean"==typeof t){if((0,S.p)("api-"+P.Pv,[t],void 0,"session",e.ee),e.runtime.consented=t,t){const t=e.features.page_view_event;t.onAggregateImported.then(e=>{const r=t.featAggregate;e&&!r.sentRum&&r.sendRum?.()})}}else(0,f.R)(65,typeof t)},e)}(this),this.run()):(0,f.R)(21)}get config(){return{info:this.info,init:this.init,loader_config:this.loader_config,runtime:this.runtime}}get api(){return this}run(){try{const e=function(e){const t={};return n.forEach(r=>{t[r]=!!e[r]?.enabled}),t}(this.init),r=[...this.desiredFeatures],i=this.init.feature_flags.includes("rum_v2");r.sort((e,r)=>t.P3[e.featureName]-t.P3[r.featureName]),r.forEach(r=>{if(!e[r.featureName]&&(i||r.featureName!==t.K7.pageViewEvent))return;const n=function(e){switch(e){case t.K7.ajax:return[t.K7.jserrors];case t.K7.sessionTrace:return[t.K7.ajax,t.K7.pageViewEvent];case t.K7.sessionReplay:return[t.K7.sessionTrace];case t.K7.pageViewTiming:return[t.K7.pageViewEvent];default:return[]}}(r.featureName).filter(e=>!(e in this.features));n.length>0&&(0,f.R)(36,{targetFeature:r.featureName,missingDependencies:n}),this.features[r.featureName]=new r(this)})}catch(e){(0,f.R)(22,e);for(const e in this.features)this.features[e].abortHandler?.();const t=(0,i.Zm)();delete t.initializedAgents[this.agentIdentifier]?.features,delete this.sharedAggregator;return t.ee.get(this.agentIdentifier).abort(),!1}}}var H=r(2843),z=r(782);class Y extends U{static featureName=z.T;constructor(e){super(e,z.T),h.RI&&((0,H.u)(()=>(0,S.p)("docHidden",[(0,j.t)()],void 0,z.T,this.ee),!0),(0,H.G)(()=>(0,S.p)("winPagehide",[(0,j.t)()],void 0,z.T,this.ee)),this.importAggregator(e,()=>r.e(296).then(r.bind(r,9981))))}}var Z=r(3969);class q extends U{static featureName=Z.TZ;constructor(e){super(e,Z.TZ),this.importAggregator(e,()=>r.e(296).then(r.bind(r,9623)))}}new G({features:[F,Y,q],loaderType:"lite"})})()})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" href="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/themes/nvidia/dist/images/favicon_300a1064.ico" type="image/vnd.microsoft.icon">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "NVIDIA Developer",
+  "url": "https://developer.nvidia.com",
+  "logo": "https://www.nvidia.com/en-us/about-nvidia/legal-info/logo-brand-usage/_jcr_content/root/responsivegrid/nv_container_392921705/nv_container_412055486/nv_image.coreimg.100.630.png/1703060329095/nvidia-logo-horz.png",
+  "sameAs": [
+    "https://github.com/nvidia",
+    "https://www.linkedin.com/company/nvidia/",
+    "https://x.com/NVIDIAAI"
+  ]
+}
+</script>
+  <title>NVIDIA Rubin CPX 加速百万级以上 token 上下文工作负载的推理性能和效率 &#x2d; NVIDIA 技术博客</title>
+<!-- OneTrust Cookies Consent Notice start for developer.nvidia.cn -->
+<script type="text/javascript" src="https://www.nvidia.cn/assets/cn/onetrust/scripttemplates/otSDKStub.js" charset="UTF-8" data-domain-script="1984719c-04aa-48de-8c22-5174bdf5c0ed" data-document-language="true">
+</script>
+<script>
+    function OptanonWrapper() {
+        var event = new Event('bannerLoaded');
+        window.dispatchEvent(event);
+    }
+</script>
+<!-- OneTrust Cookies Consent Notice end for developer.nvidia.cn --><link rel="preload" href="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/themes/nvidia/dist/styles/main_280db669.css" as="style"><link rel="preload" href="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/themes/nvidia/dist/scripts/main_280db669.js" as="script"><script src="//info.nvidia.com/js/forms2/js/forms2.min.js" defer></script>
+<!-- The SEO Framework by Sybre Waaijer -->
+<meta name="robots" content="max-snippet:-1,max-image-preview:standard,max-video-preview:-1" />
+<link rel="canonical" href="https://developer.nvidia.cn/blog/nvidia-rubin-cpx-accelerates-inference-performance-and-efficiency-for-1m-token-context-workloads/" />
+<meta name="description" content="推理正成为人工智能复杂性的前沿领域。现代模型正逐步演变为具备多步推理能力、持久化记忆和长时程上下文理解的代理式系统，使其能够胜任软件开发、" />
+<meta property="og:type" content="article" />
+<meta property="og:locale" content="zh_CN" />
+<meta property="og:site_name" content="NVIDIA 技术博客" />
+<meta property="og:title" content="NVIDIA Rubin CPX 加速百万级以上 token 上下文工作负载的推理性能和效率" />
+<meta property="og:description" content="推理正成为人工智能复杂性的前沿领域。现代模型正逐步演变为具备多步推理能力、持久化记忆和长时程上下文理解的代理式系统，使其能够胜任软件开发、视频生成和深度研究等领域的复杂任务。这些任务对基础设施提出了前所未有的要求，在计算、内存和网络方面带来了新的挑战，亟需从根本上重新思考推理系统的扩展方式与优化策略。 在这些挑战中，为特定类型的工作负载处理大规模上下文正变得愈发关键。以软件开发为例，" />
+<meta property="og:url" content="https://developer.nvidia.cn/blog/nvidia-rubin-cpx-accelerates-inference-performance-and-efficiency-for-1m-token-context-workloads/" />
+<meta property="og:image" content="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2025/09/Rubin-CPX-1024x576-png.webp" />
+<meta property="og:image:width" content="1024" />
+<meta property="og:image:height" content="576" />
+<meta property="og:image" content="https://developer.nvidia.cn/zh-cn/blog/wp-content/uploads/2025/09/Disaggregated-inference.gif" />
+<meta property="og:image" content="https://developer.nvidia.cn/zh-cn/blog/wp-content/uploads/2025/09/Vera-Rubin-png.webp" />
+<meta property="og:image" content="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2025/09/Rubin-CPX-1024x576-png-660x370.webp" />
+<meta property="og:image:width" content="660" />
+<meta property="og:image:height" content="370" />
+<meta property="article:published_time" content="2025-09-09T10:21:15+00:00" />
+<meta property="article:modified_time" content="2025-09-18T10:24:40+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="NVIDIA Rubin CPX 加速百万级以上 token 上下文工作负载的推理性能和效率" />
+<meta name="twitter:description" content="推理正成为人工智能复杂性的前沿领域。现代模型正逐步演变为具备多步推理能力、持久化记忆和长时程上下文理解的代理式系统，使其能够胜任软件开发、视频生成和深度研究等领域的复杂任务。这些任务对基础设施提出了前所未有的要求，在计算、内存和网络方面带来了新的挑战，亟需从根本上重新思考推理系统的扩展方式与优化策略。 在这些挑战中，为特定类型的工作负载处理大规模上下文正变得愈发关键。以软件开发为例，" />
+<meta name="twitter:image" content="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2025/09/Rubin-CPX-1024x576-png.webp" />
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://developer.nvidia.cn/blog/#/schema/WebSite","url":"https://developer.nvidia.cn/blog/","name":"NVIDIA 技术博客","description":"阅读开发者创建的最新技术信息、头条新闻 和内容。","inLanguage":"zh-CN","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://developer.nvidia.cn/blog/search/{search_term_string}/"},"query-input":"required name=search_term_string"},"publisher":{"@type":"Organization","@id":"https://developer.nvidia.cn/blog/#/schema/Organization","name":"NVIDIA 技术博客","url":"https://developer.nvidia.cn/blog/","logo":{"@type":"ImageObject","url":"https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2025/09/Rubin-CPX-1024x576-png-660x370.webp","contentUrl":"https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2025/09/Rubin-CPX-1024x576-png-660x370.webp","width":660,"height":370}}},{"@type":"WebPage","@id":"https://developer.nvidia.cn/blog/nvidia-rubin-cpx-accelerates-inference-performance-and-efficiency-for-1m-token-context-workloads/","url":"https://developer.nvidia.cn/blog/nvidia-rubin-cpx-accelerates-inference-performance-and-efficiency-for-1m-token-context-workloads/","name":"NVIDIA Rubin CPX 加速百万级以上 token 上下文工作负载的推理性能和效率 &#x2d; NVIDIA 技术博客","description":"推理正成为人工智能复杂性的前沿领域。现代模型正逐步演变为具备多步推理能力、持久化记忆和长时程上下文理解的代理式系统，使其能够胜任软件开发、","inLanguage":"zh-CN","isPartOf":{"@id":"https://developer.nvidia.cn/blog/#/schema/WebSite"},"breadcrumb":{"@type":"BreadcrumbList","@id":"https://developer.nvidia.cn/blog/#/schema/BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":"https://developer.nvidia.cn/blog/","name":"NVIDIA 技术博客"},{"@type":"ListItem","position":2,"item":"https://developer.nvidia.cn/blog/category/ai-platforms-deployment/","name":"Category: AI 平台/部署"},{"@type":"ListItem","position":3,"name":"NVIDIA Rubin CPX 加速百万级以上 token 上下文工作负载的推理性能和效率"}]},"potentialAction":{"@type":"ReadAction","target":"https://developer.nvidia.cn/blog/nvidia-rubin-cpx-accelerates-inference-performance-and-efficiency-for-1m-token-context-workloads/"},"datePublished":"2025-09-09T10:21:15+00:00","dateModified":"2025-09-18T10:24:40+00:00","author":{"@type":"Person","@id":"https://developer.nvidia.cn/blog/#/schema/Person/2fe59b98e4aec5bf6033983e0bbbef9f","name":"wnger"}}]}</script>
+<!-- / The SEO Framework by Sybre Waaijer | 17.55ms meta | 0.11ms boot -->
+
+<link rel='dns-prefetch' href='//stats.wp.com' />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://developer-blogs.nvidia.com/zh-cn-blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.nvidia.cn%2Fblog%2Fnvidia-rubin-cpx-accelerates-inference-performance-and-efficiency-for-1m-token-context-workloads%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://developer-blogs.nvidia.com/zh-cn-blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.nvidia.cn%2Fblog%2Fnvidia-rubin-cpx-accelerates-inference-performance-and-efficiency-for-1m-token-context-workloads%2F&#038;format=xml" />
+<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style^=border-color],[style*=";border-color"],[style*="; border-color"]){border-style:solid}html :where([style^=border-top-color],[style*=";border-top-color"],[style*="; border-top-color"]){border-top-style:solid}html :where([style^=border-right-color],[style*=";border-right-color"],[style*="; border-right-color"]){border-right-style:solid}html :where([style^=border-bottom-color],[style*=";border-bottom-color"],[style*="; border-bottom-color"]){border-bottom-style:solid}html :where([style^=border-left-color],[style*=";border-left-color"],[style*="; border-left-color"]){border-left-style:solid}html :where([style^=border-width],[style*=";border-width"],[style*="; border-width"]){border-style:solid}html :where([style^=border-top-width],[style*=";border-top-width"],[style*="; border-top-width"]){border-top-style:solid}html :where([style^=border-right-width],[style*=";border-right-width"],[style*="; border-right-width"]){border-right-style:solid}html :where([style^=border-bottom-width],[style*=";border-bottom-width"],[style*="; border-bottom-width"]){border-bottom-style:solid}html :where([style^=border-left-width],[style*=";border-left-width"],[style*="; border-left-width"]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+/*# sourceURL=/wp-includes/css/dist/block-library/common.min.css */
+</style>
+<style id="classic-theme-styles-inline-css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+/*# sourceURL=/wp-includes/css/classic-themes.min.css */
+</style>
+<style id="wp-block-styles-placeholder-inline-css">
+:root { --wp-internal-comment: "Placeholder for wp_hoist_late_printed_styles() to replace with the block styles printed at wp_footer." }
+/*# sourceURL=wp-block-styles-placeholder-inline-css */
+</style>
+<link rel='stylesheet' id='metaslider-blocks-editor-css-css' href='https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/ml-slider/admin/assets/dist/css/editor-block.css?ver=3.109.0' media='all' property='stylesheet' />
+<style id="wp-global-styles-placeholder-inline-css">
+:root { --wp-internal-comment: "Placeholder for wp_hoist_late_printed_styles() to replace with the global-styles printed at wp_footer." }
+/*# sourceURL=wp-global-styles-placeholder-inline-css */
+</style>
+<link rel='stylesheet' id='comment_styles-css' href='https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/wp-discourse/lib/../css/comments.css?ver=1790507951' media='all' />
+<link rel='stylesheet' id='anchor-style-css' href='https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/nv-content-tweaks/assets/style.css?ver=1.0.0' media='all' />
+<link rel='stylesheet' id='wp-ulike-css' href='https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/wp-ulike/assets/css/wp-ulike.min.css?ver=5.0.3' media='all' />
+<link rel='stylesheet' id='arve-css' href='https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/advanced-responsive-video-embedder/build/main.css?ver=10.9.4' media='all' />
+<link rel='stylesheet' id='sage/main.css-css' href='https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/themes/nvidia/dist/styles/main_280db669.css' media='all' />
+<link rel='stylesheet' id='nv-developer-menu.css-css' href='https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/themes/nvidia/resources/assets/libs/nv-developer-menu/nv-developer-menu.css?ver=1.0.0' media='all' />
+<link rel='stylesheet' id='stbCoreCSS-css' href='https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/wp-special-textboxes/css/stb-core.css?ver=6.2.6' media='all' />
+<style id="stbCoreCSS-inline-css">
+.stb-container {border-radius: 5px;-webkit-box-shadow: 0px 0px 15px #555555;box-shadow: 0px 0px 15px #555555;margin: 10px 10px 10px 10px}.stb-container.stb-widget {margin-left: 0;margin-right: 0;box-shadow: none}.stb-container .stb-caption .stb-caption-content {font-size: 15px;font-family: Impact, Verdana, Helvetica, Arial, sans-serif}.stb-container .stb-caption .stb-tool {background-color: transparent;background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAKZJREFUeNrskr0NwjAQhZ9NaJmALbwIUwSJRdgAiTIVa2QBKNNQU1BSWPIPtnl2FERJ5DaWPp9cfE93OouUEmqOROVZAoDmIgQEcCZqjsjdXcm+MeNb7dpWaa3hnCt47wsxRuRVTzUjpcTQ92MHR14HYq2FMabUKSCE8JV+Eez6ReeUA+7A9gYMz66bNfuDTnY5OjY5iKzJ6k8/EE/eYvnK9QEfAQYA6/9arWk/ykwAAAAASUVORK5CYII=);background-position: 50%;background-repeat: no-repeat}.stb-container .stb-content {padding: 10px;font-size: unset;font-family: unset;text-shadow: unset}.stb-container.stb-collapsed .stb-caption .stb-tool {background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAA4GmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS41LWMwMTQgNzkuMTUxNDgxLCAyMDEzLzAzLzEzLTEyOjA5OjE1ICAgICAgICAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iCiAgICAgICAgICAgIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIKICAgICAgICAgICAgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIgogICAgICAgICAgICB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIKICAgICAgICAgICAgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iCiAgICAgICAgICAgIHhtbG5zOmV4aWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vZXhpZi8xLjAvIj4KICAgICAgICAgPHhtcDpDcmVhdG9yVG9vbD5BZG9iZSBQaG90b3Nob3AgQ0MgKFdpbmRvd3MpPC94bXA6Q3JlYXRvclRvb2w+CiAgICAgICAgIDx4bXA6Q3JlYXRlRGF0ZT4yMDE0LTAxLTI4VDExOjI3OjE1KzAzOjAwPC94bXA6Q3JlYXRlRGF0ZT4KICAgICAgICAgPHhtcDpNb2RpZnlEYXRlPjIwMTQtMDItMDRUMTc6MzQ6MTErMDM6MDA8L3htcDpNb2RpZnlEYXRlPgogICAgICAgICA8eG1wOk1ldGFkYXRhRGF0ZT4yMDE0LTAyLTA0VDE3OjM0OjExKzAzOjAwPC94bXA6TWV0YWRhdGFEYXRlPgogICAgICAgICA8ZGM6Zm9ybWF0PmltYWdlL3BuZzwvZGM6Zm9ybWF0PgogICAgICAgICA8cGhvdG9zaG9wOkNvbG9yTW9kZT4zPC9waG90b3Nob3A6Q29sb3JNb2RlPgogICAgICAgICA8eG1wTU06SW5zdGFuY2VJRD54bXAuaWlkOjdjYTIzOWYyLTY1OWYtZjk0Ny04YmU0LTcyNWMxZTg3YjA1ZDwveG1wTU06SW5zdGFuY2VJRD4KICAgICAgICAgPHhtcE1NOkRvY3VtZW50SUQ+eG1wLmRpZDo3Y2EyMzlmMi02NTlmLWY5NDctOGJlNC03MjVjMWU4N2IwNWQ8L3htcE1NOkRvY3VtZW50SUQ+CiAgICAgICAgIDx4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ+eG1wLmRpZDo3Y2EyMzlmMi02NTlmLWY5NDctOGJlNC03MjVjMWU4N2IwNWQ8L3htcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD4KICAgICAgICAgPHhtcE1NOkhpc3Rvcnk+CiAgICAgICAgICAgIDxyZGY6U2VxPgogICAgICAgICAgICAgICA8cmRmOmxpIHJkZjpwYXJzZVR5cGU9IlJlc291cmNlIj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OmFjdGlvbj5jcmVhdGVkPC9zdEV2dDphY3Rpb24+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDppbnN0YW5jZUlEPnhtcC5paWQ6N2NhMjM5ZjItNjU5Zi1mOTQ3LThiZTQtNzI1YzFlODdiMDVkPC9zdEV2dDppbnN0YW5jZUlEPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6d2hlbj4yMDE0LTAxLTI4VDExOjI3OjE1KzAzOjAwPC9zdEV2dDp3aGVuPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6c29mdHdhcmVBZ2VudD5BZG9iZSBQaG90b3Nob3AgQ0MgKFdpbmRvd3MpPC9zdEV2dDpzb2Z0d2FyZUFnZW50PgogICAgICAgICAgICAgICA8L3JkZjpsaT4KICAgICAgICAgICAgPC9yZGY6U2VxPgogICAgICAgICA8L3htcE1NOkhpc3Rvcnk+CiAgICAgICAgIDx0aWZmOk9yaWVudGF0aW9uPjE8L3RpZmY6T3JpZW50YXRpb24+CiAgICAgICAgIDx0aWZmOlhSZXNvbHV0aW9uPjcyMDAwMC8xMDAwMDwvdGlmZjpYUmVzb2x1dGlvbj4KICAgICAgICAgPHRpZmY6WVJlc29sdXRpb24+NzIwMDAwLzEwMDAwPC90aWZmOllSZXNvbHV0aW9uPgogICAgICAgICA8dGlmZjpSZXNvbHV0aW9uVW5pdD4yPC90aWZmOlJlc29sdXRpb25Vbml0PgogICAgICAgICA8ZXhpZjpDb2xvclNwYWNlPjY1NTM1PC9leGlmOkNvbG9yU3BhY2U+CiAgICAgICAgIDxleGlmOlBpeGVsWERpbWVuc2lvbj4xNjwvZXhpZjpQaXhlbFhEaW1lbnNpb24+CiAgICAgICAgIDxleGlmOlBpeGVsWURpbWVuc2lvbj4xNjwvZXhpZjpQaXhlbFlEaW1lbnNpb24+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgIAo8P3hwYWNrZXQgZW5kPSJ3Ij8+ZK4pUAAAACBjSFJNAAB6JQAAgIMAAPn/AACA6QAAdTAAAOpgAAA6mAAAF2+SX8VGAAABIUlEQVR42qSTsUrEQBCG/8QjCCcWV1gJYm+31ic+gHa2goVcbeMb2PgGcoVgay3YiKDtpbBNpQgWV6i5Iptkx/ktcrcEj0OSG1j4Z4f9dmd2JiCJZayzKBDcblwBMFM35tF40AgApTnZPzYAcP140/wF+AGstV63ABBFUXjdHCBEnucgCcg/gGDYqxfMW1mWHhAMe6M/4Zinn4PO9DZzsHdorLUg6dfM7+/0TX0/DEM8vzzVUhDCOQfnHACArPx0kiLLMgCAEwdqdTiKIp/WDBDfP9zN5be5vWV0RfHx9h7PNwpiD+BZOtckweX6SFYFqgoIwfPJbrNfcIR0pSqia/ONhULXtAIU2gLwLWCXXjcHJJJ8XbxWeoxk4dAtO86/AwCZ86lQjmgAxAAAAABJRU5ErkJggg==)}.stb-container.stb-collapsed .stb-content {padding-bottom: 0;padding-top: 0}.stb-container.stb-no-caption, .stb-container.stb-no-caption.stb-ltr {direction: ltr}.stb-container.stb-no-caption:not(.stb-caption-box) .stb-content,.stb-container.stb-no-caption.stb-ltr:not(.stb-caption-box) .stb-content {padding: 10px 10px 10px 0}.stb-container.stb-no-caption.stb-rtl {direction: rtl}.stb-container.stb-no-caption.stb-rtl:not(.stb-caption-box) .stb-content {padding: 10px 0 10px 10px}
+.stb-container.stb-style-alert {color: #000000;border: 1px solid #f9574f;background-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #fdcbc9), color-stop(90%, #fb7d78));background-image: -o-linear-gradient(top, #fdcbc9 30%, #fb7d78 90%);background-image: linear-gradient(180deg, #fdcbc9 30%, #fb7d78 90%);}.stb-container.stb-style-alert .stb-caption {color: #ffffff;background-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #1d1a1a), color-stop(90%, #504848));background-image: -o-linear-gradient(top, #1d1a1a 30%, #504848 90%);background-image: linear-gradient(180deg, #1d1a1a 30%, #504848 90%);}.stb-container.stb-style-alert.stb-no-caption:not(.stb-caption-box) .stb-caption {background-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #fdcbc9), color-stop(90%, #fb7d78));background-image: -o-linear-gradient(top, #fdcbc9 30%, #fb7d78 90%);background-image: linear-gradient(180deg, #fdcbc9 30%, #fb7d78 90%);}.stb-container.stb-style-black {color: #ffffff;border: 1px solid #535353;background-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #3b3b3b), color-stop(90%, #000000));background-image: -o-linear-gradient(top, #3b3b3b 30%, #000000 90%);background-image: linear-gradient(180deg, #3b3b3b 30%, #000000 90%);}.stb-container.stb-style-black .stb-caption {color: #ffffff;background-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #4B4747), color-stop(90%, #141414));background-image: -o-linear-gradient(top, #4B4747 30%, #141414 90%);background-image: linear-gradient(180deg, #4B4747 30%, #141414 90%);}.stb-container.stb-style-black.stb-no-caption:not(.stb-caption-box) .stb-caption {background-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #3b3b3b), color-stop(90%, #000000));background-image: -o-linear-gradient(top, #3b3b3b 30%, #000000 90%);background-image: linear-gradient(180deg, #3b3b3b 30%, #000000 90%);}.stb-container.stb-style-custom {color: #000000;border: 1px solid #f844ee;background-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #f7cdf5), color-stop(90%, #f77df1));background-image: -o-linear-gradient(top, #f7cdf5 30%, #f77df1 90%);background-image: linear-gradient(180deg, #f7cdf5 30%, #f77df1 90%);}.stb-container.stb-style-custom .stb-caption {color: #ffffff;background-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #1d1a1a), color-stop(90%, #504848));background-image: -o-linear-gradient(top, #1d1a1a 30%, #504848 90%);background-image: linear-gradient(180deg, #1d1a1a 30%, #504848 90%);}.stb-container.stb-style-custom.stb-no-caption:not(.stb-caption-box) .stb-caption {background-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #f7cdf5), color-stop(90%, #f77df1));background-image: -o-linear-gradient(top, #f7cdf5 30%, #f77df1 90%);background-image: linear-gradient(180deg, #f7cdf5 30%, #f77df1 90%);}.stb-container.stb-style-download {color: #000000;border: 1px solid #15609a;background-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #78c0f7), color-stop(90%, #2e7cb9));background-image: -o-linear-gradient(top, #78c0f7 30%, #2e7cb9 90%);background-image: linear-gradient(180deg, #78c0f7 30%, #2e7cb9 90%);}.stb-container.stb-style-download .stb-caption {color: #ffffff;background-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #1d1a1a), color-stop(90%, #504848));background-image: -o-linear-gradient(top, #1d1a1a 30%, #504848 90%);background-image: linear-gradient(180deg, #1d1a1a 30%, #504848 90%);}.stb-container.stb-style-download.stb-no-caption:not(.stb-caption-box) .stb-caption {background-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #78c0f7), color-stop(90%, #2e7cb9));background-image: -o-linear-gradient(top, #78c0f7 30%, #2e7cb9 90%);background-image: linear-gradient(180deg, #78c0f7 30%, #2e7cb9 90%);}.stb-container.stb-style-grey {color: #000000;border: 1px solid #6e6e6e;background-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #e3e3e3), color-stop(90%, #ababab));background-image: -o-linear-gradient(top, #e3e3e3 30%, #ababab 90%);background-image: linear-gradient(180deg, #e3e3e3 30%, #ababab 90%);}.stb-container.stb-style-grey .stb-caption {color: #ffffff;background-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #b5b5b5), color-stop(90%, #6e6e6e));background-image: -o-linear-gradient(top, #b5b5b5 30%, #6e6e6e 90%);background-image: linear-gradient(180deg, #b5b5b5 30%, #6e6e6e 90%);}.stb-container.stb-style-grey.stb-no-caption:not(.stb-caption-box) .stb-caption {background-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #e3e3e3), color-stop(90%, #ababab));background-image: -o-linear-gradient(top, #e3e3e3 30%, #ababab 90%);background-image: linear-gradient(180deg, #e3e3e3 30%, #ababab 90%);}.stb-container.stb-style-info {color: #000000;border: 1px solid #6c9c62;background-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #a1ea94), color-stop(90%, #79b06e));background-image: -o-linear-gradient(top, #a1ea94 30%, #79b06e 90%);background-image: linear-gradient(180deg, #a1ea94 30%, #79b06e 90%);}.stb-container.stb-style-info .stb-caption {color: #ffffff;background-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #1d1a1a), color-stop(90%, #504848));background-image: -o-linear-gradient(top, #1d1a1a 30%, #504848 90%);background-image: linear-gradient(180deg, #1d1a1a 30%, #504848 90%);}.stb-container.stb-style-info.stb-no-caption:not(.stb-caption-box) .stb-caption {background-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #a1ea94), color-stop(90%, #79b06e));background-image: -o-linear-gradient(top, #a1ea94 30%, #79b06e 90%);background-image: linear-gradient(180deg, #a1ea94 30%, #79b06e 90%);}.stb-container.stb-style-warning {color: #000000;border: 1px solid #d9be08;background-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #f8fc91), color-stop(90%, #f0d208));background-image: -o-linear-gradient(top, #f8fc91 30%, #f0d208 90%);background-image: linear-gradient(180deg, #f8fc91 30%, #f0d208 90%);}.stb-container.stb-style-warning .stb-caption {color: #ffffff;background-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #1d1a1a), color-stop(90%, #504848));background-image: -o-linear-gradient(top, #1d1a1a 30%, #504848 90%);background-image: linear-gradient(180deg, #1d1a1a 30%, #504848 90%);}.stb-container.stb-style-warning.stb-no-caption:not(.stb-caption-box) .stb-caption {background-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #f8fc91), color-stop(90%, #f0d208));background-image: -o-linear-gradient(top, #f8fc91 30%, #f0d208 90%);background-image: linear-gradient(180deg, #f8fc91 30%, #f0d208 90%);}
+/*# sourceURL=stbCoreCSS-inline-css */
+</style>
+<script id="jquery-core-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-includes/js/jquery/jquery.min.js?ver=3.7.1"></script>
+<script id="munchkin-js-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/themes/nvidia/resources/assets/scripts/munchkin.js?ver=1790507952"></script>
+<script id="user_dropdown.js-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/themes/nvidia/resources/assets/scripts/user-dropdown.js?ver=1790507952"></script>
+<link rel="https://api.w.org/" href="https://developer-blogs.nvidia.com/zh-cn-blog/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://developer-blogs.nvidia.com/zh-cn-blog/wp-json/wp/v2/posts/15244" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://developer-blogs.nvidia.com/zh-cn-blog/xmlrpc.php?rsd" />
+<link rel="alternate" hreflang="en" href="https://developer.nvidia.com/blog/" title="en_US" />
+<link rel="alternate" hreflang="ja" href="https://developer.nvidia.com/ja-jp/blog/nvidia-rubin-cpx-accelerates-inference-performance-and-efficiency-for-1m-token-context-workloads/" title="ja" />
+<link rel="alternate" hreflang="ko" href="https://developer.nvidia.com/ko-kr/blog/nvidia-rubin-cpx-accelerates-inference-performance-and-efficiency-for-1m-token-context-workloads/" title="ko_KR" />
+<link rel="alternate" hreflang="zh" href="https://developer.nvidia.cn/blog/nvidia-rubin-cpx-accelerates-inference-performance-and-efficiency-for-1m-token-context-workloads/" title="zh_CN" />
+<!-- Stream WordPress user activity plugin v4.1.1 -->
+	<style>img#wpstats{display:none}</style>
+		  <script src="//assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" data-ot-ignore="true"></script>
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.1/css/all.css" integrity="sha384-TxKWSXbsweFt0o2WqfkfJRRNVaPdzXJ/YLqgStggBVRREXkwU7OKz+xXtqOU4u8+" crossorigin="anonymous" media="none" onload="if(media!='all')media='all'">
+     <script src='https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/nv-faceted-search/js/faceted-search/build/facetedSearchBundle.js?ver=97e32c5'></script> </head>
+  <body class="wp-singular post-template-default single single-post postid-15244 single-format-standard wp-theme-nvidiaresources metaslider-plugin nvidia-rubin-cpx-accelerates-inference-performance-and-efficiency-for-1m-token-context-workloads app-data index-data singular-data single-data single-post-data single-post-nvidia-rubin-cpx-accelerates-inference-performance-and-efficiency-for-1m-token-context-workloads-data">
+            <svg xmlns="http://www.w3.org/2000/svg" class="hide" style="display: none;">
+  <symbol id="n24-user-circle" viewBox="0 0 24 24">
+    <defs>
+      <style>.n24-user-circle-cls-1 {fill: none; stroke: #CCC; stroke-miterlimit: 10; stroke-width: 1.5px;} .n24-bounds {fill: none;}</style>
+    </defs>
+    <rect id="n24-icon-user-circle-bounds" class="n24-bounds" width="24" height="24"></rect>
+    <g id="n24-icon-user-circle">
+      <circle id="user-circle" class="n24-user-circle-cls-1" cx="12" cy="12" r="9.75"></circle>
+      <polyline id="user-body" class="n24-user-circle-cls-1" points="17.55 20.01 16.34 15.48 7.66 15.48 6.45 20.01"></polyline>
+      <circle id="user-head" class="n24-user-circle-cls-1" cx="12" cy="9.91" r="3.48"></circle>
+    </g>
+  </symbol>
+</svg>
+
+  <header class="page-header">
+    <div class="container">
+      <button class="navbar-toggle" type="button">
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+</button>
+      <div class="logo">
+  <a class="primary-logo" href="/" title="Home" data-wpel-link="internal">
+    <img alt="Home" width="142" height="32" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/themes/nvidia/dist/images/nvidia-logo_28b633c7.svg">
+  </a>
+  <a class="secondary-logo" href="/" title="Home" data-wpel-link="internal">DEVELOPER</a>
+</div>
+      <nav class="navbar primary navbar-expand-md navbar-inverse">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="menu-top-menu-container"><ul id="menu-top-menu" class="menu nav navbar-nav primary mr-auto"><li id="menu-item-572" class="menu-item menu-item-type-custom menu-item-object-custom nav-item nav-item-572"><a title="首页" href="https://developer.nvidia.cn" class="nav-link" data-wpel-link="external" rel="external noopener noreferrer">首页</a></li><li id="menu-item-573" class="active menu-item menu-item-type-custom menu-item-object-custom nav-item nav-item-573"><a title="博客" href="/zh-cn/blog" class="nav-link active" data-wpel-link="internal">博客</a></li><li id="menu-item-574" class="menu-item menu-item-type-custom menu-item-object-custom nav-item nav-item-574"><a title="论坛" href="https://developer.nvidia-china.com/" class="nav-link" data-wpel-link="external" rel="external noopener noreferrer">论坛</a></li><li id="menu-item-9923" class="menu-item menu-item-type-custom menu-item-object-custom nav-item nav-item-9923"><a title="论坛 (英文)" href="https://forums.developer.nvidia.com/" class="nav-link" data-wpel-link="internal">论坛 (英文)</a></li><li id="menu-item-575" class="menu-item menu-item-type-custom menu-item-object-custom nav-item nav-item-575"><a title="文档" href="https://docs.nvidia.cn" class="nav-link" data-wpel-link="external" rel="external noopener noreferrer">文档</a></li><li id="menu-item-576" class="menu-item menu-item-type-custom menu-item-object-custom nav-item nav-item-576"><a title="下载" href="https://developer.nvidia.cn/downloads" class="nav-link" data-wpel-link="external" rel="external noopener noreferrer">下载</a></li><li id="menu-item-577" class="menu-item menu-item-type-custom menu-item-object-custom nav-item nav-item-577"><a title="培训" href="https://www.nvidia.cn/deep-learning-ai/education/" class="nav-link" data-wpel-link="external" rel="external noopener noreferrer">培训</a></li></ul></div>
+      </div>
+</nav>
+      <nav class="navbar navbar-right" id="topRightNavbar">
+  <ul class="nav navbar-nav navbar-margin navbar-right navbar-margin-media login-nav">
+    <li class="search" id="search-top">
+      <div class="search-form" id="search-top-form">
+        <form class="gss form-search content-search"
+  data-base-url="https://developer.nvidia.cn/blog/"
+  action="https://developer.nvidia.cn/blog/search-posts"
+  method="GET" id="nvidia-site-search-form"
+  accept-charset="UTF-8">
+  <div>
+    <div class="input-group">
+      <div id="top-site-search-form">
+        <input
+          placeholder="搜索"
+          class="form-control form-text js-autocomplete"
+          type="text"
+          id="edit-term"
+          name="q"
+          value=""
+          size="15"
+          maxlength="128">
+      </div>
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-default" aria-label="搜索">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+      </span>
+    </div>
+    <button class="btn element-invisible btn-primary form-submit" type="submit" id="edit-submit" name="op"
+      value="Search">搜索</button>
+  </div>
+</form>
+      </div>
+    </li>
+        <li class="leaf" id="dzauth_join_link">
+      <a href="https://developer.nvidia.cn/login" class="cta--prim nv-join" data-wpel-link="external" rel="external noopener noreferrer">
+        加入
+      </a>
+    </li>
+    <li class="leaf last" id="dzauth_login_link">
+      <a href="https://developer.nvidia.cn/login" class="nv-login" data-wpel-link="external" rel="external noopener noreferrer">
+        <svg aria-label="User Account" class="n24-icon nvprofileicon n24-account" width="24px" height="24px">
+          <use xlink:href="#n24-user-circle"></use>
+        </svg>
+      </a>
+    </li>
+      </ul>
+</nav>
+    </div>
+  </header>
+    <section class="main">
+      <div class="faceted-search-top-wrapper">
+        <div class="container">
+          <div class="row">
+            <div class="col col-lg-12 faceted-search-component-wrapper">
+              <faceted-search-bar appUrl="https://developer.nvidia.cn/blog" componentTitle="技术博客" text="" subscribeUrl="https://developer.nvidia.cn/email-signup" subscribeLabel="订阅" locale="zh-CN" redirectUrl="https://developer.nvidia.cn/blog/search-posts/" autocompleteEndpointUrl="https://developer.nvidia.cn/blog/wp-json/faceted-search/v1/autocomplete/" data-search-page="false"></faceted-search-bar>
+            </div>
+          </div>
+        </div>
+      </div>
+
+              <div class="search-filters-component-wrapper--inner-page position-fixed w-100">
+          <div class="container">
+            <div class="row">
+              <faceted-search-filters endpoint="https://developer.nvidia.cn/blog/wp-json/faceted-search/v1/select/" redirectUrl="https://developer.nvidia.cn/blog/search-posts/" data-expanded="false" data-with-redirect="true" data-with-overlay="false" sortBy="post_date" locale="zh-CN" handleURls="false"></faceted-search-filters>
+            </div>
+          </div>
+        </div>
+        <div class="container single-page">
+          <div id="main-content" class="row">
+                       <script>
+  sessionStorage.removeItem('facets.search.text');
+  sessionStorage.removeItem('facets.search.text-copy');
+  sessionStorage.removeItem('facets.search.filters');
+</script>
+      <div class="col-sm-12 d-none text-right sidebar-toggle-link-wrapper">
+  <a class="sidebar-toggle sidebar-toggle-link" href="#main-content-end">
+    Related Resources <i class="fa fa-angle-right" aria-hidden="true"></i>
+  </a>
+</div>
+<main class="main-content col-lg-9 col-md-9 mt-0">
+  <div class="post-card--single">
+    
+    <div class="row">
+      <div class="col-lg-12 mb-0">
+        <div class="card--post-attributes">
+          <span class="category-name content-s">
+                        <a href="https://developer.nvidia.cn/blog/category/ai-platforms-deployment/" data-wpel-link="internal">AI 平台/部署</a>
+          </span>
+
+          
+          <span class="post-rate-widget content-s"></span>
+          <span class="post-lang-switcher">
+                        <div class="posts-filter-form"><div class="filter-item form-type-select"><select aria-label="Select language" class="msls_languages"><option value="https://developer.nvidia.com/ja-jp/blog/nvidia-rubin-cpx-accelerates-inference-performance-and-efficiency-for-1m-token-context-workloads/">日本語</option><option value="https://developer.nvidia.com/ko-kr/blog/nvidia-rubin-cpx-accelerates-inference-performance-and-efficiency-for-1m-token-context-workloads/">한국어</option><option value="https://developer.nvidia.cn/blog/nvidia-rubin-cpx-accelerates-inference-performance-and-efficiency-for-1m-token-context-workloads/" selected>中文</option></select></div></div>
+                      </span>
+        </div>
+
+        <h1 class="h--large txt-clr--blck mt-2 mb-0">NVIDIA Rubin CPX 加速百万级以上 token 上下文工作负载的推理性能和效率</h1>
+
+        
+        <img width="1024" height="576" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2025/09/Rubin-CPX-1024x576-png.webp" class="attachment-full-page-width size-full-page-width wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2025/09/Rubin-CPX-1024x576-png.webp 1024w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2025/09/Rubin-CPX-1024x576-png-300x169.webp 300w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2025/09/Rubin-CPX-1024x576-png-768x432.webp 768w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2025/09/Rubin-CPX-1024x576-png-645x363.webp 645w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2025/09/Rubin-CPX-1024x576-png-660x370.webp 660w" sizes="(max-width: 1024px) 100vw, 1024px" />
+        <div class="post-info">
+          <div class="post-published-date">
+            2025年 9月 9日
+          </div>
+
+          <div class="post-authors">
+            作者：<a href="https://developer.nvidia.cn/blog/author/joe-delaere/" title="Posts by Joe Delaere" class="author url fn" rel="author" data-wpel-link="internal">Joe Delaere</a>, <a href="https://developer.nvidia.cn/blog/author/kirthi-devleker/" title="Posts by Kirthi Devleker" class="author url fn" rel="author" data-wpel-link="internal">Kirthi Devleker</a> 和 <a href="https://developer.nvidia.cn/blog/author/eduardo-alvarez/" title="Posts by Eduardo Alvarez" class="author url fn" rel="author" data-wpel-link="internal">Eduardo Alvarez</a>          </div>
+
+          <div class="card--post-attributes-secondary card--post-attributes-header">
+            <div class="post--rate secondary--attribute">
+              		<div class="wpulike wpulike-heart " ><div class="wp_ulike_general_class wp_ulike_is_not_liked"><button type="button"
+					aria-label="Like Button"
+					data-ulike-id="15244"
+					data-ulike-nonce="9a324272fd"
+					data-ulike-type="post"
+					data-ulike-template="wpulike-heart"
+					data-ulike-display-likers=""
+					data-ulike-likers-style="popover"
+					class="wp_ulike_btn wp_ulike_put_text wp_post_btn_15244"><span><i class="far fa-thumbs-up"></i></span>				</button><span class="count-box wp_ulike_counter_up" data-ulike-counter-value="+3"></span>			</div></div>
+	
+              <button type="button" class="js-like-click like-click" aria-label="点赞此文章">
+  点赞
+</button>
+            </div>
+
+                                  </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="entry-meta-social">
+    <ul class="entry-meta-social-links-list">
+                     <li><a data-wpel-link="external" href="https://api.qrserver.com/v1/create-qr-code/?size=154x154&amp;data=https%3A%2F%2Fdeveloper.nvidia.cn%2Fblog%2Fnvidia-rubin-cpx-accelerates-inference-performance-and-efficiency-for-1m-token-context-workloads%2F" class="for-wechat" target="_blank" rel="external noopener noreferrer">W</a></li>
+                     <li><a data-wpel-link="external" href=" https://service.weibo.com/share/share.php?title=NVIDIA+Rubin+CPX+%E5%8A%A0%E9%80%9F%E7%99%BE%E4%B8%87%E7%BA%A7%E4%BB%A5%E4%B8%8A+token+%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD%E7%9A%84%E6%8E%A8%E7%90%86%E6%80%A7%E8%83%BD%E5%92%8C%E6%95%88%E7%8E%87&amp;url=https%3A%2F%2Fdeveloper.nvidia.cn%2Fblog%2Fnvidia-rubin-cpx-accelerates-inference-performance-and-efficiency-for-1m-token-context-workloads%2F" class="for-weibo" target="_blank" rel="external noopener noreferrer">W</a></li>
+                     <li><a href="mailto:?subject=我想和你分享一个信息&body=https%3A%2F%2Fdeveloper.nvidia.cn%2Fblog%2Fnvidia-rubin-cpx-accelerates-inference-performance-and-efficiency-for-1m-token-context-workloads%2F" class="for-mail"><span class="icon icon-email">Email</span></a></li>
+                   </ul>  </div>
+
+  
+  
+  <div class="entry-content">
+<p><a href="https://www.nvidia.cn/glossary/ai-inference/" target="_self" rel="follow noopener" data-wpel-link="internal">推理</a>正成为人工智能复杂性的前沿领域。现代模型正逐步演变为具备<a href="https://www.nvidia.cn/glossary/ai-reasoning/" target="_self" rel="follow noopener" data-wpel-link="internal">多步推理</a>能力、持久化记忆和长时程上下文理解的代理式系统，使其能够胜任软件开发、视频生成和深度研究等领域的复杂任务。这些任务对基础设施提出了前所未有的要求，在计算、内存和网络方面带来了新的挑战，亟需从根本上重新思考<a href="https://blogs.nvidia.com/blog/ai-factory-inference-optimization/" target="_self" rel="follow noopener" data-wpel-link="internal">推理系统的扩展方式与优化策略</a>。</p>
+<p>在这些挑战中，为特定类型的工作负载处理大规模上下文正变得愈发关键。以软件开发为例，AI 系统需要能够对整个代码库进行推理，维护跨文件的依赖关系，并理解仓库级别的整体结构，从而将编码助手从简单的自动补全工具，转变为具备深度理解能力的智能协作伙伴。同样，在长视频处理和科研应用中，系统也必须在数百万 <a href="https://blogs.nvidia.com/blog/ai-tokens-explained/" target="_self" rel="follow noopener" data-wpel-link="internal">tokens</a> 的范围内保持上下文的连贯性与记忆能力。这些需求正不断突破当前基础设施的承载极限。</p>
+<p>为应对这一转变，<a href="https://blogs.nvidia.com/blog/think-smart-optimize-ai-factory-inference-performance/" target="_self" rel="follow noopener" data-wpel-link="internal">NVIDIA SMART </a>框架提供了一条清晰的发展路径，从规模扩展、多维性能、架构设计、投资回报率以及更广泛的技术生态系统等多个方面优化推理能力。该框架强调全栈解耦的基础设施，实现计算与内存资源的高效分配。结合 <a href="https://developer.nvidia.cn/deep-learning-performance-training-inference/ai-inference" target="_self" rel="follow noopener" data-wpel-link="internal">NVIDIA Blackwell 和 NVIDIA GB200 NVL72 等平台</a>，辅以支持低精度推理的 NVFP4 技术，以及 NVIDIA TensorRT-LLM 和 NVIDIA Dynamo 等开源软件，正全面重塑人工智能领域的推理性能。</p>
+<p>本博客探讨了推理基础架构的下一阶段演进，并介绍了 NVIDIA Rubin CPX——一款专为长上下文 AI 工作负载设计的 GPU，旨在以更高的效率和投资回报率满足不断增长的需求。</p>
+<h2 id="disaggregated_inference_a_scalable_approach_to_ai_complexity"   class="wp-block-heading">分解推理：针对 AI 复杂性的可扩展方法<a href="#disaggregated_inference_a_scalable_approach_to_ai_complexity" aria-label="Scroll to 分解推理：针对 AI 复杂性的可扩展方法 section" class="heading-anchor-link"><i class="fas fa-link"></i></a></h2>
+<p>推理过程包含两个不同的阶段：上下文阶段和生成阶段，每个阶段对基础设施的要求截然不同。上下文阶段受限于计算能力，需要高吞吐量的处理性能，以高效提取并分析大量输入数据，从而生成首个输出 token。而生成阶段则受限于内存带宽，依赖快速的内存传输和高速互联技术（如 NVLink），以持续维持逐个 token 的输出效率。</p>
+<p>分解推理能够独立处理各个阶段，从而有针对性地优化计算与内存资源。这一架构转变有助于提升吞吐量、降低延迟，并改善整体资源利用率（图 1）。</p>
+<div class="wp-block-image">
+<figure class="aligncenter size-full"><img decoding="async" class="lazyload wp-image-105631" src="https://developer.nvidia.cn/zh-cn/blog/wp-content/uploads/2025/09/Disaggregated-inference.gif" alt="Diagram of a disaggregated inference pipeline. Documents/databases/videos feed a context processor (shown as GPU B with a swap to GPU A); its output goes to a key–value cache read by a GPU B generation node to produce results. Labels note GPU A is optimized for long-context processing, while GPU B delivers strong TCO for both context and generation." width="1280" height="720" data-src="https://developer-blogs.nvidia.com/wp-content/uploads/2025/09/Disaggregated-inference.gif" />
+<figcaption class="wp-element-caption"><em>图 1。通过使 GPU 功能与上下文和生成工作负载保持一致来优化推理</em></figcaption>
+</figure>
+</div>
+<p>然而，分解架构引入了新的复杂性，需要在低延迟 KV 缓存传输、大语言模型感知的路由以及高效内存管理之间实现精准协同。 <a href="https://developer.nvidia.cn/dynamo" target="_self" rel="follow noopener" data-wpel-link="internal">NVIDIA Dynamo</a> 作为这些组件的编排层，在最新的 MLPerf 推理结果中发挥了关键作用。了解基于 <a href="https://developer.nvidia.cn/zh-cn/blog/nvidia-blackwell-ultra-sets-new-inference-records-in-mlperf-debut/" target="_self" rel="follow noopener" data-wpel-link="internal">GB200 NVL72 平台、结合 Dynamo 实现的分解架构如何创下性能新高</a>。</p>
+<p>为充分发挥分解推理的优势，特别是在计算密集型上下文处理阶段，专业化的加速能力至关重要。为满足这一需求，NVIDIA 推出 <a href="https://nvidianews.nvidia.com/news/nvidia-unveils-rubin-cpx-a-new-class-of-gpu-designed-for-massive-context-inference" target="_self" rel="follow noopener" data-wpel-link="internal">Rubin CPX GPU</a>—这是一款专为高价值、长上下文推理工作负载设计的解决方案，可提供高吞吐量性能，并能无缝集成到分解式基础设施中。</p>
+<h2 id="rubin_cpx_built_to_accelerate_long-context_processing"   class="wp-block-heading">Rubin CPX：专为加速长上下文处理而构建<a href="#rubin_cpx_built_to_accelerate_long-context_processing" aria-label="Scroll to Rubin CPX：专为加速长上下文处理而构建 section" class="heading-anchor-link"><i class="fas fa-link"></i></a></h2>
+<p>Rubin CPX GPU 旨在提升长上下文处理性能，在增强现有基础设施的同时，为上下文感知推理的部署提供可扩展的高效能力，并进一步提升投资回报。基于 Rubin 架构打造，Rubin CPX 能够在计算密集型的上下文推理阶段实现突破性性能表现。该 GPU 具备 30 petaFLOPS 的 NVFP4 计算能力、128 GB GDDR7 显存、专用的视频编解码硬件支持，并在注意力机制加速方面达到 NVIDIA GB300 NVL72 的 3 倍水平。</p>
+<p>Rubin CPX 经过优化，能够高效处理长序列，对软件开发和高清视频生成等高价值推理应用场景具有重要意义。该技术旨在与现有的分布式推理架构协同工作，提升吞吐量与响应速度，同时显著增强大规模生成式 AI 工作负载的投资效益。</p>
+<p>Rubin CPX 与 NVIDIA Vera CPU 及 Rubin GPU 协同工作，共同承担生成阶段的处理任务，为长上下文应用场景提供完整的高性能计算细分解决方案。NVIDIA Vera Rubin NVL144 CPX 机架集成了 144 个 Rubin CPX GPU、144 个 Rubin GPU 和 36 个 Vera CPU，单机架即可提供 8 exaFLOPS 的 NVFP4 计算能力（较 GB300 NVL72 提升 7.5%），同时具备 100 TB 高速内存和 1.7 PB/s 的内存带宽。</p>
+<p>Vera Rubin NVL144 CPX 采用 NVIDIA Quantum-X800 InfiniBand 或 Spectrum-X 以太网技术，结合 NVIDIA ConnectX-9 SuperNIC，并由 Dynamo 平台进行统一编排，专为支持下一代百万级令牌上下文的 AI 推理工作负载而设计，可有效降低推理成本，同时为全球开发者与创作者提供先进的功能支持。</p>
+<p>该平台可实现30至50倍的大规模投资回报，1亿美元的资本支出可带来高达50亿美元的收入，为推理计算的经济性设立了新的标杆。通过融合分解式基础设施、加速能力与全栈编排技术，Vera Rubin NVL144 CPX 重新定义了企业构建新一代生成式AI应用的可能性。</p>
+<div class="wp-block-image">
+<figure class="aligncenter size-full is-resized"><img decoding="async" class="lazyload wp-image-105632" style="width: 735px;height: auto" src="https://developer.nvidia.cn/zh-cn/blog/wp-content/uploads/2025/09/Vera-Rubin-png.webp" alt="The image on the left displays the NVIDIA Vera Rubin NVL144 CPX rack, which integrates 144 Rubin CPX GPUs for accelerating context-phase processing, 144 Rubin GPUs connected via NVLink for generation-phase processing, and 36 Vera CPUs, all housed within a single Oberon rack for streamlined deployment. The image on the right shows a single tray from the rack, containing 2 Vera CPUs, 4 Rubin GPUs, and 8 Rubin CPX processors, showing the modular and scalable design of the system." width="995" height="757" data-sizes="(max-width: 995px) 100vw, 995px" data-src="https://developer-blogs.nvidia.com/wp-content/uploads/2025/09/Vera-Rubin-png.webp" data-srcset="https://developer-blogs.nvidia.com/wp-content/uploads/2025/09/Vera-Rubin-png.webp 995w, https://developer-blogs.nvidia.com/wp-content/uploads/2025/09/Vera-Rubin-300x228-png.webp 300w, https://developer-blogs.nvidia.com/wp-content/uploads/2025/09/Vera-Rubin-625x476-png.webp 625w, https://developer-blogs.nvidia.com/wp-content/uploads/2025/09/Vera-Rubin-151x115-png.webp 151w, https://developer-blogs.nvidia.com/wp-content/uploads/2025/09/Vera-Rubin-768x584-png.webp 768w, https://developer-blogs.nvidia.com/wp-content/uploads/2025/09/Vera-Rubin-645x491-png.webp 645w, https://developer-blogs.nvidia.com/wp-content/uploads/2025/09/Vera-Rubin-394x300-png.webp 394w, https://developer-blogs.nvidia.com/wp-content/uploads/2025/09/Vera-Rubin-118x90-png.webp 118w, https://developer-blogs.nvidia.com/wp-content/uploads/2025/09/Vera-Rubin-362x275-png.webp 362w, https://developer-blogs.nvidia.com/wp-content/uploads/2025/09/Vera-Rubin-145x110-png.webp 145w, https://developer-blogs.nvidia.com/wp-content/uploads/2025/09/Vera-Rubin-710x540-png.webp 710w" />
+<figcaption class="wp-element-caption"><em>图 2。NVIDIA Vera Rubin NVL144 CPX 机架和托盘，配备 Rubin Context GPU (Rubin CPX) 、Rubin GPU 和 Vera CPU</em></figcaption>
+</figure>
+</div>
+<h2 id="summary "   class="wp-block-heading">总结 <a href="#summary " aria-label="Scroll to 总结  section" class="heading-anchor-link"><i class="fas fa-link"></i></a></h2>
+<p>NVIDIA Rubin CPX GPU 和 NVIDIA Vera Rubin NVL144 CPX 机架充分体现了 SMART 平台的理念，即通过架构创新与生态系统集成，实现多维度的性能扩展与更高的投资回报。该平台由 NVIDIA Dynamo 提供动力，专为处理海量上下文而设计，为全栈 AI 基础设施树立了新标杆，为高级软件编程、生成式视频等前沿工作负载开辟了全新可能。</p>
+<p>深入了解 <a href="https://nvidianews.nvidia.com/news/nvidia-unveils-rubin-cpx-a-new-class-of-gpu-designed-for-massive-context-inference" target="_self" rel="follow noopener" data-wpel-link="internal">NVIDIA Rubin CPX</a>。</p>
+<p> </p>
+</div>
+
+  <div class="card--post-attributes-secondary">
+        
+    <div class="post--rate secondary--attribute">
+      		<div class="wpulike wpulike-heart " ><div class="wp_ulike_general_class wp_ulike_is_not_liked"><button type="button"
+					aria-label="Like Button"
+					data-ulike-id="15244"
+					data-ulike-nonce="9a324272fd"
+					data-ulike-type="post"
+					data-ulike-template="wpulike-heart"
+					data-ulike-display-likers=""
+					data-ulike-likers-style="popover"
+					class="wp_ulike_btn wp_ulike_put_text wp_post_btn_15244"><span><i class="far fa-thumbs-up"></i></span>				</button><span class="count-box wp_ulike_counter_up" data-ulike-counter-value="+3"></span>			</div></div>
+	
+      <button type="button" class="js-like-click like-click" aria-label="点赞此文章">
+  点赞
+</button>
+    </div>
+  </div>
+
+  <div class="card--post-attributes-secondary tags">
+    <div class="caption">
+      <h2 class="h--smaller txt-clr--blck">标签</h2>
+    </div>
+    <div class="content-s post-tags--list mt-0">
+             <a href="https://developer.nvidia.cn/blog/category/ai-platforms-deployment/" data-wpel-link="internal">AI 平台/部署</a> | <a href="https://developer.nvidia.cn/blog/category/data-center-cloud/" data-wpel-link="internal">数据中心/云端</a> | <a href="https://developer.nvidia.cn/blog/category/generative-ai/" data-wpel-link="internal">智能体/生成式 AI</a>     </div>
+  </div>
+
+  <div class="post-authors-list">
+    <div class="entry-content-author">
+  <div class="caption">
+    <h2 class="h--smaller txt-clr--blck">
+                关于作者
+              </h2>
+  </div>
+                          <div class="media author-info">
+          <div class="author-media-left media-left">
+                        <img alt='' src='https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2022/08/JoeDelaere.jpg' srcset='https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2022/08/JoeDelaere.jpg 2x' class='avatar avatar-131 photo avatar-default' height='131' width='131' loading='lazy' decoding='async'/>
+          </div>
+          <div class="author-media-body media-body">
+
+            
+                          Joe DeLaere 是负责数据中心加速计算的高级产品营销经理，专注于 GPU 和 AI 用例。此前，他曾在 Altera / Intel 和 Xilinx / AMD 担任产品管理和营销职务，专注于基于 FPGA 的数据中心加速解决方案。乔拥有圣何塞州立大学电气工程学士学位。
+            
+            
+                          <div id="author-link">
+                <a href="https://developer.nvidia.cn/blog/author/joe-delaere/" rel="author" data-wpel-link="internal">
+                                            查看 Joe Delaere 所有文章<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 612"><path d="M305 239c9.4 9.4 9.4 24.6 0 33.9L113 465c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l175-175L79 81c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L305 239z"/></svg>
+                                        </a>
+              </div>
+                      </div>
+        </div>
+              <div class="media author-info">
+          <div class="author-media-left media-left">
+                        <img alt='' src='https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2024/03/KirthiDevleker.jpg' srcset='https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2024/03/KirthiDevleker.jpg 2x' class='avatar avatar-131 photo avatar-default' height='131' width='131' loading='lazy' decoding='async'/>
+          </div>
+          <div class="author-media-body media-body">
+
+            
+                          Kirthi Devleker 是 NVIDIA 数据中心部门的高级产品营销经理，专注于推出适用于生成式 AI 训练和推理应用程序的新一代企业 GPU.在加入 NVIDIA 之前，Kirthi 领导了在 DigitalOcean 推出新一代 AI 驱动的 IaaS 产品的战略活动。Kirthi 还在 MathWorks 担任了 10 多年的高级产品经理，专注于人工智能和信号处理产品的发展，并担任全球医疗设备行业经理。Kirthi 拥有信号和图像处理方面的背景，并拥有圣何塞州立大学的 MSEE 学位。
+            
+            
+                          <div id="author-link">
+                <a href="https://developer.nvidia.cn/blog/author/kirthi-devleker/" rel="author" data-wpel-link="internal">
+                                            查看 Kirthi Devleker 所有文章<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 612"><path d="M305 239c9.4 9.4 9.4 24.6 0 33.9L113 465c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l175-175L79 81c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L305 239z"/></svg>
+                                        </a>
+              </div>
+                      </div>
+        </div>
+              <div class="media author-info">
+          <div class="author-media-left media-left">
+                        <img alt='' src='https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2025/07/EduardoAlvarez.png' srcset='https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2025/07/EduardoAlvarez.png 2x' class='avatar avatar-131 photo avatar-default' height='131' width='131' loading='lazy' decoding='async'/>
+          </div>
+          <div class="author-media-body media-body">
+
+            
+                          Eduardo Alvarez 是 NVIDIA 的高级技术营销工程师，专注于大规模 AI 推理、工作负载性能优化、TCO 分析和 AI 工程支持。他在 AI 系统工程、模型优化和 GPU 加速计算方面拥有深厚的背景，将前沿研究转化为开发者和企业团队的实用见解。加入 NVIDIA 之前，Eduardo 曾在领先的半导体和能源公司担任技术职务，帮助推动 AI 在各行各业中的应用。他拥有德克萨斯农工大学 (Texas A&amp;M University) 的地球物理工程学位。
+            
+            
+                          <div id="author-link">
+                <a href="https://developer.nvidia.cn/blog/author/eduardo-alvarez/" rel="author" data-wpel-link="internal">
+                                            查看 Eduardo Alvarez 所有文章<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 612"><path d="M305 239c9.4 9.4 9.4 24.6 0 33.9L113 465c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l175-175L79 81c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L305 239z"/></svg>
+                                        </a>
+              </div>
+                      </div>
+        </div>
+            </div>
+  </div>
+
+    <div id="main-content-end"></div>
+</main>
+
+<aside id="sidebar" class="sidebar col-lg-3 col-md-3 mt-0">
+  <div class="sticky-top-pre"></div>
+  <div class="sidebar-item not-sticky-top">
+    <div id="sidebar-content" class="sidebar__inner">
+      <script>
+    window.is_post_page = true;
+    window.nv_homepage_url = 'https://developer.nvidia.cn/blog';
+  </script>
+
+  <div class="block--related-posts prspr-related" data-source="nv">
+      <h2 class="h--smaller txt-clr--blck">相关文章</h2>
+      <div class="carousel-row__slide js-post-card related-post--row" data-post-id="14403" data-post-title="NVIDIA GB200 NVL72 和 NVIDIA Dynamo 如何提升 MoE 模型的推理性能">
+  <div class="carousel-row-slide__inner">
+    <div class="carousel-row-slide__thumbnail">
+      <img width="660" height="370" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2025/06/dynamo-featured-fixed-1024x576-1-660x370.png" class="attachment-post-card-thumbnail size-post-card-thumbnail wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2025/06/dynamo-featured-fixed-1024x576-1-660x370.png 660w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2025/06/dynamo-featured-fixed-1024x576-1-300x169.png 300w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2025/06/dynamo-featured-fixed-1024x576-1-768x432.png 768w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2025/06/dynamo-featured-fixed-1024x576-1-645x363.png 645w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2025/06/dynamo-featured-fixed-1024x576-1.png 1024w" sizes="auto, (max-width: 660px) 100vw, 660px" />
+    </div>
+    <div class="carousel-row-slide__content">
+      <div class="carousel-row-slide__title">
+        <h3 class="h--smallest carousel-row-slide__heading">
+          NVIDIA GB200 NVL72 和 NVIDIA Dynamo 如何提升 MoE 模型的推理性能
+        </h3>
+      </div>
+    </div>
+    <a href="https://developer.nvidia.cn/blog/how-nvidia-gb200-nvl72-and-nvidia-dynamo-boost-inference-performance-for-moe-models/" class="carousel-row-slide__link" data-wpel-link="internal">
+      <span class="visually-hidden">NVIDIA GB200 NVL72 和 NVIDIA Dynamo 如何提升 MoE 模型的推理性能</span>
+    </a>
+  </div>
+</div>
+    </div>
+        <div class="block--related-posts hide" data-source="wp">
+      <h2 class="h--smaller txt-clr--blck">相关文章</h2>
+      <div class="carousel-row__slide js-post-card related-post--row" data-post-id="19736" data-post-title="借助 NVIDIA 机密计算实现私有高性能生产级 AI 推理">
+  <div class="carousel-row-slide__inner">
+    <div class="carousel-row-slide__thumbnail">
+      <img width="660" height="370" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/cybersecurity-graphic-1-1024x576-1-660x370.png" class="attachment-post-card-thumbnail size-post-card-thumbnail wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/cybersecurity-graphic-1-1024x576-1-660x370.png 660w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/cybersecurity-graphic-1-1024x576-1-300x169.png 300w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/cybersecurity-graphic-1-1024x576-1-768x432.png 768w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/cybersecurity-graphic-1-1024x576-1-645x363.png 645w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/cybersecurity-graphic-1-1024x576-1.png 1024w" sizes="auto, (max-width: 660px) 100vw, 660px" />
+    </div>
+    <div class="carousel-row-slide__content">
+      <div class="carousel-row-slide__title">
+        <h3 class="h--smallest carousel-row-slide__heading">
+          借助 NVIDIA 机密计算实现私有高性能生产级 AI 推理
+        </h3>
+      </div>
+    </div>
+    <a href="https://developer.nvidia.cn/blog/enabling-private-high-performance-production-ai-inference-with-nvidia-confidential-computing/" class="carousel-row-slide__link" data-wpel-link="internal">
+      <span class="visually-hidden">借助 NVIDIA 机密计算实现私有高性能生产级 AI 推理</span>
+    </a>
+  </div>
+</div>
+<div class="carousel-row__slide js-post-card related-post--row" data-post-id="19733" data-post-title="使用 AI 智能体和 NVIDIA Isaac ROS 加速 ROS 2 节点">
+  <div class="carousel-row-slide__inner">
+    <div class="carousel-row-slide__thumbnail">
+      <img width="660" height="370" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/robot-arm-ros-2-node-1024x576-1-660x370.png" class="attachment-post-card-thumbnail size-post-card-thumbnail wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/robot-arm-ros-2-node-1024x576-1-660x370.png 660w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/robot-arm-ros-2-node-1024x576-1-300x169.png 300w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/robot-arm-ros-2-node-1024x576-1-768x432.png 768w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/robot-arm-ros-2-node-1024x576-1-645x363.png 645w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/robot-arm-ros-2-node-1024x576-1.png 1024w" sizes="auto, (max-width: 660px) 100vw, 660px" />
+    </div>
+    <div class="carousel-row-slide__content">
+      <div class="carousel-row-slide__title">
+        <h3 class="h--smallest carousel-row-slide__heading">
+          使用 AI 智能体和 NVIDIA Isaac ROS 加速 ROS 2 节点
+        </h3>
+      </div>
+    </div>
+    <a href="https://developer.nvidia.cn/blog/accelerating-a-ros-2-node-with-an-ai-agent-and-nvidia-isaac-ros/" class="carousel-row-slide__link" data-wpel-link="internal">
+      <span class="visually-hidden">使用 AI 智能体和 NVIDIA Isaac ROS 加速 ROS 2 节点</span>
+    </a>
+  </div>
+</div>
+<div class="carousel-row__slide js-post-card related-post--row" data-post-id="19732" data-post-title="借助 NVIDIA Dynamo-Triton 中的 NVIDIA TensorRT 多设备集成，简化跨多个 GPU 的模型服务">
+  <div class="carousel-row-slide__inner">
+    <div class="carousel-row-slide__thumbnail">
+      <img width="660" height="370" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/grid-robot-arm-cleaning-plate-1-1024x576-1-660x370.png" class="attachment-post-card-thumbnail size-post-card-thumbnail wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/grid-robot-arm-cleaning-plate-1-1024x576-1-660x370.png 660w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/grid-robot-arm-cleaning-plate-1-1024x576-1-300x169.png 300w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/grid-robot-arm-cleaning-plate-1-1024x576-1-768x432.png 768w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/grid-robot-arm-cleaning-plate-1-1024x576-1-645x363.png 645w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/grid-robot-arm-cleaning-plate-1-1024x576-1.png 1024w" sizes="auto, (max-width: 660px) 100vw, 660px" />
+    </div>
+    <div class="carousel-row-slide__content">
+      <div class="carousel-row-slide__title">
+        <h3 class="h--smallest carousel-row-slide__heading">
+          借助 NVIDIA Dynamo-Triton 中的 NVIDIA TensorRT 多设备集成，简化跨多个 GPU 的模型服务
+        </h3>
+      </div>
+    </div>
+    <a href="https://developer.nvidia.cn/blog/simplifying-model-serving-across-multiple-gpus-with-nvidia-tensorrt-multi-device-integration-in-nvidia-dynamo-triton/" class="carousel-row-slide__link" data-wpel-link="internal">
+      <span class="visually-hidden">借助 NVIDIA Dynamo-Triton 中的 NVIDIA TensorRT 多设备集成，简化跨多个 GPU 的模型服务</span>
+    </a>
+  </div>
+</div>
+<div class="carousel-row__slide js-post-card related-post--row" data-post-id="19731" data-post-title="如何评估从工具调用到任务完成的 AI 智能体">
+  <div class="carousel-row-slide__inner">
+    <div class="carousel-row-slide__thumbnail">
+      <img width="660" height="370" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/image4-10-1024x576-1-660x370.png" class="attachment-post-card-thumbnail size-post-card-thumbnail wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/image4-10-1024x576-1-660x370.png 660w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/image4-10-1024x576-1-300x169.png 300w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/image4-10-1024x576-1-768x432.png 768w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/image4-10-1024x576-1-645x363.png 645w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/image4-10-1024x576-1.png 1024w" sizes="auto, (max-width: 660px) 100vw, 660px" />
+    </div>
+    <div class="carousel-row-slide__content">
+      <div class="carousel-row-slide__title">
+        <h3 class="h--smallest carousel-row-slide__heading">
+          如何评估从工具调用到任务完成的 AI 智能体
+        </h3>
+      </div>
+    </div>
+    <a href="https://developer.nvidia.cn/blog/how-to-evaluate-ai-agents-from-tool-calls-to-task-completion/" class="carousel-row-slide__link" data-wpel-link="internal">
+      <span class="visually-hidden">如何评估从工具调用到任务完成的 AI 智能体</span>
+    </a>
+  </div>
+</div>
+<div class="carousel-row__slide js-post-card related-post--row" data-post-id="19714" data-post-title="借助 AIPerf 对 LLM 进行大规模基准测试推理">
+  <div class="carousel-row-slide__inner">
+    <div class="carousel-row-slide__thumbnail">
+      <img width="660" height="370" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/image3-10-1024x576-1-660x370.png" class="attachment-post-card-thumbnail size-post-card-thumbnail wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/image3-10-1024x576-1-660x370.png 660w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/image3-10-1024x576-1-300x169.png 300w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/image3-10-1024x576-1-768x432.png 768w, https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/uploads/sites/2/2026/09/image3-10-1024x576-1-645x363.png 645w" sizes="auto, (max-width: 660px) 100vw, 660px" />
+    </div>
+    <div class="carousel-row-slide__content">
+      <div class="carousel-row-slide__title">
+        <h3 class="h--smallest carousel-row-slide__heading">
+          借助 AIPerf 对 LLM 进行大规模基准测试推理
+        </h3>
+      </div>
+    </div>
+    <a href="https://developer.nvidia.cn/blog/benchmarking-llm-inference-at-scale-with-aiperf/" class="carousel-row-slide__link" data-wpel-link="internal">
+      <span class="visually-hidden">借助 AIPerf 对 LLM 进行大规模基准测试推理</span>
+    </a>
+  </div>
+</div>
+    </div>
+      
+
+
+
+    </div>
+  </div>
+</aside>
+              </div>
+        </div>
+          </section>
+        <style>
+    #nv-footer .footer-news__cta a {
+      border-radius: 0;
+      margin: 0;
+    }
+    #nv-footer-container > .code-block {
+      margin-top: 0 !important;
+    }
+  </style>
+  <footer id="nv-footer"></footer>
+  <script type="text/javascript">
+    (function() {
+      const defaultLinks = JSON.parse("{\n    \"columns\": [],\n    \"links\": [\n      {\n        \"text\": \"\u6cd5\u5f8b\u4e8b\u5b9c\",\n        \"href\": \"https:\/\/www.nvidia.cn\/about-nvidia\/legal-info\/\"\n      },\n      {\n        \"text\": \"\u4f7f\u7528\u6761\u6b3e\",\n        \"href\": \"https:\/\/developer.nvidia.com\/legal\/terms\"\n      },\n      {\n        \"text\": \"\u9690\u79c1\u58f0\u660e\",\n        \"href\": \"https:\/\/www.nvidia.cn\/about-nvidia\/privacy-policy\/\"\n      },\n      {\n        \"text\": \"Cookie \u653f\u7b56\",\n        \"href\": \"https:\/\/www.nvidia.cn\/about-nvidia\/cookie-policy\/\"\n      },\n      {\n        \"text\": \"\u8054\u7cfb\u6211\u4eec\",\n        \"href\": \"https:\/\/developer.nvidia.cn\/contact\"\n      }\n    ]\n}\n")
+
+      const mountFooterComponent = (locale, response) => {
+        new NVDeveloperFooter({
+          target: document.getElementById('nv-footer'),
+          props: {
+            locale: locale,
+            menu: response
+          }
+        })
+      }
+
+      const handleError = (error, locale, menu) => {
+        console.debug(error)
+        mountFooterComponent(locale, menu)
+      }
+
+      const initFooter = () => {
+        let menuUrl = 'https://d29g4g2dyqv443.cloudfront.net/menu/zh-CN/footer.json'
+                let locale = 'zh-CN';
+        menuUrl = 'https://d29g4g2dyqv443.cloudfront.net/menu/zh-CN/footer.json'
+        
+        if (!menuUrl) {
+          handleError('Footer menu URL not defined.', locale, defaultLinks)
+          return
+        }
+
+        fetch(menuUrl)
+          .then((response) => response.json())
+          .then((response) => mountFooterComponent(locale, response))
+          .catch((error) => handleError(error, locale, defaultLinks))
+      }
+
+      document.addEventListener('DOMContentLoaded', initFooter);
+    })();
+  </script>
+  <script type="text/javascript">_satellite.pageBottom();</script>
+  <!-- OneTrust gpc signal detection script start -->
+  <!-- OneTrust Cookies Consent Notice end -->
+  <script type="text/javascript" src="https://www.nvidia.cn/assets/cn/onetrust/scripttemplates/nv-ot-custom.js"></script>
+  <!-- OneTrust gpc signal detection script end -->
+    <script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/blog/*"},{"not":{"href_matches":["/zh-cn-blog/wp-*.php","/zh-cn-blog/wp-admin/*","/zh-cn-blog/wp-content/uploads/sites/2/*","/zh-cn-blog/wp-content/*","/zh-cn-blog/wp-content/plugins/*","/zh-cn-blog/wp-content/themes/nvidia/resources/*","/blog/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script id="syntaxhighlighter-core-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-as3-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushAS3.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-arduino-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushArduino.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-bash-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushBash.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-coldfusion-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushColdFusion.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-clojure-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/third-party-brushes/shBrushClojure.js?ver=20090602"></script>
+<script id="syntaxhighlighter-brush-cpp-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCpp.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-csharp-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCSharp.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-css-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCss.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-delphi-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushDelphi.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-diff-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushDiff.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-erlang-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushErlang.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-fsharp-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/third-party-brushes/shBrushFSharp.js?ver=20091003"></script>
+<script id="syntaxhighlighter-brush-go-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushGo.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-groovy-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushGroovy.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-haskell-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushHaskell.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-java-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJava.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-javafx-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJavaFX.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-jscript-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJScript.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-latex-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/third-party-brushes/shBrushLatex.js?ver=20090613"></script>
+<script id="syntaxhighlighter-brush-matlabkey-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/third-party-brushes/shBrushMatlabKey.js?ver=20091209"></script>
+<script id="syntaxhighlighter-brush-objc-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/third-party-brushes/shBrushObjC.js?ver=20091207"></script>
+<script id="syntaxhighlighter-brush-perl-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPerl.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-php-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-plain-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPlain.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-powershell-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPowerShell.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-python-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPython.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-r-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/third-party-brushes/shBrushR.js?ver=20100919"></script>
+<script id="syntaxhighlighter-brush-ruby-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushRuby.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-scala-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushScala.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-sql-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushSql.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-swift-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushSwift.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-vb-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushVb.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-xml-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushXml.js?ver=3.0.9b"></script>
+<script id="syntaxhighlighter-brush-yaml-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushYaml.js?ver=3.0.9b"></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.head.appendChild( corecss );
+		var themecssurl = "https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/nv-tweaks/css/shThemeNvidia.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		document.head.appendChild( themecss );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['gutter'] = false;
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}.wp-block-button{--wp--preset--dimension--25: 25%;--wp--preset--dimension--50: 50%;--wp--preset--dimension--75: 75%;--wp--preset--dimension--100: 100%;}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+<script id="jquery-migrate-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1"></script>
+<script id="load_comments_js-js-extra">
+var wpdc = {"commentsURL":"https://developer.nvidia.cn/blog/wp-json/wp-discourse/v1/discourse-comments"};
+//# sourceURL=load_comments_js-js-extra
+</script>
+<script id="load_comments_js-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/wp-discourse/lib/../js/load-comments.js?ver=1790507951"></script>
+<script id="wp_ulike-js-extra">
+var wp_ulike_params = {"ajax_url":"https://developer-blogs.nvidia.com/zh-cn-blog/wp-admin/admin-ajax.php","notifications":"0"};
+var wp_ulike_params = {"ajax_url":"https://developer.nvidia.cn/blog/wp-admin/admin-ajax.php"};
+//# sourceURL=wp_ulike-js-extra
+</script>
+<script id="wp_ulike-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/wp-ulike/assets/js/wp-ulike.min.js?ver=5.0.3"></script>
+<script id="nv-language-switcher-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/nv-language-switcher/js/nv-language-switcher.js"></script>
+<script id="page-links-to-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/page-links-to/dist/new-tab.js?ver=3.3.5"></script>
+<script id="sage/main.js-js-extra">
+var morePostsAjax = {"network_id":"2","site_url":"https://developer.nvidia.cn/blog/wp-admin/"};
+//# sourceURL=sage%2Fmain.js-js-extra
+</script>
+<script id="sage/main.js-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/themes/nvidia/dist/scripts/main_280db669.js"></script>
+<script id="lodash-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-includes/js/dist/vendor/lodash.min.js?ver=4.18.1"></script>
+<script id="lodash-js-after">
+window.lodash = _.noConflict();
+//# sourceURL=lodash-js-after
+</script>
+<script id="nv-developer-menu.js-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/themes/nvidia/resources/assets/libs/nv-developer-menu/nv-developer-menu.js?ver=1.0.0"></script>
+<script id="jetpack-stats-js-before">
+_stq = window._stq || [];
+_stq.push([ "view", {"v":"ext","blog":"196178272","post":"15244","tz":"0","srv":"developer-blogs.nvidia.com","j":"1:15.7.1"} ]);
+_stq.push([ "clickTrackerInit", "196178272", "15244" ]);
+//# sourceURL=jetpack-stats-js-before
+</script>
+<script data-wp-strategy="defer" defer id="jetpack-stats-js" src="https://stats.wp.com/e-202639.js"></script>
+<script id="stbClient-js-extra">
+var stbUserOptions = {"restData":{"root":"https://developer-blogs.nvidia.com/zh-cn-blog/wp-json/","nonce":"2a781377a8"}};
+//# sourceURL=stbClient-js-extra
+</script>
+<script id="stbClient-js" src="https://developer-blogs.nvidia.com/zh-cn-blog/wp-content/plugins/wp-special-textboxes/js/client.js?ver=6.2.6"></script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"https://developer-blogs.nvidia.com/zh-cn-blog/wp-includes/js/wp-emoji-release.min.js?ver=7.1.2"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof HTMLScriptElement))throw new Error("Element missing: "+e);const r=JSON.parse(t.text),s=(window._wpemojiSettings=r,"wpEmojiSettingsSupports"),o=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(s,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const r=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===r[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,r){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!r(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,r){let a;const s=(a="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),o=(s.textBaseline="top",s.font="600 32px Arial",{});return e.forEach(e=>{o[e]=t(s,e,n,r)}),o}function a(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}r.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(s));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(o),u.toString(),c.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"});const a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=e=>{i(n=e.data),a.terminate(),t(n)})}catch(e){}i(n=f(o,u,c,p))}t(n)}).then(e=>{for(const n in e)r.supports[n]=e[n],r.supports.everything=r.supports.everything&&r.supports[n],"flag"!==n&&(r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&r.supports[n]);var t;r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&!r.supports.flag,r.supports.everything||((t=r.source||{}).concatemoji?a(t.concatemoji):t.wpemoji&&t.twemoji&&(a(t.twemoji),a(t.wpemoji)))});
+//# sourceURL=https://developer-blogs.nvidia.com/zh-cn-blog/wp-includes/js/wp-emoji-loader.min.js
+</script>
+          <div class="sticky-share-buttons">
+        <ul class="entry-meta-social-links-list">
+                     <li><a data-wpel-link="external" href="https://api.qrserver.com/v1/create-qr-code/?size=154x154&amp;data=https%3A%2F%2Fdeveloper.nvidia.cn%2Fblog%2Fnvidia-rubin-cpx-accelerates-inference-performance-and-efficiency-for-1m-token-context-workloads%2F" class="for-wechat" target="_blank" rel="external noopener noreferrer">W</a></li>
+                     <li><a data-wpel-link="external" href=" https://service.weibo.com/share/share.php?title=NVIDIA+Rubin+CPX+%E5%8A%A0%E9%80%9F%E7%99%BE%E4%B8%87%E7%BA%A7%E4%BB%A5%E4%B8%8A+token+%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD%E7%9A%84%E6%8E%A8%E7%90%86%E6%80%A7%E8%83%BD%E5%92%8C%E6%95%88%E7%8E%87&amp;url=https%3A%2F%2Fdeveloper.nvidia.cn%2Fblog%2Fnvidia-rubin-cpx-accelerates-inference-performance-and-efficiency-for-1m-token-context-workloads%2F" class="for-weibo" target="_blank" rel="external noopener noreferrer">W</a></li>
+                     <li><a href="mailto:?subject=我想和你分享一个信息&body=https%3A%2F%2Fdeveloper.nvidia.cn%2Fblog%2Fnvidia-rubin-cpx-accelerates-inference-performance-and-efficiency-for-1m-token-context-workloads%2F" class="for-mail"><span class="icon icon-email">Email</span></a></li>
+                   </ul>      </div>
+      <script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"NRJS-2b0defbeb07862260b2","applicationID":"745178505","transactionName":"Z10BbBRRW0QCAExfWF4XIlsSWVpZTApWUlJI","queueTime":0,"applicationTime":628,"atts":"SxoCGlxLSEo=","errorBeacon":"bam.nr-data.net","agent":""}</script></body>
+</html>

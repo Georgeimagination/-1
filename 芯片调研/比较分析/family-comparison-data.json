@@ -1959,7 +1959,7 @@
     {
       "group": "A01",
       "name": "家族01_TPU8资源变化",
-      "title": "TPU 8i 相对 8t：局部存储增加最明显",
+      "title": "TPU 8t / 8i 资源对比",
       "baseline": "tpu8t",
       "products": [
         "tpu8i"
@@ -2021,7 +2021,7 @@
     {
       "group": "A06",
       "name": "家族02_MI350资源变化",
-      "title": "MI350 家族：规模减半与功率档位调整",
+      "title": "MI350 系列资源对比",
       "baseline": "mi350x",
       "products": [
         "mi350p",
@@ -2138,7 +2138,7 @@
     {
       "group": "A07",
       "name": "家族03_H200资源变化",
-      "title": "H200 NVL 相对 SXM：内存容量相同，计算峰值较低",
+      "title": "H200 SXM / NVL 资源对比",
       "baseline": "h200_sxm5",
       "products": [
         "h200_nvl"

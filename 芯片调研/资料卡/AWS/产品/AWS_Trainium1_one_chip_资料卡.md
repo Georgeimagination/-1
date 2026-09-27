@@ -24,6 +24,9 @@
 
 本卡不包含：Trn1/Trn1n实例的vCPU、host RAM、EFA/EBS/NVMe、实例聚合算力、UltraCluster规模及跨实例网络。
 
+首次型号公开时间补充：2020-12-01。直播页建立于 11 月 27 日，但正文明确演讲在 12 月 1 日；2021 年是实例 Preview，不是芯片首次宣布。正式发布或可用时间仍单独保留：2021-11-30 Trn1 Preview；2022-10-10 GA。[10, opening event date; Coming soon / AWS Trainium]
+
+
 ## 2. 层级关系与复用
 
 | 层级 | 本 SKU 对应对象 | 是否与其他 SKU 共享 | 本卡怎么使用 | 来源 |
@@ -129,6 +132,7 @@ Trainium2 官方跨代比较表还单独将 Trainium1 的 DMA barriers 标为 Wr
 | `[7]` | AWS，*Amazon EC2 Trn1 Instances for High-Performance Model Training are Now Available*，2022-10-10 | 官方GA文章 | GA日期、旧峰值、Trn1/UltraCluster系统边界 | <https://aws.amazon.com/blogs/aws/amazon-ec2-trn1-instances-for-high-performance-model-training-are-now-available/> |
 | `[8]` | AWS，*Accelerated computing* | 当前官方实例总览 | Trn1当前用途与1/16-chip实例交叉核对 | <https://aws.amazon.com/ec2/instance-types/accelerated-computing/> |
 | `[9]` | AWS Neuron，*Trainium2 Architecture* | 官方跨代架构比较 | Trainium1 的 384 GB/s/chip 互联项、Sparse 的 N/A，以及 DMA barriers 和 SBUF layout | <https://awsdocs-neuron.readthedocs-hosted.com/en/v2.29.1/about-neuron/arch/neuron-hardware/trainium2.html>；[本地快照](../../../原始资料/网页快照/AWS/Trainium2/2026-08-12/S01_trainium2_architecture_v2.29.1.html) |
+| `[10]` | Jeff Barr，re:Invent 2020 Liveblog: Andy Jassy Keynote，2020-12-01 演讲 | 官方发布原文 | 首次按型号公开与后续正式发布的区别 | <https://aws.amazon.com/blogs/aws/reinvent-2020-liveblog-andy-jassy-keynote/> |
 
 ## 9. 完成检查
 

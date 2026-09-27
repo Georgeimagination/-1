@@ -2,7 +2,7 @@
 
 > 模板版本：1.3（芯片架构事实口径）  
 > 卡片状态：已完成  
-> 资料截止日：2026-09-23
+> 资料截止日：2026-09-27
 
 本卡以 Huawei Ascend 950PR packaged processor 为正式主语。950PR 是包含多个计算资源和内存配置的产品族，不能把各字段的最大值任意拼接成唯一销售 SKU。它与 950DT 共用第三代 DaVinci 架构，封装内包含 2 个 AI Die、2 个 IO Die 和 8 个高速内存模块；HiBL 1.0 是官方路线图给出的高带宽内存（HBM）名称。Atlas 350 PCIe accelerator card 是上层产品，其系统聚合值不作为本卡的单封装规格。[1, PDF pp.10, 12-15，正文 pp.6, 8-11，图3-1、表3-1] [2, Ascend 950PR] [4, 新品发布]
 
@@ -21,6 +21,12 @@
 | 可用状态 | 已随搭载该芯片的 Atlas 350 于 2026-03-20 正式上市进入商用；未找到独立封装销售或各配置档位的独立 shipment 日期 | 白皮书公开架构规格，不单独证明全部配置均已供货 | `[4, 新品发布：Atlas 350 加速卡上市]` |
 | 厂商定位与目标 workload | 高性能推荐、大模型 prefill 和多模态推理 | 厂商定位，不是应用实测结论，也不表示另一款产品不能执行这些任务 | `[1, PDF p.10，正文 p.6，§3]` |
 | 产品目标 | 以较大内存容量和计算资源支持推荐、prefill及多模态推理的吞吐需求 | 厂商设计意图，不等同于已测量性能、能效或成本 | `[1, PDF pp.8, 10，正文 pp.4, 6]` |
+
+### 定位与配置的版本说明
+
+2025 年官方路线图将 950PR 定位于 prefill 和推荐业务，以较低成本的 HiBL 1.0 内存作为配置特点。2026 年白皮书进一步列出多模态推理，并公布实际计算、内存和缓存档位；当前处理器产品页继续强调 prefill 和高性能推荐。Prefill 指模型处理输入上下文的阶段，decode 指后续逐步生成输出的阶段。这里记录厂商主要优化方向，不将这些名称当作任务执行能力的排他限制。[2, Ascend 950PR 段] [1, PDF p.10，正文 p.6，§3] [3, 产品介绍]
+
+早期发布稿所称“共用 Ascend 950 Die”是当时的共享设计表述。当前封装组成采用白皮书图3-1，实际使能配置采用表3-1；不能据早期简述把产品写成单计算裸片，或把 PR、DT 的所有使能资源视为相同。表中多档资源仍分别记录，未公开的完整销售组合不按斜杠位置强行配对。[2, Ascend 950 系列架构段] [1, PDF pp.12-15，正文 pp.8-11，图3-1、表3-1]
 
 ## 2. 层级关系与复用
 
@@ -172,8 +178,8 @@ CCU包含任务解释控制部分CCUM，以及带MemorySlice和Reduce Unit的CCU
 | 编号 | 资料 | 类型 | 本卡使用的信息 | 链接 |
 |---:|---|---|---|---|
 | `[1]` | Huawei，《昇腾950 NPU架构白皮书》，40页，版权2026，未标明确切发布日期 | 官方架构白皮书 | 产品档位、计算/内存/CPU资源、多die、Core微架构、数值格式、互联、CCU、调度和RAS | <https://public-download.obs.cn-east-2.myhuaweicloud.com/ascend/%E6%98%87%E8%85%BE950%20NPU%E6%9E%B6%E6%9E%84%E7%99%BD%E7%9A%AE%E4%B9%A6.pdf>；[本地 PDF](../../../原始资料/论文/华为昇腾_DaVinci/90_官方白皮书与技术资料/2026_Ascend950_NPU_Architecture_White_Paper.pdf) |
-| `[2]` | Huawei，《以开创的超节点互联技术，引领AI基础设施新范式》，2025-09-18 | 官方主题演讲 | 首次公开、HiBL1.0名称与早期算力路线图 | <https://www.huawei.com/cn/news/2025/9/hc-xu-keynote-speech> |
-| `[3]` | Huawei Ascend Community，Ascend 950PR | 官方processor产品页 | 1784TFLOPS产品headline与白皮书分项的对应 | <https://www.hiascend.com/hardware/processor> |
+| `[2]` | Huawei，《以开创的超节点互联技术，引领AI基础设施新范式》，2025-09-18 | 官方主题演讲 | 首次公开、prefill/推荐定位、HiBL1.0名称与早期路线图 | <https://www.huawei.com/cn/news/2025/9/hc-xu-keynote-speech>；[本地原文](../../../原始资料/网页快照/华为/Ascend950/2026-09-27/huawei-connect-2025-ascend-roadmap.html) |
+| `[3]` | Huawei Ascend Community，Ascend 950PR，2026-09-27补查 | 官方processor产品页 | 当前prefill/推荐定位，以及1784TFLOPS产品headline与白皮书分项的对应 | <https://www.hiascend.com/hardware/processor>；[本地原文](../../../原始资料/网页快照/华为/Ascend950/2026-09-27/hiascend-processor.html) |
 | `[4]` | Huawei Ascend Community，《技术创新赋能千行万业，昇腾人工智能伙伴峰会2026圆满举办》，2026-03-20 | 官方发布稿 | Atlas350搭载950PR、正式上市与商用状态 | <https://www.hiascend.com/activities/dynamic-news/20260320-3> |
 | `[5]` | Huawei Ascend Community，《概述：AI Core SIMD编程》，CANN9.1.0 | 官方编程指南 | 显式分层访存、256B单寄存器、GM→UB→Register | <https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/910/programug/Ascendcopdevg/docs/guide/%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97/%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B/AI-Core-SIMD%E7%BC%96%E7%A8%8B/%E6%A6%82%E8%BF%B0.md> |
 | `[6]` | Huawei Ascend Community，《抽象硬件架构：AI Core SIMT编程》，CANN9.1.0 | 官方编程指南 | SIMT的Shared Memory、Data Cache与L2抽象 | <https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/910/programug/Ascendcopdevg/docs/guide/%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97/%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B/AI-Core-SIMT%E7%BC%96%E7%A8%8B/%E6%8A%BD%E8%B1%A1%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84.md> |

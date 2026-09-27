@@ -104,6 +104,10 @@ MIG（多实例 GPU）可以将计算、cache 和 HBM 资源隔离为最多 7 �
 
 HBM、L2、L1 与寄存器提供 SECDED ECC，NVLink 支持错误检测、重传及远端故障归属。80GB 产品于 2020 年 11 月公布；后续软件支持状态和硬件是否可订购是两件事。现有资料尚不足以补出这款容量版本的全部 DRAM 物理组织和封装细节。[2, pp.35,52-54；4, opening；5, lifecycle scope]
 
+## scale-up 域的配置边界
+
+80GB 数据手册列出八 GPU 的 HGX A100 配置；A100 白皮书给出八颗 GPU 经 NVSwitch 连接的组织。80GB 发布稿另列四 GPU 形态，但本次来源没有单列四卡拓扑。更大的 DGX POD 经 InfiniBand 或 Ethernet 连接，不能将集群 GPU 数当成单个 NVLink 域。 [1, p.1, Server Options] [2, pp.52-53,70-71] [4, HGX A100 systems paragraph]
+
 ## 参考资料
 
 页码采用文内印刷页码；独立微基准采用 PDF 页序。网页按所列章节、表或图定位。

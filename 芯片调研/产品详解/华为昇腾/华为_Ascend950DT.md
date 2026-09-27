@@ -125,6 +125,10 @@ Ascend 950DT 于 2025 年 9 月 18 日公开，路线图给出的单芯片可用
 
 DVPP 的 VPC 支持 resize、crop、padding、色彩空间转换、HSV 调整、像素增强，以及仿射/透视变换。JPEGD 输入是 8-bit baseline JPEG，支持 YUV444/422/420/440/400、区域解码和对应 semi-planar 输出；JPEGE 支持 Baseline Sequential DCT 编码及 YUV420 semi-planar、YUV422 packed/semi-planar、YUV444 planar/packed、YUV400。两者最大分辨率都是 32768×32768；这些格式约束应与前面的等效 FPS 一起阅读，不能把最大分辨率和最高帧率相乘得到实际吞吐。[1, PDF p.29 / 正文 p.25, §4.5]
 
+## scale-up 域的配置边界
+
+2025 年发布稿把 Atlas 950 的规划满配明确写成 8,192 张 950DT 卡，并说明每卡对应一颗芯片，上市时间为 2026 年第四季度。2026 年 7 月真机稿展示 1,024 卡 Atlas 950，但没有直接指明 PR 或 DT；不能将这次展示自动绑定到 DT 型号，或据此宣称 8,192 卡满配已交付。 [2, Atlas 950超节点段] [5, 昇腾950超节点真机首次亮相]
+
 ## 参考资料
 
 [1] Huawei，《昇腾950 NPU架构白皮书》，40页，版权2026，未标明确切发布日期。<https://public-download.obs.cn-east-2.myhuaweicloud.com/ascend/%E6%98%87%E8%85%BE950%20NPU%E6%9E%B6%E6%9E%84%E7%99%BD%E7%9A%AE%E4%B9%A6.pdf>；[本地 PDF](../../原始资料/论文/华为昇腾_DaVinci/90_官方白皮书与技术资料/2026_Ascend950_NPU_Architecture_White_Paper.pdf)
